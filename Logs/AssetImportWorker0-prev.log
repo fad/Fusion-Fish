@@ -1,0 +1,425 @@
+Using pre-set license
+Built from '2022.3/staging' branch; Version is '2022.3.11f1 (d00248457e15) revision 13632072'; Using compiler version '192829333'; Build Type 'Release'
+OS: 'Windows 11  (10.0.22631) 64bit Professional' Language: 'en' Physical Memory: 16087 MB
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 1
+
+COMMAND LINE ARGUMENTS:
+C:\Program Files\Unity\Hub\Editor\2022.3.11f1\Editor\Unity.exe
+-adb2
+-batchMode
+-noUpm
+-name
+AssetImportWorker0
+-projectPath
+C:/Users/Alexander Pfeifer/Documents/Fusion-Fish
+-logFile
+Logs/AssetImportWorker0.log
+-srvPort
+63489
+Successfully changed project path to: C:/Users/Alexander Pfeifer/Documents/Fusion-Fish
+C:/Users/Alexander Pfeifer/Documents/Fusion-Fish
+[UnityMemory] Configuration Parameters - Can be set up in boot.config
+    "memorysetup-bucket-allocator-granularity=16"
+    "memorysetup-bucket-allocator-bucket-count=8"
+    "memorysetup-bucket-allocator-block-size=33554432"
+    "memorysetup-bucket-allocator-block-count=8"
+    "memorysetup-main-allocator-block-size=16777216"
+    "memorysetup-thread-allocator-block-size=16777216"
+    "memorysetup-gfx-main-allocator-block-size=16777216"
+    "memorysetup-gfx-thread-allocator-block-size=16777216"
+    "memorysetup-cache-allocator-block-size=4194304"
+    "memorysetup-typetree-allocator-block-size=2097152"
+    "memorysetup-profiler-bucket-allocator-granularity=16"
+    "memorysetup-profiler-bucket-allocator-bucket-count=8"
+    "memorysetup-profiler-bucket-allocator-block-size=33554432"
+    "memorysetup-profiler-bucket-allocator-block-count=8"
+    "memorysetup-profiler-allocator-block-size=16777216"
+    "memorysetup-profiler-editor-allocator-block-size=1048576"
+    "memorysetup-temp-allocator-size-main=16777216"
+    "memorysetup-job-temp-allocator-block-size=2097152"
+    "memorysetup-job-temp-allocator-block-size-background=1048576"
+    "memorysetup-job-temp-allocator-reduction-small-platforms=262144"
+    "memorysetup-allocator-temp-initial-block-size-main=262144"
+    "memorysetup-allocator-temp-initial-block-size-worker=262144"
+    "memorysetup-temp-allocator-size-background-worker=32768"
+    "memorysetup-temp-allocator-size-job-worker=262144"
+    "memorysetup-temp-allocator-size-preload-manager=33554432"
+    "memorysetup-temp-allocator-size-nav-mesh-worker=65536"
+    "memorysetup-temp-allocator-size-audio-worker=65536"
+    "memorysetup-temp-allocator-size-cloud-worker=32768"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gfx=262144"
+Player connection [21400] Host "[IP] 192.168.0.170 [Port] 0 [Flags] 2 [Guid] 2601437638 [EditorId] 2601437638 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-AlexanderPfeifer) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined multi-casting on [225.0.0.222:54997]...
+
+Player connection [21400] Host "[IP] 192.168.0.170 [Port] 0 [Flags] 2 [Guid] 2601437638 [EditorId] 2601437638 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-AlexanderPfeifer) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined alternative multi-casting on [225.0.0.222:34997]...
+
+[Physics::Module] Initialized MultithreadedJobDispatcher with 15 workers.
+Refreshing native plugins compatible for Editor in 6920.48 ms, found 7 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Initialize engine version: 2022.3.11f1 (d00248457e15)
+[Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2022.3.11f1/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path C:/Users/Alexander Pfeifer/Documents/Fusion-Fish/Assets
+GfxDevice: creating device client; threaded=0; jobified=0
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: NVIDIA GeForce RTX 4070 Laptop GPU (ID=0x2820)
+    Vendor:   NVIDIA
+    VRAM:     7948 MB
+    Driver:   32.0.15.6081
+Initialize mono
+Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2022.3.11f1/Editor/Data/Managed'
+Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2022.3.11f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
+Mono config path = 'C:/Program Files/Unity/Hub/Editor/2022.3.11f1/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56984
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2022.3.11f1/Editor/Data/PlaybackEngines/WebGLSupport/UnityEditor.WebGL.Extensions.dll
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2022.3.11f1/Editor/Data/PlaybackEngines/MacStandaloneSupport/UnityEditor.OSXStandalone.Extensions.dll
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2022.3.11f1/Editor/Data/PlaybackEngines/AndroidPlayer/UnityEditor.Android.Extensions.dll
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2022.3.11f1/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.dll
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2022.3.11f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+Registered in 1.119083 seconds.
+- Loaded All Assemblies, in 14.236 seconds
+Native extension for WindowsStandalone target not found
+[usbmuxd] Start listen thread
+[usbmuxd] Listen thread started
+Native extension for iOS target not found
+Native extension for Android target not found
+Android Extension - Scanning For ADB Devices 188 ms
+Native extension for OSXStandalone target not found
+Native extension for WebGL target not found
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  0.990 seconds
+Domain Reload Profiling: 15225ms
+	BeginReloadAssembly (9566ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (0ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (1ms)
+	RebuildCommonClasses (763ms)
+	RebuildNativeTypeToScriptingClass (8ms)
+	initialDomainReloadingComplete (1159ms)
+	LoadAllAssembliesAndSetupDomain (2739ms)
+		LoadAssemblies (9565ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (2737ms)
+			TypeCache.Refresh (2736ms)
+				TypeCache.ScanAssembly (2269ms)
+			ScanForSourceGeneratedMonoScriptInfo (0ms)
+			ResolveRequiredComponents (0ms)
+	FinalizeReload (990ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (945ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (830ms)
+			SetLoadedEditorAssemblies (3ms)
+			RefreshPlugins (0ms)
+			BeforeProcessingInitializeOnLoad (2ms)
+			ProcessInitializeOnLoadAttributes (67ms)
+			ProcessInitializeOnLoadMethodAttributes (43ms)
+			AfterProcessingInitializeOnLoad (0ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (0ms)
+========================================================================
+Worker process is ready to serve import requests
+Begin MonoManager ReloadAssembly
+- Loaded All Assemblies, in 20.222 seconds
+Refreshing native plugins compatible for Editor in 13.09 ms, found 7 plugins.
+Native extension for WindowsStandalone target not found
+Native extension for iOS target not found
+Native extension for Android target not found
+Native extension for OSXStandalone target not found
+Native extension for WebGL target not found
+Package Manager log level set to [2]
+[Package Manager] Server::EnsureServerProcessIsRunning -- launch failed, reason: Unity was launched with the -noUpm command-line argument
+[Package Manager] UpmClient::Send -- Unable to send message (not connected to UPM process).
+[Package Manager] Cannot connect to Unity Package Manager local server
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  0.762 seconds
+Domain Reload Profiling: 20982ms
+	BeginReloadAssembly (101ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (5ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (15ms)
+	RebuildCommonClasses (20ms)
+	RebuildNativeTypeToScriptingClass (6ms)
+	initialDomainReloadingComplete (29ms)
+	LoadAllAssembliesAndSetupDomain (20064ms)
+		LoadAssemblies (18936ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (1184ms)
+			TypeCache.Refresh (1150ms)
+				TypeCache.ScanAssembly (1037ms)
+			ScanForSourceGeneratedMonoScriptInfo (23ms)
+			ResolveRequiredComponents (11ms)
+	FinalizeReload (762ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (608ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (28ms)
+			SetLoadedEditorAssemblies (4ms)
+			RefreshPlugins (0ms)
+			BeforeProcessingInitializeOnLoad (108ms)
+			ProcessInitializeOnLoadAttributes (435ms)
+			ProcessInitializeOnLoadMethodAttributes (30ms)
+			AfterProcessingInitializeOnLoad (3ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (4ms)
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.03 seconds
+Refreshing native plugins compatible for Editor in 11.36 ms, found 7 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 5940 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 183 unused Assets / (2.6 MB). Loaded Objects now: 6345.
+Memory consumption went from 259.4 MB to 256.8 MB.
+Total: 3.698700 ms (FindLiveObjects: 0.325800 ms CreateObjectMapping: 0.390200 ms MarkObjects: 2.246900 ms  DeleteObjects: 0.735000 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:CustomObjectIndexerAttribute: d54d2f2da18e7612c182cf67624b6b12 -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:SearchIndexIgnoredProperties: e643bd26f0fe6173181afceb89e7c659 -> 
+  custom:AudioImporter_EditorPlatform: d09bf68614088b80899f8185d706f6e7 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 1245926.989705 seconds.
+  path: Assets/Packages/Clean Multiplayer Pro/UI/Images/Check_mark_(white).svg.png
+  artifactKey: Guid(56b96a23919a9e4428030b20c33e7f20) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Packages/Clean Multiplayer Pro/UI/Images/Check_mark_(white).svg.png using Guid(56b96a23919a9e4428030b20c33e7f20) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '385dc009df8bf58799d8f0405a0358cf') in 0.100425 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 35.639998 seconds.
+  path: Assets/Packages/Clean Multiplayer Pro/Environment/Art/ICON/39-01.png
+  artifactKey: Guid(e828f5a7083a8224baa67b485b745e52) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Packages/Clean Multiplayer Pro/Environment/Art/ICON/39-01.png using Guid(e828f5a7083a8224baa67b485b745e52) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c0a0cba5fd48a1fc4404b621126f75f2') in 0.025501 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000018 seconds.
+  path: Assets/Packages/Clean Multiplayer Pro/UI/Images/Brand Identity.png
+  artifactKey: Guid(fea1b3277f8686d41a02b3bd79cf9956) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Packages/Clean Multiplayer Pro/UI/Images/Brand Identity.png using Guid(fea1b3277f8686d41a02b3bd79cf9956) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6cc7a741c3dcca2f409bb7b618f8d4c0') in 0.019748 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000574 seconds.
+  path: Assets/Packages/Photon/Fusion/Editor/EditorResources/Fusion-dark-help-button-off.png
+  artifactKey: Guid(1cb1b1bf7bfc6574a95f9a2bc7421c60) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Packages/Photon/Fusion/Editor/EditorResources/Fusion-dark-help-button-off.png using Guid(1cb1b1bf7bfc6574a95f9a2bc7421c60) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '35f27caa1248abeae97ef0f843aeffd3') in 0.016269 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000017 seconds.
+  path: Assets/Packages/Photon/Fusion/Editor/EditorResources/Fusion-inline-box-no-vertical-borders.png
+  artifactKey: Guid(6f21527b75fde934381920063e9666ce) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Packages/Photon/Fusion/Editor/EditorResources/Fusion-inline-box-no-vertical-borders.png using Guid(6f21527b75fde934381920063e9666ce) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3a4940c565f07b4f839d11d76e32cb9f') in 0.016446 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000189 seconds.
+  path: Assets/Packages/Photon/Fusion/Editor/EditorResources/Fusion-light-help-button-on.png
+  artifactKey: Guid(decc33e0428e74349941f54fe6299753) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Packages/Photon/Fusion/Editor/EditorResources/Fusion-light-help-button-on.png using Guid(decc33e0428e74349941f54fe6299753) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '46f0fb02fb1a13d283ff09ff21224553') in 0.021049 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000158 seconds.
+  path: Assets/Packages/Photon/Fusion/Runtime/Statistics/StatsIcons/FusionStatsCancelIcon.png
+  artifactKey: Guid(5853bc00e6bfda84ea9030e0486a1c44) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Packages/Photon/Fusion/Runtime/Statistics/StatsIcons/FusionStatsCancelIcon.png using Guid(5853bc00e6bfda84ea9030e0486a1c44) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '291e6f6b4a045eebdec7200e86d2afb0') in 0.015824 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000173 seconds.
+  path: Assets/Packages/Photon/Fusion/Editor/EditorResources/Fusion-outline-box.png
+  artifactKey: Guid(223390825bdf7f7488411f7b7ca1c776) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Packages/Photon/Fusion/Editor/EditorResources/Fusion-outline-box.png using Guid(223390825bdf7f7488411f7b7ca1c776) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4c994b88a8317a49f6d56b022e204218') in 0.021269 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000014 seconds.
+  path: Assets/Packages/Clean Multiplayer Pro/UI/Resources/Identity.png
+  artifactKey: Guid(fc5483a9af10c3a43a4d47c9fdc06d6e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Packages/Clean Multiplayer Pro/UI/Resources/Identity.png using Guid(fc5483a9af10c3a43a4d47c9fdc06d6e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0d0796d8ca9efad93308fbd777adb67e') in 0.012225 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000141 seconds.
+  path: Assets/Packages/Clean Multiplayer Pro/UI/Images/locked.png
+  artifactKey: Guid(8d0061afc5a7ca9419dfb35079f2963c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Packages/Clean Multiplayer Pro/UI/Images/locked.png using Guid(8d0061afc5a7ca9419dfb35079f2963c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '37e0e2c29926811398b7696520be0de3') in 0.020209 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000016 seconds.
+  path: Assets/Packages/Clean Multiplayer Pro/Controller/Mobile Controller/UI/UI_Circle_Bevel_Base.png
+  artifactKey: Guid(b74c31d447d2f5d41a61081bdf5e7126) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Packages/Clean Multiplayer Pro/Controller/Mobile Controller/UI/UI_Circle_Bevel_Base.png using Guid(b74c31d447d2f5d41a61081bdf5e7126) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd26373f4e8bed5ca57cf44a4074ca276') in 0.021587 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000099 seconds.
+  path: Assets/Packages/Clean Multiplayer Pro/Controller/Mobile Controller/UI/UI_Circle_Faded.png
+  artifactKey: Guid(90ded0611e490aa4ba6961afbfc2280d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Packages/Clean Multiplayer Pro/Controller/Mobile Controller/UI/UI_Circle_Faded.png using Guid(90ded0611e490aa4ba6961afbfc2280d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b394d8ede9dd84435083a091ee6d15d0') in 0.053379 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000021 seconds.
+  path: Assets/Packages/Clean Multiplayer Pro/UI/Images/time-left.png
+  artifactKey: Guid(e215406eac91c014386d599dec3fb85d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Packages/Clean Multiplayer Pro/UI/Images/time-left.png using Guid(e215406eac91c014386d599dec3fb85d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c30617779bfae5b3fcf9e6b7f525485e') in 0.046428 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000020 seconds.
+  path: Assets/Packages/Photon/Fusion/Editor/EditorResources/Fusion-script-header.png
+  artifactKey: Guid(2f112e6067c75b34f8c6233878db13b4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Packages/Photon/Fusion/Editor/EditorResources/Fusion-script-header.png using Guid(2f112e6067c75b34f8c6233878db13b4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e6723530269d2113e6f4c52cd60ae419') in 0.037240 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000102 seconds.
+  path: Assets/Packages/Clean Multiplayer Pro/Environment/Art/Textures/Grid_01_BaseMap_UI_Version.png
+  artifactKey: Guid(2caed53a7cd72354494b344084d44d29) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Packages/Clean Multiplayer Pro/Environment/Art/Textures/Grid_01_BaseMap_UI_Version.png using Guid(2caed53a7cd72354494b344084d44d29) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4fc19d58630f4cd595a8a07c095c68bb') in 0.020295 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000016 seconds.
+  path: Assets/Packages/Clean Multiplayer Pro/UI/Images/unlocked.png
+  artifactKey: Guid(337a61dc5f92d38458928679cd863679) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Packages/Clean Multiplayer Pro/UI/Images/unlocked.png using Guid(337a61dc5f92d38458928679cd863679) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b587099dec7c6237ca11359da52441d3') in 0.023480 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000015 seconds.
+  path: Assets/Packages/Clean Multiplayer Pro/UI/Images/people_icon.png
+  artifactKey: Guid(3da7b0e93093ae44cbee434370e170fa) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Packages/Clean Multiplayer Pro/UI/Images/people_icon.png using Guid(3da7b0e93093ae44cbee434370e170fa) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '751f330f18ec19a89173aa5f1f93cfba') in 0.030646 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000016 seconds.
+  path: Assets/Packages/Clean Multiplayer Pro/UI/Images/Rounded Square.png
+  artifactKey: Guid(1461cb7cdaefe4143badc1eba3ff1291) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Packages/Clean Multiplayer Pro/UI/Images/Rounded Square.png using Guid(1461cb7cdaefe4143badc1eba3ff1291) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '38dc57eef1cc1c5b970ce7e3e31b1503') in 0.025043 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000018 seconds.
+  path: Assets/Packages/Photon/PhotonVoice/Demos/DemoVoiceUI/Media/gizmo-speech-bubble.png
+  artifactKey: Guid(58086affa71851c4b81d7fba4c08e0b6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Packages/Photon/PhotonVoice/Demos/DemoVoiceUI/Media/gizmo-speech-bubble.png using Guid(58086affa71851c4b81d7fba4c08e0b6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '20bae6829bf5cd4f9a4823f3cbdea145') in 0.018829 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000017 seconds.
+  path: Assets/Packages/Clean Multiplayer Pro/UI/Images/downwardarrow.png
+  artifactKey: Guid(578f7bded37535048a6ffb21b83180ab) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Packages/Clean Multiplayer Pro/UI/Images/downwardarrow.png using Guid(578f7bded37535048a6ffb21b83180ab) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b3375dae0ae6b66411e86fc5e46528ad') in 0.040700 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000024 seconds.
+  path: Assets/Packages/Photon/Fusion/Editor/EditorResources/Fusion-light-help-button-off.png
+  artifactKey: Guid(2d73479cf571d21409b2656fd24f7737) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Packages/Photon/Fusion/Editor/EditorResources/Fusion-light-help-button-off.png using Guid(2d73479cf571d21409b2656fd24f7737) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9380ce11707db04cd833c957d3968ac4') in 0.015135 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000017 seconds.
+  path: Assets/Packages/Photon/PhotonVoice/Demos/DemoVoiceUI/Media/barsHorizontal.png
+  artifactKey: Guid(055458b32c82031478126740cfeff8b5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Packages/Photon/PhotonVoice/Demos/DemoVoiceUI/Media/barsHorizontal.png using Guid(055458b32c82031478126740cfeff8b5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a4c670bf1ff9aa285067aadbd2b1d98d') in 0.018073 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000019 seconds.
+  path: Assets/Packages/Photon/PhotonVoice/Demos/DemoVoiceUI/Media/gizmo-speaker.png
+  artifactKey: Guid(78b736601df34e145b113200f637e37f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Packages/Photon/PhotonVoice/Demos/DemoVoiceUI/Media/gizmo-speaker.png using Guid(78b736601df34e145b113200f637e37f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e47738df8b20e9bb816b7c02266455d3') in 0.015412 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000016 seconds.
+  path: Assets/Packages/Clean Multiplayer Pro/UI/Images/spinner.png
+  artifactKey: Guid(e897b1b804f2ec34fa4c532dc895d106) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Packages/Clean Multiplayer Pro/UI/Images/spinner.png using Guid(e897b1b804f2ec34fa4c532dc895d106) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c35ad1625e374d6d0d88841f289f9637') in 0.016095 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000019 seconds.
+  path: Assets/Packages/Clean Multiplayer Pro/Controller/Mobile Controller/UI/UI_Icon_Move.png
+  artifactKey: Guid(ff7bfa7addf40784d86f62b8e4a034a6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Packages/Clean Multiplayer Pro/Controller/Mobile Controller/UI/UI_Icon_Move.png using Guid(ff7bfa7addf40784d86f62b8e4a034a6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b63a75f84ef0db211db653e872061580') in 0.018728 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 45.967804 seconds.
+  path: Assets/Packages/Clean Multiplayer Pro/Scenes/Environment 2/LightingData.asset
+  artifactKey: Guid(0ea186f72557c8e489e9888bd7f9bc52) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Packages/Clean Multiplayer Pro/Scenes/Environment 2/LightingData.asset using Guid(0ea186f72557c8e489e9888bd7f9bc52) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f23c63611b19ed2b3c32e4611f4a2c69') in 0.001864 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.012589 seconds.
+  path: Assets/Packages/Clean Multiplayer Pro/Scenes/Environment 1/OcclusionCullingData.asset
+  artifactKey: Guid(147e8bcb4410e934881d14ffd72454d5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Packages/Clean Multiplayer Pro/Scenes/Environment 1/OcclusionCullingData.asset using Guid(147e8bcb4410e934881d14ffd72454d5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fb218364c8e4526dfdffb3209ac0c4da') in 0.001103 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 0.002506 seconds.
+  path: Assets/Packages/Clean Multiplayer Pro/Scenes/Menu/OcclusionCullingData.asset
+  artifactKey: Guid(6eafe7a696e6a714781058ed8b2751e8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Packages/Clean Multiplayer Pro/Scenes/Menu/OcclusionCullingData.asset using Guid(6eafe7a696e6a714781058ed8b2751e8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c04cbb186001ae84c3c0f62670bb7958') in 0.001300 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+Editor requested this worker to shutdown with reason: Scaling down because of idle timeout
+TcpMessagingSession - receive error
+AssetImportWorkerClient::OnTransportError - code=2 error=End of file
+AssetImportWorker is now disconnected from the server
+Process exiting
+Exiting without the bug reporter. Application will terminate with return code 0
