@@ -1,54 +1,66 @@
-using System;
-using System.Collections;
 using StarterAssets;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Attack : MonoBehaviour
 {
-    [Header("Attack")] 
+    [Header("Food")] 
     [SerializeField] private LayerMask foodLayerMask;
-    private float timeBetweenAttack;
-    [SerializeField] private float maxTimeBetweenAttack = 0.375f;
-    public bool isAttacking;
     private GameObject foodObject;
-    private float attackDamage;
-    public Animator animator;
-    [SerializeField] private ThirdPersonController thirdPersonController;
+
+    [Header("Bite")] 
     [SerializeField] private Transform biteUpper;
     [SerializeField] private Transform biteLower;
     [SerializeField] private Animator biteAnimator;
+    
+    [Header("Attack")] 
+    public bool isAttacking;
+    private float attackDamage;
     private bool preparedAttack;
+    
+    [Header("Time")]
+    private float timeBetweenAttack;
+    [SerializeField] private float maxTimeBetweenAttack = 0.375f;
 
-    private void Start()
-    {
-        timeBetweenAttack = maxTimeBetweenAttack;
-    }
+    [Header("Player")]
+    [SerializeField] private ThirdPersonController thirdPersonController;
+    [SerializeField] private Transform fishRender;
+
+    private void Start() => timeBetweenAttack = maxTimeBetweenAttack;
 
     private void Update() => AttackUpdate();
 
     private void AttackUpdate()
     {
+        if (thirdPersonController.playerManager.health.isDead)
+            return;
+
         if (timeBetweenAttack >= 0)
         {
             timeBetweenAttack -= Time.deltaTime;
             return;
         }
         
-        if (thirdPersonController.input.attack && !preparedAttack)
+        switch (thirdPersonController.input.attack)
         {
-            biteUpper.gameObject.SetActive(true);
-            biteLower.gameObject.SetActive(true);
-            biteAnimator.SetTrigger("prepareAttack");
-            preparedAttack = true;
-        }
-        
-        if (!thirdPersonController.input.attack && preparedAttack)
-        {
-            biteAnimator.SetTrigger("executeAttack");
-            animator.SetTrigger("attack");
-            timeBetweenAttack = maxTimeBetweenAttack;
-            preparedAttack = false;
+            case true when !preparedAttack:
+                biteUpper.gameObject.SetActive(true);
+                biteLower.gameObject.SetActive(true);
+                biteAnimator.SetTrigger("prepareAttack");
+                preparedAttack = true;
+                break;
+            case false when preparedAttack:
+            {
+                biteAnimator.SetTrigger("executeAttack");
+                thirdPersonController.animator.SetTrigger("attack");
+                timeBetweenAttack = maxTimeBetweenAttack;
+                if (foodObject != null)
+                {
+                    fishRender.transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(foodObject.transform.position - fishRender.transform.position), Time.deltaTime * 10);
+                } 
+                preparedAttack = false;
+                break;
+            }
         }
     }
 

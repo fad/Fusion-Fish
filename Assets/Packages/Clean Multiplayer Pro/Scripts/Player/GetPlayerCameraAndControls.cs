@@ -32,6 +32,10 @@ namespace AvocadoShark
                 _rigidbody.MovePosition(new Vector3(Random.Range(-7.6f, 14.2f), 0,
                     Random.Range(-31.48f, -41.22f)));
 
+                var vCam = GameObject.Find("Virtual Camera").GetComponent<CinemachineVirtualCamera>();
+                vCam.Follow = transform;
+                vCam.LookAt = transform;
+                
                 if (UseMobileControls)
                 {
                     var mobileControls = GameObject.Find("Mobile Controls");

@@ -5,35 +5,37 @@ using Random = UnityEngine.Random;
 
 public class NPC : MonoBehaviour
 {
-    [Header("Natural Behaviour")] 
+    [Header("Movement")] 
     private float currentSpeed;
     [SerializeField] private float rotationSpeed = 10f;
-    [SerializeField] private bool attacksPlayer;
-    [SerializeField] private int attackDamage = 10;
-    private bool isAttacking;
-
-    private Rigidbody rb;
-    private Vector3 newPosition;
-    private float randomTime = 5;
-    private Animator anim;
-
-    [Header("Attack")] 
-    private float enemyRange;
-    
-    [Header("Flight")] 
-    [SerializeField] private LayerMask playerLayer;
-    [SerializeField] private LayerMask foodLayer;
-    [SerializeField] private float maxFlightDelayTime;
     [SerializeField] private float maxSwimSpeed = 95f;
     [SerializeField] private float maxSwimSpeedOnAttack = 15f;
     [SerializeField] private float defaultSwimSpeed = 30f;
+    private Rigidbody rb;
+
+    [Header("things in NPCs view")]
+    [SerializeField] private LayerMask playerLayer;
+    [SerializeField] private LayerMask foodLayer;
+    private GameObject enemy;
+
+    [Header("Animation")]
+    private Animator animator;
+
+    [Header("Attack")] 
     [SerializeField] private float timeBetweenAttacksMax = 1.5f;
     [SerializeField] private float timeBetweenAttacksMin = .8f;
-    private Animator animator;
-    private GameObject enemy;
+    [SerializeField] private bool attacksPlayer;
+    [SerializeField] private int attackDamage = 10;
+    private float enemyRange;
+    private bool isAttacking;
+
+    [Header("Flight")]
+    [SerializeField] private float maxFlightDelayTime;
     private bool canFlight = true;
     private float currentFlightDelayTime;
     private const float FlightTime = 3f;
+    [Tooltip("time when the npc changes direction of movement")]
+    private float randomTime;
 
     private Behaviour behaviour;
     private enum Behaviour
@@ -48,8 +50,6 @@ public class NPC : MonoBehaviour
         animator = GetComponent<Animator>();
         behaviour = Behaviour.NaturalBehaviour;
         rb = GetComponent<Rigidbody>();
-        newPosition = transform.position;
-        anim = GetComponent<Animator>();
     }
 
     private void Update()
@@ -85,11 +85,12 @@ public class NPC : MonoBehaviour
                 MoveNPCInDirection(swimDirectionAwayFromEnemy, Quaternion.LookRotation(swimDirectionAwayFromEnemy));
                 break;
             case Behaviour.NaturalBehaviour:
-                var position = transform.position;
+                var currentPosition = transform.position;
+                var newPosition = currentPosition;
 
                 if (randomTime <= 0)
                 {
-                    newPosition = new Vector3(RandomFloat(position.x), RandomFloat(position.y), RandomFloat(position.z));
+                    newPosition = new Vector3(RandomFloat(currentPosition.x), RandomFloat(currentPosition.y), RandomFloat(currentPosition.z));
                     randomTime = Random.Range(4.5f, 7.5f);
                     defaultSwimSpeed = Random.Range(3, 5);
                 }
@@ -98,7 +99,7 @@ public class NPC : MonoBehaviour
 
                 currentSpeed = defaultSwimSpeed;
                     
-                MoveNPCInDirection(newPosition - position, Quaternion.LookRotation(newPosition - position));
+                MoveNPCInDirection(newPosition - currentPosition, Quaternion.LookRotation(newPosition - currentPosition));
                 break;
             case Behaviour.Attack:
                 if (Vector3.Distance(transform.position, enemy.transform.position) < 1)
@@ -107,6 +108,10 @@ public class NPC : MonoBehaviour
                     {
                         StartCoroutine(AttackCoroutine());
                     }
+                }
+                else if (Vector3.Distance(transform.position, enemy.transform.position) > 15)
+                {
+                    behaviour = Behaviour.NaturalBehaviour;
                 }
                 else
                 {
@@ -122,7 +127,7 @@ public class NPC : MonoBehaviour
                 throw new ArgumentOutOfRangeException();
         }
 
-        anim.SetFloat("movingSpeed", rb.velocity.sqrMagnitude);
+        animator.SetFloat("movingSpeed", rb.velocity.sqrMagnitude);
     }
 
     private IEnumerator AttackCoroutine()

@@ -1,4 +1,3 @@
-using System;
 using StarterAssets;
 using UnityEngine;
 
@@ -7,6 +6,7 @@ public class PlayerManager : MonoBehaviour
     [HideInInspector] public ThirdPersonController thirdPersonController;
     [HideInInspector] public Health health;
     [HideInInspector] public Experience experience;
+    [SerializeField] public Attack attack;
 
     private void Start()
     {

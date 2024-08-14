@@ -3,34 +3,54 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
+    [Header("Health")]
     public float maxHealth;
     [HideInInspector] public float currentHealth;
     private ParticleSystem bloodParticleSystem;
+    private ThirdPersonController thirdPersonController;
+    private NPC npc;
+    private bool isNPC;
+    private bool isPlayer;
+    
+    [Header("Death")]
+    [HideInInspector] public bool isDead;
+    public GameObject deathPanel;
 
     private void Start()
     {
+        if (TryGetComponent(out ThirdPersonController thirdPersonControllerTemp))
+        {
+            isPlayer = true;
+            thirdPersonController = thirdPersonControllerTemp;
+        }
+
+        if (TryGetComponent(out NPC npcTemp))
+        {
+            npc = npcTemp;
+            isNPC = true;
+        }
         currentHealth = maxHealth;
         bloodParticleSystem = FindObjectOfType<ParticleSystem>();
     }
 
-    /// <summary>
-    /// Here I managed the incoming damage of the objects and the score that is obtained when killing a NPC or eating food.
-    /// On top I made a particle system that simulates blood or food particles because I noticed the player feedback lacking.
-    /// </summary>
-    /// <param name="damage"></param>
-    
     public void ReceiveDamage(int damage)
     {
         currentHealth -= damage;
 
-        if (GetComponent<NPC>())
+        if (isNPC)
         {
             PlayParticles(Color.red, 10);
         }
         
         if (currentHealth <= 0)
         {
-            if (gameObject.GetComponent<NPC>())
+            if (isPlayer)
+            {
+                Die(0);
+                return;
+            }
+            
+            if (isNPC)
             {
                 PlayParticles(Color.red, 30);
                 Die(100);
@@ -45,9 +65,19 @@ public class Health : MonoBehaviour
 
     private void Die(int experience)
     {
-        FindObjectOfType<Attack>().isAttacking = false;
-        FindObjectOfType<Experience>().currentExperience += experience;
-        Destroy(gameObject);
+        thirdPersonController.playerManager.attack.isAttacking = false;
+        thirdPersonController.playerManager.experience.currentExperience += experience;
+        
+        if (isNPC)
+        {
+            Destroy(npc.gameObject);
+        }
+        else
+        {
+            thirdPersonController.animator.SetBool("isDead", true);
+            isDead = true;
+            deathPanel.SetActive(true);
+        }
     }
 
     //Here I change burst count and color when needed
