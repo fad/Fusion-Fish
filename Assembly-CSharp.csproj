@@ -99,21 +99,50 @@
     <Compile Include="Assets\Packages\Clean Multiplayer Pro\Scripts\Player\DontDestroyOnLoad.cs" />
     <Compile Include="Assets\Packages\Clean Multiplayer Pro\Scripts\Vote\VoteKickUIEntry.cs" />
     <Compile Include="Assets\Packages\Clean Multiplayer Pro\Scripts\Player\PlayerPosResetter.cs" />
+    <None Include="Assets\Packages\PolygonNatureBiomes\PNB_Core\Shaders\SyntyStudios_CrystalShader.shader" />
+    <None Include="Assets\Packages\StylizedWater2\Shaders\Underwater\UnderwaterEffects.hlsl" />
     <None Include="Assets\Packages\TextMesh Pro\Shaders\TMPro.cginc" />
     <None Include="Assets\Packages\Photon\PhotonLibs\netstandard2.0\Photon3Unity3D.xml" />
     <None Include="Assets\Packages\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
+    <None Include="Assets\Packages\StylizedWater2\Shaders\Libraries\Lighting.hlsl" />
+    <None Include="Assets\Packages\StylizedWater2\Shaders\Underwater\SphereMappedDistortion.shader" />
+    <None Include="Assets\Packages\StylizedWater2\Shaders\Libraries\Features.hlsl" />
+    <None Include="Assets\Packages\StylizedWater2\Shaders\Libraries\Reflections.hlsl" />
+    <None Include="Assets\Packages\PolygonNatureBiomes\PNB_Core\Shaders\SyntyStudios_WaterScrolling.shader" />
+    <None Include="Assets\Packages\PolygonNatureBiomes\PNB_Core\Shaders\SyntyStudios_Basic_LOD_Shader.shader" />
     <None Include="Assets\Packages\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
     <None Include="Assets\Packages\Photon\Fusion\package.json" />
+    <None Include="Assets\Packages\StylizedWater2\Shaders\Libraries\Displacement.hlsl" />
+    <None Include="Assets\Packages\StylizedWater2\Shaders\Underwater\UnderwaterFog.hlsl" />
     <None Include="Assets\Packages\Photon\PhotonVoice\changes-voice.txt" />
+    <None Include="Assets\Packages\PolygonNatureBiomes\PNB_Core\Shaders\SyntyStudios_GlacierIce.shader" />
+    <None Include="Assets\Packages\StylizedWater2\Shaders\Libraries\ForwardPass.hlsl" />
+    <None Include="Assets\Packages\StylizedWater2\Shaders\Libraries\Tesselation.hlsl" />
+    <None Include="Assets\Packages\StylizedWater2\Shaders\Libraries\Common.hlsl" />
+    <None Include="Assets\Packages\PolygonNatureBiomes\PNB_Core\Shaders\SyntyStudios_CloudShader_NoFog.shader" />
     <None Include="Assets\Packages\TextMesh Pro\Shaders\TMPro_Mobile.cginc" />
+    <None Include="Assets\Packages\StylizedWater2\Shaders\Underwater\UnderwaterLighting.hlsl" />
     <None Include="Assets\Packages\Photon\PhotonVoice\Demos\Fusion\readme.txt" />
     <None Include="Assets\Packages\TextMesh Pro\Shaders\TMP_SDF SSD.shader" />
+    <None Include="Assets\Packages\StylizedWater2\Shaders\Libraries\Fog.hlsl" />
     <None Include="Assets\Packages\Photon\Fusion\Assemblies\Fusion.Runtime.xml" />
+    <None Include="Assets\Packages\PolygonNatureBiomes\PNB_Core\Shaders\SyntyStudios_CloudShader.shader" />
     <None Include="Assets\Packages\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
+    <None Include="Assets\Packages\PolygonNatureBiomes\PNB_Core\Shaders\SyntyStudios_Glacier_Triplanar_01.shader" />
+    <None Include="Assets\Packages\StylizedWater2\Shaders\WaterCutoutMask.shader" />
+    <None Include="Assets\Packages\PolygonNatureBiomes\PNB_Core\Shaders\SyntyStudios_VegitationShader_Basic.shader" />
+    <None Include="Assets\Packages\StylizedWater2\package.json" />
+    <None Include="Assets\Packages\PolygonNatureBiomes\PNB_Core\Shaders\SyntyStudios_VegitationShader.shader" />
+    <None Include="Assets\Packages\PolygonNatureBiomes\PNB_Core\Shaders\SyntyStudios_Triplanar_Basic.shader" />
     <None Include="Assets\Packages\Photon\PhotonVoice\Demos\Resources\readme.txt" />
+    <None Include="Assets\Packages\PolygonNatureBiomes\PNB_Core\Shaders\SyntyStudios_WaterShader.shader" />
     <None Include="Assets\Packages\Photon\Fusion\release_history.txt" />
     <None Include="Assets\Packages\Photon\Fusion\Assemblies\Fusion.Common.xml" />
+    <None Include="Assets\Packages\PolygonNatureBiomes\PNB_Core\Shaders\SyntyStudios_Skybox.shader" />
     <None Include="Assets\Packages\TextMesh Pro\Shaders\TMP_SDF-Surface.shader" />
+    <None Include="Assets\Packages\StylizedWater2\Shaders\Libraries\Caustics.hlsl" />
+    <None Include="Assets\Packages\PolygonNatureBiomes\PNB_Core\Shaders\SyntyStudios_SulphurPools.shader" />
+    <None Include="Assets\Packages\StylizedWater2\Shaders\Libraries\Input.hlsl" />
     <None Include="Assets\Packages\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
     <None Include="Assets\Packages\TextMesh Pro\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
     <None Include="Assets\Packages\TextMesh Pro\Shaders\TMP_SDF.shader" />
@@ -121,15 +150,25 @@
     <None Include="Assets\Packages\Photon\PhotonLibs\changes-library.txt" />
     <None Include="Assets\Packages\Photon\PhotonVoice\Demos\DemoVoiceUI\RobotoFont\Apache License.txt" />
     <None Include="Assets\Packages\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
+    <None Include="Assets\Packages\PolygonNatureBiomes\PNB_Core\Shaders\SyntyStudios_Triplanar_01.shader" />
     <None Include="Assets\Packages\TextMesh Pro\Shaders\TMPro_Properties.cginc" />
     <None Include="Assets\Packages\Photon\PhotonLibs\netstandard2.0\Photon3Unity3D.deps.json" />
     <None Include="Assets\Packages\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
+    <None Include="Assets\Packages\StylizedWater2\Shaders\Libraries\Vertex.hlsl" />
     <None Include="Assets\Packages\Photon\Fusion\Assemblies\Fusion.Realtime.xml" />
+    <None Include="Assets\Packages\StylizedWater2\Shaders\Underwater\UnderwaterMask.hlsl" />
+    <None Include="Assets\Packages\PolygonNatureBiomes\PNB_Core\Shaders\Aurora.shader" />
     <None Include="Assets\Packages\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
+    <None Include="Assets\Packages\StylizedWater2\Shaders\SubGraphs\Readme.txt" />
     <None Include="Assets\Packages\Low Poly Fishes\Shaders\Simple.shader" />
+    <None Include="Assets\Packages\StylizedWater2\Shaders\Underwater\UnderwaterShading.hlsl" />
+    <None Include="Assets\Packages\StylizedWater2\Shaders\Libraries\Foam.hlsl" />
     <None Include="Assets\Packages\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
+    <None Include="Assets\Packages\PolygonNatureBiomes\PNB_Core\Shaders\SyntyStudios_Skybox_NoFog.shader" />
+    <None Include="Assets\Packages\PolygonNatureBiomes\PNB_Core\Shaders\SyntyStudios_TexturePanner.shader" />
     <None Include="Assets\Packages\Photon\Fusion\build_info.txt" />
     <None Include="Assets\Packages\TextMesh Pro\Shaders\TMP_SDF Overlay.shader" />
+    <None Include="Assets\Packages\StylizedWater2\Shaders\Libraries\Waves.hlsl" />
     <None Include="Assets\Packages\TextMesh Pro\Shaders\TMP_Bitmap-Mobile.shader" />
     <None Include="Assets\Packages\TextMesh Pro\Fonts\LiberationSans - OFL.txt" />
     <None Include="Assets\Packages\TextMesh Pro\Shaders\TMP_SDF-Mobile.shader" />
@@ -137,6 +176,7 @@
     <None Include="Assets\Packages\TextMesh Pro\Sprites\EmojiOne.json" />
     <None Include="Assets\Packages\TextMesh Pro\Shaders\TMP_Sprite.shader" />
     <None Include="Assets\Packages\Photon\PhotonVoice\PhotonVoiceLibs\WebRTC-LICENSE.txt" />
+    <None Include="Assets\Packages\StylizedWater2\Shaders\Libraries\URP.hlsl" />
     <Reference Include="UnityEngine">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.11f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>
@@ -931,6 +971,10 @@
       <Project>{05e1895a-be17-7a52-dadd-14eb90a905dc}</Project>
       <Name>PhotonVoice.Editor</Name>
     </ProjectReference>
+    <ProjectReference Include="sc.stylizedwater2.runtime.csproj">
+      <Project>{0d2e5a25-04e6-09cf-fee3-d83435b3fa4a}</Project>
+      <Name>sc.stylizedwater2.runtime</Name>
+    </ProjectReference>
     <ProjectReference Include="MicAmplifierEditor.Editor.csproj">
       <Project>{8b8ecdd2-e3e6-7a31-f636-51953de58ee3}</Project>
       <Name>MicAmplifierEditor.Editor</Name>
@@ -946,6 +990,10 @@
     <ProjectReference Include="PhotonVoice.Utilities.Editor.csproj">
       <Project>{361490fa-c970-315a-2c49-d837ca0c4cf0}</Project>
       <Name>PhotonVoice.Utilities.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="sc.stylizedwater2.editor.csproj">
+      <Project>{910b1d6d-094a-1d1a-b2b0-46859451c762}</Project>
+      <Name>sc.stylizedwater2.editor</Name>
     </ProjectReference>
     <ProjectReference Include="PhotonVoice.csproj">
       <Project>{e2d77339-d95e-9a88-f2ee-81bd28f75817}</Project>

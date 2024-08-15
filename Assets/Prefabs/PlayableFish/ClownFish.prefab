@@ -424,7 +424,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5967580297110785664}
@@ -829,6 +829,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   currentHealth: 0
+  experienceValue: 100
   isDead: 0
   deathPanel: {fileID: 6755335005213376716}
 --- !u!114 &532309906241500560
@@ -3249,7 +3250,6 @@ MonoBehaviour:
   biteUpper: {fileID: 6123893895256554119}
   biteLower: {fileID: 2081464334898195788}
   biteAnimator: {fileID: 4857523056436020111}
-  isAttacking: 0
   maxTimeBetweenAttack: 0.375
   thirdPersonController: {fileID: 9150513680388461083}
   fishRender: {fileID: 5267721347161833077}
