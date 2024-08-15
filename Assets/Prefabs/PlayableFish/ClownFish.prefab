@@ -445,26 +445,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentBoostCount: 0
-  maxBoostCount: 100
   boostDelayAfterActivation: 2
-  boostSwimSpeed: 300
-  defaultSwimSpeed: 50
-  playerVisual: {fileID: 5159690815227489710}
-  attack: {fileID: 8937508590947867388}
-  health: {fileID: 0}
-  rotationSmoothTime: 7
+  maxBoostCount: 100
   cameraFOVSmoothTime: 5
-  landingInWaterAudioClip: {fileID: 0}
-  finStrokeAudioClips: []
-  finStrokeAudioVolume: 0.5
   cineMachineCameraTarget: {fileID: 505540377448418887}
   vCam: {fileID: 0}
   vCamRoot: {fileID: 0}
-  sensitivity: 0.85
   topClamp: 80
   bottomClamp: -80
   cameraAngleOverride: 0
   lockCameraPosition: 0
+  rotationSmoothTime: 7
+  sensitivity: 0.85
+  playerVisual: {fileID: 5159690815227489710}
+  boostSwimSpeed: 300
+  defaultSwimSpeed: 50
+  playerManager: {fileID: 0}
   animator: {fileID: 6424190454631559794}
   input: {fileID: 0}
   boostState: 0
@@ -832,7 +828,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   currentHealth: 0
-  fishAnimator: {fileID: 6424190454631559794}
   isDead: 0
   deathPanel: {fileID: 6755335005213376716}
 --- !u!114 &532309906241500560
@@ -850,6 +845,7 @@ MonoBehaviour:
   thirdPersonController: {fileID: 0}
   health: {fileID: 0}
   experience: {fileID: 0}
+  attack: {fileID: 8937508590947867388}
 --- !u!1 &519523620963440096
 GameObject:
   m_ObjectHideFlags: 0
@@ -3249,13 +3245,12 @@ MonoBehaviour:
   foodLayerMask:
     serializedVersion: 2
     m_Bits: 64
-  maxTimeBetweenAttack: 0.375
-  isAttacking: 0
-  animator: {fileID: 6424190454631559794}
-  thirdPersonController: {fileID: 9150513680388461083}
   biteUpper: {fileID: 6123893895256554119}
   biteLower: {fileID: 2081464334898195788}
   biteAnimator: {fileID: 4857523056436020111}
+  isAttacking: 0
+  maxTimeBetweenAttack: 0.375
+  thirdPersonController: {fileID: 9150513680388461083}
   fishRender: {fileID: 5267721347161833077}
 --- !u!65 &7784981795302348359
 BoxCollider:

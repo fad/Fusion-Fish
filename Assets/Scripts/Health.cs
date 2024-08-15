@@ -13,7 +13,7 @@ public class Health : MonoBehaviour
     private bool isPlayer;
     
     [Header("Death")]
-    [HideInInspector] public bool isDead;
+    [HideInInspector] public bool isDead = false;
     public GameObject deathPanel;
 
     private void Start()

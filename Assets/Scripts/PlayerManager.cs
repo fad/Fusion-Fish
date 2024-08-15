@@ -1,3 +1,4 @@
+using System;
 using StarterAssets;
 using UnityEngine;
 
@@ -8,7 +9,7 @@ public class PlayerManager : MonoBehaviour
     [HideInInspector] public Experience experience;
     [SerializeField] public Attack attack;
 
-    private void Start()
+    private void Awake()
     {
         thirdPersonController = GetComponent<ThirdPersonController>();
         health = GetComponent<Health>();
