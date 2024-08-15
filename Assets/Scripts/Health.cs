@@ -33,7 +33,7 @@ public class Health : MonoBehaviour
             isNPC = true;
         }
         currentHealth = maxHealth;
-        bloodParticleSystem = FindObjectOfType<ParticleSystem>();
+        bloodParticleSystem = GameObject.Find("BloodParticles").GetComponent<ParticleSystem>();
     }
 
     public void ReceiveDamage(int damage)

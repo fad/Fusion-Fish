@@ -24,8 +24,16 @@ public class Attack : MonoBehaviour
     [Header("Player")]
     [SerializeField] private ThirdPersonController thirdPersonController;
     [SerializeField] private Transform fishRender;
+    private float maxSensitivity;
+    private float halfSensitivity;
 
-    private void Start() => timeBetweenAttack = maxTimeBetweenAttack;
+    private void Start()
+    {
+        maxSensitivity = thirdPersonController.sensitivity;
+        halfSensitivity = thirdPersonController.sensitivity /= 2;
+        
+        timeBetweenAttack = maxTimeBetweenAttack;
+    }
 
     private void Update() => AttackUpdate();
 
@@ -46,20 +54,20 @@ public class Attack : MonoBehaviour
                 biteUpper.gameObject.SetActive(true);
                 biteLower.gameObject.SetActive(true);
                 biteAnimator.SetTrigger("prepareAttack");
+                thirdPersonController.sensitivity = halfSensitivity;
                 preparedAttack = true;
                 break;
             case false when preparedAttack:
-            {
                 biteAnimator.SetTrigger("executeAttack");
                 thirdPersonController.animator.SetTrigger("attack");
                 timeBetweenAttack = maxTimeBetweenAttack;
+                thirdPersonController.sensitivity = maxSensitivity;
                 if (foodObject != null)
                 {
                     fishRender.transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(foodObject.transform.position - fishRender.transform.position), Time.deltaTime * 10);
                 } 
                 preparedAttack = false;
                 break;
-            }
         }
     }
 

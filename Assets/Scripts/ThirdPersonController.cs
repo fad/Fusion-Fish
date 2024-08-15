@@ -16,6 +16,23 @@ namespace StarterAssets
 #endif
     public class ThirdPersonController : NetworkBehaviour
     {
+        [Header("PlayerSettings")] 
+        [SerializeField] private SettingsSO settingsSO;
+        
+        [Header("Movement")]
+        [Tooltip("How fast the character turns to face movement direction")]
+        [SerializeField] private float playerRotationSmoothTime = 3f;
+        [Tooltip("How fast you can rotate the player depending on the mouse movement, the camera moves with the player")]
+        public float sensitivity = .85f;
+        [SerializeField] private GameObject playerVisual;
+        [SerializeField] private float boostSwimSpeed = 100f;
+        [SerializeField] private float defaultSwimSpeed = 50f;
+        [HideInInspector] public PlayerManager playerManager;
+        private float speed;
+        private float rotationVelocity;
+        private bool outOfWater;
+        private Rigidbody rb;
+        
         [Header("Boost")]
         [HideInInspector] public float currentBoostCount;
         [SerializeField] private float boostDelayAfterActivation = 3f;
@@ -23,8 +40,6 @@ namespace StarterAssets
         private bool isBoosting;
         private bool canReloadBoost = true;
         
-        [Space(10)]
-
         [Header("CineMachine")]
         [Tooltip("How fast the fov changes when the character speed changes")]
         [SerializeField] private float cameraFOVSmoothTime = 3f;
@@ -45,22 +60,6 @@ namespace StarterAssets
         private float cineMachineTargetYaw;
         private float cineMachineTargetPitch;
         
-        [Space(10)]
-
-        [Header("Movement")]
-        [Tooltip("How fast the character turns to face movement direction")]
-        [SerializeField] private float playerRotationSmoothTime = 3f;
-        [Tooltip("How fast you can rotate the player depending on the mouse movement, the camera moves with the player")]
-        [SerializeField] private float sensitivity = .85f;
-        [SerializeField] private GameObject playerVisual;
-        [SerializeField] private float boostSwimSpeed = 100f;
-        [SerializeField] private float defaultSwimSpeed = 50f;
-        [HideInInspector] public PlayerManager playerManager;
-        private float speed;
-        private float rotationVelocity;
-        private bool outOfWater;
-        private Rigidbody rb;
-
         [Header("Animation")]
         public Animator animator;
         private int animIDMotionSpeed;
@@ -94,6 +93,8 @@ namespace StarterAssets
 
         private void Start()
         {
+            AudioManager.Instance.PlaySoundAtPosition("impactWithWater", transform.position);
+            AudioManager.Instance.Play("underwaterAmbience");
             cineMachineCameraTarget = gameObject;
             playerManager = GetComponent<PlayerManager>();
             cineMachineTargetYaw = cineMachineCameraTarget.transform.rotation.eulerAngles.y;
@@ -102,6 +103,7 @@ namespace StarterAssets
             rb = GetComponent<Rigidbody>();
             vCamRoot = GameObject.Find("Cams").GetComponent<Transform>();
             vCam = GameObject.Find("Virtual Camera").GetComponent<CinemachineVirtualCamera>();
+            
             
 #if ENABLE_INPUT_SYSTEM
             playerInput = GetComponent<PlayerInput>();
@@ -149,8 +151,23 @@ namespace StarterAssets
                 //Don't multiply mouse input by Time.deltaTime;
                 float deltaTimeMultiplier = IsCurrentDeviceMouse ? 1.0f : Time.deltaTime;
 
-                cineMachineTargetYaw += input.look.x * deltaTimeMultiplier * sensitivity;
-                cineMachineTargetPitch += -input.look.y * deltaTimeMultiplier * sensitivity;
+                if (settingsSO.xInputIsInverted)
+                {
+                    cineMachineTargetYaw -= input.look.x * deltaTimeMultiplier * sensitivity;
+                }
+                else
+                {
+                    cineMachineTargetYaw += input.look.x * deltaTimeMultiplier * sensitivity;
+                }
+
+                if (settingsSO.yInputIsInverted)
+                {
+                    cineMachineTargetPitch -= -input.look.y * deltaTimeMultiplier * sensitivity;
+                }
+                else
+                {
+                    cineMachineTargetPitch += -input.look.y * deltaTimeMultiplier * sensitivity;
+                }
             }
 
             // clamp our rotations so our values are limited 360 degrees
@@ -168,6 +185,9 @@ namespace StarterAssets
         {
             if (input.sprint)
             {
+                if(boostState != BoostState.BoostStarted)
+                    AudioManager.Instance.PlaySoundWithRandomPitchAtPosition("boost", transform.position);
+                
                 boostState = BoostState.BoostStarted;
             }
             else if (!input.sprint && isBoosting)
@@ -217,7 +237,7 @@ namespace StarterAssets
                     currentBoostCount -= Time.deltaTime * 30f;
                     if (currentBoostCount <= 0)
                     {
-                        boostState = BoostState.BoostReload;
+                        StartCoroutine(DelayedBoostReloadCoroutine());
                     }
                     break;
                 case BoostState.BoostReload :

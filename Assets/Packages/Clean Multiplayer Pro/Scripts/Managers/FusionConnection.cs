@@ -12,6 +12,7 @@ using Photon.Voice.Fusion;
 using Photon.Voice.Unity;
 using StarterAssets;
 using Fusion.Photon.Realtime;
+using UnityEngine.Serialization;
 
 namespace AvocadoShark
 {
@@ -33,8 +34,8 @@ namespace AvocadoShark
 
         public bool hasEnteredGameScene = false;
 
-        [Header("Player 1")] [SerializeField] public GameObject playerPrefabYellow;
-        [Header("Player 2")] [SerializeField] public GameObject playerPrefabRed;
+        [Header("Player 1")] [SerializeField] public GameObject playerPrefabFirst;
+        [Header("Player 2")] [SerializeField] public GameObject playerPrefabSecond;
 
         [Header("Name Entry")] public GameObject mainObject;
         public Button submitButton;
@@ -475,10 +476,10 @@ namespace AvocadoShark
             
             if (runner.GetPlayerObject(runner.LocalPlayer) != null)
                 return;
-            var playerPrefab = PlayerPrefs.GetInt("ChosenCharacter") == 0 ? playerPrefabRed : playerPrefabYellow;
+            var playerPrefab = PlayerPrefs.GetInt("ChosenCharacter") == 0 ? playerPrefabSecond : playerPrefabFirst;
             var location = !UseCustomLocation
-                ? new Vector3(UnityEngine.Random.Range(-7.6f, 14.2f), 0,
-                    UnityEngine.Random.Range(-31.48f, -41.22f))
+                ? new Vector3(UnityEngine.Random.Range(80f, 90f), UnityEngine.Random.Range(-3, -5),
+                    UnityEngine.Random.Range(-40.48f, -50.22f))
                 : CustomLocation;
             NetworkObject playerObject = runner.Spawn(playerPrefab,location);
             playerObject.transform.position = location;

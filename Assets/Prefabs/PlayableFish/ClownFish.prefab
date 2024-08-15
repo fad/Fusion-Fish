@@ -444,11 +444,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26e54e5a728a9234ab24fcf1460ed8a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  settingsSO: {fileID: 11400000, guid: 933cba68e45ea634da0cb2bf0e3cb604, type: 2}
+  playerRotationSmoothTime: 10
+  sensitivity: 1.5
+  playerVisual: {fileID: 5159690815227489710}
+  boostSwimSpeed: 320
+  defaultSwimSpeed: 80
+  playerManager: {fileID: 0}
   currentBoostCount: 0
   boostDelayAfterActivation: 2
   maxBoostCount: 100
   cameraFOVSmoothTime: 2
-  cameraRotationSmoothTime: 3.5
+  cameraRotationSmoothTime: 4.5
   cineMachineCameraTarget: {fileID: 505540377448418887}
   vCam: {fileID: 0}
   vCamRoot: {fileID: 0}
@@ -456,12 +463,6 @@ MonoBehaviour:
   bottomClamp: -80
   cameraAngleOverride: 0
   lockCameraPosition: 0
-  playerRotationSmoothTime: 10
-  sensitivity: 0.85
-  playerVisual: {fileID: 5159690815227489710}
-  boostSwimSpeed: 300
-  defaultSwimSpeed: 50
-  playerManager: {fileID: 0}
   animator: {fileID: 6424190454631559794}
   input: {fileID: 0}
   boostState: 0
