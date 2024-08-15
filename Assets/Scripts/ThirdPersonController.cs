@@ -28,6 +28,8 @@ namespace StarterAssets
         [Header("CineMachine")]
         [Tooltip("How fast the fov changes when the character speed changes")]
         [SerializeField] private float cameraFOVSmoothTime = 3f;
+        [Tooltip("How fast the camera rotates with the player")]
+        [SerializeField] private float cameraRotationSmoothTime = 3f;
         [Tooltip("The follow target set in the CineMachine Virtual Camera that the camera will follow")]
         [HideInInspector] public GameObject cineMachineCameraTarget;
         [SerializeField] private CinemachineVirtualCamera vCam;
@@ -47,7 +49,7 @@ namespace StarterAssets
 
         [Header("Movement")]
         [Tooltip("How fast the character turns to face movement direction")]
-        [SerializeField] private float rotationSmoothTime = 3f;
+        [SerializeField] private float playerRotationSmoothTime = 3f;
         [Tooltip("How fast you can rotate the player depending on the mouse movement, the camera moves with the player")]
         [SerializeField] private float sensitivity = .85f;
         [SerializeField] private GameObject playerVisual;
@@ -157,9 +159,9 @@ namespace StarterAssets
 
             // CineMachine will follow this target
             var localRotation = transform.localRotation;
-            localRotation = Quaternion.Lerp(localRotation, Quaternion.Euler(cineMachineTargetPitch + cameraAngleOverride, cineMachineTargetYaw, 0.0f), rotationSmoothTime * Time.deltaTime);
+            localRotation = Quaternion.Lerp(localRotation, Quaternion.Euler(cineMachineTargetPitch + cameraAngleOverride, cineMachineTargetYaw, 0.0f), playerRotationSmoothTime * Time.deltaTime);
             transform.localRotation = localRotation;
-            vCamRoot.transform.localRotation = Quaternion.Lerp(vCamRoot.transform.localRotation, localRotation, rotationSmoothTime * Time.deltaTime);
+            vCamRoot.transform.localRotation = Quaternion.Lerp(vCamRoot.transform.localRotation, localRotation, cameraRotationSmoothTime * Time.deltaTime);
         }
 
         private void Move()
@@ -184,11 +186,8 @@ namespace StarterAssets
                 rb.AddForce(vCam.transform.forward * (inputDirectionNormalized.z * moveDistance), ForceMode.Impulse);
 
                 vCam.m_Lens.FieldOfView = Mathf.Lerp(vCam.m_Lens.FieldOfView, isBoosting ? 30f : 20f, cameraFOVSmoothTime * Time.deltaTime);
-
-                if (!playerManager.attack.isAttacking)
-                {
-                    playerVisual.transform.localRotation = Quaternion.Lerp(playerVisual.transform.localRotation, Quaternion.Euler(playerRenderRotation, 0, playerRenderRotation), rotationSmoothTime * Time.deltaTime);
-                }
+                
+                playerVisual.transform.localRotation = Quaternion.Lerp(playerVisual.transform.localRotation, Quaternion.Euler(playerRenderRotation, 0, playerRenderRotation), playerRotationSmoothTime * Time.deltaTime);
             }
             
             if (inputDirectionNormalized.z >= 0.1)

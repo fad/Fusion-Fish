@@ -11,9 +11,12 @@ public class Health : MonoBehaviour
     private NPC npc;
     private bool isNPC;
     private bool isPlayer;
+
+    [Header("Experience")] 
+    public int experienceValue = 100;
     
     [Header("Death")]
-    [HideInInspector] public bool isDead = false;
+    [HideInInspector] public bool isDead;
     public GameObject deathPanel;
 
     private void Start()
@@ -46,33 +49,24 @@ public class Health : MonoBehaviour
         {
             if (isPlayer)
             {
-                Die(0);
+                Die();
                 return;
             }
             
             if (isNPC)
             {
                 PlayParticles(Color.red, 30);
-                Die(100);
             }
             else
             {
                 PlayParticles(Color.yellow, 10);
-                Die(10);
             }
         }
     }
 
-    private void Die(int experience)
+    private void Die()
     {
-        thirdPersonController.playerManager.attack.isAttacking = false;
-        thirdPersonController.playerManager.experience.currentExperience += experience;
-        
-        if (isNPC)
-        {
-            Destroy(npc.gameObject);
-        }
-        else
+        if (isPlayer)
         {
             thirdPersonController.animator.SetBool("isDead", true);
             isDead = true;

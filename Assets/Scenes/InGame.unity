@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18385918, g: 0.22904861, b: 0.3033682, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -225,7 +225,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &4055413
@@ -348,7 +347,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &12649451
@@ -552,20 +550,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 2
-  attacksPlayer: 1
-  attackDamage: 10
+  maxSwimSpeed: 20
+  maxSwimSpeedOnAttack: 15
+  defaultSwimSpeed: 3
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
   foodLayer:
     serializedVersion: 2
     m_Bits: 64
-  maxFlightDelayTime: 7
-  maxSwimSpeed: 20
-  maxSwimSpeedOnAttack: 15
-  defaultSwimSpeed: 3
   timeBetweenAttacksMax: 1.5
   timeBetweenAttacksMin: 0.8
+  attacksPlayer: 1
+  attackDamage: 10
+  maxFlightDelayTime: 7
 --- !u!114 &46985893
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -580,7 +578,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 4
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!54 &46985894
@@ -961,7 +958,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &67920715
@@ -1365,7 +1361,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &107396914
@@ -1488,7 +1483,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &108822872
@@ -1745,20 +1739,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 2
-  attacksPlayer: 1
-  attackDamage: 10
+  maxSwimSpeed: 20
+  maxSwimSpeedOnAttack: 15
+  defaultSwimSpeed: 3
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
   foodLayer:
     serializedVersion: 2
     m_Bits: 64
-  maxFlightDelayTime: 7
-  maxSwimSpeed: 20
-  maxSwimSpeedOnAttack: 15
-  defaultSwimSpeed: 3
   timeBetweenAttacksMax: 1.5
   timeBetweenAttacksMin: 0.8
+  attacksPlayer: 1
+  attackDamage: 10
+  maxFlightDelayTime: 7
 --- !u!114 &111974359
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1773,7 +1767,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 4
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!54 &111974360
@@ -1849,20 +1842,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 2
-  attacksPlayer: 1
-  attackDamage: 10
+  maxSwimSpeed: 20
+  maxSwimSpeedOnAttack: 15
+  defaultSwimSpeed: 3
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
   foodLayer:
     serializedVersion: 2
     m_Bits: 64
-  maxFlightDelayTime: 7
-  maxSwimSpeed: 20
-  maxSwimSpeedOnAttack: 15
-  defaultSwimSpeed: 3
   timeBetweenAttacksMax: 1.5
   timeBetweenAttacksMin: 0.8
+  attacksPlayer: 1
+  attackDamage: 10
+  maxFlightDelayTime: 7
 --- !u!114 &112564572
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1877,7 +1870,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 2
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!54 &112564573
@@ -2173,20 +2165,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 2
-  attacksPlayer: 1
-  attackDamage: 10
+  maxSwimSpeed: 20
+  maxSwimSpeedOnAttack: 15
+  defaultSwimSpeed: 3
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
   foodLayer:
     serializedVersion: 2
     m_Bits: 64
-  maxFlightDelayTime: 7
-  maxSwimSpeed: 20
-  maxSwimSpeedOnAttack: 15
-  defaultSwimSpeed: 3
   timeBetweenAttacksMax: 1.5
   timeBetweenAttacksMin: 0.8
+  attacksPlayer: 1
+  attackDamage: 10
+  maxFlightDelayTime: 7
 --- !u!114 &118776865
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2201,7 +2193,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 4
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!54 &118776866
@@ -2301,7 +2292,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &123093932
@@ -2424,7 +2414,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &129275661
@@ -2766,7 +2755,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &158622073
@@ -2865,20 +2853,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 2
-  attacksPlayer: 1
-  attackDamage: 10
+  maxSwimSpeed: 20
+  maxSwimSpeedOnAttack: 15
+  defaultSwimSpeed: 3
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
   foodLayer:
     serializedVersion: 2
     m_Bits: 64
-  maxFlightDelayTime: 7
-  maxSwimSpeed: 20
-  maxSwimSpeedOnAttack: 15
-  defaultSwimSpeed: 3
   timeBetweenAttacksMax: 1.5
   timeBetweenAttacksMin: 0.8
+  attacksPlayer: 1
+  attackDamage: 10
+  maxFlightDelayTime: 7
 --- !u!114 &183569520
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2893,7 +2881,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 2
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!54 &183569521
@@ -2993,7 +2980,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &183598951
@@ -3116,7 +3102,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &187631559
@@ -3220,6 +3205,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 410087041}
+  - {fileID: 1235031263}
   - {fileID: 832575519}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3248,20 +3234,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 2
-  attacksPlayer: 1
-  attackDamage: 10
+  maxSwimSpeed: 20
+  maxSwimSpeedOnAttack: 15
+  defaultSwimSpeed: 3
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
   foodLayer:
     serializedVersion: 2
     m_Bits: 64
-  maxFlightDelayTime: 7
-  maxSwimSpeed: 20
-  maxSwimSpeedOnAttack: 15
-  defaultSwimSpeed: 3
   timeBetweenAttacksMax: 1.5
   timeBetweenAttacksMin: 0.8
+  attacksPlayer: 1
+  attackDamage: 10
+  maxFlightDelayTime: 7
 --- !u!114 &188884272
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3276,7 +3262,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 4
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!54 &188884273
@@ -3376,7 +3361,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &189895830
@@ -3499,7 +3483,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &192583780
@@ -3622,7 +3605,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &199615145
@@ -3721,20 +3703,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 2
-  attacksPlayer: 1
-  attackDamage: 10
+  maxSwimSpeed: 20
+  maxSwimSpeedOnAttack: 15
+  defaultSwimSpeed: 3
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
   foodLayer:
     serializedVersion: 2
     m_Bits: 64
-  maxFlightDelayTime: 7
-  maxSwimSpeed: 20
-  maxSwimSpeedOnAttack: 15
-  defaultSwimSpeed: 3
   timeBetweenAttacksMax: 1.5
   timeBetweenAttacksMin: 0.8
+  attacksPlayer: 1
+  attackDamage: 10
+  maxFlightDelayTime: 7
 --- !u!114 &203323604
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3749,7 +3731,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 3
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!54 &203323605
@@ -4044,20 +4025,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 2
-  attacksPlayer: 1
-  attackDamage: 10
+  maxSwimSpeed: 20
+  maxSwimSpeedOnAttack: 15
+  defaultSwimSpeed: 3
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
   foodLayer:
     serializedVersion: 2
     m_Bits: 64
-  maxFlightDelayTime: 7
-  maxSwimSpeed: 20
-  maxSwimSpeedOnAttack: 15
-  defaultSwimSpeed: 3
   timeBetweenAttacksMax: 1.5
   timeBetweenAttacksMin: 0.8
+  attacksPlayer: 1
+  attackDamage: 10
+  maxFlightDelayTime: 7
 --- !u!114 &218475391
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4072,7 +4053,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 10
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!54 &218475392
@@ -4339,7 +4319,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &248282593
@@ -4462,7 +4441,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &251433924
@@ -4638,7 +4616,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &260776449
@@ -4761,7 +4738,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &276629318
@@ -4884,7 +4860,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &277410597
@@ -5341,7 +5316,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &327291210
@@ -5440,20 +5414,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 2
-  attacksPlayer: 1
-  attackDamage: 10
+  maxSwimSpeed: 20
+  maxSwimSpeedOnAttack: 15
+  defaultSwimSpeed: 3
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
   foodLayer:
     serializedVersion: 2
     m_Bits: 64
-  maxFlightDelayTime: 7
-  maxSwimSpeed: 20
-  maxSwimSpeedOnAttack: 15
-  defaultSwimSpeed: 3
   timeBetweenAttacksMax: 1.5
   timeBetweenAttacksMin: 0.8
+  attacksPlayer: 1
+  attackDamage: 10
+  maxFlightDelayTime: 7
 --- !u!114 &332977601
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5468,7 +5442,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 2
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!54 &332977602
@@ -5597,20 +5570,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 2
-  attacksPlayer: 1
-  attackDamage: 10
+  maxSwimSpeed: 20
+  maxSwimSpeedOnAttack: 15
+  defaultSwimSpeed: 3
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
   foodLayer:
     serializedVersion: 2
     m_Bits: 64
-  maxFlightDelayTime: 7
-  maxSwimSpeed: 20
-  maxSwimSpeedOnAttack: 15
-  defaultSwimSpeed: 3
   timeBetweenAttacksMax: 1.5
   timeBetweenAttacksMin: 0.8
+  attacksPlayer: 1
+  attackDamage: 10
+  maxFlightDelayTime: 7
 --- !u!114 &335394915
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5625,7 +5598,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 10
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!54 &335394916
@@ -5725,7 +5697,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &341245096
@@ -5848,7 +5819,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &342218558
@@ -6190,7 +6160,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &351994629
@@ -6313,7 +6282,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &354198337
@@ -6550,7 +6518,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &356324468
@@ -6649,20 +6616,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 2
-  attacksPlayer: 1
-  attackDamage: 10
+  maxSwimSpeed: 20
+  maxSwimSpeedOnAttack: 15
+  defaultSwimSpeed: 3
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
   foodLayer:
     serializedVersion: 2
     m_Bits: 64
-  maxFlightDelayTime: 7
-  maxSwimSpeed: 20
-  maxSwimSpeedOnAttack: 15
-  defaultSwimSpeed: 3
   timeBetweenAttacksMax: 1.5
   timeBetweenAttacksMin: 0.8
+  attacksPlayer: 1
+  attackDamage: 10
+  maxFlightDelayTime: 7
 --- !u!114 &364777177
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6677,7 +6644,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 3
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!54 &364777178
@@ -6830,7 +6796,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &369973508
@@ -7043,20 +7008,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 2
-  attacksPlayer: 1
-  attackDamage: 10
+  maxSwimSpeed: 20
+  maxSwimSpeedOnAttack: 15
+  defaultSwimSpeed: 3
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
   foodLayer:
     serializedVersion: 2
     m_Bits: 64
-  maxFlightDelayTime: 7
-  maxSwimSpeed: 20
-  maxSwimSpeedOnAttack: 15
-  defaultSwimSpeed: 3
   timeBetweenAttacksMax: 1.5
   timeBetweenAttacksMin: 0.8
+  attacksPlayer: 1
+  attackDamage: 10
+  maxFlightDelayTime: 7
 --- !u!114 &377691496
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7071,7 +7036,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 2
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!54 &377691497
@@ -7276,7 +7240,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &391806135
@@ -7399,7 +7362,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &400537175
@@ -7522,7 +7484,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &402923994
@@ -7759,7 +7720,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &406390964
@@ -7882,7 +7842,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &406694853
@@ -7986,7 +7945,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 3
+  m_Intensity: 2.5
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -8044,13 +8003,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 410087039}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
+  m_LocalRotation: {x: 0.25285706, y: -0.24979359, z: 0.067752816, w: 0.9322425}
   m_LocalPosition: {x: -7.913204, y: 16.399094, z: -12.27415}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 188568174}
-  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+  m_LocalEulerAnglesHint: {x: 30.351, y: -30, z: 0}
 --- !u!114 &410087042
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8123,7 +8082,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &412688853
@@ -8299,7 +8257,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &417110690
@@ -8422,7 +8379,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &430669530
@@ -8545,7 +8501,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &431863228
@@ -8668,7 +8623,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &437526873
@@ -8791,7 +8745,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &464574125
@@ -8914,7 +8867,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &468266768
@@ -9013,20 +8965,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 2
-  attacksPlayer: 1
-  attackDamage: 10
+  maxSwimSpeed: 20
+  maxSwimSpeedOnAttack: 15
+  defaultSwimSpeed: 3
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
   foodLayer:
     serializedVersion: 2
     m_Bits: 64
-  maxFlightDelayTime: 7
-  maxSwimSpeed: 20
-  maxSwimSpeedOnAttack: 15
-  defaultSwimSpeed: 3
   timeBetweenAttacksMax: 1.5
   timeBetweenAttacksMin: 0.8
+  attacksPlayer: 1
+  attackDamage: 10
+  maxFlightDelayTime: 7
 --- !u!114 &468671319
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9041,7 +8993,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 3
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!54 &468671320
@@ -9141,7 +9092,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &469738731
@@ -9264,7 +9214,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &492558857
@@ -9387,7 +9336,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &499864855
@@ -9563,7 +9511,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &516207690
@@ -9739,7 +9686,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &518966821
@@ -9968,7 +9914,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &529210172
@@ -10091,7 +10036,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &538668759
@@ -10214,7 +10158,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &545901895
@@ -10337,7 +10280,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &558812772
@@ -10460,7 +10402,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &559039235
@@ -10583,7 +10524,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &562211939
@@ -10706,7 +10646,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &568667893
@@ -10829,7 +10768,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &573493251
@@ -10952,7 +10890,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &576641584
@@ -11075,7 +11012,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &578191431
@@ -11198,7 +11134,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &579151510
@@ -11426,7 +11361,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &587929776
@@ -11549,7 +11483,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &595168669
@@ -11648,20 +11581,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 2
-  attacksPlayer: 1
-  attackDamage: 10
+  maxSwimSpeed: 20
+  maxSwimSpeedOnAttack: 15
+  defaultSwimSpeed: 3
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
   foodLayer:
     serializedVersion: 2
     m_Bits: 64
-  maxFlightDelayTime: 7
-  maxSwimSpeed: 20
-  maxSwimSpeedOnAttack: 15
-  defaultSwimSpeed: 3
   timeBetweenAttacksMax: 1.5
   timeBetweenAttacksMin: 0.8
+  attacksPlayer: 1
+  attackDamage: 10
+  maxFlightDelayTime: 7
 --- !u!114 &602163045
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11676,7 +11609,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 4
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!54 &602163046
@@ -11752,20 +11684,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 2
-  attacksPlayer: 1
-  attackDamage: 10
+  maxSwimSpeed: 20
+  maxSwimSpeedOnAttack: 15
+  defaultSwimSpeed: 3
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
   foodLayer:
     serializedVersion: 2
     m_Bits: 64
-  maxFlightDelayTime: 7
-  maxSwimSpeed: 20
-  maxSwimSpeedOnAttack: 15
-  defaultSwimSpeed: 3
   timeBetweenAttacksMax: 1.5
   timeBetweenAttacksMin: 0.8
+  attacksPlayer: 1
+  attackDamage: 10
+  maxFlightDelayTime: 7
 --- !u!114 &606556935
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11780,7 +11712,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 3
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!54 &606556936
@@ -11880,7 +11811,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &607863234
@@ -12003,7 +11933,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &608550001
@@ -17043,20 +16972,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 2
-  attacksPlayer: 1
-  attackDamage: 10
+  maxSwimSpeed: 20
+  maxSwimSpeedOnAttack: 15
+  defaultSwimSpeed: 3
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
   foodLayer:
     serializedVersion: 2
     m_Bits: 64
-  maxFlightDelayTime: 7
-  maxSwimSpeed: 20
-  maxSwimSpeedOnAttack: 15
-  defaultSwimSpeed: 3
   timeBetweenAttacksMax: 1.5
   timeBetweenAttacksMin: 0.8
+  attacksPlayer: 1
+  attackDamage: 10
+  maxFlightDelayTime: 7
 --- !u!114 &650012120
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17071,7 +17000,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 4
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!54 &650012121
@@ -17276,7 +17204,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &659458461
@@ -17399,7 +17326,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &670877482
@@ -17522,7 +17448,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &684980491
@@ -17698,7 +17623,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &687948572
@@ -18268,7 +18192,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &732922056
@@ -18391,7 +18314,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &733215926
@@ -18514,7 +18436,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &745709228
@@ -18637,7 +18558,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &746864747
@@ -18865,7 +18785,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &756765616
@@ -18988,7 +18907,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &756819325
@@ -19225,7 +19143,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &766034596
@@ -19348,7 +19265,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &767246385
@@ -19524,7 +19440,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &771465912
@@ -19647,7 +19562,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &772640825
@@ -19935,7 +19849,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &777891589
@@ -20034,20 +19947,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 2
-  attacksPlayer: 1
-  attackDamage: 10
+  maxSwimSpeed: 20
+  maxSwimSpeedOnAttack: 15
+  defaultSwimSpeed: 3
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
   foodLayer:
     serializedVersion: 2
     m_Bits: 64
-  maxFlightDelayTime: 7
-  maxSwimSpeed: 20
-  maxSwimSpeedOnAttack: 15
-  defaultSwimSpeed: 3
   timeBetweenAttacksMax: 1.5
   timeBetweenAttacksMin: 0.8
+  attacksPlayer: 1
+  attackDamage: 10
+  maxFlightDelayTime: 7
 --- !u!114 &779383274
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20062,7 +19975,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 4
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!54 &779383275
@@ -20138,20 +20050,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 2
-  attacksPlayer: 1
-  attackDamage: 10
+  maxSwimSpeed: 20
+  maxSwimSpeedOnAttack: 15
+  defaultSwimSpeed: 3
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
   foodLayer:
     serializedVersion: 2
     m_Bits: 64
-  maxFlightDelayTime: 7
-  maxSwimSpeed: 20
-  maxSwimSpeedOnAttack: 15
-  defaultSwimSpeed: 3
   timeBetweenAttacksMax: 1.5
   timeBetweenAttacksMin: 0.8
+  attacksPlayer: 1
+  attackDamage: 10
+  maxFlightDelayTime: 7
 --- !u!114 &785308304
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20166,7 +20078,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 2
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!54 &785308305
@@ -20266,7 +20177,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &785487995
@@ -20442,7 +20352,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &800846603
@@ -20541,20 +20450,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 2
-  attacksPlayer: 1
-  attackDamage: 10
+  maxSwimSpeed: 20
+  maxSwimSpeedOnAttack: 15
+  defaultSwimSpeed: 3
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
   foodLayer:
     serializedVersion: 2
     m_Bits: 64
-  maxFlightDelayTime: 7
-  maxSwimSpeed: 20
-  maxSwimSpeedOnAttack: 15
-  defaultSwimSpeed: 3
   timeBetweenAttacksMax: 1.5
   timeBetweenAttacksMin: 0.8
+  attacksPlayer: 1
+  attackDamage: 10
+  maxFlightDelayTime: 7
 --- !u!114 &803299981
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20569,7 +20478,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 3
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!54 &803299982
@@ -20645,20 +20553,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 2
-  attacksPlayer: 1
-  attackDamage: 10
+  maxSwimSpeed: 20
+  maxSwimSpeedOnAttack: 15
+  defaultSwimSpeed: 3
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
   foodLayer:
     serializedVersion: 2
     m_Bits: 64
-  maxFlightDelayTime: 7
-  maxSwimSpeed: 20
-  maxSwimSpeedOnAttack: 15
-  defaultSwimSpeed: 3
   timeBetweenAttacksMax: 1.5
   timeBetweenAttacksMin: 0.8
+  attacksPlayer: 1
+  attackDamage: 10
+  maxFlightDelayTime: 7
 --- !u!114 &817899161
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20673,7 +20581,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 10
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!54 &817899162
@@ -20875,7 +20782,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &841600638
@@ -21051,7 +20957,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &860915094
@@ -21174,7 +21079,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &867638164
@@ -21297,7 +21201,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &872156634
@@ -21473,7 +21376,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &888511794
@@ -21596,7 +21498,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &900133646
@@ -21833,7 +21734,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &904782884
@@ -22061,7 +21961,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &913545885
@@ -22237,7 +22136,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &923431527
@@ -22336,20 +22234,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 2
-  attacksPlayer: 1
-  attackDamage: 10
+  maxSwimSpeed: 20
+  maxSwimSpeedOnAttack: 15
+  defaultSwimSpeed: 3
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
   foodLayer:
     serializedVersion: 2
     m_Bits: 64
-  maxFlightDelayTime: 7
-  maxSwimSpeed: 20
-  maxSwimSpeedOnAttack: 15
-  defaultSwimSpeed: 3
   timeBetweenAttacksMax: 1.5
   timeBetweenAttacksMin: 0.8
+  attacksPlayer: 1
+  attackDamage: 10
+  maxFlightDelayTime: 7
 --- !u!114 &930489325
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22364,7 +22262,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 4
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!54 &930489326
@@ -22464,7 +22361,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &935227217
@@ -22563,20 +22459,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 2
-  attacksPlayer: 1
-  attackDamage: 10
+  maxSwimSpeed: 20
+  maxSwimSpeedOnAttack: 15
+  defaultSwimSpeed: 3
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
   foodLayer:
     serializedVersion: 2
     m_Bits: 64
-  maxFlightDelayTime: 7
-  maxSwimSpeed: 20
-  maxSwimSpeedOnAttack: 15
-  defaultSwimSpeed: 3
   timeBetweenAttacksMax: 1.5
   timeBetweenAttacksMin: 0.8
+  attacksPlayer: 1
+  attackDamage: 10
+  maxFlightDelayTime: 7
 --- !u!114 &945198223
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22591,7 +22487,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 4
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!54 &945198224
@@ -22667,20 +22562,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 2
-  attacksPlayer: 1
-  attackDamage: 10
+  maxSwimSpeed: 20
+  maxSwimSpeedOnAttack: 15
+  defaultSwimSpeed: 3
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
   foodLayer:
     serializedVersion: 2
     m_Bits: 64
-  maxFlightDelayTime: 7
-  maxSwimSpeed: 20
-  maxSwimSpeedOnAttack: 15
-  defaultSwimSpeed: 3
   timeBetweenAttacksMax: 1.5
   timeBetweenAttacksMin: 0.8
+  attacksPlayer: 1
+  attackDamage: 10
+  maxFlightDelayTime: 7
 --- !u!114 &947450901
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22695,7 +22590,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 10
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!54 &947450902
@@ -22795,7 +22689,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &949406822
@@ -22918,7 +22811,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &953708297
@@ -23078,7 +22970,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &969926271
@@ -23304,7 +23195,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &974103572
@@ -23403,20 +23293,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 2
-  attacksPlayer: 1
-  attackDamage: 10
+  maxSwimSpeed: 20
+  maxSwimSpeedOnAttack: 15
+  defaultSwimSpeed: 3
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
   foodLayer:
     serializedVersion: 2
     m_Bits: 64
-  maxFlightDelayTime: 7
-  maxSwimSpeed: 20
-  maxSwimSpeedOnAttack: 15
-  defaultSwimSpeed: 3
   timeBetweenAttacksMax: 1.5
   timeBetweenAttacksMin: 0.8
+  attacksPlayer: 1
+  attackDamage: 10
+  maxFlightDelayTime: 7
 --- !u!114 &986776877
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23431,7 +23321,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 4
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!54 &986776878
@@ -23531,7 +23420,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &990612891
@@ -23630,20 +23518,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 2
-  attacksPlayer: 1
-  attackDamage: 10
+  maxSwimSpeed: 20
+  maxSwimSpeedOnAttack: 15
+  defaultSwimSpeed: 3
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
   foodLayer:
     serializedVersion: 2
     m_Bits: 64
-  maxFlightDelayTime: 7
-  maxSwimSpeed: 20
-  maxSwimSpeedOnAttack: 15
-  defaultSwimSpeed: 3
   timeBetweenAttacksMax: 1.5
   timeBetweenAttacksMin: 0.8
+  attacksPlayer: 1
+  attackDamage: 10
+  maxFlightDelayTime: 7
 --- !u!114 &991345788
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23658,7 +23546,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 3
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!54 &991345789
@@ -23758,7 +23645,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &1000347539
@@ -23881,7 +23767,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &1008821509
@@ -23980,20 +23865,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 2
-  attacksPlayer: 1
-  attackDamage: 10
+  maxSwimSpeed: 20
+  maxSwimSpeedOnAttack: 15
+  defaultSwimSpeed: 3
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
   foodLayer:
     serializedVersion: 2
     m_Bits: 64
-  maxFlightDelayTime: 7
-  maxSwimSpeed: 20
-  maxSwimSpeedOnAttack: 15
-  defaultSwimSpeed: 3
   timeBetweenAttacksMax: 1.5
   timeBetweenAttacksMin: 0.8
+  attacksPlayer: 1
+  attackDamage: 10
+  maxFlightDelayTime: 7
 --- !u!114 &1010963259
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24008,7 +23893,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 2
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!54 &1010963260
@@ -24180,7 +24064,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1015053384
 Transform:
   m_ObjectHideFlags: 0
@@ -24317,7 +24201,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &1020455326
@@ -24657,7 +24540,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &1029062062
@@ -24780,7 +24662,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &1031300994
@@ -24956,7 +24837,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &1040864217
@@ -25299,7 +25179,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &1049181150
@@ -25528,7 +25407,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &1058600155
@@ -25844,20 +25722,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 2
-  attacksPlayer: 1
-  attackDamage: 10
+  maxSwimSpeed: 20
+  maxSwimSpeedOnAttack: 15
+  defaultSwimSpeed: 3
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
   foodLayer:
     serializedVersion: 2
     m_Bits: 64
-  maxFlightDelayTime: 7
-  maxSwimSpeed: 20
-  maxSwimSpeedOnAttack: 15
-  defaultSwimSpeed: 3
   timeBetweenAttacksMax: 1.5
   timeBetweenAttacksMin: 0.8
+  attacksPlayer: 1
+  attackDamage: 10
+  maxFlightDelayTime: 7
 --- !u!114 &1071121588
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25872,7 +25750,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 10
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!54 &1071121589
@@ -25972,7 +25849,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &1074604962
@@ -26724,7 +26600,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 3
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!54 &1099729795
@@ -26788,20 +26663,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 2
-  attacksPlayer: 1
-  attackDamage: 10
+  maxSwimSpeed: 20
+  maxSwimSpeedOnAttack: 15
+  defaultSwimSpeed: 3
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
   foodLayer:
     serializedVersion: 2
     m_Bits: 64
-  maxFlightDelayTime: 7
-  maxSwimSpeed: 20
-  maxSwimSpeedOnAttack: 15
-  defaultSwimSpeed: 3
   timeBetweenAttacksMax: 1.5
   timeBetweenAttacksMin: 0.8
+  attacksPlayer: 1
+  attackDamage: 10
+  maxFlightDelayTime: 7
 --- !u!1 &1105718504
 GameObject:
   m_ObjectHideFlags: 0
@@ -26851,7 +26726,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &1105718509
@@ -26974,7 +26848,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &1107686366
@@ -27097,7 +26970,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &1109589483
@@ -27220,7 +27092,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &1111210254
@@ -27319,20 +27190,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 2
-  attacksPlayer: 1
-  attackDamage: 10
+  maxSwimSpeed: 20
+  maxSwimSpeedOnAttack: 15
+  defaultSwimSpeed: 3
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
   foodLayer:
     serializedVersion: 2
     m_Bits: 64
-  maxFlightDelayTime: 7
-  maxSwimSpeed: 20
-  maxSwimSpeedOnAttack: 15
-  defaultSwimSpeed: 3
   timeBetweenAttacksMax: 1.5
   timeBetweenAttacksMin: 0.8
+  attacksPlayer: 1
+  attackDamage: 10
+  maxFlightDelayTime: 7
 --- !u!114 &1115311143
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27347,7 +27218,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 4
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!54 &1115311144
@@ -27423,20 +27293,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 2
-  attacksPlayer: 1
-  attackDamage: 10
+  maxSwimSpeed: 20
+  maxSwimSpeedOnAttack: 15
+  defaultSwimSpeed: 3
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
   foodLayer:
     serializedVersion: 2
     m_Bits: 64
-  maxFlightDelayTime: 7
-  maxSwimSpeed: 20
-  maxSwimSpeedOnAttack: 15
-  defaultSwimSpeed: 3
   timeBetweenAttacksMax: 1.5
   timeBetweenAttacksMin: 0.8
+  attacksPlayer: 1
+  attackDamage: 10
+  maxFlightDelayTime: 7
 --- !u!114 &1116130280
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27451,7 +27321,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 3
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!54 &1116130281
@@ -27551,7 +27420,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &1118355319
@@ -27650,20 +27518,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 2
-  attacksPlayer: 1
-  attackDamage: 10
+  maxSwimSpeed: 20
+  maxSwimSpeedOnAttack: 15
+  defaultSwimSpeed: 3
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
   foodLayer:
     serializedVersion: 2
     m_Bits: 64
-  maxFlightDelayTime: 7
-  maxSwimSpeed: 20
-  maxSwimSpeedOnAttack: 15
-  defaultSwimSpeed: 3
   timeBetweenAttacksMax: 1.5
   timeBetweenAttacksMin: 0.8
+  attacksPlayer: 1
+  attackDamage: 10
+  maxFlightDelayTime: 7
 --- !u!114 &1121796577
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27678,7 +27546,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 4
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!54 &1121796578
@@ -27778,7 +27645,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &1127505068
@@ -27930,20 +27796,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 2
-  attacksPlayer: 1
-  attackDamage: 10
+  maxSwimSpeed: 20
+  maxSwimSpeedOnAttack: 15
+  defaultSwimSpeed: 3
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
   foodLayer:
     serializedVersion: 2
     m_Bits: 64
-  maxFlightDelayTime: 7
-  maxSwimSpeed: 20
-  maxSwimSpeedOnAttack: 15
-  defaultSwimSpeed: 3
   timeBetweenAttacksMax: 1.5
   timeBetweenAttacksMin: 0.8
+  attacksPlayer: 1
+  attackDamage: 10
+  maxFlightDelayTime: 7
 --- !u!114 &1140845336
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27958,7 +27824,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 2
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!54 &1140845337
@@ -28058,7 +27923,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &1141934867
@@ -28181,7 +28045,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &1143587274
@@ -28357,7 +28220,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &1147321863
@@ -28708,7 +28570,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &1160613315
@@ -28831,7 +28692,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &1169997194
@@ -28954,7 +28814,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &1192300787
@@ -29277,20 +29136,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 2
-  attacksPlayer: 1
-  attackDamage: 10
+  maxSwimSpeed: 20
+  maxSwimSpeedOnAttack: 15
+  defaultSwimSpeed: 3
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
   foodLayer:
     serializedVersion: 2
     m_Bits: 64
-  maxFlightDelayTime: 7
-  maxSwimSpeed: 20
-  maxSwimSpeedOnAttack: 15
-  defaultSwimSpeed: 3
   timeBetweenAttacksMax: 1.5
   timeBetweenAttacksMin: 0.8
+  attacksPlayer: 1
+  attackDamage: 10
+  maxFlightDelayTime: 7
 --- !u!114 &1203819315
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29305,7 +29164,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 4
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!54 &1203819316
@@ -29405,7 +29263,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &1205404700
@@ -29528,7 +29385,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &1213418552
@@ -29627,20 +29483,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 2
-  attacksPlayer: 1
-  attackDamage: 10
+  maxSwimSpeed: 20
+  maxSwimSpeedOnAttack: 15
+  defaultSwimSpeed: 3
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
   foodLayer:
     serializedVersion: 2
     m_Bits: 64
-  maxFlightDelayTime: 7
-  maxSwimSpeed: 20
-  maxSwimSpeedOnAttack: 15
-  defaultSwimSpeed: 3
   timeBetweenAttacksMax: 1.5
   timeBetweenAttacksMin: 0.8
+  attacksPlayer: 1
+  attackDamage: 10
+  maxFlightDelayTime: 7
 --- !u!114 &1218417753
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29655,7 +29511,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 3
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!54 &1218417754
@@ -29957,6 +29812,124 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 5, y: 5, z: 10}
   m_Center: {x: 0, y: 0, z: -5}
+--- !u!1 &1235031262
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1235031263}
+  - component: {fileID: 1235031265}
+  - component: {fileID: 1235031264}
+  m_Layer: 0
+  m_Name: Directional Light (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1235031263
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1235031262}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.91999793, y: -0.07885929, z: 0.24651267, w: 0.29430687}
+  m_LocalPosition: {x: -7.913204, y: 16.399094, z: -12.27415}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 188568174}
+  m_LocalEulerAnglesHint: {x: 144.521, y: -30, z: 0}
+--- !u!114 &1235031264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1235031262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 3
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_RenderingLayers: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_ShadowRenderingLayers: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
+  m_SoftShadowQuality: 1
+--- !u!108 &1235031265
+Light:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1235031262}
+  m_Enabled: 1
+  serializedVersion: 10
+  m_Type: 1
+  m_Shape: 0
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Intensity: 1
+  m_Range: 10
+  m_SpotAngle: 30
+  m_InnerSpotAngle: 21.80208
+  m_CookieSize: 10
+  m_Shadows:
+    m_Type: 2
+    m_Resolution: -1
+    m_CustomResolution: -1
+    m_Strength: 1
+    m_Bias: 0.05
+    m_NormalBias: 0.4
+    m_NearPlane: 0.2
+    m_CullingMatrixOverride:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    m_UseCullingMatrixOverride: 0
+  m_Cookie: {fileID: 0}
+  m_DrawHalo: 0
+  m_Flare: {fileID: 0}
+  m_RenderMode: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingLayerMask: 1
+  m_Lightmapping: 4
+  m_LightShadowCasterMode: 0
+  m_AreaSize: {x: 1, y: 1}
+  m_BounceIntensity: 1
+  m_ColorTemperature: 8500
+  m_UseColorTemperature: 1
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_UseBoundingSphereOverride: 0
+  m_UseViewFrustumForShadowCasterCull: 1
+  m_ShadowRadius: 0
+  m_ShadowAngle: 0
 --- !u!1001 &1249958386
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -30234,7 +30207,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &1253085613
@@ -30357,7 +30329,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &1255853820
@@ -30480,7 +30451,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &1279805980
@@ -30603,7 +30573,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &1280117103
@@ -30840,7 +30809,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &1283022045
@@ -30939,20 +30907,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 2
-  attacksPlayer: 1
-  attackDamage: 10
+  maxSwimSpeed: 20
+  maxSwimSpeedOnAttack: 15
+  defaultSwimSpeed: 3
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
   foodLayer:
     serializedVersion: 2
     m_Bits: 64
-  maxFlightDelayTime: 7
-  maxSwimSpeed: 20
-  maxSwimSpeedOnAttack: 15
-  defaultSwimSpeed: 3
   timeBetweenAttacksMax: 1.5
   timeBetweenAttacksMin: 0.8
+  attacksPlayer: 1
+  attackDamage: 10
+  maxFlightDelayTime: 7
 --- !u!114 &1291702391
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30967,7 +30935,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 4
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!54 &1291702392
@@ -31067,7 +31034,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &1292504220
@@ -31620,7 +31586,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &1308567684
@@ -31743,7 +31708,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &1311495459
@@ -31842,20 +31806,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 2
-  attacksPlayer: 1
-  attackDamage: 10
+  maxSwimSpeed: 20
+  maxSwimSpeedOnAttack: 15
+  defaultSwimSpeed: 3
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
   foodLayer:
     serializedVersion: 2
     m_Bits: 64
-  maxFlightDelayTime: 7
-  maxSwimSpeed: 20
-  maxSwimSpeedOnAttack: 15
-  defaultSwimSpeed: 3
   timeBetweenAttacksMax: 1.5
   timeBetweenAttacksMin: 0.8
+  attacksPlayer: 1
+  attackDamage: 10
+  maxFlightDelayTime: 7
 --- !u!114 &1314104241
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31870,7 +31834,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 4
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!54 &1314104242
@@ -31970,7 +31933,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &1323407681
@@ -32419,7 +32381,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &1347151703
@@ -32542,7 +32503,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &1350287953
@@ -32665,7 +32625,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &1352164604
@@ -32859,7 +32818,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!1 &1355758766
@@ -32911,7 +32869,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &1355758771
@@ -33010,20 +32967,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 2
-  attacksPlayer: 1
-  attackDamage: 10
+  maxSwimSpeed: 20
+  maxSwimSpeedOnAttack: 15
+  defaultSwimSpeed: 3
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
   foodLayer:
     serializedVersion: 2
     m_Bits: 64
-  maxFlightDelayTime: 7
-  maxSwimSpeed: 20
-  maxSwimSpeedOnAttack: 15
-  defaultSwimSpeed: 3
   timeBetweenAttacksMax: 1.5
   timeBetweenAttacksMin: 0.8
+  attacksPlayer: 1
+  attackDamage: 10
+  maxFlightDelayTime: 7
 --- !u!114 &1356674614
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33038,7 +32995,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 2
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!54 &1356674615
@@ -33281,20 +33237,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 2
-  attacksPlayer: 1
-  attackDamage: 10
+  maxSwimSpeed: 20
+  maxSwimSpeedOnAttack: 15
+  defaultSwimSpeed: 3
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
   foodLayer:
     serializedVersion: 2
     m_Bits: 64
-  maxFlightDelayTime: 7
-  maxSwimSpeed: 20
-  maxSwimSpeedOnAttack: 15
-  defaultSwimSpeed: 3
   timeBetweenAttacksMax: 1.5
   timeBetweenAttacksMin: 0.8
+  attacksPlayer: 1
+  attackDamage: 10
+  maxFlightDelayTime: 7
 --- !u!114 &1360088487
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33309,7 +33265,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 4
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!54 &1360088488
@@ -33409,7 +33364,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &1360777973
@@ -33532,7 +33486,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &1362545166
@@ -33655,7 +33608,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &1381363195
@@ -33778,7 +33730,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &1382825127
@@ -33901,7 +33852,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &1388727610
@@ -34182,7 +34132,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &1398818796
@@ -34305,7 +34254,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &1401622634
@@ -34404,20 +34352,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 2
-  attacksPlayer: 1
-  attackDamage: 10
+  maxSwimSpeed: 20
+  maxSwimSpeedOnAttack: 15
+  defaultSwimSpeed: 3
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
   foodLayer:
     serializedVersion: 2
     m_Bits: 64
-  maxFlightDelayTime: 7
-  maxSwimSpeed: 20
-  maxSwimSpeedOnAttack: 15
-  defaultSwimSpeed: 3
   timeBetweenAttacksMax: 1.5
   timeBetweenAttacksMin: 0.8
+  attacksPlayer: 1
+  attackDamage: 10
+  maxFlightDelayTime: 7
 --- !u!114 &1407519210
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34432,7 +34380,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 2
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!54 &1407519211
@@ -34508,20 +34455,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 2
-  attacksPlayer: 1
-  attackDamage: 10
+  maxSwimSpeed: 20
+  maxSwimSpeedOnAttack: 15
+  defaultSwimSpeed: 3
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
   foodLayer:
     serializedVersion: 2
     m_Bits: 64
-  maxFlightDelayTime: 7
-  maxSwimSpeed: 20
-  maxSwimSpeedOnAttack: 15
-  defaultSwimSpeed: 3
   timeBetweenAttacksMax: 1.5
   timeBetweenAttacksMin: 0.8
+  attacksPlayer: 1
+  attackDamage: 10
+  maxFlightDelayTime: 7
 --- !u!114 &1409979855
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34536,7 +34483,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 4
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!54 &1409979856
@@ -34636,7 +34582,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &1429706345
@@ -34759,7 +34704,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &1435649672
@@ -34882,7 +34826,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &1438036919
@@ -35005,7 +34948,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &1439323579
@@ -35128,7 +35070,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &1446360174
@@ -35479,7 +35420,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &1470719079
@@ -35602,7 +35542,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &1471128809
@@ -35725,7 +35664,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &1486413236
@@ -35824,20 +35762,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 2
-  attacksPlayer: 1
-  attackDamage: 10
+  maxSwimSpeed: 20
+  maxSwimSpeedOnAttack: 15
+  defaultSwimSpeed: 3
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
   foodLayer:
     serializedVersion: 2
     m_Bits: 64
-  maxFlightDelayTime: 7
-  maxSwimSpeed: 20
-  maxSwimSpeedOnAttack: 15
-  defaultSwimSpeed: 3
   timeBetweenAttacksMax: 1.5
   timeBetweenAttacksMin: 0.8
+  attacksPlayer: 1
+  attackDamage: 10
+  maxFlightDelayTime: 7
 --- !u!114 &1487423783
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35852,7 +35790,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 3
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!54 &1487423784
@@ -35952,7 +35889,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &1488237160
@@ -36051,20 +35987,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 2
-  attacksPlayer: 1
-  attackDamage: 10
+  maxSwimSpeed: 20
+  maxSwimSpeedOnAttack: 15
+  defaultSwimSpeed: 3
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
   foodLayer:
     serializedVersion: 2
     m_Bits: 64
-  maxFlightDelayTime: 7
-  maxSwimSpeed: 20
-  maxSwimSpeedOnAttack: 15
-  defaultSwimSpeed: 3
   timeBetweenAttacksMax: 1.5
   timeBetweenAttacksMin: 0.8
+  attacksPlayer: 1
+  attackDamage: 10
+  maxFlightDelayTime: 7
 --- !u!114 &1492375108
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36079,7 +36015,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 2
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!54 &1492375109
@@ -36232,7 +36167,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &1502250051
@@ -36355,7 +36289,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &1513056847
@@ -36478,7 +36411,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &1513120155
@@ -36654,7 +36586,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &1519891172
@@ -36777,7 +36708,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &1520148874
@@ -36900,7 +36830,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &1539268119
@@ -37023,7 +36952,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &1557216520
@@ -37146,7 +37074,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &1577132453
@@ -37322,7 +37249,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &1595762860
@@ -37421,20 +37347,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 2
-  attacksPlayer: 1
-  attackDamage: 10
+  maxSwimSpeed: 20
+  maxSwimSpeedOnAttack: 15
+  defaultSwimSpeed: 3
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
   foodLayer:
     serializedVersion: 2
     m_Bits: 64
-  maxFlightDelayTime: 7
-  maxSwimSpeed: 20
-  maxSwimSpeedOnAttack: 15
-  defaultSwimSpeed: 3
   timeBetweenAttacksMax: 1.5
   timeBetweenAttacksMin: 0.8
+  attacksPlayer: 1
+  attackDamage: 10
+  maxFlightDelayTime: 7
 --- !u!114 &1600785314
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -37449,7 +37375,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 2
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!54 &1600785315
@@ -37549,7 +37474,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &1607173251
@@ -37786,7 +37710,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &1627285905
@@ -37909,7 +37832,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &1636062659
@@ -38302,7 +38224,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &1661527790
@@ -38401,20 +38322,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 2
-  attacksPlayer: 1
-  attackDamage: 10
+  maxSwimSpeed: 20
+  maxSwimSpeedOnAttack: 15
+  defaultSwimSpeed: 3
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
   foodLayer:
     serializedVersion: 2
     m_Bits: 64
-  maxFlightDelayTime: 7
-  maxSwimSpeed: 20
-  maxSwimSpeedOnAttack: 15
-  defaultSwimSpeed: 3
   timeBetweenAttacksMax: 1.5
   timeBetweenAttacksMin: 0.8
+  attacksPlayer: 1
+  attackDamage: 10
+  maxFlightDelayTime: 7
 --- !u!114 &1671662563
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38429,7 +38350,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 2
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!54 &1671662564
@@ -38529,7 +38449,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &1673506138
@@ -38758,7 +38677,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &1676340909
@@ -38962,20 +38880,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 2
-  attacksPlayer: 1
-  attackDamage: 10
+  maxSwimSpeed: 20
+  maxSwimSpeedOnAttack: 15
+  defaultSwimSpeed: 3
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
   foodLayer:
     serializedVersion: 2
     m_Bits: 64
-  maxFlightDelayTime: 7
-  maxSwimSpeed: 20
-  maxSwimSpeedOnAttack: 15
-  defaultSwimSpeed: 3
   timeBetweenAttacksMax: 1.5
   timeBetweenAttacksMin: 0.8
+  attacksPlayer: 1
+  attackDamage: 10
+  maxFlightDelayTime: 7
 --- !u!114 &1676823409
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38990,7 +38908,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 4
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!54 &1676823410
@@ -39143,7 +39060,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &1693119454
@@ -39266,7 +39182,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &1698658261
@@ -39389,7 +39304,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &1700681069
@@ -39488,20 +39402,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 2
-  attacksPlayer: 1
-  attackDamage: 10
+  maxSwimSpeed: 20
+  maxSwimSpeedOnAttack: 15
+  defaultSwimSpeed: 3
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
   foodLayer:
     serializedVersion: 2
     m_Bits: 64
-  maxFlightDelayTime: 7
-  maxSwimSpeed: 20
-  maxSwimSpeedOnAttack: 15
-  defaultSwimSpeed: 3
   timeBetweenAttacksMax: 1.5
   timeBetweenAttacksMin: 0.8
+  attacksPlayer: 1
+  attackDamage: 10
+  maxFlightDelayTime: 7
 --- !u!114 &1701338413
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39516,7 +39430,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 3
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!54 &1701338414
@@ -39616,7 +39529,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &1710881935
@@ -39739,7 +39651,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &1714915602
@@ -39862,7 +39773,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &1721365283
@@ -40097,20 +40007,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 2
-  attacksPlayer: 1
-  attackDamage: 10
+  maxSwimSpeed: 20
+  maxSwimSpeedOnAttack: 15
+  defaultSwimSpeed: 3
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
   foodLayer:
     serializedVersion: 2
     m_Bits: 64
-  maxFlightDelayTime: 7
-  maxSwimSpeed: 20
-  maxSwimSpeedOnAttack: 15
-  defaultSwimSpeed: 3
   timeBetweenAttacksMax: 1.5
   timeBetweenAttacksMin: 0.8
+  attacksPlayer: 1
+  attackDamage: 10
+  maxFlightDelayTime: 7
 --- !u!114 &1734176840
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -40125,7 +40035,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 2
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!54 &1734176841
@@ -40225,7 +40134,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &1735682115
@@ -40568,7 +40476,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &1752265903
@@ -40691,7 +40598,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &1758117260
@@ -40814,7 +40720,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &1764045993
@@ -40937,7 +40842,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &1777887542
@@ -41060,7 +40964,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &1778214640
@@ -41262,20 +41165,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 2
-  attacksPlayer: 1
-  attackDamage: 10
+  maxSwimSpeed: 20
+  maxSwimSpeedOnAttack: 15
+  defaultSwimSpeed: 3
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
   foodLayer:
     serializedVersion: 2
     m_Bits: 64
-  maxFlightDelayTime: 7
-  maxSwimSpeed: 20
-  maxSwimSpeedOnAttack: 15
-  defaultSwimSpeed: 3
   timeBetweenAttacksMax: 1.5
   timeBetweenAttacksMin: 0.8
+  attacksPlayer: 1
+  attackDamage: 10
+  maxFlightDelayTime: 7
 --- !u!114 &1791944969
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -41290,7 +41193,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 4
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!54 &1791944970
@@ -41610,7 +41512,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &1805544836
@@ -41733,7 +41634,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &1831457572
@@ -41856,7 +41756,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &1834255401
@@ -41979,7 +41878,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &1834324519
@@ -42102,7 +42000,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &1838866325
@@ -42225,7 +42122,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &1841008627
@@ -42462,7 +42358,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &1854088922
@@ -42585,7 +42480,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &1860725477
@@ -42684,20 +42578,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 2
-  attacksPlayer: 1
-  attackDamage: 10
+  maxSwimSpeed: 20
+  maxSwimSpeedOnAttack: 15
+  defaultSwimSpeed: 3
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
   foodLayer:
     serializedVersion: 2
     m_Bits: 64
-  maxFlightDelayTime: 7
-  maxSwimSpeed: 20
-  maxSwimSpeedOnAttack: 15
-  defaultSwimSpeed: 3
   timeBetweenAttacksMax: 1.5
   timeBetweenAttacksMin: 0.8
+  attacksPlayer: 1
+  attackDamage: 10
+  maxFlightDelayTime: 7
 --- !u!114 &1865309856
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -42712,7 +42606,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 2
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!54 &1865309857
@@ -42812,7 +42705,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &1868750686
@@ -42935,7 +42827,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &1875964032
@@ -43058,7 +42949,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &1875990385
@@ -43181,7 +43071,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &1876219629
@@ -43304,7 +43193,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &1877922181
@@ -43427,7 +43315,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &1888777971
@@ -43603,7 +43490,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &1897299076
@@ -43702,20 +43588,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 2
-  attacksPlayer: 1
-  attackDamage: 10
+  maxSwimSpeed: 20
+  maxSwimSpeedOnAttack: 15
+  defaultSwimSpeed: 3
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
   foodLayer:
     serializedVersion: 2
     m_Bits: 64
-  maxFlightDelayTime: 7
-  maxSwimSpeed: 20
-  maxSwimSpeedOnAttack: 15
-  defaultSwimSpeed: 3
   timeBetweenAttacksMax: 1.5
   timeBetweenAttacksMin: 0.8
+  attacksPlayer: 1
+  attackDamage: 10
+  maxFlightDelayTime: 7
 --- !u!114 &1897856029
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -43730,7 +43616,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 4
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!54 &1897856030
@@ -43830,7 +43715,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &1908806980
@@ -43953,7 +43837,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &1911860562
@@ -44076,7 +43959,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &1930105438
@@ -44199,7 +44081,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &1932356727
@@ -44322,7 +44203,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &1933334443
@@ -44445,7 +44325,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &1937354016
@@ -44814,20 +44693,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 2
-  attacksPlayer: 1
-  attackDamage: 10
+  maxSwimSpeed: 20
+  maxSwimSpeedOnAttack: 15
+  defaultSwimSpeed: 3
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
   foodLayer:
     serializedVersion: 2
     m_Bits: 64
-  maxFlightDelayTime: 7
-  maxSwimSpeed: 20
-  maxSwimSpeedOnAttack: 15
-  defaultSwimSpeed: 3
   timeBetweenAttacksMax: 1.5
   timeBetweenAttacksMin: 0.8
+  attacksPlayer: 1
+  attackDamage: 10
+  maxFlightDelayTime: 7
 --- !u!114 &1978574919
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -44842,7 +44721,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 2
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!54 &1978574920
@@ -44942,7 +44820,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &1986297912
@@ -45179,7 +45056,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &1997313808
@@ -45278,20 +45154,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 2
-  attacksPlayer: 1
-  attackDamage: 10
+  maxSwimSpeed: 20
+  maxSwimSpeedOnAttack: 15
+  defaultSwimSpeed: 3
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
   foodLayer:
     serializedVersion: 2
     m_Bits: 64
-  maxFlightDelayTime: 7
-  maxSwimSpeed: 20
-  maxSwimSpeedOnAttack: 15
-  defaultSwimSpeed: 3
   timeBetweenAttacksMax: 1.5
   timeBetweenAttacksMin: 0.8
+  attacksPlayer: 1
+  attackDamage: 10
+  maxFlightDelayTime: 7
 --- !u!114 &1999390941
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -45306,7 +45182,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 10
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!54 &1999390942
@@ -45459,7 +45334,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &2011113591
@@ -45684,7 +45558,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &2035455980
@@ -45807,7 +45680,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &2036154052
@@ -45930,7 +45802,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &2039703790
@@ -46431,7 +46302,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &2068843096
@@ -46530,20 +46400,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 2
-  attacksPlayer: 1
-  attackDamage: 10
+  maxSwimSpeed: 20
+  maxSwimSpeedOnAttack: 15
+  defaultSwimSpeed: 3
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
   foodLayer:
     serializedVersion: 2
     m_Bits: 64
-  maxFlightDelayTime: 7
-  maxSwimSpeed: 20
-  maxSwimSpeedOnAttack: 15
-  defaultSwimSpeed: 3
   timeBetweenAttacksMax: 1.5
   timeBetweenAttacksMin: 0.8
+  attacksPlayer: 1
+  attackDamage: 10
+  maxFlightDelayTime: 7
 --- !u!114 &2086428447
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -46558,7 +46428,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 4
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!54 &2086428448
@@ -46658,7 +46527,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &2086667605
@@ -46781,7 +46649,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &2102901720
@@ -46904,7 +46771,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &2106766367
@@ -47027,7 +46893,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &2109463808
@@ -47401,7 +47266,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &2134462728
@@ -47524,7 +47388,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &2138883649
@@ -47647,7 +47510,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   currentHealth: 0
-  fishAnimator: {fileID: 0}
   isDead: 0
   deathPanel: {fileID: 0}
 --- !u!135 &2145979144

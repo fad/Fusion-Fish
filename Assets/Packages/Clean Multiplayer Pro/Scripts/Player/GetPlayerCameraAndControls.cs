@@ -33,8 +33,8 @@ namespace AvocadoShark
                     Random.Range(-31.48f, -41.22f)));
 
                 var vCam = GameObject.Find("Virtual Camera").GetComponent<CinemachineVirtualCamera>();
-                vCam.Follow = transform;
                 vCam.LookAt = transform;
+                vCam.Follow = transform;
                 
                 if (UseMobileControls)
                 {

@@ -12,6 +12,7 @@ public class NPC : MonoBehaviour
     [SerializeField] private float maxSwimSpeedOnAttack = 15f;
     [SerializeField] private float defaultSwimSpeed = 30f;
     private Rigidbody rb;
+    private Vector3 newPosition;
 
     [Header("things in NPCs view")]
     [SerializeField] private LayerMask playerLayer;
@@ -86,7 +87,6 @@ public class NPC : MonoBehaviour
                 break;
             case Behaviour.NaturalBehaviour:
                 var currentPosition = transform.position;
-                var newPosition = currentPosition;
 
                 if (randomTime <= 0)
                 {

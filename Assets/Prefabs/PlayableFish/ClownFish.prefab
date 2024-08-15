@@ -447,7 +447,8 @@ MonoBehaviour:
   currentBoostCount: 0
   boostDelayAfterActivation: 2
   maxBoostCount: 100
-  cameraFOVSmoothTime: 5
+  cameraFOVSmoothTime: 2
+  cameraRotationSmoothTime: 3.5
   cineMachineCameraTarget: {fileID: 505540377448418887}
   vCam: {fileID: 0}
   vCamRoot: {fileID: 0}
@@ -455,7 +456,7 @@ MonoBehaviour:
   bottomClamp: -80
   cameraAngleOverride: 0
   lockCameraPosition: 0
-  rotationSmoothTime: 7
+  playerRotationSmoothTime: 10
   sensitivity: 0.85
   playerVisual: {fileID: 5159690815227489710}
   boostSwimSpeed: 300

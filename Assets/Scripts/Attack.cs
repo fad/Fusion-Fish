@@ -14,7 +14,6 @@ public class Attack : MonoBehaviour
     [SerializeField] private Animator biteAnimator;
     
     [Header("Attack")] 
-    public bool isAttacking;
     private float attackDamage;
     private bool preparedAttack;
     
@@ -76,7 +75,13 @@ public class Attack : MonoBehaviour
     {
         if (foodObject != null)
         {
+            var experienceValueOfEnemy = foodObject.GetComponent<Health>().experienceValue;
             foodObject.GetComponent<Health>().ReceiveDamage(1);
+            if (foodObject.GetComponent<Health>().currentHealth <= 0)
+            {
+                thirdPersonController.playerManager.experience.currentExperience += experienceValueOfEnemy;
+                Destroy(foodObject);
+            }
             foodObject = null;
         }
     }
