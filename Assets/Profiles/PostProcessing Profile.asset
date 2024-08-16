@@ -1,5 +1,51 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-7256482730655536736
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: defe3efb56c1bc943a6bfb504a00dc77, type: 3}
+  m_Name: UnderwaterSettings
+  m_EditorClassIdentifier: 
+  active: 1
+  startDistance:
+    m_OverrideState: 1
+    m_Value: 5.1
+  fogDensity:
+    m_OverrideState: 1
+    m_Value: 8.75
+  heightFogDepth:
+    m_OverrideState: 1
+    m_Value: 41.2
+  heightFogDensity:
+    m_OverrideState: 1
+    m_Value: 29.8
+  heightFogBrightness:
+    m_OverrideState: 1
+    m_Value: 0.49
+  fogBrightness:
+    m_OverrideState: 1
+    m_Value: 2.06
+  subsurfaceStrength:
+    m_OverrideState: 1
+    m_Value: 4.05
+  causticsStrength:
+    m_OverrideState: 1
+    m_Value: 6.32
+  distortionStrength:
+    m_OverrideState: 1
+    m_Value: 0.66
+  distortionFrequency:
+    m_OverrideState: 1
+    m_Value: 0.45
+  distortionSpeed:
+    m_OverrideState: 1
+    m_Value: 0.79
 --- !u!114 &-3546222440294003052
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -43,6 +89,7 @@ MonoBehaviour:
   components:
   - {fileID: 5224740347818436090}
   - {fileID: -3546222440294003052}
+  - {fileID: -7256482730655536736}
 --- !u!114 &5224740347818436090
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -58,4 +105,4 @@ MonoBehaviour:
   active: 1
   intensity:
     m_OverrideState: 1
-    m_Value: 0.2
+    m_Value: 0.15

@@ -456,9 +456,6 @@ MonoBehaviour:
   maxBoostCount: 100
   cameraFOVSmoothTime: 2
   cameraRotationSmoothTime: 4.5
-  cineMachineCameraTarget: {fileID: 505540377448418887}
-  vCam: {fileID: 0}
-  vCamRoot: {fileID: 0}
   topClamp: 80
   bottomClamp: -80
   cameraAngleOverride: 0
@@ -681,6 +678,8 @@ MonoBehaviour:
   PlayerModel: {fileID: 5967580297110785664}
   InterpolationPoint: {fileID: 7369987465763149778}
   UseMobileControls: 0
+  vCam: {fileID: 0}
+  vCamRoot: {fileID: 0}
 --- !u!114 &6443437523783385271
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3273,8 +3272,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.0089896, y: 2.635714, z: 3.0401094}
-  m_Center: {x: 0, y: -3.2420232, z: -0.04953134}
+  m_Size: {x: 2.0089896, y: 2.635714, z: 4.107199}
+  m_Center: {x: 0, y: -3.2420232, z: 0.4840138}
 --- !u!1 &8657425969331322465
 GameObject:
   m_ObjectHideFlags: 0

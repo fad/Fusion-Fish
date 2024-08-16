@@ -11,8 +11,11 @@ public class NPC : MonoBehaviour
     [SerializeField] private float maxSwimSpeed = 95f;
     [SerializeField] private float maxSwimSpeedOnAttack = 15f;
     [SerializeField] private float defaultSwimSpeed = 30f;
+    [SerializeField] private float minTimeChangeMoveDirection = 6f;
+    [SerializeField] private float maxTimeChangeMoveDirection = 10f;
     private Rigidbody rb;
     private Vector3 newPosition;
+    [SerializeField] private bool mainMenuObject;
 
     [Header("things in NPCs view")]
     [SerializeField] private LayerMask playerLayer;
@@ -91,7 +94,7 @@ public class NPC : MonoBehaviour
                 if (randomTime <= 0)
                 {
                     newPosition = new Vector3(RandomFloat(currentPosition.x), RandomFloat(currentPosition.y), RandomFloat(currentPosition.z));
-                    randomTime = Random.Range(4.5f, 7.5f);
+                    randomTime = Random.Range(minTimeChangeMoveDirection, maxTimeChangeMoveDirection);
                     defaultSwimSpeed = Random.Range(3, 5);
                 }
                     
@@ -127,7 +130,8 @@ public class NPC : MonoBehaviour
                 throw new ArgumentOutOfRangeException();
         }
 
-        animator.SetFloat("movingSpeed", rb.velocity.sqrMagnitude);
+        if(!mainMenuObject)
+            animator.SetFloat("movingSpeed", rb.velocity.sqrMagnitude);
     }
 
     private IEnumerator AttackCoroutine()

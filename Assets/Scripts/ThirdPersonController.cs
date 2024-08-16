@@ -2,6 +2,7 @@
 #if CMPSETUP_COMPLETE
 using System;
 using System.Collections;
+using AvocadoShark;
 using Cinemachine;
 using Fusion;
 using UnityEngine;
@@ -45,10 +46,6 @@ namespace StarterAssets
         [SerializeField] private float cameraFOVSmoothTime = 3f;
         [Tooltip("How fast the camera rotates with the player")]
         [SerializeField] private float cameraRotationSmoothTime = 3f;
-        [Tooltip("The follow target set in the CineMachine Virtual Camera that the camera will follow")]
-        [HideInInspector] public GameObject cineMachineCameraTarget;
-        [SerializeField] private CinemachineVirtualCamera vCam;
-        [SerializeField] private Transform vCamRoot;
         [Tooltip("How far in degrees can you move the camera up")]
         [SerializeField] private float topClamp = 70.0f;
         [Tooltip("How far in degrees can you move the camera down")]
@@ -59,6 +56,7 @@ namespace StarterAssets
         [SerializeField] private bool lockCameraPosition;
         private float cineMachineTargetYaw;
         private float cineMachineTargetPitch;
+        private GetPlayerCameraAndControls getPlayerCameraAndControls;
         
         [Header("Animation")]
         public Animator animator;
@@ -95,19 +93,16 @@ namespace StarterAssets
         {
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
-                
+
+            getPlayerCameraAndControls = GetComponent<GetPlayerCameraAndControls>();
             AudioManager.Instance.PlaySoundAtPosition("impactWithWater", transform.position);
             AudioManager.Instance.Play("underwaterAmbience");
-            cineMachineCameraTarget = gameObject;
             playerManager = GetComponent<PlayerManager>();
-            cineMachineTargetYaw = cineMachineCameraTarget.transform.rotation.eulerAngles.y;
+            cineMachineTargetYaw = gameObject.transform.rotation.eulerAngles.y;
             input = GetComponent<StarterAssetsInputs>();
             boostState = BoostState.BoostReload;
             rb = GetComponent<Rigidbody>();
-            vCamRoot = GameObject.Find("Cams").GetComponent<Transform>();
-            vCam = GameObject.Find("Virtual Camera").GetComponent<CinemachineVirtualCamera>();
-            
-            
+
 #if ENABLE_INPUT_SYSTEM
             playerInput = GetComponent<PlayerInput>();
 #else
@@ -181,7 +176,7 @@ namespace StarterAssets
             var localRotation = transform.localRotation;
             localRotation = Quaternion.Lerp(localRotation, Quaternion.Euler(cineMachineTargetPitch + cameraAngleOverride, cineMachineTargetYaw, 0.0f), playerRotationSmoothTime * Time.deltaTime);
             transform.localRotation = localRotation;
-            vCamRoot.transform.localRotation = Quaternion.Lerp(vCamRoot.transform.localRotation, localRotation, cameraRotationSmoothTime * Time.deltaTime);
+            getPlayerCameraAndControls.vCamRoot.transform.localRotation = Quaternion.Lerp(getPlayerCameraAndControls.vCamRoot.transform.localRotation, localRotation, cameraRotationSmoothTime * Time.deltaTime);
         }
 
         private void Move()
@@ -204,13 +199,13 @@ namespace StarterAssets
             
             var moveDistance = speed * Time.deltaTime;
 
-            void MovePlayer(float playerRenderRotationX, float playerRenderRotationZ)
+            void MovePlayer(float playerRenderRotationX, float playerRenderRotationY)
             {
-                rb.AddForce(vCam.transform.forward * (inputDirectionNormalized.z * moveDistance), ForceMode.Impulse);
+                rb.AddForce(getPlayerCameraAndControls.vCam.transform.forward * (inputDirectionNormalized.z * moveDistance), ForceMode.Impulse);
 
-                vCam.m_Lens.FieldOfView = Mathf.Lerp(vCam.m_Lens.FieldOfView, isBoosting ? 30f : 20f, cameraFOVSmoothTime * Time.deltaTime);
+                getPlayerCameraAndControls.vCam.m_Lens.FieldOfView = Mathf.Lerp(getPlayerCameraAndControls.vCam.m_Lens.FieldOfView, isBoosting ? 30f : 20f, cameraFOVSmoothTime * Time.deltaTime);
                 
-                playerVisual.transform.localRotation = Quaternion.Lerp(playerVisual.transform.localRotation, Quaternion.Euler(playerRenderRotationX, 0, playerRenderRotationZ), playerRotationSmoothTime * Time.deltaTime);
+                playerVisual.transform.localRotation = Quaternion.Lerp(playerVisual.transform.localRotation, Quaternion.Euler(playerRenderRotationX, playerRenderRotationY, 0), playerRotationSmoothTime * Time.deltaTime);
             }
             
             if (inputDirectionNormalized.z >= 0.1)
@@ -223,7 +218,7 @@ namespace StarterAssets
             }
             else
             {
-                vCam.m_Lens.FieldOfView = Mathf.Lerp(vCam.m_Lens.FieldOfView, 17.5f, cameraFOVSmoothTime * Time.deltaTime);
+                getPlayerCameraAndControls.vCam.m_Lens.FieldOfView = Mathf.Lerp(getPlayerCameraAndControls.vCam.m_Lens.FieldOfView, 17.5f, cameraFOVSmoothTime * Time.deltaTime);
             }
         
             animator.SetFloat(animIDMotionSpeed, rb.velocity.sqrMagnitude);

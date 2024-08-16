@@ -18,6 +18,8 @@ namespace AvocadoShark
         [SerializeField] Transform InterpolationPoint;
         private Rigidbody _rigidbody;
         public bool UseMobileControls;
+        [HideInInspector] public CinemachineVirtualCamera vCam;
+        [HideInInspector] public Transform vCamRoot;
 
         private void Awake()
         {
@@ -32,7 +34,8 @@ namespace AvocadoShark
                 _rigidbody.MovePosition(new Vector3(Random.Range(-7.6f, 14.2f), 0,
                     Random.Range(-31.48f, -41.22f)));
 
-                var vCam = GameObject.Find("Virtual Camera").GetComponent<CinemachineVirtualCamera>();
+                vCam = GameObject.Find("Virtual Camera").GetComponent<CinemachineVirtualCamera>();
+                vCamRoot = GameObject.Find("Cams").GetComponent<Transform>();
                 vCam.LookAt = transform;
                 vCam.Follow = transform;
                 

@@ -35,18 +35,6 @@ namespace AvocadoShark
         Application.Quit();
 #endif
         }
-        public void OpenProVersion()
-        {
-            Application.OpenURL("https://assetstore.unity.com/packages/slug/264984");
-        }
-        public void OpenSupport()
-        {
-            Application.OpenURL("https://discord.gg/mP4yfHxXPa");
-        }
-        public void OpenAvocadoShark()
-        {
-            Application.OpenURL("https://avocadoshark.com/");
-        }
         public void ChooseCharacter(string option)
         {
             if (option == "Clownfish")
