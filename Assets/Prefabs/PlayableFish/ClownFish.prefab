@@ -3253,7 +3253,7 @@ MonoBehaviour:
   biteAnimator: {fileID: 4857523056436020111}
   maxTimeBetweenAttack: 0.375
   thirdPersonController: {fileID: 9150513680388461083}
-  fishRender: {fileID: 5267721347161833077}
+  fishRender: {fileID: 5967580297110785664}
 --- !u!65 &7784981795302348359
 BoxCollider:
   m_ObjectHideFlags: 0

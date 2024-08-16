@@ -93,6 +93,9 @@ namespace StarterAssets
 
         private void Start()
         {
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+                
             AudioManager.Instance.PlaySoundAtPosition("impactWithWater", transform.position);
             AudioManager.Instance.Play("underwaterAmbience");
             cineMachineCameraTarget = gameObject;
@@ -201,22 +204,22 @@ namespace StarterAssets
             
             var moveDistance = speed * Time.deltaTime;
 
-            void MovePlayer(float playerRenderRotation)
+            void MovePlayer(float playerRenderRotationX, float playerRenderRotationZ)
             {
                 rb.AddForce(vCam.transform.forward * (inputDirectionNormalized.z * moveDistance), ForceMode.Impulse);
 
                 vCam.m_Lens.FieldOfView = Mathf.Lerp(vCam.m_Lens.FieldOfView, isBoosting ? 30f : 20f, cameraFOVSmoothTime * Time.deltaTime);
                 
-                playerVisual.transform.localRotation = Quaternion.Lerp(playerVisual.transform.localRotation, Quaternion.Euler(playerRenderRotation, 0, playerRenderRotation), playerRotationSmoothTime * Time.deltaTime);
+                playerVisual.transform.localRotation = Quaternion.Lerp(playerVisual.transform.localRotation, Quaternion.Euler(playerRenderRotationX, 0, playerRenderRotationZ), playerRotationSmoothTime * Time.deltaTime);
             }
             
             if (inputDirectionNormalized.z >= 0.1)
             {
-                MovePlayer(0);
+                MovePlayer(25, 0);
             }
             else if (inputDirectionNormalized.z <= -0.1)
             {
-                MovePlayer(-180);
+                MovePlayer(0, -180);
             }
             else
             {

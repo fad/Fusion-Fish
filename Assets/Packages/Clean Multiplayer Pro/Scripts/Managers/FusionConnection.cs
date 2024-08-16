@@ -41,6 +41,8 @@ namespace AvocadoShark
         public Button submitButton;
         public TMP_InputField nameField;
         public GameObject characterselectionobject;
+        private const string NamePlayerPrefs = "Name";
+        private const string RoomNamePlayerPrefs = "RoomName";
 
         [Header("Room List")] public RoomEntry roomEntryPrefab;
         public GameObject roomListObject;
@@ -122,6 +124,13 @@ namespace AvocadoShark
             PhotonAppSettings settings = Resources.Load<PhotonAppSettings>("PhotonAppSettings");
             settings.AppSettings.FixedRegion = region;
         }
+
+        private void Start()
+        {
+            nameField.text = PlayerPrefs.GetString(NamePlayerPrefs);
+            menuCanvas.nameInputField.text = PlayerPrefs.GetString(RoomNamePlayerPrefs);
+        }
+
         public void ChangeRegion(int region_n)
         {
             string region = null;
@@ -202,6 +211,7 @@ namespace AvocadoShark
             if (IsRoomNameValid())
             {
                 sessionName = menuCanvas.GetRoomName();
+                PlayerPrefs.SetString(RoomNamePlayerPrefs, menuCanvas.nameInputField.text);
                 sessionPassword = menuCanvas.GetPassword();
                 maxPlayers = menuCanvas.GetMaxPlayers();
             }
@@ -306,6 +316,7 @@ namespace AvocadoShark
         }
         private void ContinueConnectToRunner()
         {
+            PlayerPrefs.SetString(NamePlayerPrefs, nameField.text);
             _playerName = nameField.text;
             mainObject.SetActive(false);
             characterselectionobject.SetActive(false);

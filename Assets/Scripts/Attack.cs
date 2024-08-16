@@ -64,7 +64,7 @@ public class Attack : MonoBehaviour
                 thirdPersonController.sensitivity = maxSensitivity;
                 if (foodObject != null)
                 {
-                    fishRender.transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(foodObject.transform.position - fishRender.transform.position), Time.deltaTime * 10);
+                    fishRender.transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(foodObject.transform.position - fishRender.transform.position), Time.deltaTime * 20);
                 } 
                 preparedAttack = false;
                 break;

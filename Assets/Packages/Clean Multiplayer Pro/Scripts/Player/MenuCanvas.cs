@@ -20,7 +20,7 @@ public class MenuCanvas : MonoBehaviour {
     [SerializeField] private TextMeshProUGUI roomCountText,nameInputFieldLimitText,passwordInputFieldLimitText;
     [HideInInspector] public bool isPasswordEnabled { private set; get; } = false;
 
-    [SerializeField] private TMP_InputField nameInputField, passwordInputField;
+    public TMP_InputField nameInputField, passwordInputField;
 
     private void Awake() {
         instance = this;
