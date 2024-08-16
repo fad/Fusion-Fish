@@ -448,7 +448,7 @@ MonoBehaviour:
   playerRotationSmoothTime: 10
   sensitivity: 1.5
   playerVisual: {fileID: 5159690815227489710}
-  boostSwimSpeed: 320
+  boostSwimSpeed: 250
   defaultSwimSpeed: 80
   playerManager: {fileID: 0}
   currentBoostCount: 0
