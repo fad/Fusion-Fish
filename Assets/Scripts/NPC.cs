@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using StarterAssets;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -105,24 +106,31 @@ public class NPC : MonoBehaviour
                 MoveNPCInDirection(newPosition - currentPosition, Quaternion.LookRotation(newPosition - currentPosition));
                 break;
             case Behaviour.Attack:
-                if (Vector3.Distance(transform.position, enemy.transform.position) < 1)
+                if (enemy.GetComponent<ThirdPersonController>().playerMesh.activeSelf)
                 {
-                    if (!isAttacking)
+                    if (Vector3.Distance(transform.position, enemy.transform.position) < 1)
                     {
-                        StartCoroutine(AttackCoroutine());
+                        if (!isAttacking)
+                        {
+                            StartCoroutine(AttackCoroutine());
+                        }
                     }
-                }
-                else if (Vector3.Distance(transform.position, enemy.transform.position) > 15)
-                {
-                    behaviour = Behaviour.NaturalBehaviour;
+                    else if (Vector3.Distance(transform.position, enemy.transform.position) > 15)
+                    {
+                        behaviour = Behaviour.NaturalBehaviour;
+                    }
+                    else
+                    {
+                        var swimDirectionEnemy = transform.position - enemy.transform.position;
+
+                        currentSpeed = maxSwimSpeed;
+                
+                        MoveNPCInDirection(swimDirectionEnemy, Quaternion.LookRotation(swimDirectionEnemy));   
+                    }
                 }
                 else
                 {
-                    var swimDirectionEnemy = transform.position - enemy.transform.position;
-
-                    currentSpeed = maxSwimSpeed;
-                
-                    MoveNPCInDirection(swimDirectionEnemy, Quaternion.LookRotation(swimDirectionEnemy));   
+                    behaviour = Behaviour.NaturalBehaviour;
                 }
                 break;
 

@@ -25,14 +25,17 @@ namespace StarterAssets
         [SerializeField] private float playerRotationSmoothTime = 3f;
         [Tooltip("How fast you can rotate the player depending on the mouse movement, the camera moves with the player")]
         public float sensitivity = .85f;
-        [SerializeField] private GameObject playerVisual;
+        public GameObject playerVisual;
+        public GameObject playerMesh;
         [SerializeField] private float boostSwimSpeed = 100f;
         [SerializeField] private float defaultSwimSpeed = 50f;
+        [SerializeField] private float  maxSwimAreaLength;
         [HideInInspector] public PlayerManager playerManager;
         private float speed;
         private float rotationVelocity;
         private bool outOfWater;
         private Rigidbody rb;
+        private Transform swimArea;
         
         [Header("Boost")]
         [HideInInspector] public float currentBoostCount;
@@ -57,6 +60,7 @@ namespace StarterAssets
         private float cineMachineTargetYaw;
         private float cineMachineTargetPitch;
         private GetPlayerCameraAndControls getPlayerCameraAndControls;
+        private bool hasVCam = true;
         
         [Header("Animation")]
         public Animator animator;
@@ -84,7 +88,6 @@ namespace StarterAssets
         [HideInInspector] public BoostState boostState;
         [HideInInspector] public enum BoostState
         {
-            BoostFull,
             BoostStarted,
             BoostReload,
         }
@@ -93,8 +96,11 @@ namespace StarterAssets
         {
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
-
+            
+            swimArea = GameObject.Find("SwimArea").GetComponent<Transform>();
             getPlayerCameraAndControls = GetComponent<GetPlayerCameraAndControls>();
+            if (getPlayerCameraAndControls.vCamRoot == null)
+                hasVCam = false;
             AudioManager.Instance.PlaySoundAtPosition("impactWithWater", transform.position);
             AudioManager.Instance.Play("underwaterAmbience");
             playerManager = GetComponent<PlayerManager>();
@@ -176,7 +182,10 @@ namespace StarterAssets
             var localRotation = transform.localRotation;
             localRotation = Quaternion.Lerp(localRotation, Quaternion.Euler(cineMachineTargetPitch + cameraAngleOverride, cineMachineTargetYaw, 0.0f), playerRotationSmoothTime * Time.deltaTime);
             transform.localRotation = localRotation;
-            getPlayerCameraAndControls.vCamRoot.transform.localRotation = Quaternion.Lerp(getPlayerCameraAndControls.vCamRoot.transform.localRotation, localRotation, cameraRotationSmoothTime * Time.deltaTime);
+            if (hasVCam)
+            {
+                getPlayerCameraAndControls.vCamRoot.transform.localRotation = Quaternion.Lerp(getPlayerCameraAndControls.vCamRoot.transform.localRotation, localRotation, cameraRotationSmoothTime * Time.deltaTime);
+            }
         }
 
         private void Move()
@@ -194,17 +203,41 @@ namespace StarterAssets
             }
 
             Vector3 inputDirectionNormalized = new Vector3(input.move.x, 0.0f, input.move.y).normalized;
+
             // set target speed based on move speed, sprint speed and if sprint is pressed
-            speed = isBoosting ? boostSwimSpeed : defaultSwimSpeed;
-            
+            if (Vector3.Distance(transform.position, swimArea.position) >= maxSwimAreaLength && !IsSwimmingTowardIsland())
+            {
+                if (isBoosting)
+                {
+                    if (boostSwimSpeed > 0)
+                    {
+                        speed = boostSwimSpeed - (Vector3.Distance(transform.position, swimArea.position) - maxSwimAreaLength * 2);
+                    }
+                }
+                else
+                {
+                    if (defaultSwimSpeed > 0)
+                    {
+                        speed = defaultSwimSpeed - (Vector3.Distance(transform.position, swimArea.position) - maxSwimAreaLength * 2);
+                    }
+                }
+            }
+            else
+            {
+                speed = isBoosting ? boostSwimSpeed : defaultSwimSpeed;
+            }
+
             var moveDistance = speed * Time.deltaTime;
 
             void MovePlayer(float playerRenderRotationX, float playerRenderRotationY)
             {
-                rb.AddForce(getPlayerCameraAndControls.vCam.transform.forward * (inputDirectionNormalized.z * moveDistance), ForceMode.Impulse);
+                if (hasVCam)
+                {
+                    rb.AddForce(getPlayerCameraAndControls.vCam.transform.forward * (inputDirectionNormalized.z * moveDistance), ForceMode.Impulse);
 
-                getPlayerCameraAndControls.vCam.m_Lens.FieldOfView = Mathf.Lerp(getPlayerCameraAndControls.vCam.m_Lens.FieldOfView, isBoosting ? 30f : 20f, cameraFOVSmoothTime * Time.deltaTime);
-                
+                    getPlayerCameraAndControls.vCam.m_Lens.FieldOfView = Mathf.Lerp(getPlayerCameraAndControls.vCam.m_Lens.FieldOfView, isBoosting ? 30f : 20f, cameraFOVSmoothTime * Time.deltaTime);
+                }
+
                 playerVisual.transform.localRotation = Quaternion.Lerp(playerVisual.transform.localRotation, Quaternion.Euler(playerRenderRotationX, playerRenderRotationY, 0), playerRotationSmoothTime * Time.deltaTime);
             }
             
@@ -218,7 +251,8 @@ namespace StarterAssets
             }
             else
             {
-                getPlayerCameraAndControls.vCam.m_Lens.FieldOfView = Mathf.Lerp(getPlayerCameraAndControls.vCam.m_Lens.FieldOfView, 17.5f, cameraFOVSmoothTime * Time.deltaTime);
+                if(hasVCam)
+                    getPlayerCameraAndControls.vCam.m_Lens.FieldOfView = Mathf.Lerp(getPlayerCameraAndControls.vCam.m_Lens.FieldOfView, 17.5f, cameraFOVSmoothTime * Time.deltaTime);
             }
         
             animator.SetFloat(animIDMotionSpeed, rb.velocity.sqrMagnitude);
@@ -228,30 +262,29 @@ namespace StarterAssets
         {
             switch (boostState)
             {
-                case BoostState.BoostFull :
-                    break;
                 case BoostState.BoostStarted :
-                    isBoosting = true;
-                    currentBoostCount -= Time.deltaTime * 30f;
-                    if (currentBoostCount <= 0)
+                    if (currentBoostCount < 0)
                     {
-                        StartCoroutine(DelayedBoostReloadCoroutine());
+                        boostState = BoostState.BoostReload;
+                    }
+                    else
+                    {
+                        isBoosting = true;
+                        currentBoostCount -= Time.deltaTime * 30f;
                     }
                     break;
                 case BoostState.BoostReload :
-                    if (isBoosting)
-                    {
+                    if(isBoosting)
                         StartCoroutine(DelayedBoostReloadCoroutine());
-                    }
+
                     isBoosting = false;
-                    if (canReloadBoost)
+
+                    if (currentBoostCount < maxBoostCount)
                     {
-                        currentBoostCount += Time.deltaTime * 18f;
-                    }
-                    
-                    if (currentBoostCount >= maxBoostCount)
-                    {
-                        boostState = BoostState.BoostFull;
+                        if (canReloadBoost)
+                        {
+                            currentBoostCount += Time.deltaTime * 18f;
+                        }
                     }
                     break;
                 default:
@@ -264,6 +297,23 @@ namespace StarterAssets
             yield return new WaitForSeconds(boostDelayAfterActivation);
 
             canReloadBoost = true;
+        }
+
+        private bool IsSwimmingTowardIsland()
+        {
+            if (hasVCam)
+            {
+                //where the island is depending on player position
+                var direction = swimArea.transform.position - transform.position;
+                //gives angle as float from look direction to the direction to the middle of the island
+                var targetAngle = Vector3.Angle(getPlayerCameraAndControls.vCam.transform.forward, direction);
+            
+                return targetAngle < 90;   
+            }
+            else
+            {
+                return true;
+            }
         }
 
         private void Gravity()

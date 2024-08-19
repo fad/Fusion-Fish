@@ -62,10 +62,6 @@ public class Attack : MonoBehaviour
                 thirdPersonController.animator.SetTrigger("attack");
                 timeBetweenAttack = maxTimeBetweenAttack;
                 thirdPersonController.sensitivity = maxSensitivity;
-                if (foodObject != null)
-                {
-                    fishRender.transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(foodObject.transform.position - fishRender.transform.position), Time.deltaTime * 20);
-                } 
                 preparedAttack = false;
                 break;
         }
@@ -90,7 +86,6 @@ public class Attack : MonoBehaviour
                 thirdPersonController.playerManager.experience.currentExperience += experienceValueOfEnemy;
                 Destroy(foodObject);
             }
-            foodObject = null;
         }
     }
 

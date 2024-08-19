@@ -17,6 +17,7 @@ public class Health : MonoBehaviour
     
     [Header("Death")]
     [HideInInspector] public bool isDead;
+    [SerializeField] private Transform foodObject;
     public GameObject deathPanel;
 
     private void Start()
@@ -44,12 +45,17 @@ public class Health : MonoBehaviour
         {
             PlayParticles(Color.red, 10);
         }
+        else if(isPlayer)
+        {
+            PlayParticles(Color.red, 10);
+        }
         
         if (currentHealth <= 0)
         {
             if (isPlayer)
             {
                 Die();
+                PlayParticles(Color.red, 30);
                 return;
             }
             
@@ -68,7 +74,14 @@ public class Health : MonoBehaviour
     {
         if (isPlayer)
         {
-            thirdPersonController.animator.SetBool("isDead", true);
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+            thirdPersonController.playerMesh.SetActive(false);
+            for (var i = 0; i < 4; i++)
+            {
+                var food = Instantiate(foodObject);
+                food.transform.position = transform.position;
+            }
             isDead = true;
             deathPanel.SetActive(true);
         }
@@ -79,7 +92,7 @@ public class Health : MonoBehaviour
     {
         var mainModule = bloodParticleSystem.main;
         mainModule.startColor = new ParticleSystem.MinMaxGradient(color);
-        
+
         var emissionModule = bloodParticleSystem.emission;
         emissionModule.SetBursts(new ParticleSystem.Burst[] { new(0.0f, burstCount) });
         

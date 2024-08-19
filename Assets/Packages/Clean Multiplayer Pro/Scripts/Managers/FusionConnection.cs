@@ -13,6 +13,7 @@ using Photon.Voice.Unity;
 using StarterAssets;
 using Fusion.Photon.Realtime;
 using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
 namespace AvocadoShark
 {
@@ -54,10 +55,14 @@ namespace AvocadoShark
         [Header("Room List Refresh (s)")] [SerializeField]
         private float refreshInterval = 2f;
 
-        [Header("Player Spawn Location")] [SerializeField]
-        public bool UseCustomLocation;
-
-        [SerializeField] public Vector3 CustomLocation;
+        [HideInInspector] public Vector3 chosenLocation;
+        [HideInInspector] public Quaternion chosenRotation;
+        [SerializeField] public Vector3 CustomLocation1;
+        [SerializeField] public Quaternion CustomRotation1;
+        [SerializeField] public Vector3 CustomLocation2;
+        [SerializeField] public Quaternion CustomRotation2;
+        [SerializeField] public Vector3 CustomLocation3;
+        [SerializeField] public Quaternion CustomRotation3;
 
         private FusionVoiceClient _fvc;
         private Recorder _recorder;
@@ -488,12 +493,33 @@ namespace AvocadoShark
             if (runner.GetPlayerObject(runner.LocalPlayer) != null)
                 return;
             var playerPrefab = PlayerPrefs.GetInt("ChosenCharacter") == 0 ? playerPrefabSecond : playerPrefabFirst;
-            var location = !UseCustomLocation
-                ? new Vector3(UnityEngine.Random.Range(80f, 90f), UnityEngine.Random.Range(-3, -5),
-                    UnityEngine.Random.Range(-40.48f, -50.22f))
-                : CustomLocation;
-            NetworkObject playerObject = runner.Spawn(playerPrefab,location);
-            playerObject.transform.position = location;
+            
+            var location = new Vector3(0,0,0);
+            var rotation = new Quaternion(0,0,0,0);
+
+            var locationAndRotation = Random.Range(0, 2);
+            switch (locationAndRotation)
+            {
+                case 0:
+                    location = CustomLocation1;
+                    rotation = CustomRotation1;
+                    break;
+                case 1:
+                    location = CustomLocation2;
+                    rotation = CustomRotation2;
+                    break;
+                case 2:
+                    location = CustomLocation3;
+                    rotation = CustomRotation3;
+                    break;
+            }
+            
+            chosenLocation = location;
+            chosenRotation = rotation;
+            NetworkObject playerObject = runner.Spawn(playerPrefab,location, rotation);
+            var playerTransform = playerObject.transform;
+            playerTransform.position = location;
+            playerTransform.rotation = rotation;
 
             _voiceManager.Init(playerObject.GetComponent<StarterAssetsInputs>(),
                 playerObject.GetComponent<PlayerWorldUIManager>());

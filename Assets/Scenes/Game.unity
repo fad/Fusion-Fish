@@ -17,7 +17,7 @@ RenderSettings:
   m_Fog: 1
   m_FogColor: {r: 0.047058824, g: 0.44313726, b: 0.7647059, a: 1}
   m_FogMode: 3
-  m_FogDensity: 0.008
+  m_FogDensity: 0.02
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
   m_AmbientSkyColor: {r: 0.03433981, g: 0.06662595, b: 0.111932434, a: 1}
@@ -455,16 +455,16 @@ MonoBehaviour:
   waterLevelPadding: 0
   waterMaterial: {fileID: 2100000, guid: 35027ffa3123a9549bb75189aa589910, type: 2}
   dynamicMaterial: 0
-  settings: {fileID: 0}
+  settings: {fileID: 495684843}
   useVolumeBlending: 0
-  startDistance: 13.55
-  fogDensity: 4
+  startDistance: 0
+  fogDensity: 0
   heightFogDepth: 500
   heightFogDensity: 1
   heightFogBrightness: 0.5
   fogBrightness: 0.7
   subsurfaceStrength: 0.5
-  causticsStrength: 0.75
+  causticsStrength: 0.25
   distortionStrength: 0.25
   distortionFrequency: 0.75
   distortionSpeed: 0.5
@@ -523,6 +523,52 @@ Transform:
   - {fileID: 451587320}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &495684843
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: defe3efb56c1bc943a6bfb504a00dc77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  active: 1
+  startDistance:
+    m_OverrideState: 1
+    m_Value: 5.1
+  fogDensity:
+    m_OverrideState: 1
+    m_Value: 8.75
+  heightFogDepth:
+    m_OverrideState: 1
+    m_Value: 41.2
+  heightFogDensity:
+    m_OverrideState: 1
+    m_Value: 29.8
+  heightFogBrightness:
+    m_OverrideState: 1
+    m_Value: 0.49
+  fogBrightness:
+    m_OverrideState: 1
+    m_Value: 2.06
+  subsurfaceStrength:
+    m_OverrideState: 1
+    m_Value: 4.05
+  causticsStrength:
+    m_OverrideState: 1
+    m_Value: 6.32
+  distortionStrength:
+    m_OverrideState: 1
+    m_Value: 0.66
+  distortionFrequency:
+    m_OverrideState: 1
+    m_Value: 0.45
+  distortionSpeed:
+    m_OverrideState: 1
+    m_Value: 0.79
 --- !u!1 &513705740
 GameObject:
   m_ObjectHideFlags: 0
@@ -6507,7 +6553,7 @@ Transform:
   m_GameObject: {fileID: 1351627759}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: 0.85, y: 318.89, z: 5}
+  m_LocalPosition: {x: -16.88, y: 1.3, z: 29.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7659,7 +7705,7 @@ Transform:
   m_GameObject: {fileID: 2033457116}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: 0.85, y: 318.89, z: 5}
+  m_LocalPosition: {x: -16.88, y: 1.3, z: 29.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -7735,6 +7781,37 @@ MonoBehaviour:
   m_Damping: 1
   m_DampingWhenOccluded: 1
   m_OptimalTargetDistance: 0
+--- !u!1 &2130085252
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2130085253}
+  m_Layer: 8
+  m_Name: SwimArea
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2130085253
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2130085252}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &107770586553537257
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10133,5 +10210,6 @@ SceneRoots:
   - {fileID: 467397033}
   - {fileID: 2204696815456294684}
   - {fileID: 609516053}
+  - {fileID: 2130085253}
   - {fileID: 357687504}
   - {fileID: 1513505001}

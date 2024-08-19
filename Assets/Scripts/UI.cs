@@ -41,7 +41,8 @@ public class UI : MonoBehaviour
 
     public void Restart()
     {
-        
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
         playerManager.health.deathPanel.SetActive(false);
         playerManager.health.isDead = false;
         playerManager.health.currentHealth = playerManager.health.maxHealth;
@@ -53,6 +54,6 @@ public class UI : MonoBehaviour
         playerTransform.localScale = new Vector3(1, 1, 1);
         playerManager.thirdPersonController.currentBoostCount = 0;
         playerManager.thirdPersonController.boostState = ThirdPersonController.BoostState.BoostReload;
-        playerManager.thirdPersonController.animator.SetBool("isDead", false);
+        playerManager.thirdPersonController.playerVisual.SetActive(true);
     }
 }
