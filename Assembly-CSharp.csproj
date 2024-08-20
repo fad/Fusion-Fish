@@ -58,8 +58,10 @@
     <Compile Include="Assets\Packages\Clean Multiplayer Pro\Scripts\Managers\FusionConnection.cs" />
     <Compile Include="Assets\Packages\Clean Multiplayer Pro\Scripts\Player\ResizeBackgroundToText.cs" />
     <Compile Include="Assets\Packages\Clean Multiplayer Pro\Scripts\Player\InfoPanel.cs" />
+    <Compile Include="Assets\NPCSpawner.cs" />
     <Compile Include="Assets\Packages\Photon\PhotonVoice\Demos\DemoVoiceUI\Scripts\MicrophoneSelector.cs" />
     <Compile Include="Assets\Packages\Clean Multiplayer Pro\Scripts\Chat\ChatItem.cs" />
+    <Compile Include="Assets\FoodSpawner.cs" />
     <Compile Include="Assets\Packages\Clean Multiplayer Pro\Scripts\Menu\Menu.cs" />
     <Compile Include="Assets\Packages\Photon\PhotonVoice\Demos\DemoVoiceUI\Scripts\RemoteSpeakerUI.cs" />
     <Compile Include="Assets\Packages\Clean Multiplayer Pro\Scripts\Player\GetPlayerCameraAndControls.cs" />

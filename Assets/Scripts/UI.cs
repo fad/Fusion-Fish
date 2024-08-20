@@ -54,6 +54,6 @@ public class UI : MonoBehaviour
         playerTransform.localScale = new Vector3(1, 1, 1);
         playerManager.thirdPersonController.currentBoostCount = 0;
         playerManager.thirdPersonController.boostState = ThirdPersonController.BoostState.BoostReload;
-        playerManager.thirdPersonController.playerVisual.SetActive(true);
+        playerManager.thirdPersonController.playerMesh.SetActive(true);
     }
 }

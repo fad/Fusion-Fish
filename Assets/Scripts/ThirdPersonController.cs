@@ -3,7 +3,6 @@
 using System;
 using System.Collections;
 using AvocadoShark;
-using Cinemachine;
 using Fusion;
 using UnityEngine;
 #if ENABLE_INPUT_SYSTEM
@@ -40,10 +39,13 @@ namespace StarterAssets
         [Header("Boost")]
         [HideInInspector] public float currentBoostCount;
         [SerializeField] private float boostDelayAfterActivation = 3f;
+        [SerializeField] private float boostReloadSpeed = 18;
+        [SerializeField] private float boostConsumptionSpeed = 30;
         public float maxBoostCount = 100f;
         private bool isBoosting;
         private bool canReloadBoost = true;
-        
+        private bool canReload;
+
         [Header("CineMachine")]
         [Tooltip("How fast the fov changes when the character speed changes")]
         [SerializeField] private float cameraFOVSmoothTime = 3f;
@@ -57,11 +59,14 @@ namespace StarterAssets
         [SerializeField] private float cameraAngleOverride;
         [Tooltip("For locking the camera position on all axis")]
         [SerializeField] private bool lockCameraPosition;
+        public float notMovingFOV = 17.5f;
+        public float defaultSpeedFOV = 20f;
+        public float boostSpeedFOV = 30;
         private float cineMachineTargetYaw;
         private float cineMachineTargetPitch;
         private GetPlayerCameraAndControls getPlayerCameraAndControls;
         private bool hasVCam = true;
-        
+
         [Header("Animation")]
         public Animator animator;
         private int animIDMotionSpeed;
@@ -192,17 +197,15 @@ namespace StarterAssets
         {
             if (input.sprint)
             {
-                if(boostState != BoostState.BoostStarted)
-                    AudioManager.Instance.PlaySoundWithRandomPitchAtPosition("boost", transform.position);
-                
+                canReload = false;
                 boostState = BoostState.BoostStarted;
             }
-            else if (!input.sprint && isBoosting)
+            else
             {
                 boostState = BoostState.BoostReload;
             }
 
-            Vector3 inputDirectionNormalized = new Vector3(input.move.x, 0.0f, input.move.y).normalized;
+            var inputDirectionNormalized = new Vector3(input.move.x, 0.0f, input.move.y).normalized;
 
             // set target speed based on move speed, sprint speed and if sprint is pressed
             if (Vector3.Distance(transform.position, swimArea.position) >= maxSwimAreaLength && !IsSwimmingTowardIsland())
@@ -235,7 +238,7 @@ namespace StarterAssets
                 {
                     rb.AddForce(getPlayerCameraAndControls.vCam.transform.forward * (inputDirectionNormalized.z * moveDistance), ForceMode.Impulse);
 
-                    getPlayerCameraAndControls.vCam.m_Lens.FieldOfView = Mathf.Lerp(getPlayerCameraAndControls.vCam.m_Lens.FieldOfView, isBoosting ? 30f : 20f, cameraFOVSmoothTime * Time.deltaTime);
+                    getPlayerCameraAndControls.vCam.m_Lens.FieldOfView = Mathf.Lerp(getPlayerCameraAndControls.vCam.m_Lens.FieldOfView, isBoosting ? boostSpeedFOV : defaultSpeedFOV, cameraFOVSmoothTime * Time.deltaTime);
                 }
 
                 playerVisual.transform.localRotation = Quaternion.Lerp(playerVisual.transform.localRotation, Quaternion.Euler(playerRenderRotationX, playerRenderRotationY, 0), playerRotationSmoothTime * Time.deltaTime);
@@ -252,7 +255,7 @@ namespace StarterAssets
             else
             {
                 if(hasVCam)
-                    getPlayerCameraAndControls.vCam.m_Lens.FieldOfView = Mathf.Lerp(getPlayerCameraAndControls.vCam.m_Lens.FieldOfView, 17.5f, cameraFOVSmoothTime * Time.deltaTime);
+                    getPlayerCameraAndControls.vCam.m_Lens.FieldOfView = Mathf.Lerp(getPlayerCameraAndControls.vCam.m_Lens.FieldOfView, notMovingFOV, cameraFOVSmoothTime * Time.deltaTime);
             }
         
             animator.SetFloat(animIDMotionSpeed, rb.velocity.sqrMagnitude);
@@ -263,39 +266,49 @@ namespace StarterAssets
             switch (boostState)
             {
                 case BoostState.BoostStarted :
-                    if (currentBoostCount < 0)
+                    if (currentBoostCount <= 0)
                     {
                         boostState = BoostState.BoostReload;
                     }
                     else
-                    {
+                    { 
+                        if(!isBoosting)
+                            AudioManager.Instance.PlaySoundWithRandomPitchAtPosition("boost", transform.position);
                         isBoosting = true;
-                        currentBoostCount -= Time.deltaTime * 30f;
+                        currentBoostCount -= Time.deltaTime * boostConsumptionSpeed;
                     }
                     break;
                 case BoostState.BoostReload :
-                    if(isBoosting)
-                        StartCoroutine(DelayedBoostReloadCoroutine());
-
+                    if (!canReload)
+                    {
+                        DelayedBoostReload();
+                    }
+                    
                     isBoosting = false;
 
-                    if (currentBoostCount < maxBoostCount)
+                    if (currentBoostCount < maxBoostCount && canReloadBoost)
                     {
-                        if (canReloadBoost)
-                        {
-                            currentBoostCount += Time.deltaTime * 18f;
-                        }
+                        currentBoostCount += Time.deltaTime * boostReloadSpeed;
                     }
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
         }
+
+        private void DelayedBoostReload()
+        {
+            StartCoroutine(DelayedBoostReloadCoroutine());
+        }
         
         private IEnumerator DelayedBoostReloadCoroutine()
         {
-            yield return new WaitForSeconds(boostDelayAfterActivation);
+            canReload = true;
 
+            canReloadBoost = false;
+            
+            yield return new WaitForSeconds(boostDelayAfterActivation);
+            
             canReloadBoost = true;
         }
 

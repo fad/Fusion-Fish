@@ -11,6 +11,9 @@ public class Experience : MonoBehaviour
         if (currentExperience >= experienceUntilUpgrade)
         {
             GetComponent<ThirdPersonController>().transform.localScale += new Vector3(0.25f, 0.25f, 0.25f);
+            GetComponent<ThirdPersonController>().notMovingFOV += .5f;
+            GetComponent<ThirdPersonController>().defaultSpeedFOV += .5f;
+            GetComponent<ThirdPersonController>().boostSpeedFOV += .5f;
             currentExperience = 0;
         }
     }

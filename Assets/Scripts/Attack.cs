@@ -67,15 +67,13 @@ public class Attack : MonoBehaviour
         }
     }
 
-    public void ResetBiteImage()
+    public void ResetBiteImageAnimationEvent()
     {
         biteUpper.gameObject.SetActive(false);
         biteLower.gameObject.SetActive(false);
-        biteUpper.GetComponent<Image>().color = Color.white;
-        biteLower.GetComponent<Image>().color = Color.white;
     }
 
-    private void DamageAnimationTrigger()
+    private void DamageAnimationEvent()
     {
         if (foodObject != null)
         {
@@ -83,8 +81,18 @@ public class Attack : MonoBehaviour
             foodObject.GetComponent<Health>().ReceiveDamage(1);
             if (foodObject.GetComponent<Health>().currentHealth <= 0)
             {
+                if (foodObject.GetComponent<NPC>())
+                {
+                    FindObjectOfType<NPCSpawner>().SpawnFish();
+                }
+                else
+                {
+                    FindObjectOfType<FoodSpawner>().SpawnFood();
+                }
                 thirdPersonController.playerManager.experience.currentExperience += experienceValueOfEnemy;
                 Destroy(foodObject);
+                biteUpper.GetComponent<Image>().color = Color.white;
+                biteLower.GetComponent<Image>().color = Color.white;
             }
         }
     }

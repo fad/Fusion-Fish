@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Settings
   m_EditorClassIdentifier: 
   xInputIsInverted: 0
-  yInputIsInverted: 1
+  yInputIsInverted: 0

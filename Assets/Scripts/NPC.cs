@@ -152,7 +152,10 @@ public class NPC : MonoBehaviour
         
         yield return new WaitForSeconds(.2f);
         
-        SubtractHealth();
+        if(Vector3.Distance(transform.position, enemy.transform.position) < 1.5f)
+        {
+            SubtractHealth();
+        }
 
         isAttacking = false;
     }
