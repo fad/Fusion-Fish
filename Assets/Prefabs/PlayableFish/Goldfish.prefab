@@ -494,6 +494,7 @@ MonoBehaviour:
   look: {x: 0, y: 0}
   sprint: 0
   attack: 0
+  setActiveStateMultiplayerUI: 0
   analogMovement: 0
   pushToTalk: 0
   cursorLocked: 0
@@ -622,6 +623,8 @@ MonoBehaviour:
   - {fileID: 8171385306191510493}
   - {fileID: 7352476292597749749}
   - {fileID: 1041757245521577014}
+  - {fileID: 2297454540360690151}
+  - {fileID: 2749181200256999984}
   - {fileID: 3542185466123676831}
 --- !u!114 &2381114956621545328
 MonoBehaviour:
@@ -823,6 +826,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   experienceUntilUpgrade: 300
   currentExperience: 0
+  defaultSwimSpeedIncreaseOnLevelUp: 1
+  boostSwimSpeedIncreaseOnLevelUp: 1
+  attackDamageIncreaseOnLevelUp: 0.5
+  sizeIncreaseOnLevelUp: 0.25
 --- !u!114 &4632872686385277288
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2549,6 +2556,7 @@ MonoBehaviour:
   biteUpper: {fileID: 1817263681268154888}
   biteLower: {fileID: 5466369016473450773}
   biteAnimator: {fileID: 9174893869088333902}
+  attackDamage: 1
   maxTimeBetweenAttack: 0.375
   thirdPersonController: {fileID: 9150513680388461083}
   fishRender: {fileID: 5967580297110785664}

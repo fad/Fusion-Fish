@@ -1,10 +1,11 @@
 using System;
 using System.Collections;
 using StarterAssets;
+using Fusion;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class NPC : MonoBehaviour
+public class NPC : NetworkBehaviour
 {
     [Header("Movement")] 
     private float currentSpeed;

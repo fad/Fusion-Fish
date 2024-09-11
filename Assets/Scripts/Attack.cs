@@ -1,8 +1,9 @@
 using StarterAssets;
 using UnityEngine;
 using UnityEngine.UI;
+using Fusion;
 
-public class Attack : MonoBehaviour
+public class Attack : NetworkBehaviour
 {
     [Header("Food")] 
     [SerializeField] private LayerMask foodLayerMask;

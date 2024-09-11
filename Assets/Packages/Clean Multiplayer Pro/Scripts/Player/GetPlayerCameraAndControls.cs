@@ -1,5 +1,4 @@
 #if CMPSETUP_COMPLETE
-using System;
 using System.Collections;
 using Cinemachine;
 using UnityEngine;
@@ -23,7 +22,7 @@ namespace AvocadoShark
 
         private void Awake()
         {
-            _rigidbody=GetComponent<Rigidbody>();
+            _rigidbody = GetComponent<Rigidbody>();
         }
 
         public override void Spawned()
