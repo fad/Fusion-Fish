@@ -14,6 +14,9 @@ public class Experience : MonoBehaviour
             GetComponent<ThirdPersonController>().notMovingFOV += .5f;
             GetComponent<ThirdPersonController>().defaultSpeedFOV += .5f;
             GetComponent<ThirdPersonController>().boostSpeedFOV += .5f;
+            GetComponent<ThirdPersonController>().boostSwimSpeed += 1f;
+            GetComponent<ThirdPersonController>().defaultSwimSpeed += 1f;
+            GetComponent<ThirdPersonController>().playerManager.attack.attackDamage += .5f;
             currentExperience = 0;
         }
     }

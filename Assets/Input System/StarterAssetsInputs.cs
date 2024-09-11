@@ -17,6 +17,7 @@ namespace StarterAssets
 		public Vector2 look;
 		public bool sprint;
 		public bool attack;
+		public bool setActiveStateMultiplayerUI;
 
 		[Header("Movement Settings")]
 		public bool analogMovement;
@@ -45,6 +46,11 @@ namespace StarterAssets
 		public void OnSprint(InputValue value)
 		{
 			SprintInput(value.isPressed);
+		}
+		
+		public void OnSetActivationStateMultiplayerUI(InputValue value)
+		{
+			SetActivationStateMultiplayerUIInput(value.isPressed);
 		}
 		
 		public void OnAttack(InputValue value)
@@ -88,6 +94,12 @@ namespace StarterAssets
 			if (isPlayerWritingChat)
 				return;
 			attack = newAttackState;
+		}
+		
+		public void SetActivationStateMultiplayerUIInput(bool newActivationState) {
+			if (isPlayerWritingChat)
+				return;
+			setActiveStateMultiplayerUI = newActivationState;
 		}
 
 		private void OnApplicationFocus(bool hasFocus)

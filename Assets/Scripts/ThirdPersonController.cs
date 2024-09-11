@@ -26,8 +26,8 @@ namespace StarterAssets
         public float sensitivity = .85f;
         public GameObject playerVisual;
         public GameObject playerMesh;
-        [SerializeField] private float boostSwimSpeed = 100f;
-        [SerializeField] private float defaultSwimSpeed = 50f;
+        [SerializeField] public float boostSwimSpeed = 100f;
+        [SerializeField] public float defaultSwimSpeed = 50f;
         [SerializeField] private float  maxSwimAreaLength;
         [HideInInspector] public PlayerManager playerManager;
         private float speed;
@@ -130,6 +130,7 @@ namespace StarterAssets
             
             Gravity();
             SpeedBoost();
+            SetActiveMultiplayerUI();
             
             if (HasStateAuthority == false)
             {
@@ -151,6 +152,19 @@ namespace StarterAssets
                 return;
             
             CameraRotation();
+        }
+
+        private void SetActiveMultiplayerUI()
+        {
+            switch (input.setActiveStateMultiplayerUI)
+            {
+                case true when SetUIActivationState.Instance.pressedActivationUIMultiplayerButton == false:
+                    SetUIActivationState.Instance.SetActiveUIObjects();
+                    break;
+                case false:
+                    SetUIActivationState.Instance.pressedActivationUIMultiplayerButton = false;
+                    break;
+            }
         }
 
         private void CameraRotation()

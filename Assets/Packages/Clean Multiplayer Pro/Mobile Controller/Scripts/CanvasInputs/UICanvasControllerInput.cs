@@ -24,6 +24,11 @@ namespace StarterAssets
             starterAssetsInputs.SprintInput(virtualSprintState);
         }
         
+        public void VirtualSetMultiplayerUIActivationState(bool virtualActivationState)
+        {
+            starterAssetsInputs.SprintInput(virtualActivationState);
+        }
+        
         public void VirtualAttackInput(bool virtualAttackState)
         {
             starterAssetsInputs.AttackInput(virtualAttackState);

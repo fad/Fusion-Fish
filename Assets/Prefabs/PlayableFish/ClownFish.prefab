@@ -494,6 +494,7 @@ MonoBehaviour:
   look: {x: 0, y: 0}
   sprint: 0
   attack: 0
+  setActiveStateMultiplayerUI: 0
   analogMovement: 0
   pushToTalk: 0
   cursorLocked: 0

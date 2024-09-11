@@ -14,7 +14,7 @@ public class Attack : MonoBehaviour
     [SerializeField] private Animator biteAnimator;
     
     [Header("Attack")] 
-    private float attackDamage;
+    public float attackDamage = 1;
     private bool preparedAttack;
     
     [Header("Time")]

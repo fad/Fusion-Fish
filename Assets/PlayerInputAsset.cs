@@ -73,6 +73,15 @@ namespace PlayerInputAssetNS
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SetActivationStateMultiplayerUI"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""cf812bba-d127-4dd9-88d3-d047865271d4"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -251,6 +260,17 @@ namespace PlayerInputAssetNS
                     ""action"": ""Attack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fd3b4c68-9915-4b12-82a5-e58689568e8a"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SetActivationStateMultiplayerUI"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -312,6 +332,7 @@ namespace PlayerInputAssetNS
             m_Player_Sprint = m_Player.FindAction("Sprint", throwIfNotFound: true);
             m_Player_PushToTalk = m_Player.FindAction("PushToTalk", throwIfNotFound: true);
             m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
+            m_Player_SetActivationStateMultiplayerUI = m_Player.FindAction("SetActivationStateMultiplayerUI", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -378,6 +399,7 @@ namespace PlayerInputAssetNS
         private readonly InputAction m_Player_Sprint;
         private readonly InputAction m_Player_PushToTalk;
         private readonly InputAction m_Player_Attack;
+        private readonly InputAction m_Player_SetActivationStateMultiplayerUI;
         public struct PlayerActions
         {
             private @StarterAssets m_Wrapper;
@@ -387,6 +409,7 @@ namespace PlayerInputAssetNS
             public InputAction @Sprint => m_Wrapper.m_Player_Sprint;
             public InputAction @PushToTalk => m_Wrapper.m_Player_PushToTalk;
             public InputAction @Attack => m_Wrapper.m_Player_Attack;
+            public InputAction @SetActivationStateMultiplayerUI => m_Wrapper.m_Player_SetActivationStateMultiplayerUI;
             public InputActionMap Get() { return m_Wrapper.m_Player; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -411,6 +434,9 @@ namespace PlayerInputAssetNS
                 @Attack.started += instance.OnAttack;
                 @Attack.performed += instance.OnAttack;
                 @Attack.canceled += instance.OnAttack;
+                @SetActivationStateMultiplayerUI.started += instance.OnSetActivationStateMultiplayerUI;
+                @SetActivationStateMultiplayerUI.performed += instance.OnSetActivationStateMultiplayerUI;
+                @SetActivationStateMultiplayerUI.canceled += instance.OnSetActivationStateMultiplayerUI;
             }
 
             private void UnregisterCallbacks(IPlayerActions instance)
@@ -430,6 +456,9 @@ namespace PlayerInputAssetNS
                 @Attack.started -= instance.OnAttack;
                 @Attack.performed -= instance.OnAttack;
                 @Attack.canceled -= instance.OnAttack;
+                @SetActivationStateMultiplayerUI.started -= instance.OnSetActivationStateMultiplayerUI;
+                @SetActivationStateMultiplayerUI.performed -= instance.OnSetActivationStateMultiplayerUI;
+                @SetActivationStateMultiplayerUI.canceled -= instance.OnSetActivationStateMultiplayerUI;
             }
 
             public void RemoveCallbacks(IPlayerActions instance)
@@ -490,6 +519,7 @@ namespace PlayerInputAssetNS
             void OnSprint(InputAction.CallbackContext context);
             void OnPushToTalk(InputAction.CallbackContext context);
             void OnAttack(InputAction.CallbackContext context);
+            void OnSetActivationStateMultiplayerUI(InputAction.CallbackContext context);
         }
     }
 }
