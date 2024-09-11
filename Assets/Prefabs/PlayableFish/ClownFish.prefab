@@ -395,18 +395,17 @@ GameObject:
   - component: {fileID: 760614429699185995}
   - component: {fileID: 6014465216197840825}
   - component: {fileID: 9144912782510203114}
-  - component: {fileID: 2381114956621545328}
   - component: {fileID: 4763555619980021824}
   - component: {fileID: 7967942701457511286}
   - component: {fileID: 6443437523783385271}
   - component: {fileID: 8171385306191510493}
   - component: {fileID: 7352476292597749749}
   - component: {fileID: 7123409410812152395}
-  - component: {fileID: 1041757245521577014}
   - component: {fileID: 6147171116043748880}
   - component: {fileID: 2297454540360690151}
   - component: {fileID: 4632872686385277288}
   - component: {fileID: 532309906241500560}
+  - component: {fileID: 6222487964510190762}
   m_Layer: 7
   m_Name: ClownFish
   m_TagString: Player
@@ -429,7 +428,6 @@ Transform:
   m_Children:
   - {fileID: 3554473533067565278}
   - {fileID: 5967580297110785664}
-  - {fileID: 7369987465763149778}
   - {fileID: 2278835644543468176}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 25, y: 0, z: 0}
@@ -613,38 +611,20 @@ MonoBehaviour:
   SortKey: 778621691
   ObjectInterest: 1
   Flags: 264449
-  NestedObjects: []
+  NestedObjects:
+  - {fileID: 6147735825067914960}
   NetworkedBehaviours:
   - {fileID: 9150513680388461083}
-  - {fileID: 2381114956621545328}
   - {fileID: 4763555619980021824}
   - {fileID: 7967942701457511286}
   - {fileID: 6443437523783385271}
   - {fileID: 8171385306191510493}
   - {fileID: 7352476292597749749}
-  - {fileID: 1041757245521577014}
   - {fileID: 2297454540360690151}
   - {fileID: 4632872686385277288}
+  - {fileID: 6222487964510190762}
   - {fileID: 2749181200256999984}
   - {fileID: 3542185466123676831}
---- !u!114 &2381114956621545328
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 505540377448418887}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 506319458, guid: e725a070cec140c4caffb81624c8c787, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Animator: {fileID: 0}
-  TotalWords: 0
-  ApplyTiming: 2
-  SyncSettings: 79
-  StateHashes: 000000002445ff7f3ed4c595221c37918758d02e
-  TriggerHashes: 000000003b2dc047
 --- !u!114 &4763555619980021824
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -768,28 +748,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &1041757245521577014
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 505540377448418887}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0a591d221a634417e9827eb58e17de84, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SyncScale: 1
-  SyncParent: 1
-  _interpolationTarget: {fileID: 7369987465763149778}
-  UsePreciseRotation: 0
-  UseRenderSleepThresholds: 1
-  RenderThresholds:
-    UseEnergy: 1
-    Position: 0.01
-    Rotation: 0.01
-    Scale: 0.01
 --- !u!136 &6147171116043748880
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -866,6 +824,22 @@ MonoBehaviour:
   health: {fileID: 0}
   experience: {fileID: 0}
   attack: {fileID: 2749181200256999984}
+--- !u!114 &6222487964510190762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 505540377448418887}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 158639473, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SyncScale: 1
+  SyncParent: 1
+  _autoAOIOverride: 1
+  DisableSharedModeInterpolation: 1
 --- !u!1 &519523620963440096
 GameObject:
   m_ObjectHideFlags: 0
@@ -2398,6 +2372,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5967580297110785664}
+  - component: {fileID: 6147735825067914960}
+  - component: {fileID: 3024809650598101344}
   m_Layer: 0
   m_Name: Player Render
   m_TagString: Untagged
@@ -2418,6 +2394,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 7369987465763149778}
   - {fileID: 3231227891575338801}
   - {fileID: 5267721347161833077}
   - {fileID: 2724932963667091118}
@@ -2426,6 +2403,40 @@ Transform:
   - {fileID: 3332633570356973672}
   m_Father: {fileID: 61442038398986381}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6147735825067914960
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5159690815227489710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SortKey: 724917311
+  ObjectInterest: 1
+  Flags: 262145
+  NestedObjects: []
+  NetworkedBehaviours:
+  - {fileID: 3024809650598101344}
+--- !u!114 &3024809650598101344
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5159690815227489710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 158639473, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SyncScale: 0
+  SyncParent: 0
+  _autoAOIOverride: 1
+  DisableSharedModeInterpolation: 1
 --- !u!1 &5283585986367064851
 GameObject:
   m_ObjectHideFlags: 0
@@ -3480,12 +3491,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8400198987109439168}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 61442038398986381}
+  m_Father: {fileID: 5967580297110785664}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8657425969331322465
 GameObject:

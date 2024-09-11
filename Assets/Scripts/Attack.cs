@@ -91,7 +91,6 @@ public class Attack : NetworkBehaviour
                     FindObjectOfType<FoodSpawner>().SpawnFood();
                 }
                 thirdPersonController.playerManager.experience.currentExperience += experienceValueOfEnemy;
-                foodObject.SetActive(false);
                 biteUpper.GetComponent<Image>().color = Color.white;
                 biteLower.GetComponent<Image>().color = Color.white;
             }

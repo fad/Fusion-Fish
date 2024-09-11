@@ -63,29 +63,28 @@ public class Health : NetworkBehaviour
             if (isNPC)
             {
                 PlayParticles(Color.red, 30);
+                Runner.Despawn(GetComponent<NetworkObject>());
             }
             else
             {
                 PlayParticles(Color.yellow, 10);
+                Runner.Despawn(GetComponent<NetworkObject>());
             }
         }
     }
 
     private void Die()
     {
-        if (isPlayer)
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+        thirdPersonController.playerMesh.SetActive(false);
+        for (var i = 0; i < 4; i++)
         {
-            Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.None;
-            thirdPersonController.playerMesh.SetActive(false);
-            for (var i = 0; i < 4; i++)
-            {
-                var food = Instantiate(foodObject);
-                food.transform.position = transform.position;
-            }
-            isDead = true;
-            deathPanel.SetActive(true);
+            var food = Instantiate(foodObject);
+            food.transform.position = transform.position;
         }
+        isDead = true;
+        deathPanel.SetActive(true);
     }
 
     //Here I change burst count and color when needed
