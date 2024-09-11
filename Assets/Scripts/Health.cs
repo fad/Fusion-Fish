@@ -1,7 +1,8 @@
+using Fusion;
 using StarterAssets;
 using UnityEngine;
 
-public class Health : MonoBehaviour
+public class Health : NetworkBehaviour
 {
     [Header("Health")]
     public float maxHealth;
@@ -37,7 +38,7 @@ public class Health : MonoBehaviour
         bloodParticleSystem = GameObject.Find("BloodParticles").GetComponent<ParticleSystem>();
     }
 
-    public void ReceiveDamage(int damage)
+    public void ReceiveDamage(float damage)
     {
         currentHealth -= damage;
 

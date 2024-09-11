@@ -131,11 +131,6 @@ namespace StarterAssets
             Gravity();
             SpeedBoost();
             SetActiveMultiplayerUI();
-            
-            if (HasStateAuthority == false)
-            {
-                return;
-            }
         }
 
         private void FixedUpdate()

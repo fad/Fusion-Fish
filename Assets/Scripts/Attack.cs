@@ -79,7 +79,7 @@ public class Attack : NetworkBehaviour
         if (foodObject != null)
         {
             var experienceValueOfEnemy = foodObject.GetComponent<Health>().experienceValue;
-            foodObject.GetComponent<Health>().ReceiveDamage(1);
+            foodObject.GetComponent<Health>().ReceiveDamage(attackDamage);
             if (foodObject.GetComponent<Health>().currentHealth <= 0)
             {
                 if (foodObject.GetComponent<NPC>())
@@ -91,7 +91,7 @@ public class Attack : NetworkBehaviour
                     FindObjectOfType<FoodSpawner>().SpawnFood();
                 }
                 thirdPersonController.playerManager.experience.currentExperience += experienceValueOfEnemy;
-                Destroy(foodObject);
+                foodObject.SetActive(false);
                 biteUpper.GetComponent<Image>().color = Color.white;
                 biteLower.GetComponent<Image>().color = Color.white;
             }

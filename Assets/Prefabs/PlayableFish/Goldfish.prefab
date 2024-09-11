@@ -624,6 +624,7 @@ MonoBehaviour:
   - {fileID: 7352476292597749749}
   - {fileID: 1041757245521577014}
   - {fileID: 2297454540360690151}
+  - {fileID: 4632872686385277288}
   - {fileID: 2749181200256999984}
   - {fileID: 3542185466123676831}
 --- !u!114 &2381114956621545328
@@ -826,7 +827,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   experienceUntilUpgrade: 300
   currentExperience: 0
-  defaultSwimSpeedIncreaseOnLevelUp: 1
+  defaultSwimSpeedAdditionOnLevelUp: 1
   boostSwimSpeedIncreaseOnLevelUp: 1
   attackDamageIncreaseOnLevelUp: 0.5
   sizeIncreaseOnLevelUp: 0.25

@@ -624,6 +624,7 @@ MonoBehaviour:
   - {fileID: 7352476292597749749}
   - {fileID: 1041757245521577014}
   - {fileID: 2297454540360690151}
+  - {fileID: 4632872686385277288}
   - {fileID: 2749181200256999984}
   - {fileID: 3542185466123676831}
 --- !u!114 &2381114956621545328
@@ -779,7 +780,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a591d221a634417e9827eb58e17de84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SyncScale: 0
+  SyncScale: 1
   SyncParent: 1
   _interpolationTarget: {fileID: 7369987465763149778}
   UsePreciseRotation: 0
@@ -826,7 +827,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   experienceUntilUpgrade: 300
   currentExperience: 0
-  defaultSwimSpeedIncreaseOnLevelUp: 1
+  defaultSwimSpeedAdditionOnLevelUp: 1
   boostSwimSpeedIncreaseOnLevelUp: 1
   attackDamageIncreaseOnLevelUp: 0.5
   sizeIncreaseOnLevelUp: 0.25
@@ -864,7 +865,7 @@ MonoBehaviour:
   thirdPersonController: {fileID: 0}
   health: {fileID: 0}
   experience: {fileID: 0}
-  attack: {fileID: 0}
+  attack: {fileID: 2749181200256999984}
 --- !u!1 &519523620963440096
 GameObject:
   m_ObjectHideFlags: 0
