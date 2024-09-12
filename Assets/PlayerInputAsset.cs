@@ -82,6 +82,15 @@ namespace PlayerInputAssetNS
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SuckIn"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""ba4ec999-e593-4352-88e4-1d08cf9ddca2"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -267,8 +276,19 @@ namespace PlayerInputAssetNS
                     ""path"": ""<Keyboard>/tab"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""KeyboardMouse"",
                     ""action"": ""SetActivationStateMultiplayerUI"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""188999d8-9bc9-4650-867a-66321ed29212"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""SuckIn"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -333,6 +353,7 @@ namespace PlayerInputAssetNS
             m_Player_PushToTalk = m_Player.FindAction("PushToTalk", throwIfNotFound: true);
             m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
             m_Player_SetActivationStateMultiplayerUI = m_Player.FindAction("SetActivationStateMultiplayerUI", throwIfNotFound: true);
+            m_Player_SuckIn = m_Player.FindAction("SuckIn", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -400,6 +421,7 @@ namespace PlayerInputAssetNS
         private readonly InputAction m_Player_PushToTalk;
         private readonly InputAction m_Player_Attack;
         private readonly InputAction m_Player_SetActivationStateMultiplayerUI;
+        private readonly InputAction m_Player_SuckIn;
         public struct PlayerActions
         {
             private @StarterAssets m_Wrapper;
@@ -410,6 +432,7 @@ namespace PlayerInputAssetNS
             public InputAction @PushToTalk => m_Wrapper.m_Player_PushToTalk;
             public InputAction @Attack => m_Wrapper.m_Player_Attack;
             public InputAction @SetActivationStateMultiplayerUI => m_Wrapper.m_Player_SetActivationStateMultiplayerUI;
+            public InputAction @SuckIn => m_Wrapper.m_Player_SuckIn;
             public InputActionMap Get() { return m_Wrapper.m_Player; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -437,6 +460,9 @@ namespace PlayerInputAssetNS
                 @SetActivationStateMultiplayerUI.started += instance.OnSetActivationStateMultiplayerUI;
                 @SetActivationStateMultiplayerUI.performed += instance.OnSetActivationStateMultiplayerUI;
                 @SetActivationStateMultiplayerUI.canceled += instance.OnSetActivationStateMultiplayerUI;
+                @SuckIn.started += instance.OnSuckIn;
+                @SuckIn.performed += instance.OnSuckIn;
+                @SuckIn.canceled += instance.OnSuckIn;
             }
 
             private void UnregisterCallbacks(IPlayerActions instance)
@@ -459,6 +485,9 @@ namespace PlayerInputAssetNS
                 @SetActivationStateMultiplayerUI.started -= instance.OnSetActivationStateMultiplayerUI;
                 @SetActivationStateMultiplayerUI.performed -= instance.OnSetActivationStateMultiplayerUI;
                 @SetActivationStateMultiplayerUI.canceled -= instance.OnSetActivationStateMultiplayerUI;
+                @SuckIn.started -= instance.OnSuckIn;
+                @SuckIn.performed -= instance.OnSuckIn;
+                @SuckIn.canceled -= instance.OnSuckIn;
             }
 
             public void RemoveCallbacks(IPlayerActions instance)
@@ -520,6 +549,7 @@ namespace PlayerInputAssetNS
             void OnPushToTalk(InputAction.CallbackContext context);
             void OnAttack(InputAction.CallbackContext context);
             void OnSetActivationStateMultiplayerUI(InputAction.CallbackContext context);
+            void OnSuckIn(InputAction.CallbackContext context);
         }
     }
 }

@@ -28,6 +28,12 @@ public class Attack : NetworkBehaviour
     private float maxSensitivity;
     private float halfSensitivity;
 
+    [Header("SuckIn")] 
+    [SerializeField] private ParticleSystem suckInParticleSystem;
+    [SerializeField] private float suckInDelay = 1;
+    [SerializeField] private float currentSuckInDelay = 1;
+    [SerializeField] public float suckPower;
+
     private void Start()
     {
         maxSensitivity = thirdPersonController.sensitivity;
@@ -36,8 +42,50 @@ public class Attack : NetworkBehaviour
         timeBetweenAttack = maxTimeBetweenAttack;
     }
 
-    private void Update() => AttackUpdate();
+    private void Update()
+    {
+        AttackUpdate();
+        
+        SuckInUpdate();
+    }
 
+    private void SuckInUpdate()
+    {
+        currentSuckInDelay -= Time.deltaTime;
+
+        if (thirdPersonController.input.suckIn)
+        {
+            if (currentSuckInDelay <= 0)
+            {
+                suckInParticleSystem.Play();
+
+                if (foodObject != null)
+                {
+                    var experienceValueOfEnemy = foodObject.GetComponent<Health>().experienceValue;
+                    Debug.Log("notnull");
+                    if (foodObject.GetComponent<Health>().currentHealth <= suckPower)
+                    {
+                        if (foodObject.GetComponent<NPC>())
+                        {
+                            FindObjectOfType<NPCSpawner>().SpawnFish();
+                        }
+                        else
+                        {
+                            FindObjectOfType<FoodSpawner>().SpawnFood();
+                        }
+                        thirdPersonController.playerManager.experience.currentExperience += experienceValueOfEnemy;
+                        biteUpper.GetComponent<Image>().color = Color.white;
+                        biteLower.GetComponent<Image>().color = Color.white;
+                        foodObject.GetComponent<Health>().ReceiveDamage(suckPower);
+                        Debug.Log("suck");
+                    }
+                }
+
+                currentSuckInDelay = suckInDelay;
+            }
+        }
+    }
+    
     private void AttackUpdate()
     {
         if (thirdPersonController.playerManager.health.isDead)

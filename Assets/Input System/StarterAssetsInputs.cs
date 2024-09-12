@@ -17,6 +17,7 @@ namespace StarterAssets
 		public Vector2 look;
 		public bool sprint;
 		public bool attack;
+		public bool suckIn;
 		public bool setActiveStateMultiplayerUI;
 
 		[Header("Movement Settings")]
@@ -46,6 +47,11 @@ namespace StarterAssets
 		public void OnSprint(InputValue value)
 		{
 			SprintInput(value.isPressed);
+		}		
+		
+		public void OnSuckIn(InputValue value)
+		{
+			SuckInInput(value.isPressed);
 		}
 		
 		public void OnSetActivationStateMultiplayerUI(InputValue value)
@@ -100,6 +106,12 @@ namespace StarterAssets
 			if (isPlayerWritingChat)
 				return;
 			setActiveStateMultiplayerUI = newActivationState;
+		}		
+		
+		public void SuckInInput(bool newActivationState) {
+			if (isPlayerWritingChat)
+				return;
+			suckIn = newActivationState;
 		}
 
 		private void OnApplicationFocus(bool hasFocus)
