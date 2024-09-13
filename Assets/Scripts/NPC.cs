@@ -91,7 +91,7 @@ public class NPC : NetworkBehaviour
             case Behaviour.Flight:
                 var swimDirectionAwayFromEnemy = enemy.transform.position - transform.position;
                 
-                currentSpeed = GetComponent<Health>().currentHealth >= GetComponent<Health>().maxHealth ? maxSwimSpeedOnAttack : maxSwimSpeed;
+                currentSpeed = GetComponent<Health>().NetworkedHealth >= GetComponent<Health>().maxHealth ? maxSwimSpeedOnAttack : maxSwimSpeed;
                 
                 MoveNPCInDirection(swimDirectionAwayFromEnemy, Quaternion.LookRotation(swimDirectionAwayFromEnemy));
                 break;
@@ -177,7 +177,7 @@ public class NPC : NetworkBehaviour
 
     private void SubtractHealth()
     {
-        enemy.GetComponent<Health>().ReceiveDamage(attackDamage);
+        enemy.GetComponent<Health>().ReceiveDamageRpc(attackDamage);
     }
     
     private void MoveNPCInDirection(Vector3 targetDirection, Quaternion lookDirection)

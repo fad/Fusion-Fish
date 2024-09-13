@@ -43,7 +43,7 @@ public class UI : MonoBehaviour
         if (healthUI == null || playerManager == null) 
             return;
         
-        healthUI.fillAmount = playerManager.health.currentHealth / playerManager.health.maxHealth;
+        healthUI.fillAmount = playerManager.health.NetworkedHealth / playerManager.health.maxHealth;
 
         boostUI.fillAmount = playerManager.thirdPersonController.currentBoostCount / playerManager.thirdPersonController.maxBoostCount;
 

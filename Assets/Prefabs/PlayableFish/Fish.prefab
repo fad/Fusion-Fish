@@ -259,7 +259,6 @@ MonoBehaviour:
   currentHealth: 0
   experienceValue: 100
   isDead: 0
-  deathPanel: {fileID: 0}
 --- !u!114 &4763555619980021824
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -582,6 +581,7 @@ MonoBehaviour:
   health: {fileID: 0}
   experience: {fileID: 0}
   attack: {fileID: 2749181200256999984}
+  hostPlayer: {fileID: 0}
 --- !u!114 &9144912782510203114
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -610,6 +610,7 @@ MonoBehaviour:
   - {fileID: 7352476292597749749}
   - {fileID: 10622835304475330}
   - {fileID: 6222487964510190762}
+  - {fileID: 532309906241500560}
   - {fileID: 2749181200256999984}
   - {fileID: 3542185466123676831}
 --- !u!1 &519523620963440096

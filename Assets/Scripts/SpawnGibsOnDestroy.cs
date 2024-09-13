@@ -12,10 +12,12 @@ namespace BiggestFish.Gameplay
         private void OnDestroy()
         {
             if (gibPrefab != null && gibSpawnCount > 0)
-                SpawnMeatObjects();
+            {
+                SpawnMeatObjects(UI.Instance.playerManager.hostPlayerRunner);
+            }
         }
         
-        public void SpawnMeatObjects()
+        public void SpawnMeatObjects(NetworkRunner runner)
         {
             if (gibPrefab != null)
                 for (var i = 0; i < gibSpawnCount; i++)
@@ -23,8 +25,7 @@ namespace BiggestFish.Gameplay
                     var randomOffset = Random.insideUnitSphere * 0.5f; // Adjust the offset as needed
                     var spawnPosition = transform.position + randomOffset;
                     //Need to make that online
-                    //Runner.Spawn(gibPrefab, spawnPosition, Quaternion.identity);
-                    Instantiate(gibPrefab, spawnPosition, Quaternion.identity);
+                    runner.Spawn(gibPrefab, spawnPosition, Quaternion.identity);
                 }
         }
     }

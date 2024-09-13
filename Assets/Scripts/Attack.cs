@@ -3,6 +3,7 @@ using StarterAssets;
 using UnityEngine;
 using UnityEngine.UI;
 using Fusion;
+using Fusion.Sockets;
 
 public class Attack : NetworkBehaviour
 {
@@ -62,10 +63,10 @@ public class Attack : NetworkBehaviour
 
                 if (foodObject != null)
                 {
-                    if (foodObject.GetComponent<Health>().currentHealth <= suckPower && !foodObject.GetComponent<NPC>())
+                    if (foodObject.GetComponent<Health>().NetworkedHealth <= suckPower && !foodObject.GetComponent<NPC>())
                     {
                         thirdPersonController.playerManager.experience.currentExperience += foodObject.GetComponent<Health>().experienceValue;
-                        foodObject.GetComponent<Health>().ReceiveDamage(suckPower);
+                        foodObject.GetComponent<Health>().ReceiveDamageRpc(suckPower);
                     }
                 }
 
@@ -109,13 +110,13 @@ public class Attack : NetworkBehaviour
         biteUpper.gameObject.SetActive(false);
         biteLower.gameObject.SetActive(false);
     }
-
+    
     private void DamageAnimationEvent()
     {
         if (foodObject != null && !foodObject.GetComponent<MeatObject>())
         {
-            foodObject.GetComponent<Health>().ReceiveDamage(attackDamage);
-            if (foodObject.GetComponent<Health>().currentHealth <= 0)
+            foodObject.GetComponent<Health>().ReceiveDamageRpc(attackDamage);
+            if (foodObject.GetComponent<Health>().NetworkedHealth <= 0)
             {
                 biteUpper.GetComponent<Image>().color = Color.white;
                 biteLower.GetComponent<Image>().color = Color.white;

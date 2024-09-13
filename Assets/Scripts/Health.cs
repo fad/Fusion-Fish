@@ -7,7 +7,8 @@ public class Health : NetworkBehaviour
 {
     [Header("Health")]
     public float maxHealth;
-    [HideInInspector] public float currentHealth;
+
+    [Networked] public float NetworkedHealth { get; set; } = 5;
     private ParticleSystem bloodParticleSystem;
     private ThirdPersonController thirdPersonController;
     private bool isPlayer;
@@ -26,17 +27,17 @@ public class Health : NetworkBehaviour
             thirdPersonController = thirdPersonControllerTemp;
         }
         
-        currentHealth = maxHealth;
         bloodParticleSystem = GameObject.Find("BloodParticles").GetComponent<ParticleSystem>();
     }
-
-    public void ReceiveDamage(float damage)
+    
+    [Rpc(RpcSources.All, RpcTargets.StateAuthority)]
+    public void ReceiveDamageRpc(float damage)
     {
-        currentHealth -= damage;
+        NetworkedHealth -= damage;
 
         PlayParticles(Color.red, 10);
         
-        if (currentHealth <= 0)
+        if (NetworkedHealth <= 0)
         {
             if (isPlayer)
             {
@@ -58,9 +59,8 @@ public class Health : NetworkBehaviour
                     FindObjectOfType<FoodSpawner>().SpawnFood();
                 }
                 PlayParticles(Color.red, 20);
-                //Need to make that online
-                //Runner.Despawn(GetComponent<NetworkObject>());
-                Destroy(gameObject);
+                
+                Runner.Despawn(GetComponent<NetworkObject>());
             }
         }
     }
@@ -70,8 +70,7 @@ public class Health : NetworkBehaviour
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
         thirdPersonController.playerMesh.SetActive(false);
-        //MAKE THIS GIBS SPAWING ONLINE
-        GetComponent<SpawnGibsOnDestroy>().SpawnMeatObjects();
+        GetComponent<SpawnGibsOnDestroy>().SpawnMeatObjects(Runner);
         isDead = true;
         UI.Instance.deathPanel.SetActive(true);
     }
@@ -82,7 +81,7 @@ public class Health : NetworkBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         UI.Instance.deathPanel.SetActive(false);
         isDead = false;
-        currentHealth = maxHealth;
+        NetworkedHealth = maxHealth;
         
         thirdPersonController.playerManager.experience.currentExperience = 0;
 
