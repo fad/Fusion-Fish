@@ -62,7 +62,6 @@ public class Attack : NetworkBehaviour
                 if (foodObject != null)
                 {
                     var experienceValueOfEnemy = foodObject.GetComponent<Health>().experienceValue;
-                    Debug.Log("notnull");
                     if (foodObject.GetComponent<Health>().currentHealth <= suckPower)
                     {
                         if (foodObject.GetComponent<NPC>())

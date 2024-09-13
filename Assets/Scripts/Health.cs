@@ -9,8 +9,6 @@ public class Health : NetworkBehaviour
     [HideInInspector] public float currentHealth;
     private ParticleSystem bloodParticleSystem;
     private ThirdPersonController thirdPersonController;
-    private NPC npc;
-    private bool isNPC;
     private bool isPlayer;
 
     [Header("Experience")] 
@@ -18,7 +16,7 @@ public class Health : NetworkBehaviour
     
     [Header("Death")]
     [HideInInspector] public bool isDead;
-    [SerializeField] private Transform foodObject;
+    [SerializeField] private Transform gibs;
     public GameObject deathPanel;
 
     private void Start()
@@ -28,12 +26,7 @@ public class Health : NetworkBehaviour
             isPlayer = true;
             thirdPersonController = thirdPersonControllerTemp;
         }
-
-        if (TryGetComponent(out NPC npcTemp))
-        {
-            npc = npcTemp;
-            isNPC = true;
-        }
+        
         currentHealth = maxHealth;
         bloodParticleSystem = GameObject.Find("BloodParticles").GetComponent<ParticleSystem>();
     }
@@ -42,45 +35,31 @@ public class Health : NetworkBehaviour
     {
         currentHealth -= damage;
 
-        if (isNPC)
-        {
-            PlayParticles(Color.red, 10);
-        }
-        else if(isPlayer)
-        {
-            PlayParticles(Color.red, 10);
-        }
+        PlayParticles(Color.red, 10);
         
         if (currentHealth <= 0)
         {
             if (isPlayer)
             {
-                Die();
+                PlayerDeath();
                 PlayParticles(Color.red, 30);
-                return;
-            }
-            
-            if (isNPC)
-            {
-                PlayParticles(Color.red, 30);
-                Runner.Despawn(GetComponent<NetworkObject>());
             }
             else
             {
-                PlayParticles(Color.yellow, 10);
+                PlayParticles(Color.red, 20);
                 Runner.Despawn(GetComponent<NetworkObject>());
             }
         }
     }
 
-    private void Die()
+    private void PlayerDeath()
     {
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
         thirdPersonController.playerMesh.SetActive(false);
         for (var i = 0; i < 4; i++)
         {
-            var food = Instantiate(foodObject);
+            var food = Instantiate(gibs);
             food.transform.position = transform.position;
         }
         isDead = true;
