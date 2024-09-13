@@ -16,6 +16,9 @@ public class UI : MonoBehaviour
     [Header("Health")]
     [SerializeField] private Image healthUI;
 
+    [Header("Death")] 
+    public GameObject deathPanel;
+
     [Header("XP")]
     [SerializeField] public TextMeshProUGUI experienceText;
     [SerializeField] public TextMeshProUGUI neededExperienceText;
@@ -49,19 +52,6 @@ public class UI : MonoBehaviour
 
     public void Restart()
     {
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
-        playerManager.health.deathPanel.SetActive(false);
-        playerManager.health.isDead = false;
-        playerManager.health.currentHealth = playerManager.health.maxHealth;
-        
-        playerManager.experience.currentExperience = 0;
-
-        var playerTransform = playerManager.thirdPersonController.transform;
-        playerTransform.position = new Vector3(0, 0, 0);
-        playerTransform.localScale = new Vector3(1, 1, 1);
-        playerManager.thirdPersonController.currentBoostCount = 0;
-        playerManager.thirdPersonController.boostState = ThirdPersonController.BoostState.BoostReload;
-        playerManager.thirdPersonController.playerMesh.SetActive(true);
+        playerManager.health.Restart();
     }
 }

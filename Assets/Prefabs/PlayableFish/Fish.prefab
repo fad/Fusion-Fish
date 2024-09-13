@@ -156,6 +156,7 @@ GameObject:
   - component: {fileID: 7123409410812152395}
   - component: {fileID: 6147171116043748880}
   - component: {fileID: 7352476292597749749}
+  - component: {fileID: 10622835304475330}
   - component: {fileID: 6222487964510190762}
   - component: {fileID: 532309906241500560}
   - component: {fileID: 9144912782510203114}
@@ -258,8 +259,6 @@ MonoBehaviour:
   currentHealth: 0
   experienceValue: 100
   isDead: 0
-  foodObject: {fileID: 3747122154362151496, guid: b9dad96a76a34d346ae8989e61852300,
-    type: 3}
   deathPanel: {fileID: 0}
 --- !u!114 &4763555619980021824
 MonoBehaviour:
@@ -535,6 +534,22 @@ MonoBehaviour:
   canvas: {fileID: 3638142017988820876}
   _IsSpeaking:
     _value: 0
+--- !u!114 &10622835304475330
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 505540377448418887}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b36f1545baba483449808a5cacb897cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gibPrefab: {fileID: 3993952820748017500, guid: b9dad96a76a34d346ae8989e61852300,
+    type: 3}
+  gibSpawnCount: 3
+  nutritionalValue: 1
 --- !u!114 &6222487964510190762
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -593,6 +608,7 @@ MonoBehaviour:
   - {fileID: 8171385306191510493}
   - {fileID: 6443437523783385271}
   - {fileID: 7352476292597749749}
+  - {fileID: 10622835304475330}
   - {fileID: 6222487964510190762}
   - {fileID: 2749181200256999984}
   - {fileID: 3542185466123676831}

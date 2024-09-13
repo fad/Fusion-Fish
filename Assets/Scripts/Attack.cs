@@ -1,3 +1,4 @@
+using BiggestFish.Gameplay;
 using StarterAssets;
 using UnityEngine;
 using UnityEngine.UI;
@@ -61,22 +62,10 @@ public class Attack : NetworkBehaviour
 
                 if (foodObject != null)
                 {
-                    var experienceValueOfEnemy = foodObject.GetComponent<Health>().experienceValue;
-                    if (foodObject.GetComponent<Health>().currentHealth <= suckPower)
+                    if (foodObject.GetComponent<Health>().currentHealth <= suckPower && !foodObject.GetComponent<NPC>())
                     {
-                        if (foodObject.GetComponent<NPC>())
-                        {
-                            FindObjectOfType<NPCSpawner>().SpawnFish();
-                        }
-                        else
-                        {
-                            FindObjectOfType<FoodSpawner>().SpawnFood();
-                        }
-                        thirdPersonController.playerManager.experience.currentExperience += experienceValueOfEnemy;
-                        biteUpper.GetComponent<Image>().color = Color.white;
-                        biteLower.GetComponent<Image>().color = Color.white;
+                        thirdPersonController.playerManager.experience.currentExperience += foodObject.GetComponent<Health>().experienceValue;
                         foodObject.GetComponent<Health>().ReceiveDamage(suckPower);
-                        Debug.Log("suck");
                     }
                 }
 
@@ -123,21 +112,11 @@ public class Attack : NetworkBehaviour
 
     private void DamageAnimationEvent()
     {
-        if (foodObject != null)
+        if (foodObject != null && !foodObject.GetComponent<MeatObject>())
         {
-            var experienceValueOfEnemy = foodObject.GetComponent<Health>().experienceValue;
             foodObject.GetComponent<Health>().ReceiveDamage(attackDamage);
             if (foodObject.GetComponent<Health>().currentHealth <= 0)
             {
-                if (foodObject.GetComponent<NPC>())
-                {
-                    FindObjectOfType<NPCSpawner>().SpawnFish();
-                }
-                else
-                {
-                    FindObjectOfType<FoodSpawner>().SpawnFood();
-                }
-                thirdPersonController.playerManager.experience.currentExperience += experienceValueOfEnemy;
                 biteUpper.GetComponent<Image>().color = Color.white;
                 biteLower.GetComponent<Image>().color = Color.white;
             }

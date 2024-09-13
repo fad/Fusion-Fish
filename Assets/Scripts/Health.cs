@@ -1,3 +1,4 @@
+using BiggestFish.Gameplay;
 using Fusion;
 using StarterAssets;
 using UnityEngine;
@@ -16,8 +17,6 @@ public class Health : NetworkBehaviour
     
     [Header("Death")]
     [HideInInspector] public bool isDead;
-    [SerializeField] private Transform gibs;
-    public GameObject deathPanel;
 
     private void Start()
     {
@@ -46,8 +45,22 @@ public class Health : NetworkBehaviour
             }
             else
             {
+                if (GetComponent<NPC>())
+                {
+                    FindObjectOfType<NPCSpawner>().SpawnFish();
+                }
+                else if (GetComponent<MeatObject>())
+                {
+                    
+                }
+                else
+                {
+                    FindObjectOfType<FoodSpawner>().SpawnFood();
+                }
                 PlayParticles(Color.red, 20);
-                Runner.Despawn(GetComponent<NetworkObject>());
+                //Need to make that online
+                //Runner.Despawn(GetComponent<NetworkObject>());
+                Destroy(gameObject);
             }
         }
     }
@@ -57,13 +70,28 @@ public class Health : NetworkBehaviour
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
         thirdPersonController.playerMesh.SetActive(false);
-        for (var i = 0; i < 4; i++)
-        {
-            var food = Instantiate(gibs);
-            food.transform.position = transform.position;
-        }
+        //MAKE THIS GIBS SPAWING ONLINE
+        GetComponent<SpawnGibsOnDestroy>().SpawnMeatObjects();
         isDead = true;
-        deathPanel.SetActive(true);
+        UI.Instance.deathPanel.SetActive(true);
+    }
+    
+    public void Restart()
+    {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        UI.Instance.deathPanel.SetActive(false);
+        isDead = false;
+        currentHealth = maxHealth;
+        
+        thirdPersonController.playerManager.experience.currentExperience = 0;
+
+        var playerTransform = thirdPersonController.transform;
+        playerTransform.position = new Vector3(0, 0, 0);
+        playerTransform.localScale = new Vector3(.5f, .5f, .5f);
+        thirdPersonController.currentBoostCount = 0;
+        thirdPersonController.boostState = ThirdPersonController.BoostState.BoostReload;
+        thirdPersonController.playerMesh.SetActive(true);
     }
 
     //Here I change burst count and color when needed

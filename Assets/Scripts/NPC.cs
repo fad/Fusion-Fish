@@ -19,7 +19,7 @@ public class NPC : NetworkBehaviour
     private Vector3 newPosition;
     [SerializeField] private bool mainMenuObject;
 
-    [Header("things in NPCs view")]
+    [Header("Things in NPCs view")]
     [SerializeField] private LayerMask playerLayer;
     [SerializeField] private LayerMask foodLayer;
     private GameObject enemy;
@@ -40,8 +40,13 @@ public class NPC : NetworkBehaviour
     private bool canFlight = true;
     private float currentFlightDelayTime;
     private const float FlightTime = 3f;
+    
+    [Header("Natural Behaviour")]
     [Tooltip("time when the npc changes direction of movement")]
     private float randomTime;
+    private float currentWaitTime;
+    [SerializeField] private float minWaitTime;
+    [SerializeField] private float maxWaitTime;
 
     private Behaviour behaviour;
     private enum Behaviour
@@ -98,13 +103,22 @@ public class NPC : NetworkBehaviour
                     newPosition = new Vector3(RandomFloat(currentPosition.x), RandomFloat(currentPosition.y), RandomFloat(currentPosition.z));
                     randomTime = Random.Range(minTimeChangeMoveDirection, maxTimeChangeMoveDirection);
                     defaultSwimSpeed = Random.Range(3, 5);
+                    currentWaitTime = Random.Range(minWaitTime, maxWaitTime);
                 }
-                    
-                randomTime -= Time.deltaTime;
 
-                currentSpeed = defaultSwimSpeed;
+                if (maxWaitTime > 0)
+                {
+                    currentWaitTime -= Time.deltaTime;
+                }
+                
+                if (currentWaitTime <= 0)
+                {
+                    randomTime -= Time.deltaTime;
+
+                    currentSpeed = defaultSwimSpeed;
                     
-                MoveNPCInDirection(newPosition - currentPosition, Quaternion.LookRotation(newPosition - currentPosition));
+                    MoveNPCInDirection(newPosition - currentPosition, Quaternion.LookRotation(newPosition - currentPosition));
+                }
                 break;
             case Behaviour.Attack:
                 if (enemy.GetComponent<ThirdPersonController>().playerMesh.activeSelf)
