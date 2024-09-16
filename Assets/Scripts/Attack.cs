@@ -1,9 +1,9 @@
+using System;
 using BiggestFish.Gameplay;
 using StarterAssets;
 using UnityEngine;
 using UnityEngine.UI;
 using Fusion;
-using Fusion.Sockets;
 
 public class Attack : NetworkBehaviour
 {
@@ -19,6 +19,8 @@ public class Attack : NetworkBehaviour
     [Header("Attack")] 
     public float attackDamage = 1;
     private bool preparedAttack;
+    [SerializeField] private Transform attackPosition;
+    [SerializeField] private float attackRange;
     
     [Header("Time")]
     private float timeBetweenAttack;
@@ -60,13 +62,13 @@ public class Attack : NetworkBehaviour
             if (currentSuckInDelay <= 0)
             {
                 suckInParticleSystem.Play();
-
+                
                 if (foodObject != null)
                 {
-                    if (foodObject.GetComponent<Health>().NetworkedHealth <= suckPower && !foodObject.GetComponent<NPC>())
+                    if (foodObject.GetComponent<Health>().maxHealth <= suckPower)
                     {
                         thirdPersonController.playerManager.experience.currentExperience += foodObject.GetComponent<Health>().experienceValue;
-                        foodObject.GetComponent<Health>().ReceiveDamageRpc(suckPower);
+                        foodObject.GetComponent<Health>().ReceiveDamageRpc(suckPower, false);
                     }
                 }
 
@@ -86,6 +88,8 @@ public class Attack : NetworkBehaviour
             return;
         }
         
+        EnemyInRange();
+        
         switch (thirdPersonController.input.attack)
         {
             case true when !preparedAttack:
@@ -101,7 +105,27 @@ public class Attack : NetworkBehaviour
                 timeBetweenAttack = maxTimeBetweenAttack;
                 thirdPersonController.sensitivity = maxSensitivity;
                 preparedAttack = false;
+                EnemyInRange();
                 break;
+        }
+    }
+
+    private void EnemyInRange()
+    {
+        var hitColliders = new Collider[1];
+        var hits = Physics.OverlapSphereNonAlloc(attackPosition.position, attackRange, hitColliders, foodLayerMask);
+        
+        if (hits >= 1)
+        {
+            foodObject = hitColliders[0].transform.gameObject;
+            biteUpper.GetComponent<Image>().color = Color.yellow;
+            biteLower.GetComponent<Image>().color = Color.yellow;   
+        }
+        else
+        {
+            foodObject = null;
+            biteUpper.GetComponent<Image>().color = Color.white;
+            biteLower.GetComponent<Image>().color = Color.white;   
         }
     }
 
@@ -115,32 +139,12 @@ public class Attack : NetworkBehaviour
     {
         if (foodObject != null && !foodObject.GetComponent<MeatObject>())
         {
-            foodObject.GetComponent<Health>().ReceiveDamageRpc(attackDamage);
-            if (foodObject.GetComponent<Health>().NetworkedHealth <= 0)
-            {
-                biteUpper.GetComponent<Image>().color = Color.white;
-                biteLower.GetComponent<Image>().color = Color.white;
-            }
+            foodObject.GetComponent<Health>().ReceiveDamageRpc(attackDamage, true);
         }
     }
 
-    private void OnTriggerEnter(Collider col)
+    private void OnDrawGizmos()
     {
-        if ((1 << col.gameObject.layer) == foodLayerMask.value)
-        {
-            foodObject = col.GetComponent<Transform>().transform.gameObject;
-            biteUpper.GetComponent<Image>().color = Color.yellow;
-            biteLower.GetComponent<Image>().color = Color.yellow;
-        }
-    }
-
-    private void OnTriggerExit(Collider col)
-    {
-        if ((1 << col.gameObject.layer) == foodLayerMask.value)
-        {
-            foodObject = null;
-            biteUpper.GetComponent<Image>().color = Color.white;
-            biteLower.GetComponent<Image>().color = Color.white;
-        }
+        Gizmos.DrawSphere(attackPosition.position, attackRange);
     }
 }

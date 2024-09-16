@@ -177,7 +177,7 @@ public class NPC : NetworkBehaviour
 
     private void SubtractHealth()
     {
-        enemy.GetComponent<Health>().ReceiveDamageRpc(attackDamage);
+        enemy.GetComponent<Health>().ReceiveDamageRpc(attackDamage, true);
     }
     
     private void MoveNPCInDirection(Vector3 targetDirection, Quaternion lookDirection)

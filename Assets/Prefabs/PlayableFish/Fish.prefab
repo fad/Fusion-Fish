@@ -256,7 +256,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
-  currentHealth: 0
+  _NetworkedHealth: 5
   experienceValue: 100
   isDead: 0
 --- !u!114 &4763555619980021824
@@ -548,7 +548,6 @@ MonoBehaviour:
   gibPrefab: {fileID: 3993952820748017500, guid: b9dad96a76a34d346ae8989e61852300,
     type: 3}
   gibSpawnCount: 3
-  nutritionalValue: 1
 --- !u!114 &6222487964510190762
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -581,7 +580,7 @@ MonoBehaviour:
   health: {fileID: 0}
   experience: {fileID: 0}
   attack: {fileID: 2749181200256999984}
-  hostPlayer: {fileID: 0}
+  hostPlayerRunner: {fileID: 0}
 --- !u!114 &9144912782510203114
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -657,6 +656,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad38489e6a3d8aa43b20ac0491aa7b21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1335812455522511275
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5498630722860468075}
+  m_Layer: 0
+  m_Name: AttackPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &5498630722860468075
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1335812455522511275}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7594808716570253954}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -3.35}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1517086695189240340
 GameObject:
   m_ObjectHideFlags: 0
@@ -6342,6 +6376,7 @@ RectTransform:
   m_Children:
   - {fileID: 1817263681268154888}
   - {fileID: 5466369016473450773}
+  - {fileID: 5498630722860468075}
   m_Father: {fileID: 3554473533067565278}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -6389,6 +6424,8 @@ MonoBehaviour:
   biteLower: {fileID: 5466369016473450773}
   biteAnimator: {fileID: 9174893869088333902}
   attackDamage: 1
+  attackPosition: {fileID: 5498630722860468075}
+  attackRange: 0.7
   maxTimeBetweenAttack: 0.375
   thirdPersonController: {fileID: 9150513680388461083}
   fishRender: {fileID: 5967580297110785664}

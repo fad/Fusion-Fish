@@ -18,7 +18,7 @@ public class PlayerManager : NetworkBehaviour
         health = GetComponent<Health>();
         experience = GetComponent<Experience>();
     }
-
+    
     private IEnumerator Start()
     {
         yield return new WaitUntil(() => UI.Instance != null);

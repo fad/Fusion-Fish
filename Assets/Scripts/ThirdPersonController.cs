@@ -91,7 +91,7 @@ namespace StarterAssets
         }
         
         [HideInInspector] public BoostState boostState;
-        [HideInInspector] public enum BoostState
+        public enum BoostState
         {
             BoostStarted,
             BoostReload,
@@ -112,6 +112,7 @@ namespace StarterAssets
             cineMachineTargetYaw = gameObject.transform.rotation.eulerAngles.y;
             input = GetComponent<StarterAssetsInputs>();
             boostState = BoostState.BoostReload;
+            currentBoostCount = maxBoostCount;
             rb = GetComponent<Rigidbody>();
 
 #if ENABLE_INPUT_SYSTEM

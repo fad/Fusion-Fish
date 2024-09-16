@@ -63,6 +63,31 @@ PrefabInstance:
       propertyPath: m_Name
       value: ClownFish
       objectReference: {fileID: 0}
+    - target: {fileID: 2749181200256999984, guid: 274fa519b44c24e43a28d85dbdddcb30,
+        type: 3}
+      propertyPath: attackRange
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2749181200256999984, guid: 274fa519b44c24e43a28d85dbdddcb30,
+        type: 3}
+      propertyPath: attackPosition.y
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2749181200256999984, guid: 274fa519b44c24e43a28d85dbdddcb30,
+        type: 3}
+      propertyPath: attackPosition.z
+      value: -0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2749181200256999984, guid: 274fa519b44c24e43a28d85dbdddcb30,
+        type: 3}
+      propertyPath: maxTimeBetweenAttack
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 4632872686385277288, guid: 274fa519b44c24e43a28d85dbdddcb30,
+        type: 3}
+      propertyPath: _NetworkedHealth
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 6147735825067914960, guid: 274fa519b44c24e43a28d85dbdddcb30,
         type: 3}
       propertyPath: SortKey

@@ -6,8 +6,7 @@ namespace BiggestFish.Gameplay
     public class SpawnGibsOnDestroy : NetworkBehaviour
     {
         [SerializeField] private GameObject gibPrefab;
-        [SerializeField] private int gibSpawnCount = 3;
-        [SerializeField] private int nutritionalValue = 1;
+        [SerializeField] public int gibSpawnCount = 3;
 
         private void OnDestroy()
         {

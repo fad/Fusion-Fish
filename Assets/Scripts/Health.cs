@@ -18,6 +18,7 @@ public class Health : NetworkBehaviour
     
     [Header("Death")]
     [HideInInspector] public bool isDead;
+    private bool healthToMaxHealth;
 
     private void Start()
     {
@@ -30,8 +31,17 @@ public class Health : NetworkBehaviour
         bloodParticleSystem = GameObject.Find("BloodParticles").GetComponent<ParticleSystem>();
     }
     
+    public override void FixedUpdateNetwork()
+    {
+        if (!healthToMaxHealth)
+        {
+            NetworkedHealth = maxHealth;
+            healthToMaxHealth = true;
+        }
+    }
+
     [Rpc(RpcSources.All, RpcTargets.StateAuthority)]
-    public void ReceiveDamageRpc(float damage)
+    public void ReceiveDamageRpc(float damage, bool spawnGibs)
     {
         NetworkedHealth -= damage;
 
@@ -59,6 +69,11 @@ public class Health : NetworkBehaviour
                     FindObjectOfType<FoodSpawner>().SpawnFood();
                 }
                 PlayParticles(Color.red, 20);
+
+                if (TryGetComponent<SpawnGibsOnDestroy>(out var spawnGibsOnDestroy) && !spawnGibs)
+                {
+                    spawnGibsOnDestroy.gibSpawnCount = 0;
+                }
                 
                 Runner.Despawn(GetComponent<NetworkObject>());
             }

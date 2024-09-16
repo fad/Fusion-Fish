@@ -1,6 +1,4 @@
-using System;
 using System.Collections;
-using StarterAssets;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -32,7 +30,7 @@ public class UI : MonoBehaviour
 
     private IEnumerator Start()
     {
-        yield return new WaitUntil(() => neededExperienceText != null);
+        yield return new WaitUntil(() => playerManager != null);
         
         neededExperienceText.text = playerManager.experience.experienceUntilUpgrade.ToString();
     }
