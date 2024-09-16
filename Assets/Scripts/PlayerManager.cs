@@ -31,6 +31,9 @@ public class PlayerManager : NetworkBehaviour
             }
         }
 
-        UI.Instance.playerManager = this;
+        if (HasStateAuthority)
+        {
+            UI.Instance.playerManager = this;
+        }
     }
 }
