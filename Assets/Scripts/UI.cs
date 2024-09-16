@@ -20,6 +20,7 @@ public class UI : MonoBehaviour
     [Header("XP")]
     [SerializeField] public TextMeshProUGUI experienceText;
     [SerializeField] public TextMeshProUGUI neededExperienceText;
+    [SerializeField] private Image xpUI;
 
     public static UI Instance;
     
@@ -28,24 +29,21 @@ public class UI : MonoBehaviour
         Instance = this;
     }
 
-    private IEnumerator Start()
-    {
-        yield return new WaitUntil(() => playerManager != null);
-        
-        neededExperienceText.text = playerManager.experience.experienceUntilUpgrade.ToString();
-    }
-
     //Here I update the boost slider where I divide the current boostCount and the max to get the value for the slider which goes up to 1.
     private void Update()
     {
-        if (healthUI == null || playerManager == null) 
+        if (playerManager == null) 
             return;
         
         healthUI.fillAmount = playerManager.health.NetworkedHealth / playerManager.health.maxHealth;
 
         boostUI.fillAmount = playerManager.thirdPersonController.currentBoostCount / playerManager.thirdPersonController.maxBoostCount;
+        
+        xpUI.fillAmount = (float)playerManager.experience.currentExperience / playerManager.experience.experienceUntilUpgrade;
 
         experienceText.text = playerManager.experience.currentExperience.ToString();
+        
+        neededExperienceText.text = playerManager.experience.experienceUntilUpgrade.ToString();
     }
 
     public void Restart()

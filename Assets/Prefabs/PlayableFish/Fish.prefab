@@ -680,7 +680,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1335812455522511275}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -0.266}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -688,7 +688,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -3.35}
+  m_AnchoredPosition: {x: 0, y: -3.341}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1517086695189240340
@@ -6420,19 +6420,21 @@ MonoBehaviour:
   foodLayerMask:
     serializedVersion: 2
     m_Bits: 64
+  playerLayerMask:
+    serializedVersion: 2
+    m_Bits: 128
   biteUpper: {fileID: 1817263681268154888}
   biteLower: {fileID: 5466369016473450773}
   biteAnimator: {fileID: 9174893869088333902}
-  attackDamage: 1
+  attackDamage: 10
   attackPosition: {fileID: 5498630722860468075}
   attackRange: 0.7
   maxTimeBetweenAttack: 0.375
   thirdPersonController: {fileID: 9150513680388461083}
-  fishRender: {fileID: 5967580297110785664}
   suckInParticleSystem: {fileID: 1547311364694370056}
   suckInDelay: 1
   currentSuckInDelay: 1
-  suckPower: 1
+  suckPower: 10
 --- !u!65 &78938720666164004
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -130,7 +130,7 @@ public class NPC : NetworkBehaviour
                             StartCoroutine(AttackCoroutine());
                         }
                     }
-                    else if (Vector3.Distance(transform.position, enemy.transform.position) > 15)
+                    else if (Vector3.Distance(transform.position, enemy.transform.position) > 15 || !enemy.GetComponent<Health>().isDead)
                     {
                         behaviour = Behaviour.NaturalBehaviour;
                     }

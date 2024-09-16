@@ -11,7 +11,7 @@ public class Health : NetworkBehaviour
     [Networked] public float NetworkedHealth { get; set; } = 5;
     private ParticleSystem bloodParticleSystem;
     private ThirdPersonController thirdPersonController;
-    private bool isPlayer;
+    [HideInInspector] public bool isPlayer;
 
     [Header("Experience")] 
     public int experienceValue = 100;
@@ -49,7 +49,6 @@ public class Health : NetworkBehaviour
         {
             if (isPlayer)
             {
-                PlayerDeath();
                 PlayParticles(Color.red, 30);
             }
             else
@@ -63,7 +62,7 @@ public class Health : NetworkBehaviour
                     //FindObjectOfType<FoodSpawner>().SpawnFood();
                 }
                 
-                PlayParticles(Color.red, 20);
+                PlayParticles(Color.red, 30);
 
                 if (TryGetComponent<SpawnGibsOnDestroy>(out var spawnGibsOnDestroy) && !spawnGibs)
                 {
@@ -79,12 +78,12 @@ public class Health : NetworkBehaviour
         }
     }
 
-    private void PlayerDeath()
+    public void PlayerDeath()
     {
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
         thirdPersonController.playerMesh.SetActive(false);
-        GetComponent<SpawnGibsOnDestroy>().SpawnMeatObjects(Runner);
+        GetComponent<SpawnGibsOnDestroy>().SpawnMeatObjectsRpc(Runner);
         isDead = true;
         UI.Instance.deathPanel.SetActive(true);
     }

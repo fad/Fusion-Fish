@@ -10,13 +10,16 @@ namespace BiggestFish.Gameplay
 
         private void OnDestroy()
         {
+            if (!gameObject.scene.isLoaded) 
+                return;
+            
             if (gibPrefab != null && gibSpawnCount > 0)
             {
-                SpawnMeatObjects(UI.Instance.playerManager.hostPlayerRunner);
+                SpawnMeatObjectsRpc(UI.Instance.playerManager.hostPlayerRunner);
             }
         }
         
-        public void SpawnMeatObjects(NetworkRunner runner)
+        public void SpawnMeatObjectsRpc(NetworkRunner runner)
         {
             if (gibPrefab != null)
                 for (var i = 0; i < gibSpawnCount; i++)

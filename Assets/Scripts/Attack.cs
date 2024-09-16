@@ -9,6 +9,7 @@ public class Attack : NetworkBehaviour
 {
     [Header("Food")] 
     [SerializeField] private LayerMask foodLayerMask;
+    [SerializeField] private LayerMask playerLayerMask;
     private GameObject foodObject;
 
     [Header("Bite")] 
@@ -28,7 +29,6 @@ public class Attack : NetworkBehaviour
 
     [Header("Player")]
     [SerializeField] private ThirdPersonController thirdPersonController;
-    [SerializeField] private Transform fishRender;
     private float maxSensitivity;
     private float halfSensitivity;
 
@@ -113,9 +113,10 @@ public class Attack : NetworkBehaviour
     private void EnemyInRange()
     {
         var hitColliders = new Collider[1];
-        var hits = Physics.OverlapSphereNonAlloc(attackPosition.position, attackRange, hitColliders, foodLayerMask);
+        var foodHits = Physics.OverlapSphereNonAlloc(attackPosition.position, attackRange, hitColliders, foodLayerMask);
+        var playerHits = Physics.OverlapSphereNonAlloc(attackPosition.position, attackRange, hitColliders, playerLayerMask);
         
-        if (hits >= 1)
+        if (foodHits >= 1 || playerHits >= 1)
         {
             foodObject = hitColliders[0].transform.gameObject;
             biteUpper.GetComponent<Image>().color = Color.yellow;
@@ -140,6 +141,11 @@ public class Attack : NetworkBehaviour
         if (foodObject != null && !foodObject.GetComponent<MeatObject>())
         {
             foodObject.GetComponent<Health>().ReceiveDamageRpc(attackDamage, true);
+            if (foodObject.GetComponent<Health>().isPlayer)
+            {
+                foodObject.GetComponent<Health>().PlayerDeath();
+            }
+            
         }
     }
 

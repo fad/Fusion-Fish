@@ -1,8 +1,9 @@
+using Fusion;
 using UnityEngine;
 
 namespace BiggestFish.Gameplay
 {
-    public class MeatObject : MonoBehaviour
+    public class MeatObject : NetworkBehaviour
     { 
         [SerializeField] private float rotationSpeed = 30.0f; // Speed at which the meat rotates
         

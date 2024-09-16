@@ -6,6 +6,7 @@ public class Experience : NetworkBehaviour
 {
     public int experienceUntilUpgrade = 300;
     [HideInInspector] public int currentExperience;
+    [SerializeField] private int experienceIncreaseOnLevelUp = 200;
 
     [SerializeField] private float defaultSwimSpeedAdditionOnLevelUp = 1f;
     [SerializeField] private float boostSwimSpeedIncreaseOnLevelUp = 1f;
@@ -25,6 +26,7 @@ public class Experience : NetworkBehaviour
             GetComponent<ThirdPersonController>().defaultSwimSpeed += boostSwimSpeedIncreaseOnLevelUp;
             GetComponent<ThirdPersonController>().playerManager.attack.attackDamage += attackDamageIncreaseOnLevelUp;
             GetComponent<ThirdPersonController>().playerManager.attack.suckPower += suckPowerIncreaseOnLevelUp;
+            experienceUntilUpgrade += experienceIncreaseOnLevelUp;
             currentExperience = 0;
         }
     }
