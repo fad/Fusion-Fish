@@ -21,15 +21,15 @@ public class PlayerManager : NetworkBehaviour
     
     private IEnumerator Start()
     {
-        yield return new WaitUntil(() => UI.Instance != null);
-
-        foreach (var player in Runner.ActivePlayers)
+        foreach (var unused in Runner.ActivePlayers)
         {
-            if (Runner.GetPlayerObject(player).gameObject.GetComponent<NetworkObject>().HasStateAuthority)
+            if (GetComponent<NetworkObject>().HasStateAuthority)
             {
-                hostPlayerRunner = Runner.GetPlayerObject(player).Runner;
+                hostPlayerRunner = Runner;
             }
         }
+        
+        yield return new WaitUntil(() => UI.Instance != null);
 
         if (HasStateAuthority)
         {

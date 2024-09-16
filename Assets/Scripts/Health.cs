@@ -40,12 +40,10 @@ public class Health : NetworkBehaviour
         }
     }
 
-    [Rpc(RpcSources.All, RpcTargets.StateAuthority)]
+    [Rpc(RpcSources.All, RpcTargets.All)]
     public void ReceiveDamageRpc(float damage, bool spawnGibs)
     {
         NetworkedHealth -= damage;
-
-        PlayParticles(Color.red, 10);
         
         if (NetworkedHealth <= 0)
         {
@@ -60,14 +58,11 @@ public class Health : NetworkBehaviour
                 {
                     FindObjectOfType<NPCSpawner>().SpawnFish();
                 }
-                else if (GetComponent<MeatObject>())
-                {
-                    
-                }
                 else
                 {
-                    FindObjectOfType<FoodSpawner>().SpawnFood();
+                    //FindObjectOfType<FoodSpawner>().SpawnFood();
                 }
+                
                 PlayParticles(Color.red, 20);
 
                 if (TryGetComponent<SpawnGibsOnDestroy>(out var spawnGibsOnDestroy) && !spawnGibs)
@@ -75,8 +70,12 @@ public class Health : NetworkBehaviour
                     spawnGibsOnDestroy.gibSpawnCount = 0;
                 }
                 
-                Runner.Despawn(GetComponent<NetworkObject>());
+                Destroy(gameObject);
             }
+        }
+        else
+        {
+            PlayParticles(Color.red, 10);
         }
     }
 

@@ -121,7 +121,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 1
-  _NetworkedHealth: 5
+  _NetworkedHealth: 1
   experienceValue: 100
   isDead: 0
 --- !u!114 &-6550082182933151621
