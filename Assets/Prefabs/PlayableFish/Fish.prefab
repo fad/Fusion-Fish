@@ -222,6 +222,7 @@ MonoBehaviour:
   defaultSpeedFOV: 20
   boostSpeedFOV: 30
   animator: {fileID: 6424190454631559794}
+  networkAnimator: {fileID: 4638653781339947410}
   input: {fileID: 0}
   boostState: 0
 --- !u!114 &2297454540360690151
@@ -238,6 +239,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   experienceUntilUpgrade: 300
   currentExperience: 0
+  experienceIncreaseOnLevelUp: 200
   defaultSwimSpeedAdditionOnLevelUp: 1
   boostSwimSpeedIncreaseOnLevelUp: 1
   attackDamageIncreaseOnLevelUp: 0.5
@@ -257,6 +259,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   _NetworkedHealth: 5
+  isPlayer: 0
   experienceValue: 100
   isDead: 0
 --- !u!114 &4763555619980021824
@@ -1439,6 +1442,7 @@ MonoBehaviour:
   NestedObjects: []
   NetworkedBehaviours:
   - {fileID: 3024809650598101344}
+  - {fileID: 4638653781339947410}
 --- !u!114 &3024809650598101344
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6498,6 +6502,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5267721347161833077}
   - component: {fileID: 6424190454631559794}
+  - component: {fileID: 4638653781339947410}
   m_Layer: 0
   m_Name: FishAnimation
   m_TagString: Untagged
@@ -6543,6 +6548,24 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &4638653781339947410
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6272089240189810021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 506319458, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Animator: {fileID: 6424190454631559794}
+  TotalWords: 2
+  ApplyTiming: 2
+  SyncSettings: 79
+  StateHashes: 000000002445ff7f3ed4c595221c37918758d02e8e24d5c6bd97f0f1
+  TriggerHashes: 000000003b2dc047
 --- !u!1 &6488255723578305957
 GameObject:
   m_ObjectHideFlags: 0

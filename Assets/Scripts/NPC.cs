@@ -22,6 +22,7 @@ public class NPC : NetworkBehaviour
     [Header("Things in NPCs view")]
     [SerializeField] private LayerMask playerLayer;
     [SerializeField] private LayerMask foodLayer;
+    [SerializeField] private LayerMask groundLayer;
     private GameObject enemy;
 
     [Header("Animation")]
@@ -101,12 +102,19 @@ public class NPC : NetworkBehaviour
                 if (randomTime <= 0)
                 {
                     newPosition = new Vector3(RandomFloat(currentPosition.x), RandomFloat(currentPosition.y), RandomFloat(currentPosition.z));
+
+                    //Make NPC not swim toward objects
+                    //if (Physics.Raycast(currentPosition, newPosition - currentPosition, float.MaxValue , groundLayer))
+                    //{
+                        //return;
+                    //}
+                    
                     randomTime = Random.Range(minTimeChangeMoveDirection, maxTimeChangeMoveDirection);
                     defaultSwimSpeed = Random.Range(3, 5);
                     currentWaitTime = Random.Range(minWaitTime, maxWaitTime);
                 }
 
-                if (maxWaitTime > 0)
+                if (currentWaitTime > 0)
                 {
                     currentWaitTime -= Time.deltaTime;
                 }

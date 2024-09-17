@@ -101,7 +101,7 @@ public class Attack : NetworkBehaviour
                 break;
             case false when preparedAttack:
                 biteAnimator.SetTrigger("executeAttack");
-                thirdPersonController.animator.SetTrigger("attack");
+                thirdPersonController.networkAnimator.SetTrigger("attack");
                 timeBetweenAttack = maxTimeBetweenAttack;
                 thirdPersonController.sensitivity = maxSensitivity;
                 preparedAttack = false;

@@ -69,6 +69,7 @@ namespace StarterAssets
 
         [Header("Animation")]
         public Animator animator;
+        public NetworkMecanimAnimator networkAnimator;
         private int animIDMotionSpeed;
         
         

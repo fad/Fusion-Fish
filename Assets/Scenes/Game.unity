@@ -457,12 +457,12 @@ MonoBehaviour:
   dynamicMaterial: 0
   settings: {fileID: 0}
   useVolumeBlending: 0
-  startDistance: 0
-  fogDensity: 0
+  startDistance: 30
+  fogDensity: 12.8
   heightFogDepth: 500
   heightFogDensity: 1
   heightFogBrightness: 0.5
-  fogBrightness: 0.7
+  fogBrightness: 1.2
   subsurfaceStrength: 0.5
   causticsStrength: 0.25
   distortionStrength: 0.25
