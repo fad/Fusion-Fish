@@ -17,11 +17,11 @@ namespace BiggestFish.Gameplay
             if (gibPrefab != null && gibSpawnCount > 0)
             {
                 gibPrefab.GetComponent<Health>().experienceValue = gibsExperienceValue;
-                SpawnMeatObjectsRpc(HudUI.Instance.playerManager.hostPlayerRunner);
+                SpawnMeatObjects(HudUI.Instance.playerManager.hostPlayerRunner);
             }
         }
         
-        public void SpawnMeatObjectsRpc(NetworkRunner runner)
+        public void SpawnMeatObjects(NetworkRunner runner)
         {
             if (gibPrefab != null)
                 for (var i = 0; i < gibSpawnCount; i++)

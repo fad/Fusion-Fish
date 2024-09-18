@@ -52,7 +52,7 @@ public class Health : NetworkBehaviour
                 PlayerDeath();
                 PlayParticles(Color.red, 30);
             }
-            else
+            else if(HasStateAuthority)
             {
                 if (GetComponent<NPC>())
                 {
@@ -79,12 +79,12 @@ public class Health : NetworkBehaviour
         }
     }
 
-    public void PlayerDeath()
+    private void PlayerDeath()
     {
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
         thirdPersonController.playerMesh.SetActive(false);
-        GetComponent<SpawnGibsOnDestroy>().SpawnMeatObjectsRpc(Runner);
+        GetComponent<SpawnGibsOnDestroy>().SpawnMeatObjects(Runner);
         isDead = true;
         HudUI.Instance.deathPanel.SetActive(true);
     }

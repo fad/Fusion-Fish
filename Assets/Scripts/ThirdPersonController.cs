@@ -137,12 +137,12 @@ namespace StarterAssets
             SetActiveMultiplayerUI();
         }
 
-        private void FixedUpdate()
+        public void FixedUpdate()
         {
             if (playerManager.health.isDead)
                 return;
             
-            Move();
+            Move();        
         }
 
         private void LateUpdate()
