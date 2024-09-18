@@ -141,11 +141,6 @@ public class Attack : NetworkBehaviour
         if (foodObject != null && !foodObject.GetComponent<MeatObject>())
         {
             foodObject.GetComponent<Health>().ReceiveDamageRpc(attackDamage, true);
-            if (foodObject.GetComponent<Health>().isPlayer)
-            {
-                foodObject.GetComponent<Health>().PlayerDeath();
-            }
-            
         }
     }
 

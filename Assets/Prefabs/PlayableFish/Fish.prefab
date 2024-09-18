@@ -205,7 +205,7 @@ MonoBehaviour:
   playerMesh: {fileID: 3696368532508958808}
   boostSwimSpeed: 250
   defaultSwimSpeed: 80
-  maxSwimAreaLength: 180
+  maxSwimAreaLength: 75
   playerManager: {fileID: 0}
   currentBoostCount: 0
   boostDelayAfterActivation: 2
@@ -221,6 +221,7 @@ MonoBehaviour:
   notMovingFOV: 17.5
   defaultSpeedFOV: 20
   boostSpeedFOV: 30
+  cameraDistance: 5
   animator: {fileID: 6424190454631559794}
   networkAnimator: {fileID: 4638653781339947410}
   input: {fileID: 0}
@@ -237,14 +238,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 985b0024312c2b744be313bc21d46cb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startingExperienceUntilUpgrade: 0
+  startingExperience: 0
+  startingSize: {x: 0, y: 0, z: 0}
+  startingCameraDistance: 0
+  startingBoostSwimSpeed: 0
+  startingDefaultSwimSpeed: 0
+  startingAttackDamage: 0
+  startingSuckPower: 0
   experienceUntilUpgrade: 300
   currentExperience: 0
   experienceIncreaseOnLevelUp: 200
-  defaultSwimSpeedAdditionOnLevelUp: 1
+  defaultSwimSpeedIncreaseOnLevelUp: 1
   boostSwimSpeedIncreaseOnLevelUp: 1
   attackDamageIncreaseOnLevelUp: 0.5
   sizeIncreaseOnLevelUp: 0.25
-  suckPowerIncreaseOnLevelUp: 0.1
+  suckPowerIncreaseOnLevelUp: 0.2
+  cameraDistanceIncreaseOnLevelUp: 1
 --- !u!114 &4632872686385277288
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -258,7 +268,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
-  _NetworkedHealth: 5
+  _NetworkedHealth: 100
   isPlayer: 0
   experienceValue: 100
   isDead: 0
@@ -551,6 +561,7 @@ MonoBehaviour:
   gibPrefab: {fileID: 3993952820748017500, guid: b9dad96a76a34d346ae8989e61852300,
     type: 3}
   gibSpawnCount: 3
+  gibsExperienceValue: 100
 --- !u!114 &6222487964510190762
 MonoBehaviour:
   m_ObjectHideFlags: 0

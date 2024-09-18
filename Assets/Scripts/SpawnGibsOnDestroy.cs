@@ -7,6 +7,7 @@ namespace BiggestFish.Gameplay
     {
         [SerializeField] private GameObject gibPrefab;
         [SerializeField] public int gibSpawnCount = 3;
+        [SerializeField] private int gibsExperienceValue = 100;
 
         private void OnDestroy()
         {
@@ -15,7 +16,8 @@ namespace BiggestFish.Gameplay
             
             if (gibPrefab != null && gibSpawnCount > 0)
             {
-                SpawnMeatObjectsRpc(UI.Instance.playerManager.hostPlayerRunner);
+                gibPrefab.GetComponent<Health>().experienceValue = gibsExperienceValue;
+                SpawnMeatObjectsRpc(HudUI.Instance.playerManager.hostPlayerRunner);
             }
         }
         

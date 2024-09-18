@@ -29,11 +29,11 @@ public class PlayerManager : NetworkBehaviour
             }
         }
         
-        yield return new WaitUntil(() => UI.Instance != null);
+        yield return new WaitUntil(() => HudUI.Instance != null);
 
         if (HasStateAuthority)
         {
-            UI.Instance.playerManager = this;
+            HudUI.Instance.playerManager = this;
         }
     }
 }

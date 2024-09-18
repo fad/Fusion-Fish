@@ -82,6 +82,7 @@
     <Compile Include="Assets\Packages\Photon\PhotonVoice\Demos\DemoVoiceUI\Scripts\SidebarToggle.cs" />
     <Compile Include="Assets\Scripts\SetUIActivationState.cs" />
     <Compile Include="Assets\Packages\Photon\PhotonVoice\Demos\DemoVoiceUI\Scripts\DemoVoiceUI.cs" />
+    <Compile Include="Assets\Scripts\HudUI.cs" />
     <Compile Include="Assets\Packages\Clean Multiplayer Pro\Scripts\Player\PlayerWorldUIManager.cs" />
     <Compile Include="Assets\Packages\Clean Multiplayer Pro\Mobile Controller\Scripts\VirtualInputs\UIVirtualJoystick.cs" />
     <Compile Include="Assets\Scripts\PlayerManager.cs" />
@@ -95,7 +96,6 @@
     <Compile Include="Assets\Packages\Clean Multiplayer Pro\Mobile Controller\Scripts\VirtualInputs\UIVirtualTouchZone.cs" />
     <Compile Include="Assets\Packages\Clean Multiplayer Pro\Scripts\Chat\ChatPlayer.cs" />
     <Compile Include="Assets\Input System\StarterAssetsInputs.cs" />
-    <Compile Include="Assets\Scripts\UI.cs" />
     <Compile Include="Assets\Packages\Clean Multiplayer Pro\Scripts\Menu\RoomEntry.cs" />
     <Compile Include="Assets\Scripts\Sound.cs" />
     <Compile Include="Assets\Packages\Clean Multiplayer Pro\Scripts\Player\SessionPlayers.cs" />
@@ -858,6 +858,9 @@
     <Reference Include="Unity.Burst.Editor">
       <HintPath>C:\Users\Alexander Pfeifer\Documents\Fusion-Fish\Library\ScriptAssemblies\Unity.Burst.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.AI.Navigation">
+      <HintPath>C:\Users\Alexander Pfeifer\Documents\Fusion-Fish\Library\ScriptAssemblies\Unity.AI.Navigation.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.Rider.Editor">
       <HintPath>C:\Users\Alexander Pfeifer\Documents\Fusion-Fish\Library\ScriptAssemblies\Unity.Rider.Editor.dll</HintPath>
     </Reference>
@@ -881,6 +884,9 @@
     </Reference>
     <Reference Include="Unity.TextMeshPro">
       <HintPath>C:\Users\Alexander Pfeifer\Documents\Fusion-Fish\Library\ScriptAssemblies\Unity.TextMeshPro.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.AI.Navigation.Editor.ConversionSystem">
+      <HintPath>C:\Users\Alexander Pfeifer\Documents\Fusion-Fish\Library\ScriptAssemblies\Unity.AI.Navigation.Editor.ConversionSystem.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VSCode.Editor">
       <HintPath>C:\Users\Alexander Pfeifer\Documents\Fusion-Fish\Library\ScriptAssemblies\Unity.VSCode.Editor.dll</HintPath>
@@ -942,6 +948,9 @@
     <Reference Include="Unity.VisualScripting.SettingsProvider.Editor">
       <HintPath>C:\Users\Alexander Pfeifer\Documents\Fusion-Fish\Library\ScriptAssemblies\Unity.VisualScripting.SettingsProvider.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.AI.Navigation.Updater">
+      <HintPath>C:\Users\Alexander Pfeifer\Documents\Fusion-Fish\Library\ScriptAssemblies\Unity.AI.Navigation.Updater.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.Postprocessing.Editor">
       <HintPath>C:\Users\Alexander Pfeifer\Documents\Fusion-Fish\Library\ScriptAssemblies\Unity.Postprocessing.Editor.dll</HintPath>
     </Reference>
@@ -959,6 +968,9 @@
     </Reference>
     <Reference Include="Unity.Searcher.Editor">
       <HintPath>C:\Users\Alexander Pfeifer\Documents\Fusion-Fish\Library\ScriptAssemblies\Unity.Searcher.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.AI.Navigation.Editor">
+      <HintPath>C:\Users\Alexander Pfeifer\Documents\Fusion-Fish\Library\ScriptAssemblies\Unity.AI.Navigation.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VisualScripting.State">
       <HintPath>C:\Users\Alexander Pfeifer\Documents\Fusion-Fish\Library\ScriptAssemblies\Unity.VisualScripting.State.dll</HintPath>

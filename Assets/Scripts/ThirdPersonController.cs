@@ -3,6 +3,7 @@
 using System;
 using System.Collections;
 using AvocadoShark;
+using Cinemachine;
 using Fusion;
 using UnityEngine;
 #if ENABLE_INPUT_SYSTEM
@@ -61,7 +62,8 @@ namespace StarterAssets
         [SerializeField] private bool lockCameraPosition;
         public float notMovingFOV = 17.5f;
         public float defaultSpeedFOV = 20f;
-        public float boostSpeedFOV = 30;
+        public float boostSpeedFOV = 35;
+        public float cameraDistance = 5;
         private float cineMachineTargetYaw;
         private float cineMachineTargetPitch;
         private GetPlayerCameraAndControls getPlayerCameraAndControls;
@@ -102,7 +104,7 @@ namespace StarterAssets
         {
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
-            
+
             swimArea = GameObject.Find("SwimArea").GetComponent<Transform>();
             getPlayerCameraAndControls = GetComponent<GetPlayerCameraAndControls>();
             if (getPlayerCameraAndControls.vCamRoot == null)
@@ -250,6 +252,7 @@ namespace StarterAssets
                     rb.AddForce(getPlayerCameraAndControls.vCam.transform.forward * (inputDirectionNormalized.z * moveDistance), ForceMode.Impulse);
 
                     getPlayerCameraAndControls.vCam.m_Lens.FieldOfView = Mathf.Lerp(getPlayerCameraAndControls.vCam.m_Lens.FieldOfView, isBoosting ? boostSpeedFOV : defaultSpeedFOV, cameraFOVSmoothTime * Time.deltaTime);
+                    getPlayerCameraAndControls.vCam.GetCinemachineComponent<CinemachineFramingTransposer>().m_CameraDistance = cameraDistance;
                 }
 
                 playerVisual.transform.localRotation = Quaternion.Lerp(playerVisual.transform.localRotation, Quaternion.Euler(playerRenderRotationX, playerRenderRotationY, 0), playerRotationSmoothTime * Time.deltaTime);

@@ -8,7 +8,7 @@ public class Health : NetworkBehaviour
     [Header("Health")]
     public float maxHealth;
 
-    [Networked] public float NetworkedHealth { get; set; } = 5;
+    [Networked] public float NetworkedHealth { get; private set; } = 5;
     private ParticleSystem bloodParticleSystem;
     private ThirdPersonController thirdPersonController;
     [HideInInspector] public bool isPlayer;
@@ -47,8 +47,9 @@ public class Health : NetworkBehaviour
         
         if (NetworkedHealth <= 0)
         {
-            if (isPlayer)
+            if (isPlayer && HasStateAuthority && !isDead)
             {
+                PlayerDeath();
                 PlayParticles(Color.red, 30);
             }
             else
@@ -85,22 +86,29 @@ public class Health : NetworkBehaviour
         thirdPersonController.playerMesh.SetActive(false);
         GetComponent<SpawnGibsOnDestroy>().SpawnMeatObjectsRpc(Runner);
         isDead = true;
-        UI.Instance.deathPanel.SetActive(true);
+        HudUI.Instance.deathPanel.SetActive(true);
     }
     
     public void Restart()
     {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
-        UI.Instance.deathPanel.SetActive(false);
+        HudUI.Instance.deathPanel.SetActive(false);
         isDead = false;
         NetworkedHealth = maxHealth;
         
-        thirdPersonController.playerManager.experience.currentExperience = 0;
+        thirdPersonController.playerManager.experience.currentExperience = thirdPersonController.playerManager.experience.startingExperience;
+        thirdPersonController.playerManager.experience.experienceUntilUpgrade = thirdPersonController.playerManager.experience.startingExperienceUntilUpgrade;
+
+        thirdPersonController.playerManager.attack.suckPower = thirdPersonController.playerManager.experience.startingSuckPower;
+        thirdPersonController.playerManager.attack.attackDamage = thirdPersonController.playerManager.experience.startingAttackDamage;
+        thirdPersonController.cameraDistance = thirdPersonController.playerManager.experience.startingCameraDistance;
+        thirdPersonController.defaultSwimSpeed = thirdPersonController.playerManager.experience.startingDefaultSwimSpeed;
+        thirdPersonController.boostSwimSpeed = thirdPersonController.playerManager.experience.startingBoostSwimSpeed;
 
         var playerTransform = thirdPersonController.transform;
         playerTransform.position = new Vector3(0, 0, 0);
-        playerTransform.localScale = new Vector3(.5f, .5f, .5f);
+        playerTransform.localScale = thirdPersonController.playerManager.experience.startingSize;
         thirdPersonController.currentBoostCount = 0;
         thirdPersonController.boostState = ThirdPersonController.BoostState.BoostReload;
         thirdPersonController.playerMesh.SetActive(true);
