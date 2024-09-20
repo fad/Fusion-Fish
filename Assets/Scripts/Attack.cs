@@ -63,6 +63,8 @@ public class Attack : NetworkBehaviour
             {
                 suckInParticleSystem.Play();
                 
+                AudioManager.Instance.PlaySoundWithRandomPitchAtPosition("suck", transform.position);
+                
                 if (foodObject != null)
                 {
                     if (foodObject.GetComponent<Health>().maxHealth <= suckPower)
