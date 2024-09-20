@@ -40,6 +40,11 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        Play("underwaterAmbience");
+    }
+
     //Here I Search for a sound in the sound array that has the according string as a name with lambda method, then I play the sound
     public void Play(string soundName)
     {

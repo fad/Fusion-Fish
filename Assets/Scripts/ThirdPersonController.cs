@@ -110,7 +110,6 @@ namespace StarterAssets
             if (getPlayerCameraAndControls.vCamRoot == null)
                 hasVCam = false;
             AudioManager.Instance.PlaySoundAtPosition("impactWithWater", transform.position);
-            AudioManager.Instance.Play("underwaterAmbience");
             playerManager = GetComponent<PlayerManager>();
             cineMachineTargetYaw = gameObject.transform.rotation.eulerAngles.y;
             input = GetComponent<StarterAssetsInputs>();

@@ -83,14 +83,14 @@ public class Attack : NetworkBehaviour
     {
         if (thirdPersonController.playerManager.health.isDead)
             return;
+        
+        EnemyInRange();
 
         if (timeBetweenAttack >= 0)
         {
             timeBetweenAttack -= Time.deltaTime;
             return;
         }
-        
-        EnemyInRange();
         
         switch (thirdPersonController.input.attack)
         {
@@ -107,7 +107,6 @@ public class Attack : NetworkBehaviour
                 timeBetweenAttack = maxTimeBetweenAttack;
                 thirdPersonController.sensitivity = maxSensitivity;
                 preparedAttack = false;
-                EnemyInRange();
                 break;
         }
     }
