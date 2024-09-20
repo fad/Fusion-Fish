@@ -155,14 +155,17 @@ namespace StarterAssets
 
         private void SetActiveMultiplayerUI()
         {
-            switch (input.setActiveStateMultiplayerUI)
+            if (HasStateAuthority)
             {
-                case true when SetUIActivationState.Instance.pressedActivationUIMultiplayerButton == false:
-                    SetUIActivationState.Instance.SetActiveUIObjects();
-                    break;
-                case false:
-                    SetUIActivationState.Instance.pressedActivationUIMultiplayerButton = false;
-                    break;
+                switch (input.setActiveStateMultiplayerUI)
+                {
+                    case true when SetUIActivationState.Instance.pressedActivationUIMultiplayerButton == false:
+                        SetUIActivationState.Instance.SetActiveUIObjects();
+                        break;
+                    case false:
+                        SetUIActivationState.Instance.pressedActivationUIMultiplayerButton = false;
+                        break;
+                }
             }
         }
 
