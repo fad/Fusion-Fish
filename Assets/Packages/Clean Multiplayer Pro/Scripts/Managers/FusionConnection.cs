@@ -55,15 +55,6 @@ namespace AvocadoShark
         [Header("Room List Refresh (s)")] [SerializeField]
         private float refreshInterval = 2f;
 
-        [HideInInspector] public Vector3 chosenLocation;
-        [HideInInspector] public Quaternion chosenRotation;
-        [SerializeField] public Vector3 CustomLocation1;
-        [SerializeField] public Quaternion CustomRotation1;
-        [SerializeField] public Vector3 CustomLocation2;
-        [SerializeField] public Quaternion CustomRotation2;
-        [SerializeField] public Vector3 CustomLocation3;
-        [SerializeField] public Quaternion CustomRotation3;
-
         private FusionVoiceClient _fvc;
         private Recorder _recorder;
         private VoiceManager _voiceManager;
@@ -501,21 +492,21 @@ namespace AvocadoShark
             switch (locationAndRotation)
             {
                 case 0:
-                    location = CustomLocation1;
-                    rotation = CustomRotation1;
+                    location = SpawnManager.Instance.customLocation1;
+                    rotation = SpawnManager.Instance.customRotation1;
                     break;
                 case 1:
-                    location = CustomLocation2;
-                    rotation = CustomRotation2;
+                    location = SpawnManager.Instance.customLocation2;
+                    rotation = SpawnManager.Instance.customRotation2;
                     break;
                 case 2:
-                    location = CustomLocation3;
-                    rotation = CustomRotation3;
+                    location = SpawnManager.Instance.customLocation3;
+                    rotation = SpawnManager.Instance.customRotation3;
                     break;
             }
             
-            chosenLocation = location;
-            chosenRotation = rotation;
+            SpawnManager.Instance.chosenLocation = location;
+            SpawnManager.Instance.chosenRotation = rotation;
             NetworkObject playerObject = runner.Spawn(playerPrefab,location, rotation);
             var playerTransform = playerObject.transform;
             playerTransform.position = location;

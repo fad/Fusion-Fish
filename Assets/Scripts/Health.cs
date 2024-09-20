@@ -1,3 +1,4 @@
+using AvocadoShark;
 using BiggestFish.Gameplay;
 using Fusion;
 using StarterAssets;
@@ -45,18 +46,17 @@ public class Health : NetworkBehaviour
     {
         NetworkedHealth -= damage;
         
-        if (NetworkedHealth <= 0)
+        if (NetworkedHealth <= 0 && HasStateAuthority)
         {
-            if (isPlayer && HasStateAuthority && !isDead)
+            if (isPlayer && !isDead)
             {
                 PlayerDeath();
-                PlayParticles(Color.red, 30);
             }
-            else if(HasStateAuthority)
+            else
             {
                 if (GetComponent<NPC>())
                 {
-                    FindObjectOfType<NPCSpawner>().SpawnFish();
+                    //FindObjectOfType<NPCSpawner>().SpawnFish();
                 }
                 else
                 {
@@ -84,6 +84,7 @@ public class Health : NetworkBehaviour
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
         thirdPersonController.playerMesh.SetActive(false);
+        PlayParticles(Color.red, 30);
         GetComponent<SpawnGibsOnDestroy>().SpawnMeatObjects(Runner);
         isDead = true;
         HudUI.Instance.deathPanel.SetActive(true);
@@ -107,7 +108,7 @@ public class Health : NetworkBehaviour
         thirdPersonController.boostSwimSpeed = thirdPersonController.playerManager.experience.startingBoostSwimSpeed;
 
         var playerTransform = thirdPersonController.transform;
-        playerTransform.position = new Vector3(0, 0, 0);
+        GetComponent<PlayerPosResetter>().ResetPlayerPosition();
         playerTransform.localScale = thirdPersonController.playerManager.experience.startingSize;
         thirdPersonController.currentBoostCount = 0;
         thirdPersonController.boostState = ThirdPersonController.BoostState.BoostReload;

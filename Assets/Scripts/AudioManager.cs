@@ -76,7 +76,7 @@ public class AudioManager : MonoBehaviour
             return;
         }
 
-        s.pitch = Random.Range(0.2f, 0.8f);
+        s.pitch = Random.Range(0.15f, 0.9f);
         
         AudioSource.PlayClipAtPoint(s.clip, audioPosition);
     }

@@ -18,9 +18,9 @@ namespace AvocadoShark
                 }
             }
         }
-        void ResetPlayerPosition()
+        public void ResetPlayerPosition()
         {
-            transform.SetPositionAndRotation(FusionConnection.Instance.chosenLocation, FusionConnection.Instance.chosenRotation);
+            transform.SetPositionAndRotation(SpawnManager.Instance.chosenLocation, SpawnManager.Instance.chosenRotation);
         }
     }
 }

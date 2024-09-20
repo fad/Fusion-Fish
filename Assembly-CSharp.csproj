@@ -96,6 +96,7 @@
     <Compile Include="Assets\Packages\Clean Multiplayer Pro\Mobile Controller\Scripts\VirtualInputs\UIVirtualTouchZone.cs" />
     <Compile Include="Assets\Packages\Clean Multiplayer Pro\Scripts\Chat\ChatPlayer.cs" />
     <Compile Include="Assets\Input System\StarterAssetsInputs.cs" />
+    <Compile Include="Assets\Scripts\SpawnManager.cs" />
     <Compile Include="Assets\Packages\Clean Multiplayer Pro\Scripts\Menu\RoomEntry.cs" />
     <Compile Include="Assets\Scripts\Sound.cs" />
     <Compile Include="Assets\Packages\Clean Multiplayer Pro\Scripts\Player\SessionPlayers.cs" />
