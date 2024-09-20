@@ -208,6 +208,8 @@ namespace StarterAssets
 
         private void Move()
         {
+            Debug.Log(IsSwimmingTowardIsland());
+            Debug.Log(Vector3.Distance(transform.position, swimArea.position));
             if (input.sprint)
             {
                 canReload = false;
@@ -223,19 +225,13 @@ namespace StarterAssets
             // set target speed based on move speed, sprint speed and if sprint is pressed
             if (Vector3.Distance(transform.position, swimArea.position) >= maxSwimAreaLength && !IsSwimmingTowardIsland())
             {
-                if (isBoosting)
+                if (isBoosting && boostSwimSpeed > 0)
                 {
-                    if (boostSwimSpeed > 0)
-                    {
-                        speed = boostSwimSpeed - (Vector3.Distance(transform.position, swimArea.position) - maxSwimAreaLength * 2);
-                    }
+                    speed = boostSwimSpeed - (Vector3.Distance(transform.position, swimArea.position) - maxSwimAreaLength) *  2.5f;
                 }
-                else
+                else if (defaultSwimSpeed > 0)
                 {
-                    if (defaultSwimSpeed > 0)
-                    {
-                        speed = defaultSwimSpeed - (Vector3.Distance(transform.position, swimArea.position) - maxSwimAreaLength * 2);
-                    }
+                    speed = defaultSwimSpeed - (Vector3.Distance(transform.position, swimArea.position) - maxSwimAreaLength);
                 }
             }
             else
@@ -328,19 +324,12 @@ namespace StarterAssets
 
         private bool IsSwimmingTowardIsland()
         {
-            if (hasVCam)
-            {
-                //where the island is depending on player position
-                var direction = swimArea.transform.position - transform.position;
-                //gives angle as float from look direction to the direction to the middle of the island
-                var targetAngle = Vector3.Angle(getPlayerCameraAndControls.vCam.transform.forward, direction);
+            //where the island is depending on player position
+            var direction = transform.position - swimArea.transform.position;
+            //gives angle as float from look direction to the direction to the middle of the island
+            var targetAngle = Vector3.Angle(playerVisual.transform.forward, direction);
             
-                return targetAngle < 90;   
-            }
-            else
-            {
-                return true;
-            }
+            return targetAngle < 90;
         }
 
         private void Gravity()

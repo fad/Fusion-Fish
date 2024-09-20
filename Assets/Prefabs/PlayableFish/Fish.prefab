@@ -205,7 +205,7 @@ MonoBehaviour:
   playerMesh: {fileID: 3696368532508958808}
   boostSwimSpeed: 250
   defaultSwimSpeed: 120
-  maxSwimAreaLength: 358.79
+  maxSwimAreaLength: 140
   playerManager: {fileID: 0}
   currentBoostCount: 0
   boostDelayAfterActivation: 2
@@ -609,7 +609,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SortKey: 778621691
   ObjectInterest: 1
-  Flags: 264449
+  Flags: 262145
   NestedObjects:
   - {fileID: 6147735825067914960}
   NetworkedBehaviours:
