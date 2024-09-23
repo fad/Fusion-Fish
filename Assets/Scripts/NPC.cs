@@ -129,7 +129,7 @@ public class NPC : NetworkBehaviour
                 }
                 break;
             case Behaviour.Attack:
-                if (enemy.GetComponent<ThirdPersonController>().playerMesh.activeSelf)
+                if (!enemy.GetComponent<Health>().isDead)
                 {
                     if (Vector3.Distance(transform.position, enemy.transform.position) < 1)
                     {
@@ -175,7 +175,7 @@ public class NPC : NetworkBehaviour
         
         yield return new WaitForSeconds(.2f);
         
-        if(Vector3.Distance(transform.position, enemy.transform.position) < 1.5f && enemy)
+        if(Vector3.Distance(transform.position, enemy.transform.position) < 1.5f && !enemy.GetComponent<Health>().isDead)
         {
             SubtractHealth();
         }
