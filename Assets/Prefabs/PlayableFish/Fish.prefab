@@ -596,7 +596,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   thirdPersonController: {fileID: 0}
   health: {fileID: 0}
-  experience: {fileID: 0}
+  levelUp: {fileID: 0}
   attack: {fileID: 2749181200256999984}
   hostPlayerRunner: {fileID: 0}
 --- !u!114 &9144912782510203114
@@ -1502,7 +1502,7 @@ Transform:
   m_GameObject: {fileID: 5308674794192203540}
   serializedVersion: 2
   m_LocalRotation: {x: 0.0004055649, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.0008817613, y: 0.087, z: -0.783}
+  m_LocalPosition: {x: 0.0008817613, y: 0.09, z: -1.52}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1644,8 +1644,8 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.7
-      minScalar: 0.3
+      scalar: -0.7
+      minScalar: -0.3
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -2139,9 +2139,9 @@ ParticleSystem:
   ShapeModule:
     serializedVersion: 6
     enabled: 1
-    type: 17
-    angle: 0
-    length: 5
+    type: 8
+    angle: 54.32
+    length: 0.4
     boxThickness: {x: 0, y: 0, z: 0}
     radiusThickness: 1
     donutRadius: 0.1
@@ -2226,7 +2226,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 0.05
+      value: 0.0001
       mode: 0
       spread: 0
       speed:
