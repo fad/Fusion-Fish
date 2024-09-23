@@ -9,10 +9,11 @@ public class Health : NetworkBehaviour
     [Header("Health")]
     public float maxHealth;
 
-    [Networked] public float NetworkedHealth { get; private set; } = 5;
+    [Networked] [OnChangedRender(nameof(CheckDeath))] public float NetworkedHealth { get; private set; } = 5;
     private ParticleSystem bloodParticleSystem;
     private ThirdPersonController thirdPersonController;
     [HideInInspector] public bool isPlayer;
+    private bool spawnGibs;
 
     [Header("Experience")] 
     public int experienceValue = 100;
@@ -43,42 +44,44 @@ public class Health : NetworkBehaviour
     }
 
     [Rpc(RpcSources.All, RpcTargets.All)]
-    public void ReceiveDamageRpc(float damage, bool spawnGibs)
+    public void ReceiveDamageRpc(float damage, bool spawnGibsOnDestroy)
     {
         NetworkedHealth -= damage;
-        
-        if (NetworkedHealth <= 0 && HasStateAuthority)
-        {
-            if (isPlayer)
-            {
-                if(!isDead)
-                    PlayerDeath();
-            }
-            else
-            {
-                if (GetComponent<NPC>())
-                {
-                    //FindObjectOfType<NPCSpawner>().SpawnFish();
-                }
-                else
-                {
-                    //FindObjectOfType<FoodSpawner>().SpawnFood();
-                }
-                
-                PlayParticles(Color.red, 30);
 
-                if (TryGetComponent<SpawnGibsOnDestroy>(out var spawnGibsOnDestroy) && !spawnGibs)
-                {
-                    spawnGibsOnDestroy.gibSpawnCount = 0;
-                }
-                
-                Destroy(gameObject);
-            }
-        }
-        else
+        spawnGibs = spawnGibsOnDestroy;
+        
+        if (NetworkedHealth > 0)
         {
             PlayParticles(Color.red, 10);
         }
+    }
+
+    private void CheckDeath()
+    {
+        if (NetworkedHealth <= 0)
+        {
+            if (isPlayer && HasStateAuthority)
+            {
+                PlayerDeath();
+            }
+            else
+            {
+                if (TryGetComponent<SpawnGibsOnDestroy>(out var spawnGibsOnDestroy) && spawnGibs)
+                {
+                    spawnGibsOnDestroy.spawnGibs = true;
+                }
+                
+                NPCDeathRpc();
+            }
+        }
+    }
+    
+    [Rpc(RpcSources.All, RpcTargets.All, InvokeLocal = true)]
+    private void NPCDeathRpc()
+    {
+        PlayParticles(Color.red, 30);
+
+        Destroy(gameObject);
     }
 
     private void PlayerDeath()

@@ -1,5 +1,7 @@
+using System;
 using UnityEngine;
 using Fusion;
+using Random = UnityEngine.Random;
 
 namespace BiggestFish.Gameplay
 {
@@ -8,10 +10,11 @@ namespace BiggestFish.Gameplay
         [SerializeField] private GameObject gibPrefab;
         [SerializeField] public int gibSpawnCount = 3;
         [SerializeField] private int gibsExperienceValue = 100;
-
+        [HideInInspector] public bool spawnGibs;
+        
         private void OnDestroy()
         {
-            if (!gameObject.scene.isLoaded) 
+            if (!gameObject.scene.isLoaded || !spawnGibs) 
                 return;
             
             if (gibPrefab != null && gibSpawnCount > 0)

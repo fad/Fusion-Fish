@@ -175,7 +175,7 @@ public class NPC : NetworkBehaviour
         
         yield return new WaitForSeconds(.2f);
         
-        if(Vector3.Distance(transform.position, enemy.transform.position) < 1.5f)
+        if(Vector3.Distance(transform.position, enemy.transform.position) < 1.5f && enemy)
         {
             SubtractHealth();
         }

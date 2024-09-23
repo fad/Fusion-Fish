@@ -212,8 +212,6 @@ namespace StarterAssets
 
         private void Move()
         {
-            Debug.Log(IsSwimmingTowardIsland());
-            Debug.Log(Vector3.Distance(transform.position, swimArea.position));
             if (input.sprint)
             {
                 canReload = false;
