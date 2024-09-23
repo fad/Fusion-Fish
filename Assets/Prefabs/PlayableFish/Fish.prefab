@@ -274,6 +274,7 @@ MonoBehaviour:
   experienceValue: 100
   isDead: 0
   playerName: {fileID: 3556001508082968735}
+  playerVisual: {fileID: 3696368532508958808}
 --- !u!114 &4763555619980021824
 MonoBehaviour:
   m_ObjectHideFlags: 0

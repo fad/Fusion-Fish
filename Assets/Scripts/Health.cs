@@ -4,7 +4,7 @@ using Fusion;
 using StarterAssets;
 using UnityEngine;
 
-public class Health : NetworkBehaviour
+public class Health : NetworkBehaviour, ISpawned
 {
     [Header("Health")]
     public float maxHealth;
@@ -22,6 +22,7 @@ public class Health : NetworkBehaviour
     [HideInInspector] public bool isDead;
     private bool healthToMaxHealth;
     [SerializeField] private GameObject playerName;
+    [SerializeField] private GameObject playerVisual;
 
     private void Start()
     {
@@ -33,7 +34,12 @@ public class Health : NetworkBehaviour
         
         bloodParticleSystem = GameObject.Find("BloodParticles").GetComponent<ParticleSystem>();
     }
-    
+
+    public override void Spawned()
+    {
+        NetworkedHealth = maxHealth;
+    }
+
     public override void FixedUpdateNetwork()
     {
         if (!healthToMaxHealth)
@@ -64,7 +70,7 @@ public class Health : NetworkBehaviour
             {
                 PlayerDeath();
             }
-            else
+            else if(!isPlayer)
             {
                 if (TryGetComponent<SpawnGibsOnDestroy>(out var spawnGibsOnDestroy) && spawnGibs)
                 {
@@ -98,7 +104,7 @@ public class Health : NetworkBehaviour
     [Rpc(RpcSources.All, RpcTargets.All, InvokeLocal = true)]
     private void SetPlayerMeshRpc(bool setActive)
     {
-        thirdPersonController.playerMesh.SetActive(setActive);
+        playerVisual.SetActive(setActive);
         playerName.SetActive(setActive);
         thirdPersonController.capsuleCollider.enabled = setActive;
     }
