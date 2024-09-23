@@ -29,6 +29,7 @@ namespace BiggestFish.Gameplay
             if (gibPrefab != null)
                 for (var i = 0; i < gibSpawnCount; i++)
                 {
+                    //gibPrefab.transform.localScale = transform.localToWorldMatrix.lossyScale / gibSpawnCount;
                     var randomOffset = Random.insideUnitSphere * 0.5f; // Adjust the offset as needed
                     var spawnPosition = transform.position + randomOffset;
                     runner.Spawn(gibPrefab, spawnPosition, Quaternion.identity);
