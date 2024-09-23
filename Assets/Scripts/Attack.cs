@@ -4,6 +4,7 @@ using StarterAssets;
 using UnityEngine;
 using UnityEngine.UI;
 using Fusion;
+using UnityEngine.Serialization;
 
 public class Attack : NetworkBehaviour
 {
@@ -37,6 +38,8 @@ public class Attack : NetworkBehaviour
     [SerializeField] private float suckInDelay = 1;
     [SerializeField] private float currentSuckInDelay = 1;
     [SerializeField] public float suckPower;
+    [SerializeField] private float attractionForce;
+    [SerializeField] private float eatingRangeOnSuck;
 
     private void Start()
     {
@@ -57,26 +60,39 @@ public class Attack : NetworkBehaviour
     {
         currentSuckInDelay -= Time.deltaTime;
 
-        if (thirdPersonController.input.suckIn)
+        if (thirdPersonController.input.suckIn && currentSuckInDelay <= 0)
         {
-            if (currentSuckInDelay <= 0)
-            {
-                suckInParticleSystem.Play();
+            suckInParticleSystem.Play();
                 
-                AudioManager.Instance.PlaySoundWithRandomPitchAtPosition("suck", transform.position);
-                
-                if (foodObject != null)
-                {
-                    if (foodObject.GetComponent<Health>().maxHealth <= suckPower)
-                    {
-                        thirdPersonController.playerManager.levelUp.currentExperience += foodObject.GetComponent<Health>().experienceValue;
-                        thirdPersonController.playerManager.health.NetworkedHealth += 10;
-                        foodObject.GetComponent<Health>().ReceiveDamageRpc(suckPower, false);
-                    }
-                }
+            AudioManager.Instance.PlaySoundWithRandomPitchAtPosition("suck", transform.position);
+            
+            var hitColliders = new Collider[5];
 
-                currentSuckInDelay = suckInDelay;
+            var firstHit = Physics.OverlapSphereNonAlloc(attackPosition.position, attackRange + 2, hitColliders, foodLayerMask);
+            
+            for (var i = 0; i < firstHit; i++)
+            {
+                if (hitColliders[i].TryGetComponent<Health>(out var health) && health.maxHealth <= suckPower)
+                {
+                    // Calculate the direction from this object to the target
+                    var directionToTarget = hitColliders[i].transform.position - thirdPersonController.transform.position;
+
+                    // Check if the target is within the attraction distance and angle
+                    // Apply attraction force to the target
+                    var targetRigidbody = hitColliders[i].GetComponent<Rigidbody>();
+                    if (targetRigidbody != null)
+                        targetRigidbody.AddForce(directionToTarget.normalized * -attractionForce, ForceMode.Force);
+
+                    if (directionToTarget.magnitude <= eatingRangeOnSuck)
+                    {
+                        thirdPersonController.playerManager.levelUp.currentExperience += health.experienceValue;
+                        thirdPersonController.playerManager.health.NetworkedHealth += 10;
+                        health.ReceiveDamageRpc(suckPower, false);
+                    }   
+                }
             }
+
+            currentSuckInDelay = suckInDelay;
         }
     }
     

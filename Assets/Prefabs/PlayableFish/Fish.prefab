@@ -6454,6 +6454,8 @@ MonoBehaviour:
   suckInDelay: 1
   currentSuckInDelay: 1
   suckPower: 10
+  attractionForce: 150
+  eatingRangeOnSuck: 0.5
 --- !u!65 &78938720666164004
 BoxCollider:
   m_ObjectHideFlags: 0
