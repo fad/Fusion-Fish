@@ -113,21 +113,25 @@ public class Attack : NetworkBehaviour
 
     private void EnemyInRange()
     {
-        var hitColliders = new Collider[1];
-        var foodHits = Physics.OverlapSphereNonAlloc(attackPosition.position, attackRange, hitColliders, foodLayerMask);
-        var playerHits = Physics.OverlapSphereNonAlloc(attackPosition.position, attackRange, hitColliders, playerLayerMask);
-        
-        if (foodHits >= 1 || playerHits >= 1)
+        if (attackPosition)
         {
-            foodObject = hitColliders[0].transform.gameObject;
-            biteUpper.GetComponent<Image>().color = Color.yellow;
-            biteLower.GetComponent<Image>().color = Color.yellow;   
-        }
-        else
-        {
-            foodObject = null;
-            biteUpper.GetComponent<Image>().color = Color.white;
-            biteLower.GetComponent<Image>().color = Color.white;   
+            var hitColliders = new Collider[1];
+
+            var foodHits = Physics.OverlapSphereNonAlloc(attackPosition.position, attackRange, hitColliders, foodLayerMask);
+            var playerHits = Physics.OverlapSphereNonAlloc(attackPosition.position, attackRange, hitColliders, playerLayerMask);
+            
+            if (foodHits >= 1 || playerHits >= 1)
+            {
+                foodObject = hitColliders[0].transform.gameObject;
+                biteUpper.GetComponent<Image>().color = Color.yellow;
+                biteLower.GetComponent<Image>().color = Color.yellow;   
+            }
+            else
+            {
+                foodObject = null;
+                biteUpper.GetComponent<Image>().color = Color.white;
+                biteLower.GetComponent<Image>().color = Color.white;   
+            }
         }
     }
 

@@ -207,6 +207,7 @@ MonoBehaviour:
   defaultSwimSpeed: 120
   maxSwimAreaLength: 140
   playerManager: {fileID: 0}
+  capsuleCollider: {fileID: 0}
   currentBoostCount: 0
   boostDelayAfterActivation: 2
   boostReloadSpeed: 18
@@ -272,6 +273,7 @@ MonoBehaviour:
   isPlayer: 0
   experienceValue: 100
   isDead: 0
+  playerName: {fileID: 3556001508082968735}
 --- !u!114 &4763555619980021824
 MonoBehaviour:
   m_ObjectHideFlags: 0

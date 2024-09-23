@@ -20,6 +20,7 @@ public class Health : NetworkBehaviour
     [Header("Death")]
     [HideInInspector] public bool isDead;
     private bool healthToMaxHealth;
+    [SerializeField] private GameObject playerName;
 
     private void Start()
     {
@@ -48,9 +49,10 @@ public class Health : NetworkBehaviour
         
         if (NetworkedHealth <= 0 && HasStateAuthority)
         {
-            if (isPlayer && !isDead)
+            if (isPlayer)
             {
-                PlayerDeath();
+                if(!isDead)
+                    PlayerDeath();
             }
             else
             {
@@ -83,11 +85,19 @@ public class Health : NetworkBehaviour
     {
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
-        thirdPersonController.playerMesh.SetActive(false);
         PlayParticles(Color.red, 30);
         GetComponent<SpawnGibsOnDestroy>().SpawnMeatObjects(Runner);
+        SetPlayerMeshRpc(false);
         isDead = true;
         HudUI.Instance.deathPanel.SetActive(true);
+    }
+
+    [Rpc(RpcSources.All, RpcTargets.All, InvokeLocal = true)]
+    private void SetPlayerMeshRpc(bool setActive)
+    {
+        thirdPersonController.playerMesh.SetActive(setActive);
+        playerName.SetActive(setActive);
+        thirdPersonController.capsuleCollider.enabled = setActive;
     }
     
     public void Restart()
@@ -112,7 +122,7 @@ public class Health : NetworkBehaviour
         playerTransform.localScale = thirdPersonController.playerManager.experience.startingSize;
         thirdPersonController.currentBoostCount = 0;
         thirdPersonController.boostState = ThirdPersonController.BoostState.BoostReload;
-        thirdPersonController.playerMesh.SetActive(true);
+        SetPlayerMeshRpc(true);
     }
 
     //Here I change burst count and color when needed

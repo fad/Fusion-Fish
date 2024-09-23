@@ -36,6 +36,7 @@ namespace StarterAssets
         private bool outOfWater;
         private Rigidbody rb;
         private Transform swimArea;
+        [HideInInspector] public CapsuleCollider capsuleCollider;
         
         [Header("Boost")]
         [HideInInspector] public float currentBoostCount;
@@ -105,6 +106,7 @@ namespace StarterAssets
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
 
+            capsuleCollider = GetComponent<CapsuleCollider>();
             swimArea = GameObject.Find("SwimArea").GetComponent<Transform>();
             getPlayerCameraAndControls = GetComponent<GetPlayerCameraAndControls>();
             if (getPlayerCameraAndControls.vCamRoot == null)
@@ -329,9 +331,14 @@ namespace StarterAssets
             //where the island is depending on player position
             var direction = transform.position - swimArea.transform.position;
             //gives angle as float from look direction to the direction to the middle of the island
-            var targetAngle = Vector3.Angle(playerVisual.transform.forward, direction);
+            if (playerVisual)
+            {
+                var targetAngle = Vector3.Angle(playerVisual.transform.forward, direction);
             
-            return targetAngle < 90;
+                return targetAngle < 90;   
+            }
+
+            return false;
         }
 
         private void Gravity()
