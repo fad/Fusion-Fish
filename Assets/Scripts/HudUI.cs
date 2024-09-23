@@ -39,11 +39,11 @@ public class HudUI : MonoBehaviour
 
         boostUI.fillAmount = playerManager.thirdPersonController.currentBoostCount / playerManager.thirdPersonController.maxBoostCount;
         
-        xpUI.fillAmount = (float)playerManager.experience.currentExperience / playerManager.experience.experienceUntilUpgrade;
+        xpUI.fillAmount = (float)playerManager.levelUp.currentExperience / playerManager.levelUp.experienceUntilUpgrade;
 
-        experienceText.text = playerManager.experience.currentExperience.ToString();
+        experienceText.text = playerManager.levelUp.currentExperience.ToString();
         
-        neededExperienceText.text = playerManager.experience.experienceUntilUpgrade.ToString();
+        neededExperienceText.text = playerManager.levelUp.experienceUntilUpgrade.ToString();
     }
 
     public void Restart()

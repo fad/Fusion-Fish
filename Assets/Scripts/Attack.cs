@@ -69,7 +69,8 @@ public class Attack : NetworkBehaviour
                 {
                     if (foodObject.GetComponent<Health>().maxHealth <= suckPower)
                     {
-                        thirdPersonController.playerManager.experience.currentExperience += foodObject.GetComponent<Health>().experienceValue;
+                        thirdPersonController.playerManager.levelUp.currentExperience += foodObject.GetComponent<Health>().experienceValue;
+                        thirdPersonController.playerManager.health.NetworkedHealth += 10;
                         foodObject.GetComponent<Health>().ReceiveDamageRpc(suckPower, false);
                     }
                 }

@@ -50,6 +50,7 @@
     <Compile Include="Assets\Packages\Photon\PhotonVoice\Demos\DemoVoiceUI\Scripts\UiExtensions.cs" />
     <Compile Include="Assets\Packages\Clean Multiplayer Pro\Scripts\Vote\VoteKickUIPanel.cs" />
     <Compile Include="Assets\Packages\Clean Multiplayer Pro\Mobile Controller\Scripts\CanvasInputs\UICanvasControllerInput.cs" />
+    <Compile Include="Assets\Scripts\LevelUp.cs" />
     <Compile Include="Assets\Packages\Clean Multiplayer Pro\Scripts\Player\PopUp.cs" />
     <Compile Include="Assets\PlayerInputAsset.cs" />
     <Compile Include="Assets\Packages\Clean Multiplayer Pro\Mobile Controller\Scripts\VirtualInputs\UIVirtualButton.cs" />
@@ -88,7 +89,6 @@
     <Compile Include="Assets\Scripts\PlayerManager.cs" />
     <Compile Include="Assets\Packages\Clean Multiplayer Pro\Scripts\Player\InfoItem.cs" />
     <Compile Include="Assets\Packages\Clean Multiplayer Pro\Scripts\Player\SessionPlayerUIPanel.cs" />
-    <Compile Include="Assets\Scripts\Experience.cs" />
     <Compile Include="Assets\Packages\Clean Multiplayer Pro\Scripts\Editor Window\SetupWizard.cs" />
     <Compile Include="Assets\Packages\Clean Multiplayer Pro\Scripts\Vote\VoteKickManager.cs" />
     <Compile Include="Assets\Packages\Clean Multiplayer Pro\Scripts\Managers\InGame_Manager.cs" />

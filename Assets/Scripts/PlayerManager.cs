@@ -3,12 +3,13 @@ using System.Collections;
 using Fusion;
 using StarterAssets;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class PlayerManager : NetworkBehaviour
 {
     [HideInInspector] public ThirdPersonController thirdPersonController;
     [HideInInspector] public Health health;
-    [HideInInspector] public Experience experience;
+    [FormerlySerializedAs("experience")] [HideInInspector] public LevelUp levelUp;
     [SerializeField] public Attack attack;
     [HideInInspector] public NetworkRunner hostPlayerRunner;
 
@@ -16,7 +17,7 @@ public class PlayerManager : NetworkBehaviour
     {
         thirdPersonController = GetComponent<ThirdPersonController>();
         health = GetComponent<Health>();
-        experience = GetComponent<Experience>();
+        levelUp = GetComponent<LevelUp>();
     }
     
     private IEnumerator Start()

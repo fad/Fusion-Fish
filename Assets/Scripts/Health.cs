@@ -9,7 +9,7 @@ public class Health : NetworkBehaviour, ISpawned
     [Header("Health")]
     public float maxHealth;
 
-    [Networked] [OnChangedRender(nameof(CheckDeath))] public float NetworkedHealth { get; private set; } = 5;
+    [Networked] [OnChangedRender(nameof(CheckDeath))] public float NetworkedHealth { get; set; } = 5;
     private ParticleSystem bloodParticleSystem;
     private ThirdPersonController thirdPersonController;
     [HideInInspector] public bool isPlayer;
@@ -117,18 +117,18 @@ public class Health : NetworkBehaviour, ISpawned
         isDead = false;
         NetworkedHealth = maxHealth;
         
-        thirdPersonController.playerManager.experience.currentExperience = thirdPersonController.playerManager.experience.startingExperience;
-        thirdPersonController.playerManager.experience.experienceUntilUpgrade = thirdPersonController.playerManager.experience.startingExperienceUntilUpgrade;
+        thirdPersonController.playerManager.levelUp.currentExperience = thirdPersonController.playerManager.levelUp.startingExperience;
+        thirdPersonController.playerManager.levelUp.experienceUntilUpgrade = thirdPersonController.playerManager.levelUp.startingExperienceUntilUpgrade;
 
-        thirdPersonController.playerManager.attack.suckPower = thirdPersonController.playerManager.experience.startingSuckPower;
-        thirdPersonController.playerManager.attack.attackDamage = thirdPersonController.playerManager.experience.startingAttackDamage;
-        thirdPersonController.cameraDistance = thirdPersonController.playerManager.experience.startingCameraDistance;
-        thirdPersonController.defaultSwimSpeed = thirdPersonController.playerManager.experience.startingDefaultSwimSpeed;
-        thirdPersonController.boostSwimSpeed = thirdPersonController.playerManager.experience.startingBoostSwimSpeed;
+        thirdPersonController.playerManager.attack.suckPower = thirdPersonController.playerManager.levelUp.startingSuckPower;
+        thirdPersonController.playerManager.attack.attackDamage = thirdPersonController.playerManager.levelUp.startingAttackDamage;
+        thirdPersonController.cameraDistance = thirdPersonController.playerManager.levelUp.startingCameraDistance;
+        thirdPersonController.defaultSwimSpeed = thirdPersonController.playerManager.levelUp.startingDefaultSwimSpeed;
+        thirdPersonController.boostSwimSpeed = thirdPersonController.playerManager.levelUp.startingBoostSwimSpeed;
 
         var playerTransform = thirdPersonController.transform;
         GetComponent<PlayerPosResetter>().ResetPlayerPosition();
-        playerTransform.localScale = thirdPersonController.playerManager.experience.startingSize;
+        playerTransform.localScale = thirdPersonController.playerManager.levelUp.startingSize;
         thirdPersonController.currentBoostCount = 0;
         thirdPersonController.boostState = ThirdPersonController.BoostState.BoostReload;
         SetPlayerMeshRpc(true);
