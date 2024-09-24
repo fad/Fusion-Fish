@@ -6,7 +6,7 @@ using Random = UnityEngine.Random;
 
 namespace AvocadoShark
 {
-    public class PlayerPosResetter : NetworkBehaviour, IPlayerJoined
+    public class PlayerPosResetter : NetworkBehaviour, IPlayerJoined, IPlayerLeft
     {
         [HideInInspector] public SpawnPoint currentSpawnablePoint;
         private float currentDistance;
@@ -35,8 +35,7 @@ namespace AvocadoShark
                 {
                     foreach (var spawnPoint in SpawnManager.Instance.spawnPoints)
                     {
-                        if (Vector3.Distance(Runner.GetPlayerObject(playerRef).transform.position, spawnPoint.location) <
-                            currentDistance || currentDistance == 0)
+                        if (Vector3.Distance(Runner.GetPlayerObject(playerRef).transform.position, spawnPoint.location) < currentDistance || currentDistance == 0)
                         {
                             currentDistance = Vector3.Distance(Runner.GetPlayerObject(playerRef).transform.position, spawnPoint.location);
                             currentSpawnablePoint = spawnPoint;
@@ -57,6 +56,11 @@ namespace AvocadoShark
                 }
                 
                 transform.SetPositionAndRotation(currentSpawnablePoint.location, currentSpawnablePoint.rotation);
+
+                currentDistance = 0;
+                currentSpawnablePoint = null;
+                spawnablePoints.Clear();
+                spawnPointDistances.Clear();
             }
             else
             {
@@ -70,6 +74,11 @@ namespace AvocadoShark
         public void PlayerJoined(PlayerRef player)
         {
             playerInGame.Add(player);
+        }
+
+        public void PlayerLeft(PlayerRef player)
+        {
+            playerInGame.Remove(player);
         }
     }
 }
