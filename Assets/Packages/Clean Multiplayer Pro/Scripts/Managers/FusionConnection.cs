@@ -488,25 +488,10 @@ namespace AvocadoShark
             var location = new Vector3(0,0,0);
             var rotation = new Quaternion(0,0,0,0);
 
-            var locationAndRotation = Random.Range(0, 2);
-            switch (locationAndRotation)
-            {
-                case 0:
-                    location = SpawnManager.Instance.customLocation1;
-                    rotation = SpawnManager.Instance.customRotation1;
-                    break;
-                case 1:
-                    location = SpawnManager.Instance.customLocation2;
-                    rotation = SpawnManager.Instance.customRotation2;
-                    break;
-                case 2:
-                    location = SpawnManager.Instance.customLocation3;
-                    rotation = SpawnManager.Instance.customRotation3;
-                    break;
-            }
+            var spawnPoint = Random.Range(0, SpawnManager.Instance.spawnPoints.Count - 1);
+            location = SpawnManager.Instance.spawnPoints[spawnPoint].location;
+            rotation = SpawnManager.Instance.spawnPoints[spawnPoint].rotation;
             
-            SpawnManager.Instance.chosenLocation = location;
-            SpawnManager.Instance.chosenRotation = rotation;
             NetworkObject playerObject = runner.Spawn(playerPrefab,location, rotation);
             var playerTransform = playerObject.transform;
             playerTransform.position = location;

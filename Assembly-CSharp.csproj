@@ -80,6 +80,7 @@
     <Compile Include="Assets\Packages\Photon\PhotonVoice\Demos\DemoVoiceUI\Scripts\CodecSettingsUI.cs" />
     <Compile Include="Assets\Scripts\ApplySoundEffectForButtons.cs" />
     <Compile Include="Assets\Packages\Clean Multiplayer Pro\Scripts\Player\MenuCanvas.cs" />
+    <Compile Include="Assets\Scripts\SpawnPoint.cs" />
     <Compile Include="Assets\Packages\Photon\PhotonVoice\Demos\DemoVoiceUI\Scripts\SidebarToggle.cs" />
     <Compile Include="Assets\Scripts\SetUIActivationState.cs" />
     <Compile Include="Assets\Packages\Photon\PhotonVoice\Demos\DemoVoiceUI\Scripts\DemoVoiceUI.cs" />

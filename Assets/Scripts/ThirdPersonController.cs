@@ -130,7 +130,7 @@ namespace StarterAssets
 
         private void Update()
         {
-            if(playerManager.health.isDead)
+            if(playerManager.health.isDead || !HasStateAuthority)
                 return;
             
             Gravity();
@@ -140,7 +140,7 @@ namespace StarterAssets
 
         public void FixedUpdate()
         {
-            if (playerManager.health.isDead)
+            if (playerManager.health.isDead || !HasStateAuthority)
                 return;
             
             Move();        
@@ -148,7 +148,7 @@ namespace StarterAssets
 
         private void LateUpdate()
         {
-            if(playerManager.health.isDead)
+            if(playerManager.health.isDead || !HasStateAuthority)
                 return;
             
             CameraRotation();
@@ -156,9 +156,7 @@ namespace StarterAssets
 
         private void SetActiveMultiplayerUI()
         {
-            if (HasStateAuthority)
-            {
-                switch (input.setActiveStateMultiplayerUI)
+            switch (input.setActiveStateMultiplayerUI)
                 {
                     case true when SetUIActivationState.Instance.pressedActivationUIMultiplayerButton == false:
                         SetUIActivationState.Instance.SetActiveUIObjects();
@@ -167,7 +165,6 @@ namespace StarterAssets
                         SetUIActivationState.Instance.pressedActivationUIMultiplayerButton = false;
                         break;
                 }
-            }
         }
 
         private void CameraRotation()
