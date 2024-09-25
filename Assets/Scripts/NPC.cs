@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using StarterAssets;
 using Fusion;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -11,7 +10,6 @@ public class NPC : NetworkBehaviour
     private float currentSpeed;
     [SerializeField] private float rotationSpeed = 10f;
     [SerializeField] private float maxSwimSpeed = 95f;
-    [SerializeField] private float maxSwimSpeedOnAttack = 15f;
     [SerializeField] private float defaultSwimSpeed = 30f;
     [SerializeField] private float minTimeChangeMoveDirection = 6f;
     [SerializeField] private float maxTimeChangeMoveDirection = 10f;
@@ -92,7 +90,7 @@ public class NPC : NetworkBehaviour
             case Behaviour.Flight:
                 var swimDirectionAwayFromEnemy = enemy.transform.position - transform.position;
                 
-                currentSpeed = GetComponent<Health>().NetworkedHealth >= GetComponent<Health>().maxHealth ? maxSwimSpeedOnAttack : maxSwimSpeed;
+                currentSpeed = GetComponent<Health>().NetworkedHealth >= GetComponent<Health>().maxHealth ? maxSwimSpeed : defaultSwimSpeed;
                 
                 MoveNPCInDirection(swimDirectionAwayFromEnemy, Quaternion.LookRotation(swimDirectionAwayFromEnemy));
                 break;
@@ -110,7 +108,7 @@ public class NPC : NetworkBehaviour
                     //}
                     
                     randomTime = Random.Range(minTimeChangeMoveDirection, maxTimeChangeMoveDirection);
-                    defaultSwimSpeed = Random.Range(3, 5);
+                    defaultSwimSpeed = Random.Range(defaultSwimSpeed - 10, defaultSwimSpeed + 10);
                     currentWaitTime = Random.Range(minWaitTime, maxWaitTime);
                 }
 
@@ -122,14 +120,14 @@ public class NPC : NetworkBehaviour
                 if (currentWaitTime <= 0)
                 {
                     randomTime -= Time.deltaTime;
-
-                    currentSpeed = defaultSwimSpeed;
                     
+                    currentSpeed = defaultSwimSpeed;
+
                     MoveNPCInDirection(newPosition - currentPosition, Quaternion.LookRotation(newPosition - currentPosition));
                 }
                 break;
             case Behaviour.Attack:
-                if (!enemy.GetComponent<Health>().isDead)
+                if (Vector3.Distance(transform.position, enemy.transform.position) < 15 && !enemy.GetComponent<Health>().isDead)
                 {
                     if (Vector3.Distance(transform.position, enemy.transform.position) < 1)
                     {
@@ -137,10 +135,6 @@ public class NPC : NetworkBehaviour
                         {
                             StartCoroutine(AttackCoroutine());
                         }
-                    }
-                    else if (Vector3.Distance(transform.position, enemy.transform.position) > 15 || enemy.GetComponent<Health>().isDead)
-                    {
-                        behaviour = Behaviour.NaturalBehaviour;
                     }
                     else
                     {
@@ -162,7 +156,7 @@ public class NPC : NetworkBehaviour
         }
 
         if(!mainMenuObject)
-            animator.SetFloat("movingSpeed", rb.velocity.sqrMagnitude);
+            animator.SetFloat("movingSpeed", rb.velocity.sqrMagnitude * 3);
     }
 
     private IEnumerator AttackCoroutine()
@@ -190,7 +184,7 @@ public class NPC : NetworkBehaviour
     
     private void MoveNPCInDirection(Vector3 targetDirection, Quaternion lookDirection)
     {
-        rb.AddForce(targetDirection * (-currentSpeed * Time.deltaTime), ForceMode.Impulse);
+        rb.AddForce(targetDirection.normalized * (-currentSpeed * Time.deltaTime), ForceMode.Impulse);
         
         if (rb.velocity.sqrMagnitude > .1f) 
         {  
@@ -222,12 +216,9 @@ public class NPC : NetworkBehaviour
         {
             enemy = col.GetComponent<Transform>().transform.gameObject;
             
-            if (!attacksPlayer)
+            if (!attacksPlayer && canFlight)
             {
-                if (canFlight)
-                {
-                    StartCoroutine(FlightCoroutine());
-                }
+                StartCoroutine(FlightCoroutine());
             }
             
             if(attacksPlayer)

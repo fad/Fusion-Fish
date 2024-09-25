@@ -31,7 +31,7 @@ namespace StarterAssets
         [SerializeField] public float defaultSwimSpeed = 50f;
         [SerializeField] private float  maxSwimAreaLength;
         [HideInInspector] public PlayerManager playerManager;
-        private float speed;
+        [HideInInspector] public float speed;
         private float rotationVelocity;
         private bool outOfWater;
         private Rigidbody rb;
@@ -238,8 +238,13 @@ namespace StarterAssets
             {
                 speed = isBoosting ? boostSwimSpeed : defaultSwimSpeed;
             }
-
+            
             var moveDistance = speed * Time.deltaTime;
+
+            if (playerManager.health.slowPlayerDown)
+            {
+                moveDistance /= 2;
+            }
 
             void MovePlayer(float playerRenderRotationX, float playerRenderRotationY)
             {

@@ -1,3 +1,4 @@
+using System;
 using AvocadoShark;
 using BiggestFish.Gameplay;
 using Fusion;
@@ -9,15 +10,20 @@ public class Health : NetworkBehaviour
     [Header("Health")]
     public float maxHealth;
     public bool notAbleToGetBitten;
-
     [Networked] [OnChangedRender(nameof(CheckDeath))] public float NetworkedHealth { get; set; } = 5;
     private ParticleSystem bloodParticleSystem;
     private ThirdPersonController thirdPersonController;
     [HideInInspector] public bool isPlayer;
     private bool spawnGibs;
+    private float currentHealth;
 
     [Header("Experience")] 
     public int experienceValue = 100;
+    
+    [Header("SlowDown")]
+    [HideInInspector] public bool slowPlayerDown;
+    private float slowDownSpeedTime = 5;
+    [SerializeField] private float maxSlowDownSpeedTime = 5;
     
     [Header("Death")]
     [HideInInspector] public bool isDead;
@@ -34,6 +40,8 @@ public class Health : NetworkBehaviour
         }
         
         bloodParticleSystem = GameObject.Find("BloodParticles").GetComponent<ParticleSystem>();
+        slowDownSpeedTime = maxSlowDownSpeedTime;
+        currentHealth = maxHealth;
     }
 
     public override void Spawned()
@@ -50,11 +58,23 @@ public class Health : NetworkBehaviour
         }
     }
 
+    private void Update()
+    {
+        if (slowPlayerDown && HasStateAuthority)
+        {
+            slowDownSpeedTime -= Time.deltaTime;
+            if (slowDownSpeedTime <= 0)
+            {
+                slowPlayerDown = false;
+            }
+        }
+    }
+
     [Rpc(RpcSources.All, RpcTargets.All)]
     public void ReceiveDamageRpc(float damage, bool spawnGibsOnDestroy)
     {
         NetworkedHealth -= damage;
-
+        
         spawnGibs = spawnGibsOnDestroy;
         
         if (NetworkedHealth > 0)
@@ -65,19 +85,31 @@ public class Health : NetworkBehaviour
 
     private void CheckDeath()
     {
-        if (NetworkedHealth <= 0)
+        if (isPlayer && HasStateAuthority)
         {
-            if (isPlayer && HasStateAuthority)
+            if (NetworkedHealth <= 0)
             {
                 PlayerDeath();
             }
-            else if(!isPlayer)
+            else
+            {
+                if (currentHealth >= NetworkedHealth)
+                {
+                    slowDownSpeedTime = maxSlowDownSpeedTime;
+                    slowPlayerDown = true;
+                    currentHealth = NetworkedHealth;
+                }
+            }
+        }
+        else if(!isPlayer)
+        {
+            if (NetworkedHealth <= 0)
             {
                 if (TryGetComponent<SpawnGibsOnDestroy>(out var spawnGibsOnDestroy) && spawnGibs)
                 {
                     spawnGibsOnDestroy.spawnGibs = true;
                 }
-                
+            
                 NPCDeathRpc();
             }
         }

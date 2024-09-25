@@ -207,6 +207,7 @@ MonoBehaviour:
   defaultSwimSpeed: 120
   maxSwimAreaLength: 140
   playerManager: {fileID: 0}
+  speed: 0
   capsuleCollider: {fileID: 0}
   currentBoostCount: 0
   boostDelayAfterActivation: 2
@@ -275,6 +276,8 @@ MonoBehaviour:
   _NetworkedHealth: 100
   isPlayer: 0
   experienceValue: 100
+  slowPlayerDown: 0
+  maxSlowDownSpeedTime: 2
   isDead: 0
   playerName: {fileID: 3556001508082968735}
   playerVisual: {fileID: 3696368532508958808}
@@ -572,6 +575,7 @@ MonoBehaviour:
   gibSpawnCount: 3
   gibsExperienceValue: 100
   spawnGibs: 0
+  isStarFish: 0
 --- !u!114 &6222487964510190762
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6447,9 +6451,6 @@ MonoBehaviour:
   playerLayerMask:
     serializedVersion: 2
     m_Bits: 128
-  stateAuthorityPlayer:
-    serializedVersion: 2
-    m_Bits: 512
   biteUpper: {fileID: 1817263681268154888}
   biteLower: {fileID: 5466369016473450773}
   biteAnimator: {fileID: 9174893869088333902}
