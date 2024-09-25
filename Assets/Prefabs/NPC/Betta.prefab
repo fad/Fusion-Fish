@@ -476,11 +476,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 3
-  currentHealth: 0
+  _NetworkedHealth: 5
+  isPlayer: 0
   experienceValue: 100
   isDead: 0
-  foodObject: {fileID: 0}
-  deathPanel: {fileID: 0}
+  playerName: {fileID: 0}
+  playerVisual: {fileID: 0}
 --- !u!114 &4843990542343251315
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -506,11 +507,16 @@ MonoBehaviour:
   foodLayer:
     serializedVersion: 2
     m_Bits: 64
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
   timeBetweenAttacksMax: 1.5
   timeBetweenAttacksMin: 0.8
   attacksPlayer: 1
   attackDamage: 10
   maxFlightDelayTime: 7
+  minWaitTime: 0
+  maxWaitTime: 0
 --- !u!114 &4252170826286178896
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -525,7 +531,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SortKey: 236788479
   ObjectInterest: 1
-  Flags: 262145
+  Flags: 524289
   NestedObjects: []
   NetworkedBehaviours:
   - {fileID: 5773645901970064076}

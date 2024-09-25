@@ -72,6 +72,7 @@
     <Compile Include="Assets\Scripts\AudioManager.cs" />
     <Compile Include="Assets\Packages\Photon\PhotonVoice\Demos\Fusion\DemoNetworkObject\PrefabSpawner.cs" />
     <Compile Include="Assets\Packages\Clean Multiplayer Pro\Scripts\Player\PlayerStats.cs" />
+    <Compile Include="Assets\Scripts\RequestAuthorityOnSpawn.cs" />
     <Compile Include="Assets\Packages\Clean Multiplayer Pro\Scripts\Editor Window\SetupComplete.cs" />
     <Compile Include="Assets\Packages\Clean Multiplayer Pro\Mobile Controller\Scripts\Utilities\MobileDisableAutoSwitchControls.cs" />
     <Compile Include="Assets\Scripts\NPCSpawner.cs" />

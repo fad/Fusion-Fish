@@ -317,6 +317,7 @@ GameObject:
   - component: {fileID: 2531375025165657197}
   - component: {fileID: 5290817691257283959}
   - component: {fileID: 3114016130452444203}
+  - component: {fileID: 7514688842644789268}
   m_Layer: 6
   m_Name: Catfish
   m_TagString: Untagged
@@ -424,11 +425,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 4
-  currentHealth: 0
+  _NetworkedHealth: 5
+  isPlayer: 0
   experienceValue: 100
   isDead: 0
-  foodObject: {fileID: 0}
-  deathPanel: {fileID: 0}
+  playerName: {fileID: 0}
+  playerVisual: {fileID: 0}
 --- !u!114 &3114016130452444203
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -454,11 +456,35 @@ MonoBehaviour:
   foodLayer:
     serializedVersion: 2
     m_Bits: 64
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
   timeBetweenAttacksMax: 1.5
   timeBetweenAttacksMin: 0.8
   attacksPlayer: 1
   attackDamage: 10
   maxFlightDelayTime: 7
+  minWaitTime: 0
+  maxWaitTime: 0
+--- !u!114 &7514688842644789268
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6810320542011287091}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SortKey: 669558548
+  ObjectInterest: 1
+  Flags: 524289
+  NestedObjects: []
+  NetworkedBehaviours:
+  - {fileID: 5290817691257283959}
+  - {fileID: 3114016130452444203}
 --- !u!1 &7075647709813124592
 GameObject:
   m_ObjectHideFlags: 0
