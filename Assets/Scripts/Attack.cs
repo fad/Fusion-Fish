@@ -1,10 +1,8 @@
-using System;
 using BiggestFish.Gameplay;
 using StarterAssets;
 using UnityEngine;
 using UnityEngine.UI;
 using Fusion;
-using UnityEngine.Serialization;
 
 public class Attack : NetworkBehaviour
 {
@@ -22,7 +20,7 @@ public class Attack : NetworkBehaviour
     public float attackDamage = 1;
     private bool preparedAttack;
     [SerializeField] private Transform attackPosition;
-    [SerializeField] private float attackRange;
+    [SerializeField] public float attackRange;
     
     [Header("Time")]
     private float timeBetweenAttack;
@@ -39,7 +37,7 @@ public class Attack : NetworkBehaviour
     [SerializeField] private float currentSuckInDelay = 1;
     [SerializeField] public float suckPower;
     [SerializeField] private float attractionForce;
-    [SerializeField] private float eatingRangeOnSuck;
+    [SerializeField] private float attractionAngle;
 
     private void Start()
     {
@@ -68,25 +66,34 @@ public class Attack : NetworkBehaviour
             
             var hitColliders = new Collider[5];
 
-            var firstHit = Physics.OverlapSphereNonAlloc(attackPosition.position, attackRange + 2, hitColliders, foodLayerMask);
+            var hits = Physics.OverlapSphereNonAlloc(attackPosition.position, attackRange, hitColliders, foodLayerMask);
             
-            for (var i = 0; i < firstHit; i++)
+            for (var i = 0; i < hits; i++)
             {
                 if (hitColliders[i].TryGetComponent<Health>(out var health) && health.maxHealth <= suckPower)
                 {
                     // Calculate the direction from this object to the target
-                    var directionToTarget = hitColliders[i].transform.position - thirdPersonController.transform.position;
+                    var directionToTarget = hitColliders[i].transform.position - thirdPersonController.playerVisual.transform.position;
+
+                    var angleToTarget = Vector3.Angle(-thirdPersonController.playerVisual.transform.forward, directionToTarget);
 
                     // Check if the target is within the attraction distance and angle
-                    // Apply attraction force to the target
-                    var targetRigidbody = hitColliders[i].GetComponent<Rigidbody>();
-                    if (targetRigidbody != null)
-                        targetRigidbody.AddForce(directionToTarget.normalized * -attractionForce, ForceMode.Force);
+                    if (angleToTarget <= attractionAngle)
+                    {
+                        // Check if the target is within the attraction distance and angle
+                        // Apply attraction force to the target
+                        var targetRigidbody = hitColliders[i].GetComponent<Rigidbody>();
+                        
+                        if (targetRigidbody != null)
+                            targetRigidbody.AddForce(directionToTarget.normalized * -attractionForce, ForceMode.Force);
+                    }
 
-                    if (directionToTarget.magnitude <= eatingRangeOnSuck)
+                    //Decreasing lossyScale cause it is a bit too big
+                    if (directionToTarget.magnitude <= thirdPersonController.transform.localToWorldMatrix.lossyScale.z - .05f)
                     {
                         thirdPersonController.playerManager.levelUp.currentExperience += health.experienceValue;
-                        thirdPersonController.playerManager.health.NetworkedHealth += 10;
+                        if(thirdPersonController.playerManager.health.NetworkedHealth < thirdPersonController.playerManager.health.maxHealth)
+                            thirdPersonController.playerManager.health.NetworkedHealth += 10;
                         health.ReceiveDamageRpc(suckPower, false);
                     }   
                 }
@@ -132,22 +139,36 @@ public class Attack : NetworkBehaviour
     {
         if (attackPosition)
         {
-            var hitColliders = new Collider[1];
+            var hitColliders = new Collider[2];
 
             var foodHits = Physics.OverlapSphereNonAlloc(attackPosition.position, attackRange, hitColliders, foodLayerMask);
-            var playerHits = Physics.OverlapSphereNonAlloc(attackPosition.position, attackRange, hitColliders, playerLayerMask);
             
-            if (foodHits >= 1 || playerHits >= 1)
+            //Checks for two players because the player always detects itself first
+            if (foodHits >= 1)
             {
-                foodObject = hitColliders[0].transform.gameObject;
-                biteUpper.GetComponent<Image>().color = Color.yellow;
-                biteLower.GetComponent<Image>().color = Color.yellow;   
+                var directionToTarget = hitColliders[0].transform.position - thirdPersonController.playerVisual.transform.position;
+
+                var angleToTarget = Vector3.Angle(-thirdPersonController.playerVisual.transform.forward, directionToTarget);
+
+                // Check if the target is within the attraction distance and angle
+                if (angleToTarget <= attractionAngle && hitColliders[0].GetComponent<ThirdPersonController>() != thirdPersonController && !hitColliders[0].GetComponent<Health>().notAbleToGetBitten)
+                {
+                    foodObject = hitColliders[0].transform.gameObject;
+                    biteUpper.GetComponent<Image>().color = Color.yellow;
+                    biteLower.GetComponent<Image>().color = Color.yellow;  
+                }
+                else
+                {
+                    foodObject = null;
+                    biteUpper.GetComponent<Image>().color = Color.white;
+                    biteLower.GetComponent<Image>().color = Color.white; 
+                }
             }
             else
             {
                 foodObject = null;
                 biteUpper.GetComponent<Image>().color = Color.white;
-                biteLower.GetComponent<Image>().color = Color.white;   
+                biteLower.GetComponent<Image>().color = Color.white; 
             }
         }
     }

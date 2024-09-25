@@ -13,6 +13,7 @@ public class LevelUp : NetworkBehaviour
     [HideInInspector] public float startingDefaultSwimSpeed;
     [HideInInspector] public float startingAttackDamage;
     [HideInInspector] public float startingSuckPower;
+    [HideInInspector] public float startingAttackRange;
 
 
     [Header("Upgrading Values")]
@@ -26,6 +27,7 @@ public class LevelUp : NetworkBehaviour
     [SerializeField] public float sizeIncreaseOnLevelUp = .1f;
     [SerializeField] public float suckPowerIncreaseOnLevelUp = .1f;
     [SerializeField] public float cameraDistanceIncreaseOnLevelUp = .75f;
+    [SerializeField] public float attackRangeIncreaseOnLevelUp = .2f;
 
     private void Start()
     {
@@ -37,6 +39,7 @@ public class LevelUp : NetworkBehaviour
         startingDefaultSwimSpeed = GetComponent<ThirdPersonController>().defaultSwimSpeed;
         startingAttackDamage = GetComponent<ThirdPersonController>().playerManager.attack.attackDamage;
         startingSuckPower = GetComponent<ThirdPersonController>().playerManager.attack.suckPower;
+        startingAttackRange = GetComponent<ThirdPersonController>().playerManager.attack.attackRange;
     }
 
     private void Update()
@@ -49,6 +52,7 @@ public class LevelUp : NetworkBehaviour
             GetComponent<ThirdPersonController>().defaultSwimSpeed += boostSwimSpeedIncreaseOnLevelUp;
             GetComponent<ThirdPersonController>().playerManager.attack.attackDamage += attackDamageIncreaseOnLevelUp;
             GetComponent<ThirdPersonController>().playerManager.attack.suckPower += suckPowerIncreaseOnLevelUp;
+            GetComponent<ThirdPersonController>().playerManager.attack.attackRange += attackRangeIncreaseOnLevelUp;
             experienceUntilUpgrade += experienceIncreaseOnLevelUp;
             currentExperience = 0;
         }

@@ -4,10 +4,11 @@ using Fusion;
 using StarterAssets;
 using UnityEngine;
 
-public class Health : NetworkBehaviour, ISpawned
+public class Health : NetworkBehaviour
 {
     [Header("Health")]
     public float maxHealth;
+    public bool notAbleToGetBitten;
 
     [Networked] [OnChangedRender(nameof(CheckDeath))] public float NetworkedHealth { get; set; } = 5;
     private ParticleSystem bloodParticleSystem;
@@ -125,6 +126,7 @@ public class Health : NetworkBehaviour, ISpawned
         thirdPersonController.cameraDistance = thirdPersonController.playerManager.levelUp.startingCameraDistance;
         thirdPersonController.defaultSwimSpeed = thirdPersonController.playerManager.levelUp.startingDefaultSwimSpeed;
         thirdPersonController.boostSwimSpeed = thirdPersonController.playerManager.levelUp.startingBoostSwimSpeed;
+        thirdPersonController.playerManager.attack.attackRange = thirdPersonController.playerManager.levelUp.startingAttackRange;
 
         var playerTransform = thirdPersonController.transform;
         GetComponent<PlayerPosResetter>().ResetPlayerPosition();
