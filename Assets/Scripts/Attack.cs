@@ -94,7 +94,7 @@ public class Attack : NetworkBehaviour
                     }
 
                     //Decreasing lossyScale cause it is a bit too big
-                    if (directionToTarget.magnitude <= thirdPersonController.transform.localToWorldMatrix.lossyScale.z - .05f)
+                    if (directionToTarget.magnitude <= thirdPersonController.transform.localToWorldMatrix.lossyScale.z - .03f)
                     {
                         thirdPersonController.playerManager.levelUp.currentExperience += health.experienceValue;
                         if(thirdPersonController.playerManager.health.NetworkedHealth < thirdPersonController.playerManager.health.maxHealth)

@@ -28,21 +28,26 @@ namespace BiggestFish.Gameplay
         public void SpawnMeatObjects(NetworkRunner runner)
         {
             if (gibPrefab != null)
+            {
                 for (var i = 0; i < gibSpawnCount; i++)
                 {
+                    var spawnPosition = transform.position + Random.insideUnitSphere * 0.5f;
+
                     //need to go with that /3 workaround so starfishes drop gibs with the right size
+                    //also for the gib position because otherwise it would spawn inside the ground
                     if (isStarFish)
                     {
-                        gibPrefab.transform.localScale = transform.localToWorldMatrix.lossyScale / 3;
+                        gibPrefab.transform.localScale = transform.localToWorldMatrix.lossyScale / 4;
+                        spawnPosition = transform.position;
                     }
                     else
                     {
                         gibPrefab.transform.localScale = transform.localToWorldMatrix.lossyScale / gibSpawnCount;
                     }
-                    var randomOffset = Random.insideUnitSphere * 0.5f; // Adjust the offset as needed
-                    var spawnPosition = transform.position + randomOffset;
+                    
                     runner.Spawn(gibPrefab, spawnPosition, Quaternion.identity);
-                }
+                }   
+            }
         }
     }
 }
