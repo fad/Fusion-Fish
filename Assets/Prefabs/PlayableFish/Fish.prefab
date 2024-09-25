@@ -199,7 +199,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settingsSO: {fileID: 11400000, guid: 933cba68e45ea634da0cb2bf0e3cb604, type: 2}
-  playerRotationSmoothTime: 10
+  playerRotationSmoothTime: 15
   sensitivity: 1.5
   playerVisual: {fileID: 5159690815227489710}
   playerMesh: {fileID: 3696368532508958808}
@@ -219,9 +219,9 @@ MonoBehaviour:
   bottomClamp: -80
   cameraAngleOverride: 0
   lockCameraPosition: 0
-  notMovingFOV: 17.5
-  defaultSpeedFOV: 20
-  boostSpeedFOV: 30
+  notMovingFOV: 20
+  defaultSpeedFOV: 25
+  boostSpeedFOV: 32.5
   cameraDistance: 5
   animator: {fileID: 6424190454631559794}
   networkAnimator: {fileID: 4638653781339947410}
@@ -348,6 +348,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d236a4e7dc78af4595a84b79237166e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentSpawnablePoint:
+    location: {x: 0, y: 0, z: 0}
+    rotation: {x: 0, y: 0, z: 0, w: 0}
   minYValue: -125
 --- !u!114 &760614429699185995
 MonoBehaviour:

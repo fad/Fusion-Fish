@@ -198,12 +198,13 @@ namespace StarterAssets
             cineMachineTargetPitch = ClampAngle(cineMachineTargetPitch, bottomClamp, topClamp);
 
             // CineMachine will follow this target
-            var localRotation = transform.localRotation;
-            localRotation = Quaternion.Lerp(localRotation, Quaternion.Euler(cineMachineTargetPitch + cameraAngleOverride, cineMachineTargetYaw, 0.0f), playerRotationSmoothTime * Time.deltaTime);
-            transform.localRotation = localRotation;
             if (hasVCam)
             {
-                getPlayerCameraAndControls.vCamRoot.transform.localRotation = Quaternion.Lerp(getPlayerCameraAndControls.vCamRoot.transform.localRotation, localRotation, cameraRotationSmoothTime * Time.deltaTime);
+                var localRotation = getPlayerCameraAndControls.vCamRoot.transform.localRotation;
+                localRotation = Quaternion.Lerp(localRotation, Quaternion.Euler(cineMachineTargetPitch + cameraAngleOverride, cineMachineTargetYaw, 0.0f), playerRotationSmoothTime * Time.deltaTime);
+                getPlayerCameraAndControls.vCamRoot.transform.localRotation = localRotation;
+
+                transform.localRotation = Quaternion.Lerp(transform.localRotation, localRotation, cameraRotationSmoothTime * Time.deltaTime);
             }
         }
 
