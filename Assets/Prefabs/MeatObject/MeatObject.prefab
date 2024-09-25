@@ -34,7 +34,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -168.554, y: -0.17, z: 3.6080017}
-  m_LocalScale: {x: 0.33333337, y: 0.33333334, z: 0.33333337}
+  m_LocalScale: {x: 0.28562757, y: 0.28562757, z: 0.28562763}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -126,7 +126,7 @@ MonoBehaviour:
   notAbleToGetBitten: 0
   _NetworkedHealth: 1
   isPlayer: 0
-  experienceValue: 100
+  experienceValue: 50
   isDead: 0
   playerName: {fileID: 0}
   playerVisual: {fileID: 0}

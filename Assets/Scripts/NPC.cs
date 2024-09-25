@@ -22,7 +22,7 @@ public class NPC : NetworkBehaviour
     [Header("Things in NPCs view")]
     [SerializeField] private LayerMask playerLayer;
     [SerializeField] private LayerMask foodLayer;
-    [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private LayerMask stateAuthorityPlayer;
     private GameObject enemy;
 
     [Header("Animation")]
@@ -218,7 +218,7 @@ public class NPC : NetworkBehaviour
     //Checks if the player entered the vision of the NPC and flees when possible
     private void OnTriggerEnter(Collider col)
     {
-        if ((1 << col.gameObject.layer) == playerLayer.value || (1 << col.gameObject.layer) == foodLayer.value)
+        if ((1 << col.gameObject.layer) == playerLayer.value || (1 << col.gameObject.layer) == foodLayer.value || (1 << col.gameObject.layer) == stateAuthorityPlayer.value)
         {
             enemy = col.GetComponent<Transform>().transform.gameObject;
             

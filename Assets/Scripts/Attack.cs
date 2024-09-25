@@ -41,6 +41,11 @@ public class Attack : NetworkBehaviour
 
     private void Start()
     {
+        if (HasStateAuthority)
+        {
+            thirdPersonController.gameObject.layer = LayerMask.NameToLayer("StateAuthorityPlayer");
+        }
+        
         maxSensitivity = thirdPersonController.sensitivity;
         halfSensitivity = thirdPersonController.sensitivity /= 2;
         
@@ -139,12 +144,13 @@ public class Attack : NetworkBehaviour
     {
         if (attackPosition)
         {
-            var hitColliders = new Collider[2];
+            var hitColliders = new Collider[1];
 
             var foodHits = Physics.OverlapSphereNonAlloc(attackPosition.position, attackRange, hitColliders, foodLayerMask);
+            var playerHits = Physics.OverlapSphereNonAlloc(attackPosition.position, attackRange, hitColliders, playerLayerMask);
             
             //Checks for two players because the player always detects itself first
-            if (foodHits >= 1)
+            if (foodHits >= 1 || playerHits >= 1)
             {
                 var directionToTarget = hitColliders[0].transform.position - thirdPersonController.playerVisual.transform.position;
 
