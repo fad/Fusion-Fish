@@ -16,6 +16,7 @@ public class NPC : NetworkBehaviour
     private Rigidbody rb;
     private Vector3 newPosition;
     [SerializeField] private bool mainMenuObject;
+    private bool slowDownNPC;
 
     [Header("Things in NPCs view")]
     [SerializeField] private LayerMask playerLayer;
@@ -184,7 +185,14 @@ public class NPC : NetworkBehaviour
     
     private void MoveNPCInDirection(Vector3 targetDirection, Quaternion lookDirection)
     {
-        rb.AddForce(targetDirection.normalized * (-currentSpeed * Time.deltaTime), ForceMode.Impulse);
+        if (TryGetComponent<Health>(out var health) && health.slowNPCDown)
+        {
+            rb.AddForce(targetDirection.normalized * (-currentSpeed / 2 * Time.deltaTime), ForceMode.Impulse);
+        }
+        else
+        {
+            rb.AddForce(targetDirection.normalized * (-currentSpeed * Time.deltaTime), ForceMode.Impulse);
+        }
         
         if (rb.velocity.sqrMagnitude > .1f) 
         {  

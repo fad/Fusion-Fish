@@ -22,6 +22,7 @@ public class Health : NetworkBehaviour
     
     [Header("SlowDown")]
     [HideInInspector] public bool slowPlayerDown;
+    [HideInInspector] public bool slowNPCDown;
     private float slowDownSpeedTime = 5;
     [SerializeField] private float maxSlowDownSpeedTime = 5;
     
@@ -68,6 +69,14 @@ public class Health : NetworkBehaviour
                 slowPlayerDown = false;
             }
         }
+        else if (slowNPCDown)
+        {
+            slowDownSpeedTime -= Time.deltaTime;
+            if (slowDownSpeedTime <= 0)
+            {
+                slowNPCDown = false;
+            }
+        }
     }
 
     [Rpc(RpcSources.All, RpcTargets.All)]
@@ -91,14 +100,11 @@ public class Health : NetworkBehaviour
             {
                 PlayerDeath();
             }
-            else
+            else if(currentHealth >= NetworkedHealth)
             {
-                if (currentHealth >= NetworkedHealth)
-                {
-                    slowDownSpeedTime = maxSlowDownSpeedTime;
-                    slowPlayerDown = true;
-                    currentHealth = NetworkedHealth;
-                }
+                slowDownSpeedTime = maxSlowDownSpeedTime;
+                slowPlayerDown = true;
+                currentHealth = NetworkedHealth;
             }
         }
         else if(!isPlayer)
@@ -111,6 +117,12 @@ public class Health : NetworkBehaviour
                 }
             
                 NPCDeathRpc();
+            }
+            else if(currentHealth >= NetworkedHealth)
+            {
+                slowDownSpeedTime = maxSlowDownSpeedTime;
+                slowNPCDown = true;
+                currentHealth = NetworkedHealth;
             }
         }
     }
