@@ -43,6 +43,7 @@ namespace StarterAssets
         [SerializeField] private float boostDelayAfterActivation = 3f;
         [SerializeField] private float boostReloadSpeed = 18;
         [SerializeField] private float boostConsumptionSpeed = 30;
+        [SerializeField] private ParticleSystem boostParticles;
         public float maxBoostCount = 100f;
         private bool isBoosting;
         private bool canReloadBoost = true;
@@ -289,11 +290,14 @@ namespace StarterAssets
                     { 
                         if(!isBoosting)
                             AudioManager.Instance.PlaySoundWithRandomPitchAtPosition("boost", transform.position);
+                        boostParticles.Play();
                         isBoosting = true;
                         currentBoostCount -= Time.deltaTime * boostConsumptionSpeed;
                     }
                     break;
                 case BoostState.BoostReload :
+                    boostParticles.Stop();
+
                     if (!canReload)
                     {
                         DelayedBoostReload();
