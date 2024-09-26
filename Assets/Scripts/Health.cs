@@ -160,7 +160,6 @@ public class Health : NetworkBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         HudUI.Instance.deathPanel.SetActive(false);
         isDead = false;
-        NetworkedHealth = maxHealth;
         
         thirdPersonController.playerManager.levelUp.currentExperience = thirdPersonController.playerManager.levelUp.startingExperience;
         thirdPersonController.playerManager.levelUp.experienceUntilUpgrade = thirdPersonController.playerManager.levelUp.startingExperienceUntilUpgrade;
@@ -171,7 +170,11 @@ public class Health : NetworkBehaviour
         thirdPersonController.defaultSwimSpeed = thirdPersonController.playerManager.levelUp.startingDefaultSwimSpeed;
         thirdPersonController.boostSwimSpeed = thirdPersonController.playerManager.levelUp.startingBoostSwimSpeed;
         thirdPersonController.playerManager.attack.attackRange = thirdPersonController.playerManager.levelUp.startingAttackRange;
+        thirdPersonController.playerManager.health.maxHealth = thirdPersonController.playerManager.levelUp.startingHealth;
 
+        NetworkedHealth = maxHealth;
+        thirdPersonController.currentBoostCount = thirdPersonController.maxBoostCount;
+        
         var playerTransform = thirdPersonController.transform;
         GetComponent<PlayerPosResetter>().ResetPlayerPosition();
         playerTransform.localScale = thirdPersonController.playerManager.levelUp.startingSize;

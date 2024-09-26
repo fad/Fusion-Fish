@@ -7,21 +7,18 @@ using Random = UnityEngine.Random;
 public class NPC : NetworkBehaviour
 {
     [Header("Movement")] 
-    private float currentSpeed;
     [SerializeField] private float rotationSpeed = 10f;
     [SerializeField] private float maxSwimSpeed = 95f;
     [SerializeField] private float defaultSwimSpeed = 30f;
-    [SerializeField] private float minTimeChangeMoveDirection = 6f;
-    [SerializeField] private float maxTimeChangeMoveDirection = 10f;
-    private Rigidbody rb;
-    private Vector3 newPosition;
     [SerializeField] private bool mainMenuObject;
+    private float currentSpeed;
     private bool slowDownNPC;
 
-    [Header("Things in NPCs view")]
+    [Header("Layers")]
     [SerializeField] private LayerMask playerLayer;
     [SerializeField] private LayerMask foodLayer;
     [SerializeField] private LayerMask stateAuthorityPlayer;
+    [SerializeField] private LayerMask groundLayer;
     private GameObject enemy;
 
     [Header("Animation")]
@@ -42,11 +39,15 @@ public class NPC : NetworkBehaviour
     private const float FlightTime = 3f;
     
     [Header("Natural Behaviour")]
-    [Tooltip("time when the npc changes direction of movement")]
-    private float randomTime;
-    private float currentWaitTime;
     [SerializeField] private float minWaitTime;
     [SerializeField] private float maxWaitTime;
+    [SerializeField] private float minTimeChangeMoveDirection = 6f;
+    [SerializeField] private float maxTimeChangeMoveDirection = 10f;
+    private Rigidbody rb;
+    private Vector3 newPosition;
+    [Tooltip("time when the npc changes direction of movement")] 
+    private float randomTime;
+    private float currentWaitTime;
 
     private Behaviour behaviour;
     private enum Behaviour
@@ -91,7 +92,13 @@ public class NPC : NetworkBehaviour
             case Behaviour.Flight:
                 var swimDirectionAwayFromEnemy = enemy.transform.position - transform.position;
                 
-                currentSpeed = GetComponent<Health>().NetworkedHealth >= GetComponent<Health>().maxHealth ? maxSwimSpeed : defaultSwimSpeed;
+                currentSpeed = maxSwimSpeed;
+                
+                if (Physics.Raycast(transform.position, -transform.forward, out var hitFlight, 1, groundLayer))
+                {
+                    swimDirectionAwayFromEnemy = new Vector3(hitFlight.normal.x, hitFlight.normal.y, hitFlight.normal.z);
+                    swimDirectionAwayFromEnemy *= 5;
+                }
                 
                 MoveNPCInDirection(swimDirectionAwayFromEnemy, Quaternion.LookRotation(swimDirectionAwayFromEnemy));
                 break;
@@ -102,14 +109,8 @@ public class NPC : NetworkBehaviour
                 {
                     newPosition = new Vector3(RandomFloat(currentPosition.x), RandomFloat(currentPosition.y), RandomFloat(currentPosition.z));
 
-                    //Make NPC not swim toward objects
-                    //if (Physics.Raycast(currentPosition, newPosition - currentPosition, float.MaxValue , groundLayer))
-                    //{
-                        //return;
-                    //}
-                    
                     randomTime = Random.Range(minTimeChangeMoveDirection, maxTimeChangeMoveDirection);
-                    defaultSwimSpeed = Random.Range(defaultSwimSpeed - 10, defaultSwimSpeed + 10);
+                    currentSpeed = Random.Range(defaultSwimSpeed - 5, defaultSwimSpeed + 5);
                     currentWaitTime = Random.Range(minWaitTime, maxWaitTime);
                 }
 
@@ -122,13 +123,18 @@ public class NPC : NetworkBehaviour
                 {
                     randomTime -= Time.deltaTime;
                     
-                    currentSpeed = defaultSwimSpeed;
+                    //Make NPC not swim toward objects
+                    if (Physics.Raycast(currentPosition, -transform.forward, out var hit, 1, groundLayer))
+                    {
+                        newPosition = new Vector3(hit.normal.x, hit.normal.y, hit.normal.z);
+                        newPosition *= 5;
+                    }
 
                     MoveNPCInDirection(newPosition - currentPosition, Quaternion.LookRotation(newPosition - currentPosition));
                 }
                 break;
             case Behaviour.Attack:
-                if (Vector3.Distance(transform.position, enemy.transform.position) < 15 && !enemy.GetComponent<Health>().isDead)
+                if (enemy != null && Vector3.Distance(transform.position, enemy.transform.position) < 15 && !enemy.GetComponent<Health>().isDead && !Physics.Raycast(transform.position, -transform.forward, 1, groundLayer))
                 {
                     if (Vector3.Distance(transform.position, enemy.transform.position) < 1)
                     {
@@ -170,7 +176,7 @@ public class NPC : NetworkBehaviour
         
         yield return new WaitForSeconds(.2f);
         
-        if(Vector3.Distance(transform.position, enemy.transform.position) < 1.5f && !enemy.GetComponent<Health>().isDead)
+        if(enemy != null && Vector3.Distance(transform.position, enemy.transform.position) < 1.5f && !enemy.GetComponent<Health>().isDead)
         {
             SubtractHealth();
         }
@@ -194,10 +200,7 @@ public class NPC : NetworkBehaviour
             rb.AddForce(targetDirection.normalized * (-currentSpeed * Time.deltaTime), ForceMode.Impulse);
         }
         
-        if (rb.velocity.sqrMagnitude > .1f) 
-        {  
-            transform.rotation = Quaternion.Lerp(transform.rotation, lookDirection, Time.deltaTime * rotationSpeed);
-        }
+        transform.rotation = Quaternion.Lerp(transform.rotation, lookDirection, Time.deltaTime * rotationSpeed);
     }
     
     private float RandomFloat(float value)
@@ -235,5 +238,10 @@ public class NPC : NetworkBehaviour
                 behaviour = Behaviour.Attack;
             }
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawRay(transform.position, -transform.forward);
     }
 }
