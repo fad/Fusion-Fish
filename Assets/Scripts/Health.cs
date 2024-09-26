@@ -191,8 +191,10 @@ public class Health : NetworkBehaviour
 
         var emissionModule = bloodParticleSystem.emission;
         emissionModule.SetBursts(new ParticleSystem.Burst[] { new(0.0f, burstCount) });
-        
-        bloodParticleSystem.transform.position = transform.position;
+
+        var healthObject = transform;
+        bloodParticleSystem.transform.position = healthObject.position;
+        bloodParticleSystem.transform.SetParent(healthObject);
         bloodParticleSystem.Play();
     }
 }

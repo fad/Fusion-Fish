@@ -183,7 +183,6 @@ Transform:
   - {fileID: 3554473533067565278}
   - {fileID: 5967580297110785664}
   - {fileID: 2278835644543468176}
-  - {fileID: 4691703134934924210}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 25, y: 0, z: 0}
 --- !u!114 &9150513680388461083
@@ -249,6 +248,7 @@ MonoBehaviour:
   startingAttackDamage: 0
   startingSuckPower: 0
   startingAttackRange: 0
+  startingHealth: 0
   experienceUntilUpgrade: 300
   currentExperience: 0
   experienceIncreaseOnLevelUp: 200
@@ -259,6 +259,7 @@ MonoBehaviour:
   suckPowerIncreaseOnLevelUp: 0.2
   cameraDistanceIncreaseOnLevelUp: 1
   attackRangeIncreaseOnLevelUp: 0.2
+  healthIncreaseOnLevelUp: 5
 --- !u!114 &4632872686385277288
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -277,6 +278,7 @@ MonoBehaviour:
   isPlayer: 0
   experienceValue: 100
   slowPlayerDown: 0
+  slowNPCDown: 0
   maxSlowDownSpeedTime: 2
   isDead: 0
   playerName: {fileID: 3556001508082968735}
@@ -1511,12 +1513,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5308674794192203540}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.0004055649, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.0008817613, y: 0.09, z: -1.52}
+  m_LocalRotation: {x: 0.00040556485, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.085, z: -0.971}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 61442038398986381}
+  m_Father: {fileID: 5267721347161833077}
   m_LocalEulerAnglesHint: {x: 0.046, y: 0, z: 0}
 --- !u!198 &1547311364694370056
 ParticleSystem:
@@ -1593,7 +1595,7 @@ ParticleSystem:
       m_RotationOrder: 4
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
-  scalingMode: 1
+  scalingMode: 0
   randomSeed: 0
   InitialModule:
     serializedVersion: 3
@@ -6530,6 +6532,7 @@ Transform:
   m_Children:
   - {fileID: 3618376831159647704}
   - {fileID: 7313602391179836202}
+  - {fileID: 4691703134934924210}
   m_Father: {fileID: 5967580297110785664}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &6424190454631559794
