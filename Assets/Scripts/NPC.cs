@@ -242,9 +242,4 @@ public class NPC : NetworkBehaviour
             }
         }
     }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawRay(transform.position, -transform.forward);
-    }
 }
