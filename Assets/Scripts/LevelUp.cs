@@ -1,5 +1,7 @@
+using System.Collections;
 using Fusion;
 using StarterAssets;
+using TMPro;
 using UnityEngine;
 
 public class LevelUp : NetworkBehaviour
@@ -16,7 +18,6 @@ public class LevelUp : NetworkBehaviour
     [HideInInspector] public float startingAttackRange;
     [HideInInspector] public float startingHealth;
 
-
     [Header("Upgrading Values")]
     public int experienceUntilUpgrade = 300;
     [HideInInspector] public int currentExperience;
@@ -30,9 +31,14 @@ public class LevelUp : NetworkBehaviour
     [SerializeField] public float cameraDistanceIncreaseOnLevelUp = .75f;
     [SerializeField] public float attackRangeIncreaseOnLevelUp = .2f;
     [SerializeField] public float healthIncreaseOnLevelUp = 5f;
+    
+    [Header("LevelUpText")]
+    [SerializeField] private TextMeshProUGUI levelUpText;
+    private Vector3 textStartingPosition;
 
     private void Start()
     {
+        textStartingPosition = levelUpText.transform.localPosition;
         startingExperienceUntilUpgrade = experienceUntilUpgrade;
         startingExperience = currentExperience;
         startingSize = GetComponent<ThirdPersonController>().transform.localScale;
@@ -59,6 +65,20 @@ public class LevelUp : NetworkBehaviour
             GetComponent<ThirdPersonController>().playerManager.health.maxHealth += healthIncreaseOnLevelUp;
             experienceUntilUpgrade += experienceIncreaseOnLevelUp;
             currentExperience = 0;
+            AudioManager.Instance.Play("levelUp");
+            StartCoroutine(ShowLevelUpText());
+        }
+    }
+
+    private IEnumerator ShowLevelUpText()
+    {
+        levelUpText.transform.localPosition = textStartingPosition;
+        levelUpText.color = Color.white;
+        while (levelUpText.color.a > 0)
+        {
+            levelUpText.transform.localPosition += Vector3.up * Time.deltaTime ;
+            Color.Lerp(levelUpText.color, new Color(1,1,1,0), Time.deltaTime * 30);
+            yield return null;
         }
     }
 }

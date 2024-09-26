@@ -99,6 +99,8 @@ public class Attack : NetworkBehaviour
                         thirdPersonController.playerManager.levelUp.currentExperience += health.experienceValue;
                         if(thirdPersonController.playerManager.health.NetworkedHealth < thirdPersonController.playerManager.health.maxHealth)
                             thirdPersonController.playerManager.health.NetworkedHealth += 10;
+                        //decreasing experience value because otherwise I would get experience twice when eating the shrimp
+                        health.experienceValue = 0;
                         health.ReceiveDamageRpc(suckPower, false);
                     }   
                 }

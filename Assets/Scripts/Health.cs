@@ -85,7 +85,7 @@ public class Health : NetworkBehaviour
         NetworkedHealth -= damage;
         
         spawnGibs = spawnGibsOnDestroy;
-        
+
         if (NetworkedHealth > 0)
         {
             PlayParticles(Color.red, 10);
@@ -194,7 +194,9 @@ public class Health : NetworkBehaviour
 
         var healthObject = transform;
         bloodParticleSystem.transform.position = healthObject.position;
+        var parent = bloodParticleSystem.transform.parent;
         bloodParticleSystem.transform.SetParent(healthObject);
         bloodParticleSystem.Play();
+        bloodParticleSystem.transform.SetParent(parent);
     }
 }

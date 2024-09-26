@@ -90,17 +90,20 @@ public class NPC : NetworkBehaviour
         switch (behaviour)
         {
             case Behaviour.Flight:
-                var swimDirectionAwayFromEnemy = enemy.transform.position - transform.position;
-                
-                currentSpeed = maxSwimSpeed;
-                
-                if (Physics.Raycast(transform.position, -transform.forward, out var hitFlight, 1, groundLayer))
+                if (enemy != null)
                 {
-                    swimDirectionAwayFromEnemy = new Vector3(hitFlight.normal.x, hitFlight.normal.y, hitFlight.normal.z);
-                    swimDirectionAwayFromEnemy *= 5;
-                }
+                    var swimDirectionAwayFromEnemy = enemy.transform.position - transform.position;
                 
-                MoveNPCInDirection(swimDirectionAwayFromEnemy, Quaternion.LookRotation(swimDirectionAwayFromEnemy));
+                    currentSpeed = maxSwimSpeed;
+                
+                    if (Physics.Raycast(transform.position, -transform.forward, out var hitFlight, 1, groundLayer))
+                    {
+                        swimDirectionAwayFromEnemy = new Vector3(hitFlight.normal.x, hitFlight.normal.y, hitFlight.normal.z);
+                        swimDirectionAwayFromEnemy *= 5;
+                    }
+                
+                    MoveNPCInDirection(swimDirectionAwayFromEnemy, Quaternion.LookRotation(swimDirectionAwayFromEnemy));   
+                }
                 break;
             case Behaviour.NaturalBehaviour:
                 var currentPosition = transform.position;

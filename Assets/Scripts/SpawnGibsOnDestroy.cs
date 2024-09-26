@@ -12,7 +12,7 @@ namespace BiggestFish.Gameplay
         [SerializeField] private int gibsExperienceValue = 100;
         [HideInInspector] public bool spawnGibs;
         [SerializeField] private bool isStarFish;
-        
+
         private void OnDestroy()
         {
             if (!gameObject.scene.isLoaded || !spawnGibs) 
