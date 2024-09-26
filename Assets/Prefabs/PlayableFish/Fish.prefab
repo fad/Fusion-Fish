@@ -221,8 +221,8 @@ MonoBehaviour:
   cameraAngleOverride: 0
   lockCameraPosition: 0
   notMovingFOV: 20
-  defaultSpeedFOV: 25
-  boostSpeedFOV: 32.5
+  defaultSpeedFOV: 22.5
+  boostSpeedFOV: 40
   cameraDistance: 5
   animator: {fileID: 6424190454631559794}
   networkAnimator: {fileID: 4638653781339947410}
