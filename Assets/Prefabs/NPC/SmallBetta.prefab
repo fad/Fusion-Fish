@@ -275,59 +275,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 8034310407165375948}
   m_LocalEulerAnglesHint: {x: -0.00000031433433, y: 0.000000006670215, z: 0.0000004279364}
---- !u!1 &4562269826534794372
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1444416815963721638}
-  - component: {fileID: 5472736566177365975}
-  m_Layer: 2
-  m_Name: PredatorDetection
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1444416815963721638
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4562269826534794372}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6719698805464160928}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &5472736566177365975
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4562269826534794372}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 64
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 5, y: 5, z: 10}
-  m_Center: {x: 0, y: 0, z: -5}
 --- !u!1 &5197201702416932992
 GameObject:
   m_ObjectHideFlags: 0
@@ -368,7 +315,6 @@ Transform:
   m_Children:
   - {fileID: 1851556293424689627}
   - {fileID: 7886857221017298452}
-  - {fileID: 1444416815963721638}
   - {fileID: 5509542926871816893}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: -173.45, z: 0}
@@ -404,6 +350,8 @@ MonoBehaviour:
   timeBetweenAttacksMin: 0.6
   attacksPlayer: 1
   attackDamage: 5
+  attackRange: 7
+  attractionAngle: 60
   maxFlightDelayTime: 7
   minWaitTime: 4
   maxWaitTime: 6

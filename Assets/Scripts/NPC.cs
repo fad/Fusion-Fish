@@ -31,6 +31,8 @@ public class NPC : NetworkBehaviour
     [SerializeField] private int attackDamage = 10;
     private float enemyRange;
     private bool isAttacking;
+    [SerializeField] private float attackRange;
+    [SerializeField] private float attractionAngle;
 
     [Header("Flight")]
     [SerializeField] private float maxFlightDelayTime;
@@ -67,6 +69,8 @@ public class NPC : NetworkBehaviour
     private void Update()
     {
         DoBehaviour();
+        
+        CheckForEnemies();
 
         if (!attacksPlayer)
         {
@@ -113,7 +117,6 @@ public class NPC : NetworkBehaviour
                     newPosition = new Vector3(RandomFloat(currentPosition.x), RandomFloat(currentPosition.y), RandomFloat(currentPosition.z));
 
                     randomTime = Random.Range(minTimeChangeMoveDirection, maxTimeChangeMoveDirection);
-                    currentSpeed = Random.Range(defaultSwimSpeed - 5, defaultSwimSpeed + 5);
                     currentWaitTime = Random.Range(minWaitTime, maxWaitTime);
                 }
 
@@ -126,6 +129,8 @@ public class NPC : NetworkBehaviour
                 {
                     randomTime -= Time.deltaTime;
                     
+                    currentSpeed = defaultSwimSpeed;
+
                     //Make NPC not swim toward objects
                     if (Physics.Raycast(currentPosition, -transform.forward, out var hit, 1, groundLayer))
                     {
@@ -224,21 +229,37 @@ public class NPC : NetworkBehaviour
     }
 
     //Checks if the player entered the vision of the NPC and flees when possible
-    private void OnTriggerEnter(Collider col)
+    private void CheckForEnemies()
     {
-        if ((1 << col.gameObject.layer) == playerLayer.value || (1 << col.gameObject.layer) == foodLayer.value || (1 << col.gameObject.layer) == stateAuthorityPlayer.value)
+        var hitColliders = new Collider[1];
+
+        var position = transform.position;
+        var foodHits = Physics.OverlapSphereNonAlloc(position, attackRange, hitColliders, foodLayer);
+        var playerHits = Physics.OverlapSphereNonAlloc(position, attackRange, hitColliders, playerLayer);
+        var playerStateAuthorityHits = Physics.OverlapSphereNonAlloc(position, attackRange, hitColliders, stateAuthorityPlayer);
+        
+        //Checks for two players because the player always detects itself first
+        if ((foodHits >= 1 && transform.localScale.z > hitColliders[0].transform.localScale.z) || playerHits >= 1 || playerStateAuthorityHits >= 1 && !hitColliders[0].GetComponent<Health>().notAbleToGetBitten  && hitColliders[0].GetComponent<Health>() != GetComponent<Health>())
         {
-            enemy = col.GetComponent<Transform>().transform.gameObject;
-            
-            if (!attacksPlayer && canFlight)
+            var directionToTarget = hitColliders[0].transform.position - transform.position;
+
+            var angleToTarget = Vector3.Angle(-transform.forward, directionToTarget);
+
+            // Check if the target is within the attraction distance and angle
+            if (angleToTarget <= attractionAngle)
             {
-                StartCoroutine(FlightCoroutine());
-            }
-            
-            if(attacksPlayer)
-            {
-                rb.velocity = Vector3.zero;
-                behaviour = Behaviour.Attack;
+                enemy = hitColliders[0].gameObject;
+        
+                if (!attacksPlayer && canFlight)
+                {
+                    StartCoroutine(FlightCoroutine());
+                }
+        
+                if(attacksPlayer)
+                {
+                    rb.velocity = Vector3.zero;
+                    behaviour = Behaviour.Attack;
+                }
             }
         }
     }

@@ -104,7 +104,6 @@ Transform:
   m_Children:
   - {fileID: 7790766971098883242}
   - {fileID: 4381205498386125622}
-  - {fileID: 6957889203805690666}
   - {fileID: 6695634646528823994}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: -173.45, z: 0}
@@ -140,6 +139,8 @@ MonoBehaviour:
   timeBetweenAttacksMin: 0.8
   attacksPlayer: 1
   attackDamage: 40
+  attackRange: 7
+  attractionAngle: 60
   maxFlightDelayTime: 7
   minWaitTime: 4
   maxWaitTime: 6
@@ -421,59 +422,6 @@ Transform:
   - {fileID: 1936869325746002402}
   m_Father: {fileID: 2027748069766514836}
   m_LocalEulerAnglesHint: {x: 0.0000018084661, y: -0.0000016518383, z: 0.0000002134447}
---- !u!1 &5518995704694313309
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6957889203805690666}
-  - component: {fileID: 4357064013482566792}
-  m_Layer: 2
-  m_Name: PredatorDetection
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6957889203805690666
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5518995704694313309}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2272484484140671058}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &4357064013482566792
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5518995704694313309}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 64
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 5, y: 5, z: 10}
-  m_Center: {x: 0, y: 0, z: -5}
 --- !u!1 &5907885762567082049
 GameObject:
   m_ObjectHideFlags: 0
