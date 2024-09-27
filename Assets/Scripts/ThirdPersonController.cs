@@ -181,7 +181,8 @@ namespace StarterAssets
                 }
                 else
                 {
-                    cineMachineTargetYaw += input.look.x * deltaTimeMultiplier * sensitivity;
+                    Debug.Log(input.look.x);
+                    cineMachineTargetYaw += Mathf.Clamp(input.look.x, -15, 15) * deltaTimeMultiplier * sensitivity;
                 }
 
                 if (settingsSO.yInputIsInverted)
@@ -190,6 +191,7 @@ namespace StarterAssets
                 }
                 else
                 {
+                    Debug.Log(input.look.y);
                     cineMachineTargetPitch += -input.look.y * deltaTimeMultiplier * sensitivity;
                 }
             }
@@ -202,10 +204,10 @@ namespace StarterAssets
             if (hasVCam)
             {
                 var localRotation = getPlayerCameraAndControls.vCamRoot.transform.localRotation;
-                localRotation = Quaternion.Lerp(localRotation, Quaternion.Euler(cineMachineTargetPitch + cameraAngleOverride, cineMachineTargetYaw, 0.0f), playerRotationSmoothTime * Time.deltaTime);
+                localRotation = Quaternion.Lerp(localRotation, Quaternion.Euler(cineMachineTargetPitch + cameraAngleOverride, cineMachineTargetYaw, 0.0f), cameraRotationSmoothTime * Time.deltaTime);
                 getPlayerCameraAndControls.vCamRoot.transform.localRotation = localRotation;
 
-                transform.localRotation = Quaternion.Lerp(transform.localRotation, localRotation, cameraRotationSmoothTime * Time.deltaTime);
+                transform.localRotation = Quaternion.Lerp(transform.localRotation, localRotation, playerRotationSmoothTime * Time.deltaTime);
             }
         }
 

@@ -198,7 +198,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settingsSO: {fileID: 11400000, guid: 933cba68e45ea634da0cb2bf0e3cb604, type: 2}
-  playerRotationSmoothTime: 15
+  playerRotationSmoothTime: 13.75
   sensitivity: 1.5
   playerVisual: {fileID: 5159690815227489710}
   playerMesh: {fileID: 3696368532508958808}
@@ -215,7 +215,7 @@ MonoBehaviour:
   boostParticles: {fileID: 254483115755838342}
   maxBoostCount: 100
   cameraFOVSmoothTime: 2
-  cameraRotationSmoothTime: 4.5
+  cameraRotationSmoothTime: 15
   topClamp: 80
   bottomClamp: -80
   cameraAngleOverride: 0
