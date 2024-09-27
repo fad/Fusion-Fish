@@ -186,7 +186,7 @@ public class NPC : NetworkBehaviour
         
         yield return new WaitForSeconds(.2f);
         
-        if(enemy != null && Vector3.Distance(transform.position, enemy.transform.position) < 1.5f && !enemy.GetComponent<Health>().isDead)
+        if(enemy != null && Vector3.Distance(transform.position, enemy.transform.position) < attackRange + .5f && !enemy.GetComponent<Health>().isDead)
         {
             SubtractHealth();
         }
@@ -243,7 +243,7 @@ public class NPC : NetworkBehaviour
         //Checks for two players because the player always detects itself first
         if ((foodHits >= 1 && transform.localScale.z > hitColliders[0].transform.localScale.z) || playerHits >= 1 || 
             playerStateAuthorityHits >= 1 && hitColliders[0].TryGetComponent<Health>(out var health) && 
-            health.notAbleToGetBitten && health != GetComponent<Health>() && !health.isShrimp && !health.isStarFish)
+            !health.notAbleToGetBitten && health != GetComponent<Health>() && !health.isShrimp && !health.isStarFish)
         {
             var directionToTarget = hitColliders[0].transform.position - transform.position;
 

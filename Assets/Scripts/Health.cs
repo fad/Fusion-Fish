@@ -81,7 +81,6 @@ public class Health : NetworkBehaviour
         }
     }
 
-    [Rpc(RpcSources.All, RpcTargets.All)]
     public void ReceiveDamageRpc(float damage, bool spawnGibsOnDestroy)
     {
         NetworkedHealth -= damage;
@@ -90,13 +89,13 @@ public class Health : NetworkBehaviour
 
         if (NetworkedHealth > 0)
         {
-            PlayParticles(Color.red, 10);
+            PlayParticlesRpc(Color.red, 10);
         }
     }
 
     private void CheckDeath()
     {
-        if (isPlayer && HasStateAuthority)
+        if (isPlayer && HasStateAuthority && gameObject.scene.isLoaded)
         {
             if (NetworkedHealth <= 0)
             {
@@ -132,7 +131,7 @@ public class Health : NetworkBehaviour
     [Rpc(RpcSources.All, RpcTargets.All, InvokeLocal = true)]
     private void NPCDeathRpc()
     {
-        PlayParticles(Color.red, 30);
+        PlayParticlesRpc(Color.red, 30);
 
         Destroy(gameObject);
     }
@@ -141,10 +140,9 @@ public class Health : NetworkBehaviour
     {
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
-        PlayParticles(Color.red, 30);
+        PlayParticlesRpc(Color.red, 30);
         GetComponent<SpawnGibsOnDestroy>().SpawnMeatObjects(Runner);
         SetPlayerMeshRpc(false);
-        isDead = true;
         HudUI.Instance.deathPanel.SetActive(true);
     }
 
@@ -154,6 +152,7 @@ public class Health : NetworkBehaviour
         playerVisual.SetActive(setActive);
         playerName.SetActive(setActive);
         thirdPersonController.capsuleCollider.enabled = setActive;
+        isDead = !setActive;
     }
     
     public void Restart()
@@ -161,7 +160,6 @@ public class Health : NetworkBehaviour
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         HudUI.Instance.deathPanel.SetActive(false);
-        isDead = false;
         
         thirdPersonController.playerManager.levelUp.currentExperience = thirdPersonController.playerManager.levelUp.startingExperience;
         thirdPersonController.playerManager.levelUp.experienceUntilUpgrade = thirdPersonController.playerManager.levelUp.startingExperienceUntilUpgrade;
@@ -186,7 +184,8 @@ public class Health : NetworkBehaviour
     }
 
     //Here I change burst count and color when needed
-    private void PlayParticles(Color color, int burstCount)
+    [Rpc(RpcSources.All, RpcTargets.All)]
+    private void PlayParticlesRpc(Color color, int burstCount)
     {
         var mainModule = bloodParticleSystem.main;
         mainModule.startColor = new ParticleSystem.MinMaxGradient(color);
@@ -198,6 +197,7 @@ public class Health : NetworkBehaviour
         bloodParticleSystem.transform.position = healthObject.position;
         var parent = bloodParticleSystem.transform.parent;
         bloodParticleSystem.transform.SetParent(healthObject);
+        bloodParticleSystem.transform.localScale = healthObject.localScale;
         bloodParticleSystem.Play();
         bloodParticleSystem.transform.SetParent(parent);
     }

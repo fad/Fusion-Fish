@@ -181,7 +181,6 @@ namespace StarterAssets
                 }
                 else
                 {
-                    Debug.Log(input.look.x);
                     cineMachineTargetYaw += Mathf.Clamp(input.look.x, -15, 15) * deltaTimeMultiplier * sensitivity;
                 }
 
@@ -191,7 +190,6 @@ namespace StarterAssets
                 }
                 else
                 {
-                    Debug.Log(input.look.y);
                     cineMachineTargetPitch += -input.look.y * deltaTimeMultiplier * sensitivity;
                 }
             }

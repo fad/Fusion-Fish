@@ -178,6 +178,8 @@ MonoBehaviour:
   notAbleToGetBitten: 0
   _NetworkedHealth: 10
   isPlayer: 0
+  isShrimp: 0
+  isStarFish: 1
   experienceValue: 50
   slowPlayerDown: 0
   slowNPCDown: 0

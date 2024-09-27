@@ -351,7 +351,7 @@ MonoBehaviour:
   attacksPlayer: 1
   attackDamage: 5
   detectRange: 6
-  attackRange: 1
+  attackRange: 0.7
   attractionAngle: 60
   maxFlightDelayTime: 7
   minWaitTime: 4
@@ -370,9 +370,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f8880170c48b1f44aaef687b67ca3f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 20
+  maxHealth: 30
   notAbleToGetBitten: 0
-  _NetworkedHealth: 20
+  _NetworkedHealth: 30
   isPlayer: 0
   isShrimp: 0
   isStarFish: 0
@@ -713,7 +713,7 @@ GameObject:
   - component: {fileID: 7886857221017298452}
   - component: {fileID: 5479903528969669237}
   m_Layer: 6
-  m_Name: NPC
+  m_Name: betta
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
