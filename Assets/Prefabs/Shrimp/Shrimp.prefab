@@ -1230,7 +1230,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8503746849097813198}
   - component: {fileID: 591577207863333814}
-  - component: {fileID: 9116015445340213341}
   - component: {fileID: 1713854132540231916}
   - component: {fileID: 2643641434420825491}
   - component: {fileID: 1557087152500486892}
@@ -1280,6 +1279,8 @@ MonoBehaviour:
   notAbleToGetBitten: 0
   _NetworkedHealth: 10
   isPlayer: 0
+  isShrimp: 1
+  isSeaStar: 0
   experienceValue: 100
   slowPlayerDown: 0
   slowNPCDown: 0
@@ -1287,20 +1288,6 @@ MonoBehaviour:
   isDead: 0
   playerName: {fileID: 0}
   playerVisual: {fileID: 0}
---- !u!114 &9116015445340213341
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7572578571618421079}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1541381998, guid: e725a070cec140c4caffb81624c8c787, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Guid:
-    RawGuidValue: b9dad96a76a34d346ae8989e61852300
 --- !u!114 &1713854132540231916
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1373,6 +1360,8 @@ MonoBehaviour:
   timeBetweenAttacksMin: 0
   attacksPlayer: 0
   attackDamage: 0
+  attackRange: 0
+  attractionAngle: 0
   maxFlightDelayTime: 5
   minWaitTime: 4
   maxWaitTime: 6

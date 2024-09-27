@@ -239,7 +239,9 @@ public class NPC : NetworkBehaviour
         var playerStateAuthorityHits = Physics.OverlapSphereNonAlloc(position, attackRange, hitColliders, stateAuthorityPlayer);
         
         //Checks for two players because the player always detects itself first
-        if ((foodHits >= 1 && transform.localScale.z > hitColliders[0].transform.localScale.z) || playerHits >= 1 || playerStateAuthorityHits >= 1 && !hitColliders[0].GetComponent<Health>().notAbleToGetBitten  && hitColliders[0].GetComponent<Health>() != GetComponent<Health>())
+        if ((foodHits >= 1 && transform.localScale.z > hitColliders[0].transform.localScale.z) || playerHits >= 1 || 
+            playerStateAuthorityHits >= 1 && hitColliders[0].TryGetComponent<Health>(out var health) && 
+            health.notAbleToGetBitten && health != GetComponent<Health>() && !health.isShrimp && !health.isStarFish)
         {
             var directionToTarget = hitColliders[0].transform.position - transform.position;
 

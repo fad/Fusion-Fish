@@ -4,6 +4,7 @@ using BiggestFish.Gameplay;
 using Fusion;
 using StarterAssets;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class Health : NetworkBehaviour
 {
@@ -16,6 +17,8 @@ public class Health : NetworkBehaviour
     [HideInInspector] public bool isPlayer;
     private bool spawnGibs;
     private float currentHealth;
+    [SerializeField] public bool isShrimp;
+    [SerializeField] public bool isStarFish;
 
     [Header("Experience")] 
     public int experienceValue = 100;
