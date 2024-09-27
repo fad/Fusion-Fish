@@ -1,8 +1,9 @@
 using Fusion;
+using UnityEngine;
 
-public class RequestAuthorityOnSpawn : NetworkBehaviour
+public class RequestAuthorityOnSpawn : NetworkBehaviour, IPlayerJoined
 {
-    public override void Spawned()
+    public void PlayerJoined(PlayerRef player)
     {
         Object.RequestStateAuthority();
     }
