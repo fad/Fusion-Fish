@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using Fusion;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class NPC : NetworkBehaviour
@@ -31,6 +32,7 @@ public class NPC : NetworkBehaviour
     [SerializeField] private int attackDamage = 10;
     private float enemyRange;
     private bool isAttacking;
+    [SerializeField] private float detectRange;
     [SerializeField] private float attackRange;
     [SerializeField] private float attractionAngle;
 
@@ -144,7 +146,7 @@ public class NPC : NetworkBehaviour
             case Behaviour.Attack:
                 if (enemy != null && Vector3.Distance(transform.position, enemy.transform.position) < 15 && !enemy.GetComponent<Health>().isDead && !Physics.Raycast(transform.position, -transform.forward, 1, groundLayer))
                 {
-                    if (Vector3.Distance(transform.position, enemy.transform.position) < 1)
+                    if (Vector3.Distance(transform.position, enemy.transform.position) < attackRange)
                     {
                         if (!isAttacking)
                         {
@@ -234,9 +236,9 @@ public class NPC : NetworkBehaviour
         var hitColliders = new Collider[1];
 
         var position = transform.position;
-        var foodHits = Physics.OverlapSphereNonAlloc(position, attackRange, hitColliders, foodLayer);
-        var playerHits = Physics.OverlapSphereNonAlloc(position, attackRange, hitColliders, playerLayer);
-        var playerStateAuthorityHits = Physics.OverlapSphereNonAlloc(position, attackRange, hitColliders, stateAuthorityPlayer);
+        var foodHits = Physics.OverlapSphereNonAlloc(position, detectRange, hitColliders, foodLayer);
+        var playerHits = Physics.OverlapSphereNonAlloc(position, detectRange, hitColliders, playerLayer);
+        var playerStateAuthorityHits = Physics.OverlapSphereNonAlloc(position, detectRange, hitColliders, stateAuthorityPlayer);
         
         //Checks for two players because the player always detects itself first
         if ((foodHits >= 1 && transform.localScale.z > hitColliders[0].transform.localScale.z) || playerHits >= 1 || 
@@ -264,5 +266,13 @@ public class NPC : NetworkBehaviour
                 }
             }
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, detectRange);
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, attackRange);
     }
 }

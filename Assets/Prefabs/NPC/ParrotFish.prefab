@@ -351,7 +351,8 @@ MonoBehaviour:
   timeBetweenAttacksMin: 0.8
   attacksPlayer: 1
   attackDamage: 10
-  attackRange: 7
+  detectRange: 6
+  attackRange: 1
   attractionAngle: 60
   maxFlightDelayTime: 7
   minWaitTime: 4
@@ -374,6 +375,8 @@ MonoBehaviour:
   notAbleToGetBitten: 0
   _NetworkedHealth: 40
   isPlayer: 0
+  isShrimp: 0
+  isStarFish: 0
   experienceValue: 100
   slowPlayerDown: 0
   slowNPCDown: 0

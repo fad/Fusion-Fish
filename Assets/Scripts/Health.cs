@@ -4,7 +4,6 @@ using BiggestFish.Gameplay;
 using Fusion;
 using StarterAssets;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class Health : NetworkBehaviour
 {

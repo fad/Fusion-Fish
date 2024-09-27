@@ -77,11 +77,11 @@ GameObject:
   - component: {fileID: 6071178378786399832}
   - component: {fileID: 2663326727443188411}
   - component: {fileID: 2906031962914378219}
-  - component: {fileID: 3695348802748119587}
   - component: {fileID: 5642006741565538582}
   - component: {fileID: 8189277226932359251}
   - component: {fileID: 640264574888627524}
   - component: {fileID: 6499744908904026312}
+  - component: {fileID: 3891108210594646023}
   m_Layer: 6
   m_Name: BigShark
   m_TagString: Untagged
@@ -139,7 +139,8 @@ MonoBehaviour:
   timeBetweenAttacksMin: 0.8
   attacksPlayer: 1
   attackDamage: 40
-  attackRange: 7
+  detectRange: 13
+  attackRange: 3.4
   attractionAngle: 60
   maxFlightDelayTime: 7
   minWaitTime: 4
@@ -162,6 +163,8 @@ MonoBehaviour:
   notAbleToGetBitten: 0
   _NetworkedHealth: 150
   isPlayer: 0
+  isShrimp: 0
+  isStarFish: 0
   experienceValue: 100
   slowPlayerDown: 0
   slowNPCDown: 0
@@ -208,27 +211,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!135 &3695348802748119587
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2284069224005208639}
-  m_Material: {fileID: 13400000, guid: 4a66e0c3e7fc24b49adf8cd303ab7611, type: 2}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &5642006741565538582
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -306,6 +288,29 @@ MonoBehaviour:
   SyncParent: 1
   _autoAOIOverride: 1
   DisableSharedModeInterpolation: 1
+--- !u!136 &3891108210594646023
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2284069224005208639}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.2261873
+  m_Height: 0.98718923
+  m_Direction: 2
+  m_Center: {x: 7.010739e-12, y: 0.007584572, z: 0.0064060693}
 --- !u!1 &2769723252524276266
 GameObject:
   m_ObjectHideFlags: 0
@@ -433,7 +438,7 @@ GameObject:
   - component: {fileID: 4381205498386125622}
   - component: {fileID: 1349316226896512507}
   m_Layer: 6
-  m_Name: Tuna
+  m_Name: Shark
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
