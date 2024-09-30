@@ -46,7 +46,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Packages\Clean Multiplayer Pro\Scripts\Menu\LoadingScreen.cs" />
-    <Compile Include="Assets\Scripts\NPC.cs" />
     <Compile Include="Assets\Packages\Photon\PhotonVoice\Demos\DemoVoiceUI\Scripts\UiExtensions.cs" />
     <Compile Include="Assets\Packages\Clean Multiplayer Pro\Scripts\Vote\VoteKickUIPanel.cs" />
     <Compile Include="Assets\Packages\Clean Multiplayer Pro\Mobile Controller\Scripts\CanvasInputs\UICanvasControllerInput.cs" />
@@ -62,27 +61,30 @@
     <Compile Include="Assets\Scripts\FoodSpawner.cs" />
     <Compile Include="Assets\Packages\Photon\PhotonVoice\Demos\DemoVoiceUI\Scripts\MicrophoneSelector.cs" />
     <Compile Include="Assets\Packages\Clean Multiplayer Pro\Scripts\Chat\ChatItem.cs" />
+    <Compile Include="Assets\Scripts\PlayerAttack.cs" />
+    <Compile Include="Assets\Scripts\NPCHealth.cs" />
     <Compile Include="Assets\Packages\Clean Multiplayer Pro\Scripts\Menu\Menu.cs" />
     <Compile Include="Assets\Packages\Photon\PhotonVoice\Demos\DemoVoiceUI\Scripts\RemoteSpeakerUI.cs" />
-    <Compile Include="Assets\Packages\Clean Multiplayer Pro\Scripts\Player\GetPlayerCameraAndControls.cs" />
     <Compile Include="Assets\Packages\Clean Multiplayer Pro\Scripts\Vote\VoiceManager.cs" />
-    <Compile Include="Assets\Scripts\Health.cs" />
+    <Compile Include="Assets\Scripts\NPCBehaviour.cs" />
     <Compile Include="Assets\Scripts\SpawnGibsOnDestroy.cs" />
     <Compile Include="Assets\Packages\Photon\PhotonVoice\Demos\DemoVoiceUI\Scripts\PhotonDemoExtensions.cs" />
     <Compile Include="Assets\Scripts\AudioManager.cs" />
     <Compile Include="Assets\Packages\Photon\PhotonVoice\Demos\Fusion\DemoNetworkObject\PrefabSpawner.cs" />
     <Compile Include="Assets\Packages\Clean Multiplayer Pro\Scripts\Player\PlayerStats.cs" />
     <Compile Include="Assets\Scripts\RequestAuthorityOnSpawn.cs" />
+    <Compile Include="Assets\Scripts\PlayerHealth.cs" />
     <Compile Include="Assets\Packages\Clean Multiplayer Pro\Scripts\Editor Window\SetupComplete.cs" />
     <Compile Include="Assets\Packages\Clean Multiplayer Pro\Mobile Controller\Scripts\Utilities\MobileDisableAutoSwitchControls.cs" />
+    <Compile Include="Assets\Scripts\PlayerPositionReset.cs" />
     <Compile Include="Assets\Scripts\NPCSpawner.cs" />
     <Compile Include="Assets\Packages\Photon\PhotonVoice\Demos\DemoVoiceUI\Scripts\BackgroundMusicController.cs" />
-    <Compile Include="Assets\Scripts\Attack.cs" />
     <Compile Include="Assets\Packages\Photon\PhotonVoice\Demos\DemoVoiceUI\Scripts\CodecSettingsUI.cs" />
     <Compile Include="Assets\Scripts\ApplySoundEffectForButtons.cs" />
     <Compile Include="Assets\Packages\Clean Multiplayer Pro\Scripts\Player\MenuCanvas.cs" />
     <Compile Include="Assets\Scripts\SpawnPoint.cs" />
     <Compile Include="Assets\Packages\Photon\PhotonVoice\Demos\DemoVoiceUI\Scripts\SidebarToggle.cs" />
+    <Compile Include="Assets\Scripts\HealthManager.cs" />
     <Compile Include="Assets\Scripts\SetUIActivationState.cs" />
     <Compile Include="Assets\Packages\Photon\PhotonVoice\Demos\DemoVoiceUI\Scripts\DemoVoiceUI.cs" />
     <Compile Include="Assets\Scripts\HudUI.cs" />
@@ -94,6 +96,7 @@
     <Compile Include="Assets\Packages\Clean Multiplayer Pro\Scripts\Editor Window\SetupWizard.cs" />
     <Compile Include="Assets\Packages\Clean Multiplayer Pro\Scripts\Vote\VoteKickManager.cs" />
     <Compile Include="Assets\Packages\Clean Multiplayer Pro\Scripts\Managers\InGame_Manager.cs" />
+    <Compile Include="Assets\Scripts\GetPlayerCameraAndControls.cs" />
     <Compile Include="Assets\Packages\Clean Multiplayer Pro\Scripts\Player\LookAtCamera.cs" />
     <Compile Include="Assets\Packages\Clean Multiplayer Pro\Mobile Controller\Scripts\VirtualInputs\UIVirtualTouchZone.cs" />
     <Compile Include="Assets\Packages\Clean Multiplayer Pro\Scripts\Chat\ChatPlayer.cs" />
@@ -110,7 +113,6 @@
     <Compile Include="Assets\Packages\Clean Multiplayer Pro\Scripts\Player\DontDestroyOnLoad.cs" />
     <Compile Include="Assets\Packages\Clean Multiplayer Pro\Scripts\Vote\VoteKickUIEntry.cs" />
     <Compile Include="Assets\ScriptableObjects\Scripts\SettingsSO.cs" />
-    <Compile Include="Assets\Packages\Clean Multiplayer Pro\Scripts\Player\PlayerPosResetter.cs" />
     <None Include="Assets\Packages\PolygonNatureBiomes\PNB_Core\Shaders\SyntyStudios_CrystalShader.shader" />
     <None Include="Assets\Packages\StylizedWater2\Shaders\Underwater\UnderwaterEffects.hlsl" />
     <None Include="Assets\Packages\TextMesh Pro\Shaders\TMPro.cginc" />

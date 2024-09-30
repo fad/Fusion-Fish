@@ -117,6 +117,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 4963198374037194415}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: cb0bf7cfa7fee4a4e8b5c7c05835f5ce,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -1551367193002396071}
   m_SourcePrefab: {fileID: 100100000, guid: cb0bf7cfa7fee4a4e8b5c7c05835f5ce, type: 3}
 --- !u!1 &6353985765853481726 stripped
 GameObject:
@@ -162,6 +166,7 @@ MonoBehaviour:
   - {fileID: 6528941045319445436}
   - {fileID: 3743900005715126961}
   - {fileID: 4963198374037194415}
+  - {fileID: -1551367193002396071}
 --- !u!114 &3743900005715126961
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -177,16 +182,14 @@ MonoBehaviour:
   maxHealth: 10
   notAbleToGetBitten: 0
   _NetworkedHealth: 10
-  isPlayer: 0
+  spawnGibs: 0
+  currentHealth: 0
   isShrimp: 0
   isStarFish: 1
   experienceValue: 50
-  slowPlayerDown: 0
-  slowNPCDown: 0
   maxSlowDownSpeedTime: 5
-  isDead: 0
-  playerName: {fileID: 0}
-  playerVisual: {fileID: 0}
+  slowDownSpeedTime: 0
+  slowDown: 0
 --- !u!65 &4972214465438672041
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -218,5 +221,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4c3db8ca4456a6459b54fd031c1cb2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-1551367193002396071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6353985765853481726}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e21121d4f559c1248aa8f7d3ce4320ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

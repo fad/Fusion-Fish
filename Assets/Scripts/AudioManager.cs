@@ -5,13 +5,11 @@ using Random = UnityEngine.Random;
 
 public class AudioManager : MonoBehaviour
 {
-    //A variable for every sound that is for the game
+    //A variable for every sound that is in the game
     public Sound[] sounds;
 
     public static AudioManager Instance;
     
-    //I make this a singleton class and delete it if already existing, then I apply every option for the sound that is 
-    //adjustable in the inspector
     private void Awake()
     {
         if (Instance == null)
@@ -45,7 +43,6 @@ public class AudioManager : MonoBehaviour
         Play("underwaterAmbience");
     }
 
-    //Here I Search for a sound in the sound array that has the according string as a name with lambda method, then I play the sound
     public void Play(string soundName)
     {
         var s = Array.Find(sounds, sound => sound.name == soundName);
@@ -58,7 +55,6 @@ public class AudioManager : MonoBehaviour
         s.audioSource.Play();
     }
     
-    //Here I Search for a sound in the sound array that has the according string as a name with lambda method, then I play the sound
     public void PlaySoundAtPosition(string soundName, Vector3 audioPosition)
     {
         var s = Array.Find(sounds, sound => sound.name == soundName);
@@ -71,7 +67,6 @@ public class AudioManager : MonoBehaviour
         AudioSource.PlayClipAtPoint(s.clip, audioPosition);
     }
     
-    //Here I Search for a sound in the sound array that has the according string as a name with lambda method, then I play the sound
     public void PlaySoundWithRandomPitchAtPosition(string soundName, Vector3 audioPosition)
     {
         var s = Array.Find(sounds, sound => sound.name == soundName);
@@ -86,8 +81,7 @@ public class AudioManager : MonoBehaviour
         AudioSource.PlayClipAtPoint(s.clip, audioPosition);
     }
     
-    //Here the same as play but with stop
-    public void Stop(string soundName)
+    public void StopSound(string soundName)
     {
         var s = Array.Find(sounds, sound => sound.name == soundName);
         if (s == null)
@@ -98,7 +92,6 @@ public class AudioManager : MonoBehaviour
         s.audioSource.Stop();
     }
     
-    //I am asking with a string if a sound is playing right now
     public bool IsPlaying(string soundName)
     {
         var s = Array.Find(sounds, sound => sound.name == soundName);

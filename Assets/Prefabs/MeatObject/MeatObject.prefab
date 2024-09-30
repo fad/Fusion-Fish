@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: -6505894716318477620}
   - component: {fileID: 7392976776931892285}
   - component: {fileID: 7836080894405224610}
+  - component: {fileID: 4812300359971869708}
   m_Layer: 6
   m_Name: MeatObject
   m_TagString: Untagged
@@ -34,7 +35,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -168.554, y: -0.17, z: 3.6080017}
-  m_LocalScale: {x: 0.25, y: 0.24999999, z: 0.25}
+  m_LocalScale: {x: 0.34960938, y: 0.34960938, z: 0.34960938}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -123,18 +124,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 1
-  notAbleToGetBitten: 0
   _NetworkedHealth: 1
-  isPlayer: 0
-  isShrimp: 0
-  isStarFish: 0
+  spawnGibs: 0
+  currentHealth: 0
+  notAbleToGetBitten: 0
   experienceValue: 100
-  slowPlayerDown: 0
-  slowNPCDown: 0
   maxSlowDownSpeedTime: 5
-  isDead: 0
-  playerName: {fileID: 0}
-  playerVisual: {fileID: 0}
+  slowDownSpeedTime: 0
+  slowDown: 0
 --- !u!114 &-6550082182933151621
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -155,6 +152,7 @@ MonoBehaviour:
   - {fileID: 5615224623534725559}
   - {fileID: -6505894716318477620}
   - {fileID: 7392976776931892285}
+  - {fileID: 4812300359971869708}
 --- !u!114 &-6505894716318477620
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -211,3 +209,17 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 1
+--- !u!114 &4812300359971869708
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3993952820748017500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e21121d4f559c1248aa8f7d3ce4320ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isShrimp: 0
+  isStarFish: 0

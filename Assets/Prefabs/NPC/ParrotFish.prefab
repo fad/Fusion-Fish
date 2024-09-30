@@ -294,6 +294,7 @@ GameObject:
   - component: {fileID: 2646965736066662759}
   - component: {fileID: 2504877546985743020}
   - component: {fileID: 9088175612161959807}
+  - component: {fileID: 6930732338255883832}
   m_Layer: 6
   m_Name: ParrotFish
   m_TagString: Untagged
@@ -334,7 +335,7 @@ MonoBehaviour:
   rotationSpeed: 2
   maxSwimSpeed: 250
   defaultSwimSpeed: 30
-  mainMenuObject: 0
+  isMainMenuObject: 0
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
@@ -347,18 +348,19 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 1
+  attacksAnything: 1
   timeBetweenAttacksMax: 1.5
   timeBetweenAttacksMin: 0.8
-  attacksPlayer: 1
   attackDamage: 10
   detectRange: 6
+  detectionAngle: 45
   attackRange: 1
-  attractionAngle: 60
-  maxFlightDelayTime: 7
+  maxTimeUntilFlee: 7
+  fleeTime: 3
   minWaitTime: 4
   maxWaitTime: 6
-  minTimeChangeMoveDirection: 6
-  maxTimeChangeMoveDirection: 10
+  minTimeUntilChangeMoveDirection: 6
+  maxTimeUntilChangeMoveDirection: 10
 --- !u!114 &1278129303895249973
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -372,18 +374,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 40
-  notAbleToGetBitten: 0
   _NetworkedHealth: 40
-  isPlayer: 0
+  spawnGibs: 0
+  currentHealth: 0
   isShrimp: 0
   isStarFish: 0
+  notAbleToGetBitten: 0
   experienceValue: 100
-  slowPlayerDown: 0
-  slowNPCDown: 0
   maxSlowDownSpeedTime: 2
-  isDead: 0
-  playerName: {fileID: 0}
-  playerVisual: {fileID: 0}
+  slowDownSpeedTime: 0
+  slowDown: 0
 --- !u!114 &5861376682368940301
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -505,6 +505,7 @@ MonoBehaviour:
   - {fileID: 5861376682368940301}
   - {fileID: 2646965736066662759}
   - {fileID: 9088175612161959807}
+  - {fileID: 6930732338255883832}
 --- !u!114 &9088175612161959807
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -521,6 +522,18 @@ MonoBehaviour:
   SyncParent: 1
   _autoAOIOverride: 1
   DisableSharedModeInterpolation: 1
+--- !u!114 &6930732338255883832
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7000746915098752231}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e21121d4f559c1248aa8f7d3ce4320ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7708221739454745083
 GameObject:
   m_ObjectHideFlags: 0

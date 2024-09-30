@@ -82,6 +82,7 @@ GameObject:
   - component: {fileID: 8189277226932359251}
   - component: {fileID: 640264574888627524}
   - component: {fileID: 6499744908904026312}
+  - component: {fileID: -2926847139055944381}
   m_Layer: 6
   m_Name: Tuna
   m_TagString: Untagged
@@ -122,7 +123,7 @@ MonoBehaviour:
   rotationSpeed: 2
   maxSwimSpeed: 250
   defaultSwimSpeed: 30
-  mainMenuObject: 0
+  isMainMenuObject: 0
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
@@ -135,18 +136,19 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 1
+  attacksAnything: 1
   timeBetweenAttacksMax: 1.5
   timeBetweenAttacksMin: 0.8
-  attacksPlayer: 1
   attackDamage: 10
   detectRange: 6
+  detectionAngle: 45
   attackRange: 1
-  attractionAngle: 60
-  maxFlightDelayTime: 7
+  maxTimeUntilFlee: 7
+  fleeTime: 3
   minWaitTime: 4
   maxWaitTime: 6
-  minTimeChangeMoveDirection: 6
-  maxTimeChangeMoveDirection: 10
+  minTimeUntilChangeMoveDirection: 6
+  maxTimeUntilChangeMoveDirection: 10
 --- !u!114 &6071178378786399832
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -160,18 +162,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 30
-  notAbleToGetBitten: 0
   _NetworkedHealth: 30
-  isPlayer: 0
+  spawnGibs: 0
+  currentHealth: 0
   isShrimp: 0
   isStarFish: 0
+  notAbleToGetBitten: 0
   experienceValue: 100
-  slowPlayerDown: 0
-  slowNPCDown: 0
   maxSlowDownSpeedTime: 2
-  isDead: 0
-  playerName: {fileID: 0}
-  playerVisual: {fileID: 0}
+  slowDownSpeedTime: 0
+  slowDown: 0
 --- !u!114 &2663326727443188411
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -293,6 +293,7 @@ MonoBehaviour:
   - {fileID: 2663326727443188411}
   - {fileID: 8189277226932359251}
   - {fileID: 6499744908904026312}
+  - {fileID: -2926847139055944381}
 --- !u!114 &6499744908904026312
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -309,6 +310,18 @@ MonoBehaviour:
   SyncParent: 1
   _autoAOIOverride: 1
   DisableSharedModeInterpolation: 1
+--- !u!114 &-2926847139055944381
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2284069224005208639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e21121d4f559c1248aa8f7d3ce4320ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2769723252524276266
 GameObject:
   m_ObjectHideFlags: 0

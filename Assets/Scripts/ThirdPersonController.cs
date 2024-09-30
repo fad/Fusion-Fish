@@ -1,11 +1,11 @@
-﻿
-#if CMPSETUP_COMPLETE
+﻿#if CMPSETUP_COMPLETE
 using System;
 using System.Collections;
 using AvocadoShark;
 using Cinemachine;
 using Fusion;
 using UnityEngine;
+using UnityEngine.Serialization;
 #if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
 #endif
@@ -26,13 +26,11 @@ namespace StarterAssets
         [Tooltip("How fast you can rotate the player depending on the mouse movement, the camera moves with the player")]
         public float sensitivity = .85f;
         public GameObject playerVisual;
-        public GameObject playerMesh;
         [SerializeField] public float boostSwimSpeed = 100f;
         [SerializeField] public float defaultSwimSpeed = 50f;
         [SerializeField] private float  maxSwimAreaLength;
         [HideInInspector] public PlayerManager playerManager;
         [HideInInspector] public float speed;
-        private float rotationVelocity;
         private bool outOfWater;
         private Rigidbody rb;
         private Transform swimArea;
@@ -55,11 +53,9 @@ namespace StarterAssets
         [Tooltip("How fast the camera rotates with the player")]
         [SerializeField] private float cameraRotationSmoothTime = 3f;
         [Tooltip("How far in degrees can you move the camera up")]
-        [SerializeField] private float topClamp = 70.0f;
+        [SerializeField] private float topCameraClamp = 70.0f;
         [Tooltip("How far in degrees can you move the camera down")]
-        [SerializeField] private float bottomClamp = -30.0f;
-        [Tooltip("Additional degrees to override the camera. Useful for fine tuning camera position when locked")]
-        [SerializeField] private float cameraAngleOverride;
+        [SerializeField] private float bottomCameraClamp = -30.0f;
         [Tooltip("For locking the camera position on all axis")]
         [SerializeField] private bool lockCameraPosition;
         public float notMovingFOV = 17.5f;
@@ -73,9 +69,9 @@ namespace StarterAssets
 
         [Header("Animation")]
         public Animator animator;
-        public NetworkMecanimAnimator networkAnimator;
         private int animIDMotionSpeed;
-        
+
+        private SetUIActivationState setUIActivationState;
         
         
 #if ENABLE_INPUT_SYSTEM
@@ -109,16 +105,18 @@ namespace StarterAssets
 
             capsuleCollider = GetComponent<CapsuleCollider>();
             swimArea = GameObject.Find("SwimArea").GetComponent<Transform>();
+            playerManager = GetComponent<PlayerManager>();
+            input = GetComponent<StarterAssetsInputs>();
+            rb = GetComponent<Rigidbody>();
+            setUIActivationState = GameObject.Find("SetUIActivationState").GetComponent<SetUIActivationState>();
             getPlayerCameraAndControls = GetComponent<GetPlayerCameraAndControls>();
             if (getPlayerCameraAndControls.vCamRoot == null)
                 hasVCam = false;
-            AudioManager.Instance.PlaySoundAtPosition("impactWithWater", transform.position);
-            playerManager = GetComponent<PlayerManager>();
+            
             cineMachineTargetYaw = gameObject.transform.rotation.eulerAngles.y;
-            input = GetComponent<StarterAssetsInputs>();
+            
             boostState = BoostState.BoostReload;
             currentBoostCount = maxBoostCount;
-            rb = GetComponent<Rigidbody>();
 
 #if ENABLE_INPUT_SYSTEM
             playerInput = GetComponent<PlayerInput>();
@@ -127,11 +125,12 @@ namespace StarterAssets
 #endif
 
             animIDMotionSpeed = Animator.StringToHash("movingSpeed");
+            AudioManager.Instance.PlaySoundAtPosition("impactWithWater", playerVisual.transform.position);
         }
 
         private void Update()
         {
-            if(playerManager.health.isDead || !HasStateAuthority)
+            if(playerManager.playerHealth.isDead || !HasStateAuthority)
                 return;
             
             Gravity();
@@ -141,7 +140,7 @@ namespace StarterAssets
 
         public void FixedUpdate()
         {
-            if (playerManager.health.isDead || !HasStateAuthority)
+            if (playerManager.playerHealth.isDead || !HasStateAuthority)
                 return;
             
             Move();        
@@ -149,7 +148,7 @@ namespace StarterAssets
 
         private void LateUpdate()
         {
-            if(playerManager.health.isDead || !HasStateAuthority)
+            if(playerManager.playerHealth.isDead || !HasStateAuthority)
                 return;
             
             CameraRotation();
@@ -158,14 +157,14 @@ namespace StarterAssets
         private void SetActiveMultiplayerUI()
         {
             switch (input.setActiveStateMultiplayerUI)
-                {
-                    case true when SetUIActivationState.Instance.pressedActivationUIMultiplayerButton == false:
-                        SetUIActivationState.Instance.SetActiveUIObjects();
-                        break;
-                    case false:
-                        SetUIActivationState.Instance.pressedActivationUIMultiplayerButton = false;
-                        break;
-                }
+            {
+                case true when setUIActivationState.pressedActivationUIMultiplayerButton == false:
+                    setUIActivationState.SetActiveUIObjects();
+                    break;
+                case false:
+                    setUIActivationState.pressedActivationUIMultiplayerButton = false;
+                    break;
+            }
         }
 
         private void CameraRotation()
@@ -173,7 +172,7 @@ namespace StarterAssets
             if (!lockCameraPosition)
             {
                 //Don't multiply mouse input by Time.deltaTime;
-                float deltaTimeMultiplier = IsCurrentDeviceMouse ? 1.0f : Time.deltaTime;
+                var deltaTimeMultiplier = IsCurrentDeviceMouse ? 1.0f : Time.deltaTime;
 
                 if (settingsSO.xInputIsInverted)
                 {
@@ -196,13 +195,13 @@ namespace StarterAssets
 
             // clamp our rotations so our values are limited 360 degrees
             cineMachineTargetYaw = ClampAngle(cineMachineTargetYaw, float.MinValue, float.MaxValue);
-            cineMachineTargetPitch = ClampAngle(cineMachineTargetPitch, bottomClamp, topClamp);
+            cineMachineTargetPitch = ClampAngle(cineMachineTargetPitch, bottomCameraClamp, topCameraClamp);
 
             // CineMachine will follow this target
             if (hasVCam)
             {
                 var localRotation = getPlayerCameraAndControls.vCamRoot.transform.localRotation;
-                localRotation = Quaternion.Lerp(localRotation, Quaternion.Euler(cineMachineTargetPitch + cameraAngleOverride, cineMachineTargetYaw, 0.0f), cameraRotationSmoothTime * Time.deltaTime);
+                localRotation = Quaternion.Lerp(localRotation, Quaternion.Euler(cineMachineTargetPitch, cineMachineTargetYaw, 0.0f), cameraRotationSmoothTime * Time.deltaTime);
                 getPlayerCameraAndControls.vCamRoot.transform.localRotation = localRotation;
 
                 transform.localRotation = Quaternion.Lerp(transform.localRotation, localRotation, playerRotationSmoothTime * Time.deltaTime);
@@ -242,7 +241,7 @@ namespace StarterAssets
             
             var moveDistance = speed * Time.deltaTime;
 
-            if (playerManager.health.slowPlayerDown)
+            if (playerManager.healthManager.slowDown)
             {
                 moveDistance /= 2;
             }

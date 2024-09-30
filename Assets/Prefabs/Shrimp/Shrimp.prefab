@@ -1239,6 +1239,7 @@ GameObject:
   - component: {fileID: 576333418220529877}
   - component: {fileID: 5162494352980053988}
   - component: {fileID: 7760722307578981489}
+  - component: {fileID: 2041347582299254623}
   m_Layer: 6
   m_Name: Shrimp
   m_TagString: Untagged
@@ -1278,16 +1279,14 @@ MonoBehaviour:
   maxHealth: 10
   notAbleToGetBitten: 0
   _NetworkedHealth: 10
-  isPlayer: 0
+  spawnGibs: 0
+  currentHealth: 0
   isShrimp: 1
-  isSeaStar: 0
+  isStarFish: 0
   experienceValue: 100
-  slowPlayerDown: 0
-  slowNPCDown: 0
   maxSlowDownSpeedTime: 2
-  isDead: 0
-  playerName: {fileID: 0}
-  playerVisual: {fileID: 0}
+  slowDownSpeedTime: 0
+  slowDown: 0
 --- !u!114 &1713854132540231916
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1310,6 +1309,7 @@ MonoBehaviour:
   - {fileID: 1557087152500486892}
   - {fileID: 1855833591059543511}
   - {fileID: 5162494352980053988}
+  - {fileID: 2041347582299254623}
 --- !u!114 &2643641434420825491
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1360,6 +1360,7 @@ MonoBehaviour:
   timeBetweenAttacksMin: 0
   attacksPlayer: 0
   attackDamage: 0
+  detectRange: 0
   attackRange: 0
   attractionAngle: 0
   maxFlightDelayTime: 5
@@ -1487,6 +1488,18 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 3.9688442, y: 2.9804938, z: 5.5630493}
   m_Center: {x: -0.13389571, y: 0.10859558, z: -2.7468655}
+--- !u!114 &2041347582299254623
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7572578571618421079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e21121d4f559c1248aa8f7d3ce4320ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7874023413798716356
 GameObject:
   m_ObjectHideFlags: 0

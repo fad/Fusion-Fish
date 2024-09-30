@@ -146,6 +146,7 @@ GameObject:
   - component: {fileID: 61442038398986381}
   - component: {fileID: 9150513680388461083}
   - component: {fileID: 2297454540360690151}
+  - component: {fileID: 6595614106671272429}
   - component: {fileID: 4632872686385277288}
   - component: {fileID: 4763555619980021824}
   - component: {fileID: 7967942701457511286}
@@ -201,7 +202,6 @@ MonoBehaviour:
   playerRotationSmoothTime: 10
   sensitivity: 1.5
   playerVisual: {fileID: 5159690815227489710}
-  playerMesh: {fileID: 3696368532508958808}
   boostSwimSpeed: 250
   defaultSwimSpeed: 120
   maxSwimAreaLength: 140
@@ -216,16 +216,14 @@ MonoBehaviour:
   maxBoostCount: 100
   cameraFOVSmoothTime: 2
   cameraRotationSmoothTime: 15
-  topClamp: 80
-  bottomClamp: -80
-  cameraAngleOverride: 0
+  topCameraClamp: 70
+  bottomCameraClamp: -30
   lockCameraPosition: 0
   notMovingFOV: 20
   defaultSpeedFOV: 22.5
   boostSpeedFOV: 40
   cameraDistance: 5
   animator: {fileID: 6424190454631559794}
-  networkAnimator: {fileID: 4638653781339947410}
   input: {fileID: 0}
   boostState: 0
 --- !u!114 &2297454540360690151
@@ -262,6 +260,19 @@ MonoBehaviour:
   attackRangeIncreaseOnLevelUp: 0.2
   healthIncreaseOnLevelUp: 5
   levelUpText: {fileID: 5902344984563231723}
+--- !u!114 &6595614106671272429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 505540377448418887}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be8a22e8eddbb294590862afec45550d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isDead: 0
 --- !u!114 &4632872686385277288
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -275,18 +286,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
-  notAbleToGetBitten: 0
   _NetworkedHealth: 100
-  isPlayer: 0
-  isShrimp: 0
-  isStarFish: 0
+  spawnGibs: 0
+  currentHealth: 0
+  notAbleToGetBitten: 0
   experienceValue: 100
-  slowPlayerDown: 0
-  slowNPCDown: 0
   maxSlowDownSpeedTime: 2
-  isDead: 0
-  playerName: {fileID: 3556001508082968735}
-  playerVisual: {fileID: 3696368532508958808}
+  slowDownSpeedTime: 0
+  slowDown: 0
 --- !u!114 &4763555619980021824
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -327,11 +334,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c779c12a238e2940a18ed91b9d45af8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AssetInputs: {fileID: 760614429699185995}
-  PlayerInput: {fileID: 6014465216197840825}
-  PlayerModel: {fileID: 5967580297110785664}
-  InterpolationPoint: {fileID: 7369987465763149778}
-  UseMobileControls: 0
+  assetInputs: {fileID: 760614429699185995}
+  playerInput: {fileID: 6014465216197840825}
+  playerModel: {fileID: 5267721347161833077}
+  interpolationPoint: {fileID: 7369987465763149778}
+  useMobileControls: 0
   vCam: {fileID: 0}
   vCamRoot: {fileID: 0}
 --- !u!114 &8171385306191510493
@@ -360,10 +367,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d236a4e7dc78af4595a84b79237166e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  minYValue: -125
   currentSpawnablePoint:
     location: {x: 0, y: 0, z: 0}
     rotation: {x: 0, y: 0, z: 0, w: 0}
-  minYValue: -125
 --- !u!114 &760614429699185995
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -581,6 +588,7 @@ MonoBehaviour:
   gibSpawnCount: 3
   gibsExperienceValue: 100
   spawnGibs: 0
+  isShrimp: 0
   isStarFish: 0
 --- !u!114 &6222487964510190762
 MonoBehaviour:
@@ -610,10 +618,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b9d92ac8a1171f4b9024f205c870045, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thirdPersonController: {fileID: 0}
-  health: {fileID: 0}
+  thirdPersonController: {fileID: 9150513680388461083}
+  healthManager: {fileID: 0}
   levelUp: {fileID: 0}
-  attack: {fileID: 2749181200256999984}
+  playerHealth: {fileID: 0}
+  playerAttack: {fileID: 2749181200256999984}
   hostPlayerRunner: {fileID: 0}
 --- !u!114 &9144912782510203114
 MonoBehaviour:
@@ -635,6 +644,7 @@ MonoBehaviour:
   NetworkedBehaviours:
   - {fileID: 9150513680388461083}
   - {fileID: 2297454540360690151}
+  - {fileID: 6595614106671272429}
   - {fileID: 4632872686385277288}
   - {fileID: 4763555619980021824}
   - {fileID: 7967942701457511286}
@@ -721,7 +731,7 @@ Transform:
   m_Children:
   - {fileID: 3815558802064309388}
   m_Father: {fileID: 7164404081432319888}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 1.1970038, y: -0.000001649903, z: -0.000000034466574}
 --- !u!1 &1820197847646486476
 GameObject:
   m_ObjectHideFlags: 0
@@ -919,7 +929,7 @@ Transform:
   m_Children:
   - {fileID: 4604110347247863598}
   m_Father: {fileID: 5267721347161833077}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -89.98021, y: 0, z: 0}
 --- !u!1 &2797800708372590461
 GameObject:
   m_ObjectHideFlags: 0
@@ -951,7 +961,7 @@ Transform:
   m_Children:
   - {fileID: 3693875170671168330}
   m_Father: {fileID: 3269069715231181482}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -1.1970001, y: 8.546687e-15, z: 3.9854144e-13}
 --- !u!1 &3556001508082968735
 GameObject:
   m_ObjectHideFlags: 0
@@ -1261,7 +1271,7 @@ Transform:
   - {fileID: 211199627818365346}
   - {fileID: 7048200173127437425}
   m_Father: {fileID: 3618376831159647704}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -2.88673e-19, y: -8.1606244e-13, z: 179.99998}
 --- !u!1 &4007091058199427891
 GameObject:
   m_ObjectHideFlags: 0
@@ -1438,7 +1448,6 @@ MonoBehaviour:
   NestedObjects: []
   NetworkedBehaviours:
   - {fileID: 3024809650598101344}
-  - {fileID: 4638653781339947410}
 --- !u!114 &3024809650598101344
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6424,16 +6433,16 @@ MonoBehaviour:
   biteUpper: {fileID: 1817263681268154888}
   biteLower: {fileID: 5466369016473450773}
   biteAnimator: {fileID: 9174893869088333902}
-  attackDamage: 10
   attackRange: 1.24
   maxTimeBetweenAttack: 0.75
-  thirdPersonController: {fileID: 9150513680388461083}
-  suckInParticleSystem: {fileID: 1547311364694370056}
-  suckInDelay: 1
-  currentSuckInDelay: 1
-  suckPower: 10
-  attractionForce: 250
-  attractionAngle: 30
+  attractionAngle: 40
+  attackDamage: 10
+  playerManager: {fileID: 532309906241500560}
+  suckInParticles: {fileID: 1547311364694370056}
+  maxTimeBetweenSuckIn: 1
+  suckInForce: 75
+  healthIncreaseOnEating: 10
+  suckInDamage: 10
 --- !u!1 &6192506693402442310
 GameObject:
   m_ObjectHideFlags: 0
@@ -6465,7 +6474,7 @@ Transform:
   m_Children:
   - {fileID: 7164404081432319888}
   m_Father: {fileID: 2745324502598858828}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -4.0711098e-13}
 --- !u!1 &6272089240189810021
 GameObject:
   m_ObjectHideFlags: 0
@@ -6476,7 +6485,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5267721347161833077}
   - component: {fileID: 6424190454631559794}
-  - component: {fileID: 4638653781339947410}
   m_Layer: 0
   m_Name: FishAnimation
   m_TagString: Untagged
@@ -6524,24 +6532,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &4638653781339947410
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6272089240189810021}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 506319458, guid: e725a070cec140c4caffb81624c8c787, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Animator: {fileID: 6424190454631559794}
-  TotalWords: 2
-  ApplyTiming: 2
-  SyncSettings: 79
-  StateHashes: 000000002445ff7f3ed4c595221c37918758d02e8e24d5c6bd97f0f1
-  TriggerHashes: 000000003b2dc047
 --- !u!1 &6488255723578305957
 GameObject:
   m_ObjectHideFlags: 0
@@ -6792,7 +6782,7 @@ Transform:
   m_Children:
   - {fileID: 3269069715231181482}
   m_Father: {fileID: 4604110347247863598}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -0.000009334666, y: 8.1606244e-13, z: -0.000005008956}
 --- !u!1 &7389477251353556900
 GameObject:
   m_ObjectHideFlags: 0
@@ -7064,7 +7054,7 @@ Transform:
   m_Children:
   - {fileID: 7683862711559900584}
   m_Father: {fileID: 3693875170671168330}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0.0000018079727, y: -0.0000016513746, z: -9.470262e-13}
 --- !u!1 &7743695009241452856
 GameObject:
   m_ObjectHideFlags: 0
@@ -7096,7 +7086,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3815558802064309388}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -0.00000030244846, y: -1.3220416e-14, z: -3.9839865e-13}
 --- !u!1 &8021788874347892258
 GameObject:
   m_ObjectHideFlags: 0

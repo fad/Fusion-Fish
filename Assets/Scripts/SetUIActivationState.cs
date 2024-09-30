@@ -5,13 +5,6 @@ public class SetUIActivationState : MonoBehaviour
     [SerializeField] private GameObject[] uIObjects;
     private bool uiObjectsActive;
     [HideInInspector] public bool pressedActivationUIMultiplayerButton;
-    
-    public static SetUIActivationState Instance;
-
-    private void Awake()
-    {
-        Instance = this;
-    }
 
     private void Start()
     {

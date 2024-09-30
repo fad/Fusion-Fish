@@ -328,6 +328,7 @@ GameObject:
   - component: {fileID: 3412780369562107212}
   - component: {fileID: 1822979548069201427}
   - component: {fileID: 5548094445524996536}
+  - component: {fileID: -8154368614932112872}
   m_Layer: 6
   m_Name: Catfish
   m_TagString: Untagged
@@ -368,7 +369,7 @@ MonoBehaviour:
   rotationSpeed: 2
   maxSwimSpeed: 250
   defaultSwimSpeed: 30
-  mainMenuObject: 0
+  isMainMenuObject: 0
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
@@ -381,18 +382,19 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 1
+  attacksAnything: 1
   timeBetweenAttacksMax: 1.5
   timeBetweenAttacksMin: 0.8
-  attacksPlayer: 1
   attackDamage: 10
   detectRange: 6
+  detectionAngle: 45
   attackRange: 1
-  attractionAngle: 60
-  maxFlightDelayTime: 7
+  maxTimeUntilFlee: 7
+  fleeTime: 3
   minWaitTime: 4
   maxWaitTime: 6
-  minTimeChangeMoveDirection: 6
-  maxTimeChangeMoveDirection: 10
+  minTimeUntilChangeMoveDirection: 6
+  maxTimeUntilChangeMoveDirection: 10
 --- !u!114 &5290817691257283959
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -406,18 +408,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 40
-  notAbleToGetBitten: 0
   _NetworkedHealth: 40
-  isPlayer: 0
+  spawnGibs: 0
+  currentHealth: 0
   isShrimp: 0
   isStarFish: 0
+  notAbleToGetBitten: 0
   experienceValue: 100
-  slowPlayerDown: 0
-  slowNPCDown: 0
   maxSlowDownSpeedTime: 2
-  isDead: 0
-  playerName: {fileID: 0}
-  playerVisual: {fileID: 0}
+  slowDownSpeedTime: 0
+  slowDown: 0
 --- !u!114 &3560085847436736690
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -555,6 +555,19 @@ MonoBehaviour:
   - {fileID: 3560085847436736690}
   - {fileID: 3412780369562107212}
   - {fileID: 1822979548069201427}
+  - {fileID: -8154368614932112872}
+--- !u!114 &-8154368614932112872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6810320542011287091}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e21121d4f559c1248aa8f7d3ce4320ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7075647709813124592
 GameObject:
   m_ObjectHideFlags: 0

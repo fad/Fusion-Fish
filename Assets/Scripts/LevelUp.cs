@@ -36,33 +36,36 @@ public class LevelUp : NetworkBehaviour
     [SerializeField] private TextMeshProUGUI levelUpText;
     private Vector3 textStartingPosition;
 
+    private PlayerManager playerManager;
+
     private void Start()
     {
+        playerManager = GetComponent<PlayerManager>();
         textStartingPosition = levelUpText.transform.localPosition;
         startingExperienceUntilUpgrade = experienceUntilUpgrade;
         startingExperience = currentExperience;
-        startingSize = GetComponent<ThirdPersonController>().transform.localScale;
-        startingCameraDistance = GetComponent<ThirdPersonController>().cameraDistance;
-        startingBoostSwimSpeed = GetComponent<ThirdPersonController>().boostSwimSpeed;
-        startingDefaultSwimSpeed = GetComponent<ThirdPersonController>().defaultSwimSpeed;
-        startingAttackDamage = GetComponent<ThirdPersonController>().playerManager.attack.attackDamage;
-        startingSuckPower = GetComponent<ThirdPersonController>().playerManager.attack.suckPower;
-        startingAttackRange = GetComponent<ThirdPersonController>().playerManager.attack.attackRange;
-        startingHealth = GetComponent<ThirdPersonController>().playerManager.health.maxHealth;
+        startingSize = playerManager.thirdPersonController.transform.localScale;
+        startingCameraDistance = playerManager.thirdPersonController.cameraDistance;
+        startingBoostSwimSpeed = playerManager.thirdPersonController.boostSwimSpeed;
+        startingDefaultSwimSpeed = playerManager.thirdPersonController.defaultSwimSpeed;
+        startingAttackDamage = playerManager.playerAttack.attackDamage;
+        startingSuckPower = playerManager.playerAttack.suckInDamage;
+        startingAttackRange = playerManager.playerAttack.attackRange;
+        startingHealth = playerManager.healthManager.maxHealth;
     }
 
-    private void Update()
+    public void CheckLevelUp()
     {
         if (currentExperience >= experienceUntilUpgrade)
         {
-            GetComponent<ThirdPersonController>().transform.localScale += new Vector3(sizeIncreaseOnLevelUp, sizeIncreaseOnLevelUp, sizeIncreaseOnLevelUp);
-            GetComponent<ThirdPersonController>().cameraDistance += cameraDistanceIncreaseOnLevelUp;
-            GetComponent<ThirdPersonController>().boostSwimSpeed += defaultSwimSpeedIncreaseOnLevelUp;
-            GetComponent<ThirdPersonController>().defaultSwimSpeed += boostSwimSpeedIncreaseOnLevelUp;
-            GetComponent<ThirdPersonController>().playerManager.attack.attackDamage += attackDamageIncreaseOnLevelUp;
-            GetComponent<ThirdPersonController>().playerManager.attack.suckPower += suckPowerIncreaseOnLevelUp;
-            GetComponent<ThirdPersonController>().playerManager.attack.attackRange += attackRangeIncreaseOnLevelUp;
-            GetComponent<ThirdPersonController>().playerManager.health.maxHealth += healthIncreaseOnLevelUp;
+            playerManager.thirdPersonController.transform.localScale += new Vector3(sizeIncreaseOnLevelUp, sizeIncreaseOnLevelUp, sizeIncreaseOnLevelUp);
+            playerManager.thirdPersonController.cameraDistance += cameraDistanceIncreaseOnLevelUp;
+            playerManager.thirdPersonController.boostSwimSpeed += defaultSwimSpeedIncreaseOnLevelUp;
+            playerManager.thirdPersonController.defaultSwimSpeed += boostSwimSpeedIncreaseOnLevelUp;
+            playerManager.playerAttack.attackDamage += attackDamageIncreaseOnLevelUp;
+            playerManager.playerAttack.suckInDamage += suckPowerIncreaseOnLevelUp;
+            playerManager.playerAttack.attackRange += attackRangeIncreaseOnLevelUp;
+            playerManager.healthManager.maxHealth += healthIncreaseOnLevelUp;
             experienceUntilUpgrade += experienceIncreaseOnLevelUp;
             currentExperience = 0;
             AudioManager.Instance.Play("levelUp");

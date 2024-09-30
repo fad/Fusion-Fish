@@ -5,17 +5,19 @@ using UnityEngine;
 
 public class PlayerManager : NetworkBehaviour
 {
-    [HideInInspector] public ThirdPersonController thirdPersonController;
-    [HideInInspector] public Health health;
+    public ThirdPersonController thirdPersonController;
+    [HideInInspector] public HealthManager healthManager;
     [HideInInspector] public LevelUp levelUp;
-    [SerializeField] public Attack attack;
+    [HideInInspector] public PlayerHealth playerHealth;
+    [SerializeField] public PlayerAttack playerAttack;
     [HideInInspector] public NetworkRunner hostPlayerRunner;
 
     private void Awake()
     {
         thirdPersonController = GetComponent<ThirdPersonController>();
-        health = GetComponent<Health>();
+        healthManager = GetComponent<HealthManager>();
         levelUp = GetComponent<LevelUp>();
+        playerHealth = GetComponent<PlayerHealth>();
     }
     
     private IEnumerator Start()
