@@ -19,7 +19,6 @@ public class Attack : NetworkBehaviour
     [Header("Attack")] 
     public float attackDamage = 1;
     private bool preparedAttack;
-    [SerializeField] private Transform attackPosition;
     [SerializeField] public float attackRange;
     
     [Header("Time")]
@@ -67,11 +66,11 @@ public class Attack : NetworkBehaviour
         {
             suckInParticleSystem.Play();
                 
-            AudioManager.Instance.PlaySoundWithRandomPitchAtPosition("suck", transform.position);
+            AudioManager.Instance.PlaySoundWithRandomPitchAtPosition("suck", thirdPersonController.playerVisual.transform.position);
             
             var hitColliders = new Collider[5];
 
-            var hits = Physics.OverlapSphereNonAlloc(attackPosition.position, attackRange, hitColliders, foodLayerMask);
+            var hits = Physics.OverlapSphereNonAlloc(thirdPersonController.playerVisual.transform.position, attackRange, hitColliders, foodLayerMask);
             
             for (var i = 0; i < hits; i++)
             {
@@ -144,33 +143,24 @@ public class Attack : NetworkBehaviour
 
     private void EnemyInRange()
     {
-        if (attackPosition)
+        var hitColliders = new Collider[1];
+
+        var playerVisualPosition = thirdPersonController.playerVisual.transform.position;
+        var foodHits = Physics.OverlapSphereNonAlloc(playerVisualPosition, attackRange, hitColliders, foodLayerMask);
+        var playerHits = Physics.OverlapSphereNonAlloc(playerVisualPosition, attackRange, hitColliders, playerLayerMask);
+        
+        if (foodHits >= 1 || playerHits >= 1)
         {
-            var hitColliders = new Collider[1];
+            var directionToTarget = hitColliders[0].transform.position - playerVisualPosition;
 
-            var foodHits = Physics.OverlapSphereNonAlloc(attackPosition.position, attackRange, hitColliders, foodLayerMask);
-            var playerHits = Physics.OverlapSphereNonAlloc(attackPosition.position, attackRange, hitColliders, playerLayerMask);
+            var angleToTarget = Vector3.Angle(-thirdPersonController.playerVisual.transform.forward, directionToTarget);
             
-            //Checks for two players because the player always detects itself first
-            if (foodHits >= 1 || playerHits >= 1)
+            // Check if the target is within the attraction distance and angle
+            if (angleToTarget <= attractionAngle && hitColliders[0].GetComponent<ThirdPersonController>() != thirdPersonController && !hitColliders[0].GetComponent<Health>().notAbleToGetBitten)
             {
-                var directionToTarget = hitColliders[0].transform.position - thirdPersonController.playerVisual.transform.position;
-
-                var angleToTarget = Vector3.Angle(-thirdPersonController.playerVisual.transform.forward, directionToTarget);
-
-                // Check if the target is within the attraction distance and angle
-                if (angleToTarget <= attractionAngle && hitColliders[0].GetComponent<ThirdPersonController>() != thirdPersonController && !hitColliders[0].GetComponent<Health>().notAbleToGetBitten)
-                {
-                    foodObject = hitColliders[0].transform.gameObject;
-                    biteUpper.GetComponent<Image>().color = Color.yellow;
-                    biteLower.GetComponent<Image>().color = Color.yellow;  
-                }
-                else
-                {
-                    foodObject = null;
-                    biteUpper.GetComponent<Image>().color = Color.white;
-                    biteLower.GetComponent<Image>().color = Color.white; 
-                }
+                foodObject = hitColliders[0].transform.gameObject;
+                biteUpper.GetComponent<Image>().color = Color.yellow;
+                biteLower.GetComponent<Image>().color = Color.yellow;  
             }
             else
             {
@@ -178,6 +168,12 @@ public class Attack : NetworkBehaviour
                 biteUpper.GetComponent<Image>().color = Color.white;
                 biteLower.GetComponent<Image>().color = Color.white; 
             }
+        }
+        else
+        {
+            foodObject = null;
+            biteUpper.GetComponent<Image>().color = Color.white;
+            biteLower.GetComponent<Image>().color = Color.white; 
         }
     }
 
@@ -197,6 +193,6 @@ public class Attack : NetworkBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawSphere(attackPosition.position, attackRange);
+        Gizmos.DrawWireSphere(thirdPersonController.playerVisual.transform.position, attackRange);
     }
 }
