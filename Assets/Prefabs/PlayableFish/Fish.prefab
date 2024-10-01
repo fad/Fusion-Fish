@@ -6444,6 +6444,7 @@ MonoBehaviour:
   maxTimeBetweenSuckIn: 1
   suckInForce: 100
   healthIncreaseOnEating: 10
+  increasePlayerSizeSpeedOnEating: 2
   suckInDamage: 10
 --- !u!1 &6192506693402442310
 GameObject:

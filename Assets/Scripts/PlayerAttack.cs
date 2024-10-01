@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using Fusion;
@@ -36,6 +37,8 @@ public class PlayerAttack : NetworkBehaviour
     [SerializeField] private float maxTimeBetweenSuckIn = 1;
     [SerializeField] private float suckInForce;
     [SerializeField] private float healthIncreaseOnEating = 10;
+    private bool scaleUpAnimationRunning;
+    [SerializeField] private float timeTakes = .15f; // increase player scale animation will take that time
     public float suckInDamage;
     private float currentSuckInTime;
 
@@ -108,7 +111,10 @@ public class PlayerAttack : NetworkBehaviour
                     {
                         playerManager.levelUp.currentExperience += health.experienceValue;
                         playerManager.levelUp.CheckLevelUp();
-
+                        
+                        if (!scaleUpAnimationRunning)
+                            StartCoroutine(ScalePlayerUpOnEating());
+                        
                         if (playerManager.healthManager.NetworkedHealth + healthIncreaseOnEating <= playerManager.healthManager.maxHealth)
                         {
                             playerManager.healthManager.NetworkedHealth += healthIncreaseOnEating;
@@ -121,6 +127,7 @@ public class PlayerAttack : NetworkBehaviour
                         //decreasing experience value to 0, to make sure I do not get experience twice
                         health.experienceValue = 0;
                         health.ReceiveDamageRpc(suckInDamage, false);
+                        SetFoodObject(null, Color.white);
                     }   
                 }
             }
@@ -128,7 +135,36 @@ public class PlayerAttack : NetworkBehaviour
             currentSuckInTime = maxTimeBetweenSuckIn;
         }
     }
-    
+
+    private IEnumerator ScalePlayerUpOnEating()
+    {
+        scaleUpAnimationRunning = true;
+        
+        var oldScale = playerManager.transform.localScale;
+        var scaleUpFish = oldScale + Vector3.one / 5;
+        var elapsedTime = 0f;
+
+        while (elapsedTime < timeTakes)
+        {
+            playerManager.transform.localScale = Vector3.Lerp(playerManager.transform.localScale, scaleUpFish, elapsedTime / timeTakes);
+        
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+        
+        elapsedTime = 0;
+        
+        while (elapsedTime < timeTakes)
+        {
+            playerManager.transform.localScale = Vector3.Lerp( playerManager.transform.localScale, oldScale, elapsedTime / timeTakes);
+        
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        scaleUpAnimationRunning = false;
+    }
+
     private void AttackUpdate()
     {
         if (currentAttackTime >= 0)

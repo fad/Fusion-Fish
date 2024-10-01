@@ -221,7 +221,8 @@ public class NPCBehaviour : NetworkBehaviour
         {
             if (enemy.TryGetComponent<PlayerHealth>(out var playerHealth) && playerHealth.isDead)
             {
-                yield return null;
+                isAttacking = false;
+                yield break;
             }
             enemy.GetComponent<HealthManager>().ReceiveDamageRpc(attackDamage, true);
         }
