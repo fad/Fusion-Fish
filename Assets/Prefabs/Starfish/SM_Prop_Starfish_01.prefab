@@ -145,6 +145,7 @@ MonoBehaviour:
   gibSpawnCount: 1
   gibsExperienceValue: 50
   spawnGibs: 0
+  isShrimp: 0
   isStarFish: 1
 --- !u!114 &7734552436643531540
 MonoBehaviour:
@@ -180,12 +181,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 10
-  notAbleToGetBitten: 0
   _NetworkedHealth: 10
   spawnGibs: 0
   currentHealth: 0
-  isShrimp: 0
-  isStarFish: 1
+  notAbleToGetBitten: 0
   experienceValue: 50
   maxSlowDownSpeedTime: 5
   slowDownSpeedTime: 0
@@ -235,3 +234,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e21121d4f559c1248aa8f7d3ce4320ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isShrimp: 0
+  isStarFish: 1

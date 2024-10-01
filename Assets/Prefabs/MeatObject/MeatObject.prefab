@@ -35,7 +35,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -168.554, y: -0.17, z: 3.6080017}
-  m_LocalScale: {x: 0.34960938, y: 0.34960938, z: 0.34960938}
+  m_LocalScale: {x: 0.27774888, y: 0.27774888, z: 0.27774903}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -128,7 +128,7 @@ MonoBehaviour:
   spawnGibs: 0
   currentHealth: 0
   notAbleToGetBitten: 0
-  experienceValue: 100
+  experienceValue: 50
   maxSlowDownSpeedTime: 5
   slowDownSpeedTime: 0
   slowDown: 0

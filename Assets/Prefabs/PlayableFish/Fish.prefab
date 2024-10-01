@@ -217,7 +217,7 @@ MonoBehaviour:
   cameraFOVSmoothTime: 2
   cameraRotationSmoothTime: 15
   topCameraClamp: 70
-  bottomCameraClamp: -30
+  bottomCameraClamp: -70
   lockCameraPosition: 0
   notMovingFOV: 20
   defaultSpeedFOV: 22.5
@@ -1448,6 +1448,7 @@ MonoBehaviour:
   NestedObjects: []
   NetworkedBehaviours:
   - {fileID: 3024809650598101344}
+  - {fileID: 6741892561249266755}
 --- !u!114 &3024809650598101344
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6433,6 +6434,7 @@ MonoBehaviour:
   biteUpper: {fileID: 1817263681268154888}
   biteLower: {fileID: 5466369016473450773}
   biteAnimator: {fileID: 9174893869088333902}
+  networkFishAnimator: {fileID: 6741892561249266755}
   attackRange: 1.24
   maxTimeBetweenAttack: 0.75
   attractionAngle: 40
@@ -6440,7 +6442,7 @@ MonoBehaviour:
   playerManager: {fileID: 532309906241500560}
   suckInParticles: {fileID: 1547311364694370056}
   maxTimeBetweenSuckIn: 1
-  suckInForce: 75
+  suckInForce: 100
   healthIncreaseOnEating: 10
   suckInDamage: 10
 --- !u!1 &6192506693402442310
@@ -6485,6 +6487,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5267721347161833077}
   - component: {fileID: 6424190454631559794}
+  - component: {fileID: 6741892561249266755}
   m_Layer: 0
   m_Name: FishAnimation
   m_TagString: Untagged
@@ -6532,6 +6535,24 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &6741892561249266755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6272089240189810021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 506319458, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Animator: {fileID: 6424190454631559794}
+  TotalWords: 2
+  ApplyTiming: 2
+  SyncSettings: 79
+  StateHashes: 000000002445ff7f3ed4c595221c37918758d02e8e24d5c6bd97f0f1
+  TriggerHashes: 000000003b2dc047
 --- !u!1 &6488255723578305957
 GameObject:
   m_ObjectHideFlags: 0

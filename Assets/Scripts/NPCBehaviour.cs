@@ -13,6 +13,7 @@ public class NPCBehaviour : NetworkBehaviour
     [SerializeField] private float defaultSwimSpeed = 30f;
     [SerializeField] private bool isMainMenuObject;
     private float currentSpeed;
+    private bool stopMovement;
 
     [Header("Layers")]
     [SerializeField] private LayerMask playerLayer;
@@ -72,6 +73,9 @@ public class NPCBehaviour : NetworkBehaviour
 
     private void Update()
     {
+        if(stopMovement)
+            return;
+        
         DoBehaviour();
         
         CheckForEnemies();
@@ -168,29 +172,7 @@ public class NPCBehaviour : NetworkBehaviour
         if(!isMainMenuObject)
             animator.SetFloat("movingSpeed", rb.velocity.sqrMagnitude * 3);
     }
-
-    private IEnumerator AttackCoroutine()
-    {
-        isAttacking = true;
-        
-        yield return new WaitForSeconds(Random.Range(timeBetweenAttacksMin, timeBetweenAttacksMax));
-        
-        animator.SetTrigger("attack");
-        
-        yield return new WaitForSeconds(.2f);
-        
-        if(enemy != null && Vector3.Distance(transform.position, enemy.transform.position) < attackRange + .5f)
-        {
-            if (enemy.TryGetComponent<PlayerHealth>(out var playerHealth) && playerHealth.isDead)
-            {
-                yield return null;
-            }
-            enemy.GetComponent<HealthManager>().ReceiveDamageRpc(attackDamage, true);
-        }
-
-        isAttacking = false;
-    }
-
+    
     private void MoveNPCInDirection(Vector3 targetDirection, Quaternion lookDirection)
     {
         if (TryGetComponent<HealthManager>(out var health) && health.slowDown)
@@ -223,6 +205,28 @@ public class NPCBehaviour : NetworkBehaviour
         {
             currentTimeUntilFlee -= Time.deltaTime;
         }
+    }
+    
+    private IEnumerator AttackCoroutine()
+    {
+        isAttacking = true;
+        
+        yield return new WaitForSeconds(Random.Range(timeBetweenAttacksMin, timeBetweenAttacksMax));
+        
+        animator.SetTrigger("attack");
+        
+        yield return new WaitForSeconds(.2f);
+        
+        if(enemy != null && Vector3.Distance(transform.position, enemy.transform.position) < attackRange + .5f)
+        {
+            if (enemy.TryGetComponent<PlayerHealth>(out var playerHealth) && playerHealth.isDead)
+            {
+                yield return null;
+            }
+            enemy.GetComponent<HealthManager>().ReceiveDamageRpc(attackDamage, true);
+        }
+
+        isAttacking = false;
     }
 
     //Checks if the player entered the vision of the NPC and flees when possible
@@ -264,6 +268,17 @@ public class NPCBehaviour : NetworkBehaviour
                 }
             }
         }
+    }
+
+    public IEnumerator StopMovement(float time)
+    {
+        var speedBefore = currentSpeed;
+        
+        stopMovement = true;
+        currentSpeed = 0;
+        yield return new WaitForSeconds(time);
+        currentSpeed = speedBefore;
+        stopMovement = false;
     }
 
     private void OnDrawGizmos()

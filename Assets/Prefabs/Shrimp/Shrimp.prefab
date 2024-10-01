@@ -1277,12 +1277,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 10
-  notAbleToGetBitten: 0
   _NetworkedHealth: 10
   spawnGibs: 0
   currentHealth: 0
-  isShrimp: 1
-  isStarFish: 0
+  notAbleToGetBitten: 0
   experienceValue: 100
   maxSlowDownSpeedTime: 2
   slowDownSpeedTime: 0
@@ -1327,6 +1325,7 @@ MonoBehaviour:
   gibSpawnCount: 1
   gibsExperienceValue: 100
   spawnGibs: 0
+  isShrimp: 0
   isStarFish: 0
 --- !u!114 &1557087152500486892
 MonoBehaviour:
@@ -1343,7 +1342,7 @@ MonoBehaviour:
   rotationSpeed: 2
   maxSwimSpeed: 25
   defaultSwimSpeed: 15
-  mainMenuObject: 0
+  isMainMenuObject: 0
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
@@ -1356,18 +1355,19 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 1
+  attacksAnything: 0
   timeBetweenAttacksMax: 0
   timeBetweenAttacksMin: 0
-  attacksPlayer: 0
   attackDamage: 0
   detectRange: 0
+  detectionAngle: 0
   attackRange: 0
-  attractionAngle: 0
-  maxFlightDelayTime: 5
+  maxTimeUntilFlee: 5
+  fleeTime: 3
   minWaitTime: 4
   maxWaitTime: 6
-  minTimeChangeMoveDirection: 6
-  maxTimeChangeMoveDirection: 10
+  minTimeUntilChangeMoveDirection: 6
+  maxTimeUntilChangeMoveDirection: 10
 --- !u!54 &6144821076271841752
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1500,6 +1500,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e21121d4f559c1248aa8f7d3ce4320ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isShrimp: 1
+  isStarFish: 0
 --- !u!1 &7874023413798716356
 GameObject:
   m_ObjectHideFlags: 0

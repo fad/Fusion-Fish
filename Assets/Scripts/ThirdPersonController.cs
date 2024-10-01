@@ -5,7 +5,6 @@ using AvocadoShark;
 using Cinemachine;
 using Fusion;
 using UnityEngine;
-using UnityEngine.Serialization;
 #if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
 #endif

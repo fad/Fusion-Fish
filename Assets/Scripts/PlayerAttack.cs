@@ -1,7 +1,7 @@
-using StarterAssets;
 using UnityEngine;
 using UnityEngine.UI;
 using Fusion;
+using UnityEngine.Serialization;
 
 public class PlayerAttack : NetworkBehaviour
 {
@@ -14,6 +14,7 @@ public class PlayerAttack : NetworkBehaviour
     [SerializeField] private Transform biteUpper;
     [SerializeField] private Transform biteLower;
     [SerializeField] private Animator biteAnimator;
+    [SerializeField] private NetworkMecanimAnimator networkFishAnimator;
 
     [Header("Attack")] 
     [SerializeField] public float attackRange;
@@ -22,6 +23,8 @@ public class PlayerAttack : NetworkBehaviour
     public float attackDamage = 1;
     private float currentAttackTime;
     private bool preparedAttack;
+    private int attackCount;
+    private int lastAttackCount;
     
     [Header("Player")]
     [SerializeField] private PlayerManager playerManager;
@@ -87,13 +90,15 @@ public class PlayerAttack : NetworkBehaviour
 
                     var angleToTarget = Vector3.Angle(-playerManager.thirdPersonController.playerVisual.transform.forward, directionToTarget);
 
-                    // Check if the target is within the attraction distance and angle
+                    // Check if the target is within the attraction angle
                     if (angleToTarget <= attractionAngle)
                     {
-                        // Check if the target is within the attraction distance and angle
-                        // Apply attraction force to the target
+                        // Apply force to the target
                         if(hitColliders[i].TryGetComponent<Rigidbody>(out var targetRb))
                         {
+                            if (hitColliders[i].TryGetComponent<NPCBehaviour>(out var npcBehaviour))
+                                StartCoroutine(npcBehaviour.StopMovement(2));
+                                    
                             targetRb.AddForce(directionToTarget.normalized * -suckInForce, ForceMode.Force);
                         }
                     }
@@ -143,12 +148,22 @@ public class PlayerAttack : NetworkBehaviour
                 break;
             case false when preparedAttack:
                 biteAnimator.SetTrigger("executeAttack");
-                playerManager.thirdPersonController.animator.SetTrigger("attack");
+                attackCount++;
                 currentAttackTime = maxTimeBetweenAttack;
                 playerManager.thirdPersonController.sensitivity = usualSensitivity;
                 preparedAttack = false;
                 break;
         }
+    }
+
+    public override void Render()
+    {
+        if (attackCount > lastAttackCount)
+        {
+            networkFishAnimator.SetTrigger("attack");
+        }
+
+        lastAttackCount = attackCount;
     }
 
     private void EnemyInRange()
