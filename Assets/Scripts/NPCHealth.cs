@@ -29,7 +29,7 @@ public class NPCHealth : NetworkBehaviour
     [Rpc(RpcSources.All, RpcTargets.All, InvokeLocal = true)]
     private void NPCDeathRpc()
     {
-        healthManager.PlayParticlesRpc(Color.red, 30);
+        healthManager.PlayParticles(Color.red, 30);
 
         Destroy(gameObject);
     }

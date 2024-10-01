@@ -245,7 +245,7 @@ public class NPCBehaviour : NetworkBehaviour
             playerStateAuthorityHits >= 1 && hitColliders[0].TryGetComponent<HealthManager>(out var health) && 
             !health.notAbleToGetBitten && health != GetComponent<HealthManager>())
         {
-            if(TryGetComponent<NPCHealth>(out var npcHealth) && (npcHealth.isStarFish || npcHealth.isShrimp))
+            if(hitColliders[0].TryGetComponent<NPCHealth>(out var npcHealth) && (npcHealth.isStarFish || npcHealth.isShrimp))
                 return;
             
             var directionToTarget = hitColliders[0].transform.position - position;

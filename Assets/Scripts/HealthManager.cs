@@ -40,6 +40,7 @@ public class HealthManager : NetworkBehaviour
         }
     }
 
+    [Rpc(RpcSources.All, RpcTargets.All)]
     public void ReceiveDamageRpc(float damage, bool spawnGibsOnDestroy)
     {
         NetworkedHealth -= damage;
@@ -48,7 +49,7 @@ public class HealthManager : NetworkBehaviour
 
         if (NetworkedHealth > 0)
         {
-            PlayParticlesRpc(Color.red, 10);
+            PlayParticles(Color.red, 10);
         }
     }
 
@@ -71,8 +72,7 @@ public class HealthManager : NetworkBehaviour
         }
     }
 
-    [Rpc(RpcSources.All, RpcTargets.All)]
-    public void PlayParticlesRpc(Color color, int burstCount)
+    public void PlayParticles(Color color, int burstCount)
     {
         var mainModule = bloodParticleSystem.main;
         mainModule.startColor = new ParticleSystem.MinMaxGradient(color);

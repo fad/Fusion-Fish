@@ -376,8 +376,6 @@ MonoBehaviour:
   _NetworkedHealth: 30
   spawnGibs: 0
   currentHealth: 0
-  isShrimp: 0
-  isStarFish: 0
   notAbleToGetBitten: 0
   experienceValue: 100
   maxSlowDownSpeedTime: 2
@@ -400,6 +398,7 @@ MonoBehaviour:
   gibSpawnCount: 2
   gibsExperienceValue: 100
   spawnGibs: 0
+  isShrimp: 0
   isStarFish: 0
 --- !u!95 &4646803883981058796
 Animator:
@@ -533,6 +532,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e21121d4f559c1248aa8f7d3ce4320ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isShrimp: 0
+  isStarFish: 0
 --- !u!1 &5244351179090324317
 GameObject:
   m_ObjectHideFlags: 0

@@ -34,7 +34,7 @@ public class HudUI : MonoBehaviour
         if (playerManager == null) 
             return;
         
-        healthUI.fillAmount = playerManager.healthManager.NetworkedHealth / playerManager.healthManager.maxHealth;
+        //healthUI.fillAmount = playerManager.healthManager.NetworkedHealth / playerManager.healthManager.maxHealth;
 
         boostUI.fillAmount = playerManager.thirdPersonController.currentBoostCount / playerManager.thirdPersonController.maxBoostCount;
         

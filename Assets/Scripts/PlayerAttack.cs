@@ -2,7 +2,6 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using Fusion;
-using UnityEngine.Serialization;
 
 public class PlayerAttack : NetworkBehaviour
 {
@@ -38,7 +37,8 @@ public class PlayerAttack : NetworkBehaviour
     [SerializeField] private float suckInForce;
     [SerializeField] private float healthIncreaseOnEating = 10;
     private bool scaleUpAnimationRunning;
-    [SerializeField] private float timeTakes = .15f; // increase player scale animation will take that time
+    [Tooltip("Increase player scale up and down coroutine will take that time.")]
+    [SerializeField] private float timeForScaleAnimation = .15f; 
     public float suckInDamage;
     private float currentSuckInTime;
 
@@ -144,9 +144,9 @@ public class PlayerAttack : NetworkBehaviour
         var scaleUpFish = oldScale + Vector3.one / 5;
         var elapsedTime = 0f;
 
-        while (elapsedTime < timeTakes)
+        while (elapsedTime < timeForScaleAnimation)
         {
-            playerManager.transform.localScale = Vector3.Lerp(playerManager.transform.localScale, scaleUpFish, elapsedTime / timeTakes);
+            playerManager.transform.localScale = Vector3.Lerp(playerManager.transform.localScale, scaleUpFish, elapsedTime / timeForScaleAnimation);
         
             elapsedTime += Time.deltaTime;
             yield return null;
@@ -154,9 +154,9 @@ public class PlayerAttack : NetworkBehaviour
         
         elapsedTime = 0;
         
-        while (elapsedTime < timeTakes)
+        while (elapsedTime < timeForScaleAnimation)
         {
-            playerManager.transform.localScale = Vector3.Lerp( playerManager.transform.localScale, oldScale, elapsedTime / timeTakes);
+            playerManager.transform.localScale = Vector3.Lerp( playerManager.transform.localScale, oldScale, elapsedTime / timeForScaleAnimation);
         
             elapsedTime += Time.deltaTime;
             yield return null;

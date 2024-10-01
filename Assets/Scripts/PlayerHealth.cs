@@ -26,7 +26,7 @@ public class PlayerHealth : NetworkBehaviour
     {
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
-        playerManager.healthManager.PlayParticlesRpc(Color.red, 30);
+        playerManager.healthManager.PlayParticles(Color.red, 30);
         GetComponent<SpawnGibsOnDestroy>().SpawnMeatObjects(Runner);
         SetPlayerMeshRpc(false);
         HudUI.Instance.deathPanel.SetActive(true);
