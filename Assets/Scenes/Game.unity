@@ -126,6 +126,55 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &114355063
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 114355064}
+  - component: {fileID: 114355065}
+  m_Layer: 0
+  m_Name: PostProcessingDamage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &114355064
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 114355063}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 7.913204, y: -104.12, z: 12.27415}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 467397033}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114355065
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 114355063}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IsGlobal: 1
+  priority: 0
+  blendDistance: 0
+  weight: 0
+  sharedProfile: {fileID: 11400000, guid: b2e640c9a6d8f33488be8ca77a515481, type: 2}
 --- !u!1 &205319365
 GameObject:
   m_ObjectHideFlags: 0
@@ -518,6 +567,7 @@ Transform:
   m_Children:
   - {fileID: 1301406222}
   - {fileID: 1664779658}
+  - {fileID: 114355064}
   - {fileID: 2033457117}
   - {fileID: 1351627760}
   - {fileID: 451587320}
@@ -7095,7 +7145,7 @@ GameObject:
   - component: {fileID: 1604909712}
   - component: {fileID: 1604909714}
   m_Layer: 0
-  m_Name: Manager
+  m_Name: InGameManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7113,14 +7163,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8171064120cd8340bd3b1acb096fc24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  environment1: 2
-  environment2: 3
-  room_name: {fileID: 953358300}
+  roomName: {fileID: 953358300}
   players: {fileID: 1851637992}
-  lock_image: {fileID: 1464032329}
-  locked_sprite: {fileID: 21300000, guid: 8d0061afc5a7ca9419dfb35079f2963c, type: 3}
-  lock_status_text: {fileID: 1591470170}
-  InfoText: {fileID: 537941788}
+  lockImage: {fileID: 1464032329}
+  lockedSprite: {fileID: 21300000, guid: 8d0061afc5a7ca9419dfb35079f2963c, type: 3}
+  lockStatusText: {fileID: 1591470170}
+  infoText: {fileID: 537941788}
   deltaTime: 0
   ping: 0
   runner: {fileID: 0}

@@ -273,6 +273,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDead: 0
+  showVignette: 0
+  showDamageVignetteTime: 0.8
+  hideDamageVignetteTime: 0.3
 --- !u!114 &4632872686385277288
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6444,7 +6447,7 @@ MonoBehaviour:
   maxTimeBetweenSuckIn: 1
   suckInForce: 100
   healthIncreaseOnEating: 10
-  increasePlayerSizeSpeedOnEating: 2
+  timeForScaleAnimation: 0.15
   suckInDamage: 10
 --- !u!1 &6192506693402442310
 GameObject:

@@ -3,35 +3,36 @@ using Fusion;
 using UnityEngine.SceneManagement;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
-using System.Collections;
 
 namespace AvocadoShark
 {
     public class InGame_Manager : NetworkBehaviour
     {
-        public int environment1, environment2;
-        public TextMeshProUGUI room_name;
+        public TextMeshProUGUI roomName;
         public TextMeshProUGUI players;
-        public Image lock_image;
-        public Sprite locked_sprite;
-        public TextMeshProUGUI lock_status_text;
-        public TextMeshProUGUI InfoText;
+        public Image lockImage;
+        public Sprite lockedSprite;
+        public TextMeshProUGUI lockStatusText;
+        public TextMeshProUGUI infoText;
         [HideInInspector] public float deltaTime;
         private float fps;
         public int ping;
         public NetworkRunner runner;
+        
         private void Start()
         {
             if (PlayerPrefs.GetInt("has_pass") == 1)
             {
-                lock_image.sprite = locked_sprite;
-                lock_status_text.text = "private";
+                lockImage.sprite = lockedSprite;
+                lockStatusText.text = "private";
             }
             fps = 1.0f / Time.smoothDeltaTime;
 
             runner = NetworkRunner.GetRunnerForGameObject(gameObject);
         }
+        
         public void LeaveRoom()
         {
             var fusionManager = FindObjectOfType<FusionConnection>();
@@ -42,24 +43,25 @@ namespace AvocadoShark
             Runner.Shutdown();
             SceneManager.LoadScene("Menu");
         }
-        private float smoothedRTT = 0.0f;
+        
+        private float smoothedRTT;
         private void LateUpdate()
         { 
             if(!Object)
                 return;
-            room_name.text = Runner.SessionInfo.Name;
+            roomName.text = Runner.SessionInfo.Name;
             players.text = Runner.SessionInfo.PlayerCount + "/" + Runner.SessionInfo.MaxPlayers;
-            float newFPS = 1.0f / Time.smoothDeltaTime;
+            var newFPS = 1.0f / Time.smoothDeltaTime;
             fps = Mathf.Lerp(fps, newFPS, 0.005f);
 
-            double rttInSeconds = runner.GetPlayerRtt(PlayerRef.None);
-            int rttInMilliseconds = (int)(rttInSeconds * 1000);
+            var rttInSeconds = runner.GetPlayerRtt(PlayerRef.None);
+            var rttInMilliseconds = (int)(rttInSeconds * 1000);
             smoothedRTT = Mathf.Lerp(smoothedRTT, rttInMilliseconds, 0.005f);
-            int ping = (int)smoothedRTT / 2;
-            InfoText.text = "Ping: " + ping.ToString() + "\n" + "FPS: " + ((int)fps).ToString();
+            var ping = (int)smoothedRTT / 2;
+            infoText.text = "Ping: " + ping + "\n" + "FPS: " + (int)fps;
         }
 
-        public void SwitchScene()
+        private void SwitchScene()
         {
             if (!HasStateAuthority)
             {
@@ -68,14 +70,13 @@ namespace AvocadoShark
             }
             if (!Runner.IsSceneAuthority) 
                 return;
-            //Assuming envir scene in additive mode is loaded at 1 index
+            
+            //Assuming environment scene in additive mode is loaded at 1 index
             var environmentSceneIndex = 1;
             var environmentScene = SceneManager.GetSceneAt(environmentSceneIndex);
             print(environmentScene.name);
-            var isEnvironment1 = environmentScene.buildIndex == environment1;
-            var sceneToLoad = isEnvironment1 ? environment2 : environment1;
             
-            Runner.LoadScene(SceneRef.FromIndex(sceneToLoad), LoadSceneMode.Additive);
+            Runner.LoadScene(SceneRef.FromIndex(environmentScene.buildIndex), LoadSceneMode.Additive);
             Runner.UnloadScene(SceneRef.FromIndex(environmentScene.buildIndex));
         }
 

@@ -1,6 +1,8 @@
+using System.Collections;
 using UnityEngine;
 using Fusion;
 using StarterAssets;
+using UnityEngine.Rendering;
 
 public class PlayerHealth : NetworkBehaviour
 {
@@ -8,10 +10,17 @@ public class PlayerHealth : NetworkBehaviour
     
     [Header("Death")]
     [HideInInspector] public bool isDead;
+    
+    private Volume hitVignette;
+    [HideInInspector] public bool showVignette;
+    [SerializeField] private float showDamageVignetteTime;
+    [SerializeField] private float hideDamageVignetteTime;
 
     private void Start()
     {
         playerManager = GetComponent<PlayerManager>();
+        hitVignette = GameObject.Find("PostProcessingDamage").GetComponent<Volume>();
+        showVignette = true;
     }
 
     public void PlayerCheckDeath()
@@ -57,6 +66,35 @@ public class PlayerHealth : NetworkBehaviour
         playerTransform.localScale = playerManager.levelUp.startingSize;
         playerManager.thirdPersonController.boostState = ThirdPersonController.BoostState.BoostReload;
         SetPlayerMeshRpc(true);
+    }
+    
+    public IEnumerator ShowDamageVignette()
+    {
+        showVignette = false;
+
+        hitVignette.priority = 2;
+        var elapsedTime = 0f;
+
+        while (elapsedTime < showDamageVignetteTime)
+        {
+            hitVignette.weight = Mathf.Lerp(hitVignette.weight, 1, elapsedTime / showDamageVignetteTime);
+            
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+        
+        elapsedTime = 0;
+        
+        while (elapsedTime < hideDamageVignetteTime)
+        {
+            hitVignette.weight = Mathf.Lerp(hitVignette.weight, 0, elapsedTime / hideDamageVignetteTime);
+        
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        hitVignette.priority = 0;
+        showVignette = true;
     }
 
     [Rpc(RpcSources.All, RpcTargets.All, InvokeLocal = true)]

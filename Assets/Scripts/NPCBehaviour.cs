@@ -33,6 +33,7 @@ public class NPCBehaviour : NetworkBehaviour
     [SerializeField] private float detectRange;
     [SerializeField] private float detectionAngle;
     [SerializeField] private float attackRange;
+    private bool canPlayFoundEnemySound = true;
     private bool isAttacking;
     private GameObject enemy;
 
@@ -106,6 +107,8 @@ public class NPCBehaviour : NetworkBehaviour
                 }
                 break;
             case Behaviour.NaturalBehaviour:
+                canPlayFoundEnemySound = true;
+                
                 var currentPosition = transform.position;
 
                 if (randomWaitTime <= 0)
@@ -141,6 +144,12 @@ public class NPCBehaviour : NetworkBehaviour
                     if (enemy.TryGetComponent<PlayerHealth>(out var playerHealth) && playerHealth.isDead)
                     {
                         behaviour = Behaviour.NaturalBehaviour;
+                    }
+
+                    if (canPlayFoundEnemySound)
+                    {
+                        AudioManager.Instance.PlaySoundWithRandomPitchAtPosition("FishFoundYou", enemy.transform.position);
+                        canPlayFoundEnemySound = false;
                     }
                     
                     if (Vector3.Distance(transform.position, enemy.transform.position) < attackRange)

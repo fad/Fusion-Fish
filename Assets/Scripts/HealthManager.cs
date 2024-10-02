@@ -62,8 +62,10 @@ public class HealthManager : NetworkBehaviour
             currentHealth = NetworkedHealth;
         }
         
-        if (TryGetComponent<PlayerHealth>(out var playerHealth) && HasStateAuthority)
+        if (TryGetComponent<PlayerHealth>(out var playerHealth) && HasStateAuthority && currentHealth >= NetworkedHealth)
         {
+            if(playerHealth.showVignette)
+                StartCoroutine(playerHealth.ShowDamageVignette());
             playerHealth.PlayerCheckDeath();
         }
         else if(TryGetComponent<NPCHealth>(out var npcHealth))
