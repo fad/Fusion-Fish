@@ -203,19 +203,19 @@ namespace AvocadoShark
         {
             string sessionName = null;
             string sessionPassword = null;
-            int maxPlayers = 2;
+            int maxPlayers = 10;
             if (IsRoomNameValid())
             {
                 sessionName = menuCanvas.GetRoomName();
                 PlayerPrefs.SetString(RoomNamePlayerPrefs, menuCanvas.nameInputField.text);
-                sessionPassword = menuCanvas.GetPassword();
-                maxPlayers = menuCanvas.GetMaxPlayers();
+                //sessionPassword = menuCanvas.GetPassword();
+                //maxPlayers = menuCanvas.GetMaxPlayers();
             }
             else
             {
                 int randomInt = UnityEngine.Random.Range(1000, 9999);
-                sessionPassword = menuCanvas.GetPassword();
-                maxPlayers = menuCanvas.GetMaxPlayers();
+                //sessionPassword = menuCanvas.GetPassword();
+                //maxPlayers = menuCanvas.GetMaxPlayers();
                 sessionName = "Room-" + randomInt;
             }
 
@@ -225,13 +225,15 @@ namespace AvocadoShark
 
             if (menuCanvas.isPasswordEnabled)
             {
-                PlayerPrefs.SetInt("has_pass", 1);
-                JoinRoom(sessionName, maxPlayers, sessionPassword);
+                //PlayerPrefs.SetInt("has_pass", 1);
+                //JoinRoom(sessionName, maxPlayers, sessionPassword);
             }
             else
             {
-                JoinRoom(sessionName, maxPlayers,string.Empty);
             }
+            
+            //If password is enabled, make this line of code be executed in the else statement above
+            JoinRoom(sessionName, maxPlayers,string.Empty);
 
             StopCoroutine(AutoRefreshRoomList());
         }
