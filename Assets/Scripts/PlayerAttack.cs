@@ -225,6 +225,10 @@ public class PlayerAttack : NetworkBehaviour
                 SetFoodObject(null, Color.white);
             }
         }
+        else
+        {
+            SetFoodObject(null, Color.white);
+        }
     }
 
     private void SetFoodObject(GameObject food, Color color)

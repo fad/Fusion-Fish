@@ -31,7 +31,7 @@ public class PlayerManager : NetworkBehaviour
         }
         
         yield return new WaitUntil(() => HudUI.Instance != null);
-
+        
         if (HasStateAuthority)
         {
             HudUI.Instance.playerManager = this;

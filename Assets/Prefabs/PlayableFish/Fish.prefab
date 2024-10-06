@@ -253,7 +253,7 @@ MonoBehaviour:
   experienceIncreaseOnLevelUp: 200
   defaultSwimSpeedIncreaseOnLevelUp: 1
   boostSwimSpeedIncreaseOnLevelUp: 1
-  attackDamageIncreaseOnLevelUp: 0.5
+  attackDamageIncreaseOnLevelUp: 2
   sizeIncreaseOnLevelUp: 0.25
   suckPowerIncreaseOnLevelUp: 0.2
   cameraDistanceIncreaseOnLevelUp: 1
