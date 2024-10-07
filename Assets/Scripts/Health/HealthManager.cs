@@ -1,3 +1,4 @@
+using System;
 using Fusion;
 using UnityEngine;
 
@@ -18,6 +19,8 @@ public class HealthManager : NetworkBehaviour
     [SerializeField] public float maxSlowDownSpeedTime = 5;
     [HideInInspector] public float slowDownSpeedTime;
     [HideInInspector] public bool slowDown;
+    
+    public event Action<float> OnHealthChanged; 
 
     private void Start() => bloodParticleSystem = GameObject.Find("BloodParticles").GetComponent<ParticleSystem>();
 
@@ -60,6 +63,7 @@ public class HealthManager : NetworkBehaviour
             slowDownSpeedTime = maxSlowDownSpeedTime;
             slowDown = true;
             currentHealth = NetworkedHealth;
+            OnHealthChanged?.Invoke(currentHealth);
         }
         
         if (TryGetComponent<PlayerHealth>(out var playerHealth) && HasStateAuthority && currentHealth >= NetworkedHealth)
