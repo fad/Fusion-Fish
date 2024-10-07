@@ -483,6 +483,7 @@ namespace AvocadoShark
             if (Runner.IsSceneAuthority)
             {
                 Runner.LoadScene(SceneRef.FromIndex(environmentDropdown.value + 2), LoadSceneMode.Additive);
+                SpawnManager.Instance.currentScene = environmentDropdown.value + 2;
             }
             
             if (runner.GetPlayerObject(runner.LocalPlayer) != null)
@@ -492,9 +493,9 @@ namespace AvocadoShark
             var location = new Vector3(0,0,0);
             var rotation = new Quaternion(0,0,0,0);
 
-            var spawnPoint = Random.Range(0, SpawnManager.Instance.spawnPoints.Count - 1);
-            location = SpawnManager.Instance.spawnPoints[spawnPoint].location;
-            rotation = SpawnManager.Instance.spawnPoints[spawnPoint].rotation;
+            var spawnPoint = Random.Range(0, SpawnManager.Instance.SpawnPoints().Count - 1);
+            location = SpawnManager.Instance.SpawnPoints()[spawnPoint].location;
+            rotation = SpawnManager.Instance.SpawnPoints()[spawnPoint].rotation;
             
             NetworkObject playerObject = runner.Spawn(playerPrefab,location, rotation);
             var playerTransform = playerObject.transform;

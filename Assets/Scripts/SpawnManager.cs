@@ -3,8 +3,13 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
-    [Header("Player Spawn Locations")] 
-    public List<SpawnPoint> spawnPoints;
+    [Header("Ocean Player Spawn Points")] 
+    public List<SpawnPoint> oceanSpawnPoints;
+    
+    [Header("River Player Spawn Points")] 
+    public List<SpawnPoint> riverSpawnPoints;
+
+    [HideInInspector] public int currentScene;
 
     public static SpawnManager Instance;
     
@@ -19,5 +24,15 @@ public class SpawnManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    public List<SpawnPoint> SpawnPoints()
+    {
+        return currentScene switch
+        {
+            2 => oceanSpawnPoints,
+            3 => riverSpawnPoints,
+            _ => null
+        };
     }
 }
