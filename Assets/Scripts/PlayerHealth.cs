@@ -15,6 +15,7 @@ public class PlayerHealth : NetworkBehaviour
     [HideInInspector] public bool showVignette;
     [SerializeField] private float showDamageVignetteTime;
     [SerializeField] private float hideDamageVignetteTime;
+    [Networked] public bool NetworkedPermanentHealth { get; set; }
 
     private void Start()
     {

@@ -71,7 +71,6 @@
     <Compile Include="Assets\Packages\Photon\PhotonVoice\Demos\DemoVoiceUI\Scripts\PhotonDemoExtensions.cs" />
     <Compile Include="Assets\Scripts\AudioManager.cs" />
     <Compile Include="Assets\Packages\Photon\PhotonVoice\Demos\Fusion\DemoNetworkObject\PrefabSpawner.cs" />
-    <Compile Include="Assets\Scripts\ActivateInGameDebugConsole.cs" />
     <Compile Include="Assets\Packages\Clean Multiplayer Pro\Scripts\Player\PlayerStats.cs" />
     <Compile Include="Assets\Scripts\RequestAuthorityOnSpawn.cs" />
     <Compile Include="Assets\Scripts\PlayerHealth.cs" />
@@ -96,6 +95,7 @@
     <Compile Include="Assets\Packages\Clean Multiplayer Pro\Scripts\Player\SessionPlayerUIPanel.cs" />
     <Compile Include="Assets\Packages\Clean Multiplayer Pro\Scripts\Editor Window\SetupWizard.cs" />
     <Compile Include="Assets\Packages\Clean Multiplayer Pro\Scripts\Vote\VoteKickManager.cs" />
+    <Compile Include="Assets\Scripts\InGameDebugConsoleManager.cs" />
     <Compile Include="Assets\Packages\Clean Multiplayer Pro\Scripts\Managers\InGame_Manager.cs" />
     <Compile Include="Assets\Scripts\GetPlayerCameraAndControls.cs" />
     <Compile Include="Assets\Packages\Clean Multiplayer Pro\Scripts\Player\LookAtCamera.cs" />

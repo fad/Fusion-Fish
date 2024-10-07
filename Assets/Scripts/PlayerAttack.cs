@@ -88,6 +88,9 @@ public class PlayerAttack : NetworkBehaviour
             {
                 if (hitColliders[i].TryGetComponent<HealthManager>(out var health) && health.maxHealth <= suckInDamage)
                 {
+                    if(TryGetComponent<PlayerHealth>(out var playerHealth) && playerHealth.NetworkedPermanentHealth)
+                        return;
+                    
                     // Calculate the direction from this object to the target
                     var directionToTarget = hitColliders[i].transform.position - playerManager.thirdPersonController.playerVisual.transform.position;
 
@@ -249,6 +252,9 @@ public class PlayerAttack : NetworkBehaviour
     {
         if (foodObject != null && foodObject.TryGetComponent<HealthManager>(out var health))
         {
+            if(foodObject.TryGetComponent<PlayerHealth>(out var playerHealth) && playerHealth.NetworkedPermanentHealth)
+                return;
+            
             health.ReceiveDamageRpc(attackDamage, true);
         }
     }

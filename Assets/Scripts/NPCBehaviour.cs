@@ -228,7 +228,7 @@ public class NPCBehaviour : NetworkBehaviour
         
         if(enemy != null && Vector3.Distance(transform.position, enemy.transform.position) < attackRange + .5f)
         {
-            if (enemy.TryGetComponent<PlayerHealth>(out var playerHealth) && playerHealth.isDead)
+            if (enemy.TryGetComponent<PlayerHealth>(out var playerHealth) && (playerHealth.isDead || playerHealth.NetworkedPermanentHealth))
             {
                 isAttacking = false;
                 yield break;

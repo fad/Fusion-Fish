@@ -199,7 +199,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settingsSO: {fileID: 11400000, guid: 933cba68e45ea634da0cb2bf0e3cb604, type: 2}
-  playerRotationSmoothTime: 10
+  playerRotationSmoothTime: 8
   sensitivity: 1.5
   playerVisual: {fileID: 5159690815227489710}
   boostSwimSpeed: 250
@@ -213,6 +213,7 @@ MonoBehaviour:
   boostReloadSpeed: 18
   boostConsumptionSpeed: 30
   boostParticles: {fileID: 254483115755838342}
+  permanentStamina: 0
   maxBoostCount: 100
   cameraFOVSmoothTime: 2
   cameraRotationSmoothTime: 15
@@ -274,8 +275,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isDead: 0
   showVignette: 0
-  showDamageVignetteTime: 0.8
-  hideDamageVignetteTime: 0.3
+  showDamageVignetteTime: 0.6
+  hideDamageVignetteTime: 0.2
+  _NetworkedPermanentHealth: 0
 --- !u!114 &4632872686385277288
 MonoBehaviour:
   m_ObjectHideFlags: 0

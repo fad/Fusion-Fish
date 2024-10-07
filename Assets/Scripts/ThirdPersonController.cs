@@ -41,6 +41,7 @@ namespace StarterAssets
         [SerializeField] private float boostReloadSpeed = 18;
         [SerializeField] private float boostConsumptionSpeed = 30;
         [SerializeField] private ParticleSystem boostParticles;
+        [HideInInspector] public bool permanentStamina;
         public float maxBoostCount = 100f;
         private bool isBoosting;
         private bool canReloadBoost = true;
@@ -209,9 +210,10 @@ namespace StarterAssets
 
         private void Move()
         {
-            if (input.sprint)
-            {
+            if (input.sprint && input.move.y is > 0 or < 0)
+            { 
                 canReload = false;
+                
                 boostState = BoostState.BoostStarted;
             }
             else
@@ -290,7 +292,8 @@ namespace StarterAssets
                             AudioManager.Instance.PlaySoundWithRandomPitchAtPosition("boost", transform.position);
                         boostParticles.Play();
                         isBoosting = true;
-                        currentBoostCount -= Time.deltaTime * boostConsumptionSpeed;
+                        if(!permanentStamina)
+                            currentBoostCount -= Time.deltaTime * boostConsumptionSpeed;
                     }
                     break;
                 case BoostState.BoostReload :

@@ -1,5 +1,6 @@
 using System.Collections;
 using Fusion;
+using IngameDebugConsole;
 using StarterAssets;
 using UnityEngine;
 
@@ -35,6 +36,7 @@ public class PlayerManager : NetworkBehaviour
         if (HasStateAuthority)
         {
             HudUI.Instance.playerManager = this;
+            DebugLogManager.Instance.GetComponent<InGameDebugConsoleManager>().playerManager = this;
         }
     }
 }
