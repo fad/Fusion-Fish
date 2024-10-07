@@ -21,6 +21,11 @@ public class HealthViewModel : NetworkBehaviour
     {
         healthModel.OnHealthChanged -= RPC_UpdateHealthSlider;
     }
+    
+    public void AdjustHealthBarVisibility(bool isVisible)
+    {
+        healthSlider.gameObject.SetActive(isVisible);
+    }
 
     
     [Rpc(RpcSources.All, RpcTargets.All)]

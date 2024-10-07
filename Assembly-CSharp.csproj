@@ -83,6 +83,7 @@
     <Compile Include="Assets\Scripts\Spawners\NPCSpawner.cs" />
     <Compile Include="Assets\Packages\Clean Multiplayer Pro\Scripts\Player\MenuCanvas.cs" />
     <Compile Include="Assets\Packages\Photon\PhotonVoice\Demos\DemoVoiceUI\Scripts\SidebarToggle.cs" />
+    <Compile Include="Assets\Scripts\Player Specific\NearbyEntityDetector.cs" />
     <Compile Include="Assets\Packages\Photon\PhotonVoice\Demos\DemoVoiceUI\Scripts\DemoVoiceUI.cs" />
     <Compile Include="Assets\Packages\Clean Multiplayer Pro\Scripts\Player\PlayerWorldUIManager.cs" />
     <Compile Include="Assets\Scripts\Health\NPCHealth.cs" />
