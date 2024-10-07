@@ -1,19 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
+using AvocadoShark;
 using UnityEngine;
 
-public class CanvasLookAtCamera : MonoBehaviour
+public class CanvasLookAtCamera : LookAtCamera
 {
-    private RectTransform rectTransform;
+    private RectTransform _rectTransform;
     
-    private void Start() 
+    protected override void Start() 
     {
-        rectTransform = GetComponent<RectTransform>();
+        base.Start();
+        _rectTransform = GetComponent<RectTransform>();
     }
 
-    private void Update() 
+    protected override void Update() 
     {
-        var virtualCamera = GameObject.Find("Virtual Camera");
-        rectTransform.LookAt(virtualCamera.transform);
+        _rectTransform.LookAt(VirtualCamera.transform);
     }
 }

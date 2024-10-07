@@ -1,17 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace AvocadoShark
 {
     public class LookAtCamera : MonoBehaviour
     {
-        private GameObject mainCamera;
-
-        private void Update() 
+        protected GameObject VirtualCamera;
+        
+        protected virtual void Start() 
         {
-            var virtualCamera = GameObject.Find("Virtual Camera");
-            transform.LookAt(virtualCamera.transform);
+            VirtualCamera = GameObject.Find("Virtual Camera");
+        }
+
+        protected virtual void Update() 
+        {
+            transform.LookAt(VirtualCamera.transform);
         }
     }
 }

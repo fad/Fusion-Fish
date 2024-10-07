@@ -9,14 +9,15 @@ public class HealthViewModel : NetworkBehaviour
     
     [SerializeField] private Slider healthSlider;
     
-    public void OnEnable()
+    public override void Spawned()
     {
         healthModel.OnHealthChanged += RPC_UpdateHealthSlider;
         
         healthSlider.maxValue = healthModel.maxHealth;
+        healthSlider.value = healthModel.currentHealth;
     }
-    
-    public void OnDisable()
+
+    public override void Despawned(NetworkRunner runner, bool hasState)
     {
         healthModel.OnHealthChanged -= RPC_UpdateHealthSlider;
     }
