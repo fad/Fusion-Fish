@@ -2,7 +2,6 @@ using UnityEngine;
 using IngameDebugConsole;
 using UnityEngine.UI;
 using Button = UnityEngine.UI.Button;
-using Fusion;
 
 public class InGameDebugConsoleManager : MonoBehaviour
 {

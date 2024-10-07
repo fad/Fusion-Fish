@@ -20,7 +20,7 @@ public class PlayerHealth : NetworkBehaviour
     private void Start()
     {
         playerManager = GetComponent<PlayerManager>();
-        hitVignette = GameObject.Find("PostProcessingDamage").GetComponent<Volume>();
+        hitVignette = GameObject.Find("DamagePostProcessing").GetComponent<Volume>();
         showVignette = true;
     }
 

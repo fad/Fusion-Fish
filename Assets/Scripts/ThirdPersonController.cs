@@ -33,6 +33,7 @@ namespace StarterAssets
         private bool outOfWater;
         private Rigidbody rb;
         private Transform swimArea;
+        private bool foundSwimArea;
         [HideInInspector] public CapsuleCollider capsuleCollider;
         
         [Header("Boost")]
@@ -98,13 +99,13 @@ namespace StarterAssets
             BoostReload,
         }
 
-        private void Start()
+        private IEnumerator Start()
         {
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
 
             capsuleCollider = GetComponent<CapsuleCollider>();
-            swimArea = GameObject.Find("SwimArea").GetComponent<Transform>();
+
             playerManager = GetComponent<PlayerManager>();
             input = GetComponent<StarterAssetsInputs>();
             rb = GetComponent<Rigidbody>();
@@ -125,7 +126,11 @@ namespace StarterAssets
 #endif
 
             animIDMotionSpeed = Animator.StringToHash("movingSpeed");
+            
+            yield return new WaitUntil(() => GameObject.Find("SwimArea") != null);
+            swimArea = GameObject.Find("SwimArea").GetComponent<Transform>();
             AudioManager.Instance.PlaySoundAtPosition("impactWithWater", playerVisual.transform.position);
+            foundSwimArea = true;
         }
 
         private void Update()
@@ -140,7 +145,7 @@ namespace StarterAssets
 
         public void FixedUpdate()
         {
-            if (playerManager.playerHealth.isDead || !HasStateAuthority)
+            if (playerManager.playerHealth.isDead || !HasStateAuthority || !foundSwimArea)
                 return;
             
             Move();        

@@ -76,6 +76,8 @@ namespace AvocadoShark
 
         public TMP_Dropdown region_select;
 
+        [SerializeField] private TMP_Dropdown environmentDropdown;
+
         private void Awake()
         {
             if (Instance == null)
@@ -480,7 +482,7 @@ namespace AvocadoShark
             hasEnteredGameScene = true;
             if (Runner.IsSceneAuthority)
             {
-                Runner.LoadScene(SceneRef.FromIndex(2), LoadSceneMode.Additive);
+                Runner.LoadScene(SceneRef.FromIndex(environmentDropdown.value + 2), LoadSceneMode.Additive);
             }
             
             if (runner.GetPlayerObject(runner.LocalPlayer) != null)
