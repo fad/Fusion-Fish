@@ -71,6 +71,7 @@
     <Compile Include="Assets\Packages\Photon\PhotonVoice\Demos\DemoVoiceUI\Scripts\PhotonDemoExtensions.cs" />
     <Compile Include="Assets\Scripts\AudioManager.cs" />
     <Compile Include="Assets\Packages\Photon\PhotonVoice\Demos\Fusion\DemoNetworkObject\PrefabSpawner.cs" />
+    <Compile Include="Assets\Scripts\ActivateInGameDebugConsole.cs" />
     <Compile Include="Assets\Packages\Clean Multiplayer Pro\Scripts\Player\PlayerStats.cs" />
     <Compile Include="Assets\Scripts\RequestAuthorityOnSpawn.cs" />
     <Compile Include="Assets\Scripts\PlayerHealth.cs" />
@@ -911,6 +912,9 @@
     <Reference Include="Unity.Burst">
       <HintPath>C:\Users\Alexander Pfeifer\Documents\Fusion-Fish\Library\ScriptAssemblies\Unity.Burst.dll</HintPath>
     </Reference>
+    <Reference Include="IngameDebugConsole.Editor">
+      <HintPath>C:\Users\Alexander Pfeifer\Documents\Fusion-Fish\Library\ScriptAssemblies\IngameDebugConsole.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:\Users\Alexander Pfeifer\Documents\Fusion-Fish\Library\ScriptAssemblies\Unity.Timeline.Editor.dll</HintPath>
     </Reference>
@@ -937,6 +941,9 @@
     </Reference>
     <Reference Include="Unity.VisualScripting.Flow.Editor">
       <HintPath>C:\Users\Alexander Pfeifer\Documents\Fusion-Fish\Library\ScriptAssemblies\Unity.VisualScripting.Flow.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="IngameDebugConsole.Runtime">
+      <HintPath>C:\Users\Alexander Pfeifer\Documents\Fusion-Fish\Library\ScriptAssemblies\IngameDebugConsole.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="Unity.RenderPipeline.Universal.ShaderLibrary">
       <HintPath>C:\Users\Alexander Pfeifer\Documents\Fusion-Fish\Library\ScriptAssemblies\Unity.RenderPipeline.Universal.ShaderLibrary.dll</HintPath>

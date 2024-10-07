@@ -5,16 +5,16 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 638621650785487950
-    m_Hash: 642141883
+      ticks: 638638821557937444
+    m_Hash: 1098783679
   m_LockFileStatus:
     m_FilePath: C:/Users/Alexander Pfeifer/Documents/Fusion-Fish/Packages/packages-lock.json
     m_PathExists: 1
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 638621650785535793
-    m_Hash: 2416058630
+      ticks: 638638821557968461
+    m_Hash: 1327903338
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}
 m_LocalPackages:
@@ -196,6 +196,7 @@ m_ResolvedPackages:
     - 3.0.1
     - 3.1.0
     - 3.1.1
+    - 3.1.2
     compatible:
     - 2.9.5
     - 2.9.7
@@ -211,6 +212,7 @@ m_ResolvedPackages:
     - 3.0.1
     - 3.1.0
     - 3.1.1
+    - 3.1.2
     recommended: 2.9.7
     deprecated: []
   dependencies:
@@ -370,6 +372,7 @@ m_ResolvedPackages:
     - 2.4.3
     - 2.4.4
     - 2.5.1
+    - 2.5.2
     compatible:
     - 2.1.0
     - 2.2.0
@@ -377,6 +380,7 @@ m_ResolvedPackages:
     - 2.4.3
     - 2.4.4
     - 2.5.1
+    - 2.5.2
     recommended: 2.1.0
     deprecated: []
   dependencies: []
@@ -756,6 +760,7 @@ m_ResolvedPackages:
     - 1.9.0
     - 1.10.0
     - 1.11.0
+    - 1.11.1
     compatible:
     - 1.7.0
     - 1.8.0-pre.1
@@ -766,6 +771,7 @@ m_ResolvedPackages:
     - 1.9.0
     - 1.10.0
     - 1.11.0
+    - 1.11.1
     recommended: 1.7.0
     deprecated: []
   dependencies:
@@ -1840,6 +1846,61 @@ m_ResolvedPackages:
   isAssetStorePackage: 0
   datePublishedTicks: 0
   documentationUrl: 
+  hasRepository: 0
+  repository:
+    type: 
+    url: 
+    revision: 
+    path: 
+  unityLifecycle:
+    version: 
+    nextVersion: 
+    recommendedVersion: 
+    isDeprecated: 0
+    deprecationMessage: 
+  isDeprecated: 0
+  deprecationMessage: 
+- packageId: com.yasirkula.ingamedebugconsole@https://github.com/yasirkula/UnityIngameDebugConsole.git
+  testable: 0
+  isDirectDependency: 1
+  version: 1.6.8
+  source: 5
+  resolvedPath: C:\Users\Alexander Pfeifer\Documents\Fusion-Fish\Library\PackageCache\com.yasirkula.ingamedebugconsole@51e0996359
+  assetPath: Packages/com.yasirkula.ingamedebugconsole
+  name: com.yasirkula.ingamedebugconsole
+  displayName: In-game Debug Console
+  author:
+    name: 
+    email: 
+    url: 
+  category: 
+  type: 
+  description: This asset helps you see debug messages (logs, warnings, errors, exceptions)
+    runtime in a build (also assertions in editor) and execute commands using its
+    built-in console. It also supports logging logcat messages to the console on
+    Android platform.
+  status: 0
+  errors: []
+  versions:
+    all: []
+    compatible: []
+    recommended: 
+    deprecated: []
+  dependencies: []
+  resolvedDependencies: []
+  keywords: []
+  registry:
+    id: main
+    name: 
+    url: https://packages.unity.com
+    scopes: []
+    isDefault: 1
+    capabilities: 7
+    configSource: 0
+  hideInEditor: 0
+  isAssetStorePackage: 0
+  datePublishedTicks: 0
+  documentationUrl: https://github.com/yasirkula/UnityIngameDebugConsole
   hasRepository: 0
   repository:
     type: 
@@ -4055,6 +4116,7 @@ m_ResolvedPackages:
     - 1.8.15
     - 1.8.16
     - 1.8.17
+    - 1.8.18
     compatible:
     - 1.8.9
     - 1.8.10
@@ -4065,7 +4127,8 @@ m_ResolvedPackages:
     - 1.8.15
     - 1.8.16
     - 1.8.17
-    recommended: 1.8.17
+    - 1.8.18
+    recommended: 1.8.18
     deprecated: []
   dependencies:
   - name: com.unity.mathematics
