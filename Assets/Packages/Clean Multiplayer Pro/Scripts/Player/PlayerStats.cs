@@ -5,6 +5,7 @@ using TMPro;
 using System;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using UnityEngine.Serialization;
 
 namespace AvocadoShark
 {
@@ -26,7 +27,9 @@ namespace AvocadoShark
         public Action<int> OnPositiveVotesChanged, OnNegativeVotesChanged, OnVoteTimeUpdated;
         public Action<bool> OnSpeaking;
 
-        [SerializeField] TextMeshPro playerNameLabel;
+        [Header("Player UI")]
+        [SerializeField] private TextMeshPro playerNameLabel;
+        [SerializeField] private GameObject playerHealthBarCanvas;
 
         public static PlayerStats instance;
 
@@ -40,6 +43,11 @@ namespace AvocadoShark
                 PlayerName = FusionConnection.Instance._playerName;
                 OnPlayerStatsReady?.Invoke(PlayerName.ToString());
                 playerNameLabel.text = !HasStateAuthority ? PlayerName.ToString() : "";
+                
+                Destroy(GetComponent<HealthViewModel>());
+                Destroy(playerHealthBarCanvas);
+                playerHealthBarCanvas = null;
+                
                 Debug.Log(PlayerName + " Has state authority");
                 if (instance == null)
                 {
