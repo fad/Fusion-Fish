@@ -6524,6 +6524,9 @@ MonoBehaviour:
   playerLayerMask:
     serializedVersion: 2
     m_Bits: 128
+  hittableLayerMask:
+    serializedVersion: 2
+    m_Bits: 192
   biteUpper: {fileID: 1817263681268154888}
   biteLower: {fileID: 5466369016473450773}
   biteAnimator: {fileID: 9174893869088333902}

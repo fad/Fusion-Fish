@@ -5,9 +5,9 @@ using Fusion;
 
 public class PlayerAttack : NetworkBehaviour
 {
-    [Header("Food")] 
+    [Header("Hit LayerMask")] 
     [SerializeField] private LayerMask foodLayerMask;
-    [SerializeField] private LayerMask playerLayerMask;
+    [SerializeField] private LayerMask hittableLayerMask;
     private GameObject foodObject;
 
     [Header("Bite")] 
@@ -40,7 +40,10 @@ public class PlayerAttack : NetworkBehaviour
     [Tooltip("Increase player scale up and down coroutine will take that time.")]
     [SerializeField] private float timeForScaleAnimation = .15f; 
     public float suckInDamage;
-    private float currentSuckInTime;
+    private float _currentSuckInTime;
+    
+    private Image _biteUpperImage;
+    private Image _biteLowerImage;
 
     private void Start()
     {
@@ -53,6 +56,9 @@ public class PlayerAttack : NetworkBehaviour
         sensitivityWhileAttacking = playerManager.thirdPersonController.sensitivity /= 2;
         
         currentAttackTime = maxTimeBetweenAttack;
+        
+        _biteUpperImage = biteUpper.GetComponent<Image>();
+        _biteLowerImage = biteLower.GetComponent<Image>();
     }
 
     private void Update()
@@ -69,74 +75,83 @@ public class PlayerAttack : NetworkBehaviour
 
     private void SuckInUpdate()
     {
-        if (currentSuckInTime >= 0)
+        if (_currentSuckInTime >= 0)
         {
-            currentSuckInTime -= Time.deltaTime;
+            _currentSuckInTime -= Time.deltaTime;
         }
         else if (playerManager.thirdPersonController.input.suckIn)
         {
-            var playerVisualPosition = playerManager.thirdPersonController.playerVisual.transform.position;
+            Vector3 playerVisualPosition = playerManager.thirdPersonController.playerVisual.transform.position;
                 
             suckInParticles.Play();
             AudioManager.Instance.PlaySoundWithRandomPitchAtPosition("suck", playerVisualPosition);
             
-            var hitColliders = new Collider[5];
+            Collider[] hitColliders = new Collider[5];
 
-            var hits = Physics.OverlapSphereNonAlloc(playerVisualPosition, attackRange, hitColliders, foodLayerMask);
+            int hits = Physics.OverlapSphereNonAlloc(playerVisualPosition, attackRange, hitColliders, foodLayerMask);
             
-            for (var i = 0; i < hits; i++)
+            for (int i = 0; i < hits; i++)
             {
                 if (hitColliders[i].TryGetComponent<HealthManager>(out var health) && health.maxHealth <= suckInDamage)
                 {
                     if(TryGetComponent<PlayerHealth>(out var playerHealth) && playerHealth.NetworkedPermanentHealth)
                         return;
                     
-                    // Calculate the direction from this object to the target
-                    var directionToTarget = hitColliders[i].transform.position - playerManager.thirdPersonController.playerVisual.transform.position;
-
-                    var angleToTarget = Vector3.Angle(-playerManager.thirdPersonController.playerVisual.transform.forward, directionToTarget);
-
-                    // Check if the target is within the attraction angle
-                    if (angleToTarget <= attractionAngle)
-                    {
-                        // Apply force to the target
-                        if(hitColliders[i].TryGetComponent<Rigidbody>(out var targetRb))
-                        {
-                            if (hitColliders[i].TryGetComponent<NPCBehaviour>(out var npcBehaviour))
-                                StartCoroutine(npcBehaviour.StopMovement(2));
-                                    
-                            targetRb.AddForce(directionToTarget.normalized * -suckInForce, ForceMode.Force);
-                        }
-                    }
-
-                    //Decreasing lossyScale cause it is a bit too big
-                    if (directionToTarget.magnitude <= playerManager.thirdPersonController.transform.localToWorldMatrix.lossyScale.z - .01f)
-                    {
-                        playerManager.levelUp.currentExperience += health.experienceValue;
-                        playerManager.levelUp.CheckLevelUp();
-                        
-                        if (!scaleUpAnimationRunning)
-                            StartCoroutine(ScalePlayerUpOnEating());
-                        
-                        if (playerManager.healthManager.NetworkedHealth + healthIncreaseOnEating <= playerManager.healthManager.maxHealth)
-                        {
-                            playerManager.healthManager.NetworkedHealth += healthIncreaseOnEating;
-                        }
-                        else
-                        {
-                            playerManager.healthManager.NetworkedHealth = playerManager.healthManager.maxHealth;
-                        }
-
-                        //decreasing experience value to 0, to make sure I do not get experience twice
-                        health.experienceValue = 0;
-                        health.ReceiveDamageRpc(suckInDamage, false);
-                        SetFoodObject(null, Color.white);
-                    }   
+                    CalculateDirectionAndAddForceTowardsPlayer(hitColliders[i], out Vector3 directionToTarget);
+                    ApplyExperienceAndResetFoodObject(directionToTarget, health);   
                 }
             }
 
-            currentSuckInTime = maxTimeBetweenSuckIn;
+            _currentSuckInTime = maxTimeBetweenSuckIn;
         }
+    }
+
+    private void CalculateDirectionAndAddForceTowardsPlayer(Collider hitCollider, out Vector3 directionToTarget)
+    {
+        // Calculate the direction from this object to the target
+        directionToTarget = hitCollider.transform.position - playerManager.thirdPersonController.playerVisual.transform.position;
+
+        float angleToTarget = Vector3.Angle(-playerManager.thirdPersonController.playerVisual.transform.forward, directionToTarget);
+
+        // Check if the target is within the attraction angle
+        if (angleToTarget <= attractionAngle)
+        {
+            // Apply force to the target
+            if(hitCollider.TryGetComponent<Rigidbody>(out var targetRb))
+            {
+                if (hitCollider.TryGetComponent<NPCBehaviour>(out var npcBehaviour))
+                    StartCoroutine(npcBehaviour.StopMovement(2));
+                                    
+                targetRb.AddForce(directionToTarget.normalized * -suckInForce, ForceMode.Force);
+            }
+        }
+    }
+
+    private void ApplyExperienceAndResetFoodObject(Vector3 directionToTarget, HealthManager health)
+    {
+        //Decreasing lossyScale cause it is a bit too big
+        if (directionToTarget.magnitude <= playerManager.thirdPersonController.transform.localToWorldMatrix.lossyScale.z - .01f)
+        {
+            playerManager.levelUp.currentExperience += health.experienceValue;
+            playerManager.levelUp.CheckLevelUp();
+                        
+            if (!scaleUpAnimationRunning)
+                StartCoroutine(ScalePlayerUpOnEating());
+                        
+            if (playerManager.healthManager.NetworkedHealth + healthIncreaseOnEating <= playerManager.healthManager.maxHealth)
+            {
+                playerManager.healthManager.NetworkedHealth += healthIncreaseOnEating;
+            }
+            else
+            {
+                playerManager.healthManager.NetworkedHealth = playerManager.healthManager.maxHealth;
+            }
+
+            //decreasing experience value to 0, to make sure not to apply experience twice
+            health.experienceValue = 0;
+            health.ReceiveDamageRpc(suckInDamage, false);
+            SetFoodObject(null, Color.white);
+        }  
     }
 
     private IEnumerator ScalePlayerUpOnEating()
@@ -204,22 +219,22 @@ public class PlayerAttack : NetworkBehaviour
 
         lastAttackCount = attackCount;
     }
-
+    
     private void EnemyInRange()
     {
-        var hitColliders = new Collider[1];
+        Collider[] hitColliders = new Collider[1];
 
-        var playerVisualPosition = playerManager.thirdPersonController.playerVisual.transform.position;
-        var foodHits = Physics.OverlapSphereNonAlloc(playerVisualPosition, attackRange, hitColliders, foodLayerMask);
-        var playerHits = Physics.OverlapSphereNonAlloc(playerVisualPosition, attackRange, hitColliders, playerLayerMask);
+        Vector3 playerVisualPosition = playerManager.thirdPersonController.playerVisual.transform.position;
+        int hits = Physics.OverlapSphereNonAlloc(playerVisualPosition, attackRange, hitColliders, hittableLayerMask);
         
-        if (foodHits >= 1 || playerHits >= 1)
+        if (hits >= 1)
         {
-            var directionToTarget = hitColliders[0].transform.position - playerVisualPosition;
-            var angleToTarget = Vector3.Angle(-playerManager.thirdPersonController.playerVisual.transform.forward, directionToTarget);
+            Vector3 directionToTarget = hitColliders[0].transform.position - playerVisualPosition;
+            float angleToTarget = Vector3.Angle(-playerManager.thirdPersonController.playerVisual.transform.forward, directionToTarget);
+            HealthManager health = hitColliders[0].GetComponent<HealthManager>();
             
             // Check if the target is within the attraction angle
-            if (angleToTarget <= attractionAngle && !hitColliders[0].GetComponent<HealthManager>().notAbleToGetBitten)
+            if (angleToTarget <= attractionAngle && !health.notAbleToGetBitten)
             {
                 SetFoodObject(hitColliders[0].transform.gameObject, Color.yellow);
             }
@@ -237,8 +252,8 @@ public class PlayerAttack : NetworkBehaviour
     private void SetFoodObject(GameObject food, Color color)
     {
         foodObject = food;
-        biteUpper.GetComponent<Image>().color = color;
-        biteLower.GetComponent<Image>().color = color;
+        _biteUpperImage.color = color;
+        _biteLowerImage.color = color;
     }
     
     public void ResetBiteImageAnimationEvent()
