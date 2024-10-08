@@ -50,6 +50,7 @@
     <Compile Include="Assets\Packages\Clean Multiplayer Pro\Scripts\Menu\LoadingScreen.cs" />
     <Compile Include="Assets\Scripts\Player Specific\LevelUp.cs" />
     <Compile Include="Assets\Packages\Photon\PhotonVoice\Demos\DemoVoiceUI\Scripts\UiExtensions.cs" />
+    <Compile Include="Assets\Scripts\Spawners\HatcheryManager.cs" />
     <Compile Include="Assets\Packages\Clean Multiplayer Pro\Scripts\Vote\VoteKickUIPanel.cs" />
     <Compile Include="Assets\Packages\Clean Multiplayer Pro\Mobile Controller\Scripts\CanvasInputs\UICanvasControllerInput.cs" />
     <Compile Include="Assets\Scripts\Player Specific\PlayerHealth.cs" />

@@ -1,26 +1,22 @@
-using System.Collections.Generic;
+using Fusion;
 using UnityEngine;
 
 public class NPCSpawner : MonoBehaviour
 {
-    [SerializeField] private List<Transform> spawnableFishes;
+    [Header("Spawner Bounds")]
+    [SerializeField] private Collider spawnerBounds;
 
-    private List<Transform> spawnPoints = new List<Transform>();
-
-    private void Start()
+    public void Spawn(NetworkRunner runner, Transform typeToSpawn, Vector2Int range)
     {
-        for (int i = 0; i < transform.childCount; i++)
-        {
-            spawnPoints.Add(transform.GetChild(i));
-        }
-    }
-
-    public void SpawnFish()
-    {
-        var randomFish = Random.Range(0, spawnableFishes.Count - 1);
+        int randomNumber = Random.Range(range.x, range.y+1);
         
-        var randomSpawnPoint = Random.Range(0, spawnPoints.Count - 1);
-
-        Instantiate(spawnableFishes[randomFish], spawnPoints[randomSpawnPoint].transform.position, Quaternion.identity);
+        for (int i = 0; i < randomNumber; i++)
+        {
+            Vector3 randomPosition = Random.insideUnitSphere * spawnerBounds.bounds.extents.magnitude;
+            
+            runner.Spawn(typeToSpawn.gameObject, randomPosition, Quaternion.identity);
+        }
+        
+        
     }
 }
