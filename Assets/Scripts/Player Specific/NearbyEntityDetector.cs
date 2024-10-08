@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class NearbyEntityDetector : MonoBehaviour
 {
-    [Header("NPC Settings")]
+    [Header("Entity Settings")]
     [SerializeField] private LayerMask layerMaskToCheck;
     
     private void OnTriggerEnter(Collider other)
