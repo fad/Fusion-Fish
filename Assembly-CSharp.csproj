@@ -102,6 +102,7 @@
     <Compile Include="Assets\Packages\Clean Multiplayer Pro\Scripts\Chat\ChatPlayer.cs" />
     <Compile Include="Assets\Input System\StarterAssetsInputs.cs" />
     <Compile Include="Assets\Scripts\Player Specific\PlayerManager.cs" />
+    <Compile Include="Assets\Scripts\Netcode\AuthorityManager.cs" />
     <Compile Include="Assets\Packages\Clean Multiplayer Pro\Scripts\Menu\RoomEntry.cs" />
     <Compile Include="Assets\Scripts\Health\HealthManager.cs" />
     <Compile Include="Assets\Packages\Clean Multiplayer Pro\Scripts\Player\SessionPlayers.cs" />
