@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class AuthorityManager : NetworkBehaviour, IPlayerLeft
 {
-    [Networked]
-    private NetworkDictionary<NetworkObject, PlayerRef> AuthorityDictionary { get; set; } = new();
+    // [Networked] private NetworkDictionary<NetworkObject, PlayerRef> AuthorityDictionary { get; set; } = new();
     
 
     public void PlayerLeft(PlayerRef player)
     {
-        if (AuthorityDictionary.Count == 0)
+        //if (AuthorityDictionary.Count == 0)
         {
             Debug.LogWarning("There are no NetworkObjects to transfer authority to.");
             return;
@@ -36,9 +35,9 @@ public class AuthorityManager : NetworkBehaviour, IPlayerLeft
     // TODO: Implement this method
     private void HandleAuthorityTransfer(PlayerRef player)
     {
-        foreach (KeyValuePair<NetworkObject, PlayerRef> authority in AuthorityDictionary)
-        {
-            NetworkObject networkObject = authority.Key;
+        // foreach (KeyValuePair<NetworkObject, PlayerRef> authority in AuthorityDictionary)
+        // {
+        //     NetworkObject networkObject = authority.Key;
             
             // if (AuthorityDictionary[networkObject] == player)
             // {
@@ -52,4 +51,3 @@ public class AuthorityManager : NetworkBehaviour, IPlayerLeft
             // }
         }
     }
-}
