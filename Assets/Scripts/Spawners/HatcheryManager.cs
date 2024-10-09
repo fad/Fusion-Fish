@@ -4,44 +4,55 @@ using UnityEngine;
 [RequireComponent(typeof(NetworkObject))]
 public class HatcheryManager : NetworkBehaviour
 {
-    
     [Header("Cooldown Settings")]
-    [SerializeField] 
-    private float spawnCooldown = 120f;
+    [SerializeField]
+    [Tooltip("Time it takes for the hatchery to spawn fishes")]
+    private float spawnCooldownInSeconds = 120f;
     
-    [SerializeField] 
-    private float resetCooldown = 30f;
+    [SerializeField]
+    [Tooltip("Time it takes for the hatchery to \"respawn\" eggs")]
+    private float resetCooldownInSeconds = 30f;
 
     [Header("Spawner Settings")]
     [SerializeField] 
-    private Transform fishTypeToSpawn;
+    [Tooltip("The type of fish to spawn")]
+    private NPCBehaviour fishTypeToSpawn;
     
     [SerializeField] 
+    [Tooltip("The range for the amount of fish to spawn. \nX is the inclusive minimum, Y is the inclusive maximum.")]
     private Vector2Int spawnAmountRange = new(1,3);
 
     [SerializeField]
+    [Tooltip("The spawner to use for spawning the fish")]
     private NPCSpawner spawnerToUse;
 
     [Header("Visual Settings")]
     [SerializeField]
+    [Tooltip("The eggs to show when the hatchery is ready to spawn")]
     private GameObject eggs;
     
-    private TickTimer _spawnTimer;
-    private TickTimer _resetTimer;
+    [Networked] private TickTimer SpawnTimer { get; set; }
+    [Networked] private TickTimer ResetTimer { get; set; }
 
-    private void Awake()
+    [Networked] private bool TimersAreRunning { get; set; }
+
+    public override void Spawned()
     {
-        _spawnTimer = TickTimer.CreateFromSeconds(Runner, spawnCooldown);
+        TimersAreRunning = SpawnTimer.IsRunning || ResetTimer.IsRunning;
+            
+        if (TimersAreRunning) return;
+        
+        SpawnTimer = TickTimer.CreateFromSeconds(Runner, spawnCooldownInSeconds);
     }
 
     public override void FixedUpdateNetwork()
     {
-        if (_spawnTimer.Expired(Runner))
+        if (SpawnTimer.Expired(Runner))
         {
             SpawnFishes();
         }
         
-        if(_resetTimer.Expired(Runner))
+        if(ResetTimer.Expired(Runner))
         {
             ResetHatchery();
         }
@@ -49,23 +60,19 @@ public class HatcheryManager : NetworkBehaviour
 
     private void SpawnFishes()
     {
-        _spawnTimer = default;
+        SpawnTimer = default;
         eggs.SetActive(false);
-
-        Debug.Log("Spawning fishes");
         
-        //spawnerToUse.Spawn(Runner, fishTypeToSpawn, spawnAmountRange);
+        spawnerToUse.Spawn(fishTypeToSpawn, spawnAmountRange);
         
-        _resetTimer = TickTimer.CreateFromSeconds(Runner, resetCooldown);
+        ResetTimer = TickTimer.CreateFromSeconds(Runner, resetCooldownInSeconds);
     }
     
     private void ResetHatchery()
     {
-        _resetTimer = default;
+        ResetTimer = default;
         eggs.SetActive(true);
         
-        Debug.Log("Resetting hatchery");
-        
-        _spawnTimer = TickTimer.CreateFromSeconds(Runner, spawnCooldown);
+        SpawnTimer = TickTimer.CreateFromSeconds(Runner, spawnCooldownInSeconds);
     }
 }
