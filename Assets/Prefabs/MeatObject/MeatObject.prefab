@@ -18,6 +18,8 @@ GameObject:
   - component: {fileID: 7392976776931892285}
   - component: {fileID: 7836080894405224610}
   - component: {fileID: 4812300359971869708}
+  - component: {fileID: 2222786797888536702}
+  - component: {fileID: 2696162681688181827}
   m_Layer: 6
   m_Name: MeatObject
   m_TagString: Untagged
@@ -35,7 +37,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -168.554, y: -0.17, z: 3.6080017}
-  m_LocalScale: {x: 0.33333337, y: 0.33333334, z: 0.33333337}
+  m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -153,6 +155,8 @@ MonoBehaviour:
   - {fileID: -6505894716318477620}
   - {fileID: 7392976776931892285}
   - {fileID: 4812300359971869708}
+  - {fileID: 2222786797888536702}
+  - {fileID: 2696162681688181827}
 --- !u!114 &-6505894716318477620
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -223,3 +227,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isShrimp: 0
   isStarFish: 0
+--- !u!114 &2222786797888536702
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3993952820748017500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff2982a4918a3434ea873ea2c9f9d2aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2696162681688181827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3993952820748017500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0822fda13ddf1441aa1d15688d1ed64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
