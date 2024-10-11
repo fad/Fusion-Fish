@@ -1685,6 +1685,8 @@ GameObject:
   - component: {fileID: 8691682767556998599}
   - component: {fileID: 7444146348718481504}
   - component: {fileID: 9073960008488969885}
+  - component: {fileID: 8426470833835599488}
+  - component: {fileID: 1418090894518624469}
   m_Layer: 0
   m_Name: SpawningGround
   m_TagString: Untagged
@@ -1724,11 +1726,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SortKey: 3207114062
   ObjectInterest: 1
-  Flags: 262145
+  Flags: 524289
   NestedObjects: []
   NetworkedBehaviours:
   - {fileID: 7444146348718481504}
   - {fileID: 9073960008488969885}
+  - {fileID: 8426470833835599488}
+  - {fileID: 1418090894518624469}
 --- !u!114 &7444146348718481504
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1761,6 +1765,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnerBounds: {fileID: 9052890857589678464}
   spawnerBoundsScale: 1.5
+--- !u!114 &8426470833835599488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4538355999009438500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff2982a4918a3434ea873ea2c9f9d2aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1418090894518624469
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4538355999009438500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0822fda13ddf1441aa1d15688d1ed64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4776589492373779385
 GameObject:
   m_ObjectHideFlags: 0

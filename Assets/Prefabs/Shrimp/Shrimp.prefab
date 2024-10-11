@@ -1237,10 +1237,11 @@ GameObject:
   - component: {fileID: 1855833591059543511}
   - component: {fileID: 7395764020010553276}
   - component: {fileID: 576333418220529877}
-  - component: {fileID: 5162494352980053988}
   - component: {fileID: 7760722307578981489}
   - component: {fileID: 2041347582299254623}
   - component: {fileID: 6560686478464429884}
+  - component: {fileID: 8505763890840824467}
+  - component: {fileID: 2237925685701127982}
   m_Layer: 6
   m_Name: Shrimp
   m_TagString: Untagged
@@ -1308,9 +1309,10 @@ MonoBehaviour:
   - {fileID: 2643641434420825491}
   - {fileID: 1557087152500486892}
   - {fileID: 1855833591059543511}
-  - {fileID: 5162494352980053988}
   - {fileID: 2041347582299254623}
   - {fileID: 6560686478464429884}
+  - {fileID: 8505763890840824467}
+  - {fileID: 2237925685701127982}
 --- !u!114 &2643641434420825491
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1458,18 +1460,6 @@ CapsuleCollider:
   m_Height: 0.92
   m_Direction: 2
   m_Center: {x: 0, y: 0.04, z: 0}
---- !u!114 &5162494352980053988
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7572578571618421079}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4c3db8ca4456a6459b54fd031c1cb2e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &7760722307578981489
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1519,6 +1509,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthModel: {fileID: 591577207863333814}
   healthSlider: {fileID: 5220872681161854723}
+--- !u!114 &8505763890840824467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7572578571618421079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0822fda13ddf1441aa1d15688d1ed64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2237925685701127982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7572578571618421079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff2982a4918a3434ea873ea2c9f9d2aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7874023413798716356
 GameObject:
   m_ObjectHideFlags: 0
