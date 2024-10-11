@@ -7,7 +7,5 @@ public class RequestAuthorityOnSpawn : NetworkBehaviour
     public override void Spawned()
     {
         Object.RequestStateAuthority();
-
-        Debug.Log($"[{gameObject.name}] - StateAuthority: {Object.StateAuthority.AsIndex}");
     }
 }
