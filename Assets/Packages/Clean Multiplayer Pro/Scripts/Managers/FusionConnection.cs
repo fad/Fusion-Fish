@@ -76,7 +76,10 @@ namespace AvocadoShark
 
         public TMP_Dropdown region_select;
 
+        [Header("Environment")]
         [SerializeField] private TMP_Dropdown environmentDropdown;
+        [SerializeField] private Material oceanSky;
+        [SerializeField] private Material riverSky;
 
         private void Awake()
         {
@@ -480,25 +483,31 @@ namespace AvocadoShark
             if(hasEnteredGameScene)
                 return;
             hasEnteredGameScene = true;
+            
+            //it counts +2 for the scene index because there are the menu & game scene that need to be excluded
             if (Runner.IsSceneAuthority)
             {
                 Runner.LoadScene(SceneRef.FromIndex(environmentDropdown.value + 2), LoadSceneMode.Additive);
-            } 
-            
+            }
+
             SpawnManager.Instance.currentScene = environmentDropdown.value + 2;
+            
+            RenderSettings.skybox = (environmentDropdown.value + 2) switch
+            {
+                2 => oceanSky,
+                3 => riverSky,
+                _ => RenderSettings.skybox
+            };
             
             if (runner.GetPlayerObject(runner.LocalPlayer) != null)
                 return;
             var playerPrefab = PlayerPrefs.GetInt("ChosenCharacter") == 0 ? playerPrefabSecond : playerPrefabFirst;
             
-            var location = new Vector3(0,0,0);
-            var rotation = new Quaternion(0,0,0,0);
-
             List<SpawnPoint> currentSceneSpawnPoints = SpawnManager.Instance.SpawnPoints();
 
             var spawnPoint = Random.Range(0, currentSceneSpawnPoints.Count);
-            location = currentSceneSpawnPoints[spawnPoint].location;
-            rotation = currentSceneSpawnPoints[spawnPoint].rotation;
+            var location = currentSceneSpawnPoints[spawnPoint].location;
+            var rotation = currentSceneSpawnPoints[spawnPoint].rotation;
             
             NetworkObject playerObject = runner.Spawn(playerPrefab,location, rotation);
             var playerTransform = playerObject.transform;

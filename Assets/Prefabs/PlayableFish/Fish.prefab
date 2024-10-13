@@ -210,6 +210,7 @@ MonoBehaviour:
   playerManager: {fileID: 0}
   speed: 0
   capsuleCollider: {fileID: 0}
+  waterLevelY: 0
   currentBoostCount: 0
   boostDelayAfterActivation: 2
   boostReloadSpeed: 18
@@ -6521,9 +6522,6 @@ MonoBehaviour:
   foodLayerMask:
     serializedVersion: 2
     m_Bits: 64
-  playerLayerMask:
-    serializedVersion: 2
-    m_Bits: 128
   hittableLayerMask:
     serializedVersion: 2
     m_Bits: 192

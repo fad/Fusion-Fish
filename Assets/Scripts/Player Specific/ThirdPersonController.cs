@@ -4,6 +4,8 @@ using System.Collections;
 using AvocadoShark;
 using Cinemachine;
 using Fusion;
+using StylizedWater2;
+using Unity.VisualScripting;
 using UnityEngine;
 #if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
@@ -30,11 +32,12 @@ namespace StarterAssets
         [SerializeField] private float  maxSwimAreaLength;
         [HideInInspector] public PlayerManager playerManager;
         [HideInInspector] public float speed;
-        private bool outOfWater;
         private Rigidbody rb;
         private Transform swimArea;
         private bool foundSwimArea;
         [HideInInspector] public CapsuleCollider capsuleCollider;
+        [SerializeField] private float waterLevelY;
+        private bool outOfWater;
         
         [Header("Boost")]
         [HideInInspector] public float currentBoostCount;
@@ -129,6 +132,7 @@ namespace StarterAssets
             
             yield return new WaitUntil(() => GameObject.Find("SwimArea") != null);
             swimArea = GameObject.Find("SwimArea").GetComponent<Transform>();
+            waterLevelY = FindObjectOfType<WaterGrid>().transform.position.y;
             AudioManager.Instance.PlaySoundAtPosition("impactWithWater", playerVisual.transform.position);
             foundSwimArea = true;
         }
@@ -145,7 +149,7 @@ namespace StarterAssets
 
         public void FixedUpdate()
         {
-            if (playerManager.playerHealth.isDead || !HasStateAuthority || !foundSwimArea)
+            if (playerManager.playerHealth.isDead || !HasStateAuthority || !foundSwimArea || outOfWater)
                 return;
             
             Move();        
@@ -174,7 +178,7 @@ namespace StarterAssets
 
         private void CameraRotation()
         {
-            if (!lockCameraPosition)
+            if (!lockCameraPosition && !outOfWater)
             {
                 //Don't multiply mouse input by Time.deltaTime;
                 var deltaTimeMultiplier = IsCurrentDeviceMouse ? 1.0f : Time.deltaTime;
@@ -215,6 +219,9 @@ namespace StarterAssets
 
         private void Move()
         {
+            Debug.Log(rb.velocity.sqrMagnitude < 50);
+
+            Debug.Log(rb.velocity.sqrMagnitude);
             if (input.sprint && input.move.y is > 0 or < 0)
             { 
                 canReload = false;
@@ -354,7 +361,32 @@ namespace StarterAssets
 
         private void Gravity()
         {
-            rb.useGravity = outOfWater;
+            if (transform.position.y > waterLevelY)
+            {
+                rb.useGravity = true;
+                rb.drag = .5f;
+
+                // The 60 variable is hard coded as a slow speed where the fish should not jump out of water
+                if (rb.velocity.sqrMagnitude > 60)
+                {
+                    outOfWater = true;
+                    var velocity = rb.velocity;
+                    playerVisual.transform.forward = -velocity;
+                    cineMachineTargetPitch = -velocity.x;
+                    getPlayerCameraAndControls.vCam.GetCinemachineComponent<CinemachineFramingTransposer>().m_CameraDistance = cameraDistance / 2;
+                }
+            }
+            else
+            {
+                if (outOfWater)
+                {
+                    ResetPositionAfterOutOfWater();
+                    outOfWater = false;
+                }
+                getPlayerCameraAndControls.vCam.GetCinemachineComponent<CinemachineFramingTransposer>().m_CameraDistance = cameraDistance;
+                rb.drag = 6;
+                rb.useGravity = false;
+            }
         }
 
         private static float ClampAngle(float lfAngle, float lfMin, float lfMax)
@@ -362,6 +394,21 @@ namespace StarterAssets
             if (lfAngle < -360f) lfAngle += 360f;
             if (lfAngle > 360f) lfAngle -= 360f;
             return Mathf.Clamp(lfAngle, lfMin, lfMax);
+        }
+
+        private void ResetPositionAfterOutOfWater()
+        {
+            StartCoroutine(ResetPositionAfterOutOfWaterCoroutine());
+        }
+
+        private IEnumerator ResetPositionAfterOutOfWaterCoroutine()
+        {
+            if(input.move.y is > 0 or < 0)
+                yield break;
+            
+            input.move.y = 1;
+            yield return new WaitForSeconds(.3f);
+            input.move.y = 0;
         }
     }
 }
