@@ -219,9 +219,9 @@ namespace StarterAssets
 
         private void Move()
         {
-            Debug.Log(rb.velocity.sqrMagnitude < 50);
+            //Debug.Log(rb.velocity.sqrMagnitude < 50);
 
-            Debug.Log(rb.velocity.sqrMagnitude);
+            //Debug.Log(rb.velocity.sqrMagnitude);
             if (input.sprint && input.move.y is > 0 or < 0)
             { 
                 canReload = false;

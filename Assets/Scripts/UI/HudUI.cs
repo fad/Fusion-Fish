@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -28,13 +29,25 @@ public class HudUI : MonoBehaviour
         Instance = this;
     }
 
+    private IEnumerator Start()
+    {
+        yield return new WaitUntil(() => playerManager != null);
+        
+        playerManager.healthManager.OnHealthChanged += UpdateHealthUI;
+    }
+
+    private void OnDisable()
+    {
+        playerManager.healthManager.OnHealthChanged -= UpdateHealthUI;
+    }
+
     //Here I update the boost sliders where I divide the current stats and the max of it, to get the value for the slider which goes up to 1.
     private void Update()
     {
-        if (playerManager == null) 
+        if (!playerManager) 
             return;
         
-        healthUI.fillAmount = playerManager.healthManager.NetworkedHealth / playerManager.healthManager.maxHealth;
+        //healthUI.fillAmount = playerManager.healthManager.NetworkedHealth / playerManager.healthManager.maxHealth;
 
         boostUI.fillAmount = playerManager.thirdPersonController.currentBoostCount / playerManager.thirdPersonController.maxBoostCount;
         
@@ -43,6 +56,11 @@ public class HudUI : MonoBehaviour
         experienceText.text = playerManager.levelUp.currentExperience.ToString();
         
         neededExperienceText.text = playerManager.levelUp.experienceUntilUpgrade.ToString();
+    }
+
+    private void UpdateHealthUI(float value)
+    {
+        healthUI.fillAmount = value / playerManager.healthManager.maxHealth;
     }
 
     //A button to restart when died

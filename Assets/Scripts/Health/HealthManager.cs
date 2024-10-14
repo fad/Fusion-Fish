@@ -20,17 +20,30 @@ public class HealthManager : NetworkBehaviour
     [HideInInspector] public float slowDownSpeedTime;
     [HideInInspector] public bool slowDown;
     
-    public event Action<float> OnHealthChanged; 
+    public event Action<float> OnHealthChanged;
+
+    private bool _hasSpawned = false;
 
     private void Start() => bloodParticleSystem = GameObject.Find("BloodParticles").GetComponent<ParticleSystem>();
 
     public override void Spawned()
-    {
+    {   
         NetworkedHealth = maxHealth;
         currentHealth = NetworkedHealth;
         slowDownSpeedTime = maxSlowDownSpeedTime;
+        _hasSpawned = true;
+    }
+
+    public override void Despawned(NetworkRunner runner, bool hasState)
+    {
+        _hasSpawned = false;
     }
     
+    private void OnDisable()
+    {
+        _hasSpawned = false;
+    }
+
     private void Update()
     {
         if (slowDown)
@@ -58,6 +71,8 @@ public class HealthManager : NetworkBehaviour
 
     private void CheckDeath()
     {
+        if(!_hasSpawned) return;
+        
         if(currentHealth >= NetworkedHealth)
         {
             slowDownSpeedTime = maxSlowDownSpeedTime;
