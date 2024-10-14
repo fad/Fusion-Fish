@@ -46,8 +46,6 @@ public class HudUI : MonoBehaviour
     {
         if (!playerManager) 
             return;
-        
-        //healthUI.fillAmount = playerManager.healthManager.NetworkedHealth / playerManager.healthManager.maxHealth;
 
         boostUI.fillAmount = playerManager.thirdPersonController.currentBoostCount / playerManager.thirdPersonController.maxBoostCount;
         
@@ -67,5 +65,6 @@ public class HudUI : MonoBehaviour
     public void Restart()
     {
         playerManager.healthManager.GetComponent<PlayerHealth>().PlayerRestart();
+        UpdateHealthUI(playerManager.healthManager.NetworkedHealth);
     }
 }

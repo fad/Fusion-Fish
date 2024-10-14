@@ -24,6 +24,7 @@ public class HealthViewModel : NetworkBehaviour
     
     public void AdjustHealthBarVisibility(bool isVisible)
     {
+        healthSlider.value = healthModel.currentHealth;
         healthSlider.gameObject.SetActive(isVisible);
     }
 
