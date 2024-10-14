@@ -2,6 +2,7 @@ using System.Linq;
 using UnityEngine;
 using Fusion;
 
+[RequireComponent(typeof(NetworkObjectRegistryManager))]
 public class AuthorityHandler : NetworkBehaviour, IStateAuthorityChanged
 {
 	/// <summary>
