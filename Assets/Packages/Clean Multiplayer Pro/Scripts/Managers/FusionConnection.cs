@@ -498,14 +498,23 @@ namespace AvocadoShark
                     _ => RenderSettings.skybox
                 };
             }
-            else
-            {
-                
-            }
 
             if (runner.GetPlayerObject(runner.LocalPlayer) != null)
                 return;
             var playerPrefab = PlayerPrefs.GetInt("ChosenCharacter") == 0 ? playerPrefabSecond : playerPrefabFirst;
+            
+            //THIS NEEDS FIXING
+            if(!Runner.IsSceneAuthority)
+            {
+                SpawnManager.Instance.currentScene = 2;
+
+                RenderSettings.skybox = 2 switch
+                {
+                    2 => oceanSky,
+                    3 => riverSky,
+                    _ => RenderSettings.skybox
+                };
+            }
             
             List<SpawnPoint> currentSceneSpawnPoints = SpawnManager.Instance.SpawnPoints();
 
