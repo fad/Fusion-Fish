@@ -1364,8 +1364,8 @@ MonoBehaviour:
   timeBetweenAttacksMax: 0
   timeBetweenAttacksMin: 0
   attackDamage: 0
-  detectRange: 0
-  detectionAngle: 0
+  detectRange: 1.75
+  detectionAngle: 40
   attackRange: 0
   maxTimeUntilFlee: 5
   fleeTime: 3
