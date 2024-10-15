@@ -2,7 +2,7 @@ using AI.BehaviourTree;
 using Fusion;
 using UnityEngine;
 
-public class BehaviourTreeRunner : NetworkBehaviour
+public class BehaviourTreeRunner : NetworkBehaviour, ITreeRunner
 {
     [SerializeField,
      Tooltip("The behaviour tree to generate and execute")]
@@ -15,6 +15,7 @@ public class BehaviourTreeRunner : NetworkBehaviour
 
     public override void Spawned()
     {
+        behaviourTreeToGenerate.SetRunner(this);
         _behaviourTreeToExecute = behaviourTreeToGenerate.Construct();
     }
 

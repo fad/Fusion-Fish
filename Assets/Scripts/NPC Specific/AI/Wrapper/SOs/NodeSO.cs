@@ -20,7 +20,7 @@ public abstract class NodeSO : ScriptableObject
     /// The runner for the overall behavior tree. This class is responsible for executing the behavior tree
     /// and injecting itself into the nodes so that data can be accessed within the nodes.
     /// </summary>
-    protected BehaviourTreeRunner Runner;
+    protected ITreeRunner Runner;
 
     /// <summary>
     /// The node that this ScriptableObject represents in the behavior tree.
@@ -38,6 +38,7 @@ public abstract class NodeSO : ScriptableObject
 
         foreach (NodeSO child in children)
         {
+            child.SetRunner(Runner);
             child.AddChildren();
             NodeToRepresent.AddChild(child.NodeToRepresent);
         }
@@ -48,7 +49,7 @@ public abstract class NodeSO : ScriptableObject
     /// <see cref="Runner"/> instance into the node so that data can be accessed within the nodes.
     /// </summary>
     /// <param name="runner">The <see cref="Runner"/> instance to be set.</param>
-    public void SetRunner(BehaviourTreeRunner runner)
+    public void SetRunner(ITreeRunner runner)
     {
         Runner = runner;
     }
