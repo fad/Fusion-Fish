@@ -31,7 +31,7 @@ namespace AI.BehaviourTree
                     case Status.Running:
                         return Status.Running;
                     case Status.Failure:
-                        CurrentChild = 0;
+                        Reset();
                         return Status.Failure;
                     default:
                         CurrentChild++;
