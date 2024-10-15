@@ -3573,6 +3573,7 @@ MonoBehaviour:
   - {fileID: 513705740}
   - {fileID: 392985252924180716}
   pressedActivationUIMultiplayerButton: 0
+  inputField: {fileID: 782065513778268781}
 --- !u!1 &1591470168
 GameObject:
   m_ObjectHideFlags: 0

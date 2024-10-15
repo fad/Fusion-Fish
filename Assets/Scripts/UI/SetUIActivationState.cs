@@ -1,10 +1,13 @@
+using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class SetUIActivationState : MonoBehaviour
 {
     [SerializeField] private GameObject[] uIObjects;
     private bool uiObjectsActive;
     [HideInInspector] public bool pressedActivationUIMultiplayerButton;
+    [SerializeField] private TMP_InputField inputField;
 
     private void Start()
     {
@@ -22,6 +25,11 @@ public class SetUIActivationState : MonoBehaviour
 
             foreach (var uiObject in uIObjects)
             {
+                inputField.ReleaseSelection();
+                var eventSystem = EventSystem.current;
+                if (!eventSystem.alreadySelecting) 
+                    eventSystem.SetSelectedGameObject (null);                
+                
                 uiObject.SetActive(false);
                 Cursor.visible = false;
                 Cursor.lockState = CursorLockMode.Locked;
