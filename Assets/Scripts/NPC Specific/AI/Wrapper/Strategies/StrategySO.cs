@@ -3,5 +3,5 @@ using AI.BehaviourTree;
 
 public abstract class StrategySO : ScriptableObject
 {
-    public IStrategy StrategyToRepresent;
+    public IStrategy Strategy;
 }

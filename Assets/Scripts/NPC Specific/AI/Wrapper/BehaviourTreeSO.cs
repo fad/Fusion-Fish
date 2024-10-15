@@ -9,9 +9,10 @@ public class BehaviourTreeSO : NodeSO
         NodeToRepresent = new BehaviourTree(nodeName);
     }
 
-    public void Execute()
+    public BehaviourTree Construct()
     {
-        NodeToRepresent.Evaluate();
+        AddChildren();
+        return NodeToRepresent as BehaviourTree;
     }
 
 }

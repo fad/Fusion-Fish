@@ -32,7 +32,7 @@ public abstract class NodeSO : ScriptableObject
     /// <summary>
     /// Recursively adds all children nodes to their respective parent nodes in the behavior tree.
     /// </summary>
-    public void AddChildren()
+    protected void AddChildren()
     {
         if (children == null || children.Length == 0) return;
 
