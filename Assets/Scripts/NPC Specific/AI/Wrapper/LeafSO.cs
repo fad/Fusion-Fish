@@ -1,7 +1,7 @@
 using AI.BehaviourTree;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "New Leaf", fileName = "AI/BehaviourTree/New Leaf")]
+[CreateAssetMenu(fileName = "New Leaf", menuName = "AI/BehaviourTree/New Leaf")]
 public class LeafSO : NodeSO
 {
     [SerializeField,

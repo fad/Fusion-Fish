@@ -1,7 +1,7 @@
 using AI.BehaviourTree;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Behaviour Tree", menuName = "AI/BehaviourTree/New Behaviour Tree")]
+[CreateAssetMenu(fileName = "New Behaviour Tree", menuName = "AI/BehaviourTree/New Behaviour Tree", order = 0)]
 public class BehaviourTreeSO : NodeSO
 {
     protected override void OnEnable()
