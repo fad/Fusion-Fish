@@ -30,7 +30,6 @@ namespace StarterAssets
         public GameObject playerVisual;
         [SerializeField] public float boostSwimSpeed = 100f;
         [SerializeField] public float defaultSwimSpeed = 50f;
-        [SerializeField] private float  maxSwimAreaLength;
         [HideInInspector] public PlayerManager playerManager;
         [HideInInspector] public float speed;
         private Rigidbody rb;
@@ -238,15 +237,15 @@ namespace StarterAssets
             var inputDirectionNormalized = new Vector3(input.move.x, 0.0f, input.move.y).normalized;
 
             // set target speed based on move speed, sprint speed and if sprint is pressed
-            if (Vector3.Distance(transform.position, swimArea.position) >= maxSwimAreaLength && !IsSwimmingTowardIsland())
+            if (Vector3.Distance(transform.position, swimArea.position) >= swimArea.GetComponent<PlayerSwimArea>().swimLength && !IsSwimmingTowardIsland())
             {
                 if (isBoosting && boostSwimSpeed > 0)
                 {
-                    speed = boostSwimSpeed - (Vector3.Distance(transform.position, swimArea.position) - maxSwimAreaLength) *  2.5f;
+                    speed = boostSwimSpeed - (Vector3.Distance(transform.position, swimArea.position) - swimArea.GetComponent<PlayerSwimArea>().swimLength) *  2.5f;
                 }
                 else if (defaultSwimSpeed > 0)
                 {
-                    speed = defaultSwimSpeed - (Vector3.Distance(transform.position, swimArea.position) - maxSwimAreaLength);
+                    speed = defaultSwimSpeed - (Vector3.Distance(transform.position, swimArea.position) - swimArea.GetComponent<PlayerSwimArea>().swimLength);
                 }
             }
             else
