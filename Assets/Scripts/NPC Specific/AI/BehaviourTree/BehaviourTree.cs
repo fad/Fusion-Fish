@@ -21,10 +21,17 @@ namespace AI.BehaviourTree
         /// </returns>
         public override Status Evaluate()
         {
-            Status status = Children[CurrentChild].Evaluate();
+            while(CurrentChild < Children.Count)
+            {
+                Status status = Children[CurrentChild].Evaluate();
+                if(status != Status.Success)
+                {
+                    return status;
+                }
+                CurrentChild++;
+            }
 
-            CurrentChild = (CurrentChild + 1) % Children.Count;
-            return Status.Running;
+            return Status.Success;
         }
     }
 }
