@@ -45,6 +45,7 @@ public class PlayerAttack : NetworkBehaviour
     private Image _biteUpperImage;
     private Image _biteLowerImage;
 
+    private Outline _currentEnemyOutline;
     private void Start()
     {
         if (!HasStateAuthority)
@@ -150,7 +151,7 @@ public class PlayerAttack : NetworkBehaviour
             //decreasing experience value to 0, to make sure not to apply experience twice
             health.experienceValue = 0;
             health.ReceiveDamageRpc(suckInDamage, false);
-            SetFoodObject(null, Color.white);
+            SetFoodObject(null, Color.white, true);
         }  
     }
 
@@ -236,31 +237,43 @@ public class PlayerAttack : NetworkBehaviour
             // Check if the target is within the attraction angle
             if (angleToTarget <= attractionAngle && !health.notAbleToGetBitten)
             {
-                SetFoodObject(hitColliders[0].transform.gameObject, Color.yellow);
+                SetFoodObject(hitColliders[0].transform.gameObject, Color.yellow,false);
+
+                if(! hitColliders[0].TryGetComponent<Outline>(out _currentEnemyOutline))
+                    _currentEnemyOutline = hitColliders[0].GetComponentInChildren<Outline>();
+
+                _currentEnemyOutline.enabled = true;
             }
             else
             {
-                SetFoodObject(null, Color.white);
+                SetFoodObject(null, Color.white, true);
             }
         }
         else
         {
-            SetFoodObject(null, Color.white);
+            SetFoodObject(null, Color.white, true);
         }
     }
 
-    private void SetFoodObject(GameObject food, Color color)
+    private void SetFoodObject(GameObject food, Color color, bool DeactivateOutline)
     {
         foodObject = food;
         _biteUpperImage.color = color;
         _biteLowerImage.color = color;
+        
+        if (DeactivateOutline && _currentEnemyOutline != null)
+        {
+            _currentEnemyOutline.enabled = false;
+            _currentEnemyOutline = null;
+        }
     }
     
     public void ResetBiteImageAnimationEvent()
     {
         biteUpper.gameObject.SetActive(false);
         biteLower.gameObject.SetActive(false);
-        SetFoodObject(null, Color.white);
+        
+        SetFoodObject(null, Color.white, false);
     }
     
     private void DamageAnimationEvent()
