@@ -41,6 +41,10 @@ public class AudioManager : MonoBehaviour
     private void Start()
     {
         Play("underwaterAmbience");
+        Play("OutOfWaterLake");
+        PauseSound("OutOfWaterLake");
+        Play("OutOfWaterOcean");
+        PauseSound("OutOfWaterOcean");
     }
 
     public void Play(string soundName)
@@ -81,6 +85,28 @@ public class AudioManager : MonoBehaviour
         AudioSource.PlayClipAtPoint(s.clip, audioPosition);
     }
     
+    public void PauseSound(string soundName)
+    {
+        var s = Array.Find(sounds, sound => sound.name == soundName);
+        if (s == null)
+        {
+            Debug.LogWarning("Sound:" + soundName + "not found!");
+            return;
+        }
+        s.audioSource.Pause();
+    }
+    
+    public void UnPauseSound(string soundName)
+    {
+        var s = Array.Find(sounds, sound => sound.name == soundName);
+        if (s == null)
+        {
+            Debug.LogWarning("Sound:" + soundName + "not found!");
+            return;
+        }
+        s.audioSource.UnPause();
+    }
+    
     public void StopSound(string soundName)
     {
         var s = Array.Find(sounds, sound => sound.name == soundName);
@@ -107,6 +133,9 @@ public class AudioManager : MonoBehaviour
 
     public void FadeOut(string soundEffect)
     {
+        StopCoroutine(VolumeFadeIn(soundEffect));
+        StopCoroutine(VolumeFadeOut(soundEffect));
+        
         StartCoroutine(VolumeFadeOut(soundEffect));
     }
     
@@ -120,7 +149,7 @@ public class AudioManager : MonoBehaviour
             yield break;        
         }
 
-        while (s.audioSource.volume > 0.01f)
+        while (s.audioSource.volume > 0.1f)
         {
             s.audioSource.volume = Mathf.Lerp(s.audioSource.volume, 0, Time.deltaTime * 2);
             yield return null;
@@ -135,6 +164,9 @@ public class AudioManager : MonoBehaviour
 
     public void FadeIn(string soundEffect)
     {
+        StopCoroutine(VolumeFadeIn(soundEffect));
+        StopCoroutine(VolumeFadeOut(soundEffect));
+        
         StartCoroutine(VolumeFadeIn(soundEffect));
     }
     

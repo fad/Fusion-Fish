@@ -7,6 +7,7 @@ using Fusion;
 using StylizedWater2;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 #if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
 #endif
@@ -38,7 +39,9 @@ namespace StarterAssets
         [HideInInspector] public CapsuleCollider capsuleCollider;
         [SerializeField] private float waterLevelY;
         private bool outOfWater;
-        
+        private ParticleSystem outOfWaterParticles;
+        private ParticleSystem insideWaterParticles;
+
         [Header("Boost")]
         [HideInInspector] public float currentBoostCount;
         [SerializeField] private float boostDelayAfterActivation = 3f;
@@ -133,6 +136,8 @@ namespace StarterAssets
             yield return new WaitUntil(() => GameObject.Find("SwimArea") != null);
             swimArea = GameObject.Find("SwimArea").GetComponent<Transform>();
             waterLevelY = FindObjectOfType<WaterGrid>().transform.position.y;
+            outOfWaterParticles = GameObject.Find("WaterRipples_Stationairy").GetComponent<ParticleSystem>();
+            insideWaterParticles = GameObject.Find("WaterSplash_Ring").GetComponent<ParticleSystem>();
             AudioManager.Instance.PlaySoundAtPosition("impactWithWater", playerVisual.transform.position);
             foundSwimArea = true;
         }
@@ -367,6 +372,24 @@ namespace StarterAssets
                 if (rb.velocity.sqrMagnitude > 60)
                 {
                     outOfWater = true;
+                    AudioManager.Instance.PauseSound("underwaterAmbience");
+                    var countLoaded = SceneManager.sceneCount;
+                    var loadedScenes = new Scene[countLoaded];
+
+                    for (var i = 0; i < countLoaded; i++)
+                    {
+                        loadedScenes[i] = SceneManager.GetSceneAt(i);
+                        if (loadedScenes[i].name == "Lake")
+                        {
+                            AudioManager.Instance.UnPauseSound("OutOfWaterLake");
+                        }
+                        else if (loadedScenes[i].name == "Ocean")
+                        {
+                            AudioManager.Instance.UnPauseSound("OutOfWaterOcean");
+                        }
+                    }
+                    outOfWaterParticles.transform.position = transform.position;
+                    outOfWaterParticles.Play();
                     var velocity = rb.velocity;
                     playerVisual.transform.forward = -velocity;
                     cineMachineTargetPitch = -velocity.x;
@@ -378,6 +401,26 @@ namespace StarterAssets
                 if (outOfWater)
                 {
                     ResetPositionAfterOutOfWater();
+                    insideWaterParticles.transform.position = transform.position;
+                    insideWaterParticles.Play();
+                    AudioManager.Instance.UnPauseSound("underwaterAmbience");
+                    
+                    var countLoaded = SceneManager.sceneCount;
+                    var loadedScenes = new Scene[countLoaded];
+
+                    for (var i = 0; i < countLoaded; i++)
+                    {
+                        loadedScenes[i] = SceneManager.GetSceneAt(i);
+                        if (loadedScenes[i].name == "Lake")
+                        {
+                            AudioManager.Instance.PauseSound("OutOfWaterLake");
+                        }
+                        else if (loadedScenes[i].name == "Ocean")
+                        {
+                            AudioManager.Instance.PauseSound("OutOfWaterOcean");
+                        }
+                    }
+                    AudioManager.Instance.PlaySoundAtPosition("impactWithWater", playerVisual.transform.position);
                     outOfWater = false;
                 }
                 getPlayerCameraAndControls.vCam.GetCinemachineComponent<CinemachineFramingTransposer>().m_CameraDistance = cameraDistance;
