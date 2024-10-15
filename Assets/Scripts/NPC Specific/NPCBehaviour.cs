@@ -146,7 +146,7 @@ public class NPCBehaviour : NetworkBehaviour
                         behaviour = Behaviour.NaturalBehaviour;
                     }
 
-                    if (playerHealth && canPlayFoundEnemySound)
+                    if (playerHealth && canPlayFoundEnemySound && playerHealth.HasStateAuthority)
                     {
                         AudioManager.Instance.PlaySoundWithRandomPitchAtPosition("FishFoundYou", enemy.transform.position);
                         canPlayFoundEnemySound = false;

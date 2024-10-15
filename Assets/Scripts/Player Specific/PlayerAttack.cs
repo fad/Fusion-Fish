@@ -239,10 +239,11 @@ public class PlayerAttack : NetworkBehaviour
             {
                 SetFoodObject(hitColliders[0].transform.gameObject, Color.yellow,false);
 
-                if(! hitColliders[0].TryGetComponent<Outline>(out _currentEnemyOutline))
+                if(!hitColliders[0].TryGetComponent<Outline>(out _currentEnemyOutline))
                     _currentEnemyOutline = hitColliders[0].GetComponentInChildren<Outline>();
 
-                _currentEnemyOutline.enabled = true;
+                if(_currentEnemyOutline != null)
+                    _currentEnemyOutline.enabled = true;
             }
             else
             {
@@ -281,6 +282,9 @@ public class PlayerAttack : NetworkBehaviour
         if (foodObject != null && foodObject.TryGetComponent<HealthManager>(out var health))
         {
             if(foodObject.TryGetComponent<PlayerHealth>(out var playerHealth) && playerHealth.NetworkedPermanentHealth)
+                return;
+            
+            if(foodObject.TryGetComponent(out HealthManager healthM) && healthM.notAbleToGetBitten)
                 return;
             
             health.ReceiveDamageRpc(attackDamage, true);

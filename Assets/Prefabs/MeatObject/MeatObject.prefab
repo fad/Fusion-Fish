@@ -129,7 +129,7 @@ MonoBehaviour:
   _NetworkedHealth: 1
   spawnGibs: 0
   currentHealth: 0
-  notAbleToGetBitten: 0
+  notAbleToGetBitten: 1
   experienceValue: 100
   maxSlowDownSpeedTime: 5
   slowDownSpeedTime: 0
