@@ -87,10 +87,10 @@ public class WanderStrategy : IStrategy
     /// </returns>
     private Vector3 GetRandomDirection()
     {
-        _directionPicker ??= EquallyDistributedWeightedPicker<Vector3>
+        _directionPicker ??= EquallyDistributedWeightedPicker<Vector3> // Lazy initialization
             .Create()
-            .WithEqualWeight(5)
-            .WithLessLikelyWeight(2)
+            .WithEqualWeight(8)
+            .WithLessLikelyWeight(1)
             .WithItems(Directions)
             .Build();
         
