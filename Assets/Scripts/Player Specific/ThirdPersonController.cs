@@ -8,6 +8,10 @@ using StylizedWater2;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Threading;
+
+using Unity.VisualScripting.Antlr3.Runtime.Tree;
+
 #if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
 #endif
@@ -78,8 +82,9 @@ namespace StarterAssets
         private int animIDMotionSpeed;
 
         private SetUIActivationState setUIActivationState;
-        
-        
+
+        private float checkObstacleDistance = 0.5f;
+
 #if ENABLE_INPUT_SYSTEM
         private PlayerInput playerInput;
 #endif
@@ -260,11 +265,26 @@ namespace StarterAssets
                 moveDistance /= 2;
             }
 
+             bool isThereObstacle()
+            {
+                int layerMask = 1 << 10;
+                RaycastHit hit;
+                Physics.Raycast(playerVisual.transform.position, getPlayerCameraAndControls.vCam.transform.forward * (inputDirectionNormalized.z * moveDistance), out hit, checkObstacleDistance, layerMask);
+                if (hit.collider != null)
+                {
+                    Debug.Log(true);
+                    return true;
+                }
+                Debug.Log(false);
+                return false;
+            }
+
             void MovePlayer(float playerRenderRotationX, float playerRenderRotationY)
             {
                 if (hasVCam)
                 {
-                    rb.AddForce(getPlayerCameraAndControls.vCam.transform.forward * (inputDirectionNormalized.z * moveDistance), ForceMode.Impulse);
+                    if(!isThereObstacle())
+                        rb.AddForce(getPlayerCameraAndControls.vCam.transform.forward * (inputDirectionNormalized.z * moveDistance), ForceMode.Impulse);
 
                     getPlayerCameraAndControls.vCam.m_Lens.FieldOfView = Mathf.Lerp(getPlayerCameraAndControls.vCam.m_Lens.FieldOfView, isBoosting ? boostSpeedFOV : defaultSpeedFOV, cameraFOVSmoothTime * Time.deltaTime);
                     getPlayerCameraAndControls.vCam.GetCinemachineComponent<CinemachineFramingTransposer>().m_CameraDistance = cameraDistance;
