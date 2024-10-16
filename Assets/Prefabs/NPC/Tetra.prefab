@@ -587,7 +587,7 @@ MonoBehaviour:
     m_Bits: 512
   groundLayer:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 1024
   attacksAnything: 0
   timeBetweenAttacksMax: 0
   timeBetweenAttacksMin: 0

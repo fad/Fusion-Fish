@@ -358,6 +358,11 @@ PrefabInstance:
       propertyPath: NetworkedBehaviours.Array.data[15]
       value: 
       objectReference: {fileID: 6337673288655362029}
+    - target: {fileID: 9150513680388461083, guid: 274fa519b44c24e43a28d85dbdddcb30,
+        type: 3}
+      propertyPath: obstacleLayer.m_Bits
+      value: 1024
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

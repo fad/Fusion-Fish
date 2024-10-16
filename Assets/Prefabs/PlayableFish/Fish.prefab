@@ -206,7 +206,6 @@ MonoBehaviour:
   playerVisual: {fileID: 5159690815227489710}
   boostSwimSpeed: 250
   defaultSwimSpeed: 120
-  maxSwimAreaLength: 140
   playerManager: {fileID: 0}
   speed: 0
   capsuleCollider: {fileID: 0}
@@ -228,6 +227,9 @@ MonoBehaviour:
   boostSpeedFOV: 40
   cameraDistance: 5
   animator: {fileID: 6424190454631559794}
+  obstacleLayer:
+    serializedVersion: 2
+    m_Bits: 1024
   input: {fileID: 0}
   boostState: 0
 --- !u!114 &2297454540360690151

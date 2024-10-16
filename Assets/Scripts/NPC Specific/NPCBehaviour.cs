@@ -58,6 +58,8 @@ public class NPCBehaviour : NetworkBehaviour
     [Tooltip("Time until the NPC stops movement.")]
     private float randomMoveTime;
 
+    private float checkObstacleDistance = 1;
+
     private Behaviour behaviour = Behaviour.NaturalBehaviour;
     private enum Behaviour
     {
@@ -129,7 +131,7 @@ public class NPCBehaviour : NetworkBehaviour
                     currentSpeed = defaultSwimSpeed;
 
                     //Make NPC not swim toward objects
-                    if (Physics.Raycast(currentPosition, -transform.forward, out var hit, 1, groundLayer))
+                    if (Physics.Raycast(currentPosition, -transform.forward, out var hit, checkObstacleDistance, groundLayer))
                     {
                         newPosition = new Vector3(hit.normal.x, hit.normal.y, hit.normal.z);
                         newPosition *= 5;
@@ -184,6 +186,7 @@ public class NPCBehaviour : NetworkBehaviour
     
     private void MoveNPCInDirection(Vector3 targetDirection, Quaternion lookDirection)
     {
+
         if (TryGetComponent<HealthManager>(out var health) && health.slowDown)
         {
             rb.AddForce(targetDirection.normalized * (-currentSpeed / 2 * Time.deltaTime), ForceMode.Impulse);
