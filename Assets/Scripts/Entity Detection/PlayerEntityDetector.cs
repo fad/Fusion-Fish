@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// Entity detector for player objects
+/// </summary>
 public class PlayerEntityDetector : EntityDetector
 {
     protected override void OnTriggerEnter(Collider other)

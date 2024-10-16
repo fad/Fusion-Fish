@@ -12,10 +12,10 @@ public class HealthManager : NetworkBehaviour
     [HideInInspector] public float currentHealth;
     public bool notAbleToGetBitten;
 
-    [Header("Experience")] 
+    [Header("Experience")] // TODO: Refactor in the future
     public int experienceValue = 100;
     
-    [Header("SlowDown")]
+    [Header("SlowDown")] // TODO: Refactor in the future
     [SerializeField] public float maxSlowDownSpeedTime = 5;
     [HideInInspector] public float slowDownSpeedTime;
     [HideInInspector] public bool slowDown;
