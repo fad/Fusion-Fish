@@ -138,15 +138,8 @@ public class PlayerAttack : NetworkBehaviour
                         
             if (!scaleUpAnimationRunning)
                 StartCoroutine(ScalePlayerUpOnEating());
-                        
-            if (playerManager.healthManager.NetworkedHealth + healthIncreaseOnEating <= playerManager.healthManager.maxHealth)
-            {
-                playerManager.healthManager.NetworkedHealth += healthIncreaseOnEating;
-            }
-            else
-            {
-                playerManager.healthManager.NetworkedHealth = playerManager.healthManager.maxHealth;
-            }
+
+            playerManager.healthManager.RecoveryHealthRpc(healthIncreaseOnEating);
 
             //decreasing experience value to 0, to make sure not to apply experience twice
             health.experienceValue = 0;

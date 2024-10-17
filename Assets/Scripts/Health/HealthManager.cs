@@ -68,7 +68,6 @@ public class HealthManager : NetworkBehaviour
         if(passiveRecoveryHealth != null)
         {
             StopCoroutine(passiveRecoveryHealth);
-            passiveRecoveryHealth = null;
         }
 
         passiveRecoveryHealth = StartCoroutine(PassiveRecoveryHealth());
@@ -79,11 +78,9 @@ public class HealthManager : NetworkBehaviour
         while (NetworkedHealth < maxHealth) 
         {
             RecoveryHealthRpc(recoveryHealthInSecond);
-            OnHealthChanged?.Invoke(NetworkedHealth);
             yield return new WaitForSeconds(1);
         }
         StopCoroutine(passiveRecoveryHealth);
-        passiveRecoveryHealth = null;
     }
 
     [Rpc(RpcSources.All, RpcTargets.All)]
@@ -95,8 +92,8 @@ public class HealthManager : NetworkBehaviour
             newHealth = maxHealth;
 
         NetworkedHealth = newHealth;
+        OnHealthChanged?.Invoke(NetworkedHealth);
 
-        ///zzzzzzzzzz
         Debug.Log(NetworkedHealth);
     }
 
