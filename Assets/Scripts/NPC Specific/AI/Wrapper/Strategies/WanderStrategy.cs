@@ -16,7 +16,7 @@ public class WanderStrategy : IStrategy
     private Vector3 _randomDirection;
     private Quaternion _targetRotation;
     private Vector3 _lastPickedDirection;
-    private Vector3 _lastPickedVerticalDirection;
+    private byte _lastPickedVerticalIndex;
 
     private EquallyDistributedWeightedPicker<Vector3> _directionPicker;
 
@@ -27,12 +27,6 @@ public class WanderStrategy : IStrategy
         Vector3.right,
         Vector3.back,
         Vector3.forward
-    };
-
-    private Vector3[] VerticalDirections => new[]
-    {
-        Vector3.up,
-        Vector3.down
     };
 
     public WanderStrategy(Transform entity, float speed, float rotationSpeed, float changeInterval, float maxPitch)
@@ -91,9 +85,12 @@ public class WanderStrategy : IStrategy
 
         return _directionPicker.Pick();
     }
-    
-    
 
+
+    /// <summary>
+    /// Changes the direction of the entity by picking a random direction from a set of predefined directions.
+    /// The target rotation is then interpolated towards this new direction using a random interpolation factor.
+    /// </summary>
     private void ChangeDirection()
     {
         _randomDirection = GetRandomDirection();
@@ -117,16 +114,20 @@ public class WanderStrategy : IStrategy
     private void ChangeVerticalDirection()
     {
         if (Random.value <= _chanceToChangeVerticalDirection)
+        //if (true)
         {
-            int randomIndex = Random.Range(0, VerticalDirections.Length);
-            Debug.Log($"Index picked: {randomIndex}");
-            _lastPickedVerticalDirection = VerticalDirections[randomIndex];
+            _lastPickedVerticalIndex = (byte)Random.Range(0, 2);
+            //_lastPickedVerticalIndex = 1;
+
+            _targetRotation = _lastPickedVerticalIndex == 0
+                ? Quaternion.Euler(90, _targetRotation.y, 0) // Downwards
+                : Quaternion.Euler(270, _targetRotation.y, 0); // Upwards
 
             float randomInterpolationFactor = Random.Range(0.1f, 0.5f);
 
             _targetRotation = Quaternion.Slerp(
                 _entity.rotation,
-                Quaternion.LookRotation(_lastPickedVerticalDirection),
+                _targetRotation,
                 randomInterpolationFactor
             );
 
