@@ -10,8 +10,8 @@ public class HealthManager : NetworkBehaviour
     public float maxHealth;
     [SerializeField] private float recoveryHealthInSecond = 10;
     [SerializeField] private float timeToStartRecoveryHealth = 3;
-
-    private Coroutine passiveRecoveryHealth;
+    private bool _regeneration = false;
+    [Networked] private TickTimer regenTimer { get; set; }
 
     [Networked] [OnChangedRender(nameof(CheckDeath))] public float NetworkedHealth { get; set; }
     private ParticleSystem bloodParticleSystem;
@@ -63,38 +63,29 @@ public class HealthManager : NetworkBehaviour
         }
     }
 
-    private void startPassiveRecoveryHealth()
+    public override void FixedUpdateNetwork()
     {
-        if(passiveRecoveryHealth != null)
-        {
-            StopCoroutine(passiveRecoveryHealth);
-        }
-
-        passiveRecoveryHealth = StartCoroutine(PassiveRecoveryHealth());
-    }
-    private IEnumerator PassiveRecoveryHealth()
-    {
-        yield return new WaitForSeconds(timeToStartRecoveryHealth);
-        while (NetworkedHealth < maxHealth) 
+        if (_regeneration && regenTimer.ExpiredOrNotRunning(Runner))
         {
             RecoveryHealthRpc(recoveryHealthInSecond);
-            yield return new WaitForSeconds(1);
+            regenTimer = TickTimer.CreateFromSeconds(Runner, 1);
+
+            if (NetworkedHealth >= maxHealth)
+                _regeneration = false;
         }
-        StopCoroutine(passiveRecoveryHealth);
+    }
+    private void startPassiveRecoveryHealth()
+    {
+        regenTimer = TickTimer.CreateFromSeconds(Runner, timeToStartRecoveryHealth);
+        _regeneration = true;
     }
 
     [Rpc(RpcSources.All, RpcTargets.All)]
     public void RecoveryHealthRpc(float amountHealthRestored)
     {
-        float newHealth = NetworkedHealth + amountHealthRestored;
-
-        if(newHealth > maxHealth)
-            newHealth = maxHealth;
-
-        NetworkedHealth = newHealth;
+        NetworkedHealth += amountHealthRestored;
+        NetworkedHealth = Mathf.Min(NetworkedHealth, maxHealth);
         OnHealthChanged?.Invoke(NetworkedHealth);
-
-        Debug.Log(NetworkedHealth);
     }
 
     [Rpc(RpcSources.All, RpcTargets.All)]
