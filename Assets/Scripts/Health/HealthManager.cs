@@ -1,11 +1,18 @@
 using System;
+using System.Collections;
 using Fusion;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class HealthManager : NetworkBehaviour
 {
     [Header("Health")]
     public float maxHealth;
+    [SerializeField] private float recoveryHealthInSecond = 10;
+    [SerializeField] private float timeToStartRecoveryHealth = 3;
+
+    private Coroutine passiveRecoveryHealth;
+
     [Networked] [OnChangedRender(nameof(CheckDeath))] public float NetworkedHealth { get; set; }
     private ParticleSystem bloodParticleSystem;
     [HideInInspector] public bool spawnGibs;
@@ -56,6 +63,43 @@ public class HealthManager : NetworkBehaviour
         }
     }
 
+    private void startPassiveRecoveryHealth()
+    {
+        if(passiveRecoveryHealth != null)
+        {
+            StopCoroutine(passiveRecoveryHealth);
+            passiveRecoveryHealth = null;
+        }
+
+        passiveRecoveryHealth = StartCoroutine(PassiveRecoveryHealth());
+    }
+    private IEnumerator PassiveRecoveryHealth()
+    {
+        yield return new WaitForSeconds(timeToStartRecoveryHealth);
+        while (NetworkedHealth < maxHealth) 
+        {
+            RecoveryHealthRpc(recoveryHealthInSecond);
+            OnHealthChanged?.Invoke(NetworkedHealth);
+            yield return new WaitForSeconds(1);
+        }
+        StopCoroutine(passiveRecoveryHealth);
+        passiveRecoveryHealth = null;
+    }
+
+    [Rpc(RpcSources.All, RpcTargets.All)]
+    public void RecoveryHealthRpc(float amountHealthRestored)
+    {
+        float newHealth = NetworkedHealth + amountHealthRestored;
+
+        if(newHealth > maxHealth)
+            newHealth = maxHealth;
+
+        NetworkedHealth = newHealth;
+
+        ///zzzzzzzzzz
+        Debug.Log(NetworkedHealth);
+    }
+
     [Rpc(RpcSources.All, RpcTargets.All)]
     public void ReceiveDamageRpc(float damage, bool spawnGibsOnDestroy)
     {
@@ -65,6 +109,7 @@ public class HealthManager : NetworkBehaviour
 
         if (NetworkedHealth > 0)
         {
+            startPassiveRecoveryHealth();
             PlayParticles(Color.red, 10);
         }
     }
