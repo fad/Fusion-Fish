@@ -6,19 +6,20 @@ public class WanderStrategy : IStrategy
     private readonly Transform _entity;
     private readonly float _speed;
     private readonly float _rotationSpeed;
-    private readonly float _changeInterval;
     private readonly float _maxPitch;
 
     private readonly Vector2 _randomRangeForDirections = new(0.1f, 0.95f);
     private readonly float _chanceToChangeVerticalDirection = 0.1f;
 
+    private readonly Vector2 _changeIntervalRange = new(2f, 6f);
+    private float _changeInterval;
     private float _timeSinceLastChanged;
     private Vector3 _randomDirection;
     private Quaternion _targetRotation;
     private Vector3 _lastPickedDirection;
-    private byte _lastPickedVerticalIndex;
 
     private EquallyDistributedWeightedPicker<Vector3> _directionPicker;
+    private EquallyDistributedWeightedPicker<Quaternion> _verticalDirectionPicker;
 
 
     private Vector3[] Directions => new[]
@@ -28,13 +29,18 @@ public class WanderStrategy : IStrategy
         Vector3.back,
         Vector3.forward
     };
+    
+    private Quaternion[] VerticalDirections => new[]
+    {
+        Quaternion.Euler(90, 0, 0), // Downwards
+        Quaternion.Euler(270, 0, 0) // Upwards
+    };
 
-    public WanderStrategy(Transform entity, float speed, float rotationSpeed, float changeInterval, float maxPitch)
+    public WanderStrategy(Transform entity, float speed, float rotationSpeed, float maxPitch)
     {
         _entity = entity;
         _speed = speed;
         _rotationSpeed = rotationSpeed;
-        _changeInterval = changeInterval;
         _maxPitch = maxPitch;
     }
 
@@ -50,6 +56,7 @@ public class WanderStrategy : IStrategy
         {
             ChangeDirection();
             ChangeVerticalDirection();
+            _changeInterval = Random.Range(_changeIntervalRange.x, _changeIntervalRange.y);
             _timeSinceLastChanged = 0f;
         }
 
@@ -114,14 +121,15 @@ public class WanderStrategy : IStrategy
     private void ChangeVerticalDirection()
     {
         if (Random.value <= _chanceToChangeVerticalDirection)
-        //if (true)
         {
-            _lastPickedVerticalIndex = (byte)Random.Range(0, 2);
-            //_lastPickedVerticalIndex = 1;
-
-            _targetRotation = _lastPickedVerticalIndex == 0
-                ? Quaternion.Euler(90, _targetRotation.y, 0) // Downwards
-                : Quaternion.Euler(270, _targetRotation.y, 0); // Upwards
+            _verticalDirectionPicker ??= EquallyDistributedWeightedPicker<Quaternion>
+                                            .Create()
+                                            .WithEqualWeight(10)
+                                            .WithLessLikelyWeight(4)
+                                            .WithItems(VerticalDirections)
+                                            .Build();
+            
+            _targetRotation = _verticalDirectionPicker.Pick();
 
             float randomInterpolationFactor = Random.Range(0.1f, 0.5f);
 

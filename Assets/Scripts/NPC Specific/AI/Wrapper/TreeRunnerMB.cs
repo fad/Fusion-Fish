@@ -26,9 +26,8 @@ public class TreeRunnerMB : MonoBehaviour, ITreeRunner
         Leaf wanderAround = new Leaf("Wander Around",
             new WanderStrategy(
                 transform,
+                3.5f,
                 2f,
-                2f,
-                4f,
                 45f
             ));
 
