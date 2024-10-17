@@ -150,7 +150,7 @@ public class EquallyDistributedWeightedPicker<T>
             throw new InvalidOperationException("No items have been added to the picker.");
         }
 
-        byte randomValue = (byte)UnityEngine.Random.Range(1, _totalWeight);
+        byte randomValue = (byte)UnityEngine.Random.Range(0, _totalWeight);
         byte currentWeight = 0;
 
         for (byte i = 0; i < _items.Length; i++)
@@ -165,17 +165,19 @@ public class EquallyDistributedWeightedPicker<T>
                 {
                     _items[_lastItemPickedIndex].Weight = _equalWeightAmount;
                 }
+                else
+                {
+                    _totalWeight = (byte)(_totalWeight - _equalWeightAmount + _lessLikelyWeightAmount);
+                }
 
                 _lastItemPickedIndex = i;
                 _hasPickedAtLeastOnce = true;
-
-                _totalWeight = (byte)(_totalWeight - _equalWeightAmount + _lessLikelyWeightAmount);
 
                 return _items[i].Item;
             }
         }
 
-        throw new InvalidOperationException("No item was picked. ");
+        throw new InvalidOperationException($"No item was picked. Current weight: {currentWeight}, Random value: {randomValue}, total weight: {_totalWeight}");
     }
 
     /// <summary>
