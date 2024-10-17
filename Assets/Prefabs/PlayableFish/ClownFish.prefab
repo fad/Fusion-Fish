@@ -103,6 +103,16 @@ PrefabInstance:
       propertyPath: _NetworkedHealth
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 4632872686385277288, guid: 274fa519b44c24e43a28d85dbdddcb30,
+        type: 3}
+      propertyPath: recoveryHealthInSecond
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4632872686385277288, guid: 274fa519b44c24e43a28d85dbdddcb30,
+        type: 3}
+      propertyPath: timeToStartRecoveryHealth
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 4763555619980021824, guid: 274fa519b44c24e43a28d85dbdddcb30,
         type: 3}
       propertyPath: playerHealthBarCanvas
