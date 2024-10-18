@@ -23,6 +23,7 @@ public class PlayerAttack : NetworkBehaviour
     public float attackDamage = 1;
     private float currentAttackTime;
     private bool preparedAttack;
+    private bool SucksFood;
     private int attackCount;
     private int lastAttackCount;
     
@@ -33,14 +34,12 @@ public class PlayerAttack : NetworkBehaviour
 
     [Header("SuckIn")] 
     [SerializeField] private ParticleSystem suckInParticles;
-    [SerializeField] private float maxTimeBetweenSuckIn = 1;
     [SerializeField] private float suckInForce;
     [SerializeField] private float healthIncreaseOnEating = 10;
     private bool scaleUpAnimationRunning;
     [Tooltip("Increase player scale up and down coroutine will take that time.")]
     [SerializeField] private float timeForScaleAnimation = .15f; 
     public float suckInDamage;
-    private float _currentSuckInTime;
     
     private Image _biteUpperImage;
     private Image _biteLowerImage;
@@ -67,7 +66,8 @@ public class PlayerAttack : NetworkBehaviour
         if (!HasStateAuthority || playerManager.playerHealth.isDead) 
             return;
         
-        AttackUpdate();
+        if(!SucksFood)
+            AttackUpdate();
         
         SuckInUpdate();
         
@@ -76,34 +76,35 @@ public class PlayerAttack : NetworkBehaviour
 
     private void SuckInUpdate()
     {
-        if (_currentSuckInTime >= 0)
-        {
-            _currentSuckInTime -= Time.deltaTime;
-        }
-        else if (playerManager.thirdPersonController.input.suckIn)
+        if (playerManager.thirdPersonController.input.suckIn)
         {
             Vector3 playerVisualPosition = playerManager.thirdPersonController.playerVisual.transform.position;
-                
-            suckInParticles.Play();
+            SucksFood = true;
+            if(!suckInParticles.isPlaying)
+                suckInParticles.Play();
             AudioManager.Instance.PlaySoundWithRandomPitchAtPosition("suck", playerVisualPosition);
-            
+
             Collider[] hitColliders = new Collider[5];
 
             int hits = Physics.OverlapSphereNonAlloc(playerVisualPosition, attackRange, hitColliders, foodLayerMask);
-            
+
             for (int i = 0; i < hits; i++)
             {
                 if (hitColliders[i].TryGetComponent<HealthManager>(out var health) && health.maxHealth <= suckInDamage)
                 {
-                    if(TryGetComponent<PlayerHealth>(out var playerHealth) && playerHealth.NetworkedPermanentHealth)
+                    if (TryGetComponent<PlayerHealth>(out var playerHealth) && playerHealth.NetworkedPermanentHealth)
                         return;
-                    
+
                     CalculateDirectionAndAddForceTowardsPlayer(hitColliders[i], out Vector3 directionToTarget);
-                    ApplyExperienceAndResetFoodObject(directionToTarget, health);   
+                    ApplyExperienceAndResetFoodObject(directionToTarget, health);
                 }
             }
 
-            _currentSuckInTime = maxTimeBetweenSuckIn;
+        }
+        else
+        {
+            SucksFood = false;
+            suckInParticles.Stop();
         }
     }
 
