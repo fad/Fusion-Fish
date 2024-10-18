@@ -12,6 +12,7 @@ public class WanderStrategy : IStrategy
     private readonly float _chanceToChangeVerticalDirection = 0.1f;
 
     private readonly Vector2 _changeIntervalRange = new(2f, 6f);
+    private readonly float _smoothTime = .4f;
     private float _changeInterval;
     private float _timeSinceLastChanged;
     private Vector3 _randomDirection;
@@ -21,6 +22,10 @@ public class WanderStrategy : IStrategy
     private EquallyDistributedWeightedPicker<Vector3> _directionPicker;
     private EquallyDistributedWeightedPicker<Quaternion> _verticalDirectionPicker;
 
+    private float _currentXRotationSpeed;
+    private float _currentYRotationSpeed;
+    private float _currentZRotationSpeed;
+
 
     private Vector3[] Directions => new[]
     {
@@ -29,7 +34,7 @@ public class WanderStrategy : IStrategy
         Vector3.back,
         Vector3.forward
     };
-    
+
     private Quaternion[] VerticalDirections => new[]
     {
         Quaternion.Euler(90, 0, 0), // Downwards
@@ -66,11 +71,31 @@ public class WanderStrategy : IStrategy
 
         _entity.position += forwardDirection;
 
-        _entity.rotation = Quaternion.Slerp(
-            _entity.rotation,
-            _targetRotation,
-            _rotationSpeed * Time.deltaTime
-        );
+        // float currentYTargetRotation = _targetRotation.eulerAngles.y;
+        //
+        // if(currentYTargetRotation > 180)
+        // {
+        //     currentYTargetRotation -= 360;
+        // }
+
+        float xAngle = Mathf.SmoothDampAngle(_entity.eulerAngles.x, _targetRotation.eulerAngles.x,
+            ref _currentXRotationSpeed, _smoothTime);
+
+        float yAngle = Mathf.SmoothDampAngle(_entity.eulerAngles.y, _targetRotation.eulerAngles.y,
+            ref _currentYRotationSpeed, _smoothTime);
+
+        float zAngle = Mathf.SmoothDampAngle(_entity.eulerAngles.z, _targetRotation.eulerAngles.z,
+            ref _currentZRotationSpeed, _smoothTime);
+
+
+        _entity.rotation = Quaternion.Euler(xAngle, yAngle, zAngle);
+
+
+        // _entity.rotation = Quaternion.Slerp(
+        //     _entity.rotation,
+        //     _targetRotation,
+        //     _rotationSpeed * Time.deltaTime
+        // );
 
         return Status.Running;
     }
@@ -120,16 +145,20 @@ public class WanderStrategy : IStrategy
     /// </summary>
     private void ChangeVerticalDirection()
     {
-        if (Random.value <= _chanceToChangeVerticalDirection)
+        if (true)
+            //if (Random.value <= _chanceToChangeVerticalDirection)
         {
             _verticalDirectionPicker ??= EquallyDistributedWeightedPicker<Quaternion>
-                                            .Create()
-                                            .WithEqualWeight(10)
-                                            .WithLessLikelyWeight(4)
-                                            .WithItems(VerticalDirections)
-                                            .Build();
-            
-            _targetRotation = _verticalDirectionPicker.Pick();
+                .Create()
+                .WithEqualWeight(10)
+                .WithLessLikelyWeight(4)
+                .WithItems(VerticalDirections)
+                .Build();
+
+            //Quaternion verticalDirection = _verticalDirectionPicker.Pick();
+            Quaternion verticalDirection = VerticalDirections[0];
+
+            _targetRotation = verticalDirection;
 
             float randomInterpolationFactor = Random.Range(0.1f, 0.5f);
 
@@ -140,7 +169,7 @@ public class WanderStrategy : IStrategy
             );
 
             Vector3 eulerAngles = _targetRotation.eulerAngles;
-            eulerAngles.x = Mathf.Clamp(eulerAngles.x, -_maxPitch, _maxPitch);
+            eulerAngles.x = Mathf.Clamp(eulerAngles.x, _maxPitch, 360 - _maxPitch);
             _targetRotation = Quaternion.Euler(eulerAngles);
             return;
         }
@@ -156,5 +185,9 @@ public class WanderStrategy : IStrategy
         Vector3 targetEuler = _targetRotation.eulerAngles;
         targetEuler.x = 0;
         _targetRotation = Quaternion.Euler(targetEuler);
+    }
+
+    private void AvoidObstacles()
+    {
     }
 }
