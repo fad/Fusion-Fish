@@ -3,10 +3,16 @@ using AI.BehaviourTree;
 
 public class WanderStrategy : IStrategy
 {
+    #region Fields provided by FishData
+
     private readonly Transform _entity;
     private readonly float _speed;
     private readonly float _rotationSpeed;
     private readonly float _maxPitch;
+    private readonly LayerMask _obstacleAvoidanceLayerMask;
+    private readonly float _obstacleAvoidanceDistance;
+
+    #endregion
 
     private readonly Vector2 _randomRangeForDirections = new(0.1f, 0.95f);
     private readonly float _chanceToChangeVerticalDirection = 0.1f;
@@ -26,6 +32,56 @@ public class WanderStrategy : IStrategy
     private float _currentYRotationSpeed;
     private float _currentZRotationSpeed;
 
+    public class Builder
+    {
+        public Transform entity;
+        public float speed;
+        public float rotationSpeed;
+        public float maxPitch;
+        public LayerMask obstacleAvoidanceLayerMask;
+        public float obstacleAvoidanceDistance;
+
+        public Builder(Transform entity)
+        {
+            this.entity = entity;
+        }
+
+        public Builder WithSpeed(float speed)
+        {
+            this.speed = speed;
+            return this;
+        }
+
+        public Builder WithRotationSpeed(float rotationSpeed)
+        {
+            this.rotationSpeed = rotationSpeed;
+            return this;
+        }
+
+        public Builder WithMaxPitch(float maxPitch)
+        {
+            this.maxPitch = maxPitch;
+            return this;
+        }
+
+        public Builder WithObstacleAvoidanceLayerMask(LayerMask obstacleAvoidanceLayerMask)
+        {
+            this.obstacleAvoidanceLayerMask = obstacleAvoidanceLayerMask;
+            return this;
+        }
+
+        public Builder WithObstacleAvoidanceDistance(float obstacleAvoidanceDistance)
+        {
+            this.obstacleAvoidanceDistance = obstacleAvoidanceDistance;
+            return this;
+        }
+
+        public WanderStrategy Build()
+        {
+            return new WanderStrategy(this);
+        }
+    }
+
 
     private Vector3[] Directions => new[]
     {
@@ -41,12 +97,14 @@ public class WanderStrategy : IStrategy
         Quaternion.Euler(270, 0, 0) // Upwards
     };
 
-    public WanderStrategy(Transform entity, float speed, float rotationSpeed, float maxPitch)
+    private WanderStrategy(Builder builder)
     {
-        _entity = entity;
-        _speed = speed;
-        _rotationSpeed = rotationSpeed;
-        _maxPitch = maxPitch;
+        _entity = builder.entity;
+        _speed = builder.speed;
+        _rotationSpeed = builder.rotationSpeed;
+        _maxPitch = builder.maxPitch;
+        _obstacleAvoidanceLayerMask = builder.obstacleAvoidanceLayerMask;
+        _obstacleAvoidanceDistance = builder.obstacleAvoidanceDistance;
     }
 
     /// <summary>
@@ -65,37 +123,25 @@ public class WanderStrategy : IStrategy
             _timeSinceLastChanged = 0f;
         }
 
+        AvoidObstacles();
+
         _targetRotation = Quaternion.Euler(_targetRotation.eulerAngles.x, _targetRotation.eulerAngles.y, 0);
         Vector3 forwardDirection = _entity.forward * (_speed * Time.deltaTime);
 
 
         _entity.position += forwardDirection;
 
-        // float currentYTargetRotation = _targetRotation.eulerAngles.y;
-        //
-        // if(currentYTargetRotation > 180)
-        // {
-        //     currentYTargetRotation -= 360;
-        // }
-
         float xAngle = Mathf.SmoothDampAngle(_entity.eulerAngles.x, _targetRotation.eulerAngles.x,
-            ref _currentXRotationSpeed, _smoothTime);
+            ref _currentXRotationSpeed, _smoothTime) + _rotationSpeed * Time.deltaTime;
 
         float yAngle = Mathf.SmoothDampAngle(_entity.eulerAngles.y, _targetRotation.eulerAngles.y,
-            ref _currentYRotationSpeed, _smoothTime);
+            ref _currentYRotationSpeed, _smoothTime) + _rotationSpeed * Time.deltaTime;
 
         float zAngle = Mathf.SmoothDampAngle(_entity.eulerAngles.z, _targetRotation.eulerAngles.z,
-            ref _currentZRotationSpeed, _smoothTime);
+            ref _currentZRotationSpeed, _smoothTime) + _rotationSpeed * Time.deltaTime;
 
 
         _entity.rotation = Quaternion.Euler(xAngle, yAngle, zAngle);
-
-
-        // _entity.rotation = Quaternion.Slerp(
-        //     _entity.rotation,
-        //     _targetRotation,
-        //     _rotationSpeed * Time.deltaTime
-        // );
 
         return Status.Running;
     }
@@ -145,8 +191,7 @@ public class WanderStrategy : IStrategy
     /// </summary>
     private void ChangeVerticalDirection()
     {
-        if (true)
-            //if (Random.value <= _chanceToChangeVerticalDirection)
+        if (Random.value <= _chanceToChangeVerticalDirection)
         {
             _verticalDirectionPicker ??= EquallyDistributedWeightedPicker<Quaternion>
                 .Create()
@@ -155,8 +200,7 @@ public class WanderStrategy : IStrategy
                 .WithItems(VerticalDirections)
                 .Build();
 
-            //Quaternion verticalDirection = _verticalDirectionPicker.Pick();
-            Quaternion verticalDirection = VerticalDirections[0];
+            Quaternion verticalDirection = _verticalDirectionPicker.Pick();
 
             _targetRotation = verticalDirection;
 
@@ -189,5 +233,10 @@ public class WanderStrategy : IStrategy
 
     private void AvoidObstacles()
     {
+        if (Physics.Raycast(_entity.position, _entity.forward, out RaycastHit hit, _obstacleAvoidanceDistance,
+                _obstacleAvoidanceLayerMask))
+        {
+            _targetRotation = Quaternion.LookRotation(Vector3.Reflect(_entity.forward, hit.normal));
+        }
     }
 }

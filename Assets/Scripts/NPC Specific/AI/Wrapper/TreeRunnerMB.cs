@@ -3,9 +3,14 @@ using UnityEngine;
 
 public class TreeRunnerMB : MonoBehaviour, ITreeRunner
 {
+    [Header("Settings")]
     [SerializeField,
      Tooltip("The data for this fish")]
     private FishData fishData;
+    
+    [SerializeField,
+     Tooltip("The obstacle avoidance layer mask")]
+    private LayerMask obstacleAvoidanceMask;
 
     /// <summary>
     /// The behaviour tree to execute on this object.
@@ -24,12 +29,13 @@ public class TreeRunnerMB : MonoBehaviour, ITreeRunner
         PrioritySelector actions = new PrioritySelector("Root");
 
         Leaf wanderAround = new Leaf("Wander Around",
-            new WanderStrategy(
-                transform,
-                3.5f,
-                2f,
-                45f
-            ));
+            new WanderStrategy.Builder(transform)
+                .WithSpeed(3.5f)
+                .WithRotationSpeed(2f)
+                .WithMaxPitch(45f)
+                .WithObstacleAvoidanceLayerMask(obstacleAvoidanceMask)
+                .WithObstacleAvoidanceDistance(2f)
+                .Build());
 
         actions.AddChild(wanderAround);
 
