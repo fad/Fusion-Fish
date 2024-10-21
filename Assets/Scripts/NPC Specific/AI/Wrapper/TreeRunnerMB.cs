@@ -16,11 +16,8 @@ public class TreeRunnerMB : MonoBehaviour, ITreeRunner
     /// The behaviour tree to execute on this object.
     /// </summary>
     private BehaviourTree _behaviourTreeToExecute;
-
-    /// <summary>
-    /// Flag for the fish to know if it is in danger.
-    /// </summary>
-    private bool _isInDanger;
+    
+    private bool _isInsideArea;
 
     private void Start()
     {
@@ -35,6 +32,7 @@ public class TreeRunnerMB : MonoBehaviour, ITreeRunner
                 .WithMaxPitch(45f)
                 .WithObstacleAvoidanceLayerMask(obstacleAvoidanceMask)
                 .WithObstacleAvoidanceDistance(2f)
+                .WithForbiddenAreaCheck(IsInsideForbiddenArea)
                 .Build());
 
         actions.AddChild(wanderAround);
@@ -51,9 +49,14 @@ public class TreeRunnerMB : MonoBehaviour, ITreeRunner
     {
         _behaviourTreeToExecute?.Evaluate();
     }
-
-    private bool IsSafe()
+    
+    private bool IsInsideForbiddenArea()
     {
-        return !_isInDanger;
+        return _isInsideArea;
+    }
+
+    public void AdjustAreaCheck(bool isInside)
+    {
+        _isInsideArea = isInside;
     }
 }

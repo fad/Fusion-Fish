@@ -1,9 +1,11 @@
+using System;
 using UnityEngine;
 using AI.BehaviourTree;
+using Random = UnityEngine.Random;
 
 public class WanderStrategy : IStrategy
 {
-    #region Fields provided by FishData
+    #region Fields provided from outside
 
     private readonly Transform _entity;
     private readonly float _speed;
@@ -11,6 +13,7 @@ public class WanderStrategy : IStrategy
     private readonly float _maxPitch;
     private readonly LayerMask _obstacleAvoidanceLayerMask;
     private readonly float _obstacleAvoidanceDistance;
+    private Func<bool> _forbiddenAreaCheck;
 
     #endregion
 
@@ -34,45 +37,52 @@ public class WanderStrategy : IStrategy
 
     public class Builder
     {
-        public Transform entity;
-        public float speed;
-        public float rotationSpeed;
-        public float maxPitch;
-        public LayerMask obstacleAvoidanceLayerMask;
-        public float obstacleAvoidanceDistance;
+        public Transform Entity;
+        public float Speed;
+        public float RotationSpeed;
+        public float MaxPitch;
+        public LayerMask ObstacleAvoidanceLayerMask;
+        public float ObstacleAvoidanceDistance;
+        public Func<bool> ForbiddenAreaCheck;
 
         public Builder(Transform entity)
         {
-            this.entity = entity;
+            Entity = entity;
         }
 
         public Builder WithSpeed(float speed)
         {
-            this.speed = speed;
+            Speed = speed;
             return this;
         }
 
         public Builder WithRotationSpeed(float rotationSpeed)
         {
-            this.rotationSpeed = rotationSpeed;
+            RotationSpeed = rotationSpeed;
             return this;
         }
 
         public Builder WithMaxPitch(float maxPitch)
         {
-            this.maxPitch = maxPitch;
+            MaxPitch = maxPitch;
             return this;
         }
 
         public Builder WithObstacleAvoidanceLayerMask(LayerMask obstacleAvoidanceLayerMask)
         {
-            this.obstacleAvoidanceLayerMask = obstacleAvoidanceLayerMask;
+            ObstacleAvoidanceLayerMask = obstacleAvoidanceLayerMask;
             return this;
         }
 
         public Builder WithObstacleAvoidanceDistance(float obstacleAvoidanceDistance)
         {
-            this.obstacleAvoidanceDistance = obstacleAvoidanceDistance;
+            ObstacleAvoidanceDistance = obstacleAvoidanceDistance;
+            return this;
+        }
+
+        public Builder WithForbiddenAreaCheck(Func<bool> forbiddenAreaCheck)
+        {
+            ForbiddenAreaCheck = forbiddenAreaCheck;
             return this;
         }
 
@@ -99,12 +109,13 @@ public class WanderStrategy : IStrategy
 
     private WanderStrategy(Builder builder)
     {
-        _entity = builder.entity;
-        _speed = builder.speed;
-        _rotationSpeed = builder.rotationSpeed;
-        _maxPitch = builder.maxPitch;
-        _obstacleAvoidanceLayerMask = builder.obstacleAvoidanceLayerMask;
-        _obstacleAvoidanceDistance = builder.obstacleAvoidanceDistance;
+        _entity = builder.Entity;
+        _speed = builder.Speed;
+        _rotationSpeed = builder.RotationSpeed;
+        _maxPitch = builder.MaxPitch;
+        _obstacleAvoidanceLayerMask = builder.ObstacleAvoidanceLayerMask;
+        _obstacleAvoidanceDistance = builder.ObstacleAvoidanceDistance;
+        _forbiddenAreaCheck = builder.ForbiddenAreaCheck;
     }
 
     /// <summary>
@@ -123,6 +134,7 @@ public class WanderStrategy : IStrategy
             _timeSinceLastChanged = 0f;
         }
 
+        AvoidForbiddenArea();
         AvoidObstacles();
 
         _targetRotation = Quaternion.Euler(_targetRotation.eulerAngles.x, _targetRotation.eulerAngles.y, 0);
@@ -231,12 +243,35 @@ public class WanderStrategy : IStrategy
         _targetRotation = Quaternion.Euler(targetEuler);
     }
 
+    /// <summary>
+    /// Checks for obstacles in the entity's forward direction and adjusts the target rotation to avoid them.
+    /// </summary>
     private void AvoidObstacles()
     {
         if (Physics.Raycast(_entity.position, _entity.forward, out RaycastHit hit, _obstacleAvoidanceDistance,
                 _obstacleAvoidanceLayerMask))
         {
             _targetRotation = Quaternion.LookRotation(Vector3.Reflect(_entity.forward, hit.normal));
+        }
+    }
+
+    /// <summary>
+    /// Checks if the entity is inside a forbidden area and adjusts the target rotation to move away from it.
+    /// If the entity is inside the forbidden area, the target rotation is inverted to move in the opposite direction.
+    /// The change interval is set to the maximum value to avoid frequent direction changes.
+    /// </summary>
+    private void AvoidForbiddenArea()
+    {
+        if (_forbiddenAreaCheck())
+        {
+            Debug.Log("Avoiding forbidden area");
+            
+            _targetRotation = Quaternion.LookRotation(-_entity.eulerAngles, _entity.up);
+
+            Debug.Log($"Target rotation: {_targetRotation.eulerAngles}");
+
+            // Interval is set to max value to avoid changing direction too often
+            _changeInterval = _changeIntervalRange.y;
         }
     }
 }

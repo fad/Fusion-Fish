@@ -12,6 +12,8 @@ public class BehaviourTreeRunner : NetworkBehaviour, ITreeRunner
     /// The generated behaviour tree to execute on this object.
     /// </summary>
     private BehaviourTree _behaviourTreeToExecute;
+    
+    private bool _isInsideArea;
 
     public override void Spawned()
     {
@@ -22,5 +24,10 @@ public class BehaviourTreeRunner : NetworkBehaviour, ITreeRunner
     private void Update()
     {
         _behaviourTreeToExecute?.Evaluate();
+    }
+
+    public void AdjustAreaCheck(bool isInside)
+    {
+        _isInsideArea = isInside;
     }
 }
