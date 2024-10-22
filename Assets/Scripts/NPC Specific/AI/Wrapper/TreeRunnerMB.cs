@@ -20,6 +20,7 @@ public class TreeRunnerMB : MonoBehaviour, ITreeRunner
     
     private bool _isInsideArea;
     private Vector3 _directionToArea;
+    private bool _isSafe;
     
     public FishData FishType => fishData;
 
@@ -33,7 +34,13 @@ public class TreeRunnerMB : MonoBehaviour, ITreeRunner
         _behaviourTreeToExecute = new BehaviourTree(gameObject.name);
 
         PrioritySelector actions = new PrioritySelector("Root");
+        
+        Sequence fleeSequence = new("Flee", 100);
+        Leaf isInDanger = new Leaf("Is in danger?", new Condition(() => !_isSafe));
 
+        
+        fleeSequence.AddChild(isInDanger);
+        
         Leaf wanderAround = new Leaf("Wander Around",
             new WanderStrategy.Builder(transform)
                 .WithSpeed(fishData.WanderSpeed)
@@ -47,9 +54,7 @@ public class TreeRunnerMB : MonoBehaviour, ITreeRunner
         actions.AddChild(wanderAround);
 
         // Sequence huntSequence = new("Hunt");
-        //
-        // Sequence fleeSequence = new("Flee", 100);
-        // Leaf isSafe = new Leaf("Is Safe?", new Condition(IsSafe));
+        
 
         _behaviourTreeToExecute.AddChild(actions);
     }

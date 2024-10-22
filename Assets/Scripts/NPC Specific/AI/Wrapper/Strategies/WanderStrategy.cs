@@ -3,17 +3,11 @@ using UnityEngine;
 using AI.BehaviourTree;
 using Random = UnityEngine.Random;
 
-public class WanderStrategy : IStrategy
+public class WanderStrategy : MoveStrategy
 {
     #region Fields provided from outside
 
-    private readonly Transform _entity;
     private readonly float _speed;
-    private readonly float _rotationSpeed;
-    private readonly float _maxPitch;
-    private readonly LayerMask _obstacleAvoidanceLayerMask;
-    private readonly float _obstacleAvoidanceDistance;
-    private readonly Func<(bool isInside, Vector3 direction)> _forbiddenAreaCheck;
 
     #endregion
 
@@ -25,7 +19,6 @@ public class WanderStrategy : IStrategy
     private float _changeInterval;
     private float _timeSinceLastChanged;
     private Vector3 _randomDirection;
-    private Quaternion _targetRotation;
     private Vector3 _lastPickedDirection;
 
     private EquallyDistributedWeightedPicker<Vector3> _directionPicker;
@@ -109,20 +102,20 @@ public class WanderStrategy : IStrategy
 
     private WanderStrategy(Builder builder)
     {
-        _entity = builder.Entity;
+        Entity = builder.Entity;
         _speed = builder.Speed;
-        _rotationSpeed = builder.RotationSpeed;
-        _maxPitch = builder.MaxPitch;
-        _obstacleAvoidanceLayerMask = builder.ObstacleAvoidanceLayerMask;
-        _obstacleAvoidanceDistance = builder.ObstacleAvoidanceDistance;
-        _forbiddenAreaCheck = builder.ForbiddenAreaCheck;
+        RotationSpeed = builder.RotationSpeed;
+        MaxPitch = builder.MaxPitch;
+        ObstacleAvoidanceDistance = builder.ObstacleAvoidanceLayerMask;
+        ObstacleAvoidanceDistance = builder.ObstacleAvoidanceDistance;
+        ForbiddenAreaCheck = builder.ForbiddenAreaCheck;
     }
 
     /// <summary>
     /// Constantly moves the entity.
     /// </summary>
     /// <returns><see cref="Status.Running"/> since the entity will constantly move.</returns>
-    public Status Process()
+    public override Status Process()
     {
         _timeSinceLastChanged += Time.deltaTime;
         AvoidForbiddenArea();
@@ -132,29 +125,29 @@ public class WanderStrategy : IStrategy
             ChangeDirection();
             ChangeVerticalDirection();
             _changeInterval = Random.Range(_changeIntervalRange.x, _changeIntervalRange.y);
-        
+
             _timeSinceLastChanged = 0f;
         }
 
         AvoidObstacles();
 
-        _targetRotation = Quaternion.Euler(_targetRotation.eulerAngles.x, _targetRotation.eulerAngles.y, 0);
-        Vector3 forwardDirection = _entity.forward * (_speed * Time.deltaTime);
+        TargetRotation = Quaternion.Euler(TargetRotation.eulerAngles.x, TargetRotation.eulerAngles.y, 0);
+        Vector3 forwardDirection = Entity.forward * (_speed * Time.deltaTime);
 
 
-        _entity.position += forwardDirection;
+        Entity.position += forwardDirection;
 
-        float xAngle = Mathf.SmoothDampAngle(_entity.eulerAngles.x, _targetRotation.eulerAngles.x,
-            ref _currentXRotationSpeed, _smoothTime) + _rotationSpeed * Time.deltaTime;
+        float xAngle = Mathf.SmoothDampAngle(Entity.eulerAngles.x, TargetRotation.eulerAngles.x,
+            ref _currentXRotationSpeed, _smoothTime) + RotationSpeed * Time.deltaTime;
 
-        float yAngle = Mathf.SmoothDampAngle(_entity.eulerAngles.y, _targetRotation.eulerAngles.y,
-            ref _currentYRotationSpeed, _smoothTime) + _rotationSpeed * Time.deltaTime;
+        float yAngle = Mathf.SmoothDampAngle(Entity.eulerAngles.y, TargetRotation.eulerAngles.y,
+            ref _currentYRotationSpeed, _smoothTime) + RotationSpeed * Time.deltaTime;
 
-        float zAngle = Mathf.SmoothDampAngle(_entity.eulerAngles.z, _targetRotation.eulerAngles.z,
-            ref _currentZRotationSpeed, _smoothTime) + _rotationSpeed * Time.deltaTime;
+        float zAngle = Mathf.SmoothDampAngle(Entity.eulerAngles.z, TargetRotation.eulerAngles.z,
+            ref _currentZRotationSpeed, _smoothTime) + RotationSpeed * Time.deltaTime;
 
 
-        _entity.rotation = Quaternion.Euler(xAngle, yAngle, zAngle);
+        Entity.rotation = Quaternion.Euler(xAngle, yAngle, zAngle);
 
         return Status.Running;
     }
@@ -185,13 +178,13 @@ public class WanderStrategy : IStrategy
     private void ChangeDirection()
     {
         _randomDirection = GetRandomDirection();
-        _targetRotation = Quaternion.LookRotation(_randomDirection);
+        TargetRotation = Quaternion.LookRotation(_randomDirection);
 
         float randomInterpolationFactor = Random.Range(_randomRangeForDirections.x, _randomRangeForDirections.y);
 
-        _targetRotation = Quaternion.Slerp(
-            _entity.rotation,
-            _targetRotation,
+        TargetRotation = Quaternion.Slerp(
+            Entity.rotation,
+            TargetRotation,
             randomInterpolationFactor
         );
     }
@@ -215,19 +208,19 @@ public class WanderStrategy : IStrategy
 
             Quaternion verticalDirection = _verticalDirectionPicker.Pick();
 
-            _targetRotation = verticalDirection;
+            TargetRotation = verticalDirection;
 
             float randomInterpolationFactor = Random.Range(0.1f, 0.5f);
 
-            _targetRotation = Quaternion.Slerp(
-                _entity.rotation,
-                _targetRotation,
+            TargetRotation = Quaternion.Slerp(
+                Entity.rotation,
+                TargetRotation,
                 randomInterpolationFactor
             );
 
-            Vector3 eulerAngles = _targetRotation.eulerAngles;
-            eulerAngles.x = Mathf.Clamp(eulerAngles.x, _maxPitch, 360 - _maxPitch);
-            _targetRotation = Quaternion.Euler(eulerAngles);
+            Vector3 eulerAngles = TargetRotation.eulerAngles;
+            eulerAngles.x = Mathf.Clamp(eulerAngles.x, MaxPitch, 360 - MaxPitch);
+            TargetRotation = Quaternion.Euler(eulerAngles);
             return;
         }
 
@@ -239,21 +232,9 @@ public class WanderStrategy : IStrategy
     /// </summary>
     private void FlattenOutPitch()
     {
-        Vector3 targetEuler = _targetRotation.eulerAngles;
+        Vector3 targetEuler = TargetRotation.eulerAngles;
         targetEuler.x = 0;
-        _targetRotation = Quaternion.Euler(targetEuler);
-    }
-
-    /// <summary>
-    /// Checks for obstacles in the entity's forward direction and adjusts the target rotation to avoid them.
-    /// </summary>
-    private void AvoidObstacles()
-    {
-        if (Physics.Raycast(_entity.position, _entity.forward, out RaycastHit hit, _obstacleAvoidanceDistance,
-                _obstacleAvoidanceLayerMask))
-        {
-            _targetRotation = Quaternion.LookRotation(Vector3.Reflect(_entity.forward, hit.normal));
-        }
+        TargetRotation = Quaternion.Euler(targetEuler);
     }
 
     /// <summary>
@@ -261,13 +242,13 @@ public class WanderStrategy : IStrategy
     /// If the entity is inside the forbidden area, the target rotation is inverted to move in the opposite direction.
     /// The change interval is set to the maximum value to avoid frequent direction changes.
     /// </summary>
-    private void AvoidForbiddenArea()
+    protected override void AvoidForbiddenArea()
     {
-        (bool isInside, Vector3 direction) result = _forbiddenAreaCheck();
-        
+        (bool isInside, Vector3 direction) result = ForbiddenAreaCheck();
+
         if (result.isInside)
         {
-            _targetRotation = Quaternion.LookRotation(-result.direction, _entity.up);
+            TargetRotation = Quaternion.LookRotation(-result.direction, Entity.up);
 
             // Interval is set to max value to avoid changing direction too often
             _changeInterval = _changeIntervalRange.y;
