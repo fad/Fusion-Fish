@@ -18,15 +18,35 @@ public class TreeRunnerMB : MonoBehaviour, ITreeRunner
     /// </summary>
     private BehaviourTree _behaviourTreeToExecute;
     
+    /// <summary>
+    /// Whether the fish is inside a forbidden area.
+    /// </summary>
     private bool _isInsideArea;
+    
+    /// <summary>
+    /// The direction towards center of the area the fish is inside.
+    /// </summary>
     private Vector3 _directionToArea;
+    
+    /// <summary>
+    /// Whether the fish is in danger
+    /// </summary>
     private bool _isSafe;
+    
+    /// <summary>
+    /// The stamina manager to use for this fish.
+    /// </summary>
+    private IStaminaManager _staminaManager;
     
     public FishData FishType => fishData;
 
     private void Awake()
     {
         if(!fishData) throw new NullReferenceException("FishData is not set in " + gameObject.name);
+        
+        _staminaManager = GetComponent<StaminaManager>();
+        
+        if(_staminaManager is null) throw new NullReferenceException("StaminaManager is not found in " + gameObject.name);
     }
 
     private void Start()
@@ -37,9 +57,16 @@ public class TreeRunnerMB : MonoBehaviour, ITreeRunner
         
         Sequence fleeSequence = new("Flee", 100);
         Leaf isInDanger = new Leaf("Is in danger?", new Condition(() => !_isSafe));
+        Sequence fastFleeSequence = new("Fast Flee");
+        Leaf staminaOverThreshold = new ("Stamina over threshold?",
+            new Condition(() => _staminaManager.CurrentStamina > fishData.StaminaThreshold));
+        
+        
 
+        fastFleeSequence.AddChild(staminaOverThreshold);
         
         fleeSequence.AddChild(isInDanger);
+        fleeSequence.AddChild(fastFleeSequence);
         
         Leaf wanderAround = new Leaf("Wander Around",
             new WanderStrategy.Builder(transform)

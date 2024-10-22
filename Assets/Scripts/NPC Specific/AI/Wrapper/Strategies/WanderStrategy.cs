@@ -5,12 +5,6 @@ using Random = UnityEngine.Random;
 
 public class WanderStrategy : MoveStrategy
 {
-    #region Fields provided from outside
-
-    private readonly float _speed;
-
-    #endregion
-
     private readonly Vector2 _randomRangeForDirections = new(0.1f, 0.95f);
     private readonly float _chanceToChangeVerticalDirection = 0.1f;
 
@@ -103,7 +97,7 @@ public class WanderStrategy : MoveStrategy
     private WanderStrategy(Builder builder)
     {
         Entity = builder.Entity;
-        _speed = builder.Speed;
+        Speed = builder.Speed;
         RotationSpeed = builder.RotationSpeed;
         MaxPitch = builder.MaxPitch;
         ObstacleAvoidanceLayerMask = builder.ObstacleAvoidanceLayerMask;
@@ -132,7 +126,7 @@ public class WanderStrategy : MoveStrategy
         AvoidObstacles();
 
         TargetRotation = Quaternion.Euler(TargetRotation.eulerAngles.x, TargetRotation.eulerAngles.y, 0);
-        Vector3 forwardDirection = Entity.forward * (_speed * Time.deltaTime);
+        Vector3 forwardDirection = Entity.forward * (Speed * Time.deltaTime);
 
 
         Entity.position += forwardDirection;

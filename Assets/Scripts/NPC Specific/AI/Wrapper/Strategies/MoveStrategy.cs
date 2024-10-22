@@ -9,6 +9,7 @@ public abstract class MoveStrategy : IStrategy
     protected float MaxPitch;
     protected LayerMask ObstacleAvoidanceLayerMask;
     protected float ObstacleAvoidanceDistance;
+    protected float Speed;
     
     protected Quaternion TargetRotation;
     protected Func<(bool, Vector3)> ForbiddenAreaCheck;

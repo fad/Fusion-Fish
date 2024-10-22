@@ -3,6 +3,19 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New FishData", menuName = "Data/New Fish Data", order = 0)]
 public class FishData : ScriptableObject
 {
+    [Header("General Values")]
+    [SerializeField, Tooltip("The maximum stamina of the entity.")]
+    private short maxStamina = 10;
+    
+    [SerializeField, Tooltip("The rate at which the stamina will decrease.")]
+    private short staminaDecreaseRate = 1;
+    
+    [SerializeField, Tooltip("The rate at which the stamina will regenerate.")]
+    private short staminaRegenRate = 1;
+    
+    [SerializeField, Tooltip("The stamina threshold to use.")]
+    private short staminaThreshold = 5;
+    
     [Header("Hunt Values")]
     [SerializeField]
     private FishData[] preyList;
@@ -29,6 +42,10 @@ public class FishData : ScriptableObject
     private float safeDistance;
     
     
+    public short MaxStamina => maxStamina;
+    public short StaminaDecreaseRate => staminaDecreaseRate;
+    public short StaminaRegenRate => staminaRegenRate;
+    public short StaminaThreshold => staminaThreshold;
     
     public FishData[] PreyList => preyList;
     public FishData[] PredatorList => predatorList;
