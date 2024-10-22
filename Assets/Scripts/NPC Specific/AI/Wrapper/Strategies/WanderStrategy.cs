@@ -13,7 +13,7 @@ public class WanderStrategy : IStrategy
     private readonly float _maxPitch;
     private readonly LayerMask _obstacleAvoidanceLayerMask;
     private readonly float _obstacleAvoidanceDistance;
-    private Func<bool> _forbiddenAreaCheck;
+    private readonly Func<(bool isInside, Vector3 direction)> _forbiddenAreaCheck;
 
     #endregion
 
@@ -43,7 +43,7 @@ public class WanderStrategy : IStrategy
         public float MaxPitch;
         public LayerMask ObstacleAvoidanceLayerMask;
         public float ObstacleAvoidanceDistance;
-        public Func<bool> ForbiddenAreaCheck;
+        public Func<(bool, Vector3)> ForbiddenAreaCheck;
 
         public Builder(Transform entity)
         {
@@ -80,7 +80,7 @@ public class WanderStrategy : IStrategy
             return this;
         }
 
-        public Builder WithForbiddenAreaCheck(Func<bool> forbiddenAreaCheck)
+        public Builder WithForbiddenAreaCheck(Func<(bool, Vector3)> forbiddenAreaCheck)
         {
             ForbiddenAreaCheck = forbiddenAreaCheck;
             return this;
@@ -125,16 +125,17 @@ public class WanderStrategy : IStrategy
     public Status Process()
     {
         _timeSinceLastChanged += Time.deltaTime;
+        AvoidForbiddenArea();
 
         if (_timeSinceLastChanged >= _changeInterval)
         {
             ChangeDirection();
             ChangeVerticalDirection();
             _changeInterval = Random.Range(_changeIntervalRange.x, _changeIntervalRange.y);
+        
             _timeSinceLastChanged = 0f;
         }
 
-        AvoidForbiddenArea();
         AvoidObstacles();
 
         _targetRotation = Quaternion.Euler(_targetRotation.eulerAngles.x, _targetRotation.eulerAngles.y, 0);
@@ -262,16 +263,15 @@ public class WanderStrategy : IStrategy
     /// </summary>
     private void AvoidForbiddenArea()
     {
-        if (_forbiddenAreaCheck())
+        (bool isInside, Vector3 direction) result = _forbiddenAreaCheck();
+        
+        if (result.isInside)
         {
-            Debug.Log("Avoiding forbidden area");
-            
-            _targetRotation = Quaternion.LookRotation(-_entity.eulerAngles, _entity.up);
-
-            Debug.Log($"Target rotation: {_targetRotation.eulerAngles}");
+            _targetRotation = Quaternion.LookRotation(-result.direction, _entity.up);
 
             // Interval is set to max value to avoid changing direction too often
             _changeInterval = _changeIntervalRange.y;
+            _timeSinceLastChanged = 0f;
         }
     }
 }

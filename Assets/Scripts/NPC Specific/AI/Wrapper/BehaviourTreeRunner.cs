@@ -14,6 +14,7 @@ public class BehaviourTreeRunner : NetworkBehaviour, ITreeRunner
     private BehaviourTree _behaviourTreeToExecute;
     
     private bool _isInsideArea;
+    private Vector3 _directionToArea;
 
     public override void Spawned()
     {
@@ -26,8 +27,9 @@ public class BehaviourTreeRunner : NetworkBehaviour, ITreeRunner
         _behaviourTreeToExecute?.Evaluate();
     }
 
-    public void AdjustAreaCheck(bool isInside)
+    public void AdjustAreaCheck((bool isInside, Vector3 direction) areaCheck)
     {
-        _isInsideArea = isInside;
+        _isInsideArea = areaCheck.isInside;
+        _directionToArea = areaCheck.direction;
     }
 }

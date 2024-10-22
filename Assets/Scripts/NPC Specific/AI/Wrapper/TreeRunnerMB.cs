@@ -1,3 +1,4 @@
+using System;
 using AI.BehaviourTree;
 using UnityEngine;
 
@@ -18,6 +19,12 @@ public class TreeRunnerMB : MonoBehaviour, ITreeRunner
     private BehaviourTree _behaviourTreeToExecute;
     
     private bool _isInsideArea;
+    private Vector3 _directionToArea;
+
+    private void Awake()
+    {
+        if(!fishData) throw new NullReferenceException("FishData is not set in " + gameObject.name);
+    }
 
     private void Start()
     {
@@ -27,11 +34,11 @@ public class TreeRunnerMB : MonoBehaviour, ITreeRunner
 
         Leaf wanderAround = new Leaf("Wander Around",
             new WanderStrategy.Builder(transform)
-                .WithSpeed(3.5f)
-                .WithRotationSpeed(2f)
-                .WithMaxPitch(45f)
+                .WithSpeed(fishData.WanderSpeed)
+                .WithRotationSpeed(fishData.RotationSpeed)
+                .WithMaxPitch(fishData.MaxPitch)
                 .WithObstacleAvoidanceLayerMask(obstacleAvoidanceMask)
-                .WithObstacleAvoidanceDistance(2f)
+                .WithObstacleAvoidanceDistance(fishData.ObstacleAvoidanceDistance)
                 .WithForbiddenAreaCheck(IsInsideForbiddenArea)
                 .Build());
 
@@ -49,14 +56,21 @@ public class TreeRunnerMB : MonoBehaviour, ITreeRunner
     {
         _behaviourTreeToExecute?.Evaluate();
     }
-    
-    private bool IsInsideForbiddenArea()
+
+    private void OnDrawGizmos()
     {
-        return _isInsideArea;
+        Gizmos.color = new Color(120f/255f, 33f/255f, 114f/255f, 1f);
+        Gizmos.DrawLine(transform.position, transform.position + transform.forward * 2f);
     }
 
-    public void AdjustAreaCheck(bool isInside)
+    private (bool isInside, Vector3 direction) IsInsideForbiddenArea()
     {
-        _isInsideArea = isInside;
+        return (isInside: _isInsideArea, direction: _directionToArea);
+    }
+
+    public void AdjustAreaCheck((bool isInside, Vector3 direction) areaCheck)
+    {
+        _isInsideArea = areaCheck.isInside;
+        _directionToArea = areaCheck.direction;
     }
 }

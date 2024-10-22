@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class AreaMarker : MonoBehaviour
@@ -19,7 +18,9 @@ public class AreaMarker : MonoBehaviour
 
         if (hasComponent)
         {
-            treeRunner.AdjustAreaCheck(isInside);
+            // The direction is from the other object to this object.
+            Vector3 direction = Vector3.Normalize(transform.position - other.transform.position);
+            treeRunner.AdjustAreaCheck((isInside, direction));
         }
     }
 
