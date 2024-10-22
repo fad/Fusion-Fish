@@ -106,7 +106,7 @@ public class WanderStrategy : MoveStrategy
         _speed = builder.Speed;
         RotationSpeed = builder.RotationSpeed;
         MaxPitch = builder.MaxPitch;
-        ObstacleAvoidanceDistance = builder.ObstacleAvoidanceLayerMask;
+        ObstacleAvoidanceLayerMask = builder.ObstacleAvoidanceLayerMask;
         ObstacleAvoidanceDistance = builder.ObstacleAvoidanceDistance;
         ForbiddenAreaCheck = builder.ForbiddenAreaCheck;
     }
@@ -128,7 +128,7 @@ public class WanderStrategy : MoveStrategy
 
             _timeSinceLastChanged = 0f;
         }
-
+        
         AvoidObstacles();
 
         TargetRotation = Quaternion.Euler(TargetRotation.eulerAngles.x, TargetRotation.eulerAngles.y, 0);
