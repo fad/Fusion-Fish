@@ -219,11 +219,21 @@ namespace StarterAssets
             // CineMachine will follow this target
             if (hasVCam)
             {
-                var localRotation = getPlayerCameraAndControls.vCamRoot.transform.localRotation;
-                localRotation = Quaternion.Lerp(localRotation, Quaternion.Euler(cineMachineTargetPitch, cineMachineTargetYaw, 0.0f), cameraRotationSmoothTime * Time.deltaTime);
-                getPlayerCameraAndControls.vCamRoot.transform.localRotation = localRotation;
+                var localRotation = transform.localRotation;
+                localRotation = Quaternion.Lerp(localRotation, Quaternion.Euler(cineMachineTargetPitch, cineMachineTargetYaw, 0.0f), playerRotationSmoothTime * Time.deltaTime);
+                transform.localRotation = localRotation;
 
-                transform.localRotation = Quaternion.Lerp(transform.localRotation, localRotation, playerRotationSmoothTime * Time.deltaTime);
+                Transform cameraTransform = getPlayerCameraAndControls.vCamRoot.transform;
+                float yRotationDifference = Mathf.DeltaAngle(localRotation.eulerAngles.y, cameraTransform.eulerAngles.y);
+
+                float currentCameraRotationSmoothTime = cameraRotationSmoothTime;
+                if (yRotationDifference > 90 || yRotationDifference < -90) 
+                {
+                    currentCameraRotationSmoothTime *= 2;
+                }
+
+                cameraTransform.localRotation = Quaternion.Lerp(cameraTransform.localRotation, localRotation, currentCameraRotationSmoothTime * Time.deltaTime);
+
             }
         }
 
@@ -269,7 +279,7 @@ namespace StarterAssets
 
             void MovePlayer(float playerRenderRotationX, float playerRenderRotationY)
             {
-                Vector3 Direction = getPlayerCameraAndControls.vCam.transform.forward * (inputDirectionNormalized.z * moveDistance);
+                Vector3 Direction = (transform.forward * -1) * (inputDirectionNormalized.z * moveDistance);
                 if (hasVCam)
                 {
                     if (!Physics.Raycast(playerVisual.transform.position, Direction, checkObstacleDistance, obstacleLayer))

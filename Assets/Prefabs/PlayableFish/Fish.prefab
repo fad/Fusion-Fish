@@ -201,7 +201,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settingsSO: {fileID: 11400000, guid: 933cba68e45ea634da0cb2bf0e3cb604, type: 2}
-  playerRotationSmoothTime: 8
+  playerRotationSmoothTime: 16
   sensitivity: 1.5
   playerVisual: {fileID: 5159690815227489710}
   boostSwimSpeed: 250
@@ -218,7 +218,7 @@ MonoBehaviour:
   permanentStamina: 0
   maxBoostCount: 100
   cameraFOVSmoothTime: 2
-  cameraRotationSmoothTime: 15
+  cameraRotationSmoothTime: 4
   topCameraClamp: 70
   bottomCameraClamp: -70
   lockCameraPosition: 0
