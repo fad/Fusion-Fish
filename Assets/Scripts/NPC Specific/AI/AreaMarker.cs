@@ -1,7 +1,12 @@
+using System.Linq;
 using UnityEngine;
 
 public class AreaMarker : MonoBehaviour
 {
+    [SerializeField,
+    Tooltip("The fish this area marker belongs to.")]
+    private FishData fishData;
+    
     private void OnTriggerEnter(Collider other)
     {
         ChangeAreaCheck(other, true);
@@ -15,8 +20,9 @@ public class AreaMarker : MonoBehaviour
     private void ChangeAreaCheck(Collider other, bool isInside)
     {
         bool hasComponent = other.TryGetComponent(out ITreeRunner treeRunner);
+        bool isPrey = fishData.PreyList.Contains(treeRunner.FishType);
 
-        if (hasComponent)
+        if (hasComponent && isPrey)
         {
             // The direction is from the other object to this object.
             Vector3 direction = Vector3.Normalize(transform.position - other.transform.position);

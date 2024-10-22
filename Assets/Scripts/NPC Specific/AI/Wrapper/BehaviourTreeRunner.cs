@@ -5,6 +5,10 @@ using UnityEngine;
 public class BehaviourTreeRunner : NetworkBehaviour, ITreeRunner
 {
     [SerializeField,
+     Tooltip("The data for this fish")]
+    private FishData fishData;
+    
+    [SerializeField,
      Tooltip("The behaviour tree to generate and execute")]
     private BehaviourTreeSO behaviourTreeToGenerate;
 
@@ -16,6 +20,8 @@ public class BehaviourTreeRunner : NetworkBehaviour, ITreeRunner
     private bool _isInsideArea;
     private Vector3 _directionToArea;
 
+    public FishData FishType => fishData;
+    
     public override void Spawned()
     {
         behaviourTreeToGenerate.SetRunner(this);

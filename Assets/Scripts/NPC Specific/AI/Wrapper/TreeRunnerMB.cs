@@ -20,6 +20,8 @@ public class TreeRunnerMB : MonoBehaviour, ITreeRunner
     
     private bool _isInsideArea;
     private Vector3 _directionToArea;
+    
+    public FishData FishType => fishData;
 
     private void Awake()
     {
