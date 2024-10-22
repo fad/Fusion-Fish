@@ -376,7 +376,7 @@ PrefabInstance:
     - target: {fileID: 9150513680388461083, guid: 274fa519b44c24e43a28d85dbdddcb30,
         type: 3}
       propertyPath: cameraRotationSmoothTime
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 9150513680388461083, guid: 274fa519b44c24e43a28d85dbdddcb30,
         type: 3}

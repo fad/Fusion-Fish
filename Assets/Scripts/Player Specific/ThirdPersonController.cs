@@ -286,7 +286,7 @@ namespace StarterAssets
                         rb.AddForce(Direction, ForceMode.Impulse);
 
                     getPlayerCameraAndControls.vCam.m_Lens.FieldOfView = Mathf.Lerp(getPlayerCameraAndControls.vCam.m_Lens.FieldOfView, isBoosting ? boostSpeedFOV : defaultSpeedFOV, cameraFOVSmoothTime * Time.deltaTime);
-                    getPlayerCameraAndControls.vCam.GetCinemachineComponent<CinemachineFramingTransposer>().m_CameraDistance = cameraDistance;
+                    getPlayerCameraAndControls.vCam.GetCinemachineComponent<CinemachineFramingTransposer>().m_CameraDistance = CameraDistance();
                 }
 
                 playerVisual.transform.localRotation = Quaternion.Lerp(playerVisual.transform.localRotation, Quaternion.Euler(playerRenderRotationX, playerRenderRotationY, 0), playerRotationSmoothTime * Time.deltaTime);
@@ -309,6 +309,21 @@ namespace StarterAssets
             animator.SetFloat(animIDMotionSpeed, rb.velocity.sqrMagnitude);
         }
 
+        private float CameraDistance()
+        {
+            float currentCameraDistance = cameraDistance;
+
+            RaycastHit hit;
+            if (Physics.Raycast(playerVisual.transform.position, playerVisual.transform.forward, out hit, cameraDistance, obstacleLayer))
+            {
+                currentCameraDistance = Vector3.Distance(transform.position, hit.point);
+                Debug.Log("Hit == " + currentCameraDistance);
+            }
+            else
+                Debug.Log("Def == " + currentCameraDistance);
+
+            return currentCameraDistance;
+        }
         private void SpeedBoost()
         {
             switch (boostState)
@@ -411,7 +426,7 @@ namespace StarterAssets
                     var velocity = rb.velocity;
                     playerVisual.transform.forward = -velocity;
                     cineMachineTargetPitch = -velocity.x;
-                    getPlayerCameraAndControls.vCam.GetCinemachineComponent<CinemachineFramingTransposer>().m_CameraDistance = cameraDistance / 2;
+                    getPlayerCameraAndControls.vCam.GetCinemachineComponent<CinemachineFramingTransposer>().m_CameraDistance = CameraDistance() / 2;
                 }
             }
             else
@@ -441,7 +456,7 @@ namespace StarterAssets
                     AudioManager.Instance.PlaySoundAtPosition("impactWithWater", playerVisual.transform.position);
                     outOfWater = false;
                 }
-                getPlayerCameraAndControls.vCam.GetCinemachineComponent<CinemachineFramingTransposer>().m_CameraDistance = cameraDistance;
+                getPlayerCameraAndControls.vCam.GetCinemachineComponent<CinemachineFramingTransposer>().m_CameraDistance = CameraDistance();
                 rb.drag = 6;
                 rb.useGravity = false;
             }
