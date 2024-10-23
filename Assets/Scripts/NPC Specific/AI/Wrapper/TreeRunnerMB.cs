@@ -9,7 +9,7 @@ public class TreeRunnerMB : MonoBehaviour, ITreeRunner
     [SerializeField,
      Tooltip("The data for this fish")]
     private FishData fishData;
-    
+
     [SerializeField,
      Tooltip("The obstacle avoidance layer mask")]
     private LayerMask obstacleAvoidanceMask;
@@ -18,17 +18,17 @@ public class TreeRunnerMB : MonoBehaviour, ITreeRunner
     /// The behaviour tree to execute on this object.
     /// </summary>
     private BehaviourTree _behaviourTreeToExecute;
-    
+
     /// <summary>
     /// Whether the fish is inside a forbidden area.
     /// </summary>
     private bool _isInsideArea;
-    
+
     /// <summary>
     /// The direction towards center of the area the fish is inside.
     /// </summary>
     private Vector3 _directionToArea;
-    
+
     /// <summary>
     /// Whether the fish is in danger
     /// </summary>
@@ -39,28 +39,29 @@ public class TreeRunnerMB : MonoBehaviour, ITreeRunner
     /// </summary>
     private bool _isHunting;
 
-    
+
     /// <summary>
     /// The current target for hunt or flee behaviour.
     /// If the fish is hunting, the target will be followed.
     /// If the fish is fleeing, the fish will move away from the target.
     /// </summary>
     private Transform _target;
-    
+
     /// <summary>
     /// The stamina manager to use for this fish.
     /// </summary>
     private IStaminaManager _staminaManager;
-    
+
     public FishData FishType => fishData;
 
     private void Awake()
     {
-        if(!fishData) throw new NullReferenceException("FishData is not set in " + gameObject.name);
+        if (!fishData) throw new NullReferenceException("FishData is not set in " + gameObject.name);
 
         TryGetComponent(out _staminaManager);
-        
-        if(_staminaManager is null) throw new NullReferenceException("StaminaManager is not found in " + gameObject.name);
+
+        if (_staminaManager is null)
+            throw new NullReferenceException("StaminaManager is not found in " + gameObject.name);
     }
 
     private void Start()
@@ -68,22 +69,22 @@ public class TreeRunnerMB : MonoBehaviour, ITreeRunner
         _behaviourTreeToExecute = new BehaviourTree(gameObject.name);
 
         PrioritySelector actions = new PrioritySelector("Root");
-        
+
         Sequence fleeSequence = new("Flee", 100);
         Leaf isInDanger = new Leaf("Is in danger?", new Condition(() => _isInDanger));
         Selector fastOrNormal = new Selector("Fast or Normal Flee");
         Sequence fastFleeSequence = new("Fast Flee");
-        Leaf staminaOverThreshold = new ("Stamina over threshold?",
+        Leaf staminaOverThreshold = new("Stamina over threshold?",
             new Condition(() => _staminaManager.CurrentStamina > fishData.StaminaThreshold));
-        
+
 
         fastFleeSequence.AddChild(staminaOverThreshold);
-        
+
         fastOrNormal.AddChild(fastFleeSequence);
-        
+
         fleeSequence.AddChild(isInDanger);
         fleeSequence.AddChild(fastOrNormal);
-        
+
         Leaf wanderAround = new Leaf("Wander Around",
             new WanderStrategy.Builder(transform)
                 .WithSpeed(fishData.WanderSpeed)
@@ -97,7 +98,7 @@ public class TreeRunnerMB : MonoBehaviour, ITreeRunner
         actions.AddChild(wanderAround);
 
         // Sequence huntSequence = new("Hunt");
-        
+
 
         _behaviourTreeToExecute.AddChild(actions);
     }
@@ -109,7 +110,7 @@ public class TreeRunnerMB : MonoBehaviour, ITreeRunner
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = new Color(120f/255f, 33f/255f, 114f/255f, 1f);
+        Gizmos.color = new Color(120f / 255f, 33f / 255f, 114f / 255f, 1f);
         Gizmos.DrawLine(transform.position, transform.position + transform.forward * 2f);
     }
 
@@ -128,20 +129,18 @@ public class TreeRunnerMB : MonoBehaviour, ITreeRunner
     {
         if (_isHunting || _isInDanger) return;
         if (targetData.targetBehaviour.FishType == FishType) return; // if the other fish type is the same as this one
-        
-        
+
+
         _target = targetData.targetTransform;
-        
-        if (targetData.targetBehaviour.FishType.PredatorList.Contains(FishType))
+
+        if (FishType.PredatorList.Contains(targetData.targetBehaviour.FishType) && !_isHunting)
         {
             _isInDanger = true;
-            return;
         }
-        
-        if (FishType.PreyList.Contains(targetData.targetBehaviour.FishType))
+
+        if (FishType.PreyList.Contains(targetData.targetBehaviour.FishType) && !_isInDanger)
         {
             _isHunting = true;
         }
-        
     }
 }

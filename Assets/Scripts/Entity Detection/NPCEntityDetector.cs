@@ -19,14 +19,14 @@ public class NPCEntityDetector : EntityDetector
     protected override void OnTriggerEnter(Collider other)
     {
         if (IsNotValid(other.gameObject)) return;
-
+        
         DealWithHashset(other.gameObject);
     }
 
     protected override void OnTriggerExit(Collider other)
     {
         if (IsNotValid(other.gameObject)) return;
-
+        
         DealWithHashset(other.gameObject, true);
     }
 
@@ -46,6 +46,16 @@ public class NPCEntityDetector : EntityDetector
         if (npcInFOV.entity is null || npcInFOV.entityTreeRunner is null) return;
 
         _attachedAIBehaviour.AdjustHuntOrFleeTarget(npcInFOV);
+    }
+
+    private void OnDrawGizmos()
+    {
+        bool hasSpereCollider = TryGetComponent(out SphereCollider sphereCollider);
+
+        if (!hasSpereCollider) return;
+
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(transform.position, sphereCollider.radius);
     }
 
     private void DealWithHashset(GameObject entity, bool shouldBeRemoved = false)
