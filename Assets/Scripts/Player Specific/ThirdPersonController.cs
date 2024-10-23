@@ -145,6 +145,7 @@ namespace StarterAssets
             insideWaterParticles = GameObject.Find("WaterSplash_Ring").GetComponent<ParticleSystem>();
             AudioManager.Instance.PlaySoundAtPosition("impactWithWater", playerVisual.transform.position);
             foundSwimArea = true;
+            setUIActivationState.DeactiveLoadPanel();
         }
 
         private void Update()

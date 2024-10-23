@@ -1,3 +1,5 @@
+using Microsoft.Unity.VisualStudio.Editor;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -8,15 +10,43 @@ public class SetUIActivationState : MonoBehaviour
     private bool uiObjectsActive;
     [HideInInspector] public bool pressedActivationUIMultiplayerButton;
     [SerializeField] private TMP_InputField inputField;
+    [SerializeField] private CanvasGroup LoadPanel;
 
     private void Start()
     {
+        LoadPanel.gameObject.SetActive(true);
+
         foreach (var uiObject in uIObjects)
         {
             uiObject.SetActive(false);
         }
     }
+    public void DeactiveLoadPanel()
+    {
+        StartCoroutine(DeactiveLoadPanelCor());
+    }
 
+    private IEnumerator DeactiveLoadPanelCor()
+    {
+        float timeStartedLerping = Time.time;
+        bool reachedEnd = false;
+
+        while (!reachedEnd)
+        {
+            float timeSinceStarted = Time.time - timeStartedLerping;
+            float percentageComplete = timeSinceStarted / 1.5f;
+
+            LoadPanel.alpha = Mathf.Lerp(1, 0, percentageComplete);
+
+            if (percentageComplete >= 1.0f)
+            {
+                reachedEnd = true;
+            }
+
+            yield return new WaitForEndOfFrame();
+        }
+        LoadPanel.gameObject.SetActive(false);
+    }
     public void SetActiveUIObjects()
     {
         if (uiObjectsActive)
