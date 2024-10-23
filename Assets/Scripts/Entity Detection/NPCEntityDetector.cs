@@ -40,11 +40,12 @@ public class NPCEntityDetector : EntityDetector
 
     private void Update()
     {
-        var npcInFOV = _otherNPCs.FirstOrDefault(npc => IsInFOVAndInRange(npc.entity));
+        (Transform entity, ITreeRunner entityTreeRunner) npcInFOV =
+            _otherNPCs.FirstOrDefault(npc => IsInFOVAndInRange(npc.entity));
 
         if (npcInFOV.entity is null || npcInFOV.entityTreeRunner is null) return;
 
-        // Handle stuff
+        _attachedAIBehaviour.AdjustHuntOrFleeTarget(npcInFOV);
     }
 
     private void DealWithHashset(GameObject entity, bool shouldBeRemoved = false)

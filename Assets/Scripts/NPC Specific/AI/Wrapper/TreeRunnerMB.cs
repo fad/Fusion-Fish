@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using AI.BehaviourTree;
 using UnityEngine;
 
@@ -31,7 +32,20 @@ public class TreeRunnerMB : MonoBehaviour, ITreeRunner
     /// <summary>
     /// Whether the fish is in danger
     /// </summary>
-    private bool _isSafe;
+    private bool _isInDanger;
+
+    /// <summary>
+    /// Whether the fish is locked onto prey.
+    /// </summary>
+    private bool _isHunting;
+
+    
+    /// <summary>
+    /// The current target for hunt or flee behaviour.
+    /// If the fish is hunting, the target will be followed.
+    /// If the fish is fleeing, the fish will move away from the target.
+    /// </summary>
+    private Transform _target;
     
     /// <summary>
     /// The stamina manager to use for this fish.
@@ -43,8 +57,8 @@ public class TreeRunnerMB : MonoBehaviour, ITreeRunner
     private void Awake()
     {
         if(!fishData) throw new NullReferenceException("FishData is not set in " + gameObject.name);
-        
-        _staminaManager = GetComponent<StaminaManager>();
+
+        TryGetComponent(out _staminaManager);
         
         if(_staminaManager is null) throw new NullReferenceException("StaminaManager is not found in " + gameObject.name);
     }
@@ -56,7 +70,7 @@ public class TreeRunnerMB : MonoBehaviour, ITreeRunner
         PrioritySelector actions = new PrioritySelector("Root");
         
         Sequence fleeSequence = new("Flee", 100);
-        Leaf isInDanger = new Leaf("Is in danger?", new Condition(() => !_isSafe));
+        Leaf isInDanger = new Leaf("Is in danger?", new Condition(() => _isInDanger));
         Selector fastOrNormal = new Selector("Fast or Normal Flee");
         Sequence fastFleeSequence = new("Fast Flee");
         Leaf staminaOverThreshold = new ("Stamina over threshold?",
@@ -108,5 +122,26 @@ public class TreeRunnerMB : MonoBehaviour, ITreeRunner
     {
         _isInsideArea = areaCheck.isInside;
         _directionToArea = areaCheck.direction;
+    }
+
+    public void AdjustHuntOrFleeTarget((Transform targetTransform, ITreeRunner targetBehaviour) targetData)
+    {
+        if (_isHunting || _isInDanger) return;
+        if (targetData.targetBehaviour.FishType == FishType) return; // if the other fish type is the same as this one
+        
+        
+        _target = targetData.targetTransform;
+        
+        if (targetData.targetBehaviour.FishType.PredatorList.Contains(FishType))
+        {
+            _isInDanger = true;
+            return;
+        }
+        
+        if (FishType.PreyList.Contains(targetData.targetBehaviour.FishType))
+        {
+            _isHunting = true;
+        }
+        
     }
 }
