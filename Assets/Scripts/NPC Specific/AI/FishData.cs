@@ -66,4 +66,7 @@ public class FishData : ScriptableObject
     public float ObstacleAvoidanceDistance => obstacleAvoidanceDistance;
     
     public float SafeDistance => safeDistance;
+    public float FOVAngle => FOVAngle;
+    public float FOVRadius => FOVRadius;
+
 }
