@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [CreateAssetMenu(fileName = "New FishData", menuName = "Data/New Fish Data", order = 0)]
 public class FishData : ScriptableObject
@@ -15,6 +16,12 @@ public class FishData : ScriptableObject
     
     [SerializeField, Tooltip("The stamina threshold to use.")]
     private short staminaThreshold = 5;
+
+    [SerializeField, Min(30f), Tooltip("The angle of the field of view for the fish.")]
+    private float FOV_Angle = 45f;
+    
+    [SerializeField, Min(3f), Tooltip("The detection radius inside of the FOV.")]
+    private float FOV_Radius = 10f;
     
     [Header("Hunt Values")]
     [SerializeField]
@@ -46,6 +53,9 @@ public class FishData : ScriptableObject
     public short StaminaDecreaseRate => staminaDecreaseRate;
     public short StaminaRegenRate => staminaRegenRate;
     public short StaminaThreshold => staminaThreshold;
+    
+    public float FOVAngle => FOV_Angle;
+    public float FOVRadius => FOV_Radius;
     
     public FishData[] PreyList => preyList;
     public FishData[] PredatorList => predatorList;

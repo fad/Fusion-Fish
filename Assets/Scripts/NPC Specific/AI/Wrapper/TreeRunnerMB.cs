@@ -57,16 +57,18 @@ public class TreeRunnerMB : MonoBehaviour, ITreeRunner
         
         Sequence fleeSequence = new("Flee", 100);
         Leaf isInDanger = new Leaf("Is in danger?", new Condition(() => !_isSafe));
+        Selector fastOrNormal = new Selector("Fast or Normal Flee");
         Sequence fastFleeSequence = new("Fast Flee");
         Leaf staminaOverThreshold = new ("Stamina over threshold?",
             new Condition(() => _staminaManager.CurrentStamina > fishData.StaminaThreshold));
         
-        
 
         fastFleeSequence.AddChild(staminaOverThreshold);
         
+        fastOrNormal.AddChild(fastFleeSequence);
+        
         fleeSequence.AddChild(isInDanger);
-        fleeSequence.AddChild(fastFleeSequence);
+        fleeSequence.AddChild(fastOrNormal);
         
         Leaf wanderAround = new Leaf("Wander Around",
             new WanderStrategy.Builder(transform)
