@@ -10,9 +10,13 @@ public class StaminaManager : MonoBehaviour, IStaminaManager
     [SerializeField, Tooltip("The time it takes to start regenerating stamina")]
     private float timeToStartRegenerate = 3f;
     
+    [SerializeField, Tooltip("The cooldown for decreasing stamina")]
+    private float decreaseCooldown = 1f;
+    
     private short _currentStamina;
     private bool _isRegenerating;
     private float _timePassedAfterLastDecrease;
+    private float _currentDecreaseCooldownTimer;
 
     public short CurrentStamina => _currentStamina;
 
@@ -28,6 +32,14 @@ public class StaminaManager : MonoBehaviour, IStaminaManager
 
     public void Decrease()
     {
+        if (_currentStamina <= 0) return;
+        
+        if(_currentDecreaseCooldownTimer < decreaseCooldown)
+        {
+            _currentDecreaseCooldownTimer += Time.deltaTime;
+            return;
+        }
+        
         if (_isRegenerating)
         {
             StopCoroutine(RegenerateStamina());
@@ -36,6 +48,7 @@ public class StaminaManager : MonoBehaviour, IStaminaManager
         _currentStamina -= fishData.StaminaDecreaseRate;
         _currentStamina = (short) Mathf.Clamp(_currentStamina, 0, fishData.MaxStamina);
         _timePassedAfterLastDecrease = 0f; // Reset the timer after decreasing stamina
+        _currentDecreaseCooldownTimer = 0f;
     }
 
     public void Regenerate()

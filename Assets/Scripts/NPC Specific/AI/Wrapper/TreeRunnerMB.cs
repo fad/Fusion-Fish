@@ -84,28 +84,12 @@ public class TreeRunnerMB : MonoBehaviour, ITreeRunner
 
         Sequence fleeSequence = new("Flee", 100);
         Leaf isInDanger = new Leaf("Is in danger?", new Condition(() => _isInDanger));
-        Selector fastOrNormal = new Selector("Fast or Normal Flee");
-        Sequence fastFleeSequence = new("Fast Flee");
-        Leaf hasStamina = new("Has Stamina",
-            new Condition(() => _staminaManager.CurrentStamina > 0));
         
-        Leaf fastFleeing = new Leaf("Fast fleeing",
+        Leaf fleeing = new Leaf("Fleeing",
             new FleeStrategy.Builder(transform)
-                .WithSpeed(fishData.FastSpeed)
-                .WithRotationSpeed(fishData.RotationSpeed)
-                .WithMaxPitch(fishData.MaxPitch)
-                .WithObstacleAvoidanceLayerMask(obstacleAvoidanceMask)
-                .WithObstacleAvoidanceDistance(fishData.ObstacleAvoidanceDistance)
-                .WithPredatorTransformGetter(() => _target)
-                .WithStaminaManager(_staminaManager)
-                .WithResetThreatAction(ResetFleeBehaviour)
-                .WithSafeDistance(fishData.SafeDistance)
-                .Build()
-        );
-        
-        Leaf normalFleeing = new Leaf("Normal fleeing",
-            new FleeStrategy.Builder(transform)
-                .WithSpeed(fishData.WanderSpeed)
+                .WithNormalSpeed(fishData.WanderSpeed)
+                .WithFastSpeed(fishData.FastSpeed)
+                .WithStaminaThreshold(fishData.StaminaThreshold)
                 .WithRotationSpeed(fishData.RotationSpeed)
                 .WithMaxPitch(fishData.MaxPitch)
                 .WithObstacleAvoidanceLayerMask(obstacleAvoidanceMask)
@@ -115,16 +99,9 @@ public class TreeRunnerMB : MonoBehaviour, ITreeRunner
                 .WithSafeDistance(fishData.SafeDistance)
                 .Build()
         );
-        
-        
-        fastFleeSequence.AddChild(hasStamina);
-        fastFleeSequence.AddChild(fastFleeing);
-        
-        fastOrNormal.AddChild(fastFleeSequence);
-        fastOrNormal.AddChild(normalFleeing);
         
         fleeSequence.AddChild(isInDanger);
-        fleeSequence.AddChild(fastOrNormal);
+        fleeSequence.AddChild(fleeing);
 
         // Sequence debugSeq = new Sequence("Debug Sequence", 100);
         // Leaf shallDebug = new Leaf("Shall debug", new Condition(() => DEBUG));

@@ -12,6 +12,9 @@ public class FishData : ScriptableObject
 
     [SerializeField, Tooltip("The rate at which the stamina will regenerate.")]
     private short staminaRegenRate = 1;
+    
+    [SerializeField, Tooltip("The threshold for stamina at which the fish will start using it.")]
+    private short staminaThreshold = 5;
 
     [SerializeField, Min(30f), Tooltip("The angle of the field of view for the fish.")]
     private float FOV_Angle = 45f;
@@ -52,6 +55,8 @@ public class FishData : ScriptableObject
     public short MaxStamina => maxStamina;
     public short StaminaDecreaseRate => staminaDecreaseRate;
     public short StaminaRegenRate => staminaRegenRate;
+    
+    public short StaminaThreshold => staminaThreshold;
 
     public float FOVAngle => FOV_Angle;
     public float FOVRadius => FOV_Radius;

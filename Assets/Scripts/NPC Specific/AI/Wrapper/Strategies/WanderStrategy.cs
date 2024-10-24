@@ -94,15 +94,10 @@ public class WanderStrategy : MoveStrategy
         Quaternion.Euler(270, 0, 0) // Upwards
     };
 
-    private WanderStrategy(Builder builder)
+    private WanderStrategy(Builder builder) : base(builder.Entity, builder.RotationSpeed, builder.MaxPitch,
+        builder.ObstacleAvoidanceLayerMask, builder.ObstacleAvoidanceDistance, builder.ForbiddenAreaCheck)
     {
-        Entity = builder.Entity;
         Speed = builder.Speed;
-        RotationSpeed = builder.RotationSpeed;
-        MaxPitch = builder.MaxPitch;
-        ObstacleAvoidanceLayerMask = builder.ObstacleAvoidanceLayerMask;
-        ObstacleAvoidanceDistance = builder.ObstacleAvoidanceDistance;
-        ForbiddenAreaCheck = builder.ForbiddenAreaCheck;
     }
 
     /// <summary>
