@@ -16,6 +16,8 @@ public abstract class MoveStrategy : IStrategy
     
     public abstract Status Process();
     
+    public virtual void Reset(){}
+    
     /// <summary>
     /// Checks if the entity is inside a forbidden area and adjusts the target rotation to move away from it.
     /// If the entity is inside the forbidden area, the target rotation is inverted to move in the opposite direction.

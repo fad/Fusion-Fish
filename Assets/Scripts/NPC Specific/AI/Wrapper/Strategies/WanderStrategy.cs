@@ -119,7 +119,7 @@ public class WanderStrategy : MoveStrategy
             ChangeDirection();
             ChangeVerticalDirection();
             _changeInterval = Random.Range(_changeIntervalRange.x, _changeIntervalRange.y);
-
+            
             _timeSinceLastChanged = 0f;
         }
         

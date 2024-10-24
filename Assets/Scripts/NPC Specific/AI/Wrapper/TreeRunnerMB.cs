@@ -54,6 +54,8 @@ public class TreeRunnerMB : MonoBehaviour, ITreeRunner
 
     public FishData FishType => fishData;
 
+    public bool DEBUG = false;
+
     private void Awake()
     {
         if (!fishData) throw new NullReferenceException("FishData is not set in " + gameObject.name);
@@ -70,21 +72,29 @@ public class TreeRunnerMB : MonoBehaviour, ITreeRunner
 
         PrioritySelector actions = new PrioritySelector("Root");
 
-        Sequence fleeSequence = new("Flee", 100);
-        Leaf isInDanger = new Leaf("Is in danger?", new Condition(() => _isInDanger));
-        Selector fastOrNormal = new Selector("Fast or Normal Flee");
-        Sequence fastFleeSequence = new("Fast Flee");
-        Leaf staminaOverThreshold = new("Stamina over threshold?",
-            new Condition(() => _staminaManager.CurrentStamina > fishData.StaminaThreshold));
+        // Sequence fleeSequence = new("Flee", 100);
+        // Leaf isInDanger = new Leaf("Is in danger?", new Condition(() => _isInDanger));
+        // Selector fastOrNormal = new Selector("Fast or Normal Flee");
+        // Sequence fastFleeSequence = new("Fast Flee");
+        // Leaf staminaOverThreshold = new("Stamina over threshold?",
+        //     new Condition(() => _staminaManager.CurrentStamina > fishData.StaminaThreshold));
+        //
+        //
+        // fastFleeSequence.AddChild(staminaOverThreshold);
+        //
+        // fastOrNormal.AddChild(fastFleeSequence);
+        //
+        // fleeSequence.AddChild(isInDanger);
+        // fleeSequence.AddChild(fastOrNormal);
+        
+        Sequence debugSeq = new Sequence("Debug Sequence", 100);
+        Leaf shallDebug = new Leaf("Shall debug", new Condition(() => DEBUG));
+        Leaf debugLeaf = new Leaf("Debug Leaf", new ActionStrategy(() => Debug.Log("Debugging")));
 
-
-        fastFleeSequence.AddChild(staminaOverThreshold);
-
-        fastOrNormal.AddChild(fastFleeSequence);
-
-        fleeSequence.AddChild(isInDanger);
-        fleeSequence.AddChild(fastOrNormal);
-
+        debugSeq.AddChild(shallDebug);
+        debugSeq.AddChild(debugLeaf);
+        
+        
         Leaf wanderAround = new Leaf("Wander Around",
             new WanderStrategy.Builder(transform)
                 .WithSpeed(fishData.WanderSpeed)
@@ -95,6 +105,7 @@ public class TreeRunnerMB : MonoBehaviour, ITreeRunner
                 .WithForbiddenAreaCheck(IsInsideForbiddenArea)
                 .Build());
 
+        actions.AddChild(debugSeq);
         actions.AddChild(wanderAround);
 
         // Sequence huntSequence = new("Hunt");
