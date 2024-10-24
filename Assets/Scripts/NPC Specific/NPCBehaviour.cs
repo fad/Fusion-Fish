@@ -234,6 +234,7 @@ public class NPCBehaviour : NetworkBehaviour
             if (enemy.TryGetComponent<PlayerHealth>(out var playerHealth) && (playerHealth.isDead || playerHealth.NetworkedPermanentHealth))
             {
                 isAttacking = false;
+                playerHealth.causeOfDeath = "You got eaten";
                 yield break;
             }
             enemy.GetComponent<HealthManager>().ReceiveDamageRpc(attackDamage, true);

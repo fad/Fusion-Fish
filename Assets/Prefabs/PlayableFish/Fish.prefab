@@ -148,6 +148,7 @@ GameObject:
   - component: {fileID: 2297454540360690151}
   - component: {fileID: 6595614106671272429}
   - component: {fileID: 4632872686385277288}
+  - component: {fileID: -2164658129637747517}
   - component: {fileID: 4763555619980021824}
   - component: {fileID: 7967942701457511286}
   - component: {fileID: 8171385306191510493}
@@ -283,6 +284,7 @@ MonoBehaviour:
   showDamageVignetteTime: 0.6
   hideDamageVignetteTime: 0.2
   _NetworkedPermanentHealth: 0
+  causeOfDeath: You got eaten
 --- !u!114 &4632872686385277288
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -306,6 +308,20 @@ MonoBehaviour:
   maxSlowDownSpeedTime: 2
   slowDownSpeedTime: 0
   slowDown: 0
+--- !u!114 &-2164658129637747517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 505540377448418887}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f307fa59cc8bf544883588763f9f782b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxSatiety: 100
+  satietyDecreaseRate: 1
 --- !u!114 &4763555619980021824
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -635,6 +651,7 @@ MonoBehaviour:
   healthManager: {fileID: 0}
   levelUp: {fileID: 0}
   playerHealth: {fileID: 0}
+  satietyManager: {fileID: 0}
   playerAttack: {fileID: 2749181200256999984}
   hostPlayerRunner: {fileID: 0}
 --- !u!114 &9144912782510203114
@@ -659,6 +676,7 @@ MonoBehaviour:
   - {fileID: 2297454540360690151}
   - {fileID: 6595614106671272429}
   - {fileID: 4632872686385277288}
+  - {fileID: -2164658129637747517}
   - {fileID: 4763555619980021824}
   - {fileID: 7967942701457511286}
   - {fileID: 8171385306191510493}
@@ -6502,6 +6520,7 @@ MonoBehaviour:
   suckInParticles: {fileID: 1547311364694370056}
   suckInForce: 100
   healthIncreaseOnEating: 10
+  satietyIncreaseOnEating: 10
   timeForScaleAnimation: 0.15
   suckInDamage: 10
 --- !u!1 &6192506693402442310

@@ -10,12 +10,16 @@ public class HudUI : MonoBehaviour
     
     [Header("Boost")]
     [SerializeField] private Image boostUI;
-    
-    [Header("Health")]
-    [SerializeField] private Image healthUI;
 
-    [Header("Death")] 
-    public GameObject deathPanel;
+    [Header("Health")]
+    [SerializeField] private Image healthUI; 
+    
+    [Header("Satiety")]
+    [SerializeField] private Image satietyUI;
+
+    [Header("Death")]
+    [SerializeField] private GameObject deathPanel;
+    [SerializeField] private TextMeshProUGUI causeOfDeathText;
 
     [Header("XP")]
     [SerializeField] public TextMeshProUGUI experienceText;
@@ -28,7 +32,15 @@ public class HudUI : MonoBehaviour
     {
         Instance = this;
     }
-
+    public void OnDeathPanel(string causeOfDeath)
+    {
+        deathPanel.SetActive(true);
+        causeOfDeathText.text = causeOfDeath;
+    }
+    public void OffDeathPanel()
+    {
+        deathPanel.SetActive(false);
+    }
     private IEnumerator Start()
     {
         yield return new WaitUntil(() => playerManager != null);
@@ -54,6 +66,8 @@ public class HudUI : MonoBehaviour
         experienceText.text = playerManager.levelUp.currentExperience.ToString();
         
         neededExperienceText.text = playerManager.levelUp.experienceUntilUpgrade.ToString();
+
+        satietyUI.fillAmount = playerManager.satietyManager.GetSatiety() / playerManager.satietyManager.GetMaxSatiety();
     }
 
     private void UpdateHealthUI(float value)

@@ -316,12 +316,7 @@ namespace StarterAssets
 
             RaycastHit hit;
             if (Physics.Raycast(playerVisual.transform.position, playerVisual.transform.forward, out hit, cameraDistance, obstacleLayer))
-            {
                 currentCameraDistance = Vector3.Distance(transform.position, hit.point);
-                Debug.Log("Hit == " + currentCameraDistance);
-            }
-            else
-                Debug.Log("Def == " + currentCameraDistance);
 
             return currentCameraDistance;
         }

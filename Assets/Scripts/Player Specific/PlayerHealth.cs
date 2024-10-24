@@ -16,6 +16,7 @@ public class PlayerHealth : NetworkBehaviour
     [SerializeField] private float showDamageVignetteTime;
     [SerializeField] private float hideDamageVignetteTime;
     [Networked] public bool NetworkedPermanentHealth { get; set; }
+    public string causeOfDeath = "You got eaten";
 
     private void Start()
     {
@@ -34,19 +35,20 @@ public class PlayerHealth : NetworkBehaviour
     
     private void PlayerDeath()
     {
+        playerManager.satietyManager.Death();
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
         playerManager.healthManager.PlayParticles(Color.red, 30);
         GetComponent<SpawnGibsOnDestroy>().SpawnMeatObjects(Runner);
         SetPlayerMeshRpc(false);
-        HudUI.Instance.deathPanel.SetActive(true);
+        HudUI.Instance.OnDeathPanel(causeOfDeath);
     }
     
     public void PlayerRestart()
     {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
-        HudUI.Instance.deathPanel.SetActive(false);
+        HudUI.Instance.OffDeathPanel();
         
         playerManager.levelUp.currentExperience = playerManager.levelUp.startingExperience;
         playerManager.levelUp.experienceUntilUpgrade = playerManager.levelUp.startingExperienceUntilUpgrade;
@@ -59,7 +61,8 @@ public class PlayerHealth : NetworkBehaviour
         playerManager.playerAttack.attackRange = playerManager.levelUp.startingAttackRange;
         playerManager.healthManager.maxHealth = playerManager.levelUp.startingHealth;
 
-        playerManager.healthManager.NetworkedHealth = playerManager.healthManager.maxHealth;
+        playerManager.satietyManager.Restart();
+        playerManager.healthManager.Restart();
         playerManager.thirdPersonController.currentBoostCount = playerManager.thirdPersonController.maxBoostCount;
         
         var playerTransform = playerManager.thirdPersonController.transform;

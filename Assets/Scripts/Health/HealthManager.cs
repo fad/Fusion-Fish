@@ -34,13 +34,16 @@ public class HealthManager : NetworkBehaviour
     private void Start() => bloodParticleSystem = GameObject.Find("BloodParticles").GetComponent<ParticleSystem>();
 
     public override void Spawned()
-    {   
+    {
+        Restart();
+    }
+    public void Restart()
+    {
         NetworkedHealth = maxHealth;
         currentHealth = NetworkedHealth;
         slowDownSpeedTime = maxSlowDownSpeedTime;
         _hasSpawned = true;
     }
-
     public override void Despawned(NetworkRunner runner, bool hasState)
     {
         _hasSpawned = false;
@@ -85,6 +88,7 @@ public class HealthManager : NetworkBehaviour
     {
         NetworkedHealth += amountHealthRestored;
         NetworkedHealth = Mathf.Min(NetworkedHealth, maxHealth);
+        currentHealth = NetworkedHealth;
         OnHealthChanged?.Invoke(NetworkedHealth);
     }
 

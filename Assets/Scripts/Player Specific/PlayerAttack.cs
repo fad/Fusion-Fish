@@ -36,6 +36,7 @@ public class PlayerAttack : NetworkBehaviour
     [SerializeField] private ParticleSystem suckInParticles;
     [SerializeField] private float suckInForce;
     [SerializeField] private float healthIncreaseOnEating = 10;
+    [SerializeField] private int satietyIncreaseOnEating = 10;
     private bool scaleUpAnimationRunning;
     [Tooltip("Increase player scale up and down coroutine will take that time.")]
     [SerializeField] private float timeForScaleAnimation = .15f; 
@@ -141,6 +142,7 @@ public class PlayerAttack : NetworkBehaviour
                 StartCoroutine(ScalePlayerUpOnEating());
 
             playerManager.healthManager.RecoveryHealthRpc(healthIncreaseOnEating);
+            playerManager.satietyManager.RecoverySatiety(satietyIncreaseOnEating);
 
             //decreasing experience value to 0, to make sure not to apply experience twice
             health.experienceValue = 0;
@@ -275,8 +277,11 @@ public class PlayerAttack : NetworkBehaviour
     {
         if (foodObject != null && foodObject.TryGetComponent<HealthManager>(out var health))
         {
-            if(foodObject.TryGetComponent<PlayerHealth>(out var playerHealth) && playerHealth.NetworkedPermanentHealth)
-                return;
+            if (foodObject.TryGetComponent<PlayerHealth>(out var playerHealth) && playerHealth.NetworkedPermanentHealth)
+            {
+                playerHealth.causeOfDeath = "You got eaten";
+                return; 
+            }
             
             if(foodObject.TryGetComponent(out HealthManager healthM) && healthM.notAbleToGetBitten)
                 return;

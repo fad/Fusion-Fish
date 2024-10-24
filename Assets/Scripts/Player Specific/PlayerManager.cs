@@ -10,8 +10,10 @@ public class PlayerManager : NetworkBehaviour
     [HideInInspector] public HealthManager healthManager;
     [HideInInspector] public LevelUp levelUp;
     [HideInInspector] public PlayerHealth playerHealth;
+    [HideInInspector] public SatietyManager satietyManager;
     [SerializeField] public PlayerAttack playerAttack;
     [HideInInspector] public NetworkRunner hostPlayerRunner;
+
 
     private void Awake()
     {
@@ -19,6 +21,7 @@ public class PlayerManager : NetworkBehaviour
         healthManager = GetComponent<HealthManager>();
         levelUp = GetComponent<LevelUp>();
         playerHealth = GetComponent<PlayerHealth>();
+        satietyManager = GetComponent<SatietyManager>();
     }
     
     private IEnumerator Start()

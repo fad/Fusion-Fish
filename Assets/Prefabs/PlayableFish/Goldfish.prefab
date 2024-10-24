@@ -8,6 +8,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -2164658129637747517, guid: 274fa519b44c24e43a28d85dbdddcb30,
+        type: 3}
+      propertyPath: satietyDecreaseRate
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 61442038398986381, guid: 274fa519b44c24e43a28d85dbdddcb30,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -362,7 +367,7 @@ PrefabInstance:
     - target: {fileID: 9144912782510203114, guid: 274fa519b44c24e43a28d85dbdddcb30,
         type: 3}
       propertyPath: NetworkedBehaviours.Array.size
-      value: 15
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 9144912782510203114, guid: 274fa519b44c24e43a28d85dbdddcb30,
         type: 3}
@@ -378,55 +383,60 @@ PrefabInstance:
         type: 3}
       propertyPath: NetworkedBehaviours.Array.data[4]
       value: 
-      objectReference: {fileID: 7587767572798194080}
+      objectReference: {fileID: 5378195262477108515}
     - target: {fileID: 9144912782510203114, guid: 274fa519b44c24e43a28d85dbdddcb30,
         type: 3}
       propertyPath: NetworkedBehaviours.Array.data[5]
       value: 
-      objectReference: {fileID: 5027555766210282134}
+      objectReference: {fileID: 7587767572798194080}
     - target: {fileID: 9144912782510203114, guid: 274fa519b44c24e43a28d85dbdddcb30,
         type: 3}
       propertyPath: NetworkedBehaviours.Array.data[6]
       value: 
-      objectReference: {fileID: 6498748527731075645}
+      objectReference: {fileID: 5027555766210282134}
     - target: {fileID: 9144912782510203114, guid: 274fa519b44c24e43a28d85dbdddcb30,
         type: 3}
       propertyPath: NetworkedBehaviours.Array.data[7]
       value: 
-      objectReference: {fileID: 8231760659674354007}
+      objectReference: {fileID: 6498748527731075645}
     - target: {fileID: 9144912782510203114, guid: 274fa519b44c24e43a28d85dbdddcb30,
         type: 3}
       propertyPath: NetworkedBehaviours.Array.data[8]
       value: 
-      objectReference: {fileID: 5575342837423261205}
+      objectReference: {fileID: 8231760659674354007}
     - target: {fileID: 9144912782510203114, guid: 274fa519b44c24e43a28d85dbdddcb30,
         type: 3}
       propertyPath: NetworkedBehaviours.Array.data[9]
       value: 
-      objectReference: {fileID: 3130876502895262498}
+      objectReference: {fileID: 5575342837423261205}
     - target: {fileID: 9144912782510203114, guid: 274fa519b44c24e43a28d85dbdddcb30,
         type: 3}
       propertyPath: NetworkedBehaviours.Array.data[10]
       value: 
-      objectReference: {fileID: 9010595831608323402}
+      objectReference: {fileID: 3130876502895262498}
     - target: {fileID: 9144912782510203114, guid: 274fa519b44c24e43a28d85dbdddcb30,
         type: 3}
       propertyPath: NetworkedBehaviours.Array.data[11]
       value: 
-      objectReference: {fileID: 3185597399147406448}
+      objectReference: {fileID: 9010595831608323402}
     - target: {fileID: 9144912782510203114, guid: 274fa519b44c24e43a28d85dbdddcb30,
         type: 3}
       propertyPath: NetworkedBehaviours.Array.data[12]
       value: 
-      objectReference: {fileID: 1603302356959681825}
+      objectReference: {fileID: 3185597399147406448}
     - target: {fileID: 9144912782510203114, guid: 274fa519b44c24e43a28d85dbdddcb30,
         type: 3}
       propertyPath: NetworkedBehaviours.Array.data[13]
       value: 
-      objectReference: {fileID: 968743697684689872}
+      objectReference: {fileID: 1603302356959681825}
     - target: {fileID: 9144912782510203114, guid: 274fa519b44c24e43a28d85dbdddcb30,
         type: 3}
       propertyPath: NetworkedBehaviours.Array.data[14]
+      value: 
+      objectReference: {fileID: 968743697684689872}
+    - target: {fileID: 9144912782510203114, guid: 274fa519b44c24e43a28d85dbdddcb30,
+        type: 3}
+      propertyPath: NetworkedBehaviours.Array.data[15]
       value: 
       objectReference: {fileID: 1909236060303310207}
     m_RemovedComponents: []
@@ -504,6 +514,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5c779c12a238e2940a18ed91b9d45af8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5378195262477108515 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -2164658129637747517, guid: 274fa519b44c24e43a28d85dbdddcb30,
+    type: 3}
+  m_PrefabInstance: {fileID: 3122867004875526624}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f307fa59cc8bf544883588763f9f782b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &5575342837423261205 stripped
