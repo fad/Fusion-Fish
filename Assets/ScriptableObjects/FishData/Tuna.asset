@@ -12,6 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c11d033a7185418c9421d8741488f96b, type: 3}
   m_Name: Tuna
   m_EditorClassIdentifier: 
+  maxStamina: 10
+  staminaDecreaseRate: 1
+  staminaRegenRate: 1
+  staminaThreshold: 5
   preyList: []
   predatorList: []
   wanderSpeed: 3.5

@@ -67,5 +67,16 @@ namespace AI.BehaviourTree
                 child.Reset();
             }
         }
+
+        /// <summary>
+        /// Returns the current child of the node that is executed.
+        /// </summary>
+        /// <returns>The name of the node</returns>
+        public virtual string ShowCurrentChild()
+        {
+            if(Children.Count == 0) return Name;
+            
+            return Children[CurrentChild].ShowCurrentChild();
+        }
     }
 }

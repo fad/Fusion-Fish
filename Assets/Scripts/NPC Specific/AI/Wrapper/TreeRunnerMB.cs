@@ -3,6 +3,10 @@ using System.Linq;
 using AI.BehaviourTree;
 using UnityEngine;
 
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
 public class TreeRunnerMB : MonoBehaviour, ITreeRunner
 {
     [Header("Settings")]
@@ -56,6 +60,12 @@ public class TreeRunnerMB : MonoBehaviour, ITreeRunner
 
     public bool DEBUG = false;
 
+    public BehaviourTree Tree => _behaviourTreeToExecute;
+
+    private static Color _wanderingColor = new(120f / 255f, 33f / 255f, 114f / 255f, 1f);
+    private static Color _fleeingColor = new(39f / 255f, 174f / 255f, 96f / 255f, 1f);
+    private static Color _huntingColor = new(231f / 255f, 76f / 255f, 60f / 255f, 1f);
+
     private void Awake()
     {
         if (!fishData) throw new NullReferenceException("FishData is not set in " + gameObject.name);
@@ -72,29 +82,58 @@ public class TreeRunnerMB : MonoBehaviour, ITreeRunner
 
         PrioritySelector actions = new PrioritySelector("Root");
 
-        // Sequence fleeSequence = new("Flee", 100);
-        // Leaf isInDanger = new Leaf("Is in danger?", new Condition(() => _isInDanger));
-        // Selector fastOrNormal = new Selector("Fast or Normal Flee");
-        // Sequence fastFleeSequence = new("Fast Flee");
-        // Leaf staminaOverThreshold = new("Stamina over threshold?",
-        //     new Condition(() => _staminaManager.CurrentStamina > fishData.StaminaThreshold));
-        //
-        //
-        // fastFleeSequence.AddChild(staminaOverThreshold);
-        //
-        // fastOrNormal.AddChild(fastFleeSequence);
-        //
-        // fleeSequence.AddChild(isInDanger);
-        // fleeSequence.AddChild(fastOrNormal);
+        Sequence fleeSequence = new("Flee", 100);
+        Leaf isInDanger = new Leaf("Is in danger?", new Condition(() => _isInDanger));
+        Selector fastOrNormal = new Selector("Fast or Normal Flee");
+        Sequence fastFleeSequence = new("Fast Flee");
+        Leaf hasStamina = new("Has Stamina",
+            new Condition(() => _staminaManager.CurrentStamina > 0));
         
-        Sequence debugSeq = new Sequence("Debug Sequence", 100);
-        Leaf shallDebug = new Leaf("Shall debug", new Condition(() => DEBUG));
-        Leaf debugLeaf = new Leaf("Debug Leaf", new ActionStrategy(() => Debug.Log("Debugging")));
+        Leaf fastFleeing = new Leaf("Fast fleeing",
+            new FleeStrategy.Builder(transform)
+                .WithSpeed(fishData.FastSpeed)
+                .WithRotationSpeed(fishData.RotationSpeed)
+                .WithMaxPitch(fishData.MaxPitch)
+                .WithObstacleAvoidanceLayerMask(obstacleAvoidanceMask)
+                .WithObstacleAvoidanceDistance(fishData.ObstacleAvoidanceDistance)
+                .WithPredatorTransformGetter(() => _target)
+                .WithStaminaManager(_staminaManager)
+                .WithResetThreatAction(ResetFleeBehaviour)
+                .WithSafeDistance(fishData.SafeDistance)
+                .Build()
+        );
+        
+        Leaf normalFleeing = new Leaf("Normal fleeing",
+            new FleeStrategy.Builder(transform)
+                .WithSpeed(fishData.WanderSpeed)
+                .WithRotationSpeed(fishData.RotationSpeed)
+                .WithMaxPitch(fishData.MaxPitch)
+                .WithObstacleAvoidanceLayerMask(obstacleAvoidanceMask)
+                .WithObstacleAvoidanceDistance(fishData.ObstacleAvoidanceDistance)
+                .WithPredatorTransformGetter(() => _target)
+                .WithResetThreatAction(ResetFleeBehaviour)
+                .WithSafeDistance(fishData.SafeDistance)
+                .Build()
+        );
+        
+        
+        fastFleeSequence.AddChild(hasStamina);
+        fastFleeSequence.AddChild(fastFleeing);
+        
+        fastOrNormal.AddChild(fastFleeSequence);
+        fastOrNormal.AddChild(normalFleeing);
+        
+        fleeSequence.AddChild(isInDanger);
+        fleeSequence.AddChild(fastOrNormal);
 
-        debugSeq.AddChild(shallDebug);
-        debugSeq.AddChild(debugLeaf);
-        
-        
+        // Sequence debugSeq = new Sequence("Debug Sequence", 100);
+        // Leaf shallDebug = new Leaf("Shall debug", new Condition(() => DEBUG));
+        // Leaf debugLeaf = new Leaf("Debug Leaf", new ActionStrategy(() => Debug.Log("Debugging")));
+        // //
+        // debugSeq.AddChild(shallDebug);
+        // debugSeq.AddChild(debugLeaf);
+
+
         Leaf wanderAround = new Leaf("Wander Around",
             new WanderStrategy.Builder(transform)
                 .WithSpeed(fishData.WanderSpeed)
@@ -105,7 +144,7 @@ public class TreeRunnerMB : MonoBehaviour, ITreeRunner
                 .WithForbiddenAreaCheck(IsInsideForbiddenArea)
                 .Build());
 
-        actions.AddChild(debugSeq);
+        // actions.AddChild(debugSeq);
         actions.AddChild(wanderAround);
 
         // Sequence huntSequence = new("Hunt");
@@ -121,7 +160,20 @@ public class TreeRunnerMB : MonoBehaviour, ITreeRunner
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = new Color(120f / 255f, 33f / 255f, 114f / 255f, 1f);
+        if (_isHunting)
+        {
+            Gizmos.color = _huntingColor;
+        }
+        else if (_isInDanger)
+        {
+            Gizmos.color = _fleeingColor;
+        }
+        else
+        {
+            Gizmos.color = _wanderingColor;
+        }
+
+
         Gizmos.DrawLine(transform.position, transform.position + transform.forward * 2f);
     }
 
@@ -154,4 +206,38 @@ public class TreeRunnerMB : MonoBehaviour, ITreeRunner
             _isHunting = true;
         }
     }
+
+    private void ResetFleeBehaviour()
+    {
+        _isInDanger = false;
+        _target = null;
+    }
 }
+
+
+#if UNITY_EDITOR
+
+[CustomEditor(typeof(TreeRunnerMB))]
+public class TreeRunnerMB_CustomInspector : Editor
+{
+    public override void OnInspectorGUI()
+    {
+        base.OnInspectorGUI();
+        
+        TreeRunnerMB treeRunner = (TreeRunnerMB) target;
+
+        string currentExecutionOfPrioritySelector = treeRunner.Tree is null ? "None" : treeRunner.Tree.ShowCurrentChild();
+        
+        EditorGUILayout.Space(15f);
+
+        EditorGUILayout.BeginHorizontal();
+        
+        EditorGUILayout.LabelField("Current execution: ");
+        EditorGUILayout.LabelField(currentExecutionOfPrioritySelector);
+        
+        EditorGUILayout.EndHorizontal();
+        
+    }
+}
+
+#endif

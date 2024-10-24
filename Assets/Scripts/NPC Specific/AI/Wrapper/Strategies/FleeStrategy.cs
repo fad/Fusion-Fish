@@ -109,7 +109,7 @@ public class FleeStrategy : MoveStrategy
     
     public override Status Process()
     {
-        if(Vector3.Distance(Entity.position, _predatorTransform.position) > _safeDistance)
+        if(Vector3.Distance(Entity.position, _predatorTransform.position) >= _safeDistance)
         {
             _resetThreatAction();
             return Status.Success;
@@ -158,8 +158,6 @@ public class FleeStrategy : MoveStrategy
     {
         Entity.position += forwardDirection;
 
-        if (_staminaManager is null) return;
-        
-        _staminaManager.Decrease();
+        _staminaManager?.Decrease();
     }
 }
