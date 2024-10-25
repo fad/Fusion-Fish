@@ -97,6 +97,8 @@ public class TreeRunnerMB : MonoBehaviour, ITreeRunner
                 .WithPredatorTransformGetter(() => _target)
                 .WithResetThreatAction(ResetFleeBehaviour)
                 .WithSafeDistance(fishData.SafeDistance)
+                .WithStaminaManager(_staminaManager)
+                .WithForbiddenAreaCheck(IsInsideForbiddenArea)
                 .Build()
         );
         
@@ -122,6 +124,8 @@ public class TreeRunnerMB : MonoBehaviour, ITreeRunner
                 .Build());
 
         // actions.AddChild(debugSeq);
+        
+        actions.AddChild(fleeSequence);
         actions.AddChild(wanderAround);
 
         // Sequence huntSequence = new("Hunt");
@@ -171,15 +175,17 @@ public class TreeRunnerMB : MonoBehaviour, ITreeRunner
         if (targetData.targetBehaviour.FishType == FishType) return; // if the other fish type is the same as this one
 
 
-        _target = targetData.targetTransform;
-
         if (FishType.PredatorList.Contains(targetData.targetBehaviour.FishType) && !_isHunting)
         {
+            _target = targetData.targetTransform;
             _isInDanger = true;
+
+            return;
         }
 
         if (FishType.PreyList.Contains(targetData.targetBehaviour.FishType) && !_isInDanger)
         {
+            _target = targetData.targetTransform;
             _isHunting = true;
         }
     }

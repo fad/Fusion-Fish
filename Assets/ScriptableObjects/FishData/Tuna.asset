@@ -16,10 +16,14 @@ MonoBehaviour:
   staminaDecreaseRate: 1
   staminaRegenRate: 1
   staminaThreshold: 5
+  FOV_Angle: 45
+  FOV_Radius: 10
   preyList: []
-  predatorList: []
+  predatorList:
+  - {fileID: 11400000, guid: fcbc2d0fd7ffd6f428da577421f1a7de, type: 2}
   wanderSpeed: 3.5
+  fastSpeed: 1
   rotationSpeed: 2
   maxPitch: 45
   obstacleAvoidanceDistance: 2
-  safeDistance: 0
+  safeDistance: 50

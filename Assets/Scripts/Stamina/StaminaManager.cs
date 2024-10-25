@@ -1,6 +1,11 @@
 using System.Collections;
 using UnityEngine;
 
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
+
 public class StaminaManager : MonoBehaviour, IStaminaManager
 {
     [Header("Settings")]
@@ -75,3 +80,28 @@ public class StaminaManager : MonoBehaviour, IStaminaManager
         }
     }
 }
+
+#if UNITY_EDITOR
+
+[CustomEditor(typeof(StaminaManager))]
+public class StaminaManager_CustomInspector : Editor
+{
+    public override void OnInspectorGUI()
+    {
+        base.OnInspectorGUI();
+        
+        StaminaManager staminaManager = (StaminaManager) target;
+        
+        EditorGUILayout.Space(15f);
+
+        EditorGUILayout.BeginHorizontal();
+        
+        EditorGUILayout.LabelField("Current stamina: ");
+        EditorGUILayout.LabelField(staminaManager.CurrentStamina.ToString());
+        
+        EditorGUILayout.EndHorizontal();
+        
+    }
+}
+
+#endif

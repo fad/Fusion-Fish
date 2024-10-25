@@ -43,16 +43,19 @@ public class TestBehaviour : MonoBehaviour, ITreeRunner
         if (targetData.targetBehaviour.FishType == FishType) return; // if the other fish type is the same as this one
         
         
-        _target = targetData.targetTransform;
         
         if (FishType.PredatorList.Contains(targetData.targetBehaviour.FishType) && !_isHunting)
         {
             _isInDanger = true;
+            _target = targetData.targetTransform;
+            return;
         }
         
         if (FishType.PreyList.Contains(targetData.targetBehaviour.FishType) && !_isInDanger)
         {
             _isHunting = true;
+            _target = targetData.targetTransform;
+        
         }
     }
 }

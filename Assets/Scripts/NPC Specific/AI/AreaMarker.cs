@@ -1,4 +1,5 @@
 using System.Linq;
+using Fusion;
 using UnityEngine;
 
 public class AreaMarker : MonoBehaviour
@@ -19,10 +20,7 @@ public class AreaMarker : MonoBehaviour
 
     private void ChangeAreaCheck(Collider other, bool isInside)
     {
-        bool hasComponent = other.TryGetComponent(out ITreeRunner treeRunner);
-        bool isPrey = fishData.PreyList.Contains(treeRunner.FishType);
-
-        if (hasComponent && isPrey)
+        if (other.gameObject.TryGetComponent(out ITreeRunner treeRunner) && fishData.PreyList.Contains(treeRunner.FishType))
         {
             // The direction is from the other object to this object.
             Vector3 direction = Vector3.Normalize(transform.position - other.transform.position);

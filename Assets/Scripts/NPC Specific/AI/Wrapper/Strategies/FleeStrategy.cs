@@ -131,6 +131,8 @@ public class FleeStrategy : StaminaMoveStrategy
 
     public override Status Process()
     {
+        GetPredatorTransform();
+        
         if (Vector3.Distance(Entity.position, _predatorTransform.position) >= _safeDistance)
         {
             _resetThreatAction();
@@ -141,7 +143,6 @@ public class FleeStrategy : StaminaMoveStrategy
         AvoidObstacles();
 
         CheckStamina();
-        GetPredatorTransform();
         RotateToOppositeDirection();
 
         Vector3 forwardDirection = Entity.forward * (Speed * Time.deltaTime);
@@ -176,7 +177,7 @@ public class FleeStrategy : StaminaMoveStrategy
     /// <summary>
     /// Constantly moves the entity and decreases the stamina if a StaminaManager is set.
     /// </summary>
-    /// <param name="forwardDirection"></param>
+    /// <param name="forwardDirection">The direction to move in</param>
     private void Move(Vector3 forwardDirection)
     {
         Entity.position += forwardDirection;
