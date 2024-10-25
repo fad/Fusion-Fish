@@ -22,10 +22,10 @@ public abstract class StaminaMoveStrategy : MoveStrategy
         float normalSpeed,
         float fastSpeed)
         : base(
-            entity, 
+            entity,
             rotationSpeed,
-            maxPitch, 
-            obstacleAvoidanceLayerMask, 
+            maxPitch,
+            obstacleAvoidanceLayerMask,
             obstacleAvoidanceDistance,
             forbiddenAreaCheck)
     {
@@ -42,14 +42,29 @@ public abstract class StaminaMoveStrategy : MoveStrategy
     /// </summary>
     protected virtual void CheckStamina()
     {
+        if (UsesStamina)
+        {
+            if (StaminaManager.CurrentStamina > 0)
+            {
+                Speed = FastSpeed;
+            }
+            else
+            {
+                UsesStamina = false;
+                Speed = NormalSpeed;
+            }
+
+            return;
+        }
+
         if (StaminaManager.CurrentStamina > StaminaThreshold)
         {
             UsesStamina = true;
             Speed = FastSpeed;
-            return;
         }
-
-        UsesStamina = false;
-        Speed = NormalSpeed;
+        else
+        {
+            Speed = NormalSpeed;
+        }
     }
 }

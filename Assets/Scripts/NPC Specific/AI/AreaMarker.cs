@@ -1,5 +1,4 @@
 using System.Linq;
-using Fusion;
 using UnityEngine;
 
 public class AreaMarker : MonoBehaviour

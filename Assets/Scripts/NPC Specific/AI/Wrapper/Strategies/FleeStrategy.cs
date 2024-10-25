@@ -129,6 +129,13 @@ public class FleeStrategy : StaminaMoveStrategy
         _safeDistance = builder.SafeDistance;
     }
 
+    /// <summary>
+    /// Flees from the predator by moving in the opposite direction of it. Uses stamina if the current stamina is above the threshold.
+    /// </summary>
+    /// <returns>
+    /// Returns <see cref="Status.Success"/> if the entity is at a safe distance from the predator,
+    /// otherwise returns <see cref="Status.Running"/>.
+    /// </returns>
     public override Status Process()
     {
         GetPredatorTransform();

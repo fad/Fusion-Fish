@@ -47,6 +47,7 @@ public class StaminaManager : MonoBehaviour, IStaminaManager
         
         if (_isRegenerating)
         {
+            _isRegenerating = false;
             StopCoroutine(RegenerateStamina());
         }
         
@@ -73,7 +74,7 @@ public class StaminaManager : MonoBehaviour, IStaminaManager
     {
         _timePassedAfterLastDecrease = 0f;
 
-        while (_currentStamina < fishData.MaxStamina)
+        while (_currentStamina < fishData.MaxStamina && _isRegenerating)
         {
             _currentStamina += fishData.StaminaRegenRate;
             yield return new WaitForSeconds(1f);

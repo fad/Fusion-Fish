@@ -58,8 +58,6 @@ public class TreeRunnerMB : MonoBehaviour, ITreeRunner
 
     public FishData FishType => fishData;
 
-    public bool DEBUG = false;
-
     public BehaviourTree Tree => _behaviourTreeToExecute;
 
     private static Color _wanderingColor = new(120f / 255f, 33f / 255f, 114f / 255f, 1f);
