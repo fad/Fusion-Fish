@@ -21,8 +21,8 @@ MonoBehaviour:
   preyList: []
   predatorList:
   - {fileID: 11400000, guid: fcbc2d0fd7ffd6f428da577421f1a7de, type: 2}
-  wanderSpeed: 3.5
-  fastSpeed: 1
+  wanderSpeed: 3
+  fastSpeed: 5
   rotationSpeed: 2
   maxPitch: 45
   obstacleAvoidanceDistance: 2

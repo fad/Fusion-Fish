@@ -180,17 +180,4 @@ public class FleeStrategy : StaminaMoveStrategy
 
         TargetRotation = Quaternion.LookRotation(oppositeDirection);
     }
-
-    /// <summary>
-    /// Constantly moves the entity and decreases the stamina if a StaminaManager is set.
-    /// </summary>
-    /// <param name="forwardDirection">The direction to move in</param>
-    private void Move(Vector3 forwardDirection)
-    {
-        Entity.position += forwardDirection;
-
-        if (!UsesStamina) return;
-
-        StaminaManager?.Decrease();
-    }
 }

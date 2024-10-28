@@ -34,6 +34,19 @@ public abstract class StaminaMoveStrategy : MoveStrategy
         NormalSpeed = normalSpeed;
         FastSpeed = fastSpeed;
     }
+    
+    /// <summary>
+    /// Constantly moves the entity and decreases the stamina if a StaminaManager is set.
+    /// </summary>
+    /// <param name="forwardDirection">The direction to move in</param>
+    protected virtual void Move(Vector3 forwardDirection)
+    {
+        Entity.position += forwardDirection;
+
+        if (!UsesStamina) return;
+
+        StaminaManager?.Decrease();
+    }
 
     /// <summary>
     /// Checks the current stamina level and adjusts the speed accordingly.
