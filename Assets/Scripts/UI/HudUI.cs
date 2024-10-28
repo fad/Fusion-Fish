@@ -26,6 +26,9 @@ public class HudUI : MonoBehaviour
     [SerializeField] public TextMeshProUGUI neededExperienceText;
     [SerializeField] private Image xpUI;
 
+    [Header("Egg")]
+    [SerializeField] private GameObject pressSpaceText;
+
     public static HudUI Instance;
     
     private void Awake()
@@ -68,6 +71,11 @@ public class HudUI : MonoBehaviour
         neededExperienceText.text = playerManager.levelUp.experienceUntilUpgrade.ToString();
 
         satietyUI.fillAmount = playerManager.satietyManager.GetSatiety() / playerManager.satietyManager.GetMaxSatiety();
+
+        if(playerManager.levelUp.isEgg)
+            pressSpaceText.SetActive(true);
+        else
+            pressSpaceText.SetActive(false);
     }
 
     private void UpdateHealthUI(float value)
