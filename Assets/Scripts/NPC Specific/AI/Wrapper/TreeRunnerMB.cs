@@ -55,14 +55,19 @@ public class TreeRunnerMB : MonoBehaviour, ITreeRunner
     /// The stamina manager to use for this fish.
     /// </summary>
     private IStaminaManager _staminaManager;
+    
+    /// <summary>
+    /// The attack manager to use for this fish.
+    /// </summary>
+    private IAttackManager _attackManager;
 
     public FishData FishType => fishData;
 
     public BehaviourTree Tree => _behaviourTreeToExecute;
 
-    private static Color _wanderingColor = new(120f / 255f, 33f / 255f, 114f / 255f, 1f);
-    private static Color _fleeingColor = new(39f / 255f, 174f / 255f, 96f / 255f, 1f);
-    private static Color _huntingColor = new(231f / 255f, 76f / 255f, 60f / 255f, 1f);
+    private static readonly Color WanderingColor = new(120f / 255f, 33f / 255f, 114f / 255f, 1f);
+    private static readonly Color FleeingColor = new(39f / 255f, 174f / 255f, 96f / 255f, 1f);
+    private static readonly Color HuntingColor = new(231f / 255f, 76f / 255f, 60f / 255f, 1f);
 
     private void Awake()
     {
@@ -72,6 +77,11 @@ public class TreeRunnerMB : MonoBehaviour, ITreeRunner
 
         if (_staminaManager is null)
             throw new NullReferenceException("StaminaManager is not found in " + gameObject.name);
+        
+        TryGetComponent(out _attackManager);
+        
+        if (_attackManager is null)
+            throw new NullReferenceException("AttackManager is not found in " + gameObject.name);
     }
 
     private void Start()
@@ -141,15 +151,15 @@ public class TreeRunnerMB : MonoBehaviour, ITreeRunner
     {
         if (_isHunting)
         {
-            Gizmos.color = _huntingColor;
+            Gizmos.color = HuntingColor;
         }
         else if (_isInDanger)
         {
-            Gizmos.color = _fleeingColor;
+            Gizmos.color = FleeingColor;
         }
         else
         {
-            Gizmos.color = _wanderingColor;
+            Gizmos.color = WanderingColor;
         }
 
 

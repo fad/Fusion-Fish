@@ -12,7 +12,7 @@ public class FishData : ScriptableObject
 
     [SerializeField, Tooltip("The rate at which the stamina will regenerate.")]
     private short staminaRegenRate = 1;
-    
+
     [SerializeField, Tooltip("The threshold for stamina at which the fish will start using it.")]
     private short staminaThreshold = 5;
 
@@ -29,13 +29,16 @@ public class FishData : ScriptableObject
     [SerializeField]
     private FishData[] predatorList;
 
+    [SerializeField, Min(1f), Tooltip("The damage value to use for attacks.")]
+    private float attackValue = 1f;
+
     [Header("Movement Values")]
     [SerializeField, Min(1f), Tooltip("The speed at which the fish will wander around normally.")]
     private float wanderSpeed = 1f;
 
     [SerializeField, Min(1f), Tooltip("The speed at which the fish will flee when having stamina.")]
     private float fastSpeed = 1f;
-    
+
     [SerializeField, Min(1f), Tooltip("The speed at which the fish will rotate.")]
     private float rotationSpeed = 1f;
 
@@ -55,7 +58,7 @@ public class FishData : ScriptableObject
     public short MaxStamina => maxStamina;
     public short StaminaDecreaseRate => staminaDecreaseRate;
     public short StaminaRegenRate => staminaRegenRate;
-    
+
     public short StaminaThreshold => staminaThreshold;
 
     public float FOVAngle => FOV_Angle;
@@ -63,6 +66,7 @@ public class FishData : ScriptableObject
 
     public FishData[] PreyList => preyList;
     public FishData[] PredatorList => predatorList;
+    public float AttackValue => attackValue;
 
     public float WanderSpeed => wanderSpeed;
     public float FastSpeed => fastSpeed;

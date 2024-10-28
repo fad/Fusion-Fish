@@ -6,7 +6,9 @@ public class ChaseStrategy : StaminaMoveStrategy
 {
     #region Fields from outside
 
+    private IAttackManager _attackManager;
     private readonly Func<Transform> _preyTransformGetter;
+    private readonly float _attackValue;
     
     #endregion
     
@@ -25,6 +27,8 @@ public class ChaseStrategy : StaminaMoveStrategy
         public IStaminaManager StaminaManager;
         public short StaminaThreshold;
         public Func<(bool, Vector3)> ForbiddenAreaCheck;
+        public IAttackManager AttackManager;
+        public float AttackValue;
 
         public Builder(Transform entity)
         {
@@ -91,6 +95,18 @@ public class ChaseStrategy : StaminaMoveStrategy
             return this;
         }
         
+        public Builder WithAttackManager(IAttackManager attackManager)
+        {
+            AttackManager = attackManager;
+            return this;
+        }
+        
+        public Builder WithAttackValue(float value)
+        {
+            AttackValue = value;
+            return this;
+        }
+        
         public ChaseStrategy Build()
         {
             return new ChaseStrategy(this);
@@ -110,6 +126,8 @@ public class ChaseStrategy : StaminaMoveStrategy
         builder.FastSpeed)
     {
         _preyTransformGetter = builder.PreyTransformGetter;
+        _attackManager = builder.AttackManager;
+        _attackValue = builder.AttackValue;
     }
 
 
@@ -144,6 +162,9 @@ public class ChaseStrategy : StaminaMoveStrategy
         _preyTransform ??= _preyTransformGetter();
     }
     
+    /// <summary>
+    /// Rotate the fish to face the prey in order to move in its direction.
+    /// </summary>
     private void RotateToPrey()
     {
         Vector3 direction = (_preyTransform.position - Entity.position).normalized;
