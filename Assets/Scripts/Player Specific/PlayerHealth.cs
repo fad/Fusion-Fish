@@ -50,8 +50,7 @@ public class PlayerHealth : NetworkBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         HudUI.Instance.OffDeathPanel();
         
-        playerManager.levelUp.currentExperience = playerManager.levelUp.startingExperience;
-        playerManager.levelUp.experienceUntilUpgrade = playerManager.levelUp.startingExperienceUntilUpgrade;
+        playerManager.levelUp.Restart();
 
         playerManager.playerAttack.suckInDamage = playerManager.levelUp.startingSuckPower;
         playerManager.playerAttack.attackDamage = playerManager.levelUp.startingAttackDamage;

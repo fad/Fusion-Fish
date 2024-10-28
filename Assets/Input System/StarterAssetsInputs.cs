@@ -18,7 +18,8 @@ namespace StarterAssets
 		public bool sprint;
 		public bool attack;
 		public bool suckIn;
-		public bool setActiveStateMultiplayerUI;
+		public bool jump;
+        public bool setActiveStateMultiplayerUI;
 
 		[Header("Movement Settings")]
 		public bool analogMovement;
@@ -47,14 +48,18 @@ namespace StarterAssets
 		public void OnSprint(InputValue value)
 		{
 			SprintInput(value.isPressed);
-		}		
-		
-		public void OnSuckIn(InputValue value)
-		{
-			SuckInInput(value.isPressed);
 		}
-		
-		public void OnSetActivationStateMultiplayerUI(InputValue value)
+
+        public void OnSuckIn(InputValue value)
+        {
+            SuckInInput(value.isPressed);
+        }
+
+        public void OnJump(InputValue value)
+        {
+            OnJumpInput(value.isPressed);
+        }
+        public void OnSetActivationStateMultiplayerUI(InputValue value)
 		{
 			SetActivationStateMultiplayerUIInput(value.isPressed);
 		}
@@ -113,8 +118,14 @@ namespace StarterAssets
 				return;
 			suckIn = newActivationState;
 		}
-
-		private void OnApplicationFocus(bool hasFocus)
+        public void OnJumpInput(bool newActivationState)
+        {
+            if (isPlayerWritingChat)
+                return;
+            jump = newActivationState;
+        }
+        
+        private void OnApplicationFocus(bool hasFocus)
 		{
 			SetCursorState(cursorLocked);
 		}

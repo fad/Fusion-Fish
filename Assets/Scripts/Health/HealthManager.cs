@@ -110,15 +110,7 @@ public class HealthManager : NetworkBehaviour
     {
         if(!_hasSpawned) return;
         
-        if(currentHealth >= NetworkedHealth)
-        {
-            slowDownSpeedTime = maxSlowDownSpeedTime;
-            slowDown = true;
-            currentHealth = NetworkedHealth;
-            OnHealthChanged?.Invoke(currentHealth);
-        }
-        
-        if (TryGetComponent<PlayerHealth>(out var playerHealth) && HasStateAuthority && currentHealth >= NetworkedHealth)
+        if (TryGetComponent<PlayerHealth>(out var playerHealth) && HasStateAuthority && currentHealth > NetworkedHealth)
         {
             if(playerHealth.showVignette)
                 StartCoroutine(playerHealth.ShowDamageVignette());
@@ -127,6 +119,14 @@ public class HealthManager : NetworkBehaviour
         else if(TryGetComponent<NPCHealth>(out var npcHealth))
         {
             npcHealth.NPCCheckDeath();
+        }
+
+        if (currentHealth > NetworkedHealth)
+        {
+            slowDownSpeedTime = maxSlowDownSpeedTime;
+            slowDown = true;
+            currentHealth = NetworkedHealth;
+            OnHealthChanged?.Invoke(currentHealth);
         }
     }
 

@@ -150,7 +150,7 @@ namespace StarterAssets
 
         private void Update()
         {
-            if(playerManager.playerHealth.isDead || !HasStateAuthority)
+            if(playerManager.levelUp.isEgg || playerManager.playerHealth.isDead || !HasStateAuthority)
                 return;
             
             Gravity();
@@ -162,8 +162,11 @@ namespace StarterAssets
         {
             if (playerManager.playerHealth.isDead || !HasStateAuthority || !foundSwimArea || outOfWater)
                 return;
-            
-            Move();        
+
+            if (!playerManager.levelUp.isEgg)
+                Move();
+            else
+                EggMove();
         }
 
         private void LateUpdate()
@@ -237,6 +240,33 @@ namespace StarterAssets
 
             }
         }
+
+        private void EggMove()
+        {
+            if (hasVCam && input.jump)
+            {
+                int impulseForce = 10;
+                rb.AddForce(GetRandomDirection() * impulseForce, ForceMode.Impulse);
+                playerManager.levelUp.currentExperience += 50;
+                playerManager.levelUp.CheckLevelUp();
+                input.jump = false;
+            }
+
+            rb.useGravity = true;
+            rb.drag = 0.1f;
+
+            Vector3 GetRandomDirection()
+            {
+                float randomX = UnityEngine.Random.Range(-1f, 1f);
+                float randomY = UnityEngine.Random.Range(0, 1f);
+                float randomZ = UnityEngine.Random.Range(-1f, 1f);
+
+                Vector3 randomDirection = new Vector3(randomX, randomY, randomZ);
+
+                return randomDirection.normalized;
+            }
+        }
+
 
         private void Move()
         {

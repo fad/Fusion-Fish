@@ -91,6 +91,15 @@ namespace PlayerInputAssetNS
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Jump"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""a9d77e83-9cd0-42e7-bb90-fb1011455c6a"",
+                    ""expectedControlType"": ""Key"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -291,6 +300,17 @@ namespace PlayerInputAssetNS
                     ""action"": ""SuckIn"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a5ad8cc9-06fa-4e8c-af05-62d2f065a5ba"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouse"",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -354,6 +374,7 @@ namespace PlayerInputAssetNS
             m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
             m_Player_SetActivationStateMultiplayerUI = m_Player.FindAction("SetActivationStateMultiplayerUI", throwIfNotFound: true);
             m_Player_SuckIn = m_Player.FindAction("SuckIn", throwIfNotFound: true);
+            m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -422,6 +443,7 @@ namespace PlayerInputAssetNS
         private readonly InputAction m_Player_Attack;
         private readonly InputAction m_Player_SetActivationStateMultiplayerUI;
         private readonly InputAction m_Player_SuckIn;
+        private readonly InputAction m_Player_Jump;
         public struct PlayerActions
         {
             private @StarterAssets m_Wrapper;
@@ -433,6 +455,7 @@ namespace PlayerInputAssetNS
             public InputAction @Attack => m_Wrapper.m_Player_Attack;
             public InputAction @SetActivationStateMultiplayerUI => m_Wrapper.m_Player_SetActivationStateMultiplayerUI;
             public InputAction @SuckIn => m_Wrapper.m_Player_SuckIn;
+            public InputAction @Jump => m_Wrapper.m_Player_Jump;
             public InputActionMap Get() { return m_Wrapper.m_Player; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -463,6 +486,9 @@ namespace PlayerInputAssetNS
                 @SuckIn.started += instance.OnSuckIn;
                 @SuckIn.performed += instance.OnSuckIn;
                 @SuckIn.canceled += instance.OnSuckIn;
+                @Jump.started += instance.OnJump;
+                @Jump.performed += instance.OnJump;
+                @Jump.canceled += instance.OnJump;
             }
 
             private void UnregisterCallbacks(IPlayerActions instance)
@@ -488,6 +514,9 @@ namespace PlayerInputAssetNS
                 @SuckIn.started -= instance.OnSuckIn;
                 @SuckIn.performed -= instance.OnSuckIn;
                 @SuckIn.canceled -= instance.OnSuckIn;
+                @Jump.started -= instance.OnJump;
+                @Jump.performed -= instance.OnJump;
+                @Jump.canceled -= instance.OnJump;
             }
 
             public void RemoveCallbacks(IPlayerActions instance)
@@ -550,6 +579,7 @@ namespace PlayerInputAssetNS
             void OnAttack(InputAction.CallbackContext context);
             void OnSetActivationStateMultiplayerUI(InputAction.CallbackContext context);
             void OnSuckIn(InputAction.CallbackContext context);
+            void OnJump(InputAction.CallbackContext context);
         }
     }
 }

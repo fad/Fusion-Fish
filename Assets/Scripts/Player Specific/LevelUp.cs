@@ -38,6 +38,12 @@ public class LevelUp : NetworkBehaviour
 
     private PlayerManager playerManager;
 
+    [HideInInspector] public bool isEgg;
+    [SerializeField] private GameObject eggModel;
+    [SerializeField] private GameObject fishModel;
+    [SerializeField] private ParticleSystem LevelUpParticleSystem;
+
+
     private void Start()
     {
         playerManager = GetComponent<PlayerManager>();
@@ -52,12 +58,29 @@ public class LevelUp : NetworkBehaviour
         startingSuckPower = playerManager.playerAttack.suckInDamage;
         startingAttackRange = playerManager.playerAttack.attackRange;
         startingHealth = playerManager.healthManager.maxHealth;
-    }
 
+        Restart();
+    }
+    public void Restart()
+    {
+        currentExperience = startingExperience;
+        experienceUntilUpgrade = startingExperienceUntilUpgrade;
+        isEgg = true;
+        eggModel.SetActive(true);
+        fishModel.SetActive(false);
+    }
     public void CheckLevelUp()
     {
         if (currentExperience >= experienceUntilUpgrade)
         {
+            LevelUpParticleSystem.Play();
+            if (isEgg)
+            {
+                isEgg = false;
+                eggModel.SetActive(false);
+                fishModel.SetActive(true);
+            }
+
             playerManager.thirdPersonController.transform.localScale += new Vector3(sizeIncreaseOnLevelUp, sizeIncreaseOnLevelUp, sizeIncreaseOnLevelUp);
             playerManager.thirdPersonController.cameraDistance += cameraDistanceIncreaseOnLevelUp;
             playerManager.thirdPersonController.boostSwimSpeed += defaultSwimSpeedIncreaseOnLevelUp;
