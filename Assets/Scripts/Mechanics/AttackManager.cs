@@ -2,10 +2,25 @@ using UnityEngine;
 
 public class AttackManager : MonoBehaviour, IAttackManager
 {
-        // TODO: Make other fish lose health
-        // TODO: Play animation
-        public void Attack(float damageValue)
+        private ITreeRunner _treeRunnerForThisFish;
+        
+        private void Start()
         {
-                throw new System.NotImplementedException();
+                TryGetComponent(out _treeRunnerForThisFish);
+                
+                if (_treeRunnerForThisFish == null)
+                {
+                        Debug.LogError($"No <color=#00cec9>ITreeRunner</color> component found on object: {gameObject.name}.");
+                }
+        }
+        
+        
+        public void Attack(float damageValue, Transform target)
+        {
+                target.TryGetComponent(out IHealthManager healthManager);
+                healthManager?.Damage(damageValue);
+                
+                target.TryGetComponent(out ITreeRunner treeRunner);
+                treeRunner?.AdjustHuntOrFleeTarget((target, _treeRunnerForThisFish));
         }
 }

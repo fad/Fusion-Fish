@@ -72,7 +72,7 @@ public class TreeRunnerMB : MonoBehaviour, ITreeRunner
 
     private static readonly Color WanderingColor = new(120f / 255f, 33f / 255f, 114f / 255f, 1f);
     private static readonly Color FleeingColor = new(39f / 255f, 174f / 255f, 96f / 255f, 1f);
-    private static readonly Color HuntingColor = new(231f / 255f, 76f / 255f, 60f / 255f, 1f);
+    private static readonly Color HuntingColor = new(231f / 255f, 76f / 255f, 60f / 255f, 1f);   
 
     private void Awake()
     {
@@ -125,6 +125,33 @@ public class TreeRunnerMB : MonoBehaviour, ITreeRunner
         // debugSeq.AddChild(shallDebug);
         // debugSeq.AddChild(debugLeaf);
 
+        Sequence chaseSequence = new("Hunt", 60);
+        Leaf isHunting = new Leaf("Is hunting?", new Condition(() => _isHunting));
+
+        Leaf huntBehavior = new Leaf("Hunting",
+            new ChaseStrategy.Builder(transform)
+                .WithNormalSpeed(fishData.WanderSpeed)
+                .WithFastSpeed(fishData.FastSpeed)
+                .WithStaminaThreshold(fishData.StaminaThreshold)
+                .WithStaminaManager(_staminaManager)
+                .WithRotationSpeed(fishData.RotationSpeed)
+                .WithMaxPitch(fishData.MaxPitch)
+                .WithObstacleAvoidanceLayerMask(obstacleAvoidanceMask)
+                .WithObstacleAvoidanceDistance(fishData.ObstacleAvoidanceDistance)
+                .WithPreyTransformGetter(() => _target)
+                .WithResetBehavior(ResetHuntBehaviour)
+                .WithDistanceToLoseInterest(fishData.DistanceToLoseInterest)
+                .WithTimeToLoseInterest(fishData.TimeToLoseInterest)
+                .WithForbiddenAreaCheck(IsInsideForbiddenArea)
+                .WithAttackManager(_attackManager)
+                .WithAttackRange(fishData.AttackRange)
+                .WithAttackValue(fishData.AttackValue)
+                .Build()
+        );
+        
+        chaseSequence.AddChild(isHunting);
+        chaseSequence.AddChild(huntBehavior);
+
 
         Leaf wanderAround = new Leaf("Wander Around",
             new WanderStrategy.Builder(transform)
@@ -139,6 +166,7 @@ public class TreeRunnerMB : MonoBehaviour, ITreeRunner
         // actions.AddChild(debugSeq);
         
         actions.AddChild(fleeSequence);
+        actions.AddChild(chaseSequence);
         actions.AddChild(wanderAround);
 
         // Sequence huntSequence = new("Hunt");

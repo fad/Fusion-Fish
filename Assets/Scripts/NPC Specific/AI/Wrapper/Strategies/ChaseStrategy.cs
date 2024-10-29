@@ -6,7 +6,7 @@ public class ChaseStrategy : StaminaMoveStrategy
 {
     #region Fields from outside
 
-    private IAttackManager _attackManager;
+    private readonly IAttackManager _attackManager;
     private readonly Func<Transform> _preyTransformGetter;
     private readonly float _attackValue;
     private readonly float _attackRange;
@@ -187,7 +187,7 @@ public class ChaseStrategy : StaminaMoveStrategy
         
         if(Vector3.Distance(Entity.position, _preyTransform.position) <= _attackRange)
         {
-            _attackManager.Attack(_attackValue);
+            _attackManager.Attack(_attackValue, _preyTransform);
         }
         else
         {

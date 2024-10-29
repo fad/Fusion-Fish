@@ -18,9 +18,12 @@ public class PlayerHealth : NetworkBehaviour
     [Networked] public bool NetworkedPermanentHealth { get; set; }
     public string causeOfDeath = "You got eaten";
 
+    private SpawnGibsOnDestroy _gibsSpawner;
+
     private void Start()
     {
         playerManager = GetComponent<PlayerManager>();
+        _gibsSpawner = GetComponent<SpawnGibsOnDestroy>();
         hitVignette = GameObject.Find("DamagePostProcessing").GetComponent<Volume>();
         showVignette = true;
     }
@@ -36,7 +39,7 @@ public class PlayerHealth : NetworkBehaviour
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
         playerManager.healthManager.PlayParticles(Color.red, 30);
-        GetComponent<SpawnGibsOnDestroy>().SpawnMeatObjects(Runner);
+        _gibsSpawner.SpawnMeatObjects(Runner);
         SetPlayerMeshRpc(false);
         HudUI.Instance.OnDeathPanel(causeOfDeath);
     }
