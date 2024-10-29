@@ -31,6 +31,15 @@ public class FishData : ScriptableObject
 
     [SerializeField, Min(1f), Tooltip("The damage value to use for attacks.")]
     private float attackValue = 1f;
+    
+    [SerializeField, Min(1f), Tooltip("The range at which the fish can attack.")]
+    private float attackRange = 1f;
+    
+    [SerializeField, Min(1f), Tooltip("The time to lose interest in a target.")]
+    private float timeToLoseInterest = 5f;
+    
+    [SerializeField, Min(1f), Tooltip("The distance to start losing interest in a target.")]
+    private float _distanceToLoseInterest = 20f;
 
     [Header("Movement Values")]
     [SerializeField, Min(1f), Tooltip("The speed at which the fish will wander around normally.")]
@@ -67,6 +76,9 @@ public class FishData : ScriptableObject
     public FishData[] PreyList => preyList;
     public FishData[] PredatorList => predatorList;
     public float AttackValue => attackValue;
+    public float AttackRange => attackRange;
+    public float TimeToLoseInterest => timeToLoseInterest;
+    public float DistanceToLoseInterest => _distanceToLoseInterest;
 
     public float WanderSpeed => wanderSpeed;
     public float FastSpeed => fastSpeed;

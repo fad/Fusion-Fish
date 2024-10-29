@@ -9,6 +9,11 @@ public class ChaseStrategy : StaminaMoveStrategy
     private IAttackManager _attackManager;
     private readonly Func<Transform> _preyTransformGetter;
     private readonly float _attackValue;
+    private readonly float _attackRange;
+    private readonly float _distanceToLoseInterest;
+    private readonly CountdownTimer _timerToLoseInterest;
+    private readonly Action _resetBehavior;
+    
     
     #endregion
     
@@ -29,6 +34,10 @@ public class ChaseStrategy : StaminaMoveStrategy
         public Func<(bool, Vector3)> ForbiddenAreaCheck;
         public IAttackManager AttackManager;
         public float AttackValue;
+        public float AttackRange;
+        public float TimeToLoseInterest;
+        public float DistanceToLoseInterest;
+        public Action ResetBehavior;
 
         public Builder(Transform entity)
         {
@@ -107,6 +116,30 @@ public class ChaseStrategy : StaminaMoveStrategy
             return this;
         }
         
+        public Builder WithAttackRange(float range)
+        {
+            AttackRange = range;
+            return this;
+        }
+        
+        public Builder WithTimeToLoseInterest(float time)
+        {
+            TimeToLoseInterest = time;
+            return this;
+        }
+        
+        public Builder WithResetBehavior(Action resetBehavior)
+        {
+            ResetBehavior = resetBehavior;
+            return this;
+        }
+        
+        public Builder WithDistanceToLoseInterest(float distance)
+        {
+            DistanceToLoseInterest = distance;
+            return this;
+        }
+        
         public ChaseStrategy Build()
         {
             return new ChaseStrategy(this);
@@ -128,16 +161,23 @@ public class ChaseStrategy : StaminaMoveStrategy
         _preyTransformGetter = builder.PreyTransformGetter;
         _attackManager = builder.AttackManager;
         _attackValue = builder.AttackValue;
+        _attackRange = builder.AttackRange;
+        _timerToLoseInterest = new CountdownTimer(builder.TimeToLoseInterest);
+        _resetBehavior = builder.ResetBehavior;
+        _distanceToLoseInterest = builder.DistanceToLoseInterest;
     }
 
 
     public override Status Process()
     {
         GetPreyTransform();
+        HandleTimerLogic();
         
-        // TODO: status success condition
-        // Success: Prey is caught
-        // Failure: Prey is lost after X seconds
+        if(_timerToLoseInterest.IsFinished)
+        {
+            _resetBehavior();
+            return Status.Failure;
+        }
         
         AvoidForbiddenArea();
         AvoidObstacles();
@@ -145,9 +185,16 @@ public class ChaseStrategy : StaminaMoveStrategy
         CheckStamina();
         RotateToPrey();
         
-        Vector3 forwardDirection = Entity.forward * (Speed * Time.deltaTime);
-
-        Move(forwardDirection);
+        if(Vector3.Distance(Entity.position, _preyTransform.position) <= _attackRange)
+        {
+            _attackManager.Attack(_attackValue);
+        }
+        else
+        {
+            Vector3 forwardDirection = Entity.forward * (Speed * Time.deltaTime);
+            Move(forwardDirection);    
+        }
+        
 
         Entity.rotation = Quaternion.Slerp(Entity.rotation, TargetRotation, RotationSpeed * Time.deltaTime);
         
@@ -170,5 +217,21 @@ public class ChaseStrategy : StaminaMoveStrategy
         Vector3 direction = (_preyTransform.position - Entity.position).normalized;
         
         TargetRotation = Quaternion.LookRotation(direction);
+    }
+
+    /// <summary>
+    /// Starts the timer to lose interest in the prey if the prey is too far away. Will stop it again
+    /// if the prey is close enough again.
+    /// </summary>
+    private void HandleTimerLogic()
+    {
+        if(Vector3.Distance(Entity.position, _preyTransform.position) >= _distanceToLoseInterest)
+        {
+            _timerToLoseInterest.Start();
+        }
+        else
+        {
+            _timerToLoseInterest.Stop();
+        }
     }
 }

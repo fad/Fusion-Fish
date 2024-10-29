@@ -60,6 +60,11 @@ public class TreeRunnerMB : MonoBehaviour, ITreeRunner
     /// The attack manager to use for this fish.
     /// </summary>
     private IAttackManager _attackManager;
+    
+    /// <summary>
+    /// The target's health manager to subscribe and unsubscribe from.
+    /// </summary>
+    private IHealthManager _targetHealthManager;
 
     public FishData FishType => fishData;
 
@@ -194,8 +199,17 @@ public class TreeRunnerMB : MonoBehaviour, ITreeRunner
         if (FishType.PreyList.Contains(targetData.targetBehaviour.FishType) && !_isInDanger)
         {
             _target = targetData.targetTransform;
+            _target.TryGetComponent(out _targetHealthManager);
+            _targetHealthManager.OnDeath += ResetHuntBehaviour;
             _isHunting = true;
         }
+    }
+
+    private void ResetHuntBehaviour()
+    {
+        _isHunting = false;
+        _targetHealthManager.OnDeath -= ResetHuntBehaviour;
+        _target = null;
     }
 
     private void ResetFleeBehaviour()

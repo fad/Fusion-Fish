@@ -4,7 +4,7 @@ using Fusion;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class HealthManager : NetworkBehaviour
+public class HealthManager : NetworkBehaviour, IHealthManager
 {
     [Header("Health")]
     public float maxHealth;
@@ -15,19 +15,20 @@ public class HealthManager : NetworkBehaviour
 
     [Networked] [OnChangedRender(nameof(CheckDeath))] public float NetworkedHealth { get; set; }
     private ParticleSystem bloodParticleSystem;
-    [HideInInspector] public bool spawnGibs;
+    [HideInInspector] public bool spawnGibs; // TODO: Break this up in own class
     [HideInInspector] public float currentHealth;
     public bool notAbleToGetBitten;
 
-    [Header("Experience")] // TODO: Refactor in the future
+    [Header("Experience")] // TODO: Break this up in own class
     public int experienceValue = 100;
     
-    [Header("SlowDown")] // TODO: Refactor in the future
+    [Header("SlowDown")] // TODO: Break this up in own class
     [SerializeField] public float maxSlowDownSpeedTime = 5;
     [HideInInspector] public float slowDownSpeedTime;
     [HideInInspector] public bool slowDown;
     
     public event Action<float> OnHealthChanged;
+    public event Action OnDeath;
 
     private bool _hasSpawned = false;
 
@@ -82,6 +83,19 @@ public class HealthManager : NetworkBehaviour
         regenTimer = TickTimer.CreateFromSeconds(Runner, timeToStartRecoveryHealth);
         _regeneration = true;
     }
+    
+    public void Damage(float amount)
+    {
+        if (notAbleToGetBitten) return;
+        
+        ReceiveDamageRpc(amount, true);
+        CheckDeath();
+    }
+    
+    public void Heal(float amount)
+    {
+        RecoveryHealthRpc(amount);
+    }
 
     [Rpc(RpcSources.All, RpcTargets.All)]
     public void RecoveryHealthRpc(float amountHealthRestored)
@@ -114,11 +128,21 @@ public class HealthManager : NetworkBehaviour
         {
             if(playerHealth.showVignette)
                 StartCoroutine(playerHealth.ShowDamageVignette());
-            playerHealth.PlayerCheckDeath();
+
+            if (NetworkedHealth <= 0)
+            {
+                playerHealth.Die();
+                OnDeath?.Invoke();
+            }
         }
         else if(TryGetComponent<NPCHealth>(out var npcHealth))
         {
-            npcHealth.NPCCheckDeath();
+            if (NetworkedHealth <= 0)
+            {
+                npcHealth.Die();
+                OnDeath?.Invoke();
+            }
+            
         }
 
         if (currentHealth > NetworkedHealth)
