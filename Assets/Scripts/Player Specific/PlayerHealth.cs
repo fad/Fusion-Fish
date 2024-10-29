@@ -25,12 +25,9 @@ public class PlayerHealth : NetworkBehaviour
         showVignette = true;
     }
 
-    public void PlayerCheckDeath()
+    public void Die()
     {
-        if (playerManager.healthManager.NetworkedHealth <= 0)
-        {
-            PlayerDeath();
-        }
+        PlayerDeath();
     }
     
     private void PlayerDeath()
