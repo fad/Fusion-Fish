@@ -16,7 +16,7 @@ public class ProgressBarPro : MonoBehaviour {
     [Tooltip("Smoothes out the animation of the bar.")]
     [SerializeField] bool animateBar = true;
     [SerializeField] AnimationType animationType = AnimationType.FixedTimeForChange;
-    [SerializeField] float animTime = .25f;
+    public float animTime = .25f;
     
     [Space(10)]
     [SerializeField] ProgressBarProView[] views;

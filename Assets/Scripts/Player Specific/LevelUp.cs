@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class LevelUp : NetworkBehaviour
 {
+    [HideInInspector] public int currentLevel { get; private set; }
+
     [Header("Starting Values")]
     [HideInInspector] public int startingExperienceUntilUpgrade;
     [HideInInspector] public int startingExperience;
@@ -65,6 +67,7 @@ public class LevelUp : NetworkBehaviour
     {
         currentExperience = startingExperience;
         experienceUntilUpgrade = startingExperienceUntilUpgrade;
+        currentLevel = 0;
         isEgg = true;
         eggModel.SetActive(true);
         fishModel.SetActive(false);
@@ -92,6 +95,7 @@ public class LevelUp : NetworkBehaviour
             experienceUntilUpgrade += experienceIncreaseOnLevelUp;
             currentExperience = 0;
             AudioManager.Instance.Play("levelUp");
+            currentLevel++;
             StartCoroutine(ShowLevelUpText());
         }
     }

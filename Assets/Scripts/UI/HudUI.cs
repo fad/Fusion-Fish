@@ -9,22 +9,24 @@ public class HudUI : MonoBehaviour
     [HideInInspector] public PlayerManager playerManager;
     
     [Header("Boost")]
-    [SerializeField] private Image boostUI;
+    [SerializeField] private ProgressBarPro boostUI;
 
     [Header("Health")]
-    [SerializeField] private Image healthUI; 
+    [SerializeField] private ProgressBarPro healthUI; 
     
     [Header("Satiety")]
-    [SerializeField] private Image satietyUI;
+    [SerializeField] private ProgressBarPro satietyUI;
 
     [Header("Death")]
     [SerializeField] private GameObject deathPanel;
     [SerializeField] private TextMeshProUGUI causeOfDeathText;
 
     [Header("XP")]
-    [SerializeField] public TextMeshProUGUI experienceText;
-    [SerializeField] public TextMeshProUGUI neededExperienceText;
-    [SerializeField] private Image xpUI;
+  // [SerializeField] public Text experienceText;
+  // [SerializeField] public Text neededExperienceText;
+    [SerializeField] private ProgressBarPro xpUI;
+    [SerializeField] public TextMeshProUGUI levelText;
+
 
     [Header("Egg")]
     [SerializeField] private GameObject pressSpaceText;
@@ -62,17 +64,27 @@ public class HudUI : MonoBehaviour
         if (!playerManager) 
             return;
 
-        boostUI.fillAmount = playerManager.thirdPersonController.currentBoostCount / playerManager.thirdPersonController.maxBoostCount;
-        
-        xpUI.fillAmount = (float)playerManager.levelUp.currentExperience / playerManager.levelUp.experienceUntilUpgrade;
+        boostUI.Value = playerManager.thirdPersonController.currentBoostCount / playerManager.thirdPersonController.maxBoostCount;
 
-        experienceText.text = playerManager.levelUp.currentExperience.ToString();
-        
-        neededExperienceText.text = playerManager.levelUp.experienceUntilUpgrade.ToString();
+        float XpPercent = (float)playerManager.levelUp.currentExperience / playerManager.levelUp.experienceUntilUpgrade;
+        if (xpUI.Value > XpPercent)
+        {
+            xpUI.animTime = 100;
+        }
+        else if(xpUI.Value < XpPercent)
+        {
+            xpUI.animTime = 0.8f;
+        }
+        xpUI.Value = XpPercent;
 
-        satietyUI.fillAmount = playerManager.satietyManager.GetSatiety() / playerManager.satietyManager.GetMaxSatiety();
+        // experienceText.text = playerManager.levelUp.currentExperience.ToString();
+        // neededExperienceText.text = playerManager.levelUp.experienceUntilUpgrade.ToString();
 
-        if(playerManager.levelUp.isEgg)
+        satietyUI.Value = playerManager.satietyManager.GetSatiety() / playerManager.satietyManager.GetMaxSatiety();
+
+        levelText.text = "Lvl: "+playerManager.levelUp.currentLevel.ToString();
+
+        if (playerManager.levelUp.isEgg)
             pressSpaceText.SetActive(true);
         else
             pressSpaceText.SetActive(false);
@@ -80,7 +92,7 @@ public class HudUI : MonoBehaviour
 
     private void UpdateHealthUI(float value)
     {
-        healthUI.fillAmount = value / playerManager.healthManager.maxHealth;
+        healthUI.Value = value / playerManager.healthManager.maxHealth;
     }
 
     //A button to restart when died
