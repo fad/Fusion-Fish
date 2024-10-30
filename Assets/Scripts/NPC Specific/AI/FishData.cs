@@ -5,6 +5,9 @@ public class FishData : ScriptableObject
 {
     [Header("General Values")]
     [SerializeField, Tooltip("The maximum stamina of the entity.")]
+    private float maxHealth = 10f;
+
+    [SerializeField, Tooltip("The maximum stamina of the entity.")]
     private short maxStamina = 10;
 
     [SerializeField, Tooltip("The rate at which the stamina will decrease.")]
@@ -31,13 +34,13 @@ public class FishData : ScriptableObject
 
     [SerializeField, Min(1f), Tooltip("The damage value to use for attacks.")]
     private float attackValue = 1f;
-    
+
     [SerializeField, Min(1f), Tooltip("The range at which the fish can attack.")]
     private float attackRange = 1f;
-    
+
     [SerializeField, Min(1f), Tooltip("The time to lose interest in a target.")]
     private float timeToLoseInterest = 5f;
-    
+
     [SerializeField, Min(1f), Tooltip("The distance to start losing interest in a target.")]
     private float _distanceToLoseInterest = 20f;
 
@@ -64,6 +67,7 @@ public class FishData : ScriptableObject
     private float safeDistance = 50f;
 
 
+    public float MaxHealth => maxHealth;
     public short MaxStamina => maxStamina;
     public short StaminaDecreaseRate => staminaDecreaseRate;
     public short StaminaRegenRate => staminaRegenRate;

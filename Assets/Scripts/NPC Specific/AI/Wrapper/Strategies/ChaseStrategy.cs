@@ -176,6 +176,7 @@ public class ChaseStrategy : StaminaMoveStrategy
         if(_timerToLoseInterest.IsFinished)
         {
             _resetBehavior();
+            _timerToLoseInterest.Reset();
             return Status.Failure;
         }
         
@@ -185,6 +186,7 @@ public class ChaseStrategy : StaminaMoveStrategy
         CheckStamina();
         RotateToPrey();
         
+        // BUG: Inefficient since fish will not attack due to not being "close enough"
         if(Vector3.Distance(Entity.position, _preyTransform.position) <= _attackRange)
         {
             _attackManager.Attack(_attackValue, _preyTransform);
@@ -225,7 +227,7 @@ public class ChaseStrategy : StaminaMoveStrategy
     /// </summary>
     private void HandleTimerLogic()
     {
-        if(Vector3.Distance(Entity.position, _preyTransform.position) >= _distanceToLoseInterest)
+        if(Vector3.Distance(Entity.position, _preyTransform.position) >= _distanceToLoseInterest && !_timerToLoseInterest.IsRunning)
         {
             _timerToLoseInterest.Start();
         }

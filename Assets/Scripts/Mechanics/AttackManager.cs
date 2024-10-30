@@ -21,6 +21,6 @@ public class AttackManager : MonoBehaviour, IAttackManager
                 healthManager?.Damage(damageValue);
                 
                 target.TryGetComponent(out ITreeRunner treeRunner);
-                treeRunner?.AdjustHuntOrFleeTarget((target, _treeRunnerForThisFish));
+                treeRunner?.AdjustHuntOrFleeTarget((transform, _treeRunnerForThisFish));
         }
 }

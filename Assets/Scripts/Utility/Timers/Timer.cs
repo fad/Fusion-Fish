@@ -15,6 +15,7 @@ public abstract class Timer : IDisposable {
 
     protected Timer(float value) {
         initialTime = value;
+        CurrentTime = initialTime;
     }
 
     /// <summary>

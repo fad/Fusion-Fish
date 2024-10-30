@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c11d033a7185418c9421d8741488f96b, type: 3}
-  m_Name: Tuna
+  m_Name: StingRay
   m_EditorClassIdentifier: 
   maxHealth: 10
   maxStamina: 10
@@ -19,17 +19,16 @@ MonoBehaviour:
   staminaThreshold: 5
   FOV_Angle: 45
   FOV_Radius: 10
-  preyList:
-  - {fileID: 11400000, guid: 31b8be08e598e1b49b7c80a111a9e618, type: 2}
+  preyList: []
   predatorList:
-  - {fileID: 11400000, guid: fcbc2d0fd7ffd6f428da577421f1a7de, type: 2}
+  - {fileID: 11400000, guid: 7a73207235f489a4fa6b36a0c602a74a, type: 2}
   attackValue: 1
   attackRange: 1
-  timeToLoseInterest: 20
+  timeToLoseInterest: 5
   _distanceToLoseInterest: 20
-  wanderSpeed: 3
-  fastSpeed: 5
-  rotationSpeed: 2
+  wanderSpeed: 4
+  fastSpeed: 7
+  rotationSpeed: 1
   maxPitch: 45
-  obstacleAvoidanceDistance: 2
+  obstacleAvoidanceDistance: 1
   safeDistance: 50

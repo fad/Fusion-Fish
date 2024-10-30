@@ -228,7 +228,12 @@ public class TreeRunnerMB : MonoBehaviour, ITreeRunner
         {
             _target = targetData.targetTransform;
             _target.TryGetComponent(out _targetHealthManager);
-            _targetHealthManager.OnDeath += ResetHuntBehaviour;
+
+            if (_targetHealthManager is not null)
+            {
+                _targetHealthManager.OnDeath += ResetHuntBehaviour;
+            }
+            
             _isHunting = true;
         }
     }
