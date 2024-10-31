@@ -76,17 +76,17 @@ public class TreeRunnerMB : MonoBehaviour, ITreeRunner
 
     private void Awake()
     {
-        if (!fishData) throw new NullReferenceException("FishData is not set in " + gameObject.name);
+        if (!fishData) throw new NullReferenceException("<color=#9b59b6>FishData</color> is not set in " + gameObject.name);
 
         TryGetComponent(out _staminaManager);
 
         if (_staminaManager is null)
-            throw new NullReferenceException("StaminaManager is not found in " + gameObject.name);
+            throw new NullReferenceException("<color=#2980b9>StaminaManager</color> is not found in " + gameObject.name);
         
         TryGetComponent(out _attackManager);
         
         if (_attackManager is null)
-            throw new NullReferenceException("AttackManager is not found in " + gameObject.name);
+            throw new NullReferenceException("<color=#c0392b>AttackManager</color> is not found in " + gameObject.name);
     }
 
     private void Start()

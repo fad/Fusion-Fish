@@ -38,6 +38,9 @@ public class FishData : ScriptableObject
     [SerializeField, Min(2f), Tooltip("The range at which the fish can attack.")]
     private float attackRange = 2f;
 
+    [SerializeField, Tooltip("The cooldown for an attack in seconds.")]
+    private float attackCooldown = 1f;
+
     [SerializeField, Min(1f), Tooltip("The time to lose interest in a target.")]
     private float timeToLoseInterest = 5f;
 
@@ -81,6 +84,7 @@ public class FishData : ScriptableObject
     public FishData[] PredatorList => predatorList;
     public float AttackValue => attackValue;
     public float AttackRange => attackRange;
+    public float AttackCooldown => attackCooldown;
     public float TimeToLoseInterest => timeToLoseInterest;
     public float DistanceToLoseInterest => _distanceToLoseInterest;
 

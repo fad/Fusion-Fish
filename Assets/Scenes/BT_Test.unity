@@ -4688,6 +4688,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 7223436510855899414, guid: 73d25b60be17e494ab4e66e7e30d50f4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -11922,12 +11927,12 @@ PrefabInstance:
     - target: {fileID: 1909962787590049678, guid: 9ec55b83538b2ca42af9dccd1db764b8,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3232129680447634845, guid: 9ec55b83538b2ca42af9dccd1db764b8,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.94
+      value: -8.33
       objectReference: {fileID: 0}
     - target: {fileID: 3232129680447634845, guid: 9ec55b83538b2ca42af9dccd1db764b8,
         type: 3}
@@ -11937,12 +11942,12 @@ PrefabInstance:
     - target: {fileID: 3232129680447634845, guid: 9ec55b83538b2ca42af9dccd1db764b8,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 49.05
+      value: 47.52
       objectReference: {fileID: 0}
     - target: {fileID: 3232129680447634845, guid: 9ec55b83538b2ca42af9dccd1db764b8,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.71959513
+      value: -0.7135443
       objectReference: {fileID: 0}
     - target: {fileID: 3232129680447634845, guid: 9ec55b83538b2ca42af9dccd1db764b8,
         type: 3}
@@ -11952,7 +11957,7 @@ PrefabInstance:
     - target: {fileID: 3232129680447634845, guid: 9ec55b83538b2ca42af9dccd1db764b8,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.6943939
+      value: -0.7006101
       objectReference: {fileID: 0}
     - target: {fileID: 3232129680447634845, guid: 9ec55b83538b2ca42af9dccd1db764b8,
         type: 3}
@@ -11967,7 +11972,7 @@ PrefabInstance:
     - target: {fileID: 3232129680447634845, guid: 9ec55b83538b2ca42af9dccd1db764b8,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -87.958
+      value: -271.048
       objectReference: {fileID: 0}
     - target: {fileID: 3232129680447634845, guid: 9ec55b83538b2ca42af9dccd1db764b8,
         type: 3}
@@ -11998,6 +12003,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1561301781}
+    - targetCorrespondingSourceObject: {fileID: 1909962787590049678, guid: 9ec55b83538b2ca42af9dccd1db764b8,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1561301784}
   m_SourcePrefab: {fileID: 100100000, guid: 9ec55b83538b2ca42af9dccd1db764b8, type: 3}
 --- !u!1 &1561301774 stripped
 GameObject:
@@ -12054,6 +12063,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5f071b7a0434cedad79e8b0e01fc20c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fishData: {fileID: 0}
 --- !u!114 &1561301781
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12067,6 +12077,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fishData: {fileID: 11400000, guid: 31b8be08e598e1b49b7c80a111a9e618, type: 2}
+--- !u!54 &1561301784
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1561301774}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 1
 --- !u!1 &1566479268
 GameObject:
   m_ObjectHideFlags: 0
@@ -12508,7 +12545,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1578753623
 Transform:
   m_ObjectHideFlags: 0
@@ -15046,6 +15083,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5f071b7a0434cedad79e8b0e01fc20c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fishData: {fileID: 11400000, guid: 7a73207235f489a4fa6b36a0c602a74a, type: 2}
 --- !u!114 &1914192459
 MonoBehaviour:
   m_ObjectHideFlags: 0

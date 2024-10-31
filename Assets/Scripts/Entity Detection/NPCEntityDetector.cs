@@ -35,12 +35,11 @@ public class NPCEntityDetector : EntityDetector
         transform.parent.TryGetComponent(out _attachedAIBehaviour);
 
         if (_attachedAIBehaviour is null)
-            throw new NullReferenceException("No AI behaviour found on " + gameObject.name);
+            throw new NullReferenceException("No <color=#16a085>AI behaviour (ITreeRunner)</color> found on " + gameObject.name);
     }
 
     private void Update()
     {
-        // BUG: Missing reference exception if prey dies
         (Transform entity, ITreeRunner entityTreeRunner) npcInFOV =
             _otherNPCs.FirstOrDefault(npc => IsInFOVAndInRange(npc.entity));
 
