@@ -4133,7 +4133,7 @@ PrefabInstance:
     - target: {fileID: 114810264032862352, guid: e041bff3e4559ea4abf208ccf82330d9,
         type: 3}
       propertyPath: animateBar
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224067025959442890, guid: e041bff3e4559ea4abf208ccf82330d9,
         type: 3}

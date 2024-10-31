@@ -46,22 +46,22 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 69547039a7e094f4d993ba124c20614b,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.16540344
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 69547039a7e094f4d993ba124c20614b,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.2388742
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 69547039a7e094f4d993ba124c20614b,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.95498675
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 69547039a7e094f4d993ba124c20614b,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.05984276
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 69547039a7e094f4d993ba124c20614b,
         type: 3}
@@ -177,7 +177,7 @@ MonoBehaviour:
   gibPrefab: {fileID: 3993952820748017500, guid: b9dad96a76a34d346ae8989e61852300,
     type: 3}
   gibSpawnCount: 1
-  gibsExperienceValue: 50
+  gibsExperienceValue: 10
   spawnGibs: 0
   isShrimp: 0
   isStarFish: 1
@@ -217,11 +217,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 10
+  recoveryHealthInSecond: 10
+  timeToStartRecoveryHealth: 3
   _NetworkedHealth: 10
   spawnGibs: 0
   currentHealth: 0
   notAbleToGetBitten: 0
-  experienceValue: 50
+  experienceValue: 10
   maxSlowDownSpeedTime: 5
   slowDownSpeedTime: 0
   slowDown: 0

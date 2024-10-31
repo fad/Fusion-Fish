@@ -82,6 +82,7 @@ public class LevelUp : NetworkBehaviour
                 isEgg = false;
                 eggModel.SetActive(false);
                 fishModel.SetActive(true);
+                playerManager.transform.position = playerManager.transform.position + new Vector3(0,0.2f,0);
             }
 
             playerManager.thirdPersonController.transform.localScale += new Vector3(sizeIncreaseOnLevelUp, sizeIncreaseOnLevelUp, sizeIncreaseOnLevelUp);

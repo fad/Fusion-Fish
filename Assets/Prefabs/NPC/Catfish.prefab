@@ -348,7 +348,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0.99836683, z: 0, w: 0.057128582}
   m_LocalPosition: {x: -142.14107, y: -3.0384502, z: 182.56}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5676896046337204766}
@@ -388,10 +388,10 @@ MonoBehaviour:
   attacksAnything: 1
   timeBetweenAttacksMax: 1.5
   timeBetweenAttacksMin: 0.8
-  attackDamage: 10
+  attackDamage: 30
   detectRange: 6
   detectionAngle: 45
-  attackRange: 1
+  attackRange: 1.6
   maxTimeUntilFlee: 7
   fleeTime: 3
   minWaitTime: 4
@@ -410,8 +410,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f8880170c48b1f44aaef687b67ca3f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 40
-  _NetworkedHealth: 40
+  maxHealth: 250
+  recoveryHealthInSecond: 10
+  timeToStartRecoveryHealth: 3
+  _NetworkedHealth: 250
   spawnGibs: 0
   currentHealth: 0
   notAbleToGetBitten: 0
@@ -433,8 +435,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gibPrefab: {fileID: 3993952820748017500, guid: b9dad96a76a34d346ae8989e61852300,
     type: 3}
-  gibSpawnCount: 3
-  gibsExperienceValue: 100
+  gibSpawnCount: 4
+  gibsExperienceValue: 300
   spawnGibs: 0
   isShrimp: 0
   isStarFish: 0
