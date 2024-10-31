@@ -40,6 +40,7 @@ public class NPCEntityDetector : EntityDetector
 
     private void Update()
     {
+        // BUG: Missing reference exception if prey dies
         (Transform entity, ITreeRunner entityTreeRunner) npcInFOV =
             _otherNPCs.FirstOrDefault(npc => IsInFOVAndInRange(npc.entity));
 
@@ -63,14 +64,20 @@ public class NPCEntityDetector : EntityDetector
         bool hasTreeRunner = entity.TryGetComponent(out ITreeRunner behaviour);
 
         if (!hasTreeRunner) return;
-
+        entity.TryGetComponent(out IHealthManager healthManager);
+        
+        Action onDeathRemoval = () => RemoveFromSetOnDeath(entity.transform, behaviour);
+        
         if (shouldBeRemoved)
         {
             _otherNPCs.Remove((entity: entity.transform, entityTreeRunner: behaviour));
+            
+            healthManager.OnDeath -= onDeathRemoval;
             return;
         }
 
         _otherNPCs.Add((entity: entity.transform, entityTreeRunner: behaviour));
+        healthManager.OnDeath += onDeathRemoval;
     }
 
     private bool IsInFOVAndInRange(Transform target)
@@ -80,5 +87,10 @@ public class NPCEntityDetector : EntityDetector
         float distanceToTarget = Vector3.Distance(transform.parent.position, target.position);
 
         return angleToTarget < fishData.FOVAngle && distanceToTarget <= fishData.FOVRadius;
+    }
+
+    private void RemoveFromSetOnDeath(Transform entity, ITreeRunner runner)
+    {
+        _otherNPCs.Remove((entity: entity.transform, entityTreeRunner: runner));
     }
 }

@@ -19,6 +19,8 @@ public class AttackManager : MonoBehaviour, IAttackManager
         {
                 target.TryGetComponent(out IHealthManager healthManager);
                 healthManager?.Damage(damageValue);
+
+                if (healthManager is { Died: true }) return;
                 
                 target.TryGetComponent(out ITreeRunner treeRunner);
                 treeRunner?.AdjustHuntOrFleeTarget((transform, _treeRunnerForThisFish));

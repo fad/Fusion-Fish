@@ -118,13 +118,6 @@ public class TreeRunnerMB : MonoBehaviour, ITreeRunner
         fleeSequence.AddChild(isInDanger);
         fleeSequence.AddChild(fleeing);
 
-        // Sequence debugSeq = new Sequence("Debug Sequence", 100);
-        // Leaf shallDebug = new Leaf("Shall debug", new Condition(() => DEBUG));
-        // Leaf debugLeaf = new Leaf("Debug Leaf", new ActionStrategy(() => Debug.Log("Debugging")));
-        // //
-        // debugSeq.AddChild(shallDebug);
-        // debugSeq.AddChild(debugLeaf);
-
         Sequence chaseSequence = new("Hunt", 60);
         Leaf isHunting = new Leaf("Is hunting?", new Condition(() => _isHunting));
 
@@ -146,6 +139,7 @@ public class TreeRunnerMB : MonoBehaviour, ITreeRunner
                 .WithAttackManager(_attackManager)
                 .WithAttackRange(fishData.AttackRange)
                 .WithAttackValue(fishData.AttackValue)
+                .WithDidPreyDie(() => _targetHealthManager.Died)
                 .Build()
         );
         
@@ -163,14 +157,10 @@ public class TreeRunnerMB : MonoBehaviour, ITreeRunner
                 .WithForbiddenAreaCheck(IsInsideForbiddenArea)
                 .Build());
 
-        // actions.AddChild(debugSeq);
-        
+      
         actions.AddChild(fleeSequence);
         actions.AddChild(chaseSequence);
         actions.AddChild(wanderAround);
-
-        // Sequence huntSequence = new("Hunt");
-
 
         _behaviourTreeToExecute.AddChild(actions);
     }
@@ -228,11 +218,6 @@ public class TreeRunnerMB : MonoBehaviour, ITreeRunner
         {
             _target = targetData.targetTransform;
             _target.TryGetComponent(out _targetHealthManager);
-
-            if (_targetHealthManager is not null)
-            {
-                _targetHealthManager.OnDeath += ResetHuntBehaviour;
-            }
             
             _isHunting = true;
         }
@@ -241,8 +226,8 @@ public class TreeRunnerMB : MonoBehaviour, ITreeRunner
     private void ResetHuntBehaviour()
     {
         _isHunting = false;
-        _targetHealthManager.OnDeath -= ResetHuntBehaviour;
         _target = null;
+        _targetHealthManager = null;
     }
 
     private void ResetFleeBehaviour()

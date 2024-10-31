@@ -31,6 +31,9 @@ public class HealthManager : NetworkBehaviour, IHealthManager
     public event Action OnDeath;
 
     private bool _hasSpawned = false;
+    private bool _died = false;
+    
+    public bool Died => _died;
 
     private void Start() => bloodParticleSystem = GameObject.Find("BloodParticles").GetComponent<ParticleSystem>();
 

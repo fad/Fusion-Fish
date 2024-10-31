@@ -11,20 +11,17 @@ public class HealthManagerMB : MonoBehaviour, IHealthManager
     private FishData fishData;
     
     private float _currentHealth;
+    private bool _died = false;
     
     public event Action<float> OnHealthChanged;
     public event Action OnDeath;
     
     public float CurrentHealth => _currentHealth;
+    public bool Died => _died;
 
     private void Start()
     {
         _currentHealth = fishData.MaxHealth;
-    }
-
-    private void OnDestroy()
-    {
-        OnDeath?.Invoke();
     }
 
     public void Damage(float amount)
@@ -44,6 +41,8 @@ public class HealthManagerMB : MonoBehaviour, IHealthManager
     {
         if (_currentHealth <= 0)
         {
+            OnDeath?.Invoke();
+            _died = true;
             Destroy(gameObject);
         }
     }

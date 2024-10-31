@@ -8,6 +8,7 @@ public class ChaseStrategy : StaminaMoveStrategy
 
     private readonly IAttackManager _attackManager;
     private readonly Func<Transform> _preyTransformGetter;
+    private readonly Func<bool> _didPreyDie;
     private readonly float _attackValue;
     private readonly float _attackRange;
     private readonly float _distanceToLoseInterest;
@@ -18,6 +19,7 @@ public class ChaseStrategy : StaminaMoveStrategy
     #endregion
     
     private Transform _preyTransform;
+    private IHealthManager _preyHealthManager;
 
     public class Builder
     {
@@ -38,6 +40,7 @@ public class ChaseStrategy : StaminaMoveStrategy
         public float TimeToLoseInterest;
         public float DistanceToLoseInterest;
         public Action ResetBehavior;
+        public Func<bool> DidPreyDie;
 
         public Builder(Transform entity)
         {
@@ -140,6 +143,12 @@ public class ChaseStrategy : StaminaMoveStrategy
             return this;
         }
         
+        public Builder WithDidPreyDie(Func<bool> didPreyDie)
+        {
+            DidPreyDie = didPreyDie;
+            return this;
+        }
+        
         public ChaseStrategy Build()
         {
             return new ChaseStrategy(this);
@@ -165,11 +174,18 @@ public class ChaseStrategy : StaminaMoveStrategy
         _timerToLoseInterest = new CountdownTimer(builder.TimeToLoseInterest);
         _resetBehavior = builder.ResetBehavior;
         _distanceToLoseInterest = builder.DistanceToLoseInterest;
+        _didPreyDie = builder.DidPreyDie;
     }
 
 
     public override Status Process()
     {
+        if(_didPreyDie())
+        {
+            _resetBehavior();
+            return Status.Success;
+        }
+        
         GetPreyTransform();
         HandleTimerLogic();
         
@@ -186,8 +202,7 @@ public class ChaseStrategy : StaminaMoveStrategy
         CheckStamina();
         RotateToPrey();
         
-        // BUG: Inefficient since fish will not attack due to not being "close enough"
-        if(Vector3.Distance(Entity.position, _preyTransform.position) <= _attackRange)
+        if((Entity.position - _preyTransform.position).sqrMagnitude <= _attackRange * _attackRange)
         {
             _attackManager.Attack(_attackValue, _preyTransform);
         }
@@ -227,6 +242,7 @@ public class ChaseStrategy : StaminaMoveStrategy
     /// </summary>
     private void HandleTimerLogic()
     {
+        // BUG: Missing reference on prey death
         if(Vector3.Distance(Entity.position, _preyTransform.position) >= _distanceToLoseInterest && !_timerToLoseInterest.IsRunning)
         {
             _timerToLoseInterest.Start();
