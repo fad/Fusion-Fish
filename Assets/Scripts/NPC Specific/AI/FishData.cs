@@ -26,10 +26,10 @@ public class FishData : ScriptableObject
     private float FOV_Radius = 10f;
 
     [Header("Hunt Values")]
-    [SerializeField]
+    [SerializeField, Tooltip("The list of prey for this fish. The fish will hunt these down on sight.")]
     private FishData[] preyList;
 
-    [SerializeField]
+    [SerializeField, Tooltip("The list of predators for this fish. The fish will flee from these and avoid their areas if set.")]
     private FishData[] predatorList;
 
     [SerializeField, Min(1f), Tooltip("The damage value to use for attacks.")]

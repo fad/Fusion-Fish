@@ -284,7 +284,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6719698805464160928}
-  - component: {fileID: 4843990542343251315}
+  - component: {fileID: 374186720126763322}
+  - component: {fileID: 7944229703633965556}
+  - component: {fileID: 783648995393531382}
   - component: {fileID: 5773645901970064076}
   - component: {fileID: 6051695805070191918}
   - component: {fileID: 4646803883981058796}
@@ -320,9 +322,10 @@ Transform:
   - {fileID: 7886857221017298452}
   - {fileID: 5509542926871816893}
   - {fileID: 3765694243194955839}
+  - {fileID: 3516931581675235155}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: -173.45, z: 0}
---- !u!114 &4843990542343251315
+--- !u!114 &374186720126763322
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -331,38 +334,41 @@ MonoBehaviour:
   m_GameObject: {fileID: 5197201702416932992}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba5d585b8528027458ff49e2f57276da, type: 3}
+  m_Script: {fileID: 11500000, guid: afcf9e73232a1264297014d8dd553817, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: 2
-  maxSwimSpeed: 180
-  defaultSwimSpeed: 25
-  isMainMenuObject: 0
-  playerLayer:
-    serializedVersion: 2
-    m_Bits: 128
-  foodLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  stateAuthorityPlayer:
-    serializedVersion: 2
-    m_Bits: 512
-  groundLayer:
+  fishData: {fileID: 11400000, guid: 31f2960ba76864543ac60adfe5d5f065, type: 2}
+  obstacleAvoidanceMask:
     serializedVersion: 2
     m_Bits: 1024
-  attacksAnything: 1
-  timeBetweenAttacksMax: 1.2
-  timeBetweenAttacksMin: 0.6
-  attackDamage: 5
-  detectRange: 6
-  detectionAngle: 45
-  attackRange: 0.7
-  maxTimeUntilFlee: 7
-  fleeTime: 3
-  minWaitTime: 4
-  maxWaitTime: 6
-  minTimeUntilChangeMoveDirection: 6
-  maxTimeUntilChangeMoveDirection: 10
+--- !u!114 &7944229703633965556
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5197201702416932992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5f071b7a0434cedad79e8b0e01fc20c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fishData: {fileID: 11400000, guid: 31f2960ba76864543ac60adfe5d5f065, type: 2}
+--- !u!114 &783648995393531382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5197201702416932992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e067bafce764dd5a51db5934ef526dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fishData: {fileID: 11400000, guid: 31f2960ba76864543ac60adfe5d5f065, type: 2}
+  timeToStartRegenerate: 3
+  decreaseCooldown: 1
 --- !u!114 &5773645901970064076
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -376,6 +382,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 30
+  recoveryHealthInSecond: 10
+  timeToStartRecoveryHealth: 3
   _NetworkedHealth: 30
   spawnGibs: 0
   currentHealth: 0
@@ -489,7 +497,7 @@ MonoBehaviour:
   Flags: 524289
   NestedObjects: []
   NetworkedBehaviours:
-  - {fileID: 4843990542343251315}
+  - {fileID: 374186720126763322}
   - {fileID: 5773645901970064076}
   - {fileID: 6051695805070191918}
   - {fileID: 5705068798177571207}
@@ -747,6 +755,76 @@ Transform:
   - {fileID: 2361877829631940682}
   m_Father: {fileID: 4513794170538680452}
   m_LocalEulerAnglesHint: {x: -0.9666789, y: -0.024429454, z: 2.8952518}
+--- !u!1 &8770250326641954934
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3516931581675235155}
+  - component: {fileID: 1253509041228715374}
+  - component: {fileID: 2347445053216884712}
+  m_Layer: 0
+  m_Name: EntityDetector
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3516931581675235155
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8770250326641954934}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.65229905, z: -0, w: 0.7579618}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6719698805464160928}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &1253509041228715374
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8770250326641954934}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 3
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2347445053216884712
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8770250326641954934}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdeb9c35b9454bec86e0d84a132affd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  layerMaskToCheck:
+    serializedVersion: 2
+    m_Bits: 704
+  fishData: {fileID: 11400000, guid: 31f2960ba76864543ac60adfe5d5f065, type: 2}
 --- !u!1 &9003695447979407075
 GameObject:
   m_ObjectHideFlags: 0

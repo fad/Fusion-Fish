@@ -10,13 +10,25 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c11d033a7185418c9421d8741488f96b, type: 3}
-  m_Name: Shark
+  m_Name: Catfish
   m_EditorClassIdentifier: 
-  preyList:
-  - {fileID: 11400000, guid: 7a73207235f489a4fa6b36a0c602a74a, type: 2}
+  maxHealth: 10
+  maxStamina: 10
+  staminaDecreaseRate: 1
+  staminaRegenRate: 1
+  staminaThreshold: 5
+  FOV_Angle: 45
+  FOV_Radius: 10
+  preyList: []
   predatorList: []
+  attackValue: 1
+  attackRange: 2
+  attackCooldown: 1
+  timeToLoseInterest: 5
+  _distanceToLoseInterest: 20
   wanderSpeed: 1
+  fastSpeed: 1
   rotationSpeed: 1
   maxPitch: 0
   obstacleAvoidanceDistance: 1
-  safeDistance: 0
+  safeDistance: 50
