@@ -5322,6 +5322,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.y
       value: -212.86
       objectReference: {fileID: 0}
+    - target: {fileID: 7691257856427925685, guid: 274fa519b44c24e43a28d85dbdddcb30,
+        type: 3}
+      propertyPath: fishData
+      value: 
+      objectReference: {fileID: 11400000, guid: 9ee0e09e5a23dbc4999c556ada471cf1,
+        type: 2}
     - target: {fileID: 7708194832333061884, guid: 274fa519b44c24e43a28d85dbdddcb30,
         type: 3}
       propertyPath: Flags
@@ -5376,6 +5382,11 @@ PrefabInstance:
         type: 3}
       propertyPath: NetworkedBehaviours.Array.size
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8616088687293941838, guid: 274fa519b44c24e43a28d85dbdddcb30,
+        type: 3}
+      propertyPath: layerMaskToCheck.m_Bits
+      value: 704
       objectReference: {fileID: 0}
     - target: {fileID: 8663251154307911801, guid: 274fa519b44c24e43a28d85dbdddcb30,
         type: 3}
