@@ -6,14 +6,14 @@ public class AttackManager : MonoBehaviour, IAttackManager
     [SerializeField]
     private FishData fishData;
 
-    private ITreeRunner _treeRunnerForThisFish;
+    private IEntity _correspondingEntity;
     private float _currentAttackCooldown = 0f;
 
     private void Start()
     {
-        TryGetComponent(out _treeRunnerForThisFish);
+        TryGetComponent(out _correspondingEntity);
 
-        if (_treeRunnerForThisFish == null)
+        if (_correspondingEntity == null)
         {
             Debug.LogError($"No <color=#00cec9>ITreeRunner</color> component found on object: {gameObject.name}.");
         }
@@ -37,7 +37,7 @@ public class AttackManager : MonoBehaviour, IAttackManager
         if (healthManager is { Died: true }) return;
 
         target.TryGetComponent(out ITreeRunner treeRunner);
-        treeRunner?.AdjustHuntOrFleeTarget((transform, _treeRunnerForThisFish));
+        treeRunner?.AdjustHuntOrFleeTarget((transform, _correspondingEntity));
         
         _currentAttackCooldown = fishData.AttackCooldown;
     }

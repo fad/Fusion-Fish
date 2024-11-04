@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using UnityEngine;
 
-public class TestBehaviour : MonoBehaviour, ITreeRunner
+public class TestBehaviour : MonoBehaviour, ITreeRunner, IEntity
 {
     [SerializeField] private FishData fishData;
     
@@ -37,7 +37,7 @@ public class TestBehaviour : MonoBehaviour, ITreeRunner
         throw new System.NotImplementedException();
     }
 
-    public void AdjustHuntOrFleeTarget((Transform targetTransform, ITreeRunner targetBehaviour) targetData)
+    public void AdjustHuntOrFleeTarget((Transform targetTransform, IEntity targetBehaviour) targetData)
     {
         if (_isHunting || _isInDanger) return;
         if (targetData.targetBehaviour.FishType == FishType) return; // if the other fish type is the same as this one

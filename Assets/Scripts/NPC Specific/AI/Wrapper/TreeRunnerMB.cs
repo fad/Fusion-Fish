@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEditor;
 #endif
 
-public class TreeRunnerMB : MonoBehaviour, ITreeRunner
+public class TreeRunnerMB : MonoBehaviour, ITreeRunner, IEntity
 {
     [Header("Settings")]
     [SerializeField,
@@ -200,7 +200,7 @@ public class TreeRunnerMB : MonoBehaviour, ITreeRunner
         _directionToArea = areaCheck.direction;
     }
 
-    public void AdjustHuntOrFleeTarget((Transform targetTransform, ITreeRunner targetBehaviour) targetData)
+    public void AdjustHuntOrFleeTarget((Transform targetTransform, IEntity targetBehaviour) targetData)
     {
         if (_isHunting || _isInDanger) return;
         if (targetData.targetBehaviour.FishType == FishType) return; // if the other fish type is the same as this one

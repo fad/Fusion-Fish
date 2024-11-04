@@ -19,11 +19,13 @@ public class AreaMarker : MonoBehaviour
 
     private void ChangeAreaCheck(Collider other, bool isInside)
     {
-        if (other.gameObject.TryGetComponent(out ITreeRunner treeRunner) && fishData.PreyList.Contains(treeRunner.FishType))
+        if (other.gameObject.TryGetComponent(out IEntity entity) && fishData.PreyList.Contains(entity.FishType))
         {
+            other.TryGetComponent(out ITreeRunner treeRunner);
+            
             // The direction is from the other object to this object.
             Vector3 direction = Vector3.Normalize(transform.position - other.transform.position);
-            treeRunner.AdjustAreaCheck((isInside, direction));
+            treeRunner?.AdjustAreaCheck((isInside, direction));
         }
     }
 

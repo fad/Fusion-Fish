@@ -14,7 +14,7 @@ public class NPCEntityDetector : EntityDetector
 
     private ITreeRunner _attachedAIBehaviour;
 
-    private readonly HashSet<(Transform entity, ITreeRunner entityTreeRunner)> _otherNPCs = new();
+    private readonly HashSet<(Transform entity, IEntity entityObject)> _otherNPCs = new();
 
     protected override void OnTriggerEnter(Collider other)
     {
@@ -40,10 +40,10 @@ public class NPCEntityDetector : EntityDetector
 
     private void Update()
     {
-        (Transform entity, ITreeRunner entityTreeRunner) npcInFOV =
+        var npcInFOV =
             _otherNPCs.FirstOrDefault(npc => IsInFOVAndInRange(npc.entity));
 
-        if (npcInFOV.entity is null || npcInFOV.entityTreeRunner is null) return;
+        if (npcInFOV.entity is null || npcInFOV.entityObject is null) return;
 
         _attachedAIBehaviour.AdjustHuntOrFleeTarget(npcInFOV);
     }
@@ -60,22 +60,22 @@ public class NPCEntityDetector : EntityDetector
 
     private void DealWithHashset(GameObject entity, bool shouldBeRemoved = false)
     {
-        bool hasTreeRunner = entity.TryGetComponent(out ITreeRunner behaviour);
+        bool isEntity = entity.TryGetComponent(out IEntity entityObject);
 
-        if (!hasTreeRunner) return;
+        if (!isEntity) return;
         entity.TryGetComponent(out IHealthManager healthManager);
         
-        Action onDeathRemoval = () => RemoveFromSetOnDeath(entity.transform, behaviour);
+        Action onDeathRemoval = () => RemoveFromSetOnDeath(entity.transform, entityObject);
         
         if (shouldBeRemoved)
         {
-            _otherNPCs.Remove((entity: entity.transform, entityTreeRunner: behaviour));
+            _otherNPCs.Remove((entity: entity.transform, entityObject));
             
             healthManager.OnDeath -= onDeathRemoval;
             return;
         }
 
-        _otherNPCs.Add((entity: entity.transform, entityTreeRunner: behaviour));
+        _otherNPCs.Add((entity: entity.transform, entityObject));
         healthManager.OnDeath += onDeathRemoval;
     }
 
@@ -88,8 +88,8 @@ public class NPCEntityDetector : EntityDetector
         return angleToTarget < fishData.FOVAngle && distanceToTarget <= fishData.FOVRadius;
     }
 
-    private void RemoveFromSetOnDeath(Transform entity, ITreeRunner runner)
+    private void RemoveFromSetOnDeath(Transform entity, IEntity entityObject)
     {
-        _otherNPCs.Remove((entity: entity.transform, entityTreeRunner: runner));
+        _otherNPCs.Remove((entity.transform, entityObject));
     }
 }
