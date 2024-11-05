@@ -15,8 +15,8 @@ MonoBehaviour:
   fishID: 5
   fishPrefab: {fileID: 1452471749647145543, guid: 38043a53f9b8749b19d12bc6f01a4411,
     type: 3}
-  attackComponent: {fileID: 0}
-  staminaComponent: {fileID: 0}
+  attackComponentName: AttackManager
+  staminaComponentName: StaminaManager
   scale: 1
   maxHealth: 40
   maxStamina: 60

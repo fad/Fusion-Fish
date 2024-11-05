@@ -1,24 +1,25 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [CreateAssetMenu(fileName = "New FishData", menuName = "Data/New Fish Data", order = 0)]
 public class FishData : ScriptableObject
 {
     [SerializeField, Tooltip("The ID of this fish.")]
     private short fishID;
-    
+
     [Header("Prefab Settings")]
     [SerializeField, Tooltip("The prefab to use for the fish.")]
     private GameObject fishPrefab;
     
-    [SerializeField, Tooltip("The component to use for Attacking.")]
-    private MonoBehaviour attackComponent;
+    [SerializeField, Tooltip("The name of the script to use for Attacking.")]
+    private string attackComponentName;
     
-    [SerializeField, Tooltip("The component to use for Stamina.")]
-    private MonoBehaviour staminaComponent;
-    
+    [SerializeField, Tooltip("The name of the script to use for Stamina.")]
+    private string staminaComponentName;
+
     [SerializeField, Tooltip("The scale of the fish.")]
     private float scale;
-    
+
     [Header("General Values")]
     [SerializeField, Tooltip("The maximum stamina of the entity.")]
     private float maxHealth = 10f;
@@ -45,7 +46,8 @@ public class FishData : ScriptableObject
     [SerializeField, Tooltip("The list of prey for this fish. The fish will hunt these down on sight.")]
     private FishData[] preyList;
 
-    [SerializeField, Tooltip("The list of predators for this fish. The fish will flee from these and avoid their areas if set.")]
+    [SerializeField,
+     Tooltip("The list of predators for this fish. The fish will flee from these and avoid their areas if set.")]
     private FishData[] predatorList;
 
     [SerializeField, Min(1f), Tooltip("The damage value to use for attacks.")]
@@ -88,10 +90,11 @@ public class FishData : ScriptableObject
 
     public short FishID => fishID;
     public GameObject FishPrefab => fishPrefab;
-    public MonoBehaviour AttackComponent => attackComponent;
-    public MonoBehaviour StaminaComponent => staminaComponent;
-    public float
-        Scale => scale;
+    public string AttackComponentName => attackComponentName;
+    public string StaminaComponentName => staminaComponentName;
+
+    public float Scale => scale;
+
     public float MaxHealth => maxHealth;
     public short MaxStamina => maxStamina;
     public short StaminaDecreaseRate => staminaDecreaseRate;

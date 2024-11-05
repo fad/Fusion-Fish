@@ -18,8 +18,13 @@ public class FishData_CSVReader
     [MenuItem("Utilities/Generate Fish Data")]
     public static void GenerateFishData()
     {
-        _fishDataSOs.Clear();
-
+        if (!File.Exists(FullPath))
+        {
+            Debug.LogError("[CSV Reader] <color=#8c7ae6>FishDataCSV.csv</color> not found at path: " + FullPath);
+            return;
+        }
+        
+            
         string[] allLines = File.ReadAllLines(FullPath);
         List<SerializedObject> serializedObjects = new List<SerializedObject>();
 
@@ -43,9 +48,15 @@ public class FishData_CSVReader
 
     private static void CreateScriptableObject(string[] data, out SerializedObject serializedObject)
     {
-        FishData fishData = ScriptableObject.CreateInstance<FishData>();
         string assetPath = "Assets/ScriptableObjects/FishData/" + data[1] + ".asset";
-        AssetDatabase.CreateAsset(fishData, assetPath);
+        
+        FishData fishData = AssetDatabase.LoadAssetAtPath<FishData>(assetPath);
+        
+        if (!fishData)
+        {
+            fishData = ScriptableObject.CreateInstance<FishData>();
+            AssetDatabase.CreateAsset(fishData, assetPath);
+        }
 
         serializedObject = new SerializedObject(fishData);
 
@@ -59,31 +70,19 @@ public class FishData_CSVReader
     }
 
     private static void FillMetaAndPrefabData(SerializedObject dataObject, string ID, string name, string prefabPath,
-        string attackComponentPath, string staminaComponentPath, string scaleValue)
+        string attackComponentName, string staminaComponentName, string scaleValue)
     {
         SerializedProperty fishID = dataObject.FindProperty("fishID");
         SerializedProperty fishPrefab = dataObject.FindProperty("fishPrefab");
-        SerializedProperty attackComponent = dataObject.FindProperty("attackComponent");
-        SerializedProperty staminaComponent = dataObject.FindProperty("staminaComponent");
+        SerializedProperty attackComponent = dataObject.FindProperty("attackComponentName");
+        SerializedProperty staminaComponent = dataObject.FindProperty("staminaComponentName");
         SerializedProperty scale = dataObject.FindProperty("scale");
 
         fishID.intValue = short.Parse(ID);
         fishPrefab.objectReferenceValue = AssetDatabase.LoadAssetAtPath<GameObject>(prefabPath);
-        attackComponent.objectReferenceValue = AssetDatabase.LoadAssetAtPath<MonoBehaviour>(attackComponentPath);
-        staminaComponent.objectReferenceValue = AssetDatabase.LoadAssetAtPath<MonoBehaviour>(staminaComponentPath);
+        attackComponent.stringValue = attackComponentName;
+        staminaComponent.stringValue = staminaComponentName;
         scale.floatValue = float.Parse(scaleValue);
-
-        if (attackComponent.objectReferenceValue is not IAttackManager)
-        {
-            Debug.LogWarning(
-                $"<color=#EA2027>[{name}]</color>:The attack component does not implement the {nameof(IAttackManager)} interface.");
-        }
-
-        if (staminaComponent.objectReferenceValue is not IStaminaManager)
-        {
-            Debug.LogWarning(
-                $"<color=#EA2027>[{name}]</color>:The stamina component does not implement the {nameof(IStaminaManager)} interface.");
-        }
 
         dataObject.ApplyModifiedProperties();
     }
