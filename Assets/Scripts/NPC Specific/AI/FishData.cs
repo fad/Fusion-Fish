@@ -3,6 +3,22 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New FishData", menuName = "Data/New Fish Data", order = 0)]
 public class FishData : ScriptableObject
 {
+    [SerializeField, Tooltip("The ID of this fish.")]
+    private short fishID;
+    
+    [Header("Prefab Settings")]
+    [SerializeField, Tooltip("The prefab to use for the fish.")]
+    private GameObject fishPrefab;
+    
+    [SerializeField, Tooltip("The component to use for Attacking.")]
+    private MonoBehaviour attackComponent;
+    
+    [SerializeField, Tooltip("The component to use for Stamina.")]
+    private MonoBehaviour staminaComponent;
+    
+    [SerializeField, Tooltip("The scale of the fish.")]
+    private float scale;
+    
     [Header("General Values")]
     [SerializeField, Tooltip("The maximum stamina of the entity.")]
     private float maxHealth = 10f;
@@ -45,7 +61,7 @@ public class FishData : ScriptableObject
     private float timeToLoseInterest = 5f;
 
     [SerializeField, Min(1f), Tooltip("The distance to start losing interest in a target.")]
-    private float _distanceToLoseInterest = 20f;
+    private float distanceToLoseInterest = 20f;
 
     [Header("Movement Values")]
     [SerializeField, Min(1f), Tooltip("The speed at which the fish will wander around normally.")]
@@ -70,6 +86,12 @@ public class FishData : ScriptableObject
     private float safeDistance = 50f;
 
 
+    public short FishID => fishID;
+    public GameObject FishPrefab => fishPrefab;
+    public MonoBehaviour AttackComponent => attackComponent;
+    public MonoBehaviour StaminaComponent => staminaComponent;
+    public float
+        Scale => scale;
     public float MaxHealth => maxHealth;
     public short MaxStamina => maxStamina;
     public short StaminaDecreaseRate => staminaDecreaseRate;
@@ -86,7 +108,7 @@ public class FishData : ScriptableObject
     public float AttackRange => attackRange;
     public float AttackCooldown => attackCooldown;
     public float TimeToLoseInterest => timeToLoseInterest;
-    public float DistanceToLoseInterest => _distanceToLoseInterest;
+    public float DistanceToLoseInterest => distanceToLoseInterest;
 
     public float WanderSpeed => wanderSpeed;
     public float FastSpeed => fastSpeed;

@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c11d033a7185418c9421d8741488f96b, type: 3}
+  m_Name: Clownfish
+  m_EditorClassIdentifier: 
+  fishID: 1
+  fishPrefab: {fileID: 2075058937487730628, guid: 07543d3dbdec44f7598a50d39bed61aa,
+    type: 3}
+  attackComponent: {fileID: 0}
+  staminaComponent: {fileID: 0}
+  scale: 0.5
+  maxHealth: 100
+  maxStamina: 100
+  staminaDecreaseRate: 12
+  staminaRegenRate: 8
+  staminaThreshold: 65
+  FOV_Angle: 45
+  FOV_Radius: 10
+  preyList:
+  - {fileID: 11400000, guid: 2a78cd9784236c945bccdb276ea70a09, type: 2}
+  - {fileID: 11400000, guid: 5ed4655bc6c5b3f40abc564a9d845383, type: 2}
+  - {fileID: 11400000, guid: bba15bd8a2f62a64fa33f2c44c423268, type: 2}
+  - {fileID: 11400000, guid: 31c4c5c87eacb344fb89287853580a14, type: 2}
+  - {fileID: 11400000, guid: 01c47b57e92fff24aa80e20ecb871521, type: 2}
+  predatorList:
+  - {fileID: 11400000, guid: 5ed4655bc6c5b3f40abc564a9d845383, type: 2}
+  - {fileID: 11400000, guid: bba15bd8a2f62a64fa33f2c44c423268, type: 2}
+  - {fileID: 11400000, guid: 31c4c5c87eacb344fb89287853580a14, type: 2}
+  attackValue: 10
+  attackRange: 2.5
+  attackCooldown: 1
+  timeToLoseInterest: 7
+  distanceToLoseInterest: 20
+  wanderSpeed: 3.5
+  fastSpeed: 6
+  rotationSpeed: 2
+  maxPitch: 45
+  obstacleAvoidanceDistance: 2
+  safeDistance: 40

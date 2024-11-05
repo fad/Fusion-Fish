@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c11d033a7185418c9421d8741488f96b, type: 3}
+  m_Name: Tuna
+  m_EditorClassIdentifier: 
+  fishID: 8
+  fishPrefab: {fileID: 3741301490188963127, guid: 277616db48061455085b5f9196711b42,
+    type: 3}
+  attackComponent: {fileID: 0}
+  staminaComponent: {fileID: 0}
+  scale: 0.5
+  maxHealth: 30
+  maxStamina: 50
+  staminaDecreaseRate: 10
+  staminaRegenRate: 6
+  staminaThreshold: 30
+  FOV_Angle: 50
+  FOV_Radius: 20
+  preyList:
+  - {fileID: 11400000, guid: 2a78cd9784236c945bccdb276ea70a09, type: 2}
+  - {fileID: 11400000, guid: bba15bd8a2f62a64fa33f2c44c423268, type: 2}
+  predatorList:
+  - {fileID: 11400000, guid: 1a68188f39d0cf545b5a1d99d9bf203b, type: 2}
+  - {fileID: 11400000, guid: 23094c2585f3acf49a14c1d81d5bb4f8, type: 2}
+  - {fileID: 11400000, guid: db920ed4506f4744796ce828f7505668, type: 2}
+  attackValue: 4
+  attackRange: 2.25
+  attackCooldown: 1
+  timeToLoseInterest: 6
+  distanceToLoseInterest: 17.5
+  wanderSpeed: 3
+  fastSpeed: 5
+  rotationSpeed: 2
+  maxPitch: 45
+  obstacleAvoidanceDistance: 2
+  safeDistance: 40
