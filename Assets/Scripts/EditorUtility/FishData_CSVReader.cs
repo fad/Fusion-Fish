@@ -23,8 +23,9 @@ public class FishData_CSVReader
             Debug.LogError("[CSV Reader] <color=#8c7ae6>FishDataCSV.csv</color> not found at path: " + FullPath);
             return;
         }
-        
-            
+
+        _fishDataSOs.Clear();
+
         string[] allLines = File.ReadAllLines(FullPath);
         List<SerializedObject> serializedObjects = new List<SerializedObject>();
 
@@ -49,9 +50,9 @@ public class FishData_CSVReader
     private static void CreateScriptableObject(string[] data, out SerializedObject serializedObject)
     {
         string assetPath = "Assets/ScriptableObjects/FishData/" + data[1] + ".asset";
-        
+
         FishData fishData = AssetDatabase.LoadAssetAtPath<FishData>(assetPath);
-        
+
         if (!fishData)
         {
             fishData = ScriptableObject.CreateInstance<FishData>();
