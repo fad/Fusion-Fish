@@ -330,7 +330,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e067bafce764dd5a51db5934ef526dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fishData: {fileID: 11400000, guid: 01c47b57e92fff24aa80e20ecb871521, type: 2}
+  fishData: {fileID: 11400000, guid: 4f425dd60c1f84442a76761bb02cae31, type: 2}
   timeToStartRegenerate: 3
   decreaseCooldown: 1
 --- !u!114 &9001440179497955679
@@ -345,7 +345,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afcf9e73232a1264297014d8dd553817, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fishData: {fileID: 11400000, guid: 01c47b57e92fff24aa80e20ecb871521, type: 2}
+  fishData: {fileID: 11400000, guid: 4f425dd60c1f84442a76761bb02cae31, type: 2}
   obstacleAvoidanceMask:
     serializedVersion: 2
     m_Bits: 1024
@@ -361,7 +361,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5f071b7a0434cedad79e8b0e01fc20c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fishData: {fileID: 11400000, guid: 01c47b57e92fff24aa80e20ecb871521, type: 2}
+  fishData: {fileID: 11400000, guid: 4f425dd60c1f84442a76761bb02cae31, type: 2}
 --- !u!1 &2769723252524276266
 GameObject:
   m_ObjectHideFlags: 0
@@ -547,7 +547,7 @@ MonoBehaviour:
   layerMaskToCheck:
     serializedVersion: 2
     m_Bits: 704
-  fishData: {fileID: 11400000, guid: 01c47b57e92fff24aa80e20ecb871521, type: 2}
+  fishData: {fileID: 11400000, guid: 4f425dd60c1f84442a76761bb02cae31, type: 2}
 --- !u!1 &5907885762567082049
 GameObject:
   m_ObjectHideFlags: 0

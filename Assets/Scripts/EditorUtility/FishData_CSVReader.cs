@@ -7,6 +7,7 @@ using UnityEditor;
 public class FishData_CSVReader
 {
     private static string _pathToCsv = "/Editor/CSVs/FishDataCSV.csv";
+    private static string _pathToSave = "Assets/Resources/FishData/";
 
     private static Dictionary<string, FishData> _fishDataSOs = new();
 
@@ -45,11 +46,12 @@ public class FishData_CSVReader
         }
 
         AssetDatabase.SaveAssets();
+        AssetDatabase.Refresh();
     }
 
     private static void CreateScriptableObject(string[] data, out SerializedObject serializedObject)
     {
-        string assetPath = "Assets/ScriptableObjects/FishData/" + data[1] + ".asset";
+        string assetPath = _pathToSave + data[1] + ".asset";
 
         FishData fishData = AssetDatabase.LoadAssetAtPath<FishData>(assetPath);
 
@@ -75,8 +77,8 @@ public class FishData_CSVReader
     {
         SerializedProperty fishID = dataObject.FindProperty("fishID");
         SerializedProperty fishPrefab = dataObject.FindProperty("fishPrefab");
-        SerializedProperty attackComponent = dataObject.FindProperty("attackComponentName");
-        SerializedProperty staminaComponent = dataObject.FindProperty("staminaComponentName");
+        SerializedProperty attackComponent = dataObject.FindProperty("attackComponentName"); // TODO: Refactor to use ScriptableObject for references
+        SerializedProperty staminaComponent = dataObject.FindProperty("staminaComponentName"); // TODO: Refactor to use ScriptableObject for references
         SerializedProperty scale = dataObject.FindProperty("scale");
 
         fishID.intValue = short.Parse(ID);

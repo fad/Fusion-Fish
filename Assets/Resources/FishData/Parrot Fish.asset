@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c11d033a7185418c9421d8741488f96b, type: 3}
-  m_Name: Catfish
+  m_Name: Parrot Fish
   m_EditorClassIdentifier: 
-  fishID: 4
-  fishPrefab: {fileID: 4473942619782769758, guid: 485d5162b91d746adacf58be7a6639ab,
+  fishID: 5
+  fishPrefab: {fileID: 1452471749647145543, guid: 38043a53f9b8749b19d12bc6f01a4411,
     type: 3}
   attackComponentName: AttackManager
   staminaComponentName: StaminaManager
@@ -23,16 +23,16 @@ MonoBehaviour:
   staminaDecreaseRate: 12
   staminaRegenRate: 6
   staminaThreshold: 35
-  FOV_Angle: 60
-  FOV_Radius: 15
+  FOV_Angle: 40
+  FOV_Radius: 14
   preyList:
-  - {fileID: 11400000, guid: 2a78cd9784236c945bccdb276ea70a09, type: 2}
-  - {fileID: 11400000, guid: 01c47b57e92fff24aa80e20ecb871521, type: 2}
-  - {fileID: 11400000, guid: 1a68188f39d0cf545b5a1d99d9bf203b, type: 2}
-  - {fileID: 11400000, guid: 23094c2585f3acf49a14c1d81d5bb4f8, type: 2}
+  - {fileID: 11400000, guid: 330945d332c80934999ee14c283a705e, type: 2}
+  - {fileID: 11400000, guid: d569fcbd1e7d4b64fba76a3066df7858, type: 2}
+  - {fileID: 11400000, guid: 76694b7d080cfeb4b83267df3328c64a, type: 2}
   predatorList:
-  - {fileID: 11400000, guid: 1a68188f39d0cf545b5a1d99d9bf203b, type: 2}
-  - {fileID: 11400000, guid: 23094c2585f3acf49a14c1d81d5bb4f8, type: 2}
+  - {fileID: 11400000, guid: d569fcbd1e7d4b64fba76a3066df7858, type: 2}
+  - {fileID: 11400000, guid: 76694b7d080cfeb4b83267df3328c64a, type: 2}
+  - {fileID: 11400000, guid: 4f425dd60c1f84442a76761bb02cae31, type: 2}
   attackValue: 5
   attackRange: 2.25
   attackCooldown: 1

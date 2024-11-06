@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c11d033a7185418c9421d8741488f96b, type: 3}
-  m_Name: Small Betta
+  m_Name: Tuna
   m_EditorClassIdentifier: 
-  fishID: 6
-  fishPrefab: {fileID: 725318885590578868, guid: 240d2fe2969a54ff0b6122df02e7ad13,
+  fishID: 8
+  fishPrefab: {fileID: 3741301490188963127, guid: 277616db48061455085b5f9196711b42,
     type: 3}
   attackComponentName: AttackManager
   staminaComponentName: StaminaManager
@@ -23,13 +23,15 @@ MonoBehaviour:
   staminaDecreaseRate: 10
   staminaRegenRate: 6
   staminaThreshold: 30
-  FOV_Angle: 35
-  FOV_Radius: 12.5
+  FOV_Angle: 50
+  FOV_Radius: 20
   preyList:
-  - {fileID: 11400000, guid: 2a78cd9784236c945bccdb276ea70a09, type: 2}
+  - {fileID: 11400000, guid: 330945d332c80934999ee14c283a705e, type: 2}
+  - {fileID: 11400000, guid: ca5b417791726f949aab6afff7e7eb84, type: 2}
   predatorList:
-  - {fileID: 11400000, guid: 1a68188f39d0cf545b5a1d99d9bf203b, type: 2}
-  - {fileID: 11400000, guid: 23094c2585f3acf49a14c1d81d5bb4f8, type: 2}
+  - {fileID: 11400000, guid: d569fcbd1e7d4b64fba76a3066df7858, type: 2}
+  - {fileID: 11400000, guid: 76694b7d080cfeb4b83267df3328c64a, type: 2}
+  - {fileID: 11400000, guid: 0c6308a7049671a42abceaddee436b9c, type: 2}
   attackValue: 4
   attackRange: 2.25
   attackCooldown: 1

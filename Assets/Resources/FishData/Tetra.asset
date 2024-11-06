@@ -27,12 +27,12 @@ MonoBehaviour:
   FOV_Radius: 15
   preyList: []
   predatorList:
-  - {fileID: 11400000, guid: 1a68188f39d0cf545b5a1d99d9bf203b, type: 2}
-  - {fileID: 11400000, guid: 23094c2585f3acf49a14c1d81d5bb4f8, type: 2}
-  - {fileID: 11400000, guid: 01c47b57e92fff24aa80e20ecb871521, type: 2}
-  - {fileID: 11400000, guid: 5ed4655bc6c5b3f40abc564a9d845383, type: 2}
-  - {fileID: 11400000, guid: bba15bd8a2f62a64fa33f2c44c423268, type: 2}
-  - {fileID: 11400000, guid: 31c4c5c87eacb344fb89287853580a14, type: 2}
+  - {fileID: 11400000, guid: d569fcbd1e7d4b64fba76a3066df7858, type: 2}
+  - {fileID: 11400000, guid: 76694b7d080cfeb4b83267df3328c64a, type: 2}
+  - {fileID: 11400000, guid: 4f425dd60c1f84442a76761bb02cae31, type: 2}
+  - {fileID: 11400000, guid: 7d2cb7dfd99a72c4bb748bd65e464fd4, type: 2}
+  - {fileID: 11400000, guid: ca5b417791726f949aab6afff7e7eb84, type: 2}
+  - {fileID: 11400000, guid: 6998654e15fc34741a20046b034526a9, type: 2}
   attackValue: 2
   attackRange: 2
   attackCooldown: 1

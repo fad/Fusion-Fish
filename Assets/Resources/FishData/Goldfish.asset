@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c11d033a7185418c9421d8741488f96b, type: 3}
-  m_Name: Clownfish
+  m_Name: Goldfish
   m_EditorClassIdentifier: 
-  fishID: 1
-  fishPrefab: {fileID: 2075058937487730628, guid: 07543d3dbdec44f7598a50d39bed61aa,
+  fishID: 2
+  fishPrefab: {fileID: 7922903181239320888, guid: 4903ee395fc06425aa96fe507fe8334b,
     type: 3}
   attackComponentName: AttackManager
   staminaComponentName: StaminaManager
@@ -26,15 +26,15 @@ MonoBehaviour:
   FOV_Angle: 45
   FOV_Radius: 10
   preyList:
-  - {fileID: 11400000, guid: 2a78cd9784236c945bccdb276ea70a09, type: 2}
-  - {fileID: 11400000, guid: 5ed4655bc6c5b3f40abc564a9d845383, type: 2}
-  - {fileID: 11400000, guid: bba15bd8a2f62a64fa33f2c44c423268, type: 2}
-  - {fileID: 11400000, guid: 31c4c5c87eacb344fb89287853580a14, type: 2}
-  - {fileID: 11400000, guid: 01c47b57e92fff24aa80e20ecb871521, type: 2}
+  - {fileID: 11400000, guid: 330945d332c80934999ee14c283a705e, type: 2}
+  - {fileID: 11400000, guid: 7d2cb7dfd99a72c4bb748bd65e464fd4, type: 2}
+  - {fileID: 11400000, guid: ca5b417791726f949aab6afff7e7eb84, type: 2}
+  - {fileID: 11400000, guid: 6998654e15fc34741a20046b034526a9, type: 2}
+  - {fileID: 11400000, guid: 4f425dd60c1f84442a76761bb02cae31, type: 2}
   predatorList:
-  - {fileID: 11400000, guid: 5ed4655bc6c5b3f40abc564a9d845383, type: 2}
-  - {fileID: 11400000, guid: bba15bd8a2f62a64fa33f2c44c423268, type: 2}
-  - {fileID: 11400000, guid: 31c4c5c87eacb344fb89287853580a14, type: 2}
+  - {fileID: 11400000, guid: 7d2cb7dfd99a72c4bb748bd65e464fd4, type: 2}
+  - {fileID: 11400000, guid: ca5b417791726f949aab6afff7e7eb84, type: 2}
+  - {fileID: 11400000, guid: 6998654e15fc34741a20046b034526a9, type: 2}
   attackValue: 10
   attackRange: 2.5
   attackCooldown: 1
