@@ -3,7 +3,11 @@ using UnityEngine;
 
 public class AttackManager : MonoBehaviour, IAttackManager
 {
-    [SerializeField]
+    [Header("Setup Settings")]
+    [SerializeField, Tooltip("Root of the object")]
+    private Transform root;
+    
+    [SerializeField, Tooltip("The data for this fish")]
     private FishData fishData;
 
     private IEntity _correspondingEntity;
@@ -11,7 +15,7 @@ public class AttackManager : MonoBehaviour, IAttackManager
 
     private void Start()
     {
-        TryGetComponent(out _correspondingEntity);
+        root.TryGetComponent(out _correspondingEntity);
 
         if (_correspondingEntity == null)
         {

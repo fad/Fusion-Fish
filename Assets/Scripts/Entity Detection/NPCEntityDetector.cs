@@ -8,9 +8,12 @@ using UnityEngine;
 /// </summary>
 public class NPCEntityDetector : EntityDetector
 {
-    [Header("Data settings for this NPC")]
+    [Header("Setup Settings")]
     [SerializeField, Tooltip("The data for this fish, used for FOV stuff")]
     private FishData fishData;
+    
+    [SerializeField, Tooltip("The root of this object")]
+    private Transform root;
 
     private ITreeRunner _attachedAIBehaviour;
 
@@ -32,10 +35,10 @@ public class NPCEntityDetector : EntityDetector
 
     private void Start()
     {
-        transform.parent.TryGetComponent(out _attachedAIBehaviour);
+        root.TryGetComponent(out _attachedAIBehaviour);
 
         if (_attachedAIBehaviour is null)
-            throw new NullReferenceException("No <color=#16a085>AI behaviour (ITreeRunner)</color> found on " + gameObject.name);
+            throw new NullReferenceException("No <color=#16a085>AI behaviour (ITreeRunner)</color> found on " + root.name);
     }
 
     private void Update()
