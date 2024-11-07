@@ -42,6 +42,7 @@ public class ChaseStrategy : StaminaMoveStrategy
         public float DistanceToLoseInterest;
         public Action ResetBehavior;
         public Func<bool> DidPreyDie;
+        public bool UseForward;
 
         public Builder(Transform entity)
         {
@@ -150,6 +151,12 @@ public class ChaseStrategy : StaminaMoveStrategy
             return this;
         }
 
+        public Builder WithUseForward(bool useForward)
+        {
+            UseForward = useForward;
+            return this;
+        }
+
         public ChaseStrategy Build()
         {
             return new ChaseStrategy(this);
@@ -166,7 +173,8 @@ public class ChaseStrategy : StaminaMoveStrategy
         builder.StaminaManager,
         builder.StaminaThreshold,
         builder.NormalSpeed,
-        builder.FastSpeed)
+        builder.FastSpeed,
+        builder.UseForward)
     {
         _preyTransformGetter = builder.PreyTransformGetter;
         _attackManager = builder.AttackManager;
@@ -178,6 +186,8 @@ public class ChaseStrategy : StaminaMoveStrategy
         _didPreyDie = builder.DidPreyDie;
 
         _currentInterestTime = _timeToLoseInterest;
+        
+        ForwardModifier = builder.UseForward ? (short)1 : (short)-1;
     }
 
 
@@ -204,7 +214,7 @@ public class ChaseStrategy : StaminaMoveStrategy
             _targetTransformDoesNotExist = false;
             return Status.Success;
         }
-        
+
         HandleTimerLogic();
 
         if (_currentInterestTime <= 0)
@@ -226,7 +236,7 @@ public class ChaseStrategy : StaminaMoveStrategy
         }
         else
         {
-            Vector3 forwardDirection = Entity.forward * (Speed * Time.deltaTime);
+            Vector3 forwardDirection = Entity.forward * (ForwardModifier * (Speed * Time.deltaTime));
             Move(forwardDirection);
         }
 
@@ -242,8 +252,8 @@ public class ChaseStrategy : StaminaMoveStrategy
     private void GetPreyTransform()
     {
         _preyTransform ??= _preyTransformGetter();
-        
-        if(!_preyTransform) _targetTransformDoesNotExist = true;
+
+        if (!_preyTransform) _targetTransformDoesNotExist = true;
     }
 
     /// <summary>
@@ -262,7 +272,8 @@ public class ChaseStrategy : StaminaMoveStrategy
     /// </summary>
     private void HandleTimerLogic()
     {
-        if ((Entity.position - _preyTransform.position).sqrMagnitude >= _distanceToLoseInterest * _distanceToLoseInterest)
+        if ((Entity.position - _preyTransform.position).sqrMagnitude >=
+            _distanceToLoseInterest * _distanceToLoseInterest)
         {
             _currentInterestTime -= Time.deltaTime;
         }

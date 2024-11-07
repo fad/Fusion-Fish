@@ -29,6 +29,7 @@ public class FleeStrategy : StaminaMoveStrategy
         public float SafeDistance;
         public short StaminaThreshold;
         public Func<(bool, Vector3)> ForbiddenAreaCheck;
+        public bool UseForward;
 
         public Builder(Transform entity)
         {
@@ -106,6 +107,12 @@ public class FleeStrategy : StaminaMoveStrategy
             SafeDistance = safeDistance;
             return this;
         }
+        
+        public Builder WithUseForward(bool useForward)
+        {
+            UseForward = useForward;
+            return this;
+        }
 
         public FleeStrategy Build()
         {
@@ -122,11 +129,14 @@ public class FleeStrategy : StaminaMoveStrategy
         builder.StaminaManager,
         builder.StaminaThreshold,
         builder.NormalSpeed,
-        builder.FastSpeed)
+        builder.FastSpeed,
+        builder.UseForward)
     {
         _predatorTransformGetter = builder.PredatorTransformGetter;
         _resetThreatAction = builder.ResetThreatAction;
         _safeDistance = builder.SafeDistance;
+
+        ForwardModifier = builder.UseForward ? (short)1 : (short)-1;
     }
 
     /// <summary>
@@ -152,7 +162,7 @@ public class FleeStrategy : StaminaMoveStrategy
         CheckStamina();
         RotateToOppositeDirection();
 
-        Vector3 forwardDirection = Entity.forward * (Speed * Time.deltaTime);
+        Vector3 forwardDirection = Entity.forward * (ForwardModifier * (Speed * Time.deltaTime));
 
         Move(forwardDirection);
 

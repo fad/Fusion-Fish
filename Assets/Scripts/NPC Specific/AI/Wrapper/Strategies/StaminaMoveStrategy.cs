@@ -20,14 +20,16 @@ public abstract class StaminaMoveStrategy : MoveStrategy
         IStaminaManager staminaManager,
         short staminaThreshold,
         float normalSpeed,
-        float fastSpeed)
+        float fastSpeed,
+        bool useForward)
         : base(
             entity,
             rotationSpeed,
             maxPitch,
             obstacleAvoidanceLayerMask,
             obstacleAvoidanceDistance,
-            forbiddenAreaCheck)
+            forbiddenAreaCheck,
+            useForward)
     {
         StaminaManager = staminaManager;
         StaminaThreshold = staminaThreshold;

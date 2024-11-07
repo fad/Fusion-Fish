@@ -76,13 +76,13 @@ public class BehaviourTreeRunner : NetworkBehaviour, ITreeRunner, IEntity
         if (!fishData)
             throw new NullReferenceException("<color=#9b59b6>FishData</color> is not set in " + gameObject.name);
 
-        TryGetComponent(out _staminaManager);
+        _staminaManager = GetComponentInChildren<IStaminaManager>();
 
         if (_staminaManager is null)
             throw new NullReferenceException("<color=#2980b9>StaminaManager</color> is not found in " +
                                              gameObject.name);
 
-        TryGetComponent(out _attackManager);
+        _attackManager = GetComponentInChildren<IAttackManager>();
 
         if (_attackManager is null)
             throw new NullReferenceException("<color=#c0392b>AttackManager</color> is not found in " + gameObject.name);
@@ -112,6 +112,7 @@ public class BehaviourTreeRunner : NetworkBehaviour, ITreeRunner, IEntity
                 .WithSafeDistance(fishData.SafeDistance)
                 .WithStaminaManager(_staminaManager)
                 .WithForbiddenAreaCheck(IsInsideForbiddenArea)
+                .WithUseForward(true)
                 .Build()
         );
 
@@ -140,6 +141,7 @@ public class BehaviourTreeRunner : NetworkBehaviour, ITreeRunner, IEntity
                 .WithAttackRange(fishData.AttackRange)
                 .WithAttackValue(fishData.AttackValue)
                 .WithDidPreyDie(() => _targetHealthManager.Died)
+                .WithUseForward(true)
                 .Build()
         );
 
@@ -156,6 +158,7 @@ public class BehaviourTreeRunner : NetworkBehaviour, ITreeRunner, IEntity
                 .WithObstacleAvoidanceLayerMask(obstacleAvoidanceMask)
                 .WithObstacleAvoidanceDistance(fishData.ObstacleAvoidanceDistance)
                 .WithForbiddenAreaCheck(IsInsideForbiddenArea)
+                .WithUseForward(true)
                 .Build());
 
 

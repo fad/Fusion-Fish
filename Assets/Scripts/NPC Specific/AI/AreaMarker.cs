@@ -7,6 +7,10 @@ public class AreaMarker : MonoBehaviour
     Tooltip("The fish this area marker belongs to.")]
     private FishData fishData;
     
+    [SerializeField,
+     Tooltip("Whether every fish should avoid this area.")]
+    private bool avoidedByAll;
+    
     private void OnTriggerEnter(Collider other)
     {
         ChangeAreaCheck(other, true);
@@ -19,7 +23,7 @@ public class AreaMarker : MonoBehaviour
 
     private void ChangeAreaCheck(Collider other, bool isInside)
     {
-        if (other.gameObject.TryGetComponent(out IEntity entity) && fishData.PreyList.Contains(entity.FishType))
+        if (avoidedByAll || (other.gameObject.TryGetComponent(out IEntity entity) && fishData.PreyList.Contains(entity.FishType)))
         {
             other.TryGetComponent(out ITreeRunner treeRunner);
             

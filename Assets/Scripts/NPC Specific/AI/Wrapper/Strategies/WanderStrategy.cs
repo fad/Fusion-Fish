@@ -31,6 +31,7 @@ public class WanderStrategy : MoveStrategy
         public LayerMask ObstacleAvoidanceLayerMask;
         public float ObstacleAvoidanceDistance;
         public Func<(bool, Vector3)> ForbiddenAreaCheck;
+        public bool UseForward;
 
         public Builder(Transform entity)
         {
@@ -72,6 +73,12 @@ public class WanderStrategy : MoveStrategy
             ForbiddenAreaCheck = forbiddenAreaCheck;
             return this;
         }
+        
+        public Builder WithUseForward(bool useForward)
+        {
+            UseForward = useForward;
+            return this;
+        }
 
         public WanderStrategy Build()
         {
@@ -95,9 +102,11 @@ public class WanderStrategy : MoveStrategy
     };
 
     private WanderStrategy(Builder builder) : base(builder.Entity, builder.RotationSpeed, builder.MaxPitch,
-        builder.ObstacleAvoidanceLayerMask, builder.ObstacleAvoidanceDistance, builder.ForbiddenAreaCheck)
+        builder.ObstacleAvoidanceLayerMask, builder.ObstacleAvoidanceDistance, builder.ForbiddenAreaCheck, builder.UseForward)
     {
         Speed = builder.Speed;
+        
+        ForwardModifier = (short)(builder.UseForward ? 1 : -1);
     }
 
     /// <summary>
@@ -114,14 +123,14 @@ public class WanderStrategy : MoveStrategy
             ChangeDirection();
             ChangeVerticalDirection();
             _changeInterval = Random.Range(_changeIntervalRange.x, _changeIntervalRange.y);
-            
+
             _timeSinceLastChanged = 0f;
         }
-        
+
         AvoidObstacles();
 
         TargetRotation = Quaternion.Euler(TargetRotation.eulerAngles.x, TargetRotation.eulerAngles.y, 0);
-        Vector3 forwardDirection = Entity.forward * (Speed * Time.deltaTime);
+        Vector3 forwardDirection = Entity.forward * (ForwardModifier * (Speed * Time.deltaTime));
 
 
         Entity.position += forwardDirection;
