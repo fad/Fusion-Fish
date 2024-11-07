@@ -20,6 +20,7 @@ public class ChaseStrategy : StaminaMoveStrategy
     private Transform _preyTransform;
     private IHealthManager _preyHealthManager;
     private float _currentInterestTime;
+    private bool _targetTransformDoesNotExist = false;
 
     public class Builder
     {
@@ -196,6 +197,14 @@ public class ChaseStrategy : StaminaMoveStrategy
         }
 
         GetPreyTransform();
+
+        if (_targetTransformDoesNotExist)
+        {
+            _resetBehavior();
+            _targetTransformDoesNotExist = false;
+            return Status.Success;
+        }
+        
         HandleTimerLogic();
 
         if (_currentInterestTime <= 0)
@@ -233,6 +242,8 @@ public class ChaseStrategy : StaminaMoveStrategy
     private void GetPreyTransform()
     {
         _preyTransform ??= _preyTransformGetter();
+        
+        if(!_preyTransform) _targetTransformDoesNotExist = true;
     }
 
     /// <summary>

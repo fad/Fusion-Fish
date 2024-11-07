@@ -87,7 +87,7 @@ public class BehaviourTreeRunner : NetworkBehaviour, ITreeRunner, IEntity
         if (_attackManager is null)
             throw new NullReferenceException("<color=#c0392b>AttackManager</color> is not found in " + gameObject.name);
     }
-    
+
     // TODO: Possibly cache this to only create it once and use it for all fish of the same type
     public override void Spawned()
     {
@@ -97,7 +97,7 @@ public class BehaviourTreeRunner : NetworkBehaviour, ITreeRunner, IEntity
 
         Sequence fleeSequence = new("Flee", 100);
         Leaf isInDanger = new Leaf("Is in danger?", new Condition(() => _isInDanger));
-        
+
         Leaf fleeing = new Leaf("Fleeing",
             new FleeStrategy.Builder(transform)
                 .WithNormalSpeed(fishData.WanderSpeed)
@@ -114,7 +114,7 @@ public class BehaviourTreeRunner : NetworkBehaviour, ITreeRunner, IEntity
                 .WithForbiddenAreaCheck(IsInsideForbiddenArea)
                 .Build()
         );
-        
+
         fleeSequence.AddChild(isInDanger);
         fleeSequence.AddChild(fleeing);
 
@@ -142,7 +142,8 @@ public class BehaviourTreeRunner : NetworkBehaviour, ITreeRunner, IEntity
                 .WithDidPreyDie(() => _targetHealthManager.Died)
                 .Build()
         );
-        
+
+
         chaseSequence.AddChild(isHunting);
         chaseSequence.AddChild(huntBehavior);
 
@@ -157,7 +158,7 @@ public class BehaviourTreeRunner : NetworkBehaviour, ITreeRunner, IEntity
                 .WithForbiddenAreaCheck(IsInsideForbiddenArea)
                 .Build());
 
-      
+
         actions.AddChild(fleeSequence);
         actions.AddChild(chaseSequence);
         actions.AddChild(wanderAround);
