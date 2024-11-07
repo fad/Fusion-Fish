@@ -221,7 +221,7 @@ namespace StarterAssets
                 }
                 else
                 {
-                    cineMachineTargetPitch = -20;
+                    cineMachineTargetPitch = -40;
                 }
             }
 

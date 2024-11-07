@@ -11,6 +11,7 @@ public class NonSwimmingNPCBechavior : MonoBehaviour
     private Vector3 direction;
 
     private Rigidbody rb;
+    [Header("Movement")]
 
     [SerializeField] private Animator animator;
     [SerializeField] private HealthManager healthManager;

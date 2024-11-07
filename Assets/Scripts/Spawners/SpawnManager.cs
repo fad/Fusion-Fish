@@ -6,8 +6,8 @@ public class SpawnManager : MonoBehaviour
     [Header("Ocean Player Spawn Points")] 
     public List<SpawnPoint> oceanSpawnPoints;
     
-    [Header("River Player Spawn Points")] 
-    public List<SpawnPoint> riverSpawnPoints;
+    [Header("Lake Player Spawn Points")] 
+    public List<SpawnPoint> lakeSpawnPoints;
 
     [HideInInspector] public int currentScene;
 
@@ -31,7 +31,7 @@ public class SpawnManager : MonoBehaviour
         return currentScene switch
         {
             2 => oceanSpawnPoints,
-            3 => riverSpawnPoints,
+            3 => lakeSpawnPoints,
             _ => null
         };
     }
