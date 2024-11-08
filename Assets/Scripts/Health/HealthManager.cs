@@ -57,7 +57,6 @@ public class HealthManager : NetworkBehaviour, IHealthManager
     {
         _hasSpawned = false;
     }
-
     private void Update()
     {
         if (slowDown)
@@ -69,7 +68,6 @@ public class HealthManager : NetworkBehaviour, IHealthManager
             }
         }
     }
-
     public override void FixedUpdateNetwork()
     {
         if (_regeneration && regenTimer.ExpiredOrNotRunning(Runner))

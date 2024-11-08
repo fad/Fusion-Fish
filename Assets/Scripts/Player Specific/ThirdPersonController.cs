@@ -197,6 +197,7 @@ namespace StarterAssets
                 //Don't multiply mouse input by Time.deltaTime;
                 var deltaTimeMultiplier = IsCurrentDeviceMouse ? 1.0f : Time.deltaTime;
 
+
                 if (settingsSO.xInputIsInverted)
                 {
                     cineMachineTargetYaw -= input.look.x * deltaTimeMultiplier * sensitivity;
@@ -206,13 +207,21 @@ namespace StarterAssets
                     cineMachineTargetYaw += Mathf.Clamp(input.look.x, -15, 15) * deltaTimeMultiplier * sensitivity;
                 }
 
-                if (settingsSO.yInputIsInverted)
+
+                if (!playerManager.levelUp.isEgg)
                 {
-                    cineMachineTargetPitch -= -input.look.y * deltaTimeMultiplier * sensitivity;
+                    if (settingsSO.yInputIsInverted)
+                    {
+                        cineMachineTargetPitch -= -input.look.y * deltaTimeMultiplier * sensitivity;
+                    }
+                    else
+                    {
+                        cineMachineTargetPitch += -input.look.y * deltaTimeMultiplier * sensitivity;
+                    }
                 }
                 else
                 {
-                    cineMachineTargetPitch += -input.look.y * deltaTimeMultiplier * sensitivity;
+                    cineMachineTargetPitch = -40;
                 }
             }
 
@@ -245,7 +254,7 @@ namespace StarterAssets
         {
             if (hasVCam && input.jump)
             {
-                int impulseForce = 10;
+                int impulseForce = 8;
                 rb.AddForce(GetRandomDirection() * impulseForce, ForceMode.Impulse);
                 playerManager.levelUp.currentExperience += 50;
                 playerManager.levelUp.CheckLevelUp();
@@ -253,12 +262,12 @@ namespace StarterAssets
             }
 
             rb.useGravity = true;
-            rb.drag = 0.1f;
+            rb.drag = 0.05f;
 
             Vector3 GetRandomDirection()
             {
                 float randomX = UnityEngine.Random.Range(-1f, 1f);
-                float randomY = UnityEngine.Random.Range(0, 1f);
+                float randomY = UnityEngine.Random.Range(0, 0.5f);
                 float randomZ = UnityEngine.Random.Range(-1f, 1f);
 
                 Vector3 randomDirection = new Vector3(randomX, randomY, randomZ);

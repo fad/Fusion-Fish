@@ -1926,8 +1926,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 80}
-  m_SizeDelta: {x: 200, y: 101}
+  m_AnchoredPosition: {x: 45.00177, y: 80}
+  m_SizeDelta: {x: 290.0035, y: 101}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &616533132
 MonoBehaviour:
@@ -4133,7 +4133,7 @@ PrefabInstance:
     - target: {fileID: 114810264032862352, guid: e041bff3e4559ea4abf208ccf82330d9,
         type: 3}
       propertyPath: animateBar
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224067025959442890, guid: e041bff3e4559ea4abf208ccf82330d9,
         type: 3}

@@ -38,7 +38,9 @@ public class SatietyManager : NetworkBehaviour, ISatietyManager
     {
         while (true)
         {
-            _currentSatiety -= satietyDecreaseRate;
+
+            if (!playerManager.levelUp.isEgg)
+                _currentSatiety -= satietyDecreaseRate;
 
             if (_currentSatiety <= 0)
             {

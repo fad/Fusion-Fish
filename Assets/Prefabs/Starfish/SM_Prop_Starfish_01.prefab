@@ -222,22 +222,22 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: cb0bf7cfa7fee4a4e8b5c7c05835f5ce,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.5332592
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cb0bf7cfa7fee4a4e8b5c7c05835f5ce,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.01889765
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cb0bf7cfa7fee4a4e8b5c7c05835f5ce,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.84573257
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cb0bf7cfa7fee4a4e8b5c7c05835f5ce,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.0037458967
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cb0bf7cfa7fee4a4e8b5c7c05835f5ce,
         type: 3}
@@ -359,7 +359,7 @@ MonoBehaviour:
   gibPrefab: {fileID: 3993952820748017500, guid: b9dad96a76a34d346ae8989e61852300,
     type: 3}
   gibSpawnCount: 1
-  gibsExperienceValue: 50
+  gibsExperienceValue: 25
   spawnGibs: 0
   isShrimp: 0
   isStarFish: 1
@@ -399,11 +399,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 10
+  recoveryHealthInSecond: 1
+  timeToStartRecoveryHealth: 10
   _NetworkedHealth: 10
   spawnGibs: 0
   currentHealth: 0
   notAbleToGetBitten: 0
-  experienceValue: 50
+  experienceValue: 25
   maxSlowDownSpeedTime: 5
   slowDownSpeedTime: 0
   slowDown: 0
