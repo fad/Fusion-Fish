@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Catfish
   m_EditorClassIdentifier: 
   fishID: 4
-  fishPrefab: {fileID: 4473942619782769758, guid: 485d5162b91d746adacf58be7a6639ab,
+  fishPrefab: {fileID: 6810320542011287091, guid: 10ae0571baab10142955ff89774b59f2,
     type: 3}
   attackComponentName: AttackManager
   staminaComponentName: StaminaManager

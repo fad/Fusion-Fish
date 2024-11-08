@@ -1,11 +1,9 @@
 using System;
 using UnityEngine;
 
-public class AttackManager : MonoBehaviour, IAttackManager
+public class AttackManager : MonoBehaviour, IAttackManager, IInitialisable
 {
     [Header("Setup Settings")]
-    [SerializeField, Tooltip("Root of the object")]
-    private Transform root;
     
     [SerializeField, Tooltip("The data for this fish")]
     private FishData fishData;
@@ -13,9 +11,9 @@ public class AttackManager : MonoBehaviour, IAttackManager
     private IEntity _correspondingEntity;
     private float _currentAttackCooldown = 0f;
 
-    private void Start()
+    public void Init()
     {
-        root.TryGetComponent(out _correspondingEntity);
+        _correspondingEntity = transform.parent.GetComponentInChildren<IEntity>();
 
         if (_correspondingEntity == null)
         {

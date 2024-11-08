@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Small Betta
   m_EditorClassIdentifier: 
   fishID: 6
-  fishPrefab: {fileID: 725318885590578868, guid: 240d2fe2969a54ff0b6122df02e7ad13,
+  fishPrefab: {fileID: 5197201702416932992, guid: 7b8a0ecd9c7ba2e4dad3391a0a56e42c,
     type: 3}
   attackComponentName: AttackManager
   staminaComponentName: StaminaManager

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Tuna
   m_EditorClassIdentifier: 
   fishID: 8
-  fishPrefab: {fileID: 3741301490188963127, guid: 277616db48061455085b5f9196711b42,
+  fishPrefab: {fileID: 2284069224005208639, guid: 3e743a8b52b32d940a93ecf90cedba05,
     type: 3}
   attackComponentName: AttackManager
   staminaComponentName: StaminaManager

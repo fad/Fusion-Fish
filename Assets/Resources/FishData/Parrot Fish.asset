@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Parrot Fish
   m_EditorClassIdentifier: 
   fishID: 5
-  fishPrefab: {fileID: 1452471749647145543, guid: 38043a53f9b8749b19d12bc6f01a4411,
+  fishPrefab: {fileID: 7000746915098752231, guid: d29956c564d139a45ab318ff6e931255,
     type: 3}
   attackComponentName: AttackManager
   staminaComponentName: StaminaManager

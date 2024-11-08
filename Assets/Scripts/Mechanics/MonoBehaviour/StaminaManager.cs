@@ -6,7 +6,7 @@ using UnityEditor;
 #endif
 
 
-public class StaminaManager : MonoBehaviour, IStaminaManager
+public class StaminaManager : MonoBehaviour, IStaminaManager, IInitialisable
 {
     [Header("Settings")]
     [SerializeField, Tooltip("The data for this fish")]
@@ -33,6 +33,11 @@ public class StaminaManager : MonoBehaviour, IStaminaManager
     private void Update()
     {
         Regenerate();
+    }
+
+    public void Init()
+    {
+        
     }
 
     public void Decrease()

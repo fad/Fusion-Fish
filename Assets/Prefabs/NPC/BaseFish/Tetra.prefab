@@ -292,6 +292,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 704
   fishData: {fileID: 11400000, guid: 330945d332c80934999ee14c283a705e, type: 2}
+  root: {fileID: 0}
 --- !u!1 &2979621311443367703
 GameObject:
   m_ObjectHideFlags: 0
@@ -534,6 +535,7 @@ GameObject:
   - component: {fileID: 5623972198269161468}
   - component: {fileID: 5762799115404318649}
   - component: {fileID: 1977525314625005781}
+  - component: {fileID: 1206259060733828552}
   m_Layer: 6
   m_Name: Tetra
   m_TagString: Untagged
@@ -679,6 +681,22 @@ MonoBehaviour:
   fishData: {fileID: 11400000, guid: 330945d332c80934999ee14c283a705e, type: 2}
   timeToStartRegenerate: 3
   decreaseCooldown: 1
+--- !u!114 &1206259060733828552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4503618248469752422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 158639473, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SyncScale: 0
+  SyncParent: 1
+  _autoAOIOverride: 1
+  DisableSharedModeInterpolation: 0
 --- !u!1 &4786465156385214757
 GameObject:
   m_ObjectHideFlags: 0

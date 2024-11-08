@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Big Shark
   m_EditorClassIdentifier: 
   fishID: 3
-  fishPrefab: {fileID: 1236705814913806731, guid: e131eec34188148e1912cd43e36e3d2a,
+  fishPrefab: {fileID: 2284069224005208639, guid: cb6faf6a330ec1a4a8a4f3306b40f6c3,
     type: 3}
   attackComponentName: AttackManager
   staminaComponentName: StaminaManager
