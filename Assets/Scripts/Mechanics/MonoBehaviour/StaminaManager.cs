@@ -35,9 +35,9 @@ public class StaminaManager : MonoBehaviour, IStaminaManager, IInitialisable
         Regenerate();
     }
 
-    public void Init()
+    public void Init(string fishDataName)
     {
-        
+        FishSpawnHandler.Instance.FishDataNameDictionary.TryGetValue(fishDataName, out fishData);
     }
 
     public void Decrease()

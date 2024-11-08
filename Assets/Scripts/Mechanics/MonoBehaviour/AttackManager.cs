@@ -11,13 +11,20 @@ public class AttackManager : MonoBehaviour, IAttackManager, IInitialisable
     private IEntity _correspondingEntity;
     private float _currentAttackCooldown = 0f;
 
-    public void Init()
+    public void Init(string fishDataName)
     {
         _correspondingEntity = transform.parent.GetComponentInChildren<IEntity>();
 
         if (_correspondingEntity == null)
         {
             Debug.LogError($"No <color=#00cec9>ITreeRunner</color> component found on object: {gameObject.name}.");
+        }
+        
+        FishSpawnHandler.Instance.FishDataNameDictionary.TryGetValue(fishDataName, out fishData);
+        
+        if (!fishData)
+        {
+            Debug.LogError($"No <color=#00cec9>FishData</color> found with name: {fishDataName}.");
         }
     }
 

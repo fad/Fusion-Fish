@@ -1,4 +1,4 @@
 public interface IInitialisable
 {
-    void Init();
+    void Init(string fishDataName);
 }

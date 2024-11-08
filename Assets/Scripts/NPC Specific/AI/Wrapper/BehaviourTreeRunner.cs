@@ -4,7 +4,7 @@ using AI.BehaviourTree;
 using Fusion;
 using UnityEngine;
 
-public class BehaviourTreeRunner : NetworkBehaviour, ITreeRunner, IEntity
+public class BehaviourTreeRunner : NetworkBehaviour, ITreeRunner, IEntity, IInitialisable
 {
     [Header("Settings")]
     [SerializeField,
@@ -71,6 +71,26 @@ public class BehaviourTreeRunner : NetworkBehaviour, ITreeRunner, IEntity
     private static readonly Color FleeingColor = new(39f / 255f, 174f / 255f, 96f / 255f, 1f);
     private static readonly Color HuntingColor = new(231f / 255f, 76f / 255f, 60f / 255f, 1f);
 
+    
+    public void Init(string fishDataName)
+    {
+        FishSpawnHandler.Instance.FishDataNameDictionary.TryGetValue(fishDataName, out fishData);
+
+        if (!fishData)
+            throw new NullReferenceException("<color=#9b59b6>FishData</color> is not found with name: " + fishDataName);
+        
+        _staminaManager = GetComponentInChildren<IStaminaManager>();
+
+        if (_staminaManager is null)
+            throw new NullReferenceException("<color=#2980b9>StaminaManager</color> is not found in " +
+                                             gameObject.name);
+
+        _attackManager = GetComponentInChildren<IAttackManager>();
+
+        if (_attackManager is null)
+            throw new NullReferenceException("<color=#c0392b>AttackManager</color> is not found in " + gameObject.name);
+    }
+    
     private void Awake()
     {
         if (!fishData)
@@ -222,4 +242,5 @@ public class BehaviourTreeRunner : NetworkBehaviour, ITreeRunner, IEntity
         _isInDanger = false;
         _target = null;
     }
+
 }
