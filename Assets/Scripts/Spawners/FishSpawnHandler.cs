@@ -36,7 +36,6 @@ public class FishSpawnHandler : NetworkBehaviour
         if (!Instance)
         {
             Instance = this;
-            DontDestroyOnLoad(this);
         }
         else
         {
@@ -65,8 +64,6 @@ public class FishSpawnHandler : NetworkBehaviour
     /// <param name="position">The position to spawn the fish at.</param>
     public void Spawn(FishData data, Vector3 position)
     {
-        if (!HasStateAuthority) return;
-        
         Runner.Spawn(baseFishPrefab, position, Quaternion.identity, onBeforeSpawned: (runner, obj) =>
         {
             Initialise(data, obj, runner);
@@ -108,6 +105,7 @@ public class FishSpawnHandler : NetworkBehaviour
     /// <param name="runner">The NetworkRunner used for spawning</param>
     private void Initialise(FishData data, NetworkObject obj, NetworkRunner runner)
     {
+        // BUG: The child object is not being spawned correctly since it is not a network object
         NetworkObject child = runner.Spawn(data.FishPrefab, transform.position, Quaternion.identity);
         
         child.transform.SetParent(obj.transform);
