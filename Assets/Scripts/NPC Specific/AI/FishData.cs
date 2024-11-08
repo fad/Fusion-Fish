@@ -1,8 +1,25 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [CreateAssetMenu(fileName = "New FishData", menuName = "Data/New Fish Data", order = 0)]
 public class FishData : ScriptableObject
 {
+    [SerializeField, Tooltip("The ID of this fish.")]
+    private short fishID;
+
+    [Header("Prefab Settings")]
+    [SerializeField, Tooltip("The prefab to use for the fish.")]
+    private GameObject fishPrefab;
+    
+    [SerializeField, Tooltip("The name of the script to use for Attacking.")]
+    private string attackComponentName;
+    
+    [SerializeField, Tooltip("The name of the script to use for Stamina.")]
+    private string staminaComponentName;
+
+    [SerializeField, Tooltip("The scale of the fish.")]
+    private float scale;
+
     [Header("General Values")]
     [SerializeField, Tooltip("The maximum stamina of the entity.")]
     private float maxHealth = 10f;
@@ -26,10 +43,11 @@ public class FishData : ScriptableObject
     private float FOV_Radius = 10f;
 
     [Header("Hunt Values")]
-    [SerializeField]
+    [SerializeField, Tooltip("The list of prey for this fish. The fish will hunt these down on sight.")]
     private FishData[] preyList;
 
-    [SerializeField]
+    [SerializeField,
+     Tooltip("The list of predators for this fish. The fish will flee from these and avoid their areas if set.")]
     private FishData[] predatorList;
 
     [SerializeField, Min(1f), Tooltip("The damage value to use for attacks.")]
@@ -45,7 +63,7 @@ public class FishData : ScriptableObject
     private float timeToLoseInterest = 5f;
 
     [SerializeField, Min(1f), Tooltip("The distance to start losing interest in a target.")]
-    private float _distanceToLoseInterest = 20f;
+    private float distanceToLoseInterest = 20f;
 
     [Header("Movement Values")]
     [SerializeField, Min(1f), Tooltip("The speed at which the fish will wander around normally.")]
@@ -70,6 +88,13 @@ public class FishData : ScriptableObject
     private float safeDistance = 50f;
 
 
+    public short FishID => fishID;
+    public GameObject FishPrefab => fishPrefab;
+    public string AttackComponentName => attackComponentName;
+    public string StaminaComponentName => staminaComponentName;
+
+    public float Scale => scale;
+
     public float MaxHealth => maxHealth;
     public short MaxStamina => maxStamina;
     public short StaminaDecreaseRate => staminaDecreaseRate;
@@ -86,7 +111,7 @@ public class FishData : ScriptableObject
     public float AttackRange => attackRange;
     public float AttackCooldown => attackCooldown;
     public float TimeToLoseInterest => timeToLoseInterest;
-    public float DistanceToLoseInterest => _distanceToLoseInterest;
+    public float DistanceToLoseInterest => distanceToLoseInterest;
 
     public float WanderSpeed => wanderSpeed;
     public float FastSpeed => fastSpeed;
