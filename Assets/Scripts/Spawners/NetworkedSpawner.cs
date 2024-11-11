@@ -1,7 +1,7 @@
 using UnityEngine;
 using Fusion;
 
-public abstract class NetworkedSpawner : NetworkBehaviour
+public abstract class NetworkedSpawner : NetworkBehaviour, IInitialisable
 {
     [Header("Settings")]
     [SerializeField, Tooltip("The fish to spawn")]
@@ -9,5 +9,15 @@ public abstract class NetworkedSpawner : NetworkBehaviour
     
     [Networked] protected bool HasSpawned { get; set; } 
     
-    public abstract void Spawned();
+    public abstract override void Spawned();
+    
+    public void Init(string fishDataName)
+    {
+        fishData = Resources.Load<FishData>($"FishData/{fishDataName}");
+        
+        if (!fishData)
+        {
+            Debug.LogError($"Fish data with name {fishDataName} not found!");
+        }
+    }
 }

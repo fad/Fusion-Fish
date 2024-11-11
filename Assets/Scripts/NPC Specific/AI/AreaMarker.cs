@@ -1,7 +1,7 @@
 using System.Linq;
 using UnityEngine;
 
-public class AreaMarker : MonoBehaviour
+public class AreaMarker : MonoBehaviour, IInitialisable
 {
     [SerializeField,
     Tooltip("The fish this area marker belongs to.")]
@@ -45,5 +45,15 @@ public class AreaMarker : MonoBehaviour
 
         Gizmos.color = Color.green;
         Gizmos.DrawWireCube(transform.position, boxCollider.size);
+    }
+
+    public void Init(string fishDataName)
+    {
+        fishData = Resources.Load<FishData>($"FishData/{fishDataName}");
+        
+        if (!fishData)
+        {
+            Debug.LogError($"Fish data with name {fishDataName} not found!");
+        }
     }
 }

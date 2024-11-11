@@ -80,6 +80,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3217325525760857448}
   - component: {fileID: 4190878377888191874}
+  - component: {fileID: 2013218619190644808}
   m_Layer: 0
   m_Name: FishArea
   m_TagString: Untagged
@@ -122,6 +123,19 @@ MonoBehaviour:
   NestedObjects: []
   NetworkedBehaviours:
   - {fileID: 6545150535224530330}
+--- !u!114 &2013218619190644808
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2902085350885947273}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b291e59f3a2eca649bd246f92664cc99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fishData: {fileID: 0}
 --- !u!1 &4698401513329183385
 GameObject:
   m_ObjectHideFlags: 0
