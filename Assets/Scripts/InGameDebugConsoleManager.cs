@@ -82,28 +82,33 @@ public class InGameDebugConsoleManager : MonoBehaviour
         playerManager.levelUp.CheckLevelUp();
     }
 
-    [ConsoleMethod("spawn_ID", "Spawns a fish by their ID in front of the player")]
+    [ConsoleMethod("SpawnID", "Spawns a fish by their ID in front of the player")]
     public static void SpawnFish(int id)
     {
         GameObject player = GameObject.FindGameObjectWithTag("Player");
-        Debug.Log(player);
+        Vector3 spawnPosition = player.transform.position - player.transform.forward * 4;
         
-        FishSpawnHandler.Instance.Spawn(id, player.transform.position + player.transform.forward * 4);
+        FishSpawnHandler.Instance.Spawn(id, spawnPosition);
+        
     }
     
-    [ConsoleMethod("spawn_name", "Spawns a fish by their name in front of the player")]
+    [ConsoleMethod("SpawnName", "Spawns a fish by their name in front of the player")]
     public static void SpawnFish(string name)
     {
         GameObject player = GameObject.FindGameObjectWithTag("Player");
+        Vector3 spawnPosition = player.transform.position - player.transform.forward * 4;
+
         
-        FishSpawnHandler.Instance.Spawn(name, player.transform.position + player.transform.forward * 4);
+        FishSpawnHandler.Instance.Spawn(name, spawnPosition);
     }
     
-    [ConsoleMethod("spawn_example", "Spawns an example fish in front of the player")]
+    [ConsoleMethod("SpawnExample", "Spawns an example fish in front of the player")]
     public static void SpawnExampleFish(ExampleFishes fish)
     {
         GameObject player = GameObject.FindGameObjectWithTag("Player");
+        Vector3 spawnPosition = player.transform.position - player.transform.forward * 4;
+
         
-        FishSpawnHandler.Instance.Spawn(fish.ToString(), player.transform.position + player.transform.forward * 4);
+        FishSpawnHandler.Instance.Spawn(fish.ToString(), spawnPosition);
     }
 }
