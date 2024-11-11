@@ -58,7 +58,7 @@ public class NPCBehaviour : NetworkBehaviour
     [Tooltip("Time until the NPC stops movement.")]
     private float randomMoveTime;
 
-    private float checkObstacleDistance = 1;
+    private float checkObstacleDistance = 1.5f;
 
     private Behaviour behaviour = Behaviour.NaturalBehaviour;
     private enum Behaviour
@@ -104,7 +104,7 @@ public class NPCBehaviour : NetworkBehaviour
                         swimDirectionAwayFromEnemy = new Vector3(hitFlight.normal.x, hitFlight.normal.y, hitFlight.normal.z);
                         swimDirectionAwayFromEnemy *= 5;
                     }
-                
+                    
                     MoveNPCInDirection(swimDirectionAwayFromEnemy, Quaternion.LookRotation(swimDirectionAwayFromEnemy));   
                 }
                 break;
@@ -115,7 +115,7 @@ public class NPCBehaviour : NetworkBehaviour
 
                 if (randomWaitTime <= 0)
                 {
-                    newPosition = transform.position + Random.insideUnitSphere;
+                    newPosition =  Random.insideUnitSphere;
                     randomWaitTime = Random.Range(minTimeUntilChangeMoveDirection, maxTimeUntilChangeMoveDirection);
                     randomMoveTime = Random.Range(minWaitTime, maxWaitTime);
                 }
@@ -127,17 +127,16 @@ public class NPCBehaviour : NetworkBehaviour
                 else
                 {
                     randomWaitTime -= Time.deltaTime;
-                    
                     currentSpeed = defaultSwimSpeed;
 
                     //Make NPC not swim toward objects
+                    Debug.DrawRay(currentPosition, -transform.forward * checkObstacleDistance,Color.blue);
                     if (Physics.Raycast(currentPosition, -transform.forward, out var hit, checkObstacleDistance, groundLayer))
                     {
-                        newPosition = new Vector3(hit.normal.x, hit.normal.y, hit.normal.z);
-                        newPosition *= 5;
+                        newPosition = hit.normal * -1;
                     }
 
-                    MoveNPCInDirection(newPosition - currentPosition, Quaternion.LookRotation(newPosition - currentPosition));
+                    MoveNPCInDirection(newPosition, Quaternion.LookRotation(newPosition));
                 }
                 break;
             case Behaviour.Attack:
