@@ -19,6 +19,16 @@ public class BehaviourTreeRunner : NetworkBehaviour, ITreeRunner, IEntity, IInit
     /// The behaviour tree to execute on this object.
     /// </summary>
     private BehaviourTree _behaviourTreeToExecute;
+    
+    /// <summary>
+    /// Whether the fish has been initialized.
+    /// </summary>
+    [Networked] private bool Initialized { get; set; }
+    
+    /// <summary>
+    /// The name of the fish data to use for this fish.
+    /// </summary>
+    [Networked] private string FishDataName { get; set; }
 
     /// <summary>
     /// Whether the fish is inside a forbidden area.
@@ -71,7 +81,6 @@ public class BehaviourTreeRunner : NetworkBehaviour, ITreeRunner, IEntity, IInit
     private static readonly Color FleeingColor = new(39f / 255f, 174f / 255f, 96f / 255f, 1f);
     private static readonly Color HuntingColor = new(231f / 255f, 76f / 255f, 60f / 255f, 1f);
 
-    private bool _initialized = false;
     
     public void Init(string fishDataName)
     {
@@ -91,29 +100,19 @@ public class BehaviourTreeRunner : NetworkBehaviour, ITreeRunner, IEntity, IInit
         if (_attackManager is null)
             throw new NullReferenceException("<color=#c0392b>AttackManager</color> is not found in " + gameObject.name);
         
-        _initialized = true;
+        Initialized = true;
+        FishDataName = fishDataName;
     }
-    
-    // private void Awake()
-    // {
-    //     if (!fishData)
-    //         throw new NullReferenceException("<color=#9b59b6>FishData</color> is not set in " + gameObject.name);
-    //
-    //     _staminaManager = GetComponentInChildren<IStaminaManager>();
-    //
-    //     if (_staminaManager is null)
-    //         throw new NullReferenceException("<color=#2980b9>StaminaManager</color> is not found in " +
-    //                                          gameObject.name);
-    //
-    //     _attackManager = GetComponentInChildren<IAttackManager>();
-    //
-    //     if (_attackManager is null)
-    //         throw new NullReferenceException("<color=#c0392b>AttackManager</color> is not found in " + gameObject.name);
-    // }
 
     // TODO: Possibly cache this to only create it once and use it for all fish of the same type
     public override void Spawned()
     {
+        if (!fishData)
+        {
+            fishData = FishSpawnHandler.Instance.FishDataNameDictionary[FishDataName];
+        }
+        
+        
         _behaviourTreeToExecute = new BehaviourTree(gameObject.name);
 
         PrioritySelector actions = new PrioritySelector("Root");
@@ -194,7 +193,7 @@ public class BehaviourTreeRunner : NetworkBehaviour, ITreeRunner, IEntity, IInit
 
     private void Update()
     {
-        if (!HasStateAuthority || !_initialized) return;
+        if (!HasStateAuthority || !Initialized) return;
 
         _behaviourTreeToExecute?.Evaluate();
     }

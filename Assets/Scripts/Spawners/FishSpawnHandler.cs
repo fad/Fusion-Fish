@@ -59,7 +59,7 @@ public class FishSpawnHandler : NetworkBehaviour
     /// <param name="position">The position to spawn the fish at.</param>
     public void Spawn(FishData data, Vector3 position)
     {
-        Runner.Spawn(data.FishPrefab, position, Quaternion.identity);
+        Runner.Spawn(data.FishPrefab, position, Quaternion.identity, onBeforeSpawned: (runner, o) => Initialise(data, o, runner));
     }
     
     /// <summary>
@@ -97,12 +97,6 @@ public class FishSpawnHandler : NetworkBehaviour
     /// <param name="runner">The NetworkRunner used for spawning</param>
     private void Initialise(FishData data, NetworkObject obj, NetworkRunner runner)
     {
-        // BUG: The child object is not being spawned correctly since it is not a network object
-        NetworkObject child = runner.Spawn(data.FishPrefab, transform.position, Quaternion.identity);
-        
-        child.transform.SetParent(obj.transform);
-        child.transform.localPosition = Vector3.zero;
-
         RPC_Init(obj, data.name);
     }
 
