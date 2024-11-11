@@ -165,8 +165,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 400
-  recoveryHealthInSecond: 10
-  timeToStartRecoveryHealth: 3
+  recoveryHealthInSecond: 20
+  timeToStartRecoveryHealth: 10
   _NetworkedHealth: 400
   spawnGibs: 0
   currentHealth: 0

@@ -5097,6 +5097,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: ClownFish
       objectReference: {fileID: 0}
+    - target: {fileID: 532309906241500560, guid: 274fa519b44c24e43a28d85dbdddcb30,
+        type: 3}
+      propertyPath: fishData
+      value: 
+      objectReference: {fileID: 11400000, guid: d569fcbd1e7d4b64fba76a3066df7858,
+        type: 2}
     - target: {fileID: 2297454540360690151, guid: 274fa519b44c24e43a28d85dbdddcb30,
         type: 3}
       propertyPath: eggModel
@@ -5115,7 +5121,7 @@ PrefabInstance:
     - target: {fileID: 2749181200256999984, guid: 274fa519b44c24e43a28d85dbdddcb30,
         type: 3}
       propertyPath: attackDamage
-      value: 3
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2749181200256999984, guid: 274fa519b44c24e43a28d85dbdddcb30,
         type: 3}
@@ -5159,18 +5165,28 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4632872686385277288, guid: 274fa519b44c24e43a28d85dbdddcb30,
         type: 3}
-      propertyPath: _NetworkedHealth
+      propertyPath: maxHealth
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 4632872686385277288, guid: 274fa519b44c24e43a28d85dbdddcb30,
+        type: 3}
+      propertyPath: experienceValue
       value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4632872686385277288, guid: 274fa519b44c24e43a28d85dbdddcb30,
         type: 3}
+      propertyPath: _NetworkedHealth
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 4632872686385277288, guid: 274fa519b44c24e43a28d85dbdddcb30,
+        type: 3}
       propertyPath: recoveryHealthInSecond
-      value: 1
+      value: 1.3
       objectReference: {fileID: 0}
     - target: {fileID: 4632872686385277288, guid: 274fa519b44c24e43a28d85dbdddcb30,
         type: 3}
       propertyPath: timeToStartRecoveryHealth
-      value: 5
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 4763555619980021824, guid: 274fa519b44c24e43a28d85dbdddcb30,
         type: 3}
@@ -5442,6 +5458,16 @@ PrefabInstance:
       propertyPath: NetworkedBehaviours.Array.data[15]
       value: 
       objectReference: {fileID: 6337673288655362029}
+    - target: {fileID: 9150513680388461083, guid: 274fa519b44c24e43a28d85dbdddcb30,
+        type: 3}
+      propertyPath: boostSwimSpeed
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 9150513680388461083, guid: 274fa519b44c24e43a28d85dbdddcb30,
+        type: 3}
+      propertyPath: boostReloadSpeed
+      value: 23
+      objectReference: {fileID: 0}
     - target: {fileID: 9150513680388461083, guid: 274fa519b44c24e43a28d85dbdddcb30,
         type: 3}
       propertyPath: obstacleLayer.m_Bits

@@ -8,8 +8,8 @@ public class HealthManager : NetworkBehaviour, IHealthManager
 {
     [Header("Health")]
     public float maxHealth;
-    [SerializeField] private float recoveryHealthInSecond = 10;
-    [SerializeField] private float timeToStartRecoveryHealth = 3;
+    public float recoveryHealthInSecond = 10;
+    public float timeToStartRecoveryHealth = 3;
     private bool _regeneration = false;
     [Networked] private TickTimer regenTimer { get; set; }
 

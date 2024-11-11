@@ -5142,6 +5142,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: Goldfish
       objectReference: {fileID: 0}
+    - target: {fileID: 532309906241500560, guid: 274fa519b44c24e43a28d85dbdddcb30,
+        type: 3}
+      propertyPath: fishData
+      value: 
+      objectReference: {fileID: 11400000, guid: 76694b7d080cfeb4b83267df3328c64a,
+        type: 2}
     - target: {fileID: 2297454540360690151, guid: 274fa519b44c24e43a28d85dbdddcb30,
         type: 3}
       propertyPath: eggModel
@@ -5160,7 +5166,7 @@ PrefabInstance:
     - target: {fileID: 2749181200256999984, guid: 274fa519b44c24e43a28d85dbdddcb30,
         type: 3}
       propertyPath: attackDamage
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2749181200256999984, guid: 274fa519b44c24e43a28d85dbdddcb30,
         type: 3}
@@ -5194,8 +5200,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4632872686385277288, guid: 274fa519b44c24e43a28d85dbdddcb30,
         type: 3}
+      propertyPath: maxHealth
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 4632872686385277288, guid: 274fa519b44c24e43a28d85dbdddcb30,
+        type: 3}
       propertyPath: _NetworkedHealth
-      value: 100
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 4632872686385277288, guid: 274fa519b44c24e43a28d85dbdddcb30,
+        type: 3}
+      propertyPath: recoveryHealthInSecond
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4632872686385277288, guid: 274fa519b44c24e43a28d85dbdddcb30,
+        type: 3}
+      propertyPath: timeToStartRecoveryHealth
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6014465216197840825, guid: 274fa519b44c24e43a28d85dbdddcb30,
         type: 3}
@@ -5493,6 +5514,16 @@ PrefabInstance:
       propertyPath: NetworkedBehaviours.Array.data[15]
       value: 
       objectReference: {fileID: 1909236060303310207}
+    - target: {fileID: 9150513680388461083, guid: 274fa519b44c24e43a28d85dbdddcb30,
+        type: 3}
+      propertyPath: boostSwimSpeed
+      value: 240
+      objectReference: {fileID: 0}
+    - target: {fileID: 9150513680388461083, guid: 274fa519b44c24e43a28d85dbdddcb30,
+        type: 3}
+      propertyPath: defaultSwimSpeed
+      value: 160
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:

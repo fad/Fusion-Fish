@@ -21,8 +21,14 @@ public class FishData : ScriptableObject
     private float scale;
 
     [Header("General Values")]
-    [SerializeField, Tooltip("The maximum stamina of the entity.")]
+    [SerializeField, Tooltip("The maximum Health of the entity.")]
     private float maxHealth = 10f;
+
+    [SerializeField, Tooltip("The rate at which the Health will regenerate.")]
+    public float recoveryHealthInSecond = 10;
+
+    [SerializeField, Tooltip("Time to start regenerate.")]
+    public float timeToStartRecoveryHealth = 3;
 
     [SerializeField, Tooltip("The maximum stamina of the entity.")]
     private short maxStamina = 10;
