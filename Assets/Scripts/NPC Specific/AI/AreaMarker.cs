@@ -13,11 +13,15 @@ public class AreaMarker : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
+        if (!fishData) return;
+        
         ChangeAreaCheck(other, true);
     }
 
     private void OnTriggerExit(Collider other)
     {
+        if (!fishData) return;
+        
         ChangeAreaCheck(other, false);
     }
 

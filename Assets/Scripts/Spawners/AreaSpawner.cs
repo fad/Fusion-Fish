@@ -1,16 +1,16 @@
-using Fusion;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
-public class AreaSpawner : NetworkBehaviour
+public class AreaSpawner : NetworkedSpawner
 {
-    [Header("Settings")]
-    [SerializeField, Tooltip("The fish to spawn")]
-    private FishData fishData;
-    
     [SerializeField, Tooltip("The min and max amount to spawn. X is min, Y is max.")]
     private Vector2Int minMaxAmountToSpawn = new(2,4);
     
-    [Networked] private bool HasSpawned { get; set; }
+    [SerializeField, Tooltip("The bounds of the area to spawn the fish in")]
+    private Collider areaBounds;
+    
+    [SerializeField, Tooltip("The scale of the area bounds")]
+    private float areaBoundsScale = 1f;
 
     public override void Spawned()
     {
@@ -20,10 +20,20 @@ public class AreaSpawner : NetworkBehaviour
         
         for (int i = 0; i < amountToSpawn; i++)
         {
-            Vector3 spawnPosition = transform.position + new Vector3(Random.Range(-5f, 5f), 0f, Random.Range(-5f, 5f));
+            Vector3 randomPosition = Random.insideUnitSphere * areaBounds.bounds.extents.magnitude * areaBoundsScale;
+            Vector3 spawnPosition = areaBounds.transform.position + randomPosition;
+            
             FishSpawnHandler.Instance.Spawn(fishData, spawnPosition);
         }
 
         HasSpawned = true;
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (!areaBounds) return;
+        
+        Gizmos.color = Color.magenta;
+        Gizmos.DrawWireCube(areaBounds.bounds.center, areaBounds.bounds.size * areaBoundsScale);
     }
 }

@@ -16,7 +16,7 @@ public class HatcheryManager : NetworkBehaviour
     [Header("Spawner Settings")]
     [SerializeField] 
     [Tooltip("The type of fish to spawn")]
-    private NPCBehaviour fishTypeToSpawn;
+    private FishData fishTypeToSpawn;
     
     [SerializeField] 
     [Tooltip("The range for the amount of fish to spawn. \nX is the inclusive minimum, Y is the inclusive maximum.")]
@@ -47,6 +47,8 @@ public class HatcheryManager : NetworkBehaviour
 
     public override void FixedUpdateNetwork()
     {
+        if(!fishTypeToSpawn || !spawnerToUse) return;
+        
         if (SpawnTimer.Expired(Runner))
         {
             SpawnFishes();
