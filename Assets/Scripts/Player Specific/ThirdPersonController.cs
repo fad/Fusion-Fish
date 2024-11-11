@@ -48,7 +48,7 @@ namespace StarterAssets
         [Header("Boost")]
         [HideInInspector] public float currentBoostCount;
         [SerializeField] private float boostDelayAfterActivation = 3f;
-        [SerializeField] private float boostReloadSpeed = 18;
+        [SerializeField] public float boostReloadSpeed = 18;
         [SerializeField] private float boostConsumptionSpeed = 30;
         [SerializeField] private ParticleSystem boostParticles;
         [HideInInspector] public bool permanentStamina;
