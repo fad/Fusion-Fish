@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Tetra
   m_EditorClassIdentifier: 
   fishID: 7
-  fishPrefab: {fileID: 4503618248469752422, guid: 09864b0130333b342835e2b09ec2e8dd,
+  fishPrefab: {fileID: 1337011438772157387, guid: dcafd68a26797d944b321c75f7fcec7e,
     type: 3}
   attackComponentName: AttackManager
   staminaComponentName: StaminaManager

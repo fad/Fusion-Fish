@@ -80,7 +80,6 @@ GameObject:
   - component: {fileID: 5897186053121985661}
   - component: {fileID: 5296885416873278531}
   - component: {fileID: 2159207394701197986}
-  - component: {fileID: 8171857660517950284}
   m_Layer: 6
   m_Name: Tuna
   m_TagString: Untagged
@@ -227,22 +226,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fishData: {fileID: 11400000, guid: 4f425dd60c1f84442a76761bb02cae31, type: 2}
---- !u!114 &8171857660517950284
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2284069224005208639}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 158639473, guid: e725a070cec140c4caffb81624c8c787, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SyncScale: 0
-  SyncParent: 1
-  _autoAOIOverride: 1
-  DisableSharedModeInterpolation: 0
 --- !u!1 &2769723252524276266
 GameObject:
   m_ObjectHideFlags: 0

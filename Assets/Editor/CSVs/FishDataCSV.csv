@@ -1,10 +1,9 @@
 ID,Name,Prefab,Attack Component Name,Stamina Component Name,Scale,Max Health,Max Stamina,Stamina Decrease Rate,Stamina Regeneration Rate,Stamina Threshold,FOV Angle,FOV Radius,Prey,Predators,Attack Value,Attack Range,Attack Cooldown,Time to lose interest,Distance to lose interest,Wander Speed,Fast Speed,Rotation Speed,Max Pitch,Obstacle Avoidance Distance,Safe Distance
 1,Clownfish,Assets/Packages/Low Poly Fishes/Prefabs/Clownfish.prefab,AttackManager,StaminaManager,0.5,100,100,12,8,65,45,10,Tetra;Catfish;Parrot Fish;Small Betta;Tuna,Catfish;Parrot Fish;Small Betta,10,2.5,1,7,20,3.5,6,2,45,2,40
 2,Goldfish,Assets/Packages/Low Poly Fishes/Prefabs/Goldfish.prefab,AttackManager,StaminaManager,0.5,100,100,12,8,65,45,10,Tetra;Catfish;Parrot Fish;Small Betta;Tuna,Catfish;Parrot Fish;Small Betta,10,2.5,1,7,20,3.5,6,2,45,2,40
-3,Big Shark,Assets/Prefabs/NPC/BaseFish/BigShark.prefab,AttackManager,StaminaManager,5,150,250,30,20,140,35,25,Clownfish;Goldfish;Catfish;Parrot Fish;Small Betta; Tuna,,40,4,3,10,40,2,4,2,45,5,30
-4,Catfish,Assets/Prefabs/NPC/BaseFish/Catfish.prefab,AttackManager,StaminaManager,1,40,60,12,6,35,60,15,Tetra;Tuna;Clownfish;Goldfish;,Clownfish;Goldfish;,5,2.25,1,5,15,3.5,6,2,45,2,45
-5,Parrot Fish,Assets/Prefabs/NPC/BaseFish/ParrotFish.prefab,AttackManager,StaminaManager,1,40,60,12,6,35,40,14,Tetra;Clownfish;Goldfish;,Clownfish;Goldfish;Tuna,5,2.25,1,5,15,3.5,6,2,45,2,45
-6,Small Betta,Assets/Prefabs/NPC/BaseFish/SmallBetta.prefab,AttackManager,StaminaManager,0.5,30,50,10,6,30,35,12.5,Tetra,Clownfish;Goldfish;,4,2.25,1,6,17.5,3,5,2,45,2,40
-7,Tetra,Assets/Prefabs/NPC/BaseFish/Tetra.prefab,AttackManager,StaminaManager,0.35,10,20,4,3,10,60,15,,Clownfish;Goldfish;Tuna;Catfish;Parrot Fish;Small Betta,2,2,1,4,12,5,8,2,45,2,50
-8,Tuna,Assets/Prefabs/NPC/BaseFish/Tuna.prefab,AttackManager,StaminaManager,0.5,30,50,10,6,30,50,20,Tetra;Parrot Fish,Clownfish;Goldfish;Big Shark;,4,2.25,1,6,17.5,3,5,2,45,2,40
-9,Blub,Assets/Packages/Low Poly Fishes/Prefabs/Blobfish.prefab,AttackManager,StaminaManager,1,100,100,10,6,30,50,20,Tetra;Parrot Fish,Clownfish;Goldfish;Big Shark;,4,2.25,1,6,17.5,3,5,2,45,2,40
+3,Big Shark,Assets/Prefabs/NPC/FishWithRunner/Shark.prefab,AttackManager,StaminaManager,5,150,250,30,20,140,35,25,Clownfish;Goldfish;Catfish;Parrot Fish;Small Betta; Tuna,,40,4,3,10,40,2,4,2,45,5,30
+4,Catfish,Assets/Prefabs/NPC/FishWithRunner/Catfish.prefab,AttackManager,StaminaManager,1,40,60,12,6,35,60,15,Tetra;Tuna;Clownfish;Goldfish;,Clownfish;Goldfish;,5,2.25,1,5,15,3.5,6,2,45,2,45
+5,Parrot Fish,Assets/Prefabs/NPC/FishWithRunner/Parrotfish.prefab,AttackManager,StaminaManager,1,40,60,12,6,35,40,14,Tetra;Clownfish;Goldfish;,Clownfish;Goldfish;Tuna,5,2.25,1,5,15,3.5,6,2,45,2,45
+6,Small Betta,Assets/Prefabs/NPC/FishWithRunner/SmallBetta.prefab,AttackManager,StaminaManager,0.5,30,50,10,6,30,35,12.5,Tetra,Clownfish;Goldfish;,4,2.25,1,6,17.5,3,5,2,45,2,40
+7,Tetra,Assets/Prefabs/NPC/FishWithRunner/Tetra.prefab,AttackManager,StaminaManager,0.35,10,20,4,3,10,60,15,,Clownfish;Goldfish;Tuna;Catfish;Parrot Fish;Small Betta,2,2,1,4,12,5,8,2,45,2,50
+8,Tuna,Assets/Prefabs/NPC/FishWithRunner/Tuna.prefab,AttackManager,StaminaManager,0.5,30,50,10,6,30,50,20,Tetra;Parrot Fish,Clownfish;Goldfish;Big Shark;,4,2.25,1,6,17.5,3,5,2,45,2,40

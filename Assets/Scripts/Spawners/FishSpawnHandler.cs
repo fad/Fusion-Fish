@@ -8,11 +8,6 @@ using Fusion;
 /// </summary>
 public class FishSpawnHandler : NetworkBehaviour
 {
-    [Header("Prefab Settings")]
-    [SerializeField, 
-     Tooltip("The base prefab to use as a parent for the fish")]
-    private NetworkObject baseFishPrefab;
-    
     private readonly Dictionary<int, FishData> _fishDataDictionary = new();
     private readonly Dictionary<string, FishData> _fishDataDictionaryByName = new();
     
@@ -64,10 +59,7 @@ public class FishSpawnHandler : NetworkBehaviour
     /// <param name="position">The position to spawn the fish at.</param>
     public void Spawn(FishData data, Vector3 position)
     {
-        Runner.Spawn(baseFishPrefab, position, Quaternion.identity, onBeforeSpawned: (runner, obj) =>
-        {
-            Initialise(data, obj, runner);
-        });
+        Runner.Spawn(data.FishPrefab, position, Quaternion.identity);
     }
     
     /// <summary>
