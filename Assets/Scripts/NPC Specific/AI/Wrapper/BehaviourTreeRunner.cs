@@ -73,6 +73,9 @@ public class BehaviourTreeRunner : NetworkBehaviour, ITreeRunner, IEntity, IInit
     /// </summary>
     private IHealthManager _targetHealthManager;
 
+
+    private Animator _animator;
+
     public FishData FishType => fishData;
 
     public BehaviourTree Tree => _behaviourTreeToExecute;
@@ -80,8 +83,9 @@ public class BehaviourTreeRunner : NetworkBehaviour, ITreeRunner, IEntity, IInit
     private static readonly Color WanderingColor = new(120f / 255f, 33f / 255f, 114f / 255f, 1f);
     private static readonly Color FleeingColor = new(39f / 255f, 174f / 255f, 96f / 255f, 1f);
     private static readonly Color HuntingColor = new(231f / 255f, 76f / 255f, 60f / 255f, 1f);
+    private static readonly int MovingSpeed = Animator.StringToHash("movingSpeed");
 
-    
+
     public void Init(string fishDataName)
     {
         FishSpawnHandler.Instance.FishDataNameDictionary.TryGetValue(fishDataName, out fishData);
@@ -111,6 +115,11 @@ public class BehaviourTreeRunner : NetworkBehaviour, ITreeRunner, IEntity, IInit
         {
             fishData = FishSpawnHandler.Instance.FishDataNameDictionary[FishDataName];
         }
+
+        if (!_animator)
+        {
+            _animator = GetComponentInChildren<Animator>();
+        }
         
         
         _behaviourTreeToExecute = new BehaviourTree(gameObject.name);
@@ -135,6 +144,7 @@ public class BehaviourTreeRunner : NetworkBehaviour, ITreeRunner, IEntity, IInit
                 .WithStaminaManager(_staminaManager)
                 .WithForbiddenAreaCheck(IsInsideForbiddenArea)
                 .WithUseForward(true)
+                .WithSpeedChangeCallback(SetAnimatorMoveSpeed)
                 .Build()
         );
 
@@ -164,6 +174,7 @@ public class BehaviourTreeRunner : NetworkBehaviour, ITreeRunner, IEntity, IInit
                 .WithAttackValue(fishData.AttackValue)
                 .WithDidPreyDie(() => _targetHealthManager.Died)
                 .WithUseForward(true)
+                .WithSpeedChangeCallback(SetAnimatorMoveSpeed)
                 .Build()
         );
 
@@ -181,6 +192,7 @@ public class BehaviourTreeRunner : NetworkBehaviour, ITreeRunner, IEntity, IInit
                 .WithObstacleAvoidanceDistance(fishData.ObstacleAvoidanceDistance)
                 .WithForbiddenAreaCheck(IsInsideForbiddenArea)
                 .WithUseForward(true)
+                .WithSpeedChangeCallback(SetAnimatorMoveSpeed)
                 .Build());
 
 
@@ -243,6 +255,13 @@ public class BehaviourTreeRunner : NetworkBehaviour, ITreeRunner, IEntity, IInit
     {
         _isInDanger = false;
         _target = null;
+    }
+
+    private void SetAnimatorMoveSpeed(float speed)
+    {
+        if(!_animator) return;
+        
+        _animator.SetFloat(MovingSpeed, speed);
     }
 
 }

@@ -30,6 +30,7 @@ public class FleeStrategy : StaminaMoveStrategy
         public short StaminaThreshold;
         public Func<(bool, Vector3)> ForbiddenAreaCheck;
         public bool UseForward;
+        public Action<float> SpeedChangeCallback;
 
         public Builder(Transform entity)
         {
@@ -113,6 +114,12 @@ public class FleeStrategy : StaminaMoveStrategy
             UseForward = useForward;
             return this;
         }
+        
+        public Builder WithSpeedChangeCallback(Action<float> speedChangeCallback)
+        {
+            SpeedChangeCallback = speedChangeCallback;
+            return this;
+        }
 
         public FleeStrategy Build()
         {
@@ -130,7 +137,8 @@ public class FleeStrategy : StaminaMoveStrategy
         builder.StaminaThreshold,
         builder.NormalSpeed,
         builder.FastSpeed,
-        builder.UseForward)
+        builder.UseForward,
+        builder.SpeedChangeCallback)
     {
         _predatorTransformGetter = builder.PredatorTransformGetter;
         _resetThreatAction = builder.ResetThreatAction;

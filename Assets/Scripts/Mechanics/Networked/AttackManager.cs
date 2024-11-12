@@ -1,15 +1,19 @@
-using System;
+using Fusion;
 using UnityEngine;
 
-public class AttackManager : MonoBehaviour, IAttackManager, IInitialisable
+public class AttackManager : NetworkBehaviour, IAttackManager, IInitialisable
 {
+
     [Header("Setup Settings")]
     
     [SerializeField, Tooltip("The data for this fish")]
     private FishData fishData;
+    [Networked] private float CurrentAttackCooldown { get; set; }
 
     private IEntity _correspondingEntity;
-    private float _currentAttackCooldown = 0f;
+    private Animator _animator;
+    
+    private static readonly int AttackTrigger = Animator.StringToHash("attack");
 
     public void Init(string fishDataName)
     {
@@ -26,28 +30,37 @@ public class AttackManager : MonoBehaviour, IAttackManager, IInitialisable
         {
             Debug.LogError($"No <color=#00cec9>FishData</color> found with name: {fishDataName}.");
         }
+        
+        _animator = GetComponentInChildren<Animator>();
     }
 
-    private void Update()
+    public override void FixedUpdateNetwork()
     {
-        if (_currentAttackCooldown <= 0f) return;
+        if (CurrentAttackCooldown <= 0f) return;
         
-        _currentAttackCooldown -= Time.deltaTime;
+        CurrentAttackCooldown -= Time.deltaTime;
     }
+    
+    
 
 
     public void Attack(float damageValue, Transform target)
     {
-        if(_currentAttackCooldown > 0f) return;
+        if(CurrentAttackCooldown > 0f) return;
         
         target.TryGetComponent(out IHealthManager healthManager);
         healthManager?.Damage(damageValue);
+
+        if (_animator)
+        {
+            _animator.SetTrigger(AttackTrigger);
+        }
 
         if (healthManager is { Died: true }) return;
 
         target.TryGetComponent(out ITreeRunner treeRunner);
         treeRunner?.AdjustHuntOrFleeTarget((transform, _correspondingEntity));
         
-        _currentAttackCooldown = fishData.AttackCooldown;
+        CurrentAttackCooldown = fishData.AttackCooldown;
     }
 }

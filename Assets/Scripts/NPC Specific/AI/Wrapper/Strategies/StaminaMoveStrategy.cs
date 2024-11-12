@@ -21,7 +21,8 @@ public abstract class StaminaMoveStrategy : MoveStrategy
         short staminaThreshold,
         float normalSpeed,
         float fastSpeed,
-        bool useForward)
+        bool useForward, 
+        Action<float> speedChangeCallback)
         : base(
             entity,
             rotationSpeed,
@@ -29,7 +30,8 @@ public abstract class StaminaMoveStrategy : MoveStrategy
             obstacleAvoidanceLayerMask,
             obstacleAvoidanceDistance,
             forbiddenAreaCheck,
-            useForward)
+            useForward,
+            speedChangeCallback)
     {
         StaminaManager = staminaManager;
         StaminaThreshold = staminaThreshold;
@@ -68,7 +70,8 @@ public abstract class StaminaMoveStrategy : MoveStrategy
                 UsesStamina = false;
                 Speed = NormalSpeed;
             }
-
+            
+            SpeedChangeCallback?.Invoke(Speed);
             return;
         }
 
@@ -81,5 +84,7 @@ public abstract class StaminaMoveStrategy : MoveStrategy
         {
             Speed = NormalSpeed;
         }
+        
+        SpeedChangeCallback?.Invoke(Speed);
     }
 }

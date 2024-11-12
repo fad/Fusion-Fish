@@ -43,6 +43,7 @@ public class ChaseStrategy : StaminaMoveStrategy
         public Action ResetBehavior;
         public Func<bool> DidPreyDie;
         public bool UseForward;
+        public Action<float> SpeedChangeCallback;
 
         public Builder(Transform entity)
         {
@@ -156,6 +157,12 @@ public class ChaseStrategy : StaminaMoveStrategy
             UseForward = useForward;
             return this;
         }
+        
+        public Builder WithSpeedChangeCallback(Action<float> speedChangeCallback)
+        {
+            SpeedChangeCallback = speedChangeCallback;
+            return this;
+        }
 
         public ChaseStrategy Build()
         {
@@ -174,7 +181,8 @@ public class ChaseStrategy : StaminaMoveStrategy
         builder.StaminaThreshold,
         builder.NormalSpeed,
         builder.FastSpeed,
-        builder.UseForward)
+        builder.UseForward,
+        builder.SpeedChangeCallback)
     {
         _preyTransformGetter = builder.PreyTransformGetter;
         _attackManager = builder.AttackManager;

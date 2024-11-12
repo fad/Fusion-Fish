@@ -32,6 +32,7 @@ public class WanderStrategy : MoveStrategy
         public float ObstacleAvoidanceDistance;
         public Func<(bool, Vector3)> ForbiddenAreaCheck;
         public bool UseForward;
+        public Action<float> SpeedChangeCallback;
 
         public Builder(Transform entity)
         {
@@ -73,10 +74,16 @@ public class WanderStrategy : MoveStrategy
             ForbiddenAreaCheck = forbiddenAreaCheck;
             return this;
         }
-        
+
         public Builder WithUseForward(bool useForward)
         {
             UseForward = useForward;
+            return this;
+        }
+        
+        public Builder WithSpeedChangeCallback(Action<float> speedChangeCallback)
+        {
+            SpeedChangeCallback = speedChangeCallback;
             return this;
         }
 
@@ -102,10 +109,12 @@ public class WanderStrategy : MoveStrategy
     };
 
     private WanderStrategy(Builder builder) : base(builder.Entity, builder.RotationSpeed, builder.MaxPitch,
-        builder.ObstacleAvoidanceLayerMask, builder.ObstacleAvoidanceDistance, builder.ForbiddenAreaCheck, builder.UseForward)
+        builder.ObstacleAvoidanceLayerMask, builder.ObstacleAvoidanceDistance, builder.ForbiddenAreaCheck,
+        builder.UseForward, builder.SpeedChangeCallback)
     {
         Speed = builder.Speed;
-        
+        SpeedChangeCallback?.Invoke(Speed);
+
         ForwardModifier = (short)(builder.UseForward ? 1 : -1);
     }
 
