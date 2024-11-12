@@ -172,7 +172,7 @@ public class BehaviourTreeRunner : NetworkBehaviour, ITreeRunner, IEntity, IInit
                 .WithAttackManager(_attackManager)
                 .WithAttackRange(fishData.AttackRange)
                 .WithAttackValue(fishData.AttackValue)
-                .WithDidPreyDie(() => _targetHealthManager.Died)
+                .WithDidPreyDie(DidPreyDie)
                 .WithUseForward(true)
                 .WithSpeedChangeCallback(SetAnimatorMoveSpeed)
                 .Build()
@@ -262,6 +262,13 @@ public class BehaviourTreeRunner : NetworkBehaviour, ITreeRunner, IEntity, IInit
         if(!_animator) return;
         
         _animator.SetFloat(MovingSpeed, speed);
+    }
+
+    private bool DidPreyDie()
+    {
+        if(_targetHealthManager is null) return false;
+        
+        return _targetHealthManager.Died;
     }
 
 }

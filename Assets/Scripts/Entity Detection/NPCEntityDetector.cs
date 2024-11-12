@@ -66,7 +66,7 @@ public class NPCEntityDetector : EntityDetector
         bool isEntity = entity.TryGetComponent(out IEntity entityObject);
 
         if (!isEntity) return;
-        entity.TryGetComponent(out IHealthManager healthManager);
+        IHealthManager healthManager = entity.GetComponentInChildren<IHealthManager>();
         
         Action onDeathRemoval = () => RemoveFromSetOnDeath(entity.transform, entityObject);
         
@@ -74,11 +74,16 @@ public class NPCEntityDetector : EntityDetector
         {
             _otherNPCs.Remove((entity: entity.transform, entityObject));
             
+            
+            if(healthManager is null) return;
+            
             healthManager.OnDeath -= onDeathRemoval;
             return;
         }
 
         _otherNPCs.Add((entity: entity.transform, entityObject));
+        
+        if(healthManager is null) return;
         healthManager.OnDeath += onDeathRemoval;
     }
 
