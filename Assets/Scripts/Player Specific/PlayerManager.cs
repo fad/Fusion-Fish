@@ -53,8 +53,8 @@ public class PlayerManager : NetworkBehaviour
         thirdPersonController.defaultSwimSpeed = fishData.WanderSpeed;
         thirdPersonController.boostReloadSpeed = fishData.StaminaRegenRate;
         healthManager.maxHealth = fishData.MaxHealth;
-        healthManager.recoveryHealthInSecond = fishData.recoveryHealthInSecond;
-        healthManager.timeToStartRecoveryHealth = fishData.timeToStartRecoveryHealth;
+        healthManager.recoveryHealthInSecond = fishData.RecoveryHealthInSecond;
+        healthManager.timeToStartRecoveryHealth = fishData.TimeToStartRecoveryHealth;
         playerAttack.attackDamage = fishData.AttackValue;
         playerAttack.attackRange = fishData.AttackRange;
     }
