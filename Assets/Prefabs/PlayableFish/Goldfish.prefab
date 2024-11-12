@@ -5146,7 +5146,7 @@ PrefabInstance:
         type: 3}
       propertyPath: fishData
       value: 
-      objectReference: {fileID: 11400000, guid: 76694b7d080cfeb4b83267df3328c64a,
+      objectReference: {fileID: 11400000, guid: d2cccc3f0e77a0c43b874e37f713be1b,
         type: 2}
     - target: {fileID: 2297454540360690151, guid: 274fa519b44c24e43a28d85dbdddcb30,
         type: 3}

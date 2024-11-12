@@ -17,13 +17,13 @@ MonoBehaviour:
     type: 3}
   attackComponentName: AttackManager
   staminaComponentName: StaminaManager
-  scale: 0.5
-  maxHealth: 100
-  recoveryHealthInSecond: 10
-  timeToStartRecoveryHealth: 3
+  scale: 0.25
+  maxHealth: 60
+  recoveryHealthInSecond: 7
+  timeToStartRecoveryHealth: 1.3
   maxStamina: 100
-  staminaDecreaseRate: 12
-  staminaRegenRate: 8
+  staminaDecreaseRate: 30
+  staminaRegenRate: 23
   staminaThreshold: 65
   FOV_Angle: 45
   FOV_Radius: 10
@@ -37,13 +37,13 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 7d2cb7dfd99a72c4bb748bd65e464fd4, type: 2}
   - {fileID: 11400000, guid: ca5b417791726f949aab6afff7e7eb84, type: 2}
   - {fileID: 11400000, guid: 6998654e15fc34741a20046b034526a9, type: 2}
-  attackValue: 10
-  attackRange: 2.5
+  attackValue: 6
+  attackRange: 2
   attackCooldown: 1
   timeToLoseInterest: 7
   distanceToLoseInterest: 20
-  wanderSpeed: 3.5
-  fastSpeed: 6
+  wanderSpeed: 120
+  fastSpeed: 300
   rotationSpeed: 2
   maxPitch: 45
   obstacleAvoidanceDistance: 2
