@@ -66,7 +66,7 @@ public class NPCEntityDetector : EntityDetector
         bool isEntity = entity.TryGetComponent(out IEntity entityObject);
 
         if (!isEntity) return;
-        IHealthManager healthManager = entity.GetComponentInChildren<IHealthManager>();
+        var healthManager = entity.GetComponentInChildren<IHealthManager>();
         
         Action onDeathRemoval = () => RemoveFromSetOnDeath(entity.transform, entityObject);
         
