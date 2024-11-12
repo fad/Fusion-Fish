@@ -19,8 +19,8 @@ MonoBehaviour:
   staminaComponentName: StaminaManager
   scale: 0.25
   maxHealth: 60
-  recoveryHealthInSecond: 7
-  timeToStartRecoveryHealth: 1.3
+  recoveryHealthInSecond: 0.8
+  timeToStartRecoveryHealth: 6
   maxStamina: 100
   staminaDecreaseRate: 30
   staminaRegenRate: 23
