@@ -51,7 +51,7 @@ MonoBehaviour:
   fishData: {fileID: 0}
   obstacleAvoidanceMask:
     serializedVersion: 2
-    m_Bits: 1024
+    m_Bits: 1040
 --- !u!114 &2522072839802053289
 MonoBehaviour:
   m_ObjectHideFlags: 0

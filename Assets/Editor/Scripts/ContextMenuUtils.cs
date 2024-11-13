@@ -38,6 +38,12 @@ public class ContextMenuUtils
             GameObject instance = (GameObject) PrefabUtility.InstantiatePrefab(prefab);
             instance.name = name;
             instance.transform.position = Vector3.zero;
+
+            if (Selection.activeGameObject)
+            {
+                instance.transform.SetParent(Selection.activeGameObject.transform);
+            }
+            
             Selection.activeGameObject = instance;
         }
         else
@@ -45,6 +51,8 @@ public class ContextMenuUtils
             Debug.LogError(name + " prefab not found at path: " + path);
         }
     }
+    
+    
 }
 
 #endif
