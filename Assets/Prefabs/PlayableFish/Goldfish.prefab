@@ -1,5 +1,61 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &490393965553061073
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3160892209510106560}
+  - component: {fileID: 6794456122138423620}
+  m_Layer: 0
+  m_Name: Decal Projector (4)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3160892209510106560
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 490393965553061073}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.85143596, y: -0, z: -0, w: 0.52445865}
+  m_LocalPosition: {x: -0.1035, y: 0.2546, z: 0.1177}
+  m_LocalScale: {x: 4, y: 4, z: 4}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3138146698000922989}
+  m_LocalEulerAnglesHint: {x: 116.73599, y: 0, z: 0}
+--- !u!114 &6794456122138423620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 490393965553061073}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0777d029ed3dffa4692f417d4aba19ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 2100000, guid: b4c081ab96b92c640898ed246eddaff9, type: 2}
+  m_DrawDistance: 1000
+  m_FadeScale: 1
+  m_StartAngleFade: 180
+  m_EndAngleFade: 180
+  m_UVScale: {x: 1, y: 1}
+  m_UVBias: {x: 0, y: 0}
+  m_DecalLayerMask: 0
+  m_ScaleMode: 1
+  m_Offset: {x: 0, y: 0, z: 0.01493028}
+  m_Size: {x: 0.03476113, y: 0.04691341, z: 0.04192162}
+  m_FadeFactor: 1
 --- !u!1 &2732953445935480844
 GameObject:
   m_ObjectHideFlags: 0
@@ -11,12 +67,12 @@ GameObject:
   - component: {fileID: 4739427028022770244}
   - component: {fileID: 3654780372428173145}
   m_Layer: 0
-  m_Name: 'DecalDamage '
+  m_Name: Decal Projector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4739427028022770244
 Transform:
   m_ObjectHideFlags: 0
@@ -25,13 +81,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2732953445935480844}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.36492842, y: -0, z: -0, w: 0.9310355}
+  m_LocalRotation: {x: 0.5372997, y: -0, z: -0, w: 0.8433914}
   m_LocalPosition: {x: 0.267, y: 0.104, z: 0.045}
   m_LocalScale: {x: 4, y: 4, z: 4}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3138146698000922989}
-  m_LocalEulerAnglesHint: {x: 42.806, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3654780372428173145
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -47,15 +103,15 @@ MonoBehaviour:
   m_Material: {fileID: 2100000, guid: 07eb32e931a522947944ba15f5faa605, type: 2}
   m_DrawDistance: 1000
   m_FadeScale: 1
-  m_StartAngleFade: 116.337204
-  m_EndAngleFade: 116.337204
-  m_UVScale: {x: 3.91, y: 1.13}
-  m_UVBias: {x: -2.54, y: -0.2}
+  m_StartAngleFade: 180
+  m_EndAngleFade: 180
+  m_UVScale: {x: 4.344547, y: 0.85}
+  m_UVBias: {x: -3.4145472, y: -0.05}
   m_DecalLayerMask: 0
   m_ScaleMode: 0
-  m_Offset: {x: -0.03585809, y: 0.0010036305, z: 0.0054713245}
-  m_Size: {x: 0.08262507, y: 0.052007265, z: 0.097350165}
-  m_FadeFactor: 1
+  m_Offset: {x: -0.04, y: 0, z: 0}
+  m_Size: {x: 0.074341245, y: 0.05, z: 0.07247588}
+  m_FadeFactor: 0.8
 --- !u!1 &3490360728326258991
 GameObject:
   m_ObjectHideFlags: 0
@@ -4955,12 +5011,12 @@ GameObject:
   - component: {fileID: 7514193442240594981}
   - component: {fileID: 5486828308167537676}
   m_Layer: 0
-  m_Name: DecalDamage2
+  m_Name: Decal Projector (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7514193442240594981
 Transform:
   m_ObjectHideFlags: 0
@@ -4970,7 +5026,7 @@ Transform:
   m_GameObject: {fileID: 3682152376194698322}
   serializedVersion: 2
   m_LocalRotation: {x: -0.031066623, y: -0, z: -0, w: 0.9995173}
-  m_LocalPosition: {x: -0.065, y: 0.025, z: 0.085}
+  m_LocalPosition: {x: 0.021, y: 0.102, z: 0.116}
   m_LocalScale: {x: 4, y: 4, z: 4}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4993,12 +5049,124 @@ MonoBehaviour:
   m_FadeScale: 1
   m_StartAngleFade: 180
   m_EndAngleFade: 180
-  m_UVScale: {x: 2.19, y: -0.98}
-  m_UVBias: {x: -0.21, y: 1}
+  m_UVScale: {x: 1.82, y: 1.91}
+  m_UVBias: {x: -0.06, y: -0.44}
   m_DecalLayerMask: 0
   m_ScaleMode: 0
-  m_Offset: {x: -0.0321841, y: 0.0050483877, z: 0.0009582825}
-  m_Size: {x: 0.031733945, y: 0.02864104, z: 0.03484752}
+  m_Offset: {x: -0.036567744, y: -0.0067341328, z: 0}
+  m_Size: {x: 0.06747674, y: 0.08190878, z: 0.06140616}
+  m_FadeFactor: 1
+--- !u!1 &4607496471962111403
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2250194214419143766}
+  - component: {fileID: 9060288763931808041}
+  m_Layer: 0
+  m_Name: Decal Projector (3)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2250194214419143766
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4607496471962111403}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.5294196, y: -0.44576356, z: -0.38754866, w: 0.6089464}
+  m_LocalPosition: {x: 0.143, y: 0.133, z: 0.026}
+  m_LocalScale: {x: 4, y: 4, z: 4}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3138146698000922989}
+  m_LocalEulerAnglesHint: {x: 17.414, y: -87.476, z: -81.621}
+--- !u!114 &9060288763931808041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4607496471962111403}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0777d029ed3dffa4692f417d4aba19ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 2100000, guid: 9772b0621417a4444b811f77e452e94a, type: 2}
+  m_DrawDistance: 1000
+  m_FadeScale: 1
+  m_StartAngleFade: 180
+  m_EndAngleFade: 180
+  m_UVScale: {x: 1, y: 1}
+  m_UVBias: {x: 0, y: 0}
+  m_DecalLayerMask: 0
+  m_ScaleMode: 1
+  m_Offset: {x: 0, y: 0, z: -0.01079363}
+  m_Size: {x: 0.025988746, y: 0.05, z: 0.05}
+  m_FadeFactor: 1
+--- !u!1 &4896870230944396721
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1593844255427040310}
+  - component: {fileID: 753513618460095974}
+  m_Layer: 0
+  m_Name: Decal Projector (5)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1593844255427040310
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4896870230944396721}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.4210872, y: -0.42247772, z: -0.30123222, w: 0.7439471}
+  m_LocalPosition: {x: 0.202, y: 0.03, z: 0.06}
+  m_LocalScale: {x: 4, y: 4, z: 4}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3138146698000922989}
+  m_LocalEulerAnglesHint: {x: 21.839, y: -71.899, z: -60.016}
+--- !u!114 &753513618460095974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4896870230944396721}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0777d029ed3dffa4692f417d4aba19ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 2100000, guid: 1a994410a5e638d4b94416c5c934d6d3, type: 2}
+  m_DrawDistance: 1000
+  m_FadeScale: 1
+  m_StartAngleFade: 180
+  m_EndAngleFade: 180
+  m_UVScale: {x: 1, y: 1}
+  m_UVBias: {x: 0, y: 0}
+  m_DecalLayerMask: 0
+  m_ScaleMode: 1
+  m_Offset: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.04136674, y: 0.054735687, z: 0.044238627}
   m_FadeFactor: 1
 --- !u!1 &5383486638424493648
 GameObject:
@@ -5105,6 +5273,62 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0.0000000037252903, z: 0}
+--- !u!1 &5901873529515669010
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1625910859239825148}
+  - component: {fileID: 985789605427737261}
+  m_Layer: 0
+  m_Name: Decal Projector (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1625910859239825148
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5901873529515669010}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.7478153, y: 0.38203862, z: 0.35858563, w: 0.4077195}
+  m_LocalPosition: {x: -0.235, y: 0.093, z: 0.119}
+  m_LocalScale: {x: 4, y: 4, z: 4}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3138146698000922989}
+  m_LocalEulerAnglesHint: {x: 160.378, y: -64.173004, z: -66.497986}
+--- !u!114 &985789605427737261
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5901873529515669010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0777d029ed3dffa4692f417d4aba19ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 2100000, guid: 4add2de364a9fe948ab764f12fc3246b, type: 2}
+  m_DrawDistance: 1000
+  m_FadeScale: 1
+  m_StartAngleFade: 180
+  m_EndAngleFade: 180
+  m_UVScale: {x: 1, y: 1}
+  m_UVBias: {x: 0, y: 0}
+  m_DecalLayerMask: 0
+  m_ScaleMode: 1
+  m_Offset: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.041767016, y: 0.048275597, z: 0.040472325}
+  m_FadeFactor: 1
 --- !u!1001 &3122867004875526624
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5117,6 +5341,21 @@ PrefabInstance:
         type: 3}
       propertyPath: satietyDecreaseRate
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 61442038398986381, guid: 274fa519b44c24e43a28d85dbdddcb30,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 61442038398986381, guid: 274fa519b44c24e43a28d85dbdddcb30,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 61442038398986381, guid: 274fa519b44c24e43a28d85dbdddcb30,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 61442038398986381, guid: 274fa519b44c24e43a28d85dbdddcb30,
         type: 3}
@@ -5460,12 +5699,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.y
       value: -212.86
       objectReference: {fileID: 0}
-    - target: {fileID: 7691257856427925685, guid: 274fa519b44c24e43a28d85dbdddcb30,
-        type: 3}
-      propertyPath: fishData
-      value: 
-      objectReference: {fileID: 11400000, guid: 9ee0e09e5a23dbc4999c556ada471cf1,
-        type: 2}
     - target: {fileID: 7708194832333061884, guid: 274fa519b44c24e43a28d85dbdddcb30,
         type: 3}
       propertyPath: Flags
@@ -5520,11 +5753,6 @@ PrefabInstance:
         type: 3}
       propertyPath: NetworkedBehaviours.Array.size
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8616088687293941838, guid: 274fa519b44c24e43a28d85dbdddcb30,
-        type: 3}
-      propertyPath: layerMaskToCheck.m_Bits
-      value: 704
       objectReference: {fileID: 0}
     - target: {fileID: 8663251154307911801, guid: 274fa519b44c24e43a28d85dbdddcb30,
         type: 3}
@@ -5650,6 +5878,22 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 61442038398986381, guid: 274fa519b44c24e43a28d85dbdddcb30,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2250194214419143766}
+    - targetCorrespondingSourceObject: {fileID: 61442038398986381, guid: 274fa519b44c24e43a28d85dbdddcb30,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1593844255427040310}
+    - targetCorrespondingSourceObject: {fileID: 61442038398986381, guid: 274fa519b44c24e43a28d85dbdddcb30,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1625910859239825148}
+    - targetCorrespondingSourceObject: {fileID: 61442038398986381, guid: 274fa519b44c24e43a28d85dbdddcb30,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3160892209510106560}
     - targetCorrespondingSourceObject: {fileID: 61442038398986381, guid: 274fa519b44c24e43a28d85dbdddcb30,
         type: 3}
       insertIndex: -1
