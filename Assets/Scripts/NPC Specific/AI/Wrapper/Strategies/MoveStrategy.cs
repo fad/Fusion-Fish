@@ -10,16 +10,21 @@ public abstract class MoveStrategy : IStrategy
     protected readonly LayerMask ObstacleAvoidanceLayerMask;
     protected readonly float ObstacleAvoidanceDistance;
     protected readonly Func<(bool, Vector3)> ForbiddenAreaCheck;
+    protected readonly bool UseForward;
+    protected readonly Action<float> SpeedChangeCallback;
 
     protected float Speed;
     protected Quaternion TargetRotation;
+    protected short ForwardModifier;
 
     protected MoveStrategy(Transform entity, 
         float rotationSpeed, 
         float maxPitch, 
         LayerMask obstacleAvoidanceLayerMask,
         float obstacleAvoidanceDistance, 
-        Func<(bool, Vector3)> forbiddenAreaCheck)
+        Func<(bool, Vector3)> forbiddenAreaCheck,
+        bool useForward,
+        Action<float> speedChangeCallback)
     {
         Entity = entity;
         RotationSpeed = rotationSpeed;
@@ -27,6 +32,8 @@ public abstract class MoveStrategy : IStrategy
         ObstacleAvoidanceLayerMask = obstacleAvoidanceLayerMask;
         ObstacleAvoidanceDistance = obstacleAvoidanceDistance;
         ForbiddenAreaCheck = forbiddenAreaCheck;
+        UseForward = useForward;
+        SpeedChangeCallback = speedChangeCallback;
     }
 
     public abstract Status Process();

@@ -13,7 +13,7 @@ public class NPCSpawner : NetworkBehaviour
     [Tooltip("The scale of the spawner bounds")]
     private float spawnerBoundsScale = 1f;
 
-    public void Spawn(NPCBehaviour typeToSpawn, Vector2Int range)
+    public void Spawn(FishData typeToSpawn, Vector2Int range)
     {
         int randomNumber = Random.Range(range.x, range.y+1);
         
@@ -22,7 +22,7 @@ public class NPCSpawner : NetworkBehaviour
             Vector3 randomPosition = Random.insideUnitSphere * spawnerBounds.bounds.extents.magnitude * spawnerBoundsScale;
             Vector3 spawnPosition = spawnerBounds.transform.position + randomPosition;
             
-            Runner.Spawn(typeToSpawn, spawnPosition, Quaternion.identity);
+            FishSpawnHandler.Instance.Spawn(typeToSpawn, spawnPosition);
         }
     }
     

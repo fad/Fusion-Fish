@@ -17,6 +17,13 @@ public class InGameDebugConsoleManager : MonoBehaviour
     private const float CheckInterval = 0.15f;
     private float nextCheckTime;
 
+    public enum ExampleFishes
+    {
+        Catfish,
+        Tuna,
+        Tetra
+    }
+
     private void Start() => debugConsole = gameObject.GetComponent<DebugLogManager>();
 
     void Update()
@@ -73,5 +80,35 @@ public class InGameDebugConsoleManager : MonoBehaviour
     {
         playerManager.levelUp.currentExperience = playerManager.levelUp.experienceUntilUpgrade;
         playerManager.levelUp.CheckLevelUp();
+    }
+
+    [ConsoleMethod("SpawnID", "Spawns a fish by their ID in front of the player")]
+    public static void SpawnFish(int id)
+    {
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        Vector3 spawnPosition = player.transform.position - player.transform.forward * 4;
+        
+        FishSpawnHandler.Instance.Spawn(id, spawnPosition);
+        
+    }
+    
+    [ConsoleMethod("SpawnName", "Spawns a fish by their name in front of the player")]
+    public static void SpawnFish(string name)
+    {
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        Vector3 spawnPosition = player.transform.position - player.transform.forward * 4;
+
+        
+        FishSpawnHandler.Instance.Spawn(name, spawnPosition);
+    }
+    
+    [ConsoleMethod("SpawnExample", "Spawns an example fish in front of the player")]
+    public static void SpawnExampleFish(ExampleFishes fish)
+    {
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        Vector3 spawnPosition = player.transform.position - player.transform.forward * 4;
+
+        
+        FishSpawnHandler.Instance.Spawn(fish.ToString(), spawnPosition);
     }
 }

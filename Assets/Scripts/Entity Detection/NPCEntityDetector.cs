@@ -8,13 +8,16 @@ using UnityEngine;
 /// </summary>
 public class NPCEntityDetector : EntityDetector
 {
-    [Header("Data settings for this NPC")]
+    [Header("Setup Settings")]
     [SerializeField, Tooltip("The data for this fish, used for FOV stuff")]
     private FishData fishData;
+    
+    [SerializeField, Tooltip("The root of this object")]
+    private Transform root;
 
     private ITreeRunner _attachedAIBehaviour;
 
-    private readonly HashSet<(Transform entity, ITreeRunner entityTreeRunner)> _otherNPCs = new();
+    private readonly HashSet<(Transform entity, IEntity entityObject)> _otherNPCs = new();
 
     protected override void OnTriggerEnter(Collider other)
     {
@@ -32,18 +35,18 @@ public class NPCEntityDetector : EntityDetector
 
     private void Start()
     {
-        transform.parent.TryGetComponent(out _attachedAIBehaviour);
+        root.TryGetComponent(out _attachedAIBehaviour);
 
         if (_attachedAIBehaviour is null)
-            throw new NullReferenceException("No <color=#16a085>AI behaviour (ITreeRunner)</color> found on " + gameObject.name);
+            throw new NullReferenceException("No <color=#16a085>AI behaviour (ITreeRunner)</color> found on " + root.name);
     }
 
     private void Update()
     {
-        (Transform entity, ITreeRunner entityTreeRunner) npcInFOV =
+        var npcInFOV =
             _otherNPCs.FirstOrDefault(npc => IsInFOVAndInRange(npc.entity));
 
-        if (npcInFOV.entity is null || npcInFOV.entityTreeRunner is null) return;
+        if (npcInFOV.entity is null || npcInFOV.entityObject is null) return;
 
         _attachedAIBehaviour.AdjustHuntOrFleeTarget(npcInFOV);
     }
@@ -60,22 +63,27 @@ public class NPCEntityDetector : EntityDetector
 
     private void DealWithHashset(GameObject entity, bool shouldBeRemoved = false)
     {
-        bool hasTreeRunner = entity.TryGetComponent(out ITreeRunner behaviour);
+        bool isEntity = entity.TryGetComponent(out IEntity entityObject);
 
-        if (!hasTreeRunner) return;
-        entity.TryGetComponent(out IHealthManager healthManager);
+        if (!isEntity) return;
+        var healthManager = entity.GetComponentInChildren<IHealthManager>();
         
-        Action onDeathRemoval = () => RemoveFromSetOnDeath(entity.transform, behaviour);
+        Action onDeathRemoval = () => RemoveFromSetOnDeath(entity.transform, entityObject);
         
         if (shouldBeRemoved)
         {
-            _otherNPCs.Remove((entity: entity.transform, entityTreeRunner: behaviour));
+            _otherNPCs.Remove((entity: entity.transform, entityObject));
+            
+            
+            if(healthManager is null) return;
             
             healthManager.OnDeath -= onDeathRemoval;
             return;
         }
 
-        _otherNPCs.Add((entity: entity.transform, entityTreeRunner: behaviour));
+        _otherNPCs.Add((entity: entity.transform, entityObject));
+        
+        if(healthManager is null) return;
         healthManager.OnDeath += onDeathRemoval;
     }
 
@@ -88,8 +96,8 @@ public class NPCEntityDetector : EntityDetector
         return angleToTarget < fishData.FOVAngle && distanceToTarget <= fishData.FOVRadius;
     }
 
-    private void RemoveFromSetOnDeath(Transform entity, ITreeRunner runner)
+    private void RemoveFromSetOnDeath(Transform entity, IEntity entityObject)
     {
-        _otherNPCs.Remove((entity: entity.transform, entityTreeRunner: runner));
+        _otherNPCs.Remove((entity.transform, entityObject));
     }
 }
