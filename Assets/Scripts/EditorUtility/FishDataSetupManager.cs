@@ -6,8 +6,6 @@ public class FishDataSetupManager : MonoBehaviour
     [SerializeField, Tooltip("The data for this fish")]
     private FishData fishData;
     
-    private const string FishDataPath = "FishData";
-    
     public void SetupFishData()
     {
         if (!fishData)
