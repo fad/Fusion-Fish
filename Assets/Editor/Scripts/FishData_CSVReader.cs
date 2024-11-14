@@ -10,11 +10,14 @@ public class FishData_CSVReader
     private static string _pathToSave = "Assets/Resources/FishData/";
 
     private static Dictionary<string, FishData> _fishDataSOs = new();
+    private static Dictionary<string, FishData> _playableFishDataSOs = new();
 
     private static string FullPath => Application.dataPath + _pathToCsv;
 
     private static char _delimiter = ',';
     private static char _listDelimiter = ';';
+
+    private static string _playablePrefix = "Playable_";
 
     [MenuItem("Utilities/Generate Fish Data")]
     public static void GenerateFishData()
@@ -41,8 +44,8 @@ public class FishData_CSVReader
         for (int j = 1; j < allLines.Length; j++)
         {
             string[] splitData = allLines[j].Split(_delimiter);
-            FillHuntValues(serializedObjects[j - 1], splitData[13].Split(_listDelimiter),
-                splitData[14].Split(_listDelimiter));
+            FillHuntValues(serializedObjects[j - 1], splitData[15].Split(_listDelimiter),
+                splitData[16].Split(_listDelimiter));
         }
 
         AssetDatabase.SaveAssets();
@@ -66,31 +69,39 @@ public class FishData_CSVReader
         FillMetaAndPrefabData(serializedObject, data[0], data[1], data[2], data[3]);
         FillGeneralValues(serializedObject,
             maxHealthValue: data[4],
+            recoveryHealthInSec: data[6],
+            timeToStartRecovering: data[7],
             maxStaminaValue: data[5],
-            staminaDecreaseRateValue: data[6],
-            staminaRegenRateValue: data[7],
-            staminaThresholdValue: data[8],
-            xpValue: data[9],
-            gibsSpawnValue: data[10],
-            FOV_AngleValue: data[11],
-            FOV_RadiusValue: data[12]);
-        
-        FillAttackValues(serializedObject, 
-            attackDamage: data[15],
-            attackRangeValue: data[16],
-            attackCooldownValue: data[17], 
-            timeToLoseInterestValue: data[18], 
-            distanceToLoseInterestValue: data[19]);
-        
+            staminaDecreaseRateValue: data[8],
+            staminaRegenRateValue: data[9],
+            staminaThresholdValue: data[10],
+            xpValue: data[11],
+            gibsSpawnValue: data[12],
+            FOV_AngleValue: data[13],
+            FOV_RadiusValue: data[14]);
+
+        FillAttackValues(serializedObject,
+            attackDamage: data[17],
+            attackRangeValue: data[18],
+            attackCooldownValue: data[19],
+            timeToLoseInterestValue: data[20],
+            distanceToLoseInterestValue: data[21]);
+
         FillMovementValues(serializedObject,
-            wanderSpeedValue: data[20],
-            fastSpeedValue: data[21], 
-            rotationSpeedValue: data[22], 
-            maxPitchValue: data[23], 
-            obstacleAvoidanceValue: data[24]);
-        
-        FillFleeValues(serializedObject, 
-            safeDistanceValue: data[25]);
+            wanderSpeedValue: data[22],
+            fastSpeedValue: data[23],
+            rotationSpeedValue: data[24],
+            maxPitchValue: data[25],
+            obstacleAvoidanceValue: data[26]);
+
+        FillFleeValues(serializedObject,
+            safeDistanceValue: data[27]);
+
+        if (data[1].StartsWith(_playablePrefix))
+        {
+            _playableFishDataSOs.Add(data[1].Replace(_playablePrefix, ""), fishData);
+            return;
+        }
 
         _fishDataSOs.Add(data[1], fishData);
     }
@@ -109,12 +120,15 @@ public class FishData_CSVReader
         dataObject.ApplyModifiedProperties();
     }
 
-    private static void FillGeneralValues(SerializedObject dataObject, string maxHealthValue, string maxStaminaValue,
+    private static void FillGeneralValues(SerializedObject dataObject, string maxHealthValue,
+        string recoveryHealthInSec, string timeToStartRecovering, string maxStaminaValue,
         string staminaDecreaseRateValue,
         string staminaRegenRateValue, string staminaThresholdValue, string xpValue, string gibsSpawnValue,
         string FOV_AngleValue, string FOV_RadiusValue)
     {
         SerializedProperty maxHealth = dataObject.FindProperty("maxHealth");
+        SerializedProperty recoveryHealthInSecProperty = dataObject.FindProperty("recoveryHealthInSecond");
+        SerializedProperty timeToStartRecoveringProperty = dataObject.FindProperty("timeToStartRecoveryHealth");
         SerializedProperty maxStamina = dataObject.FindProperty("maxStamina");
         SerializedProperty staminaDecreaseRate = dataObject.FindProperty("staminaDecreaseRate");
         SerializedProperty staminaRegenRate = dataObject.FindProperty("staminaRegenRate");
@@ -125,6 +139,8 @@ public class FishData_CSVReader
         SerializedProperty FOV_Radius = dataObject.FindProperty("FOV_Radius");
 
         maxHealth.floatValue = float.Parse(maxHealthValue);
+        recoveryHealthInSecProperty.floatValue = float.Parse(recoveryHealthInSec);
+        timeToStartRecoveringProperty.floatValue = float.Parse(timeToStartRecovering);
         maxStamina.intValue = short.Parse(maxStaminaValue);
         staminaDecreaseRate.intValue = short.Parse(staminaDecreaseRateValue);
         staminaRegenRate.intValue = short.Parse(staminaRegenRateValue);
@@ -158,7 +174,7 @@ public class FishData_CSVReader
 
     private static void
         FillHuntValues(SerializedObject currentDataObject, string[] preyList,
-            string[] predatorList) // data[13], data[14]
+            string[] predatorList)
     {
         SerializedProperty preyListProperty = currentDataObject.FindProperty("preyList");
         SerializedProperty predatorListProperty = currentDataObject.FindProperty("predatorList");
@@ -173,7 +189,10 @@ public class FishData_CSVReader
         {
             if (preyName == "") continue;
 
-            FishData preyData = _fishDataSOs[preyName.TrimStart()];
+            FishData preyData = _playableFishDataSOs.ContainsKey(preyName.TrimStart())
+                ? _playableFishDataSOs[preyName.TrimStart()]
+                : _fishDataSOs[preyName.TrimStart()];
+
             preyDataList.Add(preyData);
         }
 
@@ -181,7 +200,10 @@ public class FishData_CSVReader
         {
             if (predatorName == "") continue;
 
-            FishData predatorData = _fishDataSOs[predatorName.TrimStart()];
+            FishData predatorData = _playableFishDataSOs.ContainsKey(predatorName.TrimStart())
+                ? _playableFishDataSOs[predatorName.TrimStart()]
+                : _fishDataSOs[predatorName.TrimStart()];
+            
             predatorDataList.Add(predatorData);
         }
 

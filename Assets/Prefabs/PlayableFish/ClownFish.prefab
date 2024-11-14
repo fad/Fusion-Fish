@@ -5325,7 +5325,7 @@ PrefabInstance:
         type: 3}
       propertyPath: fishData
       value: 
-      objectReference: {fileID: 11400000, guid: b097be71a726721449e40364fe688078,
+      objectReference: {fileID: 11400000, guid: aaa032bb997807948879483b73e44a6d,
         type: 2}
     - target: {fileID: 2297454540360690151, guid: 274fa519b44c24e43a28d85dbdddcb30,
         type: 3}
@@ -5536,7 +5536,7 @@ PrefabInstance:
         type: 3}
       propertyPath: fishData
       value: 
-      objectReference: {fileID: 11400000, guid: 4686b247ad1741d44ac2964a910c2c9a,
+      objectReference: {fileID: 11400000, guid: aaa032bb997807948879483b73e44a6d,
         type: 2}
     - target: {fileID: 7708194832333061884, guid: 274fa519b44c24e43a28d85dbdddcb30,
         type: 3}

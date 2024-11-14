@@ -10,21 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c11d033a7185418c9421d8741488f96b, type: 3}
-  m_Name: Goldfish
+  m_Name: Playable_Clownfish
   m_EditorClassIdentifier: 
-  fishID: 2
-  fishPrefab: {fileID: 7922903181239320888, guid: 4903ee395fc06425aa96fe507fe8334b,
+  fishID: 1
+  fishPrefab: {fileID: 2075058937487730628, guid: 07543d3dbdec44f7598a50d39bed61aa,
     type: 3}
-  scale: 0.5
-  maxHealth: 100
-  recoveryHealthInSecond: 10
-  timeToStartRecoveryHealth: 3
+  scale: 0.25
+  maxHealth: 60
+  recoveryHealthInSecond: 0.8
+  timeToStartRecoveryHealth: 6
   maxStamina: 100
-  staminaDecreaseRate: 12
-  staminaRegenRate: 8
+  staminaDecreaseRate: 30
+  staminaRegenRate: 23
   staminaThreshold: 65
   xpValue: 100
-  gibsSpawnValue: 3
+  gibsSpawnValue: 2
   FOV_Angle: 45
   FOV_Radius: 10
   preyList:
@@ -37,13 +37,13 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 7d2cb7dfd99a72c4bb748bd65e464fd4, type: 2}
   - {fileID: 11400000, guid: ca5b417791726f949aab6afff7e7eb84, type: 2}
   - {fileID: 11400000, guid: 6998654e15fc34741a20046b034526a9, type: 2}
-  attackValue: 10
-  attackRange: 2.5
+  attackValue: 6
+  attackRange: 2
   attackCooldown: 1
   timeToLoseInterest: 7
   distanceToLoseInterest: 20
-  wanderSpeed: 3.5
-  fastSpeed: 6
+  wanderSpeed: 120
+  fastSpeed: 300
   rotationSpeed: 2
   maxPitch: 45
   obstacleAvoidanceDistance: 2

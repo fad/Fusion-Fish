@@ -17,8 +17,8 @@ MonoBehaviour:
     type: 3}
   scale: 1
   maxHealth: 40
-  recoveryHealthInSecond: 10
-  timeToStartRecoveryHealth: 3
+  recoveryHealthInSecond: 1
+  timeToStartRecoveryHealth: 8
   maxStamina: 60
   staminaDecreaseRate: 12
   staminaRegenRate: 6
@@ -30,11 +30,11 @@ MonoBehaviour:
   preyList:
   - {fileID: 11400000, guid: 330945d332c80934999ee14c283a705e, type: 2}
   - {fileID: 11400000, guid: 4f425dd60c1f84442a76761bb02cae31, type: 2}
-  - {fileID: 11400000, guid: d569fcbd1e7d4b64fba76a3066df7858, type: 2}
-  - {fileID: 11400000, guid: 76694b7d080cfeb4b83267df3328c64a, type: 2}
+  - {fileID: 11400000, guid: aaa032bb997807948879483b73e44a6d, type: 2}
+  - {fileID: 11400000, guid: 1724f0690ac686340a9d49e2f66c6cd3, type: 2}
   predatorList:
-  - {fileID: 11400000, guid: d569fcbd1e7d4b64fba76a3066df7858, type: 2}
-  - {fileID: 11400000, guid: 76694b7d080cfeb4b83267df3328c64a, type: 2}
+  - {fileID: 11400000, guid: aaa032bb997807948879483b73e44a6d, type: 2}
+  - {fileID: 11400000, guid: 1724f0690ac686340a9d49e2f66c6cd3, type: 2}
   attackValue: 5
   attackRange: 2.25
   attackCooldown: 1

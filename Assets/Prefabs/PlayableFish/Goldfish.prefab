@@ -5497,7 +5497,7 @@ PrefabInstance:
         type: 3}
       propertyPath: fishData
       value: 
-      objectReference: {fileID: 11400000, guid: d2cccc3f0e77a0c43b874e37f713be1b,
+      objectReference: {fileID: 11400000, guid: 1724f0690ac686340a9d49e2f66c6cd3,
         type: 2}
     - target: {fileID: 2297454540360690151, guid: 274fa519b44c24e43a28d85dbdddcb30,
         type: 3}
@@ -5714,6 +5714,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.y
       value: -212.86
       objectReference: {fileID: 0}
+    - target: {fileID: 7691257856427925685, guid: 274fa519b44c24e43a28d85dbdddcb30,
+        type: 3}
+      propertyPath: fishData
+      value: 
+      objectReference: {fileID: 11400000, guid: 1724f0690ac686340a9d49e2f66c6cd3,
+        type: 2}
     - target: {fileID: 7708194832333061884, guid: 274fa519b44c24e43a28d85dbdddcb30,
         type: 3}
       propertyPath: Flags
