@@ -63,28 +63,47 @@ public class FishData_CSVReader
 
         serializedObject = new SerializedObject(fishData);
 
-        FillMetaAndPrefabData(serializedObject, data[0], data[1], data[2], data[3], data[4], data[5]);
-        FillGeneralValues(serializedObject, data[6], data[7], data[8], data[9], data[10], data[11], data[12]);
-        FillAttackValues(serializedObject, data[15], data[16], data[17], data[18], data[19]);
-        FillMovementValues(serializedObject, data[20], data[21], data[22], data[23], data[24]);
-        FillFleeValues(serializedObject, data[25]);
+        FillMetaAndPrefabData(serializedObject, data[0], data[1], data[2], data[3]);
+        FillGeneralValues(serializedObject,
+            maxHealthValue: data[4],
+            maxStaminaValue: data[5],
+            staminaDecreaseRateValue: data[6],
+            staminaRegenRateValue: data[7],
+            staminaThresholdValue: data[8],
+            xpValue: data[9],
+            gibsSpawnValue: data[10],
+            FOV_AngleValue: data[11],
+            FOV_RadiusValue: data[12]);
+        
+        FillAttackValues(serializedObject, 
+            attackDamage: data[15],
+            attackRangeValue: data[16],
+            attackCooldownValue: data[17], 
+            timeToLoseInterestValue: data[18], 
+            distanceToLoseInterestValue: data[19]);
+        
+        FillMovementValues(serializedObject,
+            wanderSpeedValue: data[20],
+            fastSpeedValue: data[21], 
+            rotationSpeedValue: data[22], 
+            maxPitchValue: data[23], 
+            obstacleAvoidanceValue: data[24]);
+        
+        FillFleeValues(serializedObject, 
+            safeDistanceValue: data[25]);
 
         _fishDataSOs.Add(data[1], fishData);
     }
 
     private static void FillMetaAndPrefabData(SerializedObject dataObject, string ID, string name, string prefabPath,
-        string attackComponentName, string staminaComponentName, string scaleValue)
+        string scaleValue)
     {
         SerializedProperty fishID = dataObject.FindProperty("fishID");
         SerializedProperty fishPrefab = dataObject.FindProperty("fishPrefab");
-        SerializedProperty attackComponent = dataObject.FindProperty("attackComponentName"); // TODO: Refactor to use ScriptableObject for references
-        SerializedProperty staminaComponent = dataObject.FindProperty("staminaComponentName"); // TODO: Refactor to use ScriptableObject for references
         SerializedProperty scale = dataObject.FindProperty("scale");
 
         fishID.intValue = short.Parse(ID);
         fishPrefab.objectReferenceValue = AssetDatabase.LoadAssetAtPath<GameObject>(prefabPath);
-        attackComponent.stringValue = attackComponentName;
-        staminaComponent.stringValue = staminaComponentName;
         scale.floatValue = float.Parse(scaleValue);
 
         dataObject.ApplyModifiedProperties();
@@ -92,7 +111,8 @@ public class FishData_CSVReader
 
     private static void FillGeneralValues(SerializedObject dataObject, string maxHealthValue, string maxStaminaValue,
         string staminaDecreaseRateValue,
-        string staminaRegenRateValue, string staminaThresholdValue, string FOV_AngleValue, string FOV_RadiusValue)
+        string staminaRegenRateValue, string staminaThresholdValue, string xpValue, string gibsSpawnValue,
+        string FOV_AngleValue, string FOV_RadiusValue)
     {
         SerializedProperty maxHealth = dataObject.FindProperty("maxHealth");
         SerializedProperty maxStamina = dataObject.FindProperty("maxStamina");

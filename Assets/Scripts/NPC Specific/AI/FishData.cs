@@ -10,12 +10,6 @@ public class FishData : ScriptableObject
     [Header("Prefab Settings")]
     [SerializeField, Tooltip("The prefab to use for the fish.")]
     private GameObject fishPrefab;
-    
-    [SerializeField, Tooltip("The name of the script to use for Attacking.")]
-    private string attackComponentName;
-    
-    [SerializeField, Tooltip("The name of the script to use for Stamina.")]
-    private string staminaComponentName;
 
     [SerializeField, Tooltip("The scale of the fish.")]
     private float scale;
@@ -41,6 +35,12 @@ public class FishData : ScriptableObject
 
     [SerializeField, Tooltip("The threshold for stamina at which the fish will start using it.")]
     private short staminaThreshold = 5;
+    
+    [SerializeField, Tooltip("The amount of XP the fish will give when killed.")]
+    private short xpValue = 100;
+    
+    [SerializeField, Tooltip("The amount of gibs to spawn on death")]
+    private short gibsSpawnValue = 2;
 
     [SerializeField, Min(30f), Tooltip("The angle of the field of view for the fish.")]
     private float FOV_Angle = 45f;
@@ -96,8 +96,6 @@ public class FishData : ScriptableObject
 
     public short FishID => fishID;
     public GameObject FishPrefab => fishPrefab;
-    public string AttackComponentName => attackComponentName;
-    public string StaminaComponentName => staminaComponentName;
 
     public float Scale => scale;
 
@@ -109,6 +107,7 @@ public class FishData : ScriptableObject
     public short StaminaRegenRate => staminaRegenRate;
 
     public short StaminaThreshold => staminaThreshold;
+    public short XPValue => xpValue;
 
     public float FOVAngle => FOV_Angle;
     public float FOVRadius => FOV_Radius;
