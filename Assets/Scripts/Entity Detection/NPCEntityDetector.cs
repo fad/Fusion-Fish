@@ -6,7 +6,7 @@ using UnityEngine;
 /// <summary>
 /// Entity detector for NPC objects
 /// </summary>
-public class NPCEntityDetector : EntityDetector
+public class NPCEntityDetector : EntityDetector, IInitialisable
 {
     [Header("Setup Settings")]
     [SerializeField, Tooltip("The data for this fish, used for FOV stuff")]
@@ -99,5 +99,10 @@ public class NPCEntityDetector : EntityDetector
     private void RemoveFromSetOnDeath(Transform entity, IEntity entityObject)
     {
         _otherNPCs.Remove((entity.transform, entityObject));
+    }
+
+    public void Init(string fishDataName)
+    {
+        fishData = Resources.Load<FishData>($"FishData/{fishDataName}");
     }
 }
