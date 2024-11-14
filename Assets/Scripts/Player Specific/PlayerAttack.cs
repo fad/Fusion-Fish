@@ -231,7 +231,7 @@ public class PlayerAttack : NetworkBehaviour
         {
             Vector3 directionToTarget = hitColliders[0].transform.position - playerVisualPosition;
             float angleToTarget = Vector3.Angle(-playerManager.thirdPersonController.playerVisual.transform.forward, directionToTarget);
-            HealthManager health = hitColliders[0].GetComponent<HealthManager>();
+            HealthManager health = hitColliders[0].GetComponentInChildren<HealthManager>();
             
             // Check if the target is within the attraction angle
             if (angleToTarget <= attractionAngle && !health.notAbleToGetBitten)

@@ -660,6 +660,7 @@ MonoBehaviour:
   satietyManager: {fileID: 0}
   playerAttack: {fileID: 2749181200256999984}
   hostPlayerRunner: {fileID: 0}
+  fishData: {fileID: 0}
 --- !u!114 &9144912782510203114
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6621,7 +6622,7 @@ Animator:
   m_GameObject: {fileID: 6272089240189810021}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 14f68e61c5cf54643b2c15b4c5432948, type: 2}
+  m_Controller: {fileID: 9100000, guid: d999711e7f4cd294096d1bd610bf6272, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

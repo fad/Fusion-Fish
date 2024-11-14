@@ -80,6 +80,7 @@ namespace StarterAssets
         [Header("Animation")]
         public Animator animator;
         private int animIDMotionSpeed;
+        private float defaultAnimSpeed = 2.5f,boostAnimSpeed = 5,notMovingAnimSpeed = 1;
 
         private SetUIActivationState setUIActivationState;
 
@@ -291,6 +292,7 @@ namespace StarterAssets
             }
 
             var inputDirectionNormalized = new Vector3(input.move.x, 0.0f, input.move.y).normalized;
+            float AnimationSpeed = notMovingAnimSpeed;
 
             // set target speed based on move speed, sprint speed and if sprint is pressed
             if (Vector3.Distance(transform.position, swimArea.position) >= swimArea.GetComponent<PlayerSwimArea>().swimLength && !IsSwimmingTowardIsland())
@@ -325,6 +327,7 @@ namespace StarterAssets
                     if (!Physics.Raycast(playerVisual.transform.position, Direction, checkObstacleDistance, obstacleLayer))
                         rb.AddForce(Direction, ForceMode.Impulse);
 
+                    AnimationSpeed = isBoosting ? boostAnimSpeed : defaultAnimSpeed;
                     getPlayerCameraAndControls.vCam.m_Lens.FieldOfView = Mathf.Lerp(getPlayerCameraAndControls.vCam.m_Lens.FieldOfView, isBoosting ? boostSpeedFOV : defaultSpeedFOV, cameraFOVSmoothTime * Time.deltaTime);
                     getPlayerCameraAndControls.vCam.GetCinemachineComponent<CinemachineFramingTransposer>().m_CameraDistance = CameraDistance();
                 }
@@ -346,7 +349,7 @@ namespace StarterAssets
                     getPlayerCameraAndControls.vCam.m_Lens.FieldOfView = Mathf.Lerp(getPlayerCameraAndControls.vCam.m_Lens.FieldOfView, notMovingFOV, cameraFOVSmoothTime * Time.deltaTime);
             }
         
-            animator.SetFloat(animIDMotionSpeed, rb.velocity.sqrMagnitude);
+            animator.SetFloat(animIDMotionSpeed, AnimationSpeed);
         }
 
         private float CameraDistance()
