@@ -119,6 +119,8 @@ public class FishData_CSVReader
         SerializedProperty staminaDecreaseRate = dataObject.FindProperty("staminaDecreaseRate");
         SerializedProperty staminaRegenRate = dataObject.FindProperty("staminaRegenRate");
         SerializedProperty staminaThreshold = dataObject.FindProperty("staminaThreshold");
+        SerializedProperty xpValueProperty = dataObject.FindProperty("xpValue");
+        SerializedProperty gibsSpawnValueProperty = dataObject.FindProperty("gibsSpawnValue");
         SerializedProperty FOV_Angle = dataObject.FindProperty("FOV_Angle");
         SerializedProperty FOV_Radius = dataObject.FindProperty("FOV_Radius");
 
@@ -127,6 +129,8 @@ public class FishData_CSVReader
         staminaDecreaseRate.intValue = short.Parse(staminaDecreaseRateValue);
         staminaRegenRate.intValue = short.Parse(staminaRegenRateValue);
         staminaThreshold.intValue = short.Parse(staminaThresholdValue);
+        xpValueProperty.intValue = short.Parse(xpValue);
+        gibsSpawnValueProperty.intValue = short.Parse(gibsSpawnValue);
         FOV_Angle.floatValue = float.Parse(FOV_AngleValue);
         FOV_Radius.floatValue = float.Parse(FOV_RadiusValue);
 

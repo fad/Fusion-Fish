@@ -15,14 +15,16 @@ MonoBehaviour:
   fishID: 8
   fishPrefab: {fileID: 1113120347895142575, guid: 574e4c410012d714abb2b8bacc59e218,
     type: 3}
-  attackComponentName: AttackManager
-  staminaComponentName: StaminaManager
   scale: 0.5
   maxHealth: 30
+  recoveryHealthInSecond: 10
+  timeToStartRecoveryHealth: 3
   maxStamina: 50
   staminaDecreaseRate: 10
   staminaRegenRate: 6
   staminaThreshold: 30
+  xpValue: 100
+  gibsSpawnValue: 3
   FOV_Angle: 50
   FOV_Radius: 20
   preyList:

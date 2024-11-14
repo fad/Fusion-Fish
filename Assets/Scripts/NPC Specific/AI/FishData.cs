@@ -108,6 +108,7 @@ public class FishData : ScriptableObject
 
     public short StaminaThreshold => staminaThreshold;
     public short XPValue => xpValue;
+    public short GibsSpawnValue => gibsSpawnValue;
 
     public float FOVAngle => FOV_Angle;
     public float FOVRadius => FOV_Radius;
