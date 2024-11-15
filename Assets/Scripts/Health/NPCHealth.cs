@@ -22,6 +22,7 @@ public class NPCHealth : NetworkBehaviour
         if (TryGetComponent<SpawnGibsOnDestroy>(out var spawnGibsOnDestroy) && healthManager.spawnGibs)
         {
             spawnGibsOnDestroy.spawnGibs = true;
+            healthManager.PlayParticles(Color.red, 30);
         }
 
         NPCDeathRpc();
@@ -30,8 +31,6 @@ public class NPCHealth : NetworkBehaviour
     [Rpc(RpcSources.All, RpcTargets.All, InvokeLocal = true)]
     private void NPCDeathRpc()
     {
-        healthManager.PlayParticles(Color.red, 30);
-
         Destroy(gameObject);
     }
 }
