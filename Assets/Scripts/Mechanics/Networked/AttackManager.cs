@@ -25,7 +25,7 @@ public class AttackManager : NetworkBehaviour, IAttackManager, IInitialisable
 
         if (_correspondingNPC == null)
         {
-            Debug.LogError($"No <color=#00cec9>ITreeRunner</color> component found on object: {gameObject.name}.");
+            Debug.LogError($"No <color=#00cec9>INPC</color> component found on object: {gameObject.name}.");
         }
         
         _correspondingNPC.OnTargetChanged += ChangeTarget;
