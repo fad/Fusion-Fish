@@ -11,6 +11,9 @@ using UnityEngine.SceneManagement;
 using System.Threading;
 
 using Unity.VisualScripting.Antlr3.Runtime.Tree;
+using Unity.Mathematics;
+
+
 
 #if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
@@ -32,6 +35,7 @@ namespace StarterAssets
         [Tooltip("How fast you can rotate the player depending on the mouse movement, the camera moves with the player")]
         public float sensitivity = .85f;
         public GameObject playerVisual;
+        public GameObject eggVisual;
         [SerializeField] public float boostSwimSpeed = 100f;
         [SerializeField] public float defaultSwimSpeed = 50f;
         [HideInInspector] public PlayerManager playerManager;
@@ -250,13 +254,14 @@ namespace StarterAssets
 
             }
         }
-
+        quaternion randomRotation;
         private void EggMove()
         {
             if (hasVCam && input.jump)
             {
                 int impulseForce = 8;
                 rb.AddForce(GetRandomDirection() * impulseForce, ForceMode.Impulse);
+                RandomizeRotation();
                 playerManager.levelUp.currentExperience += 50;
                 playerManager.levelUp.CheckLevelUp();
                 input.jump = false;
@@ -264,16 +269,25 @@ namespace StarterAssets
 
             rb.useGravity = true;
             rb.drag = 0.05f;
+            eggVisual.transform.localRotation = Quaternion.Lerp(eggVisual.transform.localRotation,randomRotation , playerRotationSmoothTime/3 * Time.deltaTime);
 
             Vector3 GetRandomDirection()
             {
                 float randomX = UnityEngine.Random.Range(-1f, 1f);
-                float randomY = UnityEngine.Random.Range(0, 0.5f);
+                float randomY = UnityEngine.Random.Range(0, 2);
                 float randomZ = UnityEngine.Random.Range(-1f, 1f);
 
                 Vector3 randomDirection = new Vector3(randomX, randomY, randomZ);
 
                 return randomDirection.normalized;
+            }
+            void RandomizeRotation()
+            {
+                float randomX = UnityEngine.Random.Range(200, 360);
+                float randomY = UnityEngine.Random.Range(200, 360);
+                float randomZ = UnityEngine.Random.Range(200, 360);
+
+                randomRotation = Quaternion.Euler(randomX, randomY, randomZ);
             }
         }
 
