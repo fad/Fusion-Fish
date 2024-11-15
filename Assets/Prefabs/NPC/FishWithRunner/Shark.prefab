@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5253951515769351371}
-  - component: {fileID: 8224959135994014364}
   - component: {fileID: 7234708288960291066}
   - component: {fileID: 598851164403782487}
   - component: {fileID: 6576117666802300680}
@@ -38,29 +37,6 @@ Transform:
   - {fileID: 5275522956976061567}
   m_Father: {fileID: 4451768028373992673}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8224959135994014364
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6122096039290990972}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f8880170c48b1f44aaef687b67ca3f5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 150
-  recoveryHealthInSecond: 10
-  timeToStartRecoveryHealth: 3
-  _NetworkedHealth: 150
-  spawnGibs: 0
-  currentHealth: 0
-  notAbleToGetBitten: 0
-  experienceValue: 100
-  maxSlowDownSpeedTime: 2
-  slowDownSpeedTime: 0
-  slowDown: 0
 --- !u!114 &7234708288960291066
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -106,7 +82,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b50d21f750df344eb19913dadddbd49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthModel: {fileID: 8224959135994014364}
+  healthModel: {fileID: 8522425795360047863}
   healthSlider: {fileID: 1065209411317760069}
 --- !u!114 &1932959228226219729
 MonoBehaviour:
@@ -284,38 +260,63 @@ PrefabInstance:
     - target: {fileID: 2522072839802053289, guid: 3f8486498552be144992af32f4d2779b,
         type: 3}
       propertyPath: NetworkedBehaviours.Array.size
-      value: 10
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 2522072839802053289, guid: 3f8486498552be144992af32f4d2779b,
         type: 3}
       propertyPath: NetworkedBehaviours.Array.data[4]
       value: 
-      objectReference: {fileID: 8224959135994014364}
+      objectReference: {fileID: 8522425795360047863}
     - target: {fileID: 2522072839802053289, guid: 3f8486498552be144992af32f4d2779b,
         type: 3}
       propertyPath: NetworkedBehaviours.Array.data[5]
       value: 
-      objectReference: {fileID: 7234708288960291066}
+      objectReference: {fileID: 3144289043908232329}
     - target: {fileID: 2522072839802053289, guid: 3f8486498552be144992af32f4d2779b,
         type: 3}
       propertyPath: NetworkedBehaviours.Array.data[6]
       value: 
-      objectReference: {fileID: 598851164403782487}
+      objectReference: {fileID: 7234708288960291066}
     - target: {fileID: 2522072839802053289, guid: 3f8486498552be144992af32f4d2779b,
         type: 3}
       propertyPath: NetworkedBehaviours.Array.data[7]
       value: 
-      objectReference: {fileID: 6576117666802300680}
+      objectReference: {fileID: 598851164403782487}
     - target: {fileID: 2522072839802053289, guid: 3f8486498552be144992af32f4d2779b,
         type: 3}
       propertyPath: NetworkedBehaviours.Array.data[8]
       value: 
-      objectReference: {fileID: 1932959228226219729}
+      objectReference: {fileID: 6576117666802300680}
     - target: {fileID: 2522072839802053289, guid: 3f8486498552be144992af32f4d2779b,
         type: 3}
       propertyPath: NetworkedBehaviours.Array.data[9]
       value: 
+      objectReference: {fileID: 1932959228226219729}
+    - target: {fileID: 2522072839802053289, guid: 3f8486498552be144992af32f4d2779b,
+        type: 3}
+      propertyPath: NetworkedBehaviours.Array.data[10]
+      value: 
       objectReference: {fileID: 949933220601436108}
+    - target: {fileID: 2522072839802053289, guid: 3f8486498552be144992af32f4d2779b,
+        type: 3}
+      propertyPath: NetworkedBehaviours.Array.data[11]
+      value: 
+      objectReference: {fileID: 949933220601436108}
+    - target: {fileID: 5124316588462460406, guid: 3f8486498552be144992af32f4d2779b,
+        type: 3}
+      propertyPath: maxHealth
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 5124316588462460406, guid: 3f8486498552be144992af32f4d2779b,
+        type: 3}
+      propertyPath: _NetworkedHealth
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 5124316588462460406, guid: 3f8486498552be144992af32f4d2779b,
+        type: 3}
+      propertyPath: maxSlowDownSpeedTime
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5807882279209203546, guid: 3f8486498552be144992af32f4d2779b,
         type: 3}
       propertyPath: fishData
@@ -403,12 +404,36 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &3144289043908232329 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1943943065113725832, guid: 3f8486498552be144992af32f4d2779b,
+    type: 3}
+  m_PrefabInstance: {fileID: 3555741246099918593}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2689198742307886242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e21121d4f559c1248aa8f7d3ce4320ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &4451768028373992673 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 909547618975206368, guid: 3f8486498552be144992af32f4d2779b,
     type: 3}
   m_PrefabInstance: {fileID: 3555741246099918593}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8522425795360047863 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5124316588462460406, guid: 3f8486498552be144992af32f4d2779b,
+    type: 3}
+  m_PrefabInstance: {fileID: 3555741246099918593}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2689198742307886242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f8880170c48b1f44aaef687b67ca3f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &5276214526371709419
 PrefabInstance:
   m_ObjectHideFlags: 0

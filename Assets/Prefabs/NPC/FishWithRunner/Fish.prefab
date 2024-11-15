@@ -15,6 +15,8 @@ GameObject:
   - component: {fileID: 4587424286127669558}
   - component: {fileID: 3520792079937246030}
   - component: {fileID: 6630329994706225884}
+  - component: {fileID: 5124316588462460406}
+  - component: {fileID: 1943943065113725832}
   m_Layer: 6
   m_Name: Fish
   m_TagString: Untagged
@@ -74,6 +76,8 @@ MonoBehaviour:
   - {fileID: 1865835381330798333}
   - {fileID: 4587424286127669558}
   - {fileID: 3520792079937246030}
+  - {fileID: 5124316588462460406}
+  - {fileID: 1943943065113725832}
 --- !u!114 &1865835381330798333
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -129,3 +133,40 @@ MonoBehaviour:
   fishData: {fileID: 0}
   model: {fileID: 0}
   detectionRadius: 10
+--- !u!114 &5124316588462460406
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1443812496687094691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f8880170c48b1f44aaef687b67ca3f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 0
+  recoveryHealthInSecond: 10
+  timeToStartRecoveryHealth: 3
+  _NetworkedHealth: 0
+  spawnGibs: 0
+  currentHealth: 0
+  notAbleToGetBitten: 0
+  experienceValue: 100
+  maxSlowDownSpeedTime: 5
+  slowDownSpeedTime: 0
+  slowDown: 0
+--- !u!114 &1943943065113725832
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1443812496687094691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e21121d4f559c1248aa8f7d3ce4320ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isShrimp: 0
+  isStarFish: 0
