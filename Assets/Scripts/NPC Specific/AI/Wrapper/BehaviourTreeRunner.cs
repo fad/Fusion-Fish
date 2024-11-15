@@ -4,7 +4,7 @@ using AI.BehaviourTree;
 using Fusion;
 using UnityEngine;
 
-public class BehaviourTreeRunner : NetworkBehaviour, ITreeRunner, IEntity, IInitialisable
+public class BehaviourTreeRunner : NetworkBehaviour, INPC, IInitialisable
 {
     [Header("Settings")]
     [SerializeField,
@@ -85,6 +85,7 @@ public class BehaviourTreeRunner : NetworkBehaviour, ITreeRunner, IEntity, IInit
     private static readonly Color HuntingColor = new(231f / 255f, 76f / 255f, 60f / 255f, 1f);
     private static readonly int MovingSpeed = Animator.StringToHash("movingSpeed");
 
+    public event Action<Transform> OnTargetChanged;
 
     public void Init(string fishDataName)
     {
@@ -181,8 +182,7 @@ public class BehaviourTreeRunner : NetworkBehaviour, ITreeRunner, IEntity, IInit
 
         chaseSequence.AddChild(isHunting);
         chaseSequence.AddChild(huntBehavior);
-
-
+        
         Leaf wanderAround = new Leaf("Wander Around",
             new WanderStrategy.Builder(transform)
                 .WithSpeed(fishData.WanderSpeed)
@@ -215,6 +215,7 @@ public class BehaviourTreeRunner : NetworkBehaviour, ITreeRunner, IEntity, IInit
         return (isInside: _isInsideArea, direction: _directionToArea);
     }
 
+
     public void AdjustAreaCheck((bool isInside, Vector3 direction) areaCheck)
     {
         _isInsideArea = areaCheck.isInside;
@@ -231,8 +232,6 @@ public class BehaviourTreeRunner : NetworkBehaviour, ITreeRunner, IEntity, IInit
         {
             _target = targetData.targetTransform;
             _isInDanger = true;
-
-            return;
         }
 
         if (FishType.PreyList.Contains(targetData.targetBehaviour.FishType) && !_isInDanger)
@@ -242,6 +241,8 @@ public class BehaviourTreeRunner : NetworkBehaviour, ITreeRunner, IEntity, IInit
 
             _isHunting = true;
         }
+        
+        OnTargetChanged?.Invoke(_target);
     }
 
     private void ResetHuntBehaviour()
@@ -249,12 +250,14 @@ public class BehaviourTreeRunner : NetworkBehaviour, ITreeRunner, IEntity, IInit
         _isHunting = false;
         _target = null;
         _targetHealthManager = null;
+        OnTargetChanged?.Invoke(null);
     }
 
     private void ResetFleeBehaviour()
     {
         _isInDanger = false;
         _target = null;
+        OnTargetChanged?.Invoke(null);
     }
 
     private void SetAnimatorMoveSpeed(float speed)

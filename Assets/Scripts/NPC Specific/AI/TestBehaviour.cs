@@ -12,6 +12,8 @@ public class TestBehaviour : MonoBehaviour, ITreeRunner, IEntity
     private Transform _target;
 
     public FishData FishType => fishData;
+    public event Action<Transform> OnTargetChanged;
+
 
     private void Update()
     {

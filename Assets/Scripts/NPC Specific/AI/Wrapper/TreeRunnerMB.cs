@@ -73,6 +73,9 @@ public class TreeRunnerMB : MonoBehaviour, ITreeRunner, IEntity
     private static readonly Color WanderingColor = new(120f / 255f, 33f / 255f, 114f / 255f, 1f);
     private static readonly Color FleeingColor = new(39f / 255f, 174f / 255f, 96f / 255f, 1f);
     private static readonly Color HuntingColor = new(231f / 255f, 76f / 255f, 60f / 255f, 1f);   
+    
+    public event Action<Transform> OnTargetChanged;
+
 
     private void Awake()
     {

@@ -1,7 +1,10 @@
+using System;
 using UnityEngine;
 
 public interface ITreeRunner
 {
+    event Action<Transform> OnTargetChanged;
+    
     /// <summary>
     /// Sends over important information about the area check to the tree runner.
     /// </summary>
