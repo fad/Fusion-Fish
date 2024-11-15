@@ -5228,7 +5228,7 @@ PrefabInstance:
     - target: {fileID: -2164658129637747517, guid: 274fa519b44c24e43a28d85dbdddcb30,
         type: 3}
       propertyPath: satietyDecreaseRate
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 61442038398986381, guid: 274fa519b44c24e43a28d85dbdddcb30,
         type: 3}

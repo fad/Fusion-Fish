@@ -16,6 +16,7 @@ public class HudUI : MonoBehaviour
     
     [Header("Satiety")]
     [SerializeField] private ProgressBarPro satietyUI;
+    [SerializeField] private Animator satietyAnim;
 
     [Header("Death")]
     [SerializeField] private GameObject deathPanel;
@@ -80,7 +81,7 @@ public class HudUI : MonoBehaviour
         // experienceText.text = playerManager.levelUp.currentExperience.ToString();
         // neededExperienceText.text = playerManager.levelUp.experienceUntilUpgrade.ToString();
 
-        satietyUI.Value = playerManager.satietyManager.GetSatiety() / playerManager.satietyManager.GetMaxSatiety();
+        Satiety();
 
         levelText.text = "Lvl: "+playerManager.levelUp.currentLevel.ToString();
 
@@ -90,6 +91,18 @@ public class HudUI : MonoBehaviour
             pressSpaceText.SetActive(false);
     }
 
+    private void Satiety()
+    {
+        float Satiety =  playerManager.satietyManager.GetSatiety();
+        float MaxSatiety =  playerManager.satietyManager.GetMaxSatiety();
+
+        satietyUI.Value = Satiety / MaxSatiety;
+        
+        if(Satiety <= (30 * MaxSatiety) / 100f)
+            satietyAnim.SetBool("Hunger",true);
+        else
+            satietyAnim.SetBool("Hunger",false);
+    }
     private void UpdateHealthUI(float value)
     {
         healthUI.Value = value / playerManager.healthManager.maxHealth;

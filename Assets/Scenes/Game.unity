@@ -2270,6 +2270,7 @@ MonoBehaviour:
   boostUI: {fileID: 425138680}
   healthUI: {fileID: 1191598976}
   satietyUI: {fileID: 1240865124}
+  satietyAnim: {fileID: 1240865127}
   deathPanel: {fileID: 1126325023}
   causeOfDeathText: {fileID: 1196994310}
   xpUI: {fileID: 1064477822}
@@ -4246,7 +4247,11 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 394345000}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1944663734297580, guid: e041bff3e4559ea4abf208ccf82330d9,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1240865127}
   m_SourcePrefab: {fileID: 100100000, guid: e041bff3e4559ea4abf208ccf82330d9, type: 3}
 --- !u!114 &1240865124 stripped
 MonoBehaviour:
@@ -4254,7 +4259,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 1240865123}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1240865126}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2cdabb6774b00054d818f93e87ba72cb, type: 3}
@@ -4266,6 +4271,33 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1240865123}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1240865126 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1944663734297580, guid: e041bff3e4559ea4abf208ccf82330d9,
+    type: 3}
+  m_PrefabInstance: {fileID: 1240865123}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1240865127
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1240865126}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 4ed4e834d51f24b41872a0bea715c804, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1241391400
 GameObject:
   m_ObjectHideFlags: 0

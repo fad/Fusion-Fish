@@ -19,8 +19,8 @@ public class DecalController : MonoBehaviour
 
     private void ChekHealth(float health)
     {
-        float NextStage = healthManager.maxHealth - (healthManager.maxHealth%20 * (decalsCount+1));
-        float OldStage = healthManager.maxHealth - (healthManager.maxHealth%20 * decalsCount);
+        float NextStage = healthManager.maxHealth - ((healthManager.maxHealth * 20 / 100) * (decalsCount+1));
+        float OldStage = healthManager.maxHealth - ((healthManager.maxHealth * 20 / 100) * decalsCount);
 
         if(NextStage > health && decalsCount < decals.Length && health>0)
         {
