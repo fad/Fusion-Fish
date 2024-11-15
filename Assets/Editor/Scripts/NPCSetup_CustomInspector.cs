@@ -10,9 +10,7 @@ public class NPCSetup_CustomInspector : Editor
 {
     private static readonly Type[] ComponentsToAdd =
     {
-        typeof(HealthManager),
         typeof(SpawnGibsOnDestroy),
-        typeof(NPCHealth),
         typeof(HealthViewModel),
         typeof(AttackManager),
         typeof(StaminaManager)
@@ -142,7 +140,7 @@ public class NPCSetup_CustomInspector : Editor
 
     private void InitializeHealthManager(GameObject prefab, FishData fishData)
     {
-        HealthManager healthManager = prefab.GetComponent<HealthManager>();
+        HealthManager healthManager = prefab.transform.parent.GetComponent<HealthManager>();
 
         if (!healthManager) return;
 
@@ -161,7 +159,7 @@ public class NPCSetup_CustomInspector : Editor
         SerializedProperty HM = healthViewModelObject.FindProperty("healthModel");
         SerializedProperty HS = healthViewModelObject.FindProperty("healthSlider");
 
-        HM.objectReferenceValue = prefab.GetComponent<HealthManager>();
+        HM.objectReferenceValue = prefab.transform.parent.GetComponent<HealthManager>();
         HS.objectReferenceValue = healthBarCanvas.GetComponentInChildren<Slider>(true);
 
         healthViewModelObject.ApplyModifiedProperties();
