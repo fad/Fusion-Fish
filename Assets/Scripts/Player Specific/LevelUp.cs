@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Fusion;
 using StarterAssets;
@@ -34,9 +35,7 @@ public class LevelUp : NetworkBehaviour
     [SerializeField] public float attackRangeIncreaseOnLevelUp = .2f;
     [SerializeField] public float healthIncreaseOnLevelUp = 5f;
     
-    [Header("LevelUpText")]
-    [SerializeField] private TextMeshProUGUI levelUpText;
-    private Vector3 textStartingPosition;
+
 
     private PlayerManager playerManager;
 
@@ -45,11 +44,10 @@ public class LevelUp : NetworkBehaviour
     [SerializeField] private GameObject fishModel;
     [SerializeField] private ParticleSystem LevelUpParticleSystem;
 
-
+    public Action levelUpEvent;
     private void Start()
     {
         playerManager = GetComponent<PlayerManager>();
-        textStartingPosition = levelUpText.transform.localPosition;
         startingExperienceUntilUpgrade = experienceUntilUpgrade;
         startingExperience = currentExperience;
         startingSize = playerManager.thirdPersonController.transform.localScale;
@@ -97,19 +95,7 @@ public class LevelUp : NetworkBehaviour
             currentExperience = 0;
             AudioManager.Instance.Play("levelUp");
             currentLevel++;
-            StartCoroutine(ShowLevelUpText());
-        }
-    }
-
-    private IEnumerator ShowLevelUpText()
-    {
-        levelUpText.transform.localPosition = textStartingPosition;
-        levelUpText.color = Color.white;
-        while (levelUpText.color.a > 0)
-        {
-            levelUpText.transform.localPosition += Vector3.up * Time.deltaTime ;
-            Color.Lerp(levelUpText.color, new Color(1,1,1,0), Time.deltaTime * 30);
-            yield return null;
+            levelUpEvent?.Invoke();
         }
     }
 }

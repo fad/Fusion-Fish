@@ -1,5 +1,6 @@
 using System.Collections;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -32,6 +33,10 @@ public class HudUI : MonoBehaviour
     [Header("Egg")]
     [SerializeField] private GameObject pressSpaceText;
 
+    [Header("LevelUpText")]
+    [SerializeField] private TextMeshProUGUI levelUpText;
+    private Vector3 textStartingPosition;
+    
     public static HudUI Instance;
     
     private void Awake()
@@ -52,6 +57,9 @@ public class HudUI : MonoBehaviour
         yield return new WaitUntil(() => playerManager != null);
         
         playerManager.healthManager.OnHealthChanged += UpdateHealthUI;
+        playerManager.levelUp.levelUpEvent += LevelUpTextSpawn;
+
+        textStartingPosition = levelUpText.transform.localPosition;
     }
 
     private void OnDisable()
@@ -113,5 +121,24 @@ public class HudUI : MonoBehaviour
     {
         playerManager.healthManager.GetComponent<PlayerHealth>().PlayerRestart();
         UpdateHealthUI(playerManager.healthManager.NetworkedHealth);
+    }
+
+    private void LevelUpTextSpawn()
+    {
+        levelUpText.transform.localPosition = textStartingPosition;
+        levelUpText.color = Color.white;
+        StartCoroutine(ShowLevelUpText());
+    }
+
+    private IEnumerator ShowLevelUpText()
+    {
+        float alfa = 1;
+        while (levelUpText.color.a > 0)
+        {
+            levelUpText.transform.localPosition += new Vector3(0,1.5f,0);
+            levelUpText.color = new Color(1,1,1,alfa);
+            alfa -= 0.005f;
+            yield return null;
+        }
     }
 }
