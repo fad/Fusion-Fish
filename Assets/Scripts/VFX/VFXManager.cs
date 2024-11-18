@@ -82,12 +82,9 @@ public class VFXManager : MonoBehaviour
             elapsedTime += Time.deltaTime;
             float t = elapsedTime / hurtFadeOutTime;
             float fadeAmount = fadeOutCurve.Evaluate(t);
-
             
             currentIntensity = Mathf.Lerp(currentIntensity, 0f, 1-fadeAmount);
             currentPower = Mathf.Lerp(currentPower, vignettePowerEndAmount, 1-fadeAmount);
-            
-            Debug.Log($"Fade Amount: {fadeAmount}\nElapsed Time: {elapsedTime}\nT: {t}\nCurrent Intensity: {currentIntensity}\nCurrent Power: {currentPower}");
             
             damageVignetteMaterial.SetFloat(_vignetteIntensity, currentIntensity);
             damageVignetteMaterial.SetFloat(_vignettePower, currentPower);

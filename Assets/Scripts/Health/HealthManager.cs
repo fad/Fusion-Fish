@@ -128,7 +128,7 @@ public class HealthManager : NetworkBehaviour, IHealthManager
         if (TryGetComponent<PlayerHealth>(out var playerHealth) && HasStateAuthority && currentHealth > NetworkedHealth)
         {
             if(playerHealth.showVignette)
-                StartCoroutine(playerHealth.ShowDamageVignette());
+                VFXManager.Instance.ShowHurtVignette();
 
             if (NetworkedHealth <= 0)
             {
