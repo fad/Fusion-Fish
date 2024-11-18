@@ -77,10 +77,7 @@ public class LevelUp : NetworkBehaviour
             LevelUpParticleSystem.Play();
             if (isEgg)
             {
-                isEgg = false;
-                eggModel.SetActive(false);
-                fishModel.SetActive(true);
-                playerManager.transform.position = playerManager.transform.position + new Vector3(0,0.2f,0);
+                EvolutionIntoFishRpc();
             }
 
             playerManager.thirdPersonController.transform.localScale += new Vector3(sizeIncreaseOnLevelUp, sizeIncreaseOnLevelUp, sizeIncreaseOnLevelUp);
@@ -97,5 +94,14 @@ public class LevelUp : NetworkBehaviour
             currentLevel++;
             levelUpEvent?.Invoke();
         }
+    }
+
+    [Rpc(RpcSources.All, RpcTargets.All)]
+    private void EvolutionIntoFishRpc()
+    {
+        isEgg = false;
+        eggModel.SetActive(false);
+        fishModel.SetActive(true);
+        playerManager.transform.position = playerManager.transform.position + new Vector3(0,0.2f,0);
     }
 }
