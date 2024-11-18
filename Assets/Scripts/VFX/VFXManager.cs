@@ -31,8 +31,8 @@ public class VFXManager : MonoBehaviour
     
     public static VFXManager Instance;
     
-    private static int _vignetteIntensity = Shader.PropertyToID("_VignetteIntensity");
-    private static int _vignettePower = Shader.PropertyToID("_VignettePower");
+    private static readonly int VignetteIntensity = Shader.PropertyToID("_VignetteIntensity");
+    private static readonly int VignettePower = Shader.PropertyToID("_VignettePower");
     
     private WaitForSeconds _hurtDisplayTime;
     private IEnumerator _currentVignetteCoroutine;
@@ -67,8 +67,8 @@ public class VFXManager : MonoBehaviour
     private IEnumerator Hurt()
     {
         damageVignette.SetActive(true);
-        damageVignetteMaterial.SetFloat(_vignetteIntensity, vignetteIntensityStartAmount);
-        damageVignetteMaterial.SetFloat(_vignettePower, vignettePowerStartAmount);
+        damageVignetteMaterial.SetFloat(VignetteIntensity, vignetteIntensityStartAmount);
+        damageVignetteMaterial.SetFloat(VignettePower, vignettePowerStartAmount);
         
         yield return _hurtDisplayTime;
         
@@ -86,13 +86,13 @@ public class VFXManager : MonoBehaviour
             currentIntensity = Mathf.Lerp(currentIntensity, 0f, 1-fadeAmount);
             currentPower = Mathf.Lerp(currentPower, vignettePowerEndAmount, 1-fadeAmount);
             
-            damageVignetteMaterial.SetFloat(_vignetteIntensity, currentIntensity);
-            damageVignetteMaterial.SetFloat(_vignettePower, currentPower);
+            damageVignetteMaterial.SetFloat(VignetteIntensity, currentIntensity);
+            damageVignetteMaterial.SetFloat(VignettePower, currentPower);
             yield return null;
         }
         
-        damageVignetteMaterial.SetFloat(_vignetteIntensity, 0f);
-        damageVignetteMaterial.SetFloat(_vignettePower, vignettePowerEndAmount);
+        damageVignetteMaterial.SetFloat(VignetteIntensity, 0f);
+        damageVignetteMaterial.SetFloat(VignettePower, vignettePowerEndAmount);
         
         damageVignette.SetActive(false);
     }

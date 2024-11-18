@@ -48,13 +48,32 @@ MonoBehaviour:
     type: 2}
   damageVignetteMaterial: {fileID: 2100000, guid: 00fcc34bd0c198f4fbacaec1e08b0ccc,
     type: 2}
-  hurtDisplayTime: 1
-  hurtFadeOutTime: 1
-  vignetteIntensityStartAmount: 1.6
+  hurtDisplayTime: 0.4
+  hurtFadeOutTime: 350
+  vignetteIntensityStartAmount: 1.29
   vignettePowerStartAmount: 1.75
+  vignettePowerEndAmount: 6
   fadeOutCurve:
     serializedVersion: 2
-    m_Curve: []
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: -2.1411698
+      outSlope: -2.1411698
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
