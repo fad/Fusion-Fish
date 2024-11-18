@@ -151,6 +151,8 @@ namespace StarterAssets
             AudioManager.Instance.PlaySoundAtPosition("impactWithWater", playerVisual.transform.position);
             foundSwimArea = true;
             setUIActivationState.DeactiveLoadPanel();
+
+            playerManager.levelUp.levelUpEvent+=CameraForwardRotation;
         }
 
         private void Update()
@@ -193,6 +195,11 @@ namespace StarterAssets
                     setUIActivationState.pressedActivationUIMultiplayerButton = false;
                     break;
             }
+        }
+
+        private void CameraForwardRotation()
+        {
+            cineMachineTargetPitch = 20;
         }
 
         private void CameraRotation()
