@@ -137,7 +137,7 @@ public class HudUI : MonoBehaviour
         {
             levelUpText.transform.localPosition += new Vector3(0,1.5f,0);
             levelUpText.color = new Color(1,1,1,alfa);
-            alfa -= 0.005f;
+            alfa -= 0.004f;
             yield return null;
         }
     }

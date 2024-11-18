@@ -13,7 +13,7 @@ public class DecalController : MonoBehaviour
 
     private void Start()
     {
-        healthManager = GetComponent<HealthManager>();
+        healthManager = GetComponentInParent<HealthManager>();
         healthManager.OnHealthChanged += ChekHealth;
     }
 
