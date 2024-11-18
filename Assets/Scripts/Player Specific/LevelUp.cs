@@ -33,7 +33,7 @@ public class LevelUp : NetworkBehaviour
     [SerializeField] public float suckPowerIncreaseOnLevelUp = .1f;
     [SerializeField] public float cameraDistanceIncreaseOnLevelUp = .75f;
     [SerializeField] public float attackRangeIncreaseOnLevelUp = .2f;
-    [SerializeField] public float healthIncreaseOnLevelUp = 5f;
+    [SerializeField] public float healthIncreaseOnLevelUp = 20f;
     
 
 

@@ -1286,7 +1286,7 @@ MonoBehaviour:
   spawnGibs: 0
   currentHealth: 0
   notAbleToGetBitten: 0
-  experienceValue: 50
+  experienceValue: 5000
   maxSlowDownSpeedTime: 2
   slowDownSpeedTime: 0
   slowDown: 0

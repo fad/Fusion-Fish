@@ -5347,6 +5347,11 @@ PrefabInstance:
       propertyPath: LevelUpParticleSystem
       value: 
       objectReference: {fileID: 61702724229287754}
+    - target: {fileID: 2297454540360690151, guid: 274fa519b44c24e43a28d85dbdddcb30,
+        type: 3}
+      propertyPath: healthIncreaseOnLevelUp
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 2749181200256999984, guid: 274fa519b44c24e43a28d85dbdddcb30,
         type: 3}
       propertyPath: attackDamage

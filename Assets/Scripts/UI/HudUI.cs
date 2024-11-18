@@ -36,7 +36,7 @@ public class HudUI : MonoBehaviour
     [Header("LevelUpText")]
     [SerializeField] private TextMeshProUGUI levelUpText;
     private Vector3 textStartingPosition;
-    
+    private Coroutine showLevelUpText;
     public static HudUI Instance;
     
     private void Awake()
@@ -127,7 +127,11 @@ public class HudUI : MonoBehaviour
     {
         levelUpText.transform.localPosition = textStartingPosition;
         levelUpText.color = Color.white;
-        StartCoroutine(ShowLevelUpText());
+        
+        if(showLevelUpText!= null)
+            StopCoroutine(showLevelUpText);
+
+        showLevelUpText = StartCoroutine(ShowLevelUpText());
     }
 
     private IEnumerator ShowLevelUpText()
