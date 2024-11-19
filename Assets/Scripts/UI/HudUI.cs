@@ -1,9 +1,10 @@
 using System.Collections;
 using TMPro;
+using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
-
+using Random = UnityEngine.Random;
 public class HudUI : MonoBehaviour
 {
     [Header("Scripts")] 
@@ -23,11 +24,14 @@ public class HudUI : MonoBehaviour
     [SerializeField] private GameObject deathPanel;
     [SerializeField] private TextMeshProUGUI causeOfDeathText;
 
-    [Header("XP")]
+    [Header("Experience")]
   // [SerializeField] public Text experienceText;
   // [SerializeField] public Text neededExperienceText;
     [SerializeField] private ProgressBarPro xpUI;
     [SerializeField] public TextMeshProUGUI levelText;
+    [SerializeField] private MoveExperience ExperienceTextObj;
+    [SerializeField] private Transform SpawnPoint;
+    private float currentTimeToSpawn,intervalBetweenSpawn = 0.1f;
 
 
     [Header("Egg")]
@@ -37,7 +41,11 @@ public class HudUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI levelUpText;
     private Vector3 textStartingPosition;
     private Coroutine showLevelUpText;
+
+
+
     public static HudUI Instance;
+
     
     private void Awake()
     {
@@ -58,6 +66,7 @@ public class HudUI : MonoBehaviour
         
         playerManager.healthManager.OnHealthChanged += UpdateHealthUI;
         playerManager.levelUp.levelUpEvent += LevelUpTextSpawn;
+        playerManager.levelUp.AddExperienceEvent += AddExperience;
 
         textStartingPosition = levelUpText.transform.localPosition;
     }
@@ -75,7 +84,18 @@ public class HudUI : MonoBehaviour
 
         boostUI.Value = playerManager.thirdPersonController.currentBoostCount / playerManager.thirdPersonController.maxBoostCount;
 
-        float XpPercent = (float)playerManager.levelUp.currentExperience / playerManager.levelUp.experienceUntilUpgrade;
+        ExperienceLogic();
+        Satiety();
+        LevelLogic();
+    }
+
+    
+    private void ExperienceLogic()
+    {
+
+        currentTimeToSpawn -= Time.deltaTime;
+
+        float XpPercent = (float)playerManager.levelUp.GetExperience() / playerManager.levelUp.experienceUntilUpgrade;
         if (xpUI.Value > XpPercent)
         {
             xpUI.animTime = 100;
@@ -85,20 +105,7 @@ public class HudUI : MonoBehaviour
             xpUI.animTime = 0.8f;
         }
         xpUI.Value = XpPercent;
-
-        // experienceText.text = playerManager.levelUp.currentExperience.ToString();
-        // neededExperienceText.text = playerManager.levelUp.experienceUntilUpgrade.ToString();
-
-        Satiety();
-
-        levelText.text = "Lvl: "+playerManager.levelUp.currentLevel.ToString();
-
-        if (playerManager.levelUp.isEgg)
-            pressSpaceText.SetActive(true);
-        else
-            pressSpaceText.SetActive(false);
     }
-
     private void Satiety()
     {
         float Satiety =  playerManager.satietyManager.GetSatiety();
@@ -110,6 +117,15 @@ public class HudUI : MonoBehaviour
             satietyAnim.SetBool("Hunger",true);
         else
             satietyAnim.SetBool("Hunger",false);
+    }
+    private void LevelLogic()
+    {
+            levelText.text = "Lvl: "+playerManager.levelUp.currentLevel.ToString();
+
+        if (playerManager.levelUp.isEgg)
+            pressSpaceText.SetActive(true);
+        else
+            pressSpaceText.SetActive(false);
     }
     private void UpdateHealthUI(float value)
     {
@@ -127,11 +143,22 @@ public class HudUI : MonoBehaviour
     {
         levelUpText.transform.localPosition = textStartingPosition;
         levelUpText.color = Color.white;
-        
+
         if(showLevelUpText!= null)
             StopCoroutine(showLevelUpText);
 
         showLevelUpText = StartCoroutine(ShowLevelUpText());
+    }
+
+     private void AddExperience(int Experience)
+    {
+        if(currentTimeToSpawn < 0)
+        {
+            MoveExperience experienceEntity = Instantiate(ExperienceTextObj,transform);
+            experienceEntity.transform.position = SpawnPoint.position + new Vector3(Random.Range(0,50),Random.Range(0,50),0);
+            experienceEntity.MoveToPosition(xpUI.transform.localPosition,Experience);
+            currentTimeToSpawn = intervalBetweenSpawn;
+        }
     }
 
     private IEnumerator ShowLevelUpText()

@@ -199,7 +199,8 @@ namespace StarterAssets
 
         private void CameraForwardRotation()
         {
-            cineMachineTargetPitch = 20;
+            if(playerManager.levelUp.currentLevel == 1)
+                cineMachineTargetPitch = 20;
         }
 
         private void CameraRotation()
@@ -269,8 +270,7 @@ namespace StarterAssets
                 int impulseForce = 8;
                 rb.AddForce(GetRandomDirection() * impulseForce, ForceMode.Impulse);
                 RandomizeRotation();
-                playerManager.levelUp.currentExperience += 50;
-                playerManager.levelUp.CheckLevelUp();
+                playerManager.levelUp.AddExperience(50);
                 input.jump = false;
             }
 

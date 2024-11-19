@@ -78,8 +78,7 @@ public class InGameDebugConsoleManager : MonoBehaviour
     
     public void TriggerLevelUp()
     {
-        playerManager.levelUp.currentExperience = playerManager.levelUp.experienceUntilUpgrade;
-        playerManager.levelUp.CheckLevelUp();
+        playerManager.levelUp.AddExperience (playerManager.levelUp.experienceUntilUpgrade);
     }
 
     [ConsoleMethod("SpawnID", "Spawns a fish by their ID in front of the player")]

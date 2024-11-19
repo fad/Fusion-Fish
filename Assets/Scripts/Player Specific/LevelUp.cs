@@ -23,7 +23,7 @@ public class LevelUp : NetworkBehaviour
 
     [Header("Upgrading Values")]
     public int experienceUntilUpgrade = 300;
-    [HideInInspector] public int currentExperience;
+    private int currentExperience;
     [SerializeField] public int experienceIncreaseOnLevelUp = 200;
 
     [SerializeField] public float defaultSwimSpeedIncreaseOnLevelUp = 1f;
@@ -45,6 +45,7 @@ public class LevelUp : NetworkBehaviour
     [SerializeField] private ParticleSystem LevelUpParticleSystem;
 
     public Action levelUpEvent;
+    public Action<int> AddExperienceEvent;
     private void Start()
     {
         playerManager = GetComponent<PlayerManager>();
@@ -70,7 +71,18 @@ public class LevelUp : NetworkBehaviour
         eggModel.SetActive(true);
         fishModel.SetActive(false);
     }
-    public void CheckLevelUp()
+
+    public int GetExperience()
+    {
+        return currentExperience;
+    }
+    public void AddExperience(int experience)
+    {
+        currentExperience += experience;
+        AddExperienceEvent?.Invoke(experience);
+        CheckLevelUp();
+    }
+    private void CheckLevelUp()
     {
         if (currentExperience >= experienceUntilUpgrade)
         {

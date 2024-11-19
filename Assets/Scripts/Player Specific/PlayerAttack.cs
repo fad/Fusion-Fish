@@ -138,8 +138,7 @@ public class PlayerAttack : NetworkBehaviour
         //Decreasing lossyScale cause it is a bit too big
         if (directionToTarget.magnitude <= playerManager.thirdPersonController.transform.localToWorldMatrix.lossyScale.z - .01f)
         {
-            playerManager.levelUp.currentExperience += health.experienceValue;
-            playerManager.levelUp.CheckLevelUp();
+            playerManager.levelUp.AddExperience(health.experienceValue);
                         
             if (!scaleUpAnimationRunning)
                 StartCoroutine(ScalePlayerUpOnEating());
