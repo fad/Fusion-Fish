@@ -1,4 +1,5 @@
 #if CMPSETUP_COMPLETE
+using System;
 using TMPro;
 using UnityEngine;
 
@@ -10,23 +11,22 @@ namespace AvocadoShark
         public TextMeshProUGUI Players_In_Rooms;
         public TextMeshProUGUI RoomsMade;
         [HideInInspector]
-        public int characterchosen;
         public TextMeshProUGUI optionchosentext;
+
+        public Action<CharacterType> newCharacterEvent;
+
+        public enum CharacterType { Clownfish, Goldfish }
         private void Start()
         {
-            characterchosen = PlayerPrefs.GetInt("ChosenCharacter");
-
-            if (characterchosen == 0)
-                optionchosentext.text = "Choose your character: \n <b>Clownfish Chosen</b>";
-
-            if (characterchosen == 1)
-                optionchosentext.text = "Choose your character: \n <b>Goldfish Chosen</b>";
+            ChooseNumberCharacter(PlayerPrefs.GetInt("ChosenCharacter"));
         }
+
         void Update()
         {
             RoomsMade.text = "Total Rooms: " + FusionConnection.Instance.nRooms;
             Players_In_Rooms.text = "Players In Rooms: " + FusionConnection.Instance.nPPLOnline;
         }
+
         public void ExitGame()
         {
 #if UNITY_EDITOR
@@ -35,18 +35,35 @@ namespace AvocadoShark
         Application.Quit();
 #endif
         }
-        public void ChooseCharacter(string option)
+        
+        private void ChooseNumberCharacter(int characterNumber)
         {
-            if (option == "Clownfish")
+            switch (characterNumber)
             {
-                PlayerPrefs.SetInt("ChosenCharacter", 0);
+                case (int)CharacterType.Clownfish:
+                    ChooseCharacter(CharacterType.Clownfish);
+                break;                
+                
+                case (int)CharacterType.Goldfish:
+                    ChooseCharacter(CharacterType.Goldfish);
+                break;
+            }
+        }
+
+        public void ChooseCharacter(CharacterType characterType)
+        {
+            if (characterType == CharacterType.Clownfish)
+            {
+                PlayerPrefs.SetInt("ChosenCharacter", (int)CharacterType.Clownfish);
                 optionchosentext.text = "Choose your character: \n <b>Clownfish Chosen</b>";
+                newCharacterEvent?.Invoke(CharacterType.Clownfish);
             }
 
-            if (option == "Goldfish")
+            if (characterType == CharacterType.Goldfish)
             {
-                PlayerPrefs.SetInt("ChosenCharacter", 1);
+                PlayerPrefs.SetInt("ChosenCharacter", (int)CharacterType.Goldfish);
                 optionchosentext.text = "Choose your character: \n <b>Goldfish Chosen</b>";
+                newCharacterEvent?.Invoke(CharacterType.Goldfish);
             }
         }
     }

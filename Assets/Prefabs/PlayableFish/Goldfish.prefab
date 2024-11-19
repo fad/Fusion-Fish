@@ -5197,8 +5197,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.03, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
-  m_ConstrainProportionsScale: 1
+  m_LocalScale: {x: 0.6, y: 0.5, z: 0.5}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8757175084097757024}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5891,6 +5891,11 @@ PrefabInstance:
       propertyPath: NetworkedBehaviours.Array.data[15]
       value: 
       objectReference: {fileID: 1909236060303310207}
+    - target: {fileID: 9150513680388461083, guid: 274fa519b44c24e43a28d85dbdddcb30,
+        type: 3}
+      propertyPath: eggVisual
+      value: 
+      objectReference: {fileID: 5383486638424493648}
     - target: {fileID: 9150513680388461083, guid: 274fa519b44c24e43a28d85dbdddcb30,
         type: 3}
       propertyPath: boostSwimSpeed
