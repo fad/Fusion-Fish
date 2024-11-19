@@ -92,6 +92,8 @@ public class AttackManager : NetworkBehaviour, IAttackManager, IInitialisable
         _currentTarget.TryGetComponent(out _currentTargetHealthManager);
         _currentTarget.TryGetComponent(out _currentTargetTreeRunner);
 
+        if(_currentTargetHealthManager == null) return;
+        
         _currentTargetHealthManager.OnDeath += OnTargetDeath;
     }
 

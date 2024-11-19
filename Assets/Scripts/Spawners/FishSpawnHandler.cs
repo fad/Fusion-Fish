@@ -59,6 +59,18 @@ public class FishSpawnHandler : NetworkBehaviour
     /// <param name="position">The position to spawn the fish at.</param>
     public void Spawn(FishData data, Vector3 position)
     {
+        if (Runner is null)
+        {
+            Debug.LogError($"No NetworkRunner associated with {nameof(FishSpawnHandler)}!".InColor(Color.red));
+            return;
+        }
+        
+        if(data.FishPrefab is null)
+        {
+            Debug.LogError($"FishData {data.name} has no prefab assigned!".InColor(Color.red));
+            return;
+        }
+        
         Runner.Spawn(data.FishPrefab, position, Quaternion.identity, onBeforeSpawned: (runner, o) => Initialise(data, o, runner));
     }
     
