@@ -42,7 +42,10 @@ public class AttackManager : NetworkBehaviour, IAttackManager, IInitialisable
 
     public override void Despawned(NetworkRunner runner, bool hasState)
     {
-        _correspondingNPC.OnTargetChanged -= ChangeTarget;
+        if (hasState)
+        {
+            _correspondingNPC.OnTargetChanged -= ChangeTarget;
+        }
     }
 
     public override void FixedUpdateNetwork()
@@ -77,24 +80,26 @@ public class AttackManager : NetworkBehaviour, IAttackManager, IInitialisable
 
     private void ChangeTarget(Transform newTarget)
     {
-        if (!newTarget)
+        if (_currentTargetHealthManager != null)
         {
-            if(_currentTargetHealthManager != null)
-                _currentTargetHealthManager.OnDeath -= OnTargetDeath;
-            
+            _currentTargetHealthManager.OnDeath -= OnTargetDeath;
+        }
+
+        if (newTarget == null)
+        {
             _currentTargetHealthManager = null;
             _currentTarget = null;
             return;
         }
-        
-        _currentTarget = newTarget;
-        
-        _currentTarget.TryGetComponent(out _currentTargetHealthManager);
-        _currentTarget.TryGetComponent(out _currentTargetTreeRunner);
 
-        if(_currentTargetHealthManager == null) return;
-        
-        _currentTargetHealthManager.OnDeath += OnTargetDeath;
+        _currentTarget = newTarget;
+
+        if (_currentTarget.TryGetComponent(out _currentTargetHealthManager))
+        {
+            _currentTargetHealthManager.OnDeath += OnTargetDeath;
+        }
+
+        _currentTarget.TryGetComponent(out _currentTargetTreeRunner);
     }
 
     private void OnTargetDeath()
