@@ -5,18 +5,18 @@ using Fusion;
 
 public class PlayerAttack : NetworkBehaviour
 {
-    [Header("Hit LayerMask")] 
+    [Header("Hit LayerMask")]
     [SerializeField] private LayerMask foodLayerMask;
     [SerializeField] private LayerMask hittableLayerMask;
     private GameObject foodObject;
 
-    [Header("Bite")] 
+    [Header("Bite")]
     [SerializeField] private Transform biteUpper;
     [SerializeField] private Transform biteLower;
     [SerializeField] private Animator biteAnimator;
     [SerializeField] private NetworkMecanimAnimator networkFishAnimator;
 
-    [Header("Attack")] 
+    [Header("Attack")]
     [SerializeField] public float attackRange;
     [SerializeField] private float maxTimeBetweenAttack = 0.375f;
     [SerializeField] private float attractionAngle;
@@ -26,38 +26,39 @@ public class PlayerAttack : NetworkBehaviour
     private bool SucksFood;
     private int attackCount;
     private int lastAttackCount;
-    
+
     [Header("Player")]
     [SerializeField] private PlayerManager playerManager;
     private float usualSensitivity;
     private float sensitivityWhileAttacking;
 
-    [Header("SuckIn")] 
+    [Header("SuckIn")]
     [SerializeField] private ParticleSystem suckInParticles;
     [SerializeField] private float suckInForce;
     [SerializeField] private float healthIncreaseOnEating = 10;
     [SerializeField] private int satietyIncreaseOnEating = 10;
     private bool scaleUpAnimationRunning;
     [Tooltip("Increase player scale up and down coroutine will take that time.")]
-    [SerializeField] private float timeForScaleAnimation = .15f; 
+    [SerializeField] private float timeForScaleAnimation = .15f;
     public float suckInDamage;
-    
+
     private Image _biteUpperImage;
     private Image _biteLowerImage;
 
     private Outline _currentEnemyOutline;
+    private HealthViewModel _currentEnemyHealthBar;
     private void Start()
     {
         if (!HasStateAuthority)
             return;
-        
+
         playerManager.thirdPersonController.gameObject.layer = LayerMask.NameToLayer("StateAuthorityPlayer");
 
         usualSensitivity = playerManager.thirdPersonController.sensitivity;
         sensitivityWhileAttacking = playerManager.thirdPersonController.sensitivity /= 2;
-        
+
         currentAttackTime = maxTimeBetweenAttack;
-        
+
         _biteUpperImage = biteUpper.GetComponent<Image>();
         _biteLowerImage = biteLower.GetComponent<Image>();
     }
@@ -67,14 +68,14 @@ public class PlayerAttack : NetworkBehaviour
         if (playerManager.levelUp.isEgg)
             ResetBiteImageAnimationEvent();
 
-        if (playerManager.levelUp.isEgg || !HasStateAuthority || playerManager.playerHealth.isDead) 
+        if (playerManager.levelUp.isEgg || !HasStateAuthority || playerManager.playerHealth.isDead)
             return;
-        
-        if(!SucksFood)
+
+        if (!SucksFood)
             AttackUpdate();
-        
+
         SuckInUpdate();
-        
+
         EnemyInRange();
     }
 
@@ -84,7 +85,7 @@ public class PlayerAttack : NetworkBehaviour
         {
             Vector3 playerVisualPosition = playerManager.thirdPersonController.playerVisual.transform.position;
             SucksFood = true;
-            if(!suckInParticles.isPlaying)
+            if (!suckInParticles.isPlaying)
                 suckInParticles.Play();
             AudioManager.Instance.PlaySoundWithRandomPitchAtPosition("suck", playerVisualPosition);
 
@@ -123,11 +124,11 @@ public class PlayerAttack : NetworkBehaviour
         if (angleToTarget <= attractionAngle)
         {
             // Apply force to the target
-            if(hitCollider.TryGetComponent<Rigidbody>(out var targetRb))
+            if (hitCollider.TryGetComponent<Rigidbody>(out var targetRb))
             {
                 if (hitCollider.TryGetComponent<NPCBehaviour>(out var npcBehaviour))
                     StartCoroutine(npcBehaviour.StopMovement(2));
-                                    
+
                 targetRb.AddForce(directionToTarget.normalized * -suckInForce, ForceMode.Force);
             }
         }
@@ -139,7 +140,7 @@ public class PlayerAttack : NetworkBehaviour
         if (directionToTarget.magnitude <= playerManager.thirdPersonController.transform.localToWorldMatrix.lossyScale.z - .01f)
         {
             playerManager.levelUp.AddExperience(health.experienceValue);
-                        
+
             if (!scaleUpAnimationRunning)
                 StartCoroutine(ScalePlayerUpOnEating());
 
@@ -150,13 +151,13 @@ public class PlayerAttack : NetworkBehaviour
             health.experienceValue = 0;
             health.ReceiveDamageRpc(suckInDamage, false);
             SetFoodObject(null, Color.white, true);
-        }  
+        }
     }
 
     private IEnumerator ScalePlayerUpOnEating()
     {
         scaleUpAnimationRunning = true;
-        
+
         var oldScale = playerManager.transform.localScale;
         var scaleUpFish = oldScale + Vector3.one / 5;
         var elapsedTime = 0f;
@@ -164,17 +165,17 @@ public class PlayerAttack : NetworkBehaviour
         while (elapsedTime < timeForScaleAnimation)
         {
             playerManager.transform.localScale = Vector3.Lerp(playerManager.transform.localScale, scaleUpFish, elapsedTime / timeForScaleAnimation);
-        
+
             elapsedTime += Time.deltaTime;
             yield return null;
         }
-        
+
         elapsedTime = 0;
-        
+
         while (elapsedTime < timeForScaleAnimation)
         {
-            playerManager.transform.localScale = Vector3.Lerp( playerManager.transform.localScale, oldScale, elapsedTime / timeForScaleAnimation);
-        
+            playerManager.transform.localScale = Vector3.Lerp(playerManager.transform.localScale, oldScale, elapsedTime / timeForScaleAnimation);
+
             elapsedTime += Time.deltaTime;
             yield return null;
         }
@@ -189,7 +190,7 @@ public class PlayerAttack : NetworkBehaviour
             currentAttackTime -= Time.deltaTime;
             return;
         }
-        
+
         switch (playerManager.thirdPersonController.input.attack)
         {
             case true when !preparedAttack:
@@ -218,30 +219,36 @@ public class PlayerAttack : NetworkBehaviour
 
         lastAttackCount = attackCount;
     }
-    
+
     private void EnemyInRange()
     {
         Collider[] hitColliders = new Collider[1];
 
         Vector3 playerVisualPosition = playerManager.thirdPersonController.playerVisual.transform.position;
         int hits = Physics.OverlapSphereNonAlloc(playerVisualPosition, attackRange, hitColliders, hittableLayerMask);
-        
+
         if (hits >= 1)
         {
             Vector3 directionToTarget = hitColliders[0].transform.position - playerVisualPosition;
             float angleToTarget = Vector3.Angle(-playerManager.thirdPersonController.playerVisual.transform.forward, directionToTarget);
             HealthManager health = hitColliders[0].GetComponentInChildren<HealthManager>();
-            
+
             // Check if the target is within the attraction angle
             if (angleToTarget <= attractionAngle && !health.notAbleToGetBitten)
             {
-                SetFoodObject(hitColliders[0].transform.gameObject, Color.yellow,false);
+                SetFoodObject(hitColliders[0].transform.gameObject, Color.yellow, false);
 
-                if(!hitColliders[0].TryGetComponent<Outline>(out _currentEnemyOutline))
+                if (!hitColliders[0].TryGetComponent<Outline>(out _currentEnemyOutline))
                     _currentEnemyOutline = hitColliders[0].GetComponentInChildren<Outline>();
 
-                if(_currentEnemyOutline != null)
+                if (_currentEnemyOutline != null)
                     _currentEnemyOutline.enabled = true;
+
+                if (!hitColliders[0].TryGetComponent<HealthViewModel>(out _currentEnemyHealthBar))
+                    _currentEnemyHealthBar = hitColliders[0].GetComponentInChildren<HealthViewModel>();
+
+                if (_currentEnemyHealthBar != null)
+                    _currentEnemyHealthBar.AdjustHealthBarVisibility(true);
             }
             else
             {
@@ -254,27 +261,40 @@ public class PlayerAttack : NetworkBehaviour
         }
     }
 
-    private void SetFoodObject(GameObject food, Color color, bool DeactivateOutline)
+    private void SetFoodObject(GameObject food, Color color, bool DeactivateEnemyUI)
     {
         foodObject = food;
         _biteUpperImage.color = color;
         _biteLowerImage.color = color;
-        
-        if (DeactivateOutline && _currentEnemyOutline != null)
+
+        if (DeactivateEnemyUI)
         {
-            _currentEnemyOutline.enabled = false;
-            _currentEnemyOutline = null;
+            if (_currentEnemyOutline != null)
+            {
+                _currentEnemyOutline.enabled = false;
+                _currentEnemyOutline = null;
+            }
+
+            if (_currentEnemyHealthBar != null)
+            {
+                if (_currentEnemyHealthBar != null)
+                    _currentEnemyHealthBar.AdjustHealthBarVisibility(false);
+
+                _currentEnemyHealthBar = null;
+            }
         }
+
+
     }
-    
+
     public void ResetBiteImageAnimationEvent()
     {
         biteUpper.gameObject.SetActive(false);
         biteLower.gameObject.SetActive(false);
-        
+
         SetFoodObject(null, Color.white, false);
     }
-    
+
     private void DamageAnimationEvent()
     {
         if (foodObject != null && foodObject.TryGetComponent<HealthManager>(out var health))
@@ -282,12 +302,12 @@ public class PlayerAttack : NetworkBehaviour
             if (foodObject.TryGetComponent<PlayerHealth>(out var playerHealth) && playerHealth.NetworkedPermanentHealth)
             {
                 playerHealth.causeOfDeath = "You got eaten";
-                return; 
-            }
-            
-            if(foodObject.TryGetComponent(out HealthManager healthM) && healthM.notAbleToGetBitten)
                 return;
-            
+            }
+
+            if (foodObject.TryGetComponent(out HealthManager healthM) && healthM.notAbleToGetBitten)
+                return;
+
             health.ReceiveDamageRpc(attackDamage, true);
         }
     }
