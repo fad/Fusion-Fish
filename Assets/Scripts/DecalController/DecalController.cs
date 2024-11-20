@@ -6,49 +6,48 @@ using Random = UnityEngine.Random;
 public class DecalController : MonoBehaviour
 {
     [SerializeField]private GameObject[] decals;
-    private List<GameObject> activeDecals;
-    private HealthManager healthManager;
-    private int decalsCount;
+    private readonly List<GameObject> _activeDecals = new();
+    private HealthManager _healthManager;
+    private int _decalsCount;
 
     private void Start()
     {
-        healthManager = GetComponentInParent<HealthManager>();
-        healthManager.OnHealthChanged += ChekHealth;
+        _healthManager = GetComponentInParent<HealthManager>();
+        _healthManager.OnHealthChanged += ChekHealth;
     }
 
     private void OnDisable()
     {
-        healthManager.OnHealthChanged -= ChekHealth;
+        _healthManager.OnHealthChanged -= ChekHealth;
     }
 
     private void ChekHealth(float health)
     {
-        float NextStage = healthManager.maxHealth - ((healthManager.maxHealth * 20 / 100) * (decalsCount+1));
-        float OldStage = healthManager.maxHealth - ((healthManager.maxHealth * 20 / 100) * decalsCount);
+        float nextStage = _healthManager.maxHealth - ((_healthManager.maxHealth * 20 / 100) * (_decalsCount+1));
+        float oldStage = _healthManager.maxHealth - ((_healthManager.maxHealth * 20 / 100) * _decalsCount);
 
-        if(NextStage > health && decalsCount < decals.Length && health>0)
+        if(nextStage > health && _decalsCount < decals.Length && health>0)
         {
             NewDecal();
-            decalsCount++;
+            _decalsCount++;
         }
-        else if(OldStage < health && decalsCount>0)
+        else if(oldStage < health && _decalsCount>0)
         {
-            GameObject lastDecal = activeDecals.LastOrDefault();
+            GameObject lastDecal = _activeDecals.LastOrDefault();
             lastDecal.SetActive(false);
-            activeDecals.Remove(lastDecal);
-            decalsCount --;
+            _activeDecals.Remove(lastDecal);
+            _decalsCount --;
         }
     }
     private void NewDecal()
     {
         int number;
-        while(true)
+        do
         {
-            number = Random.Range(0,4);
-            if(!decals[number].activeInHierarchy)
-                break;
-        }
+            number = Random.Range(0, decals.Length);
+        } while (decals[number].activeInHierarchy);
+        
         decals[number].SetActive(true);
-        activeDecals.Add(decals[number]);
+        _activeDecals.Add(decals[number]);
     }
 }

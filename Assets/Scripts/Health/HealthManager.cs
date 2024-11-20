@@ -117,6 +117,8 @@ public class HealthManager : NetworkBehaviour, IHealthManager
             startPassiveRecoveryHealth();
             PlayParticles(Color.red, 10);
         }
+        
+        OnHealthChanged?.Invoke(NetworkedHealth);
     }
 
     private void CheckDeath()
@@ -149,7 +151,6 @@ public class HealthManager : NetworkBehaviour, IHealthManager
             slowDownSpeedTime = maxSlowDownSpeedTime;
             slowDown = true;
             currentHealth = NetworkedHealth;
-            OnHealthChanged?.Invoke(currentHealth);
         }
     }
 
