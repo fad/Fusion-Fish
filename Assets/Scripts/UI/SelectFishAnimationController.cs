@@ -6,7 +6,11 @@ using CharacterType = AvocadoShark.Menu.CharacterType;
 
 public class SelectFishAnimationController : MonoBehaviour
 {
+    [Header ("Links")]
     [SerializeField] private Menu menu;
+    [SerializeField] private GameObject selectedPanel;
+
+    [Header ("Setting")]
     [SerializeField] private CharacterType fishType;
     [SerializeField] private float maxScale;
     [SerializeField] private float speedBoostMoving = 6;
@@ -45,6 +49,7 @@ public class SelectFishAnimationController : MonoBehaviour
             }
             else
             {
+                selectedPanel.SetActive(true);
                 anim.SetFloat("movingSpeed", 1);
                 StopAllCoroutines();
                 break;
@@ -59,6 +64,7 @@ public class SelectFishAnimationController : MonoBehaviour
         {
             if (transform.localScale.x > normalScale)
             {
+                selectedPanel.SetActive(false);
                 transform.localScale -= new Vector3(scaleInterval, scaleInterval, scaleInterval);
                 yield return new WaitForSeconds(speedAnimation);
             }
