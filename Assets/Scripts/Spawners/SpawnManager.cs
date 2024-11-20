@@ -8,6 +8,9 @@ public class SpawnManager : MonoBehaviour
     
     [Header("Lake Player Spawn Points")] 
     public List<SpawnPoint> lakeSpawnPoints;
+    
+    [Header("TestLevel Player Spawn Points")]
+    public List<SpawnPoint> testLevelSpawnPoints;
 
     [HideInInspector] public int currentScene;
 
@@ -32,6 +35,7 @@ public class SpawnManager : MonoBehaviour
         {
             2 => oceanSpawnPoints,
             3 => lakeSpawnPoints,
+            4 => testLevelSpawnPoints,
             _ => null
         };
     }
