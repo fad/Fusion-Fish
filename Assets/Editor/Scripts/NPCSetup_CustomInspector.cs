@@ -10,8 +10,8 @@ public class NPCSetup_CustomInspector : Editor
 {
     private static readonly Type[] ComponentsToAdd =
     {
-        typeof(SpawnGibsOnDestroy),
         typeof(HealthViewModel),
+        typeof(SpawnGibsOnDestroy),
         typeof(AttackManager),
         typeof(StaminaManager)
     };
@@ -114,6 +114,12 @@ public class NPCSetup_CustomInspector : Editor
     {
         foreach (Type scriptType in ComponentsToAdd)
         {
+            if (scriptType == typeof(HealthViewModel))
+            {
+                prefab.transform.parent.gameObject.AddComponent<HealthViewModel>();    
+                continue;
+            }
+            
             if (prefab.GetComponent(scriptType)) continue;
 
             prefab.AddComponent(scriptType);
@@ -140,7 +146,7 @@ public class NPCSetup_CustomInspector : Editor
 
     private void InitializeHealthManager(GameObject prefab, FishData fishData)
     {
-        HealthManager healthManager = prefab.transform.parent.GetComponent<HealthManager>();
+        HealthManager healthManager = prefab.transform.GetComponentInParent<HealthManager>();
 
         if (!healthManager) return;
 
@@ -151,7 +157,7 @@ public class NPCSetup_CustomInspector : Editor
 
     private void InitializeHealthViewModel(GameObject prefab, GameObject healthBarCanvas)
     {
-        HealthViewModel healthViewModel = prefab.GetComponent<HealthViewModel>();
+        HealthViewModel healthViewModel = prefab.GetComponentInParent<HealthViewModel>();
 
         if (!healthViewModel) return;
 
@@ -159,7 +165,7 @@ public class NPCSetup_CustomInspector : Editor
         SerializedProperty HM = healthViewModelObject.FindProperty("healthModel");
         SerializedProperty HS = healthViewModelObject.FindProperty("healthSlider");
 
-        HM.objectReferenceValue = prefab.transform.parent.GetComponent<HealthManager>();
+        HM.objectReferenceValue = prefab.transform.GetComponentInParent<HealthManager>();
         HS.objectReferenceValue = healthBarCanvas.GetComponentInChildren<Slider>(true);
 
         healthViewModelObject.ApplyModifiedProperties();

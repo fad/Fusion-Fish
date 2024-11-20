@@ -1,7 +1,5 @@
 using System;
-using System.Collections;
 using Fusion;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class HealthManager : NetworkBehaviour, IHealthManager
