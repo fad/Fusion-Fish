@@ -1,8 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.Rendering.Universal;
+using Random = UnityEngine.Random;
 
 public class DecalController : MonoBehaviour
 {
@@ -15,6 +14,11 @@ public class DecalController : MonoBehaviour
     {
         healthManager = GetComponentInParent<HealthManager>();
         healthManager.OnHealthChanged += ChekHealth;
+    }
+
+    private void OnDisable()
+    {
+        healthManager.OnHealthChanged -= ChekHealth;
     }
 
     private void ChekHealth(float health)

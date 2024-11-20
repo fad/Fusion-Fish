@@ -1,6 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class NonSwimmingNPCBechavior : MonoBehaviour
 {
@@ -26,6 +26,11 @@ public class NonSwimmingNPCBechavior : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         StartCoroutine(UpdateLookDirection());
         healthManager.OnHealthChanged += OnHealthChanged;
+    }
+
+    private void OnDisable()
+    {
+        healthManager.OnHealthChanged -= OnHealthChanged;
     }
 
     public void OnHealthChanged(float health)
