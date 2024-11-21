@@ -3,7 +3,8 @@ using UnityEngine;
 
 public class NPCHealth : NetworkBehaviour
 {
-    private HealthManager healthManager;
+    private HealthManager _healthManager;
+    private SpawnGibsOnDestroy _spawnGibsOnDestroy;
 
     //Made a bool for NPCs to differentiate starfish and shrimp from other NPCs when attacking
     [SerializeField]
@@ -14,15 +15,16 @@ public class NPCHealth : NetworkBehaviour
 
     private void Start()
     {
-        healthManager = GetComponent<HealthManager>();
+        _healthManager = GetComponent<HealthManager>();
+        _spawnGibsOnDestroy = GetComponentInChildren<SpawnGibsOnDestroy>();
     }
 
     public void Die()
     {
-        if (TryGetComponent<SpawnGibsOnDestroy>(out var spawnGibsOnDestroy) && healthManager.spawnGibs)
+        if (_spawnGibsOnDestroy && _healthManager.spawnGibs)
         {
-            spawnGibsOnDestroy.spawnGibs = true;
-            healthManager.PlayParticles(Color.red, 30);
+            _spawnGibsOnDestroy.spawnGibs = true;
+            _healthManager.PlayParticles(Color.red, 30);
         }
 
         NPCDeathRpc();
