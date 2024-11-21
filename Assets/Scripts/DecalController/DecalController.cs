@@ -12,6 +12,11 @@ public class DecalController : MonoBehaviour
 
     private void Start()
     {
+        foreach (GameObject decal in decals)
+        {
+            decal.SetActive(false);
+        }
+        
         _healthManager = GetComponentInParent<HealthManager>();
         _healthManager.OnHealthChanged += ChekHealth;
     }
@@ -41,6 +46,8 @@ public class DecalController : MonoBehaviour
     }
     private void NewDecal()
     {
+        if(_activeDecals.Count == decals.Length) return;
+        
         int number;
         do
         {
