@@ -37,8 +37,8 @@ MonoBehaviour:
   attackCooldown: 1
   timeToLoseInterest: 6
   distanceToLoseInterest: 17.5
-  wanderSpeed: 3
-  fastSpeed: 5
+  wanderSpeed: 2
+  fastSpeed: 4
   rotationSpeed: 2
   maxPitch: 45
   obstacleAvoidanceDistance: 2
