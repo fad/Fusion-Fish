@@ -78,6 +78,10 @@ namespace StarterAssets
         public float cameraDistance = 5;
         private float cineMachineTargetYaw;
         private float cineMachineTargetPitch;
+        private float scrollValue = 0;
+        private float maxScrollValue = 0.8f;
+        private float zoomSpeed = 5;
+
         private GetPlayerCameraAndControls getPlayerCameraAndControls;
         private bool hasVCam = true;
 
@@ -375,14 +379,18 @@ namespace StarterAssets
 
         private float CameraDistance()
         {
-            float currentCameraDistance = cameraDistance;
-
+            scrollValue += Input.GetAxis("Mouse ScrollWheel");
+            scrollValue = Mathf.Clamp(scrollValue, 0, maxScrollValue);
+            float scrollCameraDistance = cameraDistance - scrollValue * zoomSpeed;
+            float currentCameraDistance = scrollCameraDistance;
             RaycastHit hit;
-            if (Physics.Raycast(playerVisual.transform.position, playerVisual.transform.forward, out hit, cameraDistance, obstacleLayer))
+            
+            if (Physics.Raycast(playerVisual.transform.position, playerVisual.transform.forward, out hit, scrollCameraDistance, obstacleLayer))
                 currentCameraDistance = Vector3.Distance(transform.position, hit.point);
 
             return currentCameraDistance;
         }
+
         private void SpeedBoost()
         {
             switch (boostState)
