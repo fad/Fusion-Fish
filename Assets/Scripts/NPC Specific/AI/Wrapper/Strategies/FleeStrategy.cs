@@ -108,13 +108,13 @@ public class FleeStrategy : StaminaMoveStrategy
             SafeDistance = safeDistance;
             return this;
         }
-        
+
         public Builder WithUseForward(bool useForward)
         {
             UseForward = useForward;
             return this;
         }
-        
+
         public Builder WithSpeedChangeCallback(Action<float> speedChangeCallback)
         {
             SpeedChangeCallback = speedChangeCallback;
@@ -157,18 +157,17 @@ public class FleeStrategy : StaminaMoveStrategy
     public override Status Process()
     {
         GetPredatorTransform();
-        
+
         if (Vector3.Distance(Entity.position, _predatorTransform.position) >= _safeDistance)
         {
             _resetThreatAction();
             return Status.Success;
         }
-
         AvoidForbiddenArea();
-        AvoidObstacles();
 
         CheckStamina();
         RotateToOppositeDirection();
+        AvoidObstacles();
 
         Vector3 forwardDirection = Entity.forward * (ForwardModifier * (Speed * Time.deltaTime));
 
@@ -193,7 +192,6 @@ public class FleeStrategy : StaminaMoveStrategy
     private void RotateToOppositeDirection()
     {
         Vector3 directionToPredator = _predatorTransform.position - Entity.position;
-
         Vector3 oppositeDirection = -directionToPredator.normalized;
 
         TargetRotation = Quaternion.LookRotation(oppositeDirection);

@@ -17,7 +17,7 @@ MonoBehaviour:
     type: 3}
   scale: 0.5
   maxHealth: 30
-  recoveryHealthInSecond: 1
+  recoveryHealthInSecond: 0
   timeToStartRecoveryHealth: 8
   maxStamina: 50
   staminaDecreaseRate: 10
@@ -43,4 +43,4 @@ MonoBehaviour:
   rotationSpeed: 2
   maxPitch: 45
   obstacleAvoidanceDistance: 2
-  safeDistance: 40
+  safeDistance: 20

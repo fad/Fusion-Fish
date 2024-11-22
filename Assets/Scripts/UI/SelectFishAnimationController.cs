@@ -25,7 +25,10 @@ public class SelectFishAnimationController : MonoBehaviour
         menu.newCharacterEvent += StartAnimation;
         anim = GetComponent<Animator>();
     }
-
+  private void OnDisable()
+    {
+        menu.newCharacterEvent -= StartAnimation;
+    }
     private void StartAnimation(CharacterType CharacterNumber)
     {
         StopAllCoroutines();

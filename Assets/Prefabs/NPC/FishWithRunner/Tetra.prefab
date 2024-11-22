@@ -277,20 +277,45 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 727379429373373320}
     m_Modifications:
+    - target: {fileID: 1180995299135011966, guid: 09864b0130333b342835e2b09ec2e8dd,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2441664795572653872, guid: 09864b0130333b342835e2b09ec2e8dd,
         type: 3}
       propertyPath: root
       value: 
       objectReference: {fileID: 727379429373373320}
+    - target: {fileID: 2560885932434384567, guid: 09864b0130333b342835e2b09ec2e8dd,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3338603055843513236, guid: 09864b0130333b342835e2b09ec2e8dd,
         type: 3}
       propertyPath: SortKey
       value: 1805200281
       objectReference: {fileID: 0}
+    - target: {fileID: 4054334439336703786, guid: 09864b0130333b342835e2b09ec2e8dd,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4054334439336703786, guid: 09864b0130333b342835e2b09ec2e8dd,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4503618248469752422, guid: 09864b0130333b342835e2b09ec2e8dd,
         type: 3}
       propertyPath: m_Name
       value: Tetra
+      objectReference: {fileID: 0}
+    - target: {fileID: 4944109585445969989, guid: 09864b0130333b342835e2b09ec2e8dd,
+        type: 3}
+      propertyPath: m_PixelsPerUnitMultiplier
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 5623972198269161468, guid: 09864b0130333b342835e2b09ec2e8dd,
         type: 3}
@@ -352,6 +377,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6913909594437295463, guid: 09864b0130333b342835e2b09ec2e8dd,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0.437
+      objectReference: {fileID: 0}
+    - target: {fileID: 6913909594437295463, guid: 09864b0130333b342835e2b09ec2e8dd,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.703
+      objectReference: {fileID: 0}
+    - target: {fileID: 7797043083232731476, guid: 09864b0130333b342835e2b09ec2e8dd,
+        type: 3}
+      propertyPath: m_PixelsPerUnitMultiplier
+      value: 2.5
+      objectReference: {fileID: 0}
     - target: {fileID: 8027353425583831352, guid: 09864b0130333b342835e2b09ec2e8dd,
         type: 3}
       propertyPath: m_LocalRotation.w
@@ -381,6 +421,41 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8924117449170204133, guid: 09864b0130333b342835e2b09ec2e8dd,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8924117449170204133, guid: 09864b0130333b342835e2b09ec2e8dd,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8924117449170204133, guid: 09864b0130333b342835e2b09ec2e8dd,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 42.1828
+      objectReference: {fileID: 0}
+    - target: {fileID: 8924117449170204133, guid: 09864b0130333b342835e2b09ec2e8dd,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 17.5252
+      objectReference: {fileID: 0}
+    - target: {fileID: 8924117449170204133, guid: 09864b0130333b342835e2b09ec2e8dd,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8924117449170204133, guid: 09864b0130333b342835e2b09ec2e8dd,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.017
+      objectReference: {fileID: 0}
+    - target: {fileID: 8924117449170204133, guid: 09864b0130333b342835e2b09ec2e8dd,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.1285
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8678041675259390350, guid: 09864b0130333b342835e2b09ec2e8dd, type: 3}

@@ -37,7 +37,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 7d2cb7dfd99a72c4bb748bd65e464fd4, type: 2}
   - {fileID: 11400000, guid: ca5b417791726f949aab6afff7e7eb84, type: 2}
   - {fileID: 11400000, guid: 6998654e15fc34741a20046b034526a9, type: 2}
-  attackValue: 4
+  attackValue: 3
   attackRange: 2
   attackCooldown: 1
   timeToLoseInterest: 7
@@ -47,4 +47,4 @@ MonoBehaviour:
   rotationSpeed: 2
   maxPitch: 45
   obstacleAvoidanceDistance: 2
-  safeDistance: 40
+  safeDistance: 20

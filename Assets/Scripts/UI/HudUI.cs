@@ -74,6 +74,8 @@ public class HudUI : MonoBehaviour
     private void OnDisable()
     {
         playerManager.healthManager.OnHealthChanged -= UpdateHealthUI;
+        playerManager.levelUp.levelUpEvent -= LevelUpTextSpawn;
+        playerManager.levelUp.AddExperienceEvent -= AddExperience;
     }
 
     //Here I update the boost sliders where I divide the current stats and the max of it, to get the value for the slider which goes up to 1.

@@ -344,6 +344,31 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6011426937706304738}
     m_Modifications:
+    - target: {fileID: 105568500815176948, guid: d29956c564d139a45ab318ff6e931255,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 855899923116545397, guid: d29956c564d139a45ab318ff6e931255,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 855899923116545397, guid: d29956c564d139a45ab318ff6e931255,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1039926370333328285, guid: d29956c564d139a45ab318ff6e931255,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0.4074
+      objectReference: {fileID: 0}
+    - target: {fileID: 1039926370333328285, guid: d29956c564d139a45ab318ff6e931255,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.7226
+      objectReference: {fileID: 0}
     - target: {fileID: 2008756571946939985, guid: d29956c564d139a45ab318ff6e931255,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -529,6 +554,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 4.566
       objectReference: {fileID: 0}
+    - target: {fileID: 5446229862004004737, guid: d29956c564d139a45ab318ff6e931255,
+        type: 3}
+      propertyPath: m_PixelsPerUnitMultiplier
+      value: 2.5
+      objectReference: {fileID: 0}
     - target: {fileID: 5967671144940531275, guid: d29956c564d139a45ab318ff6e931255,
         type: 3}
       propertyPath: root
@@ -539,10 +569,45 @@ PrefabInstance:
       propertyPath: healthModel
       value: 
       objectReference: {fileID: 1796521216611275508}
+    - target: {fileID: 6920440123163297748, guid: d29956c564d139a45ab318ff6e931255,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6920440123163297748, guid: d29956c564d139a45ab318ff6e931255,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6920440123163297748, guid: d29956c564d139a45ab318ff6e931255,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 6920440123163297748, guid: d29956c564d139a45ab318ff6e931255,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6920440123163297748, guid: d29956c564d139a45ab318ff6e931255,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6920440123163297748, guid: d29956c564d139a45ab318ff6e931255,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.08623
+      objectReference: {fileID: 0}
     - target: {fileID: 7000746915098752231, guid: d29956c564d139a45ab318ff6e931255,
         type: 3}
       propertyPath: m_Name
       value: ParrotFish
+      objectReference: {fileID: 0}
+    - target: {fileID: 8348419828889055348, guid: d29956c564d139a45ab318ff6e931255,
+        type: 3}
+      propertyPath: m_PixelsPerUnitMultiplier
+      value: 2.5
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 89552397713059095, guid: d29956c564d139a45ab318ff6e931255, type: 3}

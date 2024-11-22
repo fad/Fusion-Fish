@@ -45,4 +45,4 @@ MonoBehaviour:
   rotationSpeed: 2
   maxPitch: 45
   obstacleAvoidanceDistance: 5
-  safeDistance: 30
+  safeDistance: 15
