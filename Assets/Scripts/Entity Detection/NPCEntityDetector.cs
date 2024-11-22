@@ -16,7 +16,9 @@ public class NPCEntityDetector : EntityDetector, IInitialisable
     private Transform root;
 
     private ITreeRunner _attachedAIBehaviour;
-
+    
+    
+    // BUG: This might need to be networked
     private readonly HashSet<(Transform entity, IEntity entityObject)> _otherNPCs = new();
 
     protected override void OnTriggerEnter(Collider other)
@@ -43,6 +45,8 @@ public class NPCEntityDetector : EntityDetector, IInitialisable
 
     private void Update()
     {
+        // TODO: Add a return statement here?
+        
         var npcInFOV =
             _otherNPCs.FirstOrDefault(npc => IsInFOVAndInRange(npc.entity));
 
@@ -89,7 +93,7 @@ public class NPCEntityDetector : EntityDetector, IInitialisable
 
     private bool IsInFOVAndInRange(Transform target)
     {
-        Vector3 directionToTarget = (target.position - transform.parent.position).normalized;
+        Vector3 directionToTarget = (target.position - transform.parent.position).normalized; // BUG: MissingReferenceException on NPC death in MP
         float angleToTarget = Vector3.Angle(transform.parent.forward, directionToTarget);
         float distanceToTarget = Vector3.Distance(transform.parent.position, target.position);
 
