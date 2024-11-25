@@ -80,6 +80,7 @@ namespace StarterAssets
         private float cineMachineTargetPitch;
         private float scrollValue = 0;
         private float maxScrollValue = 0.8f;
+        private float minScrollValue = -2;
         private float zoomSpeed = 5;
 
         private GetPlayerCameraAndControls getPlayerCameraAndControls;
@@ -380,7 +381,7 @@ namespace StarterAssets
         private float CameraDistance()
         {
             scrollValue += Input.GetAxis("Mouse ScrollWheel");
-            scrollValue = Mathf.Clamp(scrollValue, 0, maxScrollValue);
+            scrollValue = Mathf.Clamp(scrollValue, minScrollValue, maxScrollValue);
             float scrollCameraDistance = cameraDistance - scrollValue * zoomSpeed;
             float currentCameraDistance = scrollCameraDistance;
             RaycastHit hit;

@@ -15,7 +15,7 @@ MonoBehaviour:
   fishID: 2
   fishPrefab: {fileID: 7922903181239320888, guid: 4903ee395fc06425aa96fe507fe8334b,
     type: 3}
-  scale: 0.5
+  scale: 0.25
   maxHealth: 120
   recoveryHealthInSecond: 1.2
   timeToStartRecoveryHealth: 10
