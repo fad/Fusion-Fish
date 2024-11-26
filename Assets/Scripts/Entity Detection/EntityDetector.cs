@@ -1,6 +1,7 @@
 using UnityEngine;
+using Fusion;
 
-public class EntityDetector : MonoBehaviour
+public class EntityDetector : NetworkBehaviour
 {
     [Header("Entity Settings")]
     [SerializeField] protected LayerMask layerMaskToCheck;

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Fusion;
 using UnityEngine;
 
 /// <summary>
@@ -18,21 +19,22 @@ public class NPCEntityDetector : EntityDetector, IInitialisable
     private ITreeRunner _attachedAIBehaviour;
     
     
-    // BUG: This might need to be networked
-    private readonly HashSet<(Transform entity, IEntity entityObject)> _otherNPCs = new();
+    [Networked] [Capacity(100)] public NetworkLinkedList<NetworkTransform> _otherNPCsNetworked {get;} = new();
 
     protected override void OnTriggerEnter(Collider other)
     {
         if (IsNotValid(other.gameObject)) return;
         
-        DealWithHashset(other.gameObject);
+        if(other.TryGetComponent(out NetworkTransform networkTransform))
+            DealWithHashsetRpc(networkTransform);
     }
 
     protected override void OnTriggerExit(Collider other)
     {
         if (IsNotValid(other.gameObject)) return;
-        
-        DealWithHashset(other.gameObject, true);
+
+        if(other.TryGetComponent(out NetworkTransform networkTransform))
+            DealWithHashsetRpc(networkTransform, true);
     }
 
     private void Start()
@@ -41,18 +43,16 @@ public class NPCEntityDetector : EntityDetector, IInitialisable
 
         if (_attachedAIBehaviour is null)
             throw new NullReferenceException("No <color=#16a085>AI behaviour (ITreeRunner)</color> found on " + root.name);
+
     }
 
     private void Update()
     {
-        // TODO: Add a return statement here?
-        
         var npcInFOV =
-            _otherNPCs.FirstOrDefault(npc => IsInFOVAndInRange(npc.entity));
+            _otherNPCsNetworked.FirstOrDefault(npc => IsInFOVAndInRange(npc.transform));
+        if (npcInFOV is null ) return;
 
-        if (npcInFOV.entity is null || npcInFOV.entityObject is null) return;
-
-        _attachedAIBehaviour.AdjustHuntOrFleeTarget(npcInFOV);
+        _attachedAIBehaviour.AdjustHuntOrFleeTarget((npcInFOV.transform,npcInFOV.GetComponent<IEntity>()));
     }
 
     private void OnDrawGizmos()
@@ -64,19 +64,19 @@ public class NPCEntityDetector : EntityDetector, IInitialisable
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position, sphereCollider.radius);
     }
-
-    private void DealWithHashset(GameObject entity, bool shouldBeRemoved = false)
+    [Rpc(RpcSources.All, RpcTargets.All)]
+    private void DealWithHashsetRpc(NetworkTransform entity, bool shouldBeRemoved = false)
     {
-        bool isEntity = entity.TryGetComponent(out IEntity entityObject);
+        bool isEntity = entity.gameObject.TryGetComponent(out IEntity entityObject);
 
         if (!isEntity) return;
-        var healthManager = entity.GetComponentInChildren<IHealthManager>();
+        var healthManager = entity.gameObject.GetComponent<IHealthManager>();
         
-        Action onDeathRemoval = () => RemoveFromSetOnDeath(entity.transform, entityObject);
+        Action onDeathRemoval = () => RemoveFromSetOnDeathRpc(entity);
         
         if (shouldBeRemoved)
         {
-            _otherNPCs.Remove((entity: entity.transform, entityObject));
+            _otherNPCsNetworked.Remove(entity);
             
             
             if(healthManager is null) return;
@@ -85,7 +85,7 @@ public class NPCEntityDetector : EntityDetector, IInitialisable
             return;
         }
 
-        _otherNPCs.Add((entity: entity.transform, entityObject));
+        _otherNPCsNetworked.Add(entity);
         
         if(healthManager is null) return;
         healthManager.OnDeath += onDeathRemoval;
@@ -93,16 +93,17 @@ public class NPCEntityDetector : EntityDetector, IInitialisable
 
     private bool IsInFOVAndInRange(Transform target)
     {
-        Vector3 directionToTarget = (target.position - transform.parent.position).normalized; // BUG: MissingReferenceException on NPC death in MP
+        Vector3 directionToTarget = (target.position - transform.parent.position).normalized; 
         float angleToTarget = Vector3.Angle(transform.parent.forward, directionToTarget);
         float distanceToTarget = Vector3.Distance(transform.parent.position, target.position);
 
         return angleToTarget < fishData.FOVAngle && distanceToTarget <= fishData.FOVRadius;
     }
+    [Rpc(RpcSources.All, RpcTargets.All)]
 
-    private void RemoveFromSetOnDeath(Transform entity, IEntity entityObject)
+    private void RemoveFromSetOnDeathRpc(NetworkTransform entity)
     {
-        _otherNPCs.Remove((entity.transform, entityObject));
+        _otherNPCsNetworked.Remove(entity);
     }
 
     public void Init(string fishDataName)
