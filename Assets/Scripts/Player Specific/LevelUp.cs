@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class LevelUp : NetworkBehaviour
 {
-    [HideInInspector] public int currentLevel { get; private set; }
+    [Networked][HideInInspector] public int currentLevel { get; private set; }
 
     [Header("Starting Values")]
     [HideInInspector] public int startingExperienceUntilUpgrade;
@@ -34,7 +34,7 @@ public class LevelUp : NetworkBehaviour
     [SerializeField] public float cameraDistanceIncreaseOnLevelUp = .75f;
     [SerializeField] public float attackRangeIncreaseOnLevelUp = .2f;
     [SerializeField] public float healthIncreaseOnLevelUp = 20f;
-    
+
 
 
     private PlayerManager playerManager;
@@ -49,18 +49,23 @@ public class LevelUp : NetworkBehaviour
     private void Start()
     {
         playerManager = GetComponent<PlayerManager>();
-        startingExperienceUntilUpgrade = experienceUntilUpgrade;
-        startingExperience = currentExperience;
-        startingSize = playerManager.thirdPersonController.transform.localScale;
-        startingCameraDistance = playerManager.thirdPersonController.cameraDistance;
-        startingBoostSwimSpeed = playerManager.thirdPersonController.boostSwimSpeed;
-        startingDefaultSwimSpeed = playerManager.thirdPersonController.defaultSwimSpeed;
-        startingAttackDamage = playerManager.playerAttack.attackDamage;
-        startingSuckPower = playerManager.playerAttack.suckInDamage;
-        startingAttackRange = playerManager.playerAttack.attackRange;
-        startingHealth = playerManager.healthManager.maxHealth;
 
-        Restart();
+        if (currentLevel > 0)
+            EvolutionIntoFishRpc();
+        else
+        {
+            startingExperienceUntilUpgrade = experienceUntilUpgrade;
+            startingExperience = currentExperience;
+            startingSize = playerManager.thirdPersonController.transform.localScale;
+            startingCameraDistance = playerManager.thirdPersonController.cameraDistance;
+            startingBoostSwimSpeed = playerManager.thirdPersonController.boostSwimSpeed;
+            startingDefaultSwimSpeed = playerManager.thirdPersonController.defaultSwimSpeed;
+            startingAttackDamage = playerManager.playerAttack.attackDamage;
+            startingSuckPower = playerManager.playerAttack.suckInDamage;
+            startingAttackRange = playerManager.playerAttack.attackRange;
+            startingHealth = playerManager.healthManager.maxHealth;
+            Restart();
+        }
     }
     public void Restart()
     {
@@ -80,9 +85,11 @@ public class LevelUp : NetworkBehaviour
     {
         currentExperience += experience;
         AddExperienceEvent?.Invoke(experience);
-        CheckLevelUp();
+        CheckLevelUpRpc();
     }
-    private void CheckLevelUp()
+
+    [Rpc(RpcSources.All, RpcTargets.All)]
+    private void CheckLevelUpRpc()
     {
         if (currentExperience >= experienceUntilUpgrade)
         {
@@ -114,6 +121,6 @@ public class LevelUp : NetworkBehaviour
         isEgg = false;
         eggModel.SetActive(false);
         fishModel.SetActive(true);
-        playerManager.transform.position = playerManager.transform.position + new Vector3(0,0.2f,0);
+        playerManager.transform.position = playerManager.transform.position + new Vector3(0, 0.2f, 0);
     }
 }
