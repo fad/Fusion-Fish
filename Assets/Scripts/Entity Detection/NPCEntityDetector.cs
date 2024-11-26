@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using Fusion;
 using UnityEngine;
@@ -18,15 +17,17 @@ public class NPCEntityDetector : EntityDetector, IInitialisable
 
     private ITreeRunner _attachedAIBehaviour;
     
+    private bool _hasSpawned  = false;
     
-    [Networked] [Capacity(100)] public NetworkLinkedList<NetworkTransform> _otherNPCsNetworked {get;} = new();
+    [Networked] [Capacity(100)]
+    private NetworkLinkedList<NetworkTransform> _otherNPCsNetworked {get; set; } = new();
 
     protected override void OnTriggerEnter(Collider other)
     {
         if (IsNotValid(other.gameObject)) return;
         
         if(other.TryGetComponent(out NetworkTransform networkTransform))
-            DealWithHashsetRpc(networkTransform);
+            DealWithHashsetRPC(networkTransform);
     }
 
     protected override void OnTriggerExit(Collider other)
@@ -34,7 +35,12 @@ public class NPCEntityDetector : EntityDetector, IInitialisable
         if (IsNotValid(other.gameObject)) return;
 
         if(other.TryGetComponent(out NetworkTransform networkTransform))
-            DealWithHashsetRpc(networkTransform, true);
+            DealWithHashsetRPC(networkTransform, true);
+    }
+
+    public override void Spawned()
+    {
+        _hasSpawned = true;
     }
 
     private void Start()
@@ -48,6 +54,8 @@ public class NPCEntityDetector : EntityDetector, IInitialisable
 
     private void Update()
     {
+        if(!_hasSpawned) return;
+        
         var npcInFOV =
             _otherNPCsNetworked.FirstOrDefault(npc => IsInFOVAndInRange(npc.transform));
         if (npcInFOV is null ) return;
@@ -65,14 +73,14 @@ public class NPCEntityDetector : EntityDetector, IInitialisable
         Gizmos.DrawWireSphere(transform.position, sphereCollider.radius);
     }
     [Rpc(RpcSources.All, RpcTargets.All)]
-    private void DealWithHashsetRpc(NetworkTransform entity, bool shouldBeRemoved = false)
+    private void DealWithHashsetRPC(NetworkTransform entity, bool shouldBeRemoved = false)
     {
         bool isEntity = entity.gameObject.TryGetComponent(out IEntity entityObject);
 
         if (!isEntity) return;
         var healthManager = entity.gameObject.GetComponent<IHealthManager>();
         
-        Action onDeathRemoval = () => RemoveFromSetOnDeathRpc(entity);
+        Action onDeathRemoval = () => RemoveFromSetOnDeathRPC(entity);
         
         if (shouldBeRemoved)
         {
@@ -99,9 +107,9 @@ public class NPCEntityDetector : EntityDetector, IInitialisable
 
         return angleToTarget < fishData.FOVAngle && distanceToTarget <= fishData.FOVRadius;
     }
+    
     [Rpc(RpcSources.All, RpcTargets.All)]
-
-    private void RemoveFromSetOnDeathRpc(NetworkTransform entity)
+    private void RemoveFromSetOnDeathRPC(NetworkTransform entity)
     {
         _otherNPCsNetworked.Remove(entity);
     }
