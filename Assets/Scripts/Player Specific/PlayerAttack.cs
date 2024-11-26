@@ -65,8 +65,6 @@ public class PlayerAttack : NetworkBehaviour
 
     private void Update()
     {
-        if (playerManager.levelUp.isEgg)
-            ResetBiteImageAnimationEvent();
 
         if (playerManager.levelUp.isEgg || !HasStateAuthority || playerManager.playerHealth.isDead)
             return;
