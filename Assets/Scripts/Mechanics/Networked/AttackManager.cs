@@ -42,9 +42,9 @@ public class AttackManager : NetworkBehaviour, IAttackManager, IInitialisable
 
     public override void Despawned(NetworkRunner runner, bool hasState)
     {
-        if (hasState)
+        if (hasState && _correspondingNPC!=null)
         {
-            _correspondingNPC.OnTargetChanged -= ChangeTarget;
+           _correspondingNPC.OnTargetChanged -= ChangeTarget;
         }
     }
 
