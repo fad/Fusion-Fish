@@ -18,8 +18,7 @@ public class NPCEntityDetector : EntityDetector, IInitialisable
 
     private ITreeRunner _attachedAIBehaviour;
     
-    
-    [Networked] [Capacity(100)] public NetworkLinkedList<NetworkTransform> _otherNPCsNetworked {get;} = new();
+    [Networked] [Capacity(30)] public NetworkLinkedList<NetworkTransform> _otherNPCsNetworked {get;} = new();
 
     protected override void OnTriggerEnter(Collider other)
     {
@@ -48,11 +47,15 @@ public class NPCEntityDetector : EntityDetector, IInitialisable
 
     private void Update()
     {
+        if (!HasStateAuthority)
+            return;
+
         var npcInFOV =
             _otherNPCsNetworked.FirstOrDefault(npc => IsInFOVAndInRange(npc.transform));
-        if (npcInFOV is null ) return;
+            
+        if (npcInFOV is null || !npcInFOV.gameObject.TryGetComponent(out IEntity entity)) return;
 
-        _attachedAIBehaviour.AdjustHuntOrFleeTarget((npcInFOV.transform,npcInFOV.GetComponent<IEntity>()));
+        _attachedAIBehaviour.AdjustHuntOrFleeTarget((npcInFOV.transform,entity));
     }
 
     private void OnDrawGizmos()
@@ -64,13 +67,12 @@ public class NPCEntityDetector : EntityDetector, IInitialisable
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position, sphereCollider.radius);
     }
-    [Rpc(RpcSources.All, RpcTargets.All)]
+   [Rpc(RpcSources.All, RpcTargets.All)]
     private void DealWithHashsetRpc(NetworkTransform entity, bool shouldBeRemoved = false)
     {
-        bool isEntity = entity.gameObject.TryGetComponent(out IEntity entityObject);
+        bool isEntity = entity.gameObject.TryGetComponent(out IHealthManager healthManager);
 
         if (!isEntity) return;
-        var healthManager = entity.gameObject.GetComponent<IHealthManager>();
         
         Action onDeathRemoval = () => RemoveFromSetOnDeathRpc(entity);
         
@@ -99,7 +101,7 @@ public class NPCEntityDetector : EntityDetector, IInitialisable
 
         return angleToTarget < fishData.FOVAngle && distanceToTarget <= fishData.FOVRadius;
     }
-    [Rpc(RpcSources.All, RpcTargets.All)]
+   [Rpc(RpcSources.All, RpcTargets.All)]
 
     private void RemoveFromSetOnDeathRpc(NetworkTransform entity)
     {

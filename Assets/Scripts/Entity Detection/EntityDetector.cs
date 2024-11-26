@@ -23,10 +23,13 @@ public class EntityDetector : NetworkBehaviour
     {
         return obj == gameObject;
     }
-
+   protected bool IsHaveHealth(GameObject obj)
+    {
+        return obj.TryGetComponent<IHealthManager>(out IHealthManager healthManager);
+    }
     protected bool IsNotValid(GameObject obj)
     {
-        return IsSelf(obj) || !IsEntity(obj);
+        return IsSelf(obj) || !IsEntity(obj) || IsHaveHealth(obj);
     }
     
     
