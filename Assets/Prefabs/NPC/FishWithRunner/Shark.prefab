@@ -169,6 +169,7 @@ MonoBehaviour:
     m_Bits: 704
   fishData: {fileID: 11400000, guid: 0c6308a7049671a42abceaddee436b9c, type: 2}
   root: {fileID: 4451768028373992673}
+  __otherNPCsNetworked: []
 --- !u!1001 &3555741246099918593
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -245,7 +246,7 @@ PrefabInstance:
     - target: {fileID: 2522072839802053289, guid: 3f8486498552be144992af32f4d2779b,
         type: 3}
       propertyPath: NetworkedBehaviours.Array.size
-      value: 11
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 2522072839802053289, guid: 3f8486498552be144992af32f4d2779b,
         type: 3}
@@ -286,7 +287,7 @@ PrefabInstance:
         type: 3}
       propertyPath: NetworkedBehaviours.Array.data[11]
       value: 
-      objectReference: {fileID: 949933220601436108}
+      objectReference: {fileID: 8832970889146234319}
     - target: {fileID: 5124316588462460406, guid: 3f8486498552be144992af32f4d2779b,
         type: 3}
       propertyPath: maxHealth

@@ -5819,7 +5819,7 @@ PrefabInstance:
     - target: {fileID: 9144912782510203114, guid: 274fa519b44c24e43a28d85dbdddcb30,
         type: 3}
       propertyPath: NetworkedBehaviours.Array.size
-      value: 16
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 9144912782510203114, guid: 274fa519b44c24e43a28d85dbdddcb30,
         type: 3}
@@ -5891,6 +5891,11 @@ PrefabInstance:
       propertyPath: NetworkedBehaviours.Array.data[15]
       value: 
       objectReference: {fileID: 1909236060303310207}
+    - target: {fileID: 9144912782510203114, guid: 274fa519b44c24e43a28d85dbdddcb30,
+        type: 3}
+      propertyPath: NetworkedBehaviours.Array.data[16]
+      value: 
+      objectReference: {fileID: 6684707423767108014}
     - target: {fileID: 9150513680388461083, guid: 274fa519b44c24e43a28d85dbdddcb30,
         type: 3}
       propertyPath: eggVisual
@@ -6094,6 +6099,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9e2acb4d9714ff240b43aa6adb29c3c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6684707423767108014 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8616088687293941838, guid: 274fa519b44c24e43a28d85dbdddcb30,
+    type: 3}
+  m_PrefabInstance: {fileID: 3122867004875526624}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f939a97891d93d6439cab309ba2e260a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &7083056487730671509 stripped

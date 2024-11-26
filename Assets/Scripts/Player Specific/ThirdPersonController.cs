@@ -17,6 +17,7 @@ using Unity.Mathematics;
 
 #if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
+using UnityEngine.VFX;
 #endif
 
 namespace StarterAssets
@@ -54,7 +55,7 @@ namespace StarterAssets
         [SerializeField] private float boostDelayAfterActivation = 3f;
         [SerializeField] public float boostReloadSpeed = 18;
         [SerializeField] private float boostConsumptionSpeed = 30;
-        [SerializeField] private ParticleSystem boostParticles;
+        [SerializeField] private VisualEffect boostParticles;
         [HideInInspector] public bool permanentStamina;
         public float maxBoostCount = 100f;
         private bool isBoosting;
@@ -402,17 +403,21 @@ namespace StarterAssets
                         boostState = BoostState.BoostReload;
                     }
                     else
-                    { 
-                        if(!isBoosting)
+                    {
+                        if (!isBoosting)
+                        {
                             AudioManager.Instance.PlaySoundWithRandomPitchAtPosition("boost", transform.position);
-                        boostParticles.Play();
+                            boostParticles.Play();
+                        }
+
                         isBoosting = true;
                         if(!permanentStamina)
                             currentBoostCount -= Time.deltaTime * boostConsumptionSpeed;
                     }
                     break;
                 case BoostState.BoostReload :
-                    boostParticles.Stop();
+                    if(boostParticles.aliveParticleCount > 8)
+                        boostParticles.Stop();
 
                     if (!canReload)
                     {
