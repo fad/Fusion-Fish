@@ -29,6 +29,7 @@ public class FishData_CSVReader
         }
 
         _fishDataSOs.Clear();
+        _playableFishDataSOs.Clear();
 
         string[] allLines = File.ReadAllLines(FullPath);
         List<SerializedObject> serializedObjects = new List<SerializedObject>();

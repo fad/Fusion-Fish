@@ -1,9 +1,9 @@
 ID,Name,Prefab,Scale,Max Health,Max Stamina,Recovery Health In Seconds,Time To Start Recovering Health,Stamina Decrease Rate,Stamina Regeneration Rate,Stamina Threshold,XP Value,Gibs Spawn Value,FOV Angle,FOV Radius,Prey,Predators,Attack Value,Attack Range,Attack Cooldown,Time to lose interest,Distance to lose interest,Wander Speed,Fast Speed,Rotation Speed,Max Pitch,Obstacle Avoidance Distance,Safe Distance
-1,Playable_Clownfish,Assets/Packages/Low Poly Fishes/Prefabs/Clownfish.prefab,0.25,60,100,0.8,6,30,23,65,100,2,45,10,Tetra;Catfish;Parrot Fish;Small Betta;Tuna,Catfish;Parrot Fish;Small Betta,6,2,1,7,20,120,300,2,45,2,40
-2,Playable_Goldfish,Assets/Packages/Low Poly Fishes/Prefabs/Goldfish.prefab,0.5,120,100,1.2,10,30,18,65,100,2,45,10,Tetra;Catfish;Parrot Fish;Small Betta;Tuna,Catfish;Parrot Fish;Small Betta,4,2,1,7,20,160,240,2,45,2,40
-3,Big Shark,Assets/Prefabs/NPC/FishWithRunner/Shark.prefab,5,150,250,1,8,30,20,140,200,15,50,25,Clownfish;Goldfish;Catfish;Parrot Fish;Small Betta; Tuna,,400,4,2,10,40,2,10,2,45,5,30
-4,Catfish,Assets/Prefabs/NPC/FishWithRunner/Catfish.prefab,1,40,60,1,8,12,6,35,100,3,60,15,Tetra;Tuna;Clownfish;Goldfish;,Clownfish;Goldfish;,5,2.25,1,5,15,2.5,5,2,45,2,45
-5,Parrot Fish,Assets/Prefabs/NPC/FishWithRunner/Parrotfish.prefab,1,40,60,1,8,12,6,35,100,3,40,14,Tetra;Clownfish;Goldfish;,Clownfish;Goldfish;Tuna,5,2.25,1,5,15,2.5,5,2,45,2,45
-6,Small Betta,Assets/Prefabs/NPC/FishWithRunner/SmallBetta.prefab,0.5,30,50,1,8,10,6,30,100,2,35,12.5,Tetra; Tuna;,Clownfish;Goldfish;,4,2.25,1,6,17.5,2,4,2,45,2,40
-7,Tetra,Assets/Prefabs/NPC/FishWithRunner/Tetra.prefab,0.35,10,20,1,8,4,3,10,100,1,60,15,,Clownfish;Goldfish;Tuna;Catfish;Parrot Fish;Small Betta,2,2,1,4,12,3.5,6,2,45,2,50
-8,Tuna,Assets/Prefabs/NPC/FishWithRunner/Tuna.prefab,0.5,30,50,1,8,10,6,30,100,3,50,20,Tetra;Parrot Fish;,Big Shark;,4,2.25,1,6,17.5,2,4,2,45,2,40
+1,Playable_Clownfish,Assets/Packages/Low Poly Fishes/Prefabs/Clownfish.prefab,0.25,60,100,0.8,6,30,23,65,100,2,45,10,Tetra;Catfish;Parrot Fish;Small Betta;Tuna,Catfish;Parrot Fish;Small Betta,6,2,1,7,20,120,300,2,45,2,20
+2,Playable_Goldfish,Assets/Packages/Low Poly Fishes/Prefabs/Goldfish.prefab,0.5,120,100,1.2,10,30,18,65,100,2,45,10,Tetra;Catfish;Parrot Fish;Small Betta;Tuna,Catfish;Parrot Fish;Small Betta,4,2,1,7,20,160,240,2,45,2,20
+3,Big Shark,Assets/Prefabs/NPC/FishWithRunner/Shark.prefab,5,150,250,1,8,30,20,140,200,15,50,25,Clownfish;Goldfish;Catfish;Parrot Fish;Small Betta; Tuna,,400,4,2,10,40,2,10,2,45,5,15
+4,Catfish,Assets/Prefabs/NPC/FishWithRunner/Catfish.prefab,1,40,60,1,8,12,6,35,100,3,60,15,Tetra;Tuna;Clownfish;Goldfish;,Clownfish;Goldfish;,5,2.25,1,5,15,2.5,5,2,45,2,25
+5,Parrot Fish,Assets/Prefabs/NPC/FishWithRunner/Parrotfish.prefab,1,40,60,1,8,12,6,35,100,3,40,14,Tetra;Clownfish;Goldfish;,Clownfish;Goldfish;Tuna,5,2.25,1,5,15,2.5,5,2,45,2,25
+6,Small Betta,Assets/Prefabs/NPC/FishWithRunner/SmallBetta.prefab,0.5,30,50,1,8,10,6,30,100,2,35,12.5,Tetra; Tuna;,Clownfish;Goldfish;,4,2.25,1,6,17.5,2,4,2,45,2,20
+7,Tetra,Assets/Prefabs/NPC/FishWithRunner/Tetra.prefab,0.35,10,20,1,8,4,3,10,100,1,60,15,,Clownfish;Goldfish;Tuna;Catfish;Parrot Fish;Small Betta,2,2,1,4,12,3.5,6,2,45,2,25
+8,Tuna,Assets/Prefabs/NPC/FishWithRunner/Tuna.prefab,0.5,30,50,1,8,10,6,30,100,3,50,20,Tetra;Parrot Fish;,Big Shark;,4,2.25,1,6,17.5,2,4,2,45,2,20

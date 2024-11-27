@@ -72,13 +72,13 @@ public class FishData : ScriptableObject
     private float distanceToLoseInterest = 20f;
 
     [Header("Movement Values")]
-    [SerializeField, Min(1f), Tooltip("The speed at which the fish will wander around normally.")]
+    [SerializeField, Min(0f), Tooltip("The speed at which the fish will wander around normally.")]
     private float wanderSpeed = 1f;
 
-    [SerializeField, Min(1f), Tooltip("The speed at which the fish will flee when having stamina.")]
+    [SerializeField, Min(0f), Tooltip("The speed at which the fish will flee when having stamina.")]
     private float fastSpeed = 1f;
 
-    [SerializeField, Min(1f), Tooltip("The speed at which the fish will rotate.")]
+    [SerializeField, Min(0f), Tooltip("The speed at which the fish will rotate.")]
     private float rotationSpeed = 1f;
 
     [SerializeField, Range(30f, 60f), Tooltip("The maximum pitch the fish can have.")]
