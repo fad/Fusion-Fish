@@ -5654,6 +5654,12 @@ PrefabInstance:
       propertyPath: NetworkedBehaviours.Array.size
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6443437523783385271, guid: 274fa519b44c24e43a28d85dbdddcb30,
+        type: 3}
+      propertyPath: spawnPointsData
+      value: 
+      objectReference: {fileID: 11400000, guid: 44d9467a6d8d67940a68f49e470c6bbe,
+        type: 2}
     - target: {fileID: 6746641389943344966, guid: 274fa519b44c24e43a28d85dbdddcb30,
         type: 3}
       propertyPath: Flags

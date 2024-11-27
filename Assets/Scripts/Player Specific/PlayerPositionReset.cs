@@ -1,12 +1,14 @@
 #if CMPSETUP_COMPLETE
 using System.Collections.Generic;
 using System.Linq;
+using AvocadoShark;
 using Fusion;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class PlayerPositionReset : NetworkBehaviour, IPlayerJoined, IPlayerLeft
 {
+    [SerializeField] private SpawnPointsData spawnPointsData;
     [SerializeField] private float minYValue = -10f;
     [HideInInspector] public SpawnPoint currentSpawnablePoint;
     private float currentDistance;
@@ -34,7 +36,7 @@ public class PlayerPositionReset : NetworkBehaviour, IPlayerJoined, IPlayerLeft
             //then goes through all the spawn points and caches the closest spawn point in relation to all the players 
             foreach (var playerRef in playerInGame)
             {
-                foreach (var spawnPoint in SpawnManager.Instance.SpawnPoints().Where(spawnPoint => Vector3.Distance(Runner.GetPlayerObject(playerRef).transform.position, spawnPoint.location) < currentDistance || currentDistance == 0))
+                foreach (var spawnPoint in spawnPointsData.GetSpawnPoints(FusionConnection.Instance.sceneNumber).Where(spawnPoint => Vector3.Distance(Runner.GetPlayerObject(playerRef).transform.position, spawnPoint.location) < currentDistance || currentDistance == 0))
                 {
                     currentDistance = Vector3.Distance(Runner.GetPlayerObject(playerRef).transform.position, spawnPoint.location);
                     currentSpawnablePoint = spawnPoint;
@@ -61,8 +63,8 @@ public class PlayerPositionReset : NetworkBehaviour, IPlayerJoined, IPlayerLeft
         else
         {
             //When only one player is in game, then take a random spot to spawn the player
-            var spawnPoint = Random.Range(0, SpawnManager.Instance.SpawnPoints().Count - 1);
-            var spawnPoints = SpawnManager.Instance.SpawnPoints();
+            var spawnPoint = Random.Range(0, spawnPointsData.GetSpawnPoints(FusionConnection.Instance.sceneNumber).Count - 1);
+            var spawnPoints = spawnPointsData.GetSpawnPoints(FusionConnection.Instance.sceneNumber);
 
             transform.SetPositionAndRotation(spawnPoints[spawnPoint].location, spawnPoints[spawnPoint].rotation);
         }

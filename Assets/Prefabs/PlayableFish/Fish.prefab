@@ -247,6 +247,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 985b0024312c2b744be313bc21d46cb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _currentLevel: 0
   startingExperienceUntilUpgrade: 0
   startingExperience: 0
   startingSize: {x: 0, y: 0, z: 0}
@@ -400,6 +401,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d236a4e7dc78af4595a84b79237166e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnPointsData: {fileID: 11400000, guid: 44d9467a6d8d67940a68f49e470c6bbe, type: 2}
   minYValue: -125
   currentSpawnablePoint:
     location: {x: 0, y: 0, z: 0}

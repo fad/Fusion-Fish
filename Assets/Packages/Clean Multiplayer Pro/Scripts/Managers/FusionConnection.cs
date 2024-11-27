@@ -30,6 +30,7 @@ namespace AvocadoShark
 
         public static FusionConnection Instance;
 
+        [SerializeField] private SpawnPointsData spawnPointsData;
         [SerializeField] private NetworkRunner runnerPrefab;
         public NetworkRunner Runner { get; private set; }
 
@@ -68,7 +69,7 @@ namespace AvocadoShark
         private bool initialRoomListPopulated = false;
         private List<SessionInfo> _sessionList = new List<SessionInfo>();
         private List<RoomEntry> _roomEntryList = new List<RoomEntry>();
-
+        public int sceneNumber{get; private set;}
         [HideInInspector] public bool isConnected = false;
         [HideInInspector] public string _playerName = null;
         [HideInInspector] public int nRooms = 0;
@@ -208,6 +209,7 @@ namespace AvocadoShark
         {
             string sessionName = null;
             string sessionPassword = null;
+            sceneNumber = environmentDropdown.value + 2;
             int maxPlayers = 10;
             if (IsRoomNameValid())
             {
@@ -372,7 +374,7 @@ namespace AvocadoShark
         {
             int buildIndex = -1;
 
-            var sessionProperties = new Dictionary<string, SessionProperty> { { "password", password } };
+            var sessionProperties = new Dictionary<string, SessionProperty> { { "password", password }, { "sceneNumber", sceneNumber } };
 
             for (int i = 0; i < SceneManager.sceneCountInBuildSettings; i++)
             {
@@ -484,14 +486,13 @@ namespace AvocadoShark
                 return;
             hasEnteredGameScene = true;
             
+            int sceneNumber = environmentDropdown.value + 2;
             //it counts +2 for the scene index because there are the menu & game scene that need to be excluded
             if (Runner.IsSceneAuthority)
             {
-                Runner.LoadScene(SceneRef.FromIndex(environmentDropdown.value + 2), LoadSceneMode.Additive);
+                Runner.LoadScene(SceneRef.FromIndex(sceneNumber), LoadSceneMode.Additive);
                 
-                SpawnManager.Instance.currentScene = environmentDropdown.value + 2;
-            
-                RenderSettings.skybox = (environmentDropdown.value + 2) switch
+                RenderSettings.skybox = (sceneNumber) switch
                 {
                     2 => oceanSky,
                     3 => riverSky,
@@ -503,12 +504,10 @@ namespace AvocadoShark
                 return;
             var playerPrefab = PlayerPrefs.GetInt("ChosenCharacter") == 0 ? playerPrefabSecond : playerPrefabFirst;
             
-            //THIS NEEDS FIXING
+            sceneNumber = runner.SessionInfo.Properties["sceneNumber"];
             if(!Runner.IsSceneAuthority)
             {
-                SpawnManager.Instance.currentScene = 2;
-
-                RenderSettings.skybox = 2 switch
+                RenderSettings.skybox = sceneNumber switch
                 {
                     2 => oceanSky,
                     3 => riverSky,
@@ -516,7 +515,7 @@ namespace AvocadoShark
                 };
             }
             
-            List<SpawnPoint> currentSceneSpawnPoints = SpawnManager.Instance.SpawnPoints();
+            List<SpawnPoint> currentSceneSpawnPoints = spawnPointsData.GetSpawnPoints(sceneNumber);
 
             var spawnPoint = Random.Range(0, currentSceneSpawnPoints.Count);
             var location = currentSceneSpawnPoints[spawnPoint].location;
