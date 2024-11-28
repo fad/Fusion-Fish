@@ -26,6 +26,7 @@ public class DecalController : MonoBehaviour
         _healthManager.OnHealthChanged -= ChekHealth;
     }
 
+    
     private void ChekHealth(float health)
     {
         float nextStage = _healthManager.maxHealth - ((_healthManager.maxHealth * 20 / 100) * (_decalsCount+1));
@@ -42,6 +43,7 @@ public class DecalController : MonoBehaviour
             lastDecal.SetActive(false);
             _activeDecals.Remove(lastDecal);
             _decalsCount --;
+            ChekHealth( health);
         }
     }
     private void NewDecal()
