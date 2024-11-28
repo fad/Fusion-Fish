@@ -81,7 +81,7 @@ public class HudUI : MonoBehaviour
     //Here I update the boost sliders where I divide the current stats and the max of it, to get the value for the slider which goes up to 1.
     private void Update()
     {
-        if (!playerManager) 
+        if (!playerManager ) 
             return;
 
         boostUI.Value = playerManager.thirdPersonController.currentBoostCount / playerManager.thirdPersonController.maxBoostCount;
@@ -122,7 +122,7 @@ public class HudUI : MonoBehaviour
     }
     private void LevelLogic()
     {
-            levelText.text = "Lvl: "+playerManager.levelUp.currentLevel.ToString();
+        levelText.text = "Lvl: "+playerManager.levelUp.GetLevel().ToString();
 
         if (playerManager.levelUp.isEgg)
             pressSpaceText.SetActive(true);

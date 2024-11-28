@@ -115,6 +115,14 @@ public class LevelUp : NetworkBehaviour
         }
     }
 
+    public int GetLevel()
+    {
+        if(HasStateAuthority)
+            return currentLevel;
+        else
+            return 0;
+    }
+
     [Rpc(RpcSources.All, RpcTargets.All)]
     private void EvolutionIntoFishRpc()
     {

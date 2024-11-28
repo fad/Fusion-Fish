@@ -205,7 +205,7 @@ namespace StarterAssets
 
         private void CameraForwardRotation()
         {
-            if(playerManager.levelUp.currentLevel == 1)
+            if(playerManager.levelUp.GetLevel() == 1)
                 cineMachineTargetPitch = 20;
         }
 
