@@ -486,7 +486,7 @@ namespace AvocadoShark
                 return;
             hasEnteredGameScene = true;
             
-            int sceneNumber = environmentDropdown.value + 2;
+            sceneNumber = environmentDropdown.value + 2;
             //it counts +2 for the scene index because there are the menu & game scene that need to be excluded
             if (Runner.IsSceneAuthority)
             {
