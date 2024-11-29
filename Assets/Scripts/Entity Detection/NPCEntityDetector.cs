@@ -16,38 +16,44 @@ public class NPCEntityDetector : EntityDetector, IInitialisable
     private Transform root;
 
     private ITreeRunner _attachedAIBehaviour;
-    
+
     [Networked, Capacity(30)]
     public NetworkLinkedList<NetworkTransform> OtherNPCs => default;
 
     protected override void OnTriggerEnter(Collider other)
     {
-        if (!TryCheck(other.gameObject)) return;
-
-        if (!other.TryGetComponent(out NetworkTransform networkTransform)) return;
+        // if (!TryCheck(other.gameObject)) return;
+        //
+        // if (!other.TryGetComponent(out NetworkTransform networkTransform)) return;
+        //
+        // Debug.Log("Adding to set");
+        // DealWithListRpc(networkTransform);
         
-        Debug.Log("Adding to set");
-        DealWithListRpc(networkTransform);
+        DealWithHuntAdjustment(other);
     }
 
     protected override void OnTriggerExit(Collider other)
     {
-        if (!TryCheck(other.gameObject)) return;
-
-        if (!other.TryGetComponent(out NetworkTransform networkTransform)) return;
+        // if (!TryCheck(other.gameObject)) return;
+        //
+        // if (!other.TryGetComponent(out NetworkTransform networkTransform)) return;
+        //
+        // DealWithListRpc(networkTransform, true);
         
-        DealWithListRpc(networkTransform, true);
+        DealWithHuntAdjustment(other);
     }
 
     protected override void OnTriggerStay(Collider other)
     {
-        if (!TryCheck(other.gameObject)) return;
-
-        if (!other.TryGetComponent(out NetworkTransform networkTransform)) return;
-
-        if (OtherNPCs.Contains(networkTransform)) return;
-
-        DealWithListRpc(networkTransform);
+        // if (!TryCheck(other.gameObject)) return;
+        //
+        // if (!other.TryGetComponent(out NetworkTransform networkTransform)) return;
+        //
+        // if (OtherNPCs.Contains(networkTransform)) return;
+        //
+        // DealWithListRpc(networkTransform);
+        
+        DealWithHuntAdjustment(other);
     }
 
     public override void Spawned()
@@ -120,6 +126,20 @@ public class NPCEntityDetector : EntityDetector, IInitialisable
     private void RemoveFromSetOnDeathRpc(NetworkTransform entity)
     {
         OtherNPCs.Remove(entity);
+    }
+
+    private void DealWithHuntAdjustment(Collider other)
+    {
+        if (!TryCheck(other.gameObject)) return;
+
+        if (!other.TryGetComponent(out NetworkTransform networkTransform) ||
+            !other.TryGetComponent(out IEntity entity)) return;
+
+        // if (OtherNPCs.Contains(networkTransform)) return;
+
+        if (!IsInFOVAndInRange(networkTransform.transform)) return;
+
+        _attachedAIBehaviour.AdjustHuntOrFleeTarget((networkTransform.transform, entity));
     }
 
     public void Init(string fishDataName)
