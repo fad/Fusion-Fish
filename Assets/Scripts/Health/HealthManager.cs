@@ -2,28 +2,44 @@ using System;
 using Fusion;
 using UnityEngine;
 
-public class HealthManager : NetworkBehaviour, IHealthManager
+public class HealthManager : NetworkBehaviour, IHealthManager, ISuckable
 {
-    [Header("Health")]
+    [Header("Data Container")]
+    [SerializeField]
+    private FishData fishData;
+    
+    [Header("Health"),Space(10)]
     public float maxHealth;
+
     public float recoveryHealthInSecond = 10;
     public float timeToStartRecoveryHealth = 3;
     private bool _regeneration = false;
-    [Networked] private TickTimer regenTimer { get; set; }
 
-    [Networked] [OnChangedRender(nameof(CheckDeath))] public float NetworkedHealth { get; set; }
-    private ParticleSystem bloodParticleSystem;
-    [HideInInspector] public bool spawnGibs; // TODO: Break this up in own class
-    [HideInInspector] public float currentHealth;
+    [Networked]
+    private TickTimer RegenTimer { get; set; }
+
+    [Networked]
+    public float NetworkedHealth { get; private set; }
+
+    private ParticleSystem _bloodParticleSystem;
+
+    [HideInInspector]
+    public float currentHealth;
+
     public bool notAbleToGetBitten;
 
-    [Header("Experience")] // TODO: Break this up in own class
-    public int experienceValue = 100;
-    
     [Header("SlowDown")] // TODO: Break this up in own class
-    [SerializeField] public float maxSlowDownSpeedTime = 5;
-    [HideInInspector] public float slowDownSpeedTime;
-    [HideInInspector] public bool slowDown;
+    [SerializeField]
+    public float maxSlowDownSpeedTime = 5;
+
+    [HideInInspector]
+    public float slowDownSpeedTime;
+
+    [HideInInspector]
+    public bool slowDown;
+
+    private IHealthUtility _healthUtility;
+
     [HideInInspector] public bool grasped;
     [HideInInspector] public float maxGraspedTime = 1;
     [HideInInspector] public float graspedTime;
@@ -33,15 +49,25 @@ public class HealthManager : NetworkBehaviour, IHealthManager
 
     private bool _hasSpawned = false;
     private bool _died = false;
-    
-    public bool Died => _died;
 
-    private void Start() => bloodParticleSystem = GameObject.Find("BloodParticles").GetComponent<ParticleSystem>();
+    public bool Died => _died;
+    public float MaxHealth => maxHealth;
+    public float NeededSuckingPower => maxHealth;
+    
+    private ChangeDetector _changeDetector;
+
+
+    private void Start() => _bloodParticleSystem = GameObject.Find("BloodParticles").GetComponent<ParticleSystem>();
 
     public override void Spawned()
     {
+        if (_healthUtility == null) TryGetComponent(out _healthUtility);
+        
+        _changeDetector = GetChangeDetector(ChangeDetector.Source.SimulationState);
+
         Restart();
     }
+
     public void Restart()
     {
         NetworkedHealth = maxHealth;
@@ -49,15 +75,17 @@ public class HealthManager : NetworkBehaviour, IHealthManager
         slowDownSpeedTime = maxSlowDownSpeedTime;
         _hasSpawned = true;
     }
+
     public override void Despawned(NetworkRunner runner, bool hasState)
     {
         _hasSpawned = false;
     }
-    
+
     private void OnDisable()
     {
         _hasSpawned = false;
     }
+
     private void Update()
     {
         if (slowDown)
@@ -78,31 +106,45 @@ public class HealthManager : NetworkBehaviour, IHealthManager
             }
         }
     }
+
     public override void FixedUpdateNetwork()
     {
-        if (_regeneration && regenTimer.ExpiredOrNotRunning(Runner))
+        if (_regeneration && RegenTimer.ExpiredOrNotRunning(Runner))
         {
             RecoveryHealthRpc(recoveryHealthInSecond);
-            regenTimer = TickTimer.CreateFromSeconds(Runner, 1);
+            RegenTimer = TickTimer.CreateFromSeconds(Runner, 1);
 
             if (NetworkedHealth >= maxHealth)
                 _regeneration = false;
         }
+        
+        foreach(var propertyName in _changeDetector.DetectChanges(this, out var previousBuffer, out var currentBuffer))
+        {
+            switch (propertyName)
+            {
+                case nameof(NetworkedHealth):
+                {
+                    CheckDeath();
+                    break;
+                }
+            }
+        }
     }
-    private void startPassiveRecoveryHealth()
+
+    private void StartPassiveRecoveryHealth()
     {
-        regenTimer = TickTimer.CreateFromSeconds(Runner, timeToStartRecoveryHealth);
+        RegenTimer = TickTimer.CreateFromSeconds(Runner, timeToStartRecoveryHealth);
         _regeneration = true;
     }
-    
+
     public void Damage(float amount)
     {
         if (notAbleToGetBitten) return;
-        
-        ReceiveDamageRpc(amount, true);
+
+        ReceiveDamageRpc(amount);
         CheckDeath();
     }
-    
+
     public void Heal(float amount)
     {
         RecoveryHealthRpc(amount);
@@ -118,7 +160,7 @@ public class HealthManager : NetworkBehaviour, IHealthManager
     }
 
     [Rpc(RpcSources.All, RpcTargets.All)]
-    public void ReceiveDamageRpc(float damage, bool spawnGibsOnDestroy)
+    public void ReceiveDamageRpc(float damage)
     {
         if(damage >= NetworkedHealth * 0.2f)
         {
@@ -126,68 +168,63 @@ public class HealthManager : NetworkBehaviour, IHealthManager
             graspedTime = maxGraspedTime;
         }
         NetworkedHealth -= damage;
-        
-        spawnGibs = spawnGibsOnDestroy;
 
         if (NetworkedHealth > 0)
         {
-            startPassiveRecoveryHealth();
+            StartPassiveRecoveryHealth();
             PlayParticles(Color.red, 10);
         }
-        
+
         OnHealthChanged?.Invoke(NetworkedHealth);
     }
 
     private void CheckDeath()
     {
-        if(!_hasSpawned) return;
-        
-        if (TryGetComponent<PlayerHealth>(out var playerHealth) && HasStateAuthority && currentHealth > NetworkedHealth)
+        if (!_hasSpawned) return;
+
+        if (_healthUtility is not null)
         {
-            if(playerHealth.showVignette)
+            if (_healthUtility is PlayerHealth && HasStateAuthority && currentHealth > NetworkedHealth)
                 VFXManager.Instance.ShowHurtVignette();
 
             if (NetworkedHealth <= 0)
             {
-                playerHealth.Die();
+                _healthUtility.Die();
                 OnDeath?.Invoke();
             }
-        }
-        else if(TryGetComponent<NPCHealth>(out var npcHealth))
-        {
-            if (NetworkedHealth <= 0)
-            {
-                npcHealth.Die();
-                OnDeath?.Invoke();
-            }
-            
-        }
-
-        if (currentHealth > NetworkedHealth)
-        {
-            slowDownSpeedTime = maxSlowDownSpeedTime;
-            slowDown = true;
-            currentHealth = NetworkedHealth;
         }
     }
 
     public void PlayParticles(Color color, int burstCount)
     {
-        var mainModule = bloodParticleSystem.main;
+        var mainModule = _bloodParticleSystem.main;
         mainModule.startColor = new ParticleSystem.MinMaxGradient(color);
 
-        var emissionModule = bloodParticleSystem.emission;
+        var emissionModule = _bloodParticleSystem.emission;
         emissionModule.SetBursts(new ParticleSystem.Burst[] { new(0.0f, burstCount) });
 
         var healthObjectTransform = transform;
-        var bloodParticleSystemTransform = bloodParticleSystem.transform;
+        var bloodParticleSystemTransform = _bloodParticleSystem.transform;
         //need to safe the current parent before it changes parent to revert that parent change
         var parent = bloodParticleSystemTransform.parent;
 
         bloodParticleSystemTransform.position = healthObjectTransform.position;
         bloodParticleSystemTransform.SetParent(healthObjectTransform);
-        bloodParticleSystemTransform.localScale = healthObjectTransform.localScale.z < 1 ? Vector3.one : healthObjectTransform.localScale;
-        bloodParticleSystem.Play();
+        bloodParticleSystemTransform.localScale =
+            healthObjectTransform.localScale.z < 1 ? Vector3.one : healthObjectTransform.localScale;
+        _bloodParticleSystem.Play();
         bloodParticleSystemTransform.SetParent(parent);
+    }
+
+    public int GetSuckedIn()
+    {
+        DestroySuckableRpc();
+        return fishData.XPValue;
+    }
+    
+    [Rpc(RpcSources.All, RpcTargets.StateAuthority)]
+    private void DestroySuckableRpc()
+    {
+        Runner.Despawn(Object);
     }
 }

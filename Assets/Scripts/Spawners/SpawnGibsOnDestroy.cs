@@ -4,48 +4,42 @@ using Random = UnityEngine.Random;
 
 public class SpawnGibsOnDestroy : NetworkBehaviour
 {
-    [SerializeField] private GameObject gibPrefab;
-    [SerializeField] public int gibSpawnCount = 3;
-    [SerializeField] private int gibsExperienceValue = 100;
-    [HideInInspector] public bool spawnGibs;
-    //Made a bool for NPCs to differentiate starfish and shrimp from other NPCs when attacking
-    [SerializeField] public bool isShrimp;
-    [SerializeField] public bool isStarFish;
-
-    private void OnDestroy()
-    {
-        if (!gameObject.scene.isLoaded || !spawnGibs) 
-            return;
-        
-        if (gibPrefab != null && gibSpawnCount > 0)
-        {
-            gibPrefab.GetComponent<HealthManager>().experienceValue = gibsExperienceValue;
-            SpawnMeatObjects(HudUI.Instance.playerManager.hostPlayerRunner);
-        }
-    }
+    [Header("Gibs settings")]
+    [SerializeField] private NetworkObject gibPrefab;
     
-    public void SpawnMeatObjects(NetworkRunner runner)
+    [SerializeField, Space(10)] public int gibSpawnCount = 3;
+    [SerializeField] private bool spawnGibs;
+    
+    [Header("FishData Settings")]
+    [SerializeField]
+    private FishData fishData;
+    
+    public override void Despawned(NetworkRunner runner, bool hasState)
     {
-        if (gibPrefab != null)
+        if (!spawnGibs || !gameObject.scene.isLoaded || !hasState) return;
+        
+        SpawnGibsRpc();
+    }
+
+    public void SpawnMeatObjects()
+    {
+        if (gibPrefab && gibSpawnCount > 0)
         {
             for (var i = 0; i < gibSpawnCount; i++)
             {
                 var spawnPosition = transform.position + Random.insideUnitSphere * 0.5f;
 
-                //need to go with that /4 workaround so starfishes drop gibs with the right size
-                //also for the gib position because otherwise it would spawn inside the ground
-                if (TryGetComponent<NPCHealth>(out var npcHealth) && npcHealth.isStarFish)
-                {
-                    gibPrefab.transform.localScale = transform.localToWorldMatrix.lossyScale / 4;
-                    spawnPosition = transform.position;
-                }
-                else
-                {
-                    gibPrefab.transform.localScale = transform.localToWorldMatrix.lossyScale / gibSpawnCount;
-                }
+                gibPrefab.transform.localScale = transform.localToWorldMatrix.lossyScale / gibSpawnCount;
                 
-                runner.Spawn(gibPrefab, spawnPosition, Quaternion.identity);
+                NetworkObject gib = Runner.Spawn(gibPrefab, spawnPosition, Quaternion.identity);
+                gib.GetComponent<ISuckable>().SetupXP(fishData.XPValue);
             }   
         }
+    }
+
+    [Rpc(RpcSources.All, RpcTargets.StateAuthority)]
+    public void SpawnGibsRpc()
+    {
+        SpawnMeatObjects();
     }
 }

@@ -158,7 +158,7 @@ public class ChaseStrategy : StaminaMoveStrategy
             UseForward = useForward;
             return this;
         }
-        
+
         public Builder WithSpeedChangeCallback(Action<float> speedChangeCallback)
         {
             SpeedChangeCallback = speedChangeCallback;
@@ -196,7 +196,7 @@ public class ChaseStrategy : StaminaMoveStrategy
         _didPreyDie = builder.DidPreyDie;
 
         _currentInterestTime = _timeToLoseInterest;
-        
+
         ForwardModifier = builder.UseForward ? (short)1 : (short)-1;
     }
 
@@ -215,7 +215,7 @@ public class ChaseStrategy : StaminaMoveStrategy
             _resetBehavior();
             return Status.Success;
         }
-
+        
         GetPreyTransform();
 
         if (_targetTransformDoesNotExist)
@@ -255,7 +255,12 @@ public class ChaseStrategy : StaminaMoveStrategy
             Vector3 forwardDirection = Entity.forward * (ForwardModifier * (Speed * Time.deltaTime));
             Move(forwardDirection);
         }
-
+        
+        if (_didPreyDie())
+        {
+            _resetBehavior();
+            return Status.Success;
+        }
 
         Entity.rotation = Quaternion.Slerp(Entity.rotation, TargetRotation, RotationSpeed * Time.deltaTime);
 

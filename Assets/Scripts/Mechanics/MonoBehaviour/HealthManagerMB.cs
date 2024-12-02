@@ -18,6 +18,7 @@ public class HealthManagerMB : MonoBehaviour, IHealthManager
     
     public float CurrentHealth => _currentHealth;
     public bool Died => _died;
+    public float MaxHealth => fishData.MaxHealth;
 
     private void Start()
     {

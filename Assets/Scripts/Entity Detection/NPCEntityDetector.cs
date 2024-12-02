@@ -1,5 +1,4 @@
 using System;
-using System.Linq;
 using Fusion;
 using UnityEngine;
 
@@ -16,43 +15,20 @@ public class NPCEntityDetector : EntityDetector, IInitialisable
     private Transform root;
 
     private ITreeRunner _attachedAIBehaviour;
-
-    [Networked, Capacity(30)]
-    public NetworkLinkedList<NetworkTransform> OtherNPCs => default;
+    
 
     protected override void OnTriggerEnter(Collider other)
     {
-        // if (!TryCheck(other.gameObject)) return;
-        //
-        // if (!other.TryGetComponent(out NetworkTransform networkTransform)) return;
-        //
-        // Debug.Log("Adding to set");
-        // DealWithListRpc(networkTransform);
-        
         DealWithHuntAdjustment(other);
     }
 
     protected override void OnTriggerExit(Collider other)
     {
-        // if (!TryCheck(other.gameObject)) return;
-        //
-        // if (!other.TryGetComponent(out NetworkTransform networkTransform)) return;
-        //
-        // DealWithListRpc(networkTransform, true);
-        
         DealWithHuntAdjustment(other);
     }
 
     protected override void OnTriggerStay(Collider other)
     {
-        // if (!TryCheck(other.gameObject)) return;
-        //
-        // if (!other.TryGetComponent(out NetworkTransform networkTransform)) return;
-        //
-        // if (OtherNPCs.Contains(networkTransform)) return;
-        //
-        // DealWithListRpc(networkTransform);
-        
         DealWithHuntAdjustment(other);
     }
 
@@ -65,18 +41,6 @@ public class NPCEntityDetector : EntityDetector, IInitialisable
                                              root.name);
     }
 
-    public override void FixedUpdateNetwork()
-    {
-        if (!HasStateAuthority) return;
-
-        var npcInFOV =
-            OtherNPCs.FirstOrDefault(npc => IsInFOVAndInRange(npc.transform));
-
-        if (npcInFOV is null || !npcInFOV.gameObject.TryGetComponent(out IEntity entity)) return;
-
-        _attachedAIBehaviour.AdjustHuntOrFleeTarget((npcInFOV.transform, entity));
-    }
-
     private void OnDrawGizmos()
     {
         bool hasSphereCollider = TryGetComponent(out SphereCollider sphereCollider);
@@ -87,45 +51,13 @@ public class NPCEntityDetector : EntityDetector, IInitialisable
         Gizmos.DrawWireSphere(transform.position, sphereCollider.radius);
     }
 
-    [Rpc(RpcSources.All, RpcTargets.All)]
-    private void DealWithListRpc(NetworkTransform entity, bool shouldBeRemoved = false)
-    {
-        bool isEntity = entity.gameObject.TryGetComponent(out IHealthManager healthManager);
-
-        if (!isEntity) return;
-
-        Action onDeathRemoval = () => RemoveFromSetOnDeathRpc(entity);
-
-        if (shouldBeRemoved)
-        {
-            OtherNPCs.Remove(entity);
-
-
-            if (healthManager is null) return;
-
-            healthManager.OnDeath -= onDeathRemoval;
-            return;
-        }
-
-        OtherNPCs.Add(entity);
-
-        if (healthManager is null) return;
-        healthManager.OnDeath += onDeathRemoval;
-    } // The exception is pointing here
-
     private bool IsInFOVAndInRange(Transform target)
     {
         Vector3 directionToTarget = (target.position - transform.parent.position).normalized;
         float angleToTarget = Vector3.Angle(transform.parent.forward, directionToTarget);
-        float distanceToTarget = Vector3.Distance(transform.parent.position, target.position);
+        float distanceToTarget = Vector3.Distance(transform.parent.position, target.position); // TODO: Use sqrMagnitude
 
         return angleToTarget < fishData.FOVAngle && distanceToTarget <= fishData.FOVRadius;
-    }
-
-    [Rpc(RpcSources.All, RpcTargets.All)]
-    private void RemoveFromSetOnDeathRpc(NetworkTransform entity)
-    {
-        OtherNPCs.Remove(entity);
     }
 
     private void DealWithHuntAdjustment(Collider other)
@@ -138,7 +70,7 @@ public class NPCEntityDetector : EntityDetector, IInitialisable
         // if (OtherNPCs.Contains(networkTransform)) return;
 
         if (!IsInFOVAndInRange(networkTransform.transform)) return;
-
+        
         _attachedAIBehaviour.AdjustHuntOrFleeTarget((networkTransform.transform, entity));
     }
 

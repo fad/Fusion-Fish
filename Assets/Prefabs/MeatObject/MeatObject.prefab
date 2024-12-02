@@ -12,14 +12,13 @@ GameObject:
   - component: {fileID: 5874680783092550232}
   - component: {fileID: 5377724349828213299}
   - component: {fileID: 3056846836721781855}
-  - component: {fileID: 5615224623534725559}
   - component: {fileID: -6550082182933151621}
   - component: {fileID: -6505894716318477620}
   - component: {fileID: 7392976776931892285}
   - component: {fileID: 7836080894405224610}
-  - component: {fileID: 4812300359971869708}
   - component: {fileID: 2222786797888536702}
   - component: {fileID: 2696162681688181827}
+  - component: {fileID: 8039512162137618864}
   m_Layer: 6
   m_Name: MeatObject
   m_TagString: Untagged
@@ -113,29 +112,6 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5615224623534725559
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3993952820748017500}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f8880170c48b1f44aaef687b67ca3f5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 1
-  recoveryHealthInSecond: 1
-  timeToStartRecoveryHealth: 3
-  _NetworkedHealth: 1
-  spawnGibs: 0
-  currentHealth: 0
-  notAbleToGetBitten: 1
-  experienceValue: 50
-  maxSlowDownSpeedTime: 5
-  slowDownSpeedTime: 0
-  slowDown: 0
 --- !u!114 &-6550082182933151621
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -153,12 +129,11 @@ MonoBehaviour:
   Flags: 524289
   NestedObjects: []
   NetworkedBehaviours:
-  - {fileID: 5615224623534725559}
   - {fileID: -6505894716318477620}
   - {fileID: 7392976776931892285}
-  - {fileID: 4812300359971869708}
   - {fileID: 2222786797888536702}
   - {fileID: 2696162681688181827}
+  - {fileID: 8039512162137618864}
 --- !u!114 &-6505894716318477620
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -215,20 +190,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 1
---- !u!114 &4812300359971869708
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3993952820748017500}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e21121d4f559c1248aa8f7d3ce4320ac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isShrimp: 0
-  isStarFish: 0
 --- !u!114 &2222786797888536702
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -253,3 +214,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0822fda13ddf1441aa1d15688d1ed64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8039512162137618864
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3993952820748017500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 282f68519a4e47c592172207b6583680, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  experienceValue: 100
+  neededSuckingPower: 1

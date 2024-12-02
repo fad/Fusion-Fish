@@ -33,7 +33,7 @@ MonoBehaviour:
   predatorList:
   - {fileID: 11400000, guid: 0c6308a7049671a42abceaddee436b9c, type: 2}
   attackValue: 4
-  attackRange: 2.25
+  attackRange: 4
   attackCooldown: 1
   timeToLoseInterest: 6
   distanceToLoseInterest: 17.5

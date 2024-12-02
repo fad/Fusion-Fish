@@ -236,7 +236,7 @@ public class NPCBehaviour : NetworkBehaviour
                 playerHealth.causeOfDeath = "You got eaten";
                 yield break;
             }
-            enemy.GetComponent<HealthManager>().ReceiveDamageRpc(attackDamage, true);
+            //enemy.GetComponent<HealthManager>().ReceiveDamageRpc(attackDamage, true);
         }
 
         isAttacking = false;
@@ -257,7 +257,7 @@ public class NPCBehaviour : NetworkBehaviour
             playerStateAuthorityHits >= 1 && hitColliders[0].TryGetComponent<HealthManager>(out var health) && 
             !health.notAbleToGetBitten && health != GetComponent<HealthManager>())
         {
-            if(hitColliders[0].TryGetComponent<NPCHealth>(out var npcHealth) && (npcHealth.isStarFish || npcHealth.isShrimp))
+            if(hitColliders[0].TryGetComponent<NPCHealth>(out var npcHealth))
                 return;
             
             var directionToTarget = hitColliders[0].transform.position - position;

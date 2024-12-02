@@ -99,6 +99,20 @@ public class BehaviourTreeRunner : NetworkBehaviour, INPC, IInitialisable
         if (!fishData)
             throw new NullReferenceException("<color=#9b59b6>FishData</color> is not found with name: " + fishDataName);
         
+        Initialized = true;
+        FishDataName = fishDataName;
+    }
+
+    // TODO: Possibly cache this to only create it once and use it for all fish of the same type
+    public override void Spawned()
+    {
+        if (!fishData)
+        {
+            fishData = FishSpawnHandler.Instance.FishDataNameDictionary[FishDataName];
+            if(!fishData)
+                throw new NullReferenceException("<color=#9b59b6>FishData</color> is not found with name: " + FishDataName);
+        }
+        
         _staminaManager = GetComponentInChildren<IStaminaManager>();
 
         if (_staminaManager is null)
@@ -211,12 +225,14 @@ public class BehaviourTreeRunner : NetworkBehaviour, INPC, IInitialisable
         actions.AddChild(wanderAround);
 
         _behaviourTreeToExecute.AddChild(actions);
+        
+        Initialized = true;
     }
 
-    private void Update()
+    public override void FixedUpdateNetwork()
     {
         if (!HasStateAuthority || !Initialized) return;
-
+        
         _behaviourTreeToExecute?.Evaluate();
     }
 
@@ -256,7 +272,7 @@ public class BehaviourTreeRunner : NetworkBehaviour, INPC, IInitialisable
 
             _isHunting = true;
         }
-        
+
         OnTargetChanged?.Invoke(_target);
     }
 
@@ -289,7 +305,7 @@ public class BehaviourTreeRunner : NetworkBehaviour, INPC, IInitialisable
 
     private bool DidPreyDie()
     {
-        return _targetHealthManager is not null && _targetHealthManager.Died;
+        return _targetHealthManager is null || _targetHealthManager.Died;
     }
 
 }
