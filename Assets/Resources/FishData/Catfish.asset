@@ -36,7 +36,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: aaa032bb997807948879483b73e44a6d, type: 2}
   - {fileID: 11400000, guid: 1724f0690ac686340a9d49e2f66c6cd3, type: 2}
   attackValue: 5
-  attackRange: 2.25
+  attackRange: 4
   attackCooldown: 1
   timeToLoseInterest: 5
   distanceToLoseInterest: 15

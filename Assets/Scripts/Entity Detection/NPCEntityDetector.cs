@@ -117,7 +117,7 @@ public class NPCEntityDetector : EntityDetector, IInitialisable
     {
         Vector3 directionToTarget = (target.position - transform.parent.position).normalized;
         float angleToTarget = Vector3.Angle(transform.parent.forward, directionToTarget);
-        float distanceToTarget = Vector3.Distance(transform.parent.position, target.position);
+        float distanceToTarget = Vector3.Distance(transform.parent.position, target.position); // TODO: Use sqrMagnitude
 
         return angleToTarget < fishData.FOVAngle && distanceToTarget <= fishData.FOVRadius;
     }
@@ -138,7 +138,7 @@ public class NPCEntityDetector : EntityDetector, IInitialisable
         // if (OtherNPCs.Contains(networkTransform)) return;
 
         if (!IsInFOVAndInRange(networkTransform.transform)) return;
-
+        
         _attachedAIBehaviour.AdjustHuntOrFleeTarget((networkTransform.transform, entity));
     }
 

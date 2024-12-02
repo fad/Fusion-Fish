@@ -15,7 +15,7 @@ MonoBehaviour:
   fishID: 2
   fishPrefab: {fileID: 7922903181239320888, guid: 4903ee395fc06425aa96fe507fe8334b,
     type: 3}
-  scale: 0.25
+  scale: 0.5
   maxHealth: 120
   recoveryHealthInSecond: 1.2
   timeToStartRecoveryHealth: 10
@@ -37,8 +37,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 7d2cb7dfd99a72c4bb748bd65e464fd4, type: 2}
   - {fileID: 11400000, guid: ca5b417791726f949aab6afff7e7eb84, type: 2}
   - {fileID: 11400000, guid: 6998654e15fc34741a20046b034526a9, type: 2}
-  attackValue: 3
-  attackRange: 2
+  attackValue: 4
+  attackRange: 3
   attackCooldown: 1
   timeToLoseInterest: 7
   distanceToLoseInterest: 20

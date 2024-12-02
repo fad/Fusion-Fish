@@ -21,20 +21,30 @@ public class AttackManager : NetworkBehaviour, IAttackManager, IInitialisable
 
     public void Init(string fishDataName)
     {
-        _correspondingNPC = transform.parent.GetComponent<INPC>();
+        
+    }
+
+    public override void Spawned()
+    {
+        _correspondingNPC = transform.GetComponentInParent<INPC>();
 
         if (_correspondingNPC == null)
         {
             Debug.LogError($"No <color=#00cec9>INPC</color> component found on object: {gameObject.name}.");
+            return;
         }
         
         _correspondingNPC.OnTargetChanged += ChangeTarget;
         
-        FishSpawnHandler.Instance.FishDataNameDictionary.TryGetValue(fishDataName, out fishData);
         
         if (!fishData)
         {
-            Debug.LogError($"No <color=#00cec9>FishData</color> found with name: {fishDataName}.");
+            FishSpawnHandler.Instance.FishDataNameDictionary.TryGetValue(_correspondingNPC.FishType.name, out fishData);
+            if (!fishData)
+            {
+                Debug.LogError($"No <color=#00cec9>FishData</color> found with name: {_correspondingNPC.FishType.name}.");
+                return;
+            }
         }
         
         _animator = GetComponentInChildren<Animator>();
@@ -63,14 +73,13 @@ public class AttackManager : NetworkBehaviour, IAttackManager, IInitialisable
         if(CurrentAttackCooldown > 0f) return;
         if(!_currentTarget) return;
         
-        _currentTargetHealthManager?.Damage(damageValue);
-
         if (_animator)
         {
             _animator.SetTrigger(AttackTrigger);
         }
         
         CurrentAttackCooldown = fishData.AttackCooldown;
+        _currentTargetHealthManager?.Damage(damageValue);
 
         if (_currentTargetHealthManager is { Died: true }) return;
 
