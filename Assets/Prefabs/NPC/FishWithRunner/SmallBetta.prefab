@@ -352,6 +352,28 @@ PrefabInstance:
       propertyPath: SortKey
       value: 3333051134
       objectReference: {fileID: 0}
+    - target: {fileID: 6051695805070191918, guid: 7b8a0ecd9c7ba2e4dad3391a0a56e42c,
+        type: 3}
+      propertyPath: fishData
+      value: 
+      objectReference: {fileID: 11400000, guid: 6998654e15fc34741a20046b034526a9,
+        type: 2}
+    - target: {fileID: 6051695805070191918, guid: 7b8a0ecd9c7ba2e4dad3391a0a56e42c,
+        type: 3}
+      propertyPath: gibPrefab
+      value: 
+      objectReference: {fileID: -6550082182933151621, guid: b9dad96a76a34d346ae8989e61852300,
+        type: 3}
+    - target: {fileID: 6051695805070191918, guid: 7b8a0ecd9c7ba2e4dad3391a0a56e42c,
+        type: 3}
+      propertyPath: spawnGibs
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6051695805070191918, guid: 7b8a0ecd9c7ba2e4dad3391a0a56e42c,
+        type: 3}
+      propertyPath: gibSpawnCount
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6496080518685895798, guid: 7b8a0ecd9c7ba2e4dad3391a0a56e42c,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -709,6 +731,12 @@ PrefabInstance:
       propertyPath: NetworkedBehaviours.Array.data[12]
       value: 
       objectReference: {fileID: 4485672370762897990}
+    - target: {fileID: 5124316588462460406, guid: 3f8486498552be144992af32f4d2779b,
+        type: 3}
+      propertyPath: fishData
+      value: 
+      objectReference: {fileID: 11400000, guid: 6998654e15fc34741a20046b034526a9,
+        type: 2}
     - target: {fileID: 5124316588462460406, guid: 3f8486498552be144992af32f4d2779b,
         type: 3}
       propertyPath: maxHealth

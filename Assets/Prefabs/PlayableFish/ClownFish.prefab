@@ -5372,6 +5372,11 @@ PrefabInstance:
       propertyPath: playerLayerMask.m_Bits
       value: 128
       objectReference: {fileID: 0}
+    - target: {fileID: 2749181200256999984, guid: 274fa519b44c24e43a28d85dbdddcb30,
+        type: 3}
+      propertyPath: hittableLayerMask.m_Bits
+      value: 192
+      objectReference: {fileID: 0}
     - target: {fileID: 3269069715231181482, guid: 274fa519b44c24e43a28d85dbdddcb30,
         type: 3}
       propertyPath: m_LocalPosition.x

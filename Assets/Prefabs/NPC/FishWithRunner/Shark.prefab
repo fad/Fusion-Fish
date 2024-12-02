@@ -48,13 +48,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b36f1545baba483449808a5cacb897cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gibPrefab: {fileID: 3993952820748017500, guid: b9dad96a76a34d346ae8989e61852300,
+  gibPrefab: {fileID: -6550082182933151621, guid: b9dad96a76a34d346ae8989e61852300,
     type: 3}
   gibSpawnCount: 15
-  gibsExperienceValue: 200
-  spawnGibs: 0
-  isShrimp: 0
-  isStarFish: 0
+  spawnGibs: 1
+  fishData: {fileID: 11400000, guid: 0c6308a7049671a42abceaddee436b9c, type: 2}
 --- !u!114 &598851164403782487
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -67,8 +65,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e21121d4f559c1248aa8f7d3ce4320ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isShrimp: 0
-  isStarFish: 0
 --- !u!114 &1932959228226219729
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -169,7 +165,6 @@ MonoBehaviour:
     m_Bits: 704
   fishData: {fileID: 11400000, guid: 0c6308a7049671a42abceaddee436b9c, type: 2}
   root: {fileID: 4451768028373992673}
-  __otherNPCsNetworked: []
 --- !u!1001 &3555741246099918593
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -288,6 +283,12 @@ PrefabInstance:
       propertyPath: NetworkedBehaviours.Array.data[11]
       value: 
       objectReference: {fileID: 8832970889146234319}
+    - target: {fileID: 5124316588462460406, guid: 3f8486498552be144992af32f4d2779b,
+        type: 3}
+      propertyPath: fishData
+      value: 
+      objectReference: {fileID: 11400000, guid: 0c6308a7049671a42abceaddee436b9c,
+        type: 2}
     - target: {fileID: 5124316588462460406, guid: 3f8486498552be144992af32f4d2779b,
         type: 3}
       propertyPath: maxHealth

@@ -578,6 +578,12 @@ PrefabInstance:
       objectReference: {fileID: 1532291517054931783}
     - target: {fileID: 5124316588462460406, guid: 3f8486498552be144992af32f4d2779b,
         type: 3}
+      propertyPath: fishData
+      value: 
+      objectReference: {fileID: 11400000, guid: 7d2cb7dfd99a72c4bb748bd65e464fd4,
+        type: 2}
+    - target: {fileID: 5124316588462460406, guid: 3f8486498552be144992af32f4d2779b,
+        type: 3}
       propertyPath: maxHealth
       value: 40
       objectReference: {fileID: 0}
@@ -852,6 +858,23 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3560085847436736690, guid: 10ae0571baab10142955ff89774b59f2,
+        type: 3}
+      propertyPath: fishData
+      value: 
+      objectReference: {fileID: 11400000, guid: 7d2cb7dfd99a72c4bb748bd65e464fd4,
+        type: 2}
+    - target: {fileID: 3560085847436736690, guid: 10ae0571baab10142955ff89774b59f2,
+        type: 3}
+      propertyPath: gibPrefab
+      value: 
+      objectReference: {fileID: -6550082182933151621, guid: b9dad96a76a34d346ae8989e61852300,
+        type: 3}
+    - target: {fileID: 3560085847436736690, guid: 10ae0571baab10142955ff89774b59f2,
+        type: 3}
+      propertyPath: spawnGibs
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4199829970043314401, guid: 10ae0571baab10142955ff89774b59f2,
         type: 3}

@@ -6,6 +6,7 @@ public interface IHealthManager
         event Action OnDeath;
         
         bool Died { get; }
+        float MaxHealth { get; }
     
         void Damage(float amount);
         void Heal(float amount);

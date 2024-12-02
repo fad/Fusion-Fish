@@ -559,6 +559,23 @@ PrefabInstance:
       propertyPath: m_PixelsPerUnitMultiplier
       value: 2.5
       objectReference: {fileID: 0}
+    - target: {fileID: 5861376682368940301, guid: d29956c564d139a45ab318ff6e931255,
+        type: 3}
+      propertyPath: fishData
+      value: 
+      objectReference: {fileID: 11400000, guid: ca5b417791726f949aab6afff7e7eb84,
+        type: 2}
+    - target: {fileID: 5861376682368940301, guid: d29956c564d139a45ab318ff6e931255,
+        type: 3}
+      propertyPath: gibPrefab
+      value: 
+      objectReference: {fileID: -6550082182933151621, guid: b9dad96a76a34d346ae8989e61852300,
+        type: 3}
+    - target: {fileID: 5861376682368940301, guid: d29956c564d139a45ab318ff6e931255,
+        type: 3}
+      propertyPath: spawnGibs
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5967671144940531275, guid: d29956c564d139a45ab318ff6e931255,
         type: 3}
       propertyPath: root
@@ -883,6 +900,12 @@ PrefabInstance:
       propertyPath: NetworkedBehaviours.Array.data[11]
       value: 
       objectReference: {fileID: 3191771966789653118}
+    - target: {fileID: 5124316588462460406, guid: 3f8486498552be144992af32f4d2779b,
+        type: 3}
+      propertyPath: fishData
+      value: 
+      objectReference: {fileID: 11400000, guid: ca5b417791726f949aab6afff7e7eb84,
+        type: 2}
     - target: {fileID: 5124316588462460406, guid: 3f8486498552be144992af32f4d2779b,
         type: 3}
       propertyPath: maxHealth

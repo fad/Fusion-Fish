@@ -5,6 +5,7 @@ using StarterAssets;
 public class PlayerHealth : NetworkBehaviour, IHealthUtility
 {
     private PlayerManager _playerManager;
+    private SpawnGibsOnDestroy _gibsSpawner;
     
     [Header("Death")]
     [HideInInspector] public bool isDead;
@@ -14,7 +15,6 @@ public class PlayerHealth : NetworkBehaviour, IHealthUtility
     [Networked] public bool NetworkedPermanentHealth { get; set; }
     public string causeOfDeath = "You got eaten";
 
-    private SpawnGibsOnDestroy _gibsSpawner;
 
     private void Start()
     {
@@ -33,8 +33,8 @@ public class PlayerHealth : NetworkBehaviour, IHealthUtility
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
         _playerManager.healthManager.PlayParticles(Color.red, 30);
-        _gibsSpawner.SpawnMeatObjects(Runner);
         SetPlayerMeshRpc(false);
+        _gibsSpawner.SpawnGibsRpc();
         HudUI.Instance.OnDeathPanel(causeOfDeath);
     }
     

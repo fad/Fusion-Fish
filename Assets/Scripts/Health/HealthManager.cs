@@ -2,9 +2,13 @@ using System;
 using Fusion;
 using UnityEngine;
 
-public class HealthManager : NetworkBehaviour, IHealthManager
+public class HealthManager : NetworkBehaviour, IHealthManager, ISuckable
 {
-    [Header("Health")]
+    [Header("Data Container")]
+    [SerializeField]
+    private FishData fishData;
+    
+    [Header("Health"),Space(10)]
     public float maxHealth;
 
     public float recoveryHealthInSecond = 10;
@@ -12,24 +16,17 @@ public class HealthManager : NetworkBehaviour, IHealthManager
     private bool _regeneration = false;
 
     [Networked]
-    private TickTimer regenTimer { get; set; }
+    private TickTimer RegenTimer { get; set; }
 
     [Networked]
-    [OnChangedRender(nameof(CheckDeath))]
-    public float NetworkedHealth { get; set; }
+    public float NetworkedHealth { get; private set; }
 
-    private ParticleSystem bloodParticleSystem;
-
-    [HideInInspector]
-    public bool spawnGibs; // TODO: Break this up in own class
+    private ParticleSystem _bloodParticleSystem;
 
     [HideInInspector]
     public float currentHealth;
 
     public bool notAbleToGetBitten;
-
-    [Header("Experience")] // TODO: Break this up in own class
-    public int experienceValue = 100;
 
     [Header("SlowDown")] // TODO: Break this up in own class
     [SerializeField]
@@ -50,12 +47,19 @@ public class HealthManager : NetworkBehaviour, IHealthManager
     private bool _died = false;
 
     public bool Died => _died;
+    public float MaxHealth => maxHealth;
+    public float NeededSuckingPower => maxHealth;
+    
+    private ChangeDetector _changeDetector;
 
-    private void Start() => bloodParticleSystem = GameObject.Find("BloodParticles").GetComponent<ParticleSystem>();
+
+    private void Start() => _bloodParticleSystem = GameObject.Find("BloodParticles").GetComponent<ParticleSystem>();
 
     public override void Spawned()
     {
         if (_healthUtility == null) TryGetComponent(out _healthUtility);
+        
+        _changeDetector = GetChangeDetector(ChangeDetector.Source.SimulationState);
 
         Restart();
     }
@@ -92,19 +96,31 @@ public class HealthManager : NetworkBehaviour, IHealthManager
 
     public override void FixedUpdateNetwork()
     {
-        if (_regeneration && regenTimer.ExpiredOrNotRunning(Runner))
+        if (_regeneration && RegenTimer.ExpiredOrNotRunning(Runner))
         {
             RecoveryHealthRpc(recoveryHealthInSecond);
-            regenTimer = TickTimer.CreateFromSeconds(Runner, 1);
+            RegenTimer = TickTimer.CreateFromSeconds(Runner, 1);
 
             if (NetworkedHealth >= maxHealth)
                 _regeneration = false;
         }
+        
+        foreach(var propertyName in _changeDetector.DetectChanges(this, out var previousBuffer, out var currentBuffer))
+        {
+            switch (propertyName)
+            {
+                case nameof(NetworkedHealth):
+                {
+                    CheckDeath();
+                    break;
+                }
+            }
+        }
     }
 
-    private void startPassiveRecoveryHealth()
+    private void StartPassiveRecoveryHealth()
     {
-        regenTimer = TickTimer.CreateFromSeconds(Runner, timeToStartRecoveryHealth);
+        RegenTimer = TickTimer.CreateFromSeconds(Runner, timeToStartRecoveryHealth);
         _regeneration = true;
     }
 
@@ -112,7 +128,7 @@ public class HealthManager : NetworkBehaviour, IHealthManager
     {
         if (notAbleToGetBitten) return;
 
-        ReceiveDamageRpc(amount, true);
+        ReceiveDamageRpc(amount);
         CheckDeath();
     }
 
@@ -131,15 +147,13 @@ public class HealthManager : NetworkBehaviour, IHealthManager
     }
 
     [Rpc(RpcSources.All, RpcTargets.All)]
-    public void ReceiveDamageRpc(float damage, bool spawnGibsOnDestroy)
+    public void ReceiveDamageRpc(float damage)
     {
         NetworkedHealth -= damage;
 
-        spawnGibs = spawnGibsOnDestroy;
-
         if (NetworkedHealth > 0)
         {
-            startPassiveRecoveryHealth();
+            StartPassiveRecoveryHealth();
             PlayParticles(Color.red, 10);
         }
 
@@ -161,25 +175,18 @@ public class HealthManager : NetworkBehaviour, IHealthManager
                 OnDeath?.Invoke();
             }
         }
-
-        if (currentHealth > NetworkedHealth)
-        {
-            slowDownSpeedTime = maxSlowDownSpeedTime;
-            slowDown = true;
-            currentHealth = NetworkedHealth;
-        }
     }
 
     public void PlayParticles(Color color, int burstCount)
     {
-        var mainModule = bloodParticleSystem.main;
+        var mainModule = _bloodParticleSystem.main;
         mainModule.startColor = new ParticleSystem.MinMaxGradient(color);
 
-        var emissionModule = bloodParticleSystem.emission;
+        var emissionModule = _bloodParticleSystem.emission;
         emissionModule.SetBursts(new ParticleSystem.Burst[] { new(0.0f, burstCount) });
 
         var healthObjectTransform = transform;
-        var bloodParticleSystemTransform = bloodParticleSystem.transform;
+        var bloodParticleSystemTransform = _bloodParticleSystem.transform;
         //need to safe the current parent before it changes parent to revert that parent change
         var parent = bloodParticleSystemTransform.parent;
 
@@ -187,7 +194,19 @@ public class HealthManager : NetworkBehaviour, IHealthManager
         bloodParticleSystemTransform.SetParent(healthObjectTransform);
         bloodParticleSystemTransform.localScale =
             healthObjectTransform.localScale.z < 1 ? Vector3.one : healthObjectTransform.localScale;
-        bloodParticleSystem.Play();
+        _bloodParticleSystem.Play();
         bloodParticleSystemTransform.SetParent(parent);
+    }
+
+    public int GetSuckedIn()
+    {
+        DestroySuckableRpc();
+        return fishData.XPValue;
+    }
+    
+    [Rpc(RpcSources.All, RpcTargets.StateAuthority)]
+    private void DestroySuckableRpc()
+    {
+        Runner.Despawn(Object);
     }
 }

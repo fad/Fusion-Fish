@@ -405,6 +405,12 @@ PrefabInstance:
       objectReference: {fileID: 2489755677534301191}
     - target: {fileID: 5124316588462460406, guid: 3f8486498552be144992af32f4d2779b,
         type: 3}
+      propertyPath: fishData
+      value: 
+      objectReference: {fileID: 11400000, guid: 4f425dd60c1f84442a76761bb02cae31,
+        type: 2}
+    - target: {fileID: 5124316588462460406, guid: 3f8486498552be144992af32f4d2779b,
+        type: 3}
       propertyPath: maxHealth
       value: 30
       objectReference: {fileID: 0}
@@ -805,6 +811,23 @@ PrefabInstance:
         type: 3}
       propertyPath: m_PixelsPerUnitMultiplier
       value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2663326727443188411, guid: 3e743a8b52b32d940a93ecf90cedba05,
+        type: 3}
+      propertyPath: fishData
+      value: 
+      objectReference: {fileID: 11400000, guid: 4f425dd60c1f84442a76761bb02cae31,
+        type: 2}
+    - target: {fileID: 2663326727443188411, guid: 3e743a8b52b32d940a93ecf90cedba05,
+        type: 3}
+      propertyPath: gibPrefab
+      value: 
+      objectReference: {fileID: -6550082182933151621, guid: b9dad96a76a34d346ae8989e61852300,
+        type: 3}
+    - target: {fileID: 2663326727443188411, guid: 3e743a8b52b32d940a93ecf90cedba05,
+        type: 3}
+      propertyPath: spawnGibs
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5897186053121985661, guid: 3e743a8b52b32d940a93ecf90cedba05,
         type: 3}
