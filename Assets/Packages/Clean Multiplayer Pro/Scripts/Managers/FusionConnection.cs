@@ -209,7 +209,10 @@ namespace AvocadoShark
         {
             string sessionName = null;
             string sessionPassword = null;
+
+            //it counts +2 for the scene index because there are the menu & game scene that need to be excluded
             sceneNumber = environmentDropdown.value + 2;
+            
             int maxPlayers = 10;
             if (IsRoomNameValid())
             {
@@ -486,8 +489,6 @@ namespace AvocadoShark
                 return;
             hasEnteredGameScene = true;
             
-            sceneNumber = environmentDropdown.value + 2;
-            //it counts +2 for the scene index because there are the menu & game scene that need to be excluded
             if (Runner.IsSceneAuthority)
             {
                 Runner.LoadScene(SceneRef.FromIndex(sceneNumber), LoadSceneMode.Additive);

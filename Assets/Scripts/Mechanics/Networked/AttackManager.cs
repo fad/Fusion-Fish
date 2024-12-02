@@ -1,4 +1,5 @@
 using Fusion;
+using StarterAssets;
 using UnityEngine;
 
 public class AttackManager : NetworkBehaviour, IAttackManager, IInitialisable
@@ -16,6 +17,7 @@ public class AttackManager : NetworkBehaviour, IAttackManager, IInitialisable
     private Transform _currentTarget;
     private IHealthManager _currentTargetHealthManager;
     private ITreeRunner _currentTargetTreeRunner;
+    private ThirdPersonController _thirdPersonController;
     
     private static readonly int AttackTrigger = Animator.StringToHash("attack");
 
@@ -75,7 +77,7 @@ public class AttackManager : NetworkBehaviour, IAttackManager, IInitialisable
         if (_currentTargetHealthManager is { Died: true }) return;
 
         _currentTargetTreeRunner?.AdjustHuntOrFleeTarget((transform, _correspondingNPC));
-        
+        _thirdPersonController?.GraspedRpc(transform.GetComponent<NetworkTransform>());
     }
 
     private void ChangeTarget(Transform newTarget)
@@ -100,6 +102,8 @@ public class AttackManager : NetworkBehaviour, IAttackManager, IInitialisable
         }
 
         _currentTarget.TryGetComponent(out _currentTargetTreeRunner);
+        _currentTarget.TryGetComponent(out _thirdPersonController);
+        
     }
 
     private void OnTargetDeath()

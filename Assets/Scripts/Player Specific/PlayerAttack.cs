@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using Fusion;
+using StarterAssets;
 
 public class PlayerAttack : NetworkBehaviour
 {
@@ -237,16 +238,16 @@ public class PlayerAttack : NetworkBehaviour
                 SetFoodObject(hitColliders[0].transform.gameObject, Color.yellow, false);
 
                 if (!hitColliders[0].TryGetComponent<Outline>(out _currentEnemyOutline))
+                {
                     _currentEnemyOutline = hitColliders[0].GetComponentInChildren<Outline>();
-
-                if (_currentEnemyOutline != null)
                     _currentEnemyOutline.enabled = true;
+                }
 
                 if (!hitColliders[0].TryGetComponent<HealthViewModel>(out _currentEnemyHealthBar))
+                {
                     _currentEnemyHealthBar = hitColliders[0].GetComponentInChildren<HealthViewModel>();
-
-                if (_currentEnemyHealthBar != null)
                     _currentEnemyHealthBar.AdjustHealthBarVisibility(true);
+                }
             }
             else
             {
@@ -307,6 +308,11 @@ public class PlayerAttack : NetworkBehaviour
                 return;
 
             health.ReceiveDamageRpc(attackDamage, true);
+            
+            if(foodObject.TryGetComponent<ThirdPersonController>(out var player))
+                player.GraspedRpc(playerManager.GetComponent<NetworkTransform>());
+
+            playerManager.thirdPersonController.StartAttractToEntity(foodObject.transform);
         }
     }
 

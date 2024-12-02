@@ -25,6 +25,7 @@ public class FleeStrategy : StaminaMoveStrategy
         public float ObstacleAvoidanceDistance;
         public Func<Transform> PredatorTransformGetter;
         public IStaminaManager StaminaManager;
+        public HealthManager HealthManager;
         public Action ResetThreatAction;
         public float SafeDistance;
         public short StaminaThreshold;
@@ -91,6 +92,12 @@ public class FleeStrategy : StaminaMoveStrategy
             return this;
         }
 
+        public Builder WithHealthManager(HealthManager healthManager)
+        {
+            HealthManager = healthManager;
+            return this;
+        }
+
         public Builder WithForbiddenAreaCheck(Func<(bool, Vector3)> forbiddenAreaCheck)
         {
             ForbiddenAreaCheck = forbiddenAreaCheck;
@@ -134,6 +141,7 @@ public class FleeStrategy : StaminaMoveStrategy
         builder.ObstacleAvoidanceDistance,
         builder.ForbiddenAreaCheck,
         builder.StaminaManager,
+        builder.HealthManager,
         builder.StaminaThreshold,
         builder.NormalSpeed,
         builder.FastSpeed,
@@ -164,17 +172,22 @@ public class FleeStrategy : StaminaMoveStrategy
             return Status.Success;
         }
         AvoidForbiddenArea();
-
-        CheckStamina();
         RotateToOppositeDirection();
         AvoidObstacles();
+
+        if (healthManager.grasped)
+        {
+            AttractionToPredator();
+            return Status.Running;
+        }
+
+        CheckStamina();
 
         Vector3 forwardDirection = Entity.forward * (ForwardModifier * (Speed * Time.deltaTime));
 
         Move(forwardDirection);
 
         Entity.rotation = Quaternion.Slerp(Entity.rotation, TargetRotation, RotationSpeed * Time.deltaTime);
-
         return Status.Running;
     }
 
@@ -185,7 +198,17 @@ public class FleeStrategy : StaminaMoveStrategy
     {
         _predatorTransform ??= _predatorTransformGetter();
     }
-
+    /// <summary>
+    /// Attraction to the predator if the entity is caught.
+    /// </summary>
+    private void AttractionToPredator()
+    {
+        Vector3 directionToPredator = _predatorTransform.position - Entity.position;
+        Vector3 newEntityDirection = directionToPredator.normalized * (ForwardModifier * (Speed * Time.deltaTime));
+        
+        if (Vector3.Distance(Entity.position, _predatorTransform.position) >= 1)
+            Move(newEntityDirection);
+    }
     /// <summary>
     /// Rotates the entity to the opposite direction of the predator.
     /// </summary>

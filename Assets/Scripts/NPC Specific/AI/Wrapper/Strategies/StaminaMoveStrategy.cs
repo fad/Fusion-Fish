@@ -4,6 +4,7 @@ using UnityEngine;
 public abstract class StaminaMoveStrategy : MoveStrategy
 {
     protected readonly IStaminaManager StaminaManager;
+    protected readonly HealthManager healthManager;
     protected readonly short StaminaThreshold;
     protected readonly float NormalSpeed;
     protected readonly float FastSpeed;
@@ -18,6 +19,7 @@ public abstract class StaminaMoveStrategy : MoveStrategy
         float obstacleAvoidanceDistance,
         Func<(bool, Vector3)> forbiddenAreaCheck,
         IStaminaManager staminaManager,
+        HealthManager healthManager,
         short staminaThreshold,
         float normalSpeed,
         float fastSpeed,
@@ -34,6 +36,7 @@ public abstract class StaminaMoveStrategy : MoveStrategy
             speedChangeCallback)
     {
         StaminaManager = staminaManager;
+        this.healthManager = healthManager;
         StaminaThreshold = staminaThreshold;
         NormalSpeed = normalSpeed;
         FastSpeed = fastSpeed;

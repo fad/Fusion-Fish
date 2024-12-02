@@ -169,7 +169,7 @@ MonoBehaviour:
     m_Bits: 704
   fishData: {fileID: 11400000, guid: 0c6308a7049671a42abceaddee436b9c, type: 2}
   root: {fileID: 4451768028373992673}
-  __otherNPCsNetworked: []
+  _OtherNPCs: []
 --- !u!1001 &3555741246099918593
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -502,7 +502,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1556248794854766, guid: e9fb340a10289f048b9253e71b0eb3ff,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6504890970194737656}
   m_SourcePrefab: {fileID: 100100000, guid: e9fb340a10289f048b9253e71b0eb3ff, type: 3}
 --- !u!4 &5275522956976061567 stripped
 Transform:
@@ -510,6 +514,30 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 5276214526371709419}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &5277486824946480261 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1556248794854766, guid: e9fb340a10289f048b9253e71b0eb3ff,
+    type: 3}
+  m_PrefabInstance: {fileID: 5276214526371709419}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6504890970194737656
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5277486824946480261}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 0, b: 0, a: 1}
+  outlineWidth: 2
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1001 &8960548709049626170
 PrefabInstance:
   m_ObjectHideFlags: 0

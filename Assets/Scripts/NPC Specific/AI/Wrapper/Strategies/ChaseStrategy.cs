@@ -33,6 +33,7 @@ public class ChaseStrategy : StaminaMoveStrategy
         public float ObstacleAvoidanceDistance;
         public Func<Transform> PreyTransformGetter;
         public IStaminaManager StaminaManager;
+        public HealthManager healthManager;
         public short StaminaThreshold;
         public Func<(bool, Vector3)> ForbiddenAreaCheck;
         public IAttackManager AttackManager;
@@ -178,6 +179,7 @@ public class ChaseStrategy : StaminaMoveStrategy
         builder.ObstacleAvoidanceDistance,
         builder.ForbiddenAreaCheck,
         builder.StaminaManager,
+        builder.healthManager,
         builder.StaminaThreshold,
         builder.NormalSpeed,
         builder.FastSpeed,
@@ -241,6 +243,12 @@ public class ChaseStrategy : StaminaMoveStrategy
         if ((Entity.position - _preyTransform.position).sqrMagnitude <= _attackRange * _attackRange)
         {
             _attackManager.Attack(_attackValue, _preyTransform);
+            if(Vector3.Distance(Entity.position , _preyTransform.position)>0.5f)
+            {
+                Vector3 directionToPrey = _preyTransform.position - Entity.position;
+                Vector3 forwardDirection = directionToPrey.normalized * (ForwardModifier * (Speed * Time.deltaTime));
+                Move(forwardDirection);
+            }
         }
         else
         {

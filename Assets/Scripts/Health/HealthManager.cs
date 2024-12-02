@@ -24,6 +24,9 @@ public class HealthManager : NetworkBehaviour, IHealthManager
     [SerializeField] public float maxSlowDownSpeedTime = 5;
     [HideInInspector] public float slowDownSpeedTime;
     [HideInInspector] public bool slowDown;
+    [HideInInspector] public bool grasped;
+    [HideInInspector] public float maxGraspedTime = 1;
+    [HideInInspector] public float graspedTime;
     
     public event Action<float> OnHealthChanged;
     public event Action OnDeath;
@@ -63,6 +66,15 @@ public class HealthManager : NetworkBehaviour, IHealthManager
             if (slowDownSpeedTime <= 0)
             {
                 slowDown = false;
+            }
+        }
+
+        if (grasped)
+        {
+            graspedTime -= Time.deltaTime;
+            if (graspedTime <= 0)
+            {
+                grasped = false;
             }
         }
     }
@@ -108,6 +120,11 @@ public class HealthManager : NetworkBehaviour, IHealthManager
     [Rpc(RpcSources.All, RpcTargets.All)]
     public void ReceiveDamageRpc(float damage, bool spawnGibsOnDestroy)
     {
+        if(damage >= NetworkedHealth * 0.2f)
+        {
+            grasped = true;
+            graspedTime = maxGraspedTime;
+        }
         NetworkedHealth -= damage;
         
         spawnGibs = spawnGibsOnDestroy;

@@ -59,6 +59,11 @@ public class BehaviourTreeRunner : NetworkBehaviour, INPC, IInitialisable
     private Transform _target;
 
     /// <summary>
+    /// The health manager to use for this fish.
+    /// </summary>
+    private HealthManager _healthManager;    
+    
+    /// <summary>
     /// The stamina manager to use for this fish.
     /// </summary>
     private IStaminaManager _staminaManager;
@@ -97,13 +102,17 @@ public class BehaviourTreeRunner : NetworkBehaviour, INPC, IInitialisable
         _staminaManager = GetComponentInChildren<IStaminaManager>();
 
         if (_staminaManager is null)
-            throw new NullReferenceException("<color=#2980b9>StaminaManager</color> is not found in " +
-                                             gameObject.name);
+            throw new NullReferenceException("<color=#2980b9>StaminaManager</color> is not found in " + gameObject.name);
 
         _attackManager = GetComponentInChildren<IAttackManager>();
 
         if (_attackManager is null)
             throw new NullReferenceException("<color=#c0392b>AttackManager</color> is not found in " + gameObject.name);
+
+        _healthManager = GetComponent<HealthManager>();
+        
+        if (_healthManager is null)
+            throw new NullReferenceException("<color=#9b59b6>HealthManager</color> is not found in " + gameObject.name);
         
         Initialized = true;
         FishDataName = fishDataName;
@@ -143,6 +152,7 @@ public class BehaviourTreeRunner : NetworkBehaviour, INPC, IInitialisable
                 .WithResetThreatAction(ResetFleeBehaviour)
                 .WithSafeDistance(fishData.SafeDistance)
                 .WithStaminaManager(_staminaManager)
+                .WithHealthManager(_healthManager)
                 .WithForbiddenAreaCheck(IsInsideForbiddenArea)
                 .WithUseForward(true)
                 .WithSpeedChangeCallback(SetAnimatorMoveSpeed)
