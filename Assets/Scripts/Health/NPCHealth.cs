@@ -1,7 +1,7 @@
 using Fusion;
 using UnityEngine;
 
-public class NPCHealth : NetworkBehaviour
+public class NPCHealth : NetworkBehaviour, IHealthUtility
 {
     private HealthManager _healthManager;
     private SpawnGibsOnDestroy _spawnGibsOnDestroy;

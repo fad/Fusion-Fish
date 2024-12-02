@@ -6,39 +6,60 @@ public class HealthManager : NetworkBehaviour, IHealthManager
 {
     [Header("Health")]
     public float maxHealth;
+
     public float recoveryHealthInSecond = 10;
     public float timeToStartRecoveryHealth = 3;
     private bool _regeneration = false;
-    [Networked] private TickTimer regenTimer { get; set; }
 
-    [Networked] [OnChangedRender(nameof(CheckDeath))] public float NetworkedHealth { get; set; }
+    [Networked]
+    private TickTimer regenTimer { get; set; }
+
+    [Networked]
+    [OnChangedRender(nameof(CheckDeath))]
+    public float NetworkedHealth { get; set; }
+
     private ParticleSystem bloodParticleSystem;
-    [HideInInspector] public bool spawnGibs; // TODO: Break this up in own class
-    [HideInInspector] public float currentHealth;
+
+    [HideInInspector]
+    public bool spawnGibs; // TODO: Break this up in own class
+
+    [HideInInspector]
+    public float currentHealth;
+
     public bool notAbleToGetBitten;
 
     [Header("Experience")] // TODO: Break this up in own class
     public int experienceValue = 100;
-    
+
     [Header("SlowDown")] // TODO: Break this up in own class
-    [SerializeField] public float maxSlowDownSpeedTime = 5;
-    [HideInInspector] public float slowDownSpeedTime;
-    [HideInInspector] public bool slowDown;
-    
+    [SerializeField]
+    public float maxSlowDownSpeedTime = 5;
+
+    [HideInInspector]
+    public float slowDownSpeedTime;
+
+    [HideInInspector]
+    public bool slowDown;
+
+    private IHealthUtility _healthUtility;
+
     public event Action<float> OnHealthChanged;
     public event Action OnDeath;
 
     private bool _hasSpawned = false;
     private bool _died = false;
-    
+
     public bool Died => _died;
 
     private void Start() => bloodParticleSystem = GameObject.Find("BloodParticles").GetComponent<ParticleSystem>();
 
     public override void Spawned()
     {
+        if (_healthUtility == null) TryGetComponent(out _healthUtility);
+
         Restart();
     }
+
     public void Restart()
     {
         NetworkedHealth = maxHealth;
@@ -46,15 +67,17 @@ public class HealthManager : NetworkBehaviour, IHealthManager
         slowDownSpeedTime = maxSlowDownSpeedTime;
         _hasSpawned = true;
     }
+
     public override void Despawned(NetworkRunner runner, bool hasState)
     {
         _hasSpawned = false;
     }
-    
+
     private void OnDisable()
     {
         _hasSpawned = false;
     }
+
     private void Update()
     {
         if (slowDown)
@@ -66,6 +89,7 @@ public class HealthManager : NetworkBehaviour, IHealthManager
             }
         }
     }
+
     public override void FixedUpdateNetwork()
     {
         if (_regeneration && regenTimer.ExpiredOrNotRunning(Runner))
@@ -77,20 +101,21 @@ public class HealthManager : NetworkBehaviour, IHealthManager
                 _regeneration = false;
         }
     }
+
     private void startPassiveRecoveryHealth()
     {
         regenTimer = TickTimer.CreateFromSeconds(Runner, timeToStartRecoveryHealth);
         _regeneration = true;
     }
-    
+
     public void Damage(float amount)
     {
         if (notAbleToGetBitten) return;
-        
+
         ReceiveDamageRpc(amount, true);
         CheckDeath();
     }
-    
+
     public void Heal(float amount)
     {
         RecoveryHealthRpc(amount);
@@ -109,7 +134,7 @@ public class HealthManager : NetworkBehaviour, IHealthManager
     public void ReceiveDamageRpc(float damage, bool spawnGibsOnDestroy)
     {
         NetworkedHealth -= damage;
-        
+
         spawnGibs = spawnGibsOnDestroy;
 
         if (NetworkedHealth > 0)
@@ -117,33 +142,24 @@ public class HealthManager : NetworkBehaviour, IHealthManager
             startPassiveRecoveryHealth();
             PlayParticles(Color.red, 10);
         }
-        
+
         OnHealthChanged?.Invoke(NetworkedHealth);
     }
 
     private void CheckDeath()
     {
-        if(!_hasSpawned) return;
-        
-        if (TryGetComponent<PlayerHealth>(out var playerHealth) && HasStateAuthority && currentHealth > NetworkedHealth)
+        if (!_hasSpawned) return;
+
+        if (_healthUtility is not null)
         {
-            if(playerHealth.showVignette)
+            if (_healthUtility is PlayerHealth && HasStateAuthority && currentHealth > NetworkedHealth)
                 VFXManager.Instance.ShowHurtVignette();
 
             if (NetworkedHealth <= 0)
             {
-                playerHealth.Die();
+                _healthUtility.Die();
                 OnDeath?.Invoke();
             }
-        }
-        else if(TryGetComponent<NPCHealth>(out var npcHealth))
-        {
-            if (NetworkedHealth <= 0)
-            {
-                npcHealth.Die();
-                OnDeath?.Invoke();
-            }
-            
         }
 
         if (currentHealth > NetworkedHealth)
@@ -169,7 +185,8 @@ public class HealthManager : NetworkBehaviour, IHealthManager
 
         bloodParticleSystemTransform.position = healthObjectTransform.position;
         bloodParticleSystemTransform.SetParent(healthObjectTransform);
-        bloodParticleSystemTransform.localScale = healthObjectTransform.localScale.z < 1 ? Vector3.one : healthObjectTransform.localScale;
+        bloodParticleSystemTransform.localScale =
+            healthObjectTransform.localScale.z < 1 ? Vector3.one : healthObjectTransform.localScale;
         bloodParticleSystem.Play();
         bloodParticleSystemTransform.SetParent(parent);
     }

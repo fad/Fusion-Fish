@@ -1,18 +1,14 @@
-using System.Collections;
 using UnityEngine;
 using Fusion;
 using StarterAssets;
-using UnityEngine.Rendering;
 
-public class PlayerHealth : NetworkBehaviour
+public class PlayerHealth : NetworkBehaviour, IHealthUtility
 {
-    private PlayerManager playerManager;
+    private PlayerManager _playerManager;
     
     [Header("Death")]
     [HideInInspector] public bool isDead;
     
-    private Volume hitVignette;
-    [HideInInspector] public bool showVignette;
     [SerializeField] private float showDamageVignetteTime;
     [SerializeField] private float hideDamageVignetteTime;
     [Networked] public bool NetworkedPermanentHealth { get; set; }
@@ -22,10 +18,8 @@ public class PlayerHealth : NetworkBehaviour
 
     private void Start()
     {
-        playerManager = GetComponent<PlayerManager>();
+        _playerManager = GetComponent<PlayerManager>();
         _gibsSpawner = GetComponent<SpawnGibsOnDestroy>();
-        hitVignette = GameObject.Find("DamagePostProcessing").GetComponent<Volume>();
-        showVignette = true;
     }
 
     public void Die()
@@ -35,10 +29,10 @@ public class PlayerHealth : NetworkBehaviour
     
     private void PlayerDeath()
     {
-        playerManager.satietyManager.Death();
+        _playerManager.satietyManager.Death();
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
-        playerManager.healthManager.PlayParticles(Color.red, 30);
+        _playerManager.healthManager.PlayParticles(Color.red, 30);
         _gibsSpawner.SpawnMeatObjects(Runner);
         SetPlayerMeshRpc(false);
         HudUI.Instance.OnDeathPanel(causeOfDeath);
@@ -50,61 +44,32 @@ public class PlayerHealth : NetworkBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         HudUI.Instance.OffDeathPanel();
         
-        playerManager.levelUp.Restart();
+        _playerManager.levelUp.Restart();
 
-        playerManager.playerAttack.suckInDamage = playerManager.levelUp.startingSuckPower;
-        playerManager.playerAttack.attackDamage = playerManager.levelUp.startingAttackDamage;
-        playerManager.thirdPersonController.cameraDistance = playerManager.levelUp.startingCameraDistance;
-        playerManager.thirdPersonController.defaultSwimSpeed = playerManager.levelUp.startingDefaultSwimSpeed;
-        playerManager.thirdPersonController.boostSwimSpeed = playerManager.levelUp.startingBoostSwimSpeed;
-        playerManager.playerAttack.attackRange = playerManager.levelUp.startingAttackRange;
-        playerManager.healthManager.maxHealth = playerManager.levelUp.startingHealth;
+        _playerManager.playerAttack.suckInDamage = _playerManager.levelUp.startingSuckPower;
+        _playerManager.playerAttack.attackDamage = _playerManager.levelUp.startingAttackDamage;
+        _playerManager.thirdPersonController.cameraDistance = _playerManager.levelUp.startingCameraDistance;
+        _playerManager.thirdPersonController.defaultSwimSpeed = _playerManager.levelUp.startingDefaultSwimSpeed;
+        _playerManager.thirdPersonController.boostSwimSpeed = _playerManager.levelUp.startingBoostSwimSpeed;
+        _playerManager.playerAttack.attackRange = _playerManager.levelUp.startingAttackRange;
+        _playerManager.healthManager.maxHealth = _playerManager.levelUp.startingHealth;
 
-        playerManager.satietyManager.Restart();
-        playerManager.healthManager.Restart();
-        playerManager.thirdPersonController.currentBoostCount = playerManager.thirdPersonController.maxBoostCount;
+        _playerManager.satietyManager.Restart();
+        _playerManager.healthManager.Restart();
+        _playerManager.thirdPersonController.currentBoostCount = _playerManager.thirdPersonController.maxBoostCount;
         
-        var playerTransform = playerManager.thirdPersonController.transform;
+        var playerTransform = _playerManager.thirdPersonController.transform;
         GetComponent<PlayerPositionReset>().ResetPlayerPosition();
-        playerTransform.localScale = playerManager.levelUp.startingSize;
-        playerManager.thirdPersonController.boostState = ThirdPersonController.BoostState.BoostReload;
+        playerTransform.localScale = _playerManager.levelUp.startingSize;
+        _playerManager.thirdPersonController.boostState = ThirdPersonController.BoostState.BoostReload;
         SetPlayerMeshRpc(true);
-    }
-    
-    public IEnumerator ShowDamageVignette()
-    {
-        showVignette = false;
-
-        hitVignette.priority = 2;
-        var elapsedTime = 0f;
-
-        while (elapsedTime < showDamageVignetteTime)
-        {
-            hitVignette.weight = Mathf.Lerp(hitVignette.weight, 1, elapsedTime / showDamageVignetteTime);
-            
-            elapsedTime += Time.deltaTime;
-            yield return null;
-        }
-        
-        elapsedTime = 0;
-        
-        while (elapsedTime < hideDamageVignetteTime)
-        {
-            hitVignette.weight = Mathf.Lerp(hitVignette.weight, 0, elapsedTime / hideDamageVignetteTime);
-        
-            elapsedTime += Time.deltaTime;
-            yield return null;
-        }
-
-        hitVignette.priority = 0;
-        showVignette = true;
     }
 
     [Rpc(RpcSources.All, RpcTargets.All, InvokeLocal = true)]
     private void SetPlayerMeshRpc(bool setActive)
     {
-        playerManager.thirdPersonController.playerVisual.SetActive(setActive);
-        playerManager.thirdPersonController.capsuleCollider.enabled = setActive;
+        _playerManager.thirdPersonController.playerVisual.SetActive(setActive);
+        _playerManager.thirdPersonController.capsuleCollider.enabled = setActive;
         isDead = !setActive;
     }
 }
