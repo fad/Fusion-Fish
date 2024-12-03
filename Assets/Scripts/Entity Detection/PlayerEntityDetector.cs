@@ -5,26 +5,25 @@ using UnityEngine;
 /// </summary>
 public class PlayerEntityDetector : EntityDetector
 {
-    // protected override void OnTriggerEnter(Collider other)
-    // {
-    //     if (IsNotValid(other.gameObject)) return;
+    protected override void OnTriggerEnter(Collider other)
+    {
+        if (!TryCheck(other.gameObject)) return;
 
-    //     DealWithHealthUI(other.gameObject, true);
-    // }
+        DealWithFoodOutline(other.gameObject, true);
+    }
 
-    // protected override void OnTriggerExit(Collider other)
-    // {
-    //     if (IsNotValid(other.gameObject)) return;
+    protected override void OnTriggerExit(Collider other)
+    {
+        if (!TryCheck(other.gameObject)) return;
 
-    //     DealWithHealthUI(other.gameObject, false);
-    // }
+        DealWithFoodOutline(other.gameObject, false);
+    }
 
-    // private void DealWithHealthUI(GameObject entity, bool shouldShowHealthUI)
-    // {
-    //    bool hasHealthViewModel = entity.TryGetComponent(out HealthViewModel healthViewModel);
-    //    if (!hasHealthViewModel) return;
-
-
-    //    healthViewModel.AdjustHealthBarVisibility(shouldShowHealthUI);
-    // }
+    private void DealWithFoodOutline(GameObject other, bool shouldOutline)
+    {
+        if (other.TryGetComponent(out OutlineManager outlineManager) && other.TryGetComponent(out SuckableService _))
+        {
+            outlineManager.ShouldOutline(shouldOutline);
+        }
+    }
 }

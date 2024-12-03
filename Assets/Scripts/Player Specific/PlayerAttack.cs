@@ -267,20 +267,18 @@ public class PlayerAttack : NetworkBehaviour
             Vector3 directionToTarget = hitColliders[0].transform.position - playerVisualPosition;
             float angleToTarget = Vector3.Angle(-playerManager.thirdPersonController.playerVisual.transform.forward,
                 directionToTarget);
-
-            if (hitColliders[0].TryGetComponent(out _currentEnemyOutline))
-            {
-                _currentEnemyOutline.ShouldOutline(true);
-            }
-
-            if (hitColliders[0].TryGetComponent(out SuckableService _)) return;
-
+            
             HealthManager health = hitColliders[0].GetComponentInChildren<HealthManager>();
 
             // Check if the target is within the attraction angle
             if (angleToTarget <= attractionAngle && health && !health.notAbleToGetBitten)
             {
                 SetFoodObject(hitColliders[0].transform.gameObject, Color.yellow, false);
+                
+                if (hitColliders[0].TryGetComponent(out _currentEnemyOutline))
+                {
+                    _currentEnemyOutline.ShouldOutline(true);
+                }
 
                 if (!hitColliders[0].TryGetComponent(out _currentEnemyHealthBar))
                 {
@@ -316,12 +314,9 @@ public class PlayerAttack : NetworkBehaviour
 
         if (deactivateEnemyUI)
         {
-            if (_currentEnemyOutline)
-            {
+            if(_currentEnemyOutline)
                 _currentEnemyOutline.ShouldOutline(false);
-                _currentEnemyOutline = null;
-            }
-
+            
             if (_currentEnemyHealthBar)
             {
                 _currentEnemyHealthBar.AdjustHealthBarVisibility(false);
