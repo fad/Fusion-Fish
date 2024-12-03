@@ -139,8 +139,9 @@ public class HealthManager : NetworkBehaviour, IHealthManager, ISuckable
 
     public void Damage(float amount)
     {
-        if (notAbleToGetBitten) return;
+        if (!_hasSpawned) return;
 
+        if (notAbleToGetBitten) return;
         ReceiveDamageRpc(amount);
         CheckDeath();
     }
