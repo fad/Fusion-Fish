@@ -285,7 +285,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDead: 0
-  showVignette: 0
   showDamageVignetteTime: 0.6
   hideDamageVignetteTime: 0.2
   _NetworkedPermanentHealth: 0
@@ -302,17 +301,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f8880170c48b1f44aaef687b67ca3f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fishData: {fileID: 0}
   maxHealth: 100
   recoveryHealthInSecond: 1
   timeToStartRecoveryHealth: 5
   _NetworkedHealth: 100
-  spawnGibs: 0
   currentHealth: 0
   notAbleToGetBitten: 0
-  experienceValue: 100
   maxSlowDownSpeedTime: 2
   slowDownSpeedTime: 0
   slowDown: 0
+  grasped: 0
+  maxGraspedTime: 1
+  graspedTime: 0
 --- !u!114 &-2164658129637747517
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -581,10 +582,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0
-  m_Height: 1
+  m_Radius: 0.24
+  m_Height: 0.88
   m_Direction: 2
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0, z: 0.15}
 --- !u!114 &7352476292597749749
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -622,10 +623,8 @@ MonoBehaviour:
   gibPrefab: {fileID: 3993952820748017500, guid: b9dad96a76a34d346ae8989e61852300,
     type: 3}
   gibSpawnCount: 3
-  gibsExperienceValue: 100
   spawnGibs: 0
-  isShrimp: 0
-  isStarFish: 0
+  fishData: {fileID: 0}
 --- !u!114 &6222487964510190762
 MonoBehaviour:
   m_ObjectHideFlags: 0
