@@ -239,12 +239,14 @@ public class ChaseStrategy : StaminaMoveStrategy
 
         CheckStamina();
         RotateToPrey();
+        
+        float sqrMagnitude = (Entity.position - _preyTransform.position).sqrMagnitude;
 
-        if ((Entity.position - _preyTransform.position).sqrMagnitude <= _attackRange * _attackRange)
+        if (sqrMagnitude <= _attackRange * _attackRange)
         {
             _attackManager.Attack(_attackValue, _preyTransform);
             
-            if((Entity.position - _preyTransform.position).sqrMagnitude > .25f)
+            if(sqrMagnitude > .25f)
             {
                 Vector3 directionToPrey = _preyTransform.position - Entity.position;
                 Vector3 forwardDirection = directionToPrey.normalized * (ForwardModifier * (Speed * Time.deltaTime));
