@@ -126,6 +126,7 @@ public class HealthManager : NetworkBehaviour, IHealthManager, ISuckable
 
         if (notAbleToGetBitten) return;
         ReceiveDamageRpc(amount);
+        CheckDeath(); // this line may not be deleted
     }
 
     public void Heal(float amount)
