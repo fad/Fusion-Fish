@@ -11,6 +11,7 @@ public class PlayerManager : NetworkBehaviour
     [HideInInspector] public LevelUp levelUp;
     [HideInInspector] public PlayerHealth playerHealth;
     [HideInInspector] public SatietyManager satietyManager;
+    [HideInInspector] public SlowDownManager slowDownManager;
     [SerializeField] public PlayerAttack playerAttack;
     [HideInInspector] public NetworkRunner hostPlayerRunner;
 
@@ -24,6 +25,7 @@ public class PlayerManager : NetworkBehaviour
         levelUp = GetComponent<LevelUp>();
         playerHealth = GetComponent<PlayerHealth>();
         satietyManager = GetComponent<SatietyManager>();
+        slowDownManager = GetComponent<SlowDownManager>();
         CheckLevelUp();
     }
     

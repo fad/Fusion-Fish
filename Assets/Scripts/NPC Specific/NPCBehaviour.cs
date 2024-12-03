@@ -188,8 +188,8 @@ public class NPCBehaviour : NetworkBehaviour
         int slowdown  = 1;
         if (TryGetComponent<HealthManager>(out var health))
         {
-            if(health.slowDown)
-                slowdown = 2;
+            // if(health.slowDown)
+            //     slowdown = 2;
             if(health.grasped)
                 slowdown = 10;
         }

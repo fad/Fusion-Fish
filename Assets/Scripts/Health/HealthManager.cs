@@ -28,17 +28,8 @@ public class HealthManager : NetworkBehaviour, IHealthManager, ISuckable
 
     public bool notAbleToGetBitten;
 
-    [Header("SlowDown")] // TODO: Break this up in own class
-    [SerializeField]
-    public float maxSlowDownSpeedTime = 5;
-
-    [HideInInspector]
-    public float slowDownSpeedTime;
-
-    [HideInInspector]
-    public bool slowDown;
-
     private IHealthUtility _healthUtility;
+    private SlowDownManager _slowDownManager;
 
     [HideInInspector] public bool grasped;
     [HideInInspector] public float maxGraspedTime = 1;
@@ -62,6 +53,7 @@ public class HealthManager : NetworkBehaviour, IHealthManager, ISuckable
     public override void Spawned()
     {
         if (_healthUtility == null) TryGetComponent(out _healthUtility);
+        if (!_slowDownManager) TryGetComponent(out _slowDownManager);
         
         _changeDetector = GetChangeDetector(ChangeDetector.Source.SimulationState);
 
@@ -72,7 +64,7 @@ public class HealthManager : NetworkBehaviour, IHealthManager, ISuckable
     {
         NetworkedHealth = maxHealth;
         currentHealth = NetworkedHealth;
-        slowDownSpeedTime = maxSlowDownSpeedTime;
+        _slowDownManager?.SlowDown();
         _hasSpawned = true;
     }
 
@@ -88,15 +80,6 @@ public class HealthManager : NetworkBehaviour, IHealthManager, ISuckable
 
     private void Update()
     {
-        if (slowDown)
-        {
-            slowDownSpeedTime -= Time.deltaTime;
-            if (slowDownSpeedTime <= 0)
-            {
-                slowDown = false;
-            }
-        }
-
         if (grasped)
         {
             graspedTime -= Time.deltaTime;
@@ -143,7 +126,6 @@ public class HealthManager : NetworkBehaviour, IHealthManager, ISuckable
 
         if (notAbleToGetBitten) return;
         ReceiveDamageRpc(amount);
-        CheckDeath();
     }
 
     public void Heal(float amount)

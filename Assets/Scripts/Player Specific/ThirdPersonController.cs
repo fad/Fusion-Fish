@@ -345,7 +345,7 @@ namespace StarterAssets
 
             var moveDistance = speed * Time.deltaTime;
 
-            if (playerManager.healthManager.slowDown)
+            if (playerManager.slowDownManager.CurrentlySlowedDown)
             {
                 moveDistance /= 2;
             }
