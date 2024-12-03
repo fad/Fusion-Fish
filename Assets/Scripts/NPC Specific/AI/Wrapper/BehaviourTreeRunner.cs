@@ -128,18 +128,6 @@ public class BehaviourTreeRunner : NetworkBehaviour, INPC, IInitialisable
         if (_healthManager is null)
             throw new NullReferenceException("<color=#9b59b6>HealthManager</color> is not found in " + gameObject.name);
         
-        Initialized = true;
-        FishDataName = fishDataName;
-    }
-
-    // TODO: Possibly cache this to only create it once and use it for all fish of the same type
-    public override void Spawned()
-    {
-        if (!fishData)
-        {
-            fishData = FishSpawnHandler.Instance.FishDataNameDictionary[FishDataName];
-        }
-
         if (!_animator)
         {
             _animator = GetComponentInChildren<Animator>();
