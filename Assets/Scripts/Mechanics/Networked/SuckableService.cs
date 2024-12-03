@@ -23,6 +23,7 @@ public class SuckableService : NetworkBehaviour, ISuckable
         SameXPValueRpc(xp);
     }
 
+    // BUG: This throws a InvalidOperationException: InvalidOperationException: Behaviour not initialized: Object not set.
     [Rpc(RpcSources.All, RpcTargets.StateAuthority)]
     private void DestroySuckableRpc()
     {

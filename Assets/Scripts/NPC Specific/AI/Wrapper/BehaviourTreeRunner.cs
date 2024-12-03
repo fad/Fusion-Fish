@@ -154,7 +154,7 @@ public class BehaviourTreeRunner : NetworkBehaviour, INPC, IInitialisable
                 .WithResetThreatAction(ResetFleeBehaviour)
                 .WithSafeDistance(fishData.SafeDistance)
                 .WithStaminaManager(_staminaManager)
-                .WithHealthManager(_healthManager)
+                .WithGraspable(_healthManager)
                 .WithForbiddenAreaCheck(IsInsideForbiddenArea)
                 .WithUseForward(true)
                 .WithSpeedChangeCallback(SetAnimatorMoveSpeed)

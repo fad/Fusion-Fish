@@ -190,7 +190,7 @@ public class NPCBehaviour : NetworkBehaviour
         {
             // if(health.slowDown)
             //     slowdown = 2;
-            if(health.grasped)
+            if(health.IsGrasped)
                 slowdown = 10;
         }
 

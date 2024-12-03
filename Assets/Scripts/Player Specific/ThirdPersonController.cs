@@ -362,7 +362,7 @@ namespace StarterAssets
             
                 if (hasVCam)
                 {
-                    if (!playerManager.healthManager.grasped && !Physics.Raycast(playerVisual.transform.position, Direction, checkObstacleDistance, obstacleLayer))
+                    if (!playerManager.healthManager.IsGrasped && !Physics.Raycast(playerVisual.transform.position, Direction, checkObstacleDistance, obstacleLayer))
                         rb.AddForce(Direction, ForceMode.Impulse);
 
                     AnimationSpeed = isBoosting ? boostAnimSpeed : defaultAnimSpeed;
@@ -402,7 +402,7 @@ namespace StarterAssets
         [Rpc(RpcSources.All, RpcTargets.All)]
         public void GraspedRpc(NetworkTransform predator )
         {
-            if(playerManager.healthManager.grasped)
+            if(playerManager.healthManager.IsGrasped)
                 StartAttractToEntity(predator.transform);
         } 
         public void StartAttractToEntity(Transform prey)

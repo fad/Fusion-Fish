@@ -2,7 +2,7 @@ using System;
 using Fusion;
 using UnityEngine;
 
-public class HealthManager : NetworkBehaviour, IHealthManager, ISuckable
+public class HealthManager : NetworkBehaviour, IHealthManager, ISuckable, IGraspable
 {
     [Header("Data Container")]
     [SerializeField]
@@ -31,7 +31,7 @@ public class HealthManager : NetworkBehaviour, IHealthManager, ISuckable
     private IHealthUtility _healthUtility;
     private SlowDownManager _slowDownManager;
 
-    [HideInInspector] public bool grasped;
+    private bool _grasped;
     [HideInInspector] public float maxGraspedTime = 1;
     [HideInInspector] public float graspedTime;
     
@@ -44,6 +44,8 @@ public class HealthManager : NetworkBehaviour, IHealthManager, ISuckable
     public bool Died => _died;
     public float MaxHealth => maxHealth;
     public float NeededSuckingPower => maxHealth;
+    
+    public bool IsGrasped => _grasped;
     
     private ChangeDetector _changeDetector;
 
@@ -80,12 +82,12 @@ public class HealthManager : NetworkBehaviour, IHealthManager, ISuckable
 
     private void Update()
     {
-        if (grasped)
+        if (_grasped)
         {
             graspedTime -= Time.deltaTime;
             if (graspedTime <= 0)
             {
-                grasped = false;
+                _grasped = false;
             }
         }
     }
@@ -148,7 +150,7 @@ public class HealthManager : NetworkBehaviour, IHealthManager, ISuckable
     {
         if(damage >= NetworkedHealth * 0.2f)
         {
-            grasped = true;
+            _grasped = true;
             graspedTime = maxGraspedTime;
         }
         NetworkedHealth -= damage;

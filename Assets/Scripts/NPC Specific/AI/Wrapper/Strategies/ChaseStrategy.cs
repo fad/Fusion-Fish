@@ -243,7 +243,8 @@ public class ChaseStrategy : StaminaMoveStrategy
         if ((Entity.position - _preyTransform.position).sqrMagnitude <= _attackRange * _attackRange)
         {
             _attackManager.Attack(_attackValue, _preyTransform);
-            if(Vector3.Distance(Entity.position , _preyTransform.position)>0.5f)
+            
+            if((Entity.position - _preyTransform.position).sqrMagnitude > .25f)
             {
                 Vector3 directionToPrey = _preyTransform.position - Entity.position;
                 Vector3 forwardDirection = directionToPrey.normalized * (ForwardModifier * (Speed * Time.deltaTime));

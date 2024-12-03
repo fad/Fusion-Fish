@@ -25,7 +25,7 @@ public class FleeStrategy : StaminaMoveStrategy
         public float ObstacleAvoidanceDistance;
         public Func<Transform> PredatorTransformGetter;
         public IStaminaManager StaminaManager;
-        public HealthManager HealthManager;
+        public IGraspable Graspable;
         public Action ResetThreatAction;
         public float SafeDistance;
         public short StaminaThreshold;
@@ -92,9 +92,9 @@ public class FleeStrategy : StaminaMoveStrategy
             return this;
         }
 
-        public Builder WithHealthManager(HealthManager healthManager)
+        public Builder WithGraspable(IGraspable graspable)
         {
-            HealthManager = healthManager;
+            Graspable = graspable;
             return this;
         }
 
@@ -141,7 +141,7 @@ public class FleeStrategy : StaminaMoveStrategy
         builder.ObstacleAvoidanceDistance,
         builder.ForbiddenAreaCheck,
         builder.StaminaManager,
-        builder.HealthManager,
+        builder.Graspable,
         builder.StaminaThreshold,
         builder.NormalSpeed,
         builder.FastSpeed,
@@ -166,7 +166,7 @@ public class FleeStrategy : StaminaMoveStrategy
     {
         GetPredatorTransform();
 
-        if (Vector3.Distance(Entity.position, _predatorTransform.position) >= _safeDistance)
+        if ((Entity.position - _predatorTransform.position).sqrMagnitude >= _safeDistance * _safeDistance)
         {
             _resetThreatAction();
             return Status.Success;
@@ -175,7 +175,7 @@ public class FleeStrategy : StaminaMoveStrategy
         RotateToOppositeDirection();
         AvoidObstacles();
 
-        if (healthManager.grasped)
+        if (Graspable.IsGrasped)
         {
             AttractionToPredator();
             return Status.Running;
@@ -198,6 +198,7 @@ public class FleeStrategy : StaminaMoveStrategy
     {
         _predatorTransform ??= _predatorTransformGetter();
     }
+    
     /// <summary>
     /// Attraction to the predator if the entity is caught.
     /// </summary>
@@ -206,7 +207,7 @@ public class FleeStrategy : StaminaMoveStrategy
         Vector3 directionToPredator = _predatorTransform.position - Entity.position;
         Vector3 newEntityDirection = directionToPredator.normalized * (ForwardModifier * (Speed * Time.deltaTime));
         
-        if (Vector3.Distance(Entity.position, _predatorTransform.position) >= 1)
+        if ((Entity.position - _predatorTransform.position).sqrMagnitude >= 1f)
             Move(newEntityDirection);
     }
     /// <summary>
