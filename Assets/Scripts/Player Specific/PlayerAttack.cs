@@ -76,7 +76,7 @@ public class PlayerAttack : NetworkBehaviour
     private Image _biteUpperImage;
     private Image _biteLowerImage;
 
-    private Outline _currentEnemyOutline;
+    private OutlineManager _currentEnemyOutline;
     private HealthViewModel _currentEnemyHealthBar;
     
     private static readonly int PrepareAttack = Animator.StringToHash("prepareAttack");
@@ -266,26 +266,20 @@ public class PlayerAttack : NetworkBehaviour
             Vector3 directionToTarget = hitColliders[0].transform.position - playerVisualPosition;
             float angleToTarget = Vector3.Angle(-playerManager.thirdPersonController.playerVisual.transform.forward,
                 directionToTarget);
+            
+            if (hitColliders[0].TryGetComponent(out _currentEnemyOutline))
+            {
+                _currentEnemyOutline.ShouldOutline(true);
+            }
+            
             HealthManager health = hitColliders[0].GetComponentInChildren<HealthManager>();
-            
-            if (!hitColliders[0].TryGetComponent<Outline>(out _currentEnemyOutline))
-                _currentEnemyOutline = hitColliders[0].GetComponentInChildren<Outline>();
-            
-            if (_currentEnemyOutline)
-                _currentEnemyOutline.enabled = true;
 
             // Check if the target is within the attraction angle
             if (angleToTarget <= attractionAngle && health &&!health.notAbleToGetBitten)
             {
                 SetFoodObject(hitColliders[0].transform.gameObject, Color.yellow, false);
 
-                if (!hitColliders[0].TryGetComponent<Outline>(out _currentEnemyOutline))
-                {
-                    _currentEnemyOutline = hitColliders[0].GetComponentInChildren<Outline>();
-                    _currentEnemyOutline.enabled = true;
-                }
-
-                if (!hitColliders[0].TryGetComponent<HealthViewModel>(out _currentEnemyHealthBar))
+                if (!hitColliders[0].TryGetComponent(out _currentEnemyHealthBar))
                 {
                     _currentEnemyHealthBar = hitColliders[0].GetComponentInChildren<HealthViewModel>();
 
@@ -303,18 +297,25 @@ public class PlayerAttack : NetworkBehaviour
             SetFoodObject(null, Color.white, true);
         }
     }
-
-    private void SetFoodObject(GameObject food, Color color, bool DeactivateEnemyUI)
+    
+    
+    /// <summary>
+    /// Sets the food object and updates the UI elements accordingly.
+    /// </summary>
+    /// <param name="food">The food GameObject to set.</param>
+    /// <param name="color">The color to apply to the bite images.</param>
+    /// <param name="deactivateEnemyUI">If true, deactivates the enemy UI elements.</param>
+    private void SetFoodObject(GameObject food, Color color, bool deactivateEnemyUI)
     {
         foodObject = food;
         _biteUpperImage.color = color;
         _biteLowerImage.color = color;
 
-        if (DeactivateEnemyUI)
+        if (deactivateEnemyUI)
         {
-            if (_currentEnemyOutline != null)
+            if (_currentEnemyOutline)
             {
-                _currentEnemyOutline.enabled = false;
+                _currentEnemyOutline.ShouldOutline(false);
                 _currentEnemyOutline = null;
             }
 

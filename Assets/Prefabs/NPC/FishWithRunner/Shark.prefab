@@ -165,7 +165,6 @@ MonoBehaviour:
     m_Bits: 704
   fishData: {fileID: 11400000, guid: 0c6308a7049671a42abceaddee436b9c, type: 2}
   root: {fileID: 4451768028373992673}
-  _OtherNPCs: []
 --- !u!1001 &3555741246099918593
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -174,6 +173,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -2513658585567508546, guid: 3f8486498552be144992af32f4d2779b,
+        type: 3}
+      propertyPath: objectOutline
+      value: 
+      objectReference: {fileID: 6504890970194737656}
     - target: {fileID: 909547618975206368, guid: 3f8486498552be144992af32f4d2779b,
         type: 3}
       propertyPath: m_LocalPosition.x

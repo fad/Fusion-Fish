@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 5124316588462460406}
   - component: {fileID: 1943943065113725832}
   - component: {fileID: 8821568059870424906}
+  - component: {fileID: -2513658585567508546}
   m_Layer: 6
   m_Name: Fish
   m_TagString: Untagged
@@ -147,17 +148,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f8880170c48b1f44aaef687b67ca3f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fishData: {fileID: 0}
   maxHealth: 0
   recoveryHealthInSecond: 10
   timeToStartRecoveryHealth: 3
   _NetworkedHealth: 0
-  spawnGibs: 0
   currentHealth: 0
   notAbleToGetBitten: 0
-  experienceValue: 100
   maxSlowDownSpeedTime: 5
   slowDownSpeedTime: 0
   slowDown: 0
+  grasped: 0
+  maxGraspedTime: 1
+  graspedTime: 0
 --- !u!114 &1943943065113725832
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -170,8 +173,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e21121d4f559c1248aa8f7d3ce4320ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isShrimp: 0
-  isStarFish: 0
 --- !u!114 &8821568059870424906
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -186,3 +187,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthModel: {fileID: 0}
   healthSlider: {fileID: 0}
+--- !u!114 &-2513658585567508546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1443812496687094691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f404b18c2b1b1642b892d982da4fdfb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectOutline: {fileID: 0}
