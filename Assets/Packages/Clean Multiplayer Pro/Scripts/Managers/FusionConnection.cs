@@ -14,6 +14,7 @@ using StarterAssets;
 using Fusion.Photon.Realtime;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
+using System.Linq;
 
 namespace AvocadoShark
 {
@@ -36,8 +37,8 @@ namespace AvocadoShark
 
         public bool hasEnteredGameScene = false;
 
-        [Header("Player 1")] [SerializeField] public GameObject playerPrefabFirst;
-        [Header("Player 2")] [SerializeField] public GameObject playerPrefabSecond;
+        [Header("Player 1")][SerializeField] public GameObject playerPrefabFirst;
+        [Header("Player 2")][SerializeField] public GameObject playerPrefabSecond;
 
         [Header("Name Entry")] public GameObject mainObject;
         public Button submitButton;
@@ -53,7 +54,8 @@ namespace AvocadoShark
         public TextMeshProUGUI NoRoomsText;
         public TMP_InputField room_search;
 
-        [Header("Room List Refresh (s)")] [SerializeField]
+        [Header("Room List Refresh (s)")]
+        [SerializeField]
         private float refreshInterval = 2f;
 
         private FusionVoiceClient _fvc;
@@ -64,12 +66,12 @@ namespace AvocadoShark
 
         [Header("Loading Screen")] public PopUp popup;
 
-        [Header("UI")] [SerializeField] private MenuCanvas menuCanvas;
+        [Header("UI")][SerializeField] private MenuCanvas menuCanvas;
 
         private bool initialRoomListPopulated = false;
         private List<SessionInfo> _sessionList = new List<SessionInfo>();
         private List<RoomEntry> _roomEntryList = new List<RoomEntry>();
-        public int sceneNumber{get; private set;}
+        public int sceneNumber { get; private set; }
         [HideInInspector] public bool isConnected = false;
         [HideInInspector] public string _playerName = null;
         [HideInInspector] public int nRooms = 0;
@@ -91,7 +93,7 @@ namespace AvocadoShark
 
             room_search.onValueChanged.AddListener(OnSearchTextValueChange);
 #if UNITY_2022_3_OR_NEWER
-        Application.targetFrameRate = (int)Screen.currentResolution.refreshRateRatio.value;
+            Application.targetFrameRate = (int)Screen.currentResolution.refreshRateRatio.value;
 #else
             Application.targetFrameRate = Screen.currentResolution.refreshRate;
 #endif
@@ -212,18 +214,23 @@ namespace AvocadoShark
 
             //it counts +2 for the scene index because there are the menu & game scene that need to be excluded
             sceneNumber = environmentDropdown.value + 2;
-            
+
             int maxPlayers = 10;
             if (IsRoomNameValid())
             {
-                sessionName = menuCanvas.GetRoomName();
+                do
+                {
+                    sessionName = menuCanvas.GetRoomName() + "-" + Random.Range(1000, 9999);
+                }
+                while(_sessionList.FirstOrDefault(session => session.Name == sessionName));
+
                 PlayerPrefs.SetString(RoomNamePlayerPrefs, menuCanvas.nameInputField.text);
                 //sessionPassword = menuCanvas.GetPassword();
                 //maxPlayers = menuCanvas.GetMaxPlayers();
             }
             else
             {
-                int randomInt = UnityEngine.Random.Range(1000, 9999);
+                int randomInt = Random.Range(1000, 9999);
                 //sessionPassword = menuCanvas.GetPassword();
                 //maxPlayers = menuCanvas.GetMaxPlayers();
                 sessionName = "Room-" + randomInt;
@@ -241,9 +248,9 @@ namespace AvocadoShark
             else
             {
             }
-            
+
             //If password is enabled, make this line of code be executed in the else statement above
-            JoinRoom(sessionName, maxPlayers,string.Empty);
+            JoinRoom(sessionName, maxPlayers, string.Empty);
 
             StopCoroutine(AutoRefreshRoomList());
         }
@@ -299,7 +306,7 @@ namespace AvocadoShark
                 }
 
                 RoomEntry entryScript = Instantiate(roomEntryPrefab, content);
-                entryScript.Init(session,this);
+                entryScript.Init(session, this);
                 _roomEntryList.Add(entryScript);
             }
 
@@ -414,7 +421,7 @@ namespace AvocadoShark
         }
 
         #region INetworkCallbacks
-        
+
         public void OnConnectedToServer(NetworkRunner runner)
         {
             Debug.Log("OnConnectedToServer");
@@ -483,16 +490,16 @@ namespace AvocadoShark
             {
                 Destroy(gameObject);
             }
-            
+
             Debug.Log("Scene Load Done.");
-            if(hasEnteredGameScene)
+            if (hasEnteredGameScene)
                 return;
             hasEnteredGameScene = true;
-            
+
             if (Runner.IsSceneAuthority)
             {
                 Runner.LoadScene(SceneRef.FromIndex(sceneNumber), LoadSceneMode.Additive);
-                
+
                 RenderSettings.skybox = (sceneNumber) switch
                 {
                     2 => oceanSky,
@@ -504,9 +511,9 @@ namespace AvocadoShark
             if (runner.GetPlayerObject(runner.LocalPlayer) != null)
                 return;
             var playerPrefab = PlayerPrefs.GetInt("ChosenCharacter") == 0 ? playerPrefabSecond : playerPrefabFirst;
-            
+
             sceneNumber = runner.SessionInfo.Properties["sceneNumber"];
-            if(!Runner.IsSceneAuthority)
+            if (!Runner.IsSceneAuthority)
             {
                 RenderSettings.skybox = sceneNumber switch
                 {
@@ -515,14 +522,14 @@ namespace AvocadoShark
                     _ => RenderSettings.skybox
                 };
             }
-            
+
             List<SpawnPoint> currentSceneSpawnPoints = spawnPointsData.GetSpawnPoints(sceneNumber);
 
             var spawnPoint = Random.Range(0, currentSceneSpawnPoints.Count);
             var location = currentSceneSpawnPoints[spawnPoint].location;
             var rotation = currentSceneSpawnPoints[spawnPoint].rotation;
-            
-            NetworkObject playerObject = runner.Spawn(playerPrefab,location, rotation);
+
+            NetworkObject playerObject = runner.Spawn(playerPrefab, location, rotation);
             var playerTransform = playerObject.transform;
             playerTransform.position = location;
             playerTransform.rotation = rotation;
@@ -532,7 +539,7 @@ namespace AvocadoShark
 
 
             runner.SetPlayerObject(runner.LocalPlayer, playerObject);
-            
+
             //SessionPlayers.instance.AddPlayer(runner.LocalPlayer);
         }
 
@@ -558,7 +565,7 @@ namespace AvocadoShark
 
         public void UpdateCurrentEntryBeingEdited(SessionInfo session)
         {
-            CurrentEntryBeingEdited.UpdateEntry(session,this);
+            CurrentEntryBeingEdited.UpdateEntry(session, this);
         }
         public void SetCurrentEntryBeingEdited(RoomEntry roomEntry)
         {
