@@ -12,9 +12,6 @@ GameObject:
   - component: {fileID: 5176357301769495334}
   - component: {fileID: 7042346548101621276}
   - component: {fileID: 9093912718778848599}
-  - component: {fileID: 2251787338453178906}
-  - component: {fileID: 4276068289166627214}
-  - component: {fileID: 7725030089023195739}
   - component: {fileID: 6419011312389179594}
   - component: {fileID: 3557233515773472043}
   - component: {fileID: -6645687050782172566}
@@ -58,9 +55,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotationSpeed: 1
   defaultSwimSpeed: 0.1
-  aaa: {fileID: -6505894716318477620, guid: b9dad96a76a34d346ae8989e61852300, type: 3}
   animator: {fileID: 5295291242694454168}
-  healthManager: {fileID: 2251787338453178906}
+  healthManager: {fileID: 0}
   groundLayer:
     serializedVersion: 2
     m_Bits: 1024
@@ -99,63 +95,9 @@ MonoBehaviour:
   NestedObjects: []
   NetworkedBehaviours:
   - {fileID: 7042346548101621276}
-  - {fileID: 2251787338453178906}
-  - {fileID: 4276068289166627214}
-  - {fileID: 7725030089023195739}
   - {fileID: 6419011312389179594}
   - {fileID: 3557233515773472043}
   - {fileID: -6645687050782172566}
---- !u!114 &2251787338453178906
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3074263614759568986}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f8880170c48b1f44aaef687b67ca3f5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fishData: {fileID: 0}
-  maxHealth: 5
-  recoveryHealthInSecond: 0.2
-  timeToStartRecoveryHealth: 5
-  _NetworkedHealth: 5
-  currentHealth: 0
-  notAbleToGetBitten: 0
-  maxSlowDownSpeedTime: 5
-  slowDownSpeedTime: 0
-  slowDown: 0
-  grasped: 0
-  maxGraspedTime: 1
-  graspedTime: 0
---- !u!114 &4276068289166627214
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3074263614759568986}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e21121d4f559c1248aa8f7d3ce4320ac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &7725030089023195739
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3074263614759568986}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b50d21f750df344eb19913dadddbd49, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthModel: {fileID: 2251787338453178906}
-  healthSlider: {fileID: 5101187421502881199}
 --- !u!114 &6419011312389179594
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -829,18 +771,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 759cfb814fac2fc4c9d362c4d599e8b2, type: 3}
---- !u!114 &5101187421502881199 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8255698191404723839, guid: 759cfb814fac2fc4c9d362c4d599e8b2,
-    type: 3}
-  m_PrefabInstance: {fileID: 3772098033368290256}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &5497610819034540611 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8652049046924966291, guid: 759cfb814fac2fc4c9d362c4d599e8b2,

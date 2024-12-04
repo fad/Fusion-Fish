@@ -25,28 +25,28 @@ public class NonSwimmingNPCBechavior : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         StartCoroutine(UpdateLookDirection());
-        healthManager.OnHealthChanged += OnHealthChanged;
+        //healthManager.OnHealthChanged += OnHealthChanged;
     }
 
     private void OnDisable()
     {
-        healthManager.OnHealthChanged -= OnHealthChanged;
+        //healthManager.OnHealthChanged -= OnHealthChanged;
     }
 
-    public void OnHealthChanged(float health)
-    {
-        if (health != healthManager.maxHealth)
-        {
-            OnHide = true;
-            animator.SetBool("hide", true);
-            animator.SetBool("walk", false);
-        }
-        else 
-        { 
-            OnHide = false;
-            animator.SetBool("hide", false);
-        }
-    }
+    // public void OnHealthChanged(float health)
+    // {
+    //     if (health != healthManager.maxHealth)
+    //     {
+    //         OnHide = true;
+    //         animator.SetBool("hide", true);
+    //         animator.SetBool("walk", false);
+    //     }
+    //     else 
+    //     { 
+    //         OnHide = false;
+    //         animator.SetBool("hide", false);
+    //     }
+    // }
     IEnumerator UpdateLookDirection()
     {
         while (true)
