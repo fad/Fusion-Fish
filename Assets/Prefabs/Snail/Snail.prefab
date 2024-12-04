@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 7725030089023195739}
   - component: {fileID: 6419011312389179594}
   - component: {fileID: 3557233515773472043}
+  - component: {fileID: -6645687050782172566}
   - component: {fileID: 7515034531768731648}
   - component: {fileID: 4239358611535118213}
   m_Layer: 6
@@ -57,6 +58,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotationSpeed: 1
   defaultSwimSpeed: 0.1
+  aaa: {fileID: -6505894716318477620, guid: b9dad96a76a34d346ae8989e61852300, type: 3}
   animator: {fileID: 5295291242694454168}
   healthManager: {fileID: 2251787338453178906}
   groundLayer:
@@ -77,10 +79,8 @@ MonoBehaviour:
   gibPrefab: {fileID: 3993952820748017500, guid: b9dad96a76a34d346ae8989e61852300,
     type: 3}
   gibSpawnCount: 1
-  gibsExperienceValue: 50
   spawnGibs: 0
-  isShrimp: 1
-  isStarFish: 0
+  fishData: {fileID: 0}
 --- !u!114 &9093912718778848599
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -104,6 +104,7 @@ MonoBehaviour:
   - {fileID: 7725030089023195739}
   - {fileID: 6419011312389179594}
   - {fileID: 3557233515773472043}
+  - {fileID: -6645687050782172566}
 --- !u!114 &2251787338453178906
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -116,17 +117,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f8880170c48b1f44aaef687b67ca3f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fishData: {fileID: 0}
   maxHealth: 5
   recoveryHealthInSecond: 0.2
   timeToStartRecoveryHealth: 5
   _NetworkedHealth: 5
-  spawnGibs: 0
   currentHealth: 0
   notAbleToGetBitten: 0
-  experienceValue: 50
   maxSlowDownSpeedTime: 5
   slowDownSpeedTime: 0
   slowDown: 0
+  grasped: 0
+  maxGraspedTime: 1
+  graspedTime: 0
 --- !u!114 &4276068289166627214
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -139,8 +142,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e21121d4f559c1248aa8f7d3ce4320ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isShrimp: 0
-  isStarFish: 0
 --- !u!114 &7725030089023195739
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -179,6 +180,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0822fda13ddf1441aa1d15688d1ed64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-6645687050782172566
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3074263614759568986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 282f68519a4e47c592172207b6583680, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  experienceValue: 100
+  neededSuckingPower: 1
 --- !u!54 &7515034531768731648
 Rigidbody:
   m_ObjectHideFlags: 0

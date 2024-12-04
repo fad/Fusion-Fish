@@ -42,6 +42,8 @@ public class PlayerAttack : NetworkBehaviour
     private float _currentAttackTime;
     private bool _preparedAttack;
     private bool _sucksFood;
+    float suctionInterval = 0.3f;
+    float currentSuctionInterval = 0;
     private int _attackCount;
     private int _lastAttackCount;
 
@@ -122,21 +124,28 @@ public class PlayerAttack : NetworkBehaviour
                 suckInParticles.Play();
             AudioManager.Instance.PlaySoundWithRandomPitchAtPosition("suck", playerVisualPosition);
 
-            Collider[] hitColliders = new Collider[5];
+            currentSuctionInterval -= Time.deltaTime;
 
-            int hits = Physics.OverlapSphereNonAlloc(playerVisualPosition, attackRange, hitColliders, foodLayerMask);
-
-            for (int i = 0; i < hits; i++)
+            if (currentSuctionInterval <= 0)
             {
-                if (hitColliders[i].TryGetComponent(out ISuckable suckable) &&
-                    suckable.NeededSuckingPower <= suckInDamage)
-                {
-                    if (TryGetComponent<PlayerHealth>(out var playerHealth) && playerHealth.NetworkedPermanentHealth)
-                        return;
+                Collider[] hitColliders = new Collider[5];
 
-                    CalculateDirectionAndAddForceTowardsPlayer(hitColliders[i], out Vector3 directionToTarget);
-                    ApplyExperienceAndResetFoodObject(directionToTarget, suckable);
+                int hits = Physics.OverlapSphereNonAlloc(playerVisualPosition, attackRange, hitColliders, foodLayerMask);
+
+                for (int i = 0; i < hits; i++)
+                {
+                    if (hitColliders[i].TryGetComponent(out ISuckable suckable) &&
+                        suckable.NeededSuckingPower <= suckInDamage)
+                    {
+                        if (TryGetComponent<PlayerHealth>(out var playerHealth) && playerHealth.NetworkedPermanentHealth)
+                            return;
+
+                        CalculateDirectionAndAddForceTowardsPlayer(hitColliders[i], out Vector3 directionToTarget);
+                        ApplyExperienceAndResetFoodObject(directionToTarget, suckable);
+                    }
                 }
+
+                currentSuctionInterval = suctionInterval;
             }
         }
         else
@@ -267,14 +276,14 @@ public class PlayerAttack : NetworkBehaviour
             Vector3 directionToTarget = hitColliders[0].transform.position - playerVisualPosition;
             float angleToTarget = Vector3.Angle(-playerManager.thirdPersonController.playerVisual.transform.forward,
                 directionToTarget);
-            
+
             HealthManager health = hitColliders[0].GetComponentInChildren<HealthManager>();
 
             // Check if the target is within the attraction angle
             if (angleToTarget <= attractionAngle && health && !health.notAbleToGetBitten)
             {
                 SetFoodObject(hitColliders[0].transform.gameObject, Color.yellow, false);
-                
+
                 if (hitColliders[0].TryGetComponent(out _currentEnemyOutline))
                 {
                     _currentEnemyOutline.ShouldOutline(true);
@@ -314,9 +323,9 @@ public class PlayerAttack : NetworkBehaviour
 
         if (deactivateEnemyUI)
         {
-            if(_currentEnemyOutline)
+            if (_currentEnemyOutline)
                 _currentEnemyOutline.ShouldOutline(false);
-            
+
             if (_currentEnemyHealthBar)
             {
                 _currentEnemyHealthBar.AdjustHealthBarVisibility(false);

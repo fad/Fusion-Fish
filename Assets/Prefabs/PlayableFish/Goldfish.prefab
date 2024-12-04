@@ -5342,6 +5342,17 @@ PrefabInstance:
       propertyPath: satietyDecreaseRate
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 10622835304475330, guid: 274fa519b44c24e43a28d85dbdddcb30,
+        type: 3}
+      propertyPath: fishData
+      value: 
+      objectReference: {fileID: 11400000, guid: 1724f0690ac686340a9d49e2f66c6cd3,
+        type: 2}
+    - target: {fileID: 10622835304475330, guid: 274fa519b44c24e43a28d85dbdddcb30,
+        type: 3}
+      propertyPath: spawnGibs
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 61442038398986381, guid: 274fa519b44c24e43a28d85dbdddcb30,
         type: 3}
       propertyPath: m_LocalScale.x

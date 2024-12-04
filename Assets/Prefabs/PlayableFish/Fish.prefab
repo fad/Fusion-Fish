@@ -310,7 +310,6 @@ MonoBehaviour:
   _NetworkedHealth: 100
   currentHealth: 0
   notAbleToGetBitten: 0
-  grasped: 0
   maxGraspedTime: 1
   graspedTime: 0
 --- !u!114 &-2164658129637747517
@@ -622,7 +621,7 @@ MonoBehaviour:
   gibPrefab: {fileID: 3993952820748017500, guid: b9dad96a76a34d346ae8989e61852300,
     type: 3}
   gibSpawnCount: 3
-  spawnGibs: 0
+  spawnGibs: 1
   fishData: {fileID: 0}
 --- !u!114 &6222487964510190762
 MonoBehaviour:
