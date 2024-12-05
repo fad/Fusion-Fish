@@ -133,6 +133,7 @@ public class BehaviourTreeRunner : NetworkBehaviour, INPC, IInitialisable
             _animator = GetComponentInChildren<Animator>();
         }
         
+        // TODO: Make fish stick to their area
         
         _behaviourTreeToExecute = new BehaviourTree(gameObject.name);
 
