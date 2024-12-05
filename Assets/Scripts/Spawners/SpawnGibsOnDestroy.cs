@@ -13,7 +13,6 @@ public class SpawnGibsOnDestroy : NetworkBehaviour
     [Header("FishData Settings")]
     [SerializeField]
     private FishData fishData;
-
     public override void Despawned(NetworkRunner runner, bool hasState)
     {
         if (!spawnGibs || !gameObject.scene.isLoaded || !hasState) return;

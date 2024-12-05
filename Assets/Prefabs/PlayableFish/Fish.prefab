@@ -623,6 +623,7 @@ MonoBehaviour:
   gibSpawnCount: 3
   spawnGibs: 1
   fishData: {fileID: 0}
+  debug: 1
 --- !u!114 &6222487964510190762
 MonoBehaviour:
   m_ObjectHideFlags: 0

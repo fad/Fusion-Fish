@@ -5232,10 +5232,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 10622835304475330, guid: 274fa519b44c24e43a28d85dbdddcb30,
         type: 3}
+      propertyPath: debug
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10622835304475330, guid: 274fa519b44c24e43a28d85dbdddcb30,
+        type: 3}
       propertyPath: fishData
       value: 
       objectReference: {fileID: 11400000, guid: aaa032bb997807948879483b73e44a6d,
         type: 2}
+    - target: {fileID: 10622835304475330, guid: 274fa519b44c24e43a28d85dbdddcb30,
+        type: 3}
+      propertyPath: gibPrefab
+      value: 
+      objectReference: {fileID: -6550082182933151621, guid: b9dad96a76a34d346ae8989e61852300,
+        type: 3}
     - target: {fileID: 10622835304475330, guid: 274fa519b44c24e43a28d85dbdddcb30,
         type: 3}
       propertyPath: spawnGibs

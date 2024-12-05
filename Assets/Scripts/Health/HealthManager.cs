@@ -7,8 +7,8 @@ public class HealthManager : NetworkBehaviour, IHealthManager, ISuckable, IGrasp
     [Header("Data Container")]
     [SerializeField]
     private FishData fishData;
-    
-    [Header("Health"),Space(10)]
+
+    [Header("Health"), Space(10)]
     public float maxHealth;
 
     public float recoveryHealthInSecond = 10;
@@ -34,7 +34,7 @@ public class HealthManager : NetworkBehaviour, IHealthManager, ISuckable, IGrasp
     private bool _grasped;
     [HideInInspector] public float maxGraspedTime = 1;
     [HideInInspector] public float graspedTime;
-    
+
     public event Action<float> OnHealthChanged;
     public event Action OnDeath;
 
@@ -44,9 +44,9 @@ public class HealthManager : NetworkBehaviour, IHealthManager, ISuckable, IGrasp
     public bool Died => _died;
     public float MaxHealth => maxHealth;
     public float NeededSuckingPower => maxHealth;
-    
+
     public bool IsGrasped => _grasped;
-    
+
     private ChangeDetector _changeDetector;
 
 
@@ -56,7 +56,7 @@ public class HealthManager : NetworkBehaviour, IHealthManager, ISuckable, IGrasp
     {
         if (_healthUtility == null) TryGetComponent(out _healthUtility);
         if (!_slowDownManager) TryGetComponent(out _slowDownManager);
-        
+
         _changeDetector = GetChangeDetector(ChangeDetector.Source.SimulationState);
 
         Restart();
@@ -64,6 +64,7 @@ public class HealthManager : NetworkBehaviour, IHealthManager, ISuckable, IGrasp
 
     public void Restart()
     {
+        _died = false;
         NetworkedHealth = maxHealth;
         currentHealth = NetworkedHealth;
         _slowDownManager?.SlowDown();
@@ -102,16 +103,16 @@ public class HealthManager : NetworkBehaviour, IHealthManager, ISuckable, IGrasp
             if (NetworkedHealth >= maxHealth)
                 _regeneration = false;
         }
-        
-        foreach(var propertyName in _changeDetector.DetectChanges(this, out var previousBuffer, out var currentBuffer))
+
+        foreach (var propertyName in _changeDetector.DetectChanges(this, out var previousBuffer, out var currentBuffer))
         {
             switch (propertyName)
             {
                 case nameof(NetworkedHealth):
-                {
-                    CheckDeath();
-                    break;
-                }
+                    {
+                        CheckDeath();
+                        break;
+                    }
             }
         }
     }
@@ -148,7 +149,7 @@ public class HealthManager : NetworkBehaviour, IHealthManager, ISuckable, IGrasp
     [Rpc(RpcSources.All, RpcTargets.All)]
     public void ReceiveDamageRpc(float damage)
     {
-        if(damage >= NetworkedHealth * 0.2f)
+        if (damage >= NetworkedHealth * 0.2f)
         {
             _grasped = true;
             graspedTime = maxGraspedTime;
@@ -173,10 +174,11 @@ public class HealthManager : NetworkBehaviour, IHealthManager, ISuckable, IGrasp
             if (_healthUtility is PlayerHealth && HasStateAuthority && currentHealth > NetworkedHealth)
                 VFXManager.Instance.ShowHurtVignette();
 
-            if (NetworkedHealth <= 0)
+            if (NetworkedHealth <= 0 && !_died)
             {
                 _healthUtility.Die();
                 OnDeath?.Invoke();
+                _died = true;
             }
         }
     }
@@ -207,7 +209,7 @@ public class HealthManager : NetworkBehaviour, IHealthManager, ISuckable, IGrasp
         DestroySuckableRpc();
         return fishData.XPValue;
     }
-    
+
     [Rpc(RpcSources.All, RpcTargets.StateAuthority)]
     private void DestroySuckableRpc()
     {
