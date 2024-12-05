@@ -156,7 +156,7 @@ public class BehaviourTreeRunner : NetworkBehaviour, INPC, IInitialisable
                 .WithSafeDistance(fishData.SafeDistance)
                 .WithStaminaManager(_staminaManager)
                 .WithGraspable(_healthManager)
-                .WithForbiddenAreaCheck(IsInsideForbiddenArea)
+                .WithMarkedAreaCheck(IsInsideMarkedArea)
                 .WithUseForward(true)
                 .WithSpeedChangeCallback(SetAnimatorMoveSpeed)
                 .Build()
@@ -182,7 +182,7 @@ public class BehaviourTreeRunner : NetworkBehaviour, INPC, IInitialisable
                 .WithResetBehavior(ResetHuntBehaviour)
                 .WithDistanceToLoseInterest(fishData.DistanceToLoseInterest)
                 .WithTimeToLoseInterest(fishData.TimeToLoseInterest)
-                .WithForbiddenAreaCheck(IsInsideForbiddenArea)
+                .WithMarkedAreaCheck(IsInsideMarkedArea)
                 .WithAttackManager(_attackManager)
                 .WithAttackRange(fishData.AttackRange)
                 .WithAttackValue(fishData.AttackValue)
@@ -203,7 +203,7 @@ public class BehaviourTreeRunner : NetworkBehaviour, INPC, IInitialisable
                 .WithMaxPitch(fishData.MaxPitch)
                 .WithObstacleAvoidanceLayerMask(obstacleAvoidanceMask)
                 .WithObstacleAvoidanceDistance(fishData.ObstacleAvoidanceDistance)
-                .WithForbiddenAreaCheck(IsInsideForbiddenArea)
+                .WithMarkedAreaCheck(IsInsideMarkedArea)
                 .WithUseForward(true)
                 .WithSpeedChangeCallback(SetAnimatorMoveSpeed)
                 .Build());
@@ -225,7 +225,7 @@ public class BehaviourTreeRunner : NetworkBehaviour, INPC, IInitialisable
         _behaviourTreeToExecute?.Evaluate();
     }
 
-    private (bool isInside, Vector3 direction) IsInsideForbiddenArea()
+    private (bool isInside, Vector3 direction) IsInsideMarkedArea()
     {
         return (isInside: _isInsideArea, direction: _directionToArea);
     }

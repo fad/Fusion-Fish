@@ -98,7 +98,7 @@ public class FleeStrategy : StaminaMoveStrategy
             return this;
         }
 
-        public Builder WithForbiddenAreaCheck(Func<(bool, Vector3)> forbiddenAreaCheck)
+        public Builder WithMarkedAreaCheck(Func<(bool, Vector3)> forbiddenAreaCheck)
         {
             ForbiddenAreaCheck = forbiddenAreaCheck;
             return this;
@@ -171,7 +171,7 @@ public class FleeStrategy : StaminaMoveStrategy
             _resetThreatAction();
             return Status.Success;
         }
-        AvoidForbiddenArea();
+        StayInMarkedArea();
         RotateToOppositeDirection();
         AvoidObstacles();
 
