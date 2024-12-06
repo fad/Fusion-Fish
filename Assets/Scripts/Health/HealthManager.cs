@@ -104,6 +104,8 @@ public class HealthManager : NetworkBehaviour, IHealthManager, ISuckable, IGrasp
                 _regeneration = false;
         }
 
+        if (_changeDetector is null) return;
+
         foreach (var propertyName in _changeDetector.DetectChanges(this, out var previousBuffer, out var currentBuffer))
         {
             switch (propertyName)
