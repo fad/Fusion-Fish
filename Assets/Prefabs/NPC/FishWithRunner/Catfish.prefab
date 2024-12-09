@@ -602,6 +602,16 @@ PrefabInstance:
       propertyPath: maxSlowDownSpeedTime
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 5124316588462460406, guid: 3f8486498552be144992af32f4d2779b,
+        type: 3}
+      propertyPath: recoveryHealthInSecond
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5124316588462460406, guid: 3f8486498552be144992af32f4d2779b,
+        type: 3}
+      propertyPath: timeToStartRecoveryHealth
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 5807882279209203546, guid: 3f8486498552be144992af32f4d2779b,
         type: 3}
       propertyPath: fishData

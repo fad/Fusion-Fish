@@ -289,12 +289,9 @@ public class PlayerAttack : NetworkBehaviour
                     _currentEnemyOutline.ShouldOutline(true);
                 }
 
-                if (!hitColliders[0].TryGetComponent(out _currentEnemyHealthBar))
+                if (hitColliders[0].TryGetComponent(out _currentEnemyHealthBar))
                 {
-                    _currentEnemyHealthBar = hitColliders[0].GetComponentInChildren<HealthViewModel>();
-
-                    if (_currentEnemyHealthBar)
-                        _currentEnemyHealthBar.AdjustHealthBarVisibility(true);
+                    _currentEnemyHealthBar.AdjustHealthBarVisibility(true);
                 }
             }
             else

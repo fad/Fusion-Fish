@@ -86,7 +86,7 @@ public class AttackManager : NetworkBehaviour, IAttackManager, IInitialisable
         if (_currentTargetHealthManager is { Died: true }) return;
 
         _currentTargetTreeRunner?.AdjustHuntOrFleeTarget((transform, _correspondingNPC));
-        _thirdPersonController?.GraspedRpc(transform.GetComponent<NetworkTransform>());
+        _thirdPersonController?.GraspedRpc(transform.GetComponentInParent<NetworkTransform>());
     }
 
     private void ChangeTarget(Transform newTarget)

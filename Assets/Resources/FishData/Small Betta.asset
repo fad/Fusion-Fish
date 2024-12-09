@@ -16,9 +16,9 @@ MonoBehaviour:
   fishPrefab: {fileID: 8714653982888993325, guid: e31abeab98e70be4cbb09a7698ec96f0,
     type: 3}
   scale: 0.5
-  maxHealth: 30
-  recoveryHealthInSecond: 1
-  timeToStartRecoveryHealth: 8
+  maxHealth: 100
+  recoveryHealthInSecond: 1.6
+  timeToStartRecoveryHealth: 10
   maxStamina: 50
   staminaDecreaseRate: 10
   staminaRegenRate: 6
@@ -33,7 +33,7 @@ MonoBehaviour:
   predatorList:
   - {fileID: 11400000, guid: aaa032bb997807948879483b73e44a6d, type: 2}
   - {fileID: 11400000, guid: 1724f0690ac686340a9d49e2f66c6cd3, type: 2}
-  attackValue: 4
+  attackValue: 6
   attackRange: 4
   attackCooldown: 1
   timeToLoseInterest: 6

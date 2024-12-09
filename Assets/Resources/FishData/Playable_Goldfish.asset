@@ -17,8 +17,8 @@ MonoBehaviour:
     type: 3}
   scale: 0.5
   maxHealth: 120
-  recoveryHealthInSecond: 1.2
-  timeToStartRecoveryHealth: 10
+  recoveryHealthInSecond: 2.2
+  timeToStartRecoveryHealth: 12
   maxStamina: 100
   staminaDecreaseRate: 30
   staminaRegenRate: 18

@@ -9,7 +9,7 @@ public class HealthViewModel : NetworkBehaviour
     
     [SerializeField] private Slider healthSlider;
     
-    public override void Spawned()
+    public void Start()
     {
         healthModel.OnHealthChanged += RPC_UpdateHealthSlider;
         
@@ -24,8 +24,8 @@ public class HealthViewModel : NetworkBehaviour
     
     public void AdjustHealthBarVisibility(bool isVisible)
     {
-        healthSlider.value = healthModel.currentHealth;
         healthSlider.gameObject.SetActive(isVisible);
+        healthSlider.value = healthModel.NetworkedHealth;
     }
 
     
