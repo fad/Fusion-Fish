@@ -114,7 +114,7 @@ public class TreeRunnerMB : MonoBehaviour, ITreeRunner, IEntity
                 .WithResetThreatAction(ResetFleeBehaviour)
                 .WithSafeDistance(fishData.SafeDistance)
                 .WithStaminaManager(_staminaManager)
-                .WithForbiddenAreaCheck(IsInsideForbiddenArea)
+                .WithMarkedAreaCheck(IsInsideForbiddenArea)
                 .Build()
         );
         
@@ -138,7 +138,7 @@ public class TreeRunnerMB : MonoBehaviour, ITreeRunner, IEntity
                 .WithResetBehavior(ResetHuntBehaviour)
                 .WithDistanceToLoseInterest(fishData.DistanceToLoseInterest)
                 .WithTimeToLoseInterest(fishData.TimeToLoseInterest)
-                .WithForbiddenAreaCheck(IsInsideForbiddenArea)
+                .WithMarkedAreaCheck(IsInsideForbiddenArea)
                 .WithAttackManager(_attackManager)
                 .WithAttackRange(fishData.AttackRange)
                 .WithAttackValue(fishData.AttackValue)
@@ -157,7 +157,7 @@ public class TreeRunnerMB : MonoBehaviour, ITreeRunner, IEntity
                 .WithMaxPitch(fishData.MaxPitch)
                 .WithObstacleAvoidanceLayerMask(obstacleAvoidanceMask)
                 .WithObstacleAvoidanceDistance(fishData.ObstacleAvoidanceDistance)
-                .WithForbiddenAreaCheck(IsInsideForbiddenArea)
+                .WithMarkedAreaCheck(IsInsideForbiddenArea)
                 .Build());
 
       

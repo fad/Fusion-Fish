@@ -25,16 +25,23 @@ public class AreaMarker : MonoBehaviour, IInitialisable
         ChangeAreaCheck(other, false);
     }
 
-    private void ChangeAreaCheck(Collider other, bool isInside)
+    /// <summary>
+    /// Determines whether the fish should avoid the area or not.
+    /// </summary>
+    /// <param name="other">The collider that entered / exited the trigger</param>
+    /// <param name="shouldNotTurnAround">Whether the fish should turn around or not.</param>
+    private void ChangeAreaCheck(Collider other, bool shouldNotTurnAround)
     {
-        if (avoidedByAll || (other.gameObject.TryGetComponent(out IEntity entity) && fishData.PreyList.Contains(entity.FishType)))
+        if (!other.gameObject.TryGetComponent(out INPC entity)) return;
+        
+        if (avoidedByAll || fishData.PreyList.Contains(entity.FishType))
         {
-            other.TryGetComponent(out ITreeRunner treeRunner);
-            
-            // The direction is from the other object to this object.
-            Vector3 direction = Vector3.Normalize(transform.position - other.transform.position);
-            treeRunner?.AdjustAreaCheck((isInside, direction));
+            shouldNotTurnAround = false;
         }
+        
+        // The direction is from the other object to this object.
+        Vector3 direction = Vector3.Normalize(transform.position - other.transform.position);
+        entity.AdjustAreaCheck((shouldNotTurnAround, direction));
     }
 
     private void OnDrawGizmos()

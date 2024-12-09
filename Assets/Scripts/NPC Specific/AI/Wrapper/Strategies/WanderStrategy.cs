@@ -69,7 +69,7 @@ public class WanderStrategy : MoveStrategy
             return this;
         }
 
-        public Builder WithForbiddenAreaCheck(Func<(bool, Vector3)> forbiddenAreaCheck)
+        public Builder WithMarkedAreaCheck(Func<(bool, Vector3)> forbiddenAreaCheck)
         {
             ForbiddenAreaCheck = forbiddenAreaCheck;
             return this;
@@ -125,7 +125,7 @@ public class WanderStrategy : MoveStrategy
     public override Status Process()
     {
         _timeSinceLastChanged += Time.deltaTime;
-        AvoidForbiddenArea();
+        StayInMarkedArea();
 
         if (_timeSinceLastChanged >= _changeInterval)
         {
@@ -249,11 +249,13 @@ public class WanderStrategy : MoveStrategy
     /// If the entity is inside the forbidden area, the target rotation is inverted to move in the opposite direction.
     /// The change interval is set to the maximum value to avoid frequent direction changes.
     /// </summary>
-    protected override void AvoidForbiddenArea()
+    protected override void StayInMarkedArea()
     {
-        (bool isInside, Vector3 direction) result = ForbiddenAreaCheck();
+        (bool isInside, Vector3 direction) result = MarkedAreaCheck();
+        
+        if(result.isInside == default && result.direction == default) return;
 
-        if (result.isInside)
+        if (!result.isInside)
         {
             TargetRotation = Quaternion.LookRotation(-result.direction, Entity.up);
 

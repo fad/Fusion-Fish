@@ -9,7 +9,7 @@ public abstract class MoveStrategy : IStrategy
     protected readonly float MaxPitch;
     protected readonly LayerMask ObstacleAvoidanceLayerMask;
     protected readonly float ObstacleAvoidanceDistance;
-    protected readonly Func<(bool, Vector3)> ForbiddenAreaCheck;
+    protected readonly Func<(bool, Vector3)> MarkedAreaCheck;
     protected readonly bool UseForward;
     protected readonly Action<float> SpeedChangeCallback;
 
@@ -22,7 +22,7 @@ public abstract class MoveStrategy : IStrategy
         float maxPitch, 
         LayerMask obstacleAvoidanceLayerMask,
         float obstacleAvoidanceDistance, 
-        Func<(bool, Vector3)> forbiddenAreaCheck,
+        Func<(bool, Vector3)> markedAreaCheck,
         bool useForward,
         Action<float> speedChangeCallback)
     {
@@ -31,7 +31,7 @@ public abstract class MoveStrategy : IStrategy
         MaxPitch = maxPitch;
         ObstacleAvoidanceLayerMask = obstacleAvoidanceLayerMask;
         ObstacleAvoidanceDistance = obstacleAvoidanceDistance;
-        ForbiddenAreaCheck = forbiddenAreaCheck;
+        MarkedAreaCheck = markedAreaCheck;
         UseForward = useForward;
         SpeedChangeCallback = speedChangeCallback;
     }
@@ -47,9 +47,9 @@ public abstract class MoveStrategy : IStrategy
     /// If the entity is inside the forbidden area, the target rotation is inverted to move in the opposite direction.
     /// The change interval is set to the maximum value to avoid frequent direction changes.
     /// </summary>
-    protected virtual void AvoidForbiddenArea()
+    protected virtual void StayInMarkedArea()
     {
-        (bool isInside, Vector3 direction) result = ForbiddenAreaCheck();
+        (bool isInside, Vector3 direction) result = MarkedAreaCheck();
 
         if (result.isInside)
         {

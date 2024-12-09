@@ -623,7 +623,6 @@ MonoBehaviour:
   gibSpawnCount: 3
   spawnGibs: 1
   fishData: {fileID: 0}
-  debug: 1
 --- !u!114 &6222487964510190762
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1646,7 +1645,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 20
+  m_Radius: 5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5308674794192203540
 GameObject:

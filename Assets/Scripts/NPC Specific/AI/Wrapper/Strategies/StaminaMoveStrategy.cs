@@ -17,7 +17,7 @@ public abstract class StaminaMoveStrategy : MoveStrategy
         float maxPitch,
         LayerMask obstacleAvoidanceLayerMask,
         float obstacleAvoidanceDistance,
-        Func<(bool, Vector3)> forbiddenAreaCheck,
+        Func<(bool, Vector3)> markedAreaCheck,
         IStaminaManager staminaManager,
         IGraspable graspable,
         short staminaThreshold,
@@ -31,7 +31,7 @@ public abstract class StaminaMoveStrategy : MoveStrategy
             maxPitch,
             obstacleAvoidanceLayerMask,
             obstacleAvoidanceDistance,
-            forbiddenAreaCheck,
+            markedAreaCheck,
             useForward,
             speedChangeCallback)
     {

@@ -99,7 +99,7 @@ public class ChaseStrategy : StaminaMoveStrategy
             return this;
         }
 
-        public Builder WithForbiddenAreaCheck(Func<(bool, Vector3)> forbiddenAreaCheck)
+        public Builder WithMarkedAreaCheck(Func<(bool, Vector3)> forbiddenAreaCheck)
         {
             ForbiddenAreaCheck = forbiddenAreaCheck;
             return this;
@@ -234,7 +234,7 @@ public class ChaseStrategy : StaminaMoveStrategy
             return Status.Failure;
         }
 
-        AvoidForbiddenArea();
+        StayInMarkedArea();
         AvoidObstacles();
 
         CheckStamina();
