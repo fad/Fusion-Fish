@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c11d033a7185418c9421d8741488f96b, type: 3}
+  m_Name: Meat
+  m_EditorClassIdentifier: 
+  fishID: 9
+  fishPrefab: {fileID: 0}
+  scale: 1
+  maxHealth: 1
+  recoveryHealthInSecond: 0
+  timeToStartRecoveryHealth: 0
+  maxStamina: 1
+  staminaDecreaseRate: 0
+  staminaRegenRate: 0
+  staminaThreshold: 0
+  xpValue: 100
+  gibsSpawnValue: 0
+  FOV_Angle: 45
+  FOV_Radius: 15
+  preyList: []
+  predatorList:
+  - {fileID: 11400000, guid: aaa032bb997807948879483b73e44a6d, type: 2}
+  - {fileID: 11400000, guid: 1724f0690ac686340a9d49e2f66c6cd3, type: 2}
+  - {fileID: 11400000, guid: 0c6308a7049671a42abceaddee436b9c, type: 2}
+  - {fileID: 11400000, guid: 7d2cb7dfd99a72c4bb748bd65e464fd4, type: 2}
+  - {fileID: 11400000, guid: ca5b417791726f949aab6afff7e7eb84, type: 2}
+  - {fileID: 11400000, guid: 6998654e15fc34741a20046b034526a9, type: 2}
+  - {fileID: 11400000, guid: 330945d332c80934999ee14c283a705e, type: 2}
+  - {fileID: 11400000, guid: 4f425dd60c1f84442a76761bb02cae31, type: 2}
+  attackValue: 0
+  attackRange: 0
+  attackCooldown: 0
+  timeToLoseInterest: 0
+  distanceToLoseInterest: 0
+  wanderSpeed: 0
+  fastSpeed: 0
+  rotationSpeed: 0
+  maxPitch: 0
+  obstacleAvoidanceDistance: 0
+  safeDistance: 0

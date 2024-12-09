@@ -27,7 +27,8 @@ MonoBehaviour:
   gibsSpawnValue: 1
   FOV_Angle: 60
   FOV_Radius: 15
-  preyList: []
+  preyList:
+  - {fileID: 11400000, guid: a3555f5f9bb3fce4aa266dabbd811314, type: 2}
   predatorList:
   - {fileID: 11400000, guid: aaa032bb997807948879483b73e44a6d, type: 2}
   - {fileID: 11400000, guid: 1724f0690ac686340a9d49e2f66c6cd3, type: 2}
