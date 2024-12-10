@@ -1,39 +1,46 @@
-using System.Linq;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class AreaMarker : MonoBehaviour, IInitialisable
+public class AreaMarker : MonoBehaviour
 {
     [SerializeField,
-     Tooltip("The fish this area marker belongs to.")]
-    private FishData fishData;
+     Tooltip("The fishes that should not cross this area marker.")]
+    private FishData[] fishDataToUse;
     
     [SerializeField,
      Tooltip("Whether every fish should avoid this area.")]
     private bool avoidedByAll;
-    
+
+    private HashSet<FishData> _fishesToReflect;
+
+    private void Start()
+    {
+        _fishesToReflect = new HashSet<FishData>(fishDataToUse);
+    }
+
     private void OnTriggerEnter(Collider other)
     {
-        if (!fishData) return;
+        if (fishDataToUse.Length <= 0) return;
         
         ChangeAreaCheck(other, true);
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (!fishData) return;
+        if (fishDataToUse.Length <= 0) return;
         
         ChangeAreaCheck(other, false);
     }
     
     private void ChangeAreaCheck(Collider other, bool isInside)
     {
-        if (avoidedByAll || (other.gameObject.TryGetComponent(out IEntity entity) && fishData.PreyList.Contains(entity.FishType)))
+        bool hasFishData = other.gameObject.TryGetComponent(out INPC entity);
+        
+        if (avoidedByAll || (hasFishData && _fishesToReflect.Contains(entity.FishType)))
         {
-            other.TryGetComponent(out ITreeRunner treeRunner);
-            
             // The direction is from the other object to this object.
             Vector3 direction = Vector3.Normalize(transform.position - other.transform.position);
-            treeRunner?.AdjustAreaCheck((isInside, direction));
+            entity.AdjustAreaCheck((isInside, direction));
         }
     }
 
@@ -45,15 +52,5 @@ public class AreaMarker : MonoBehaviour, IInitialisable
 
         Gizmos.color = Color.green;
         Gizmos.DrawWireCube(transform.position, boxCollider.size);
-    }
-
-    public void Init(string fishDataName)
-    {
-        fishData = Resources.Load<FishData>($"FishData/{fishDataName}");
-        
-        if (!fishData)
-        {
-            Debug.LogError($"Fish data with name {fishDataName} not found!");
-        }
     }
 }
