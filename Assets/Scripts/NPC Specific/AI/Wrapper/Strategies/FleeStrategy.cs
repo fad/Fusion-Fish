@@ -171,7 +171,7 @@ public class FleeStrategy : StaminaMoveStrategy
             _resetThreatAction();
             return Status.Success;
         }
-        StayInMarkedArea();
+        AvoidMarkedArea();
         RotateToOppositeDirection();
         AvoidObstacles();
 
