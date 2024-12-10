@@ -15,6 +15,7 @@ Material:
   m_ValidKeywords:
   - _ADVANCED_SHADING
   - _CAUSTICS
+  - _DISABLE_DEPTH_TEX
   - _DISTANCE_NORMALS
   - _FOAM
   - _NORMALMAP
@@ -30,7 +31,7 @@ Material:
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
+  m_CustomRenderQueue: 3500
   stringTagMap: {}
   disabledShaderPasses: []
   m_LockedProperties: 
@@ -155,7 +156,7 @@ Material:
     - _DepthMode: 0
     - _DepthTexture: 1
     - _DepthVertical: 7.34
-    - _DisableDepthTexture: 0
+    - _DisableDepthTexture: 1
     - _DistanceNormalsOn: 1
     - _DistanceNormalsTiling: 0.25
     - _DstBlend: 0

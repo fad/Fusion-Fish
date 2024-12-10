@@ -42,6 +42,7 @@ namespace StarterAssets
         [HideInInspector] public PlayerManager playerManager;
         [HideInInspector] public float speed;
         private bool attractToEntity;
+        private bool pushingAway;
         private Transform currentAttractEntity;
         private float maxAttractTime = 1;
         private float currentAttractTime;
@@ -354,7 +355,7 @@ namespace StarterAssets
             void MovePlayer(float playerRenderRotationX, float playerRenderRotationY)
             {
                 Vector3 Direction;
-
+                
                 if(attractToEntity)
                     Direction = (transform.position - currentAttractEntity.position).normalized * -1 * (boostSwimSpeed * Time.deltaTime);
                 else
@@ -405,9 +406,23 @@ namespace StarterAssets
             if(playerManager.healthManager.IsGrasped)
                 StartAttractToEntity(predator.transform);
         } 
-        public void StartAttractToEntity(Transform prey)
+
+        [Rpc(RpcSources.All, RpcTargets.All)]
+        public void PushAwayAnimationRpc()
         {
-            currentAttractEntity = prey;
+            boostParticles.Play();
+            AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+            if(!stateInfo.IsName("Fish_pushAway"))
+                animator.SetTrigger("pushAway");
+        } 
+        public void PushAway(Vector3 Direction)
+        {
+            rb.AddForce(Direction * 50, ForceMode.Impulse);
+            PushAwayAnimationRpc();
+        }
+        public void StartAttractToEntity(Transform entity)
+        {
+            currentAttractEntity = entity;
             currentAttractTime = maxAttractTime;
             attractToEntity = true;
         }

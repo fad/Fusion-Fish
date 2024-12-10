@@ -56,7 +56,7 @@ MonoBehaviour:
   fishData: {fileID: 0}
   obstacleAvoidanceMask:
     serializedVersion: 2
-    m_Bits: 1040
+    m_Bits: 3088
 --- !u!114 &2522072839802053289
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -155,10 +155,6 @@ MonoBehaviour:
   _NetworkedHealth: 0
   currentHealth: 0
   notAbleToGetBitten: 0
-  maxSlowDownSpeedTime: 5
-  slowDownSpeedTime: 0
-  slowDown: 0
-  grasped: 0
   maxGraspedTime: 1
   graspedTime: 0
 --- !u!114 &1943943065113725832
