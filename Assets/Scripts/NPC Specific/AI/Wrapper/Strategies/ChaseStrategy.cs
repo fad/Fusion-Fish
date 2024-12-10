@@ -234,7 +234,7 @@ public class ChaseStrategy : StaminaMoveStrategy
             return Status.Failure;
         }
 
-        StayInMarkedArea();
+        AvoidMarkedArea();
         AvoidObstacles();
 
         CheckStamina();

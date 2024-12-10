@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 8039512162137618864}
   - component: {fileID: 2799703286137334578}
   - component: {fileID: 6831977121522632727}
+  - component: {fileID: 4529062883879323259}
   m_Layer: 6
   m_Name: MeatObject
   m_TagString: Untagged
@@ -276,3 +277,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectOutline: {fileID: 2799703286137334578}
+--- !u!114 &4529062883879323259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3993952820748017500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8685392189246fe49a211d8384707f8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fishData: {fileID: 11400000, guid: a3555f5f9bb3fce4aa266dabbd811314, type: 2}

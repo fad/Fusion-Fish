@@ -47,7 +47,7 @@ public abstract class MoveStrategy : IStrategy
     /// If the entity is inside the forbidden area, the target rotation is inverted to move in the opposite direction.
     /// The change interval is set to the maximum value to avoid frequent direction changes.
     /// </summary>
-    protected virtual void StayInMarkedArea()
+    protected virtual void AvoidMarkedArea()
     {
         (bool isInside, Vector3 direction) result = MarkedAreaCheck();
 
