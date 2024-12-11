@@ -12,22 +12,30 @@ public class AreaMarker : MonoBehaviour
     private bool avoidedByAll;
 
     private HashSet<FishData> _fishesToReflect;
+    
+    private bool ArrayHasValues => fishDataToUse is { Length: > 0 };
 
     private void Start()
     {
+        if (!ArrayHasValues)
+        {
+            _fishesToReflect = new HashSet<FishData>();
+            return;
+        }
+        
         _fishesToReflect = new HashSet<FishData>(fishDataToUse);
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (fishDataToUse.Length <= 0) return;
+        if (!ArrayHasValues) return;
         
         ChangeAreaCheck(other, true);
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (fishDataToUse.Length <= 0) return;
+        if (!ArrayHasValues) return;
         
         ChangeAreaCheck(other, false);
     }
