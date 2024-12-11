@@ -2,7 +2,7 @@ using Fusion;
 using StarterAssets;
 using UnityEngine;
 
-public class AttackManager : NetworkBehaviour, IAttackManager, IInitialisable
+public class AttackManager : NetworkBehaviour, IAttackManager
 {
 
     [Header("Setup Settings")]
@@ -20,11 +20,6 @@ public class AttackManager : NetworkBehaviour, IAttackManager, IInitialisable
     private ThirdPersonController _thirdPersonController;
     
     private static readonly int AttackTrigger = Animator.StringToHash("attack");
-
-    public void Init(string fishDataName)
-    {
-        
-    }
 
     public override void Spawned()
     {

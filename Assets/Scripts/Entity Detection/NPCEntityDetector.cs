@@ -14,8 +14,8 @@ public class NPCEntityDetector : EntityDetector, IInitialisable
     [SerializeField, Tooltip("The root of this object")]
     private Transform root;
 
-    private ITreeRunner _attachedAIBehaviour;
-    
+    private INPC _attachedAIBehaviour;
+
 
     protected override void OnTriggerEnter(Collider other)
     {
@@ -29,7 +29,7 @@ public class NPCEntityDetector : EntityDetector, IInitialisable
 
     protected override void OnTriggerStay(Collider other)
     {
-        DealWithHuntAdjustment(other);
+        DealWithHuntAdjustment(other, true);
     }
 
     public override void Spawned()
@@ -37,10 +37,10 @@ public class NPCEntityDetector : EntityDetector, IInitialisable
         root.TryGetComponent(out _attachedAIBehaviour);
 
         if (_attachedAIBehaviour is null)
-            throw new NullReferenceException("No <color=#16a085>AI behaviour (ITreeRunner)</color> found on " +
+            throw new NullReferenceException("No <color=#16a085>AI behaviour (INPC)</color> found on " +
                                              root.name);
     }
-
+    
     private void OnDrawGizmos()
     {
         bool hasSphereCollider = TryGetComponent(out SphereCollider sphereCollider);
@@ -60,9 +60,11 @@ public class NPCEntityDetector : EntityDetector, IInitialisable
         return angleToTarget < fishData.FOVAngle && distanceToTarget <= fishData.FOVRadius;
     }
 
-    private void DealWithHuntAdjustment(Collider other)
+    private void DealWithHuntAdjustment(Collider other, bool calledFromUpdate = false) // bool for breakpoint condition
     {
         if (!TryCheck(other.gameObject)) return;
+
+        if (_attachedAIBehaviour.IsHunting || _attachedAIBehaviour.IsInDanger) return;
 
         if (!other.TryGetComponent(out NetworkTransform networkTransform) ||
             !other.TryGetComponent(out IEntity entity)) return;
@@ -70,7 +72,7 @@ public class NPCEntityDetector : EntityDetector, IInitialisable
         // if (OtherNPCs.Contains(networkTransform)) return;
 
         if (!IsInFOVAndInRange(networkTransform.transform)) return;
-        
+
         _attachedAIBehaviour.AdjustHuntOrFleeTarget((networkTransform.transform, entity));
     }
 
