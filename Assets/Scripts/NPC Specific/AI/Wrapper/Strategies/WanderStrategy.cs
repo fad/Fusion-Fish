@@ -155,7 +155,7 @@ public class WanderStrategy : MoveStrategy
 
 
         Entity.rotation = Quaternion.Euler(xAngle, yAngle, zAngle);
-
+        
         return Status.Running;
     }
 

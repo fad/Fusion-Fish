@@ -241,10 +241,11 @@ public class ChaseStrategy : StaminaMoveStrategy
         RotateToPrey();
         
         float sqrMagnitude = (Entity.position - _preyTransform.position).sqrMagnitude;
+        Debug.Log($"sqrMagnitude: {sqrMagnitude}\nAttackRange: {_attackRange * _attackRange}");
 
         if (sqrMagnitude <= _attackRange * _attackRange)
         {
-            _attackManager.Attack(_attackValue, _preyTransform);
+            _attackManager.Attack(_attackValue, _preyTransform); // TODO: Do an attack strategy
             
             if(sqrMagnitude > .25f)
             {
@@ -261,6 +262,7 @@ public class ChaseStrategy : StaminaMoveStrategy
         
         if (_didPreyDie())
         {
+            Debug.Log("Prey died");
             _resetBehavior();
             return Status.Success;
         }

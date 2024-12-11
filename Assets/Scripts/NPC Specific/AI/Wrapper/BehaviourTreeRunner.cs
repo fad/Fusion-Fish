@@ -84,6 +84,9 @@ public class BehaviourTreeRunner : NetworkBehaviour, INPC, IInitialisable
     public FishData FishType => fishData;
 
     public BehaviourTree Tree => _behaviourTreeToExecute;
+    
+    public bool IsInDanger => _isInDanger;
+    public bool IsHunting => _isHunting;
 
     private static readonly Color WanderingColor = new(120f / 255f, 33f / 255f, 114f / 255f, 1f);
     private static readonly Color FleeingColor = new(39f / 255f, 174f / 255f, 96f / 255f, 1f);
@@ -273,6 +276,7 @@ public class BehaviourTreeRunner : NetworkBehaviour, INPC, IInitialisable
         }
         
         _isHunting = false;
+        _isInDanger = false;
         _target = null;
         _targetHealthManager = null;
         OnTargetChanged?.Invoke(null);
@@ -281,6 +285,7 @@ public class BehaviourTreeRunner : NetworkBehaviour, INPC, IInitialisable
     private void ResetFleeBehaviour()
     {
         _isInDanger = false;
+        _isHunting = false;
         _target = null;
         OnTargetChanged?.Invoke(null);
     }
