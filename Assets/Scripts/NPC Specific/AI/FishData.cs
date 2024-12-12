@@ -86,14 +86,20 @@ public class FishData : ScriptableObject
 
     [SerializeField, Min(1f), Tooltip("The distance to avoid obstacles.")]
     private float obstacleAvoidanceDistance = 1f;
-
+    
+    [SerializeField,
+     Tooltip("Еhe maximum horizontal range a fish can swim away from its spawn point.")]
+    private float wanderDistanceHorizontal = 50f;    
+    
+    [SerializeField,
+     Tooltip("Еhe maximum vertical range a fish can swim away from its spawn point.")]
+    private float wanderDistanceVertical = 10f;
 
     [Header("Fleeing Values")]
     [SerializeField,
      Tooltip("How far away the fish shall flee in meters from the predator to be considered safe again.")]
-    private float safeDistance = 50f;
-
-
+    private float safeDistance = 50f;    
+    
     public short FishID => fishID;
     public GameObject FishPrefab => fishPrefab;
 
@@ -128,4 +134,6 @@ public class FishData : ScriptableObject
     public float ObstacleAvoidanceDistance => obstacleAvoidanceDistance;
 
     public float SafeDistance => safeDistance;
+    public float WanderDistanceVertical => wanderDistanceVertical;
+    public float WanderDistanceHorizontal => wanderDistanceHorizontal;
 }

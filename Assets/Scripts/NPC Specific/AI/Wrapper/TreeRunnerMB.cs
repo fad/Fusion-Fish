@@ -153,6 +153,9 @@ public class TreeRunnerMB : MonoBehaviour, ITreeRunner, IEntity
         Leaf wanderAround = new Leaf("Wander Around",
             new WanderStrategy.Builder(transform)
                 .WithSpeed(fishData.WanderSpeed)
+                .WithSpawnEntityPoint(transform.position)
+                .WithWanderDistanceVertical(fishData.WanderDistanceVertical)
+                .WithWanderDistanceHorizontal(fishData.WanderDistanceHorizontal)
                 .WithRotationSpeed(fishData.RotationSpeed)
                 .WithMaxPitch(fishData.MaxPitch)
                 .WithObstacleAvoidanceLayerMask(obstacleAvoidanceMask)

@@ -14,7 +14,9 @@ public class WanderStrategy : MoveStrategy
     private float _timeSinceLastChanged;
     private Vector3 _randomDirection;
     private Vector3 _lastPickedDirection;
-
+    private Vector3 _spawnEntityPoint;
+    public float _wanderDistanceVertical;
+    public float _wanderDistanceHorizontal;
     private EquallyDistributedWeightedPicker<Vector3> _directionPicker;
     private EquallyDistributedWeightedPicker<Quaternion> _verticalDirectionPicker;
 
@@ -25,6 +27,9 @@ public class WanderStrategy : MoveStrategy
     public class Builder
     {
         public Transform Entity;
+        public Vector3 SpawnEntityPoint;
+        public float WanderDistanceVertical;
+        public float WanderDistanceHorizontal;
         public float Speed;
         public float RotationSpeed;
         public float MaxPitch;
@@ -38,7 +43,21 @@ public class WanderStrategy : MoveStrategy
         {
             Entity = entity;
         }
-
+        public Builder WithSpawnEntityPoint(Vector3 spawnEntityPoint)
+        {
+            SpawnEntityPoint = spawnEntityPoint;
+            return this;
+        }        
+        public Builder WithWanderDistanceVertical(float wanderDistanceVertical)
+        {
+            WanderDistanceVertical = wanderDistanceVertical;
+            return this;
+        }        
+        public Builder WithWanderDistanceHorizontal(float wanderDistanceHorizontal)
+        {
+            WanderDistanceHorizontal = wanderDistanceHorizontal;
+            return this;
+        }
         public Builder WithSpeed(float speed)
         {
             Speed = speed;
@@ -80,7 +99,7 @@ public class WanderStrategy : MoveStrategy
             UseForward = useForward;
             return this;
         }
-        
+
         public Builder WithSpeedChangeCallback(Action<float> speedChangeCallback)
         {
             SpeedChangeCallback = speedChangeCallback;
@@ -112,9 +131,11 @@ public class WanderStrategy : MoveStrategy
         builder.ObstacleAvoidanceLayerMask, builder.ObstacleAvoidanceDistance, builder.ForbiddenAreaCheck,
         builder.UseForward, builder.SpeedChangeCallback)
     {
+        _spawnEntityPoint = builder.SpawnEntityPoint;
+        _wanderDistanceHorizontal = builder.WanderDistanceHorizontal;
+        _wanderDistanceVertical = builder.WanderDistanceVertical;
         Speed = builder.Speed;
         SpeedChangeCallback?.Invoke(Speed);
-
         ForwardModifier = (short)(builder.UseForward ? 1 : -1);
     }
 
@@ -124,16 +145,23 @@ public class WanderStrategy : MoveStrategy
     /// <returns><see cref="Status.Running"/> since the entity will constantly move.</returns>
     public override Status Process()
     {
-        _timeSinceLastChanged += Time.deltaTime;
         AvoidMarkedArea();
-
-        if (_timeSinceLastChanged >= _changeInterval)
+        
+        if (MathF.Abs(_spawnEntityPoint.x - Entity.position.x) > _wanderDistanceHorizontal || MathF.Abs(_spawnEntityPoint.y - Entity.position.y) > _wanderDistanceVertical)
         {
-            ChangeDirection();
-            ChangeVerticalDirection();
-            _changeInterval = Random.Range(_changeIntervalRange.x, _changeIntervalRange.y);
+            TargetRotation = Quaternion.LookRotation(_spawnEntityPoint - Entity.position);
+        }
+        else
+        {
+            _timeSinceLastChanged += Time.deltaTime;
+            if (_timeSinceLastChanged >= _changeInterval)
+            {
+                ChangeDirection();
+                ChangeVerticalDirection();
+                _changeInterval = Random.Range(_changeIntervalRange.x, _changeIntervalRange.y);
 
-            _timeSinceLastChanged = 0f;
+                _timeSinceLastChanged = 0f;
+            }
         }
 
         AvoidObstacles();
@@ -155,7 +183,7 @@ public class WanderStrategy : MoveStrategy
 
 
         Entity.rotation = Quaternion.Euler(xAngle, yAngle, zAngle);
-        
+
         return Status.Running;
     }
 
@@ -252,7 +280,7 @@ public class WanderStrategy : MoveStrategy
     protected override void AvoidMarkedArea()
     {
         (bool isInside, Vector3 direction) result = MarkedAreaCheck();
-        
+
         if (result.isInside)
         {
             TargetRotation = Quaternion.LookRotation(-result.direction, Entity.up);

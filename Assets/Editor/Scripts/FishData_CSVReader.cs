@@ -38,6 +38,7 @@ public class FishData_CSVReader
         {
             string[] splitData = allLines[i].Split(_delimiter);
 
+            Debug.Log(i);
             CreateScriptableObject(splitData, out SerializedObject serializedObject);
             serializedObjects.Add(serializedObject);
         }
@@ -93,7 +94,9 @@ public class FishData_CSVReader
             fastSpeedValue: data[23],
             rotationSpeedValue: data[24],
             maxPitchValue: data[25],
-            obstacleAvoidanceValue: data[26]);
+            obstacleAvoidanceValue: data[26],
+            wanderDistanceVerticalValue: data[28],
+            wanderDistanceHorizontalValue: data[29]);
 
         FillFleeValues(serializedObject,
             safeDistanceValue: data[27]);
@@ -116,7 +119,7 @@ public class FishData_CSVReader
 
         fishID.intValue = short.Parse(ID);
         fishPrefab.objectReferenceValue = AssetDatabase.LoadAssetAtPath<GameObject>(prefabPath);
-        scale.floatValue = float.Parse(scaleValue);
+        //scale.floatValue = float.Parse(scaleValue);
 
         dataObject.ApplyModifiedProperties();
     }
@@ -225,19 +228,23 @@ public class FishData_CSVReader
 
     private static void FillMovementValues(SerializedObject dataObject, string wanderSpeedValue, string fastSpeedValue,
         string rotationSpeedValue,
-        string maxPitchValue, string obstacleAvoidanceValue)
+        string maxPitchValue, string obstacleAvoidanceValue, string wanderDistanceVerticalValue, string wanderDistanceHorizontalValue)
     {
         SerializedProperty wanderSpeed = dataObject.FindProperty("wanderSpeed");
         SerializedProperty fastSpeed = dataObject.FindProperty("fastSpeed");
         SerializedProperty rotationSpeed = dataObject.FindProperty("rotationSpeed");
         SerializedProperty maxPitch = dataObject.FindProperty("maxPitch");
         SerializedProperty obstacleAvoidanceDistance = dataObject.FindProperty("obstacleAvoidanceDistance");
+        SerializedProperty wanderDistanceVertical = dataObject.FindProperty("wanderDistanceVertical");
+        SerializedProperty wanderDistanceHorizontal = dataObject.FindProperty("wanderDistanceHorizontal");
 
         wanderSpeed.floatValue = float.Parse(wanderSpeedValue);
         fastSpeed.floatValue = float.Parse(fastSpeedValue);
         rotationSpeed.floatValue = float.Parse(rotationSpeedValue);
         maxPitch.floatValue = float.Parse(maxPitchValue);
         obstacleAvoidanceDistance.floatValue = float.Parse(obstacleAvoidanceValue);
+        wanderDistanceVertical.floatValue = float.Parse(wanderDistanceVerticalValue);
+        wanderDistanceHorizontal.floatValue = float.Parse(wanderDistanceHorizontalValue);
 
         dataObject.ApplyModifiedProperties();
     }
