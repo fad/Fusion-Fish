@@ -64,8 +64,6 @@ public class NPCEntityDetector : EntityDetector, IInitialisable
     {
         if (!TryCheck(other.gameObject)) return;
 
-        if (_attachedAIBehaviour.IsHunting || _attachedAIBehaviour.IsInDanger) return;
-
         if (!other.TryGetComponent(out NetworkTransform networkTransform) ||
             !other.TryGetComponent(out IEntity entity)) return;
 

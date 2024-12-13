@@ -248,7 +248,6 @@ public class BehaviourTreeRunner : NetworkBehaviour, INPC, IInitialisable
         if (_isHunting || _isInDanger) return;
         if (targetData.targetBehaviour.FishType == FishType) return; // if the other fish type is the same as this one
 
-
         if (FishType.PredatorList.Contains(targetData.targetBehaviour.FishType) && !_isHunting)
         {
             _target = targetData.targetTransform;

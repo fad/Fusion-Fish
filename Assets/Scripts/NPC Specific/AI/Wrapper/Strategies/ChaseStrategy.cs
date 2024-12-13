@@ -209,28 +209,26 @@ public class ChaseStrategy : StaminaMoveStrategy
     /// <returns><see cref="Status.Success"/> if the prey was successfully killed. <see cref="Status.Failure"/> if the prey managed to escape or the timer to lose interest finished.
     /// <see cref="Status.Running"/> during the chase.</returns>
     public override Status Process()
-    {
+    {   
         if (_didPreyDie())
         {
-            _resetBehavior();
+            ResetValues();
             return Status.Success;
         }
         
         GetPreyTransform();
-
+        
         if (_targetTransformDoesNotExist)
         {
-            _resetBehavior();
-            _targetTransformDoesNotExist = false;
+            ResetValues();
             return Status.Success;
         }
-
+        
         HandleTimerLogic();
 
         if (_currentInterestTime <= 0)
         {
-            _resetBehavior();
-            _currentInterestTime = _timeToLoseInterest;
+            ResetValues();
             return Status.Failure;
         }
 
@@ -241,7 +239,6 @@ public class ChaseStrategy : StaminaMoveStrategy
         RotateToPrey();
         
         float sqrMagnitude = (Entity.position - _preyTransform.position).sqrMagnitude;
-        Debug.Log($"sqrMagnitude: {sqrMagnitude}\nAttackRange: {_attackRange * _attackRange}");
 
         if (sqrMagnitude <= _attackRange * _attackRange)
         {
@@ -262,8 +259,7 @@ public class ChaseStrategy : StaminaMoveStrategy
         
         if (_didPreyDie())
         {
-            Debug.Log("Prey died");
-            _resetBehavior();
+            ResetValues();
             return Status.Success;
         }
 
@@ -307,5 +303,13 @@ public class ChaseStrategy : StaminaMoveStrategy
         {
             _currentInterestTime = _timeToLoseInterest;
         }
+    }
+
+    private void ResetValues()
+    {
+        _resetBehavior();
+        _preyTransform = null;
+        _targetTransformDoesNotExist = false;
+        _currentInterestTime = _timeToLoseInterest;
     }
 }
