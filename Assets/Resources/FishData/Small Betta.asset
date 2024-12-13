@@ -44,4 +44,6 @@ MonoBehaviour:
   rotationSpeed: 2
   maxPitch: 45
   obstacleAvoidanceDistance: 2
+  wanderDistanceHorizontal: 80
+  wanderDistanceVertical: 15
   safeDistance: 20
