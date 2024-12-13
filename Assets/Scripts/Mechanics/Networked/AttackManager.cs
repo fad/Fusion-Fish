@@ -86,27 +86,11 @@ public class AttackManager : NetworkBehaviour, IAttackManager
 
     private void ChangeTarget(Transform newTarget)
     {
-        if (_currentTargetHealthManager != null)
-        {
-            _currentTargetHealthManager.OnDeath -= OnTargetDeath;
-        }
-
-        if (newTarget == null)
-        {
-            _currentTargetHealthManager = null;
-            _currentTarget = null;
-            return;
-        }
-
         _currentTarget = newTarget;
 
-        if (_currentTarget.TryGetComponent(out _currentTargetHealthManager))
-        {
-            _currentTargetHealthManager.OnDeath += OnTargetDeath;
-        }
-
-        _currentTarget.TryGetComponent(out _currentTargetTreeRunner);
-        _currentTarget.TryGetComponent(out _thirdPersonController);
+        _currentTarget?.TryGetComponent(out _currentTargetHealthManager);
+        _currentTarget?.TryGetComponent(out _currentTargetTreeRunner);
+        _currentTarget?.TryGetComponent(out _thirdPersonController);
         
     }
 
