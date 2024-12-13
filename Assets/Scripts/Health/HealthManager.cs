@@ -38,7 +38,7 @@ public class HealthManager : NetworkBehaviour, IHealthManager, ISuckable, IGrasp
     public event Action<float> OnHealthChanged;
     public event Action OnDeath;
 
-    private bool _hasSpawned = false;
+    public bool HasSpawned {get; private set;} = false;
     private bool _died = false;
 
     public bool Died => _died;
@@ -68,17 +68,17 @@ public class HealthManager : NetworkBehaviour, IHealthManager, ISuckable, IGrasp
         NetworkedHealth = maxHealth;
         currentHealth = NetworkedHealth;
         _slowDownManager?.SlowDown();
-        _hasSpawned = true;
+        HasSpawned = true;
     }
 
     public override void Despawned(NetworkRunner runner, bool hasState)
     {
-        _hasSpawned = false;
+        HasSpawned = false;
     }
 
     private void OnDisable()
     {
-        _hasSpawned = false;
+        HasSpawned = false;
     }
 
     private void Update()
@@ -127,7 +127,7 @@ public class HealthManager : NetworkBehaviour, IHealthManager, ISuckable, IGrasp
 
     public void Damage(float amount)
     {
-        if (!_hasSpawned) return;
+        if (!HasSpawned) return;
 
         if (notAbleToGetBitten) return;
         ReceiveDamageRpc(amount);
@@ -169,7 +169,7 @@ public class HealthManager : NetworkBehaviour, IHealthManager, ISuckable, IGrasp
 
     private void CheckDeath()
     {
-        if (!_hasSpawned) return;
+        if (!HasSpawned) return;
 
         if (_healthUtility is not null)
         {

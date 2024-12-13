@@ -586,6 +586,11 @@ PrefabInstance:
       propertyPath: healthModel
       value: 
       objectReference: {fileID: 1796521216611275508}
+    - target: {fileID: 6627337322097257303, guid: d29956c564d139a45ab318ff6e931255,
+        type: 3}
+      propertyPath: precomputeOutline
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6920440123163297748, guid: d29956c564d139a45ab318ff6e931255,
         type: 3}
       propertyPath: m_AnchorMax.y

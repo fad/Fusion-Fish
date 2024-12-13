@@ -38,7 +38,6 @@ public class FishData_CSVReader
         {
             string[] splitData = allLines[i].Split(_delimiter);
 
-            Debug.Log(i);
             CreateScriptableObject(splitData, out SerializedObject serializedObject);
             serializedObjects.Add(serializedObject);
         }
