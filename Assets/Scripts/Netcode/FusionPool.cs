@@ -2,8 +2,15 @@ using System.Collections.Generic;
 using Fusion;
 using UnityEngine;
 
-public class FusionPool : MonoBehaviour, INetworkObjectProvider
+/// <summary>
+/// Object pool used to store and reuse NetworkObjects.
+/// </summary>
+public class FusionPool : INetworkObjectProvider
 {
+    
+    /// <summary>
+    /// The dictionary that stores the prefab and the queue of instantiated objects.
+    /// </summary>
     private readonly Dictionary<NetworkObject, Queue<NetworkObject>> _instantiatedObjects = new();
 
     public NetworkObjectAcquireResult AcquirePrefabInstance(NetworkRunner runner, in NetworkPrefabAcquireContext context,
@@ -35,12 +42,17 @@ public class FusionPool : MonoBehaviour, INetworkObjectProvider
         _instantiatedObjects[networkedObj].Enqueue(networkedObj);
     }
 
-    private NetworkObject CreateObject(NetworkObject obj)
+    /// <summary>
+    /// Creates a new NetworkObject from the loaded prefab. Adds a new queue if the prefab is not in the dictionary.
+    /// </summary>
+    /// <param name="loadedPrefab">The loaded prefab to instantiate.</param>
+    /// <returns>The instantiated NetworkObject</returns>
+    private NetworkObject CreateObject(NetworkObject loadedPrefab)
     {
-        if (!_instantiatedObjects.ContainsKey(obj))
+        if (!_instantiatedObjects.ContainsKey(loadedPrefab))
         {
-            _instantiatedObjects.Add(obj, new Queue<NetworkObject>());
+            _instantiatedObjects.Add(loadedPrefab, new Queue<NetworkObject>());
         }
-        return Instantiate(obj);
+        return Object.Instantiate(loadedPrefab);
     }
 }
