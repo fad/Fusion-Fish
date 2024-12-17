@@ -12,16 +12,16 @@ public abstract class MoveStrategy : IStrategy
     protected readonly Func<(bool, Vector3)> MarkedAreaCheck;
     protected readonly bool UseForward;
     protected readonly Action<float> SpeedChangeCallback;
-
     protected float Speed;
     protected Quaternion TargetRotation;
     protected short ForwardModifier;
+    public float obstacleAvoidanceTime;
 
-    protected MoveStrategy(Transform entity, 
-        float rotationSpeed, 
-        float maxPitch, 
+    protected MoveStrategy(Transform entity,
+        float rotationSpeed,
+        float maxPitch,
         LayerMask obstacleAvoidanceLayerMask,
-        float obstacleAvoidanceDistance, 
+        float obstacleAvoidanceDistance,
         Func<(bool, Vector3)> markedAreaCheck,
         bool useForward,
         Action<float> speedChangeCallback)
@@ -62,10 +62,39 @@ public abstract class MoveStrategy : IStrategy
     /// </summary>
     protected virtual void AvoidObstacles()
     {
-        if (Physics.Raycast(Entity.position, Entity.forward, out RaycastHit hit, ObstacleAvoidanceDistance,
-                ObstacleAvoidanceLayerMask))
+        if (obstacleAvoidanceTime > 0)
+            obstacleAvoidanceTime -= Time.deltaTime;
+
+        Vector3 targetDirection = TargetRotation * Vector3.forward;
+        float angle = Vector3.Angle(Entity.forward, targetDirection);
+
+        Vector3 nextDirection = Entity.forward;
+        RaycastHit hit;
+
+        if (angle <= 10 && Raycast())
         {
-            TargetRotation = Quaternion.LookRotation(Vector3.Reflect(Entity.forward, hit.normal));
+            int attempts = 0;
+            while (Raycast())
+            {
+                attempts++;
+                if (attempts >= 10)
+                    break;
+            }
+
+            TargetRotation = Quaternion.LookRotation(nextDirection);
+            obstacleAvoidanceTime = 1;
+        }
+
+        bool Raycast()
+        {
+            bool Touch = Physics.Raycast(Entity.position, nextDirection, out hit, ObstacleAvoidanceDistance,
+                                     ObstacleAvoidanceLayerMask, QueryTriggerInteraction.Collide);
+
+            if (Touch && hit.normal != Vector3.zero)
+            {
+                nextDirection = Vector3.Reflect(nextDirection, hit.normal);
+            }
+            return Touch;
         }
     }
 }
