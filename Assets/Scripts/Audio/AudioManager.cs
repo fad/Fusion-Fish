@@ -1,14 +1,23 @@
 using UnityEngine;
 using System;
 using System.Collections;
+using UnityEngine.Pool;
 using Random = UnityEngine.Random;
 
 public class AudioManager : MonoBehaviour
 {
+    [Header("Sounds")]
     //A variable for every sound that is in the game
     public Sound[] sounds;
+    
+    [Header("Object Pooling")]
+    [SerializeField] private AudioSource audioSourcePrefab;
+    [SerializeField] private int initialPoolSize = 10;
+    [SerializeField] private int maxPoolSize = 256;
 
     public static AudioManager Instance;
+
+    private ObjectPool<AudioSource> _audioSourcePool;
     
     private void Awake()
     {
@@ -36,6 +45,8 @@ public class AudioManager : MonoBehaviour
             
             sound.audioSource.outputAudioMixerGroup = sound.audioMixer;
         }
+        
+        InitializePool();
     }
 
     private void Start()
@@ -45,6 +56,57 @@ public class AudioManager : MonoBehaviour
         PauseSound("OutOfWaterLake");
         Play("OutOfWaterOcean");
         PauseSound("OutOfWaterOcean");
+    }
+
+    private void InitializePool()
+    {
+        _audioSourcePool = new ObjectPool<AudioSource>(
+            createFunc: CreateAudioSource,
+            actionOnGet: OnGetSource,
+            actionOnRelease: ReturnToPool,
+            actionOnDestroy: DestroySource,
+            collectionCheck: false,
+            defaultCapacity: initialPoolSize,
+            maxSize: maxPoolSize
+        );
+    }
+
+    private AudioSource CreateAudioSource()
+    {
+        return Instantiate(audioSourcePrefab, transform);
+    }
+
+    private void OnGetSource(AudioSource src)
+    {
+        src.gameObject.SetActive(true);
+    }
+
+    private void ReturnToPool(AudioSource src)
+    {
+        src.Stop();
+        src.gameObject.SetActive(false);
+    }
+
+    private void DestroySource(AudioSource src)
+    {
+        Destroy(src.gameObject);
+    }
+
+    private IEnumerator ReturnToPoolAfterPlay(AudioSource src)
+    {
+        yield return new WaitForSeconds(src.clip.length);
+        _audioSourcePool.Release(src);
+    }
+
+    private void PlayClipAtPosition(AudioClip clip, Vector3 position, float volume = 1f)
+    {
+        AudioSource src = _audioSourcePool.Get();
+        src.transform.position = position;
+        src.volume = volume;
+        src.clip = clip;
+       
+        src.Play();
+        StartCoroutine(ReturnToPoolAfterPlay(src));
     }
 
     public void Play(string soundName)
@@ -68,7 +130,7 @@ public class AudioManager : MonoBehaviour
             return;
         }
         
-        AudioSource.PlayClipAtPoint(s.clip, audioPosition);
+        PlayClipAtPosition(s.clip, audioPosition);
     }
     
     public void PlaySoundWithRandomPitchAtPosition(string soundName, Vector3 audioPosition)
@@ -82,7 +144,7 @@ public class AudioManager : MonoBehaviour
 
         s.pitch = Random.Range(0.15f, 0.9f);
         
-        AudioSource.PlayClipAtPoint(s.clip, audioPosition);
+        PlayClipAtPosition(s.clip, audioPosition);
     }
     
     public void PauseSound(string soundName)
