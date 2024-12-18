@@ -83,7 +83,7 @@ namespace AvocadoShark
         [SerializeField] private TMP_Dropdown environmentDropdown;
         [SerializeField] private Material oceanSky;
         [SerializeField] private Material riverSky;
-
+        
         private void Awake()
         {
             if (Instance == null)
@@ -374,6 +374,7 @@ namespace AvocadoShark
                 GameMode = GameMode.Shared,
                 SessionName = sessionName,
                 Scene = SceneRef.FromIndex(buildIndex),
+                ObjectProvider = Runner.GetComponent<FusionPool>()
             });
             if (result.Ok)
                 return;
