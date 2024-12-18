@@ -14,6 +14,7 @@ public abstract class MoveStrategy : IStrategy
     protected readonly Action<float> SpeedChangeCallback;
     protected float Speed;
     protected Quaternion TargetRotation;
+    protected bool isRotating;
     protected short ForwardModifier;
     public float obstacleAvoidanceTime;
 
@@ -71,18 +72,26 @@ public abstract class MoveStrategy : IStrategy
         Vector3 nextDirection = Entity.forward;
         RaycastHit hit;
 
-        if (angle <= 10 && Raycast())
+        if (Raycast())
         {
-            int attempts = 0;
-            while (Raycast())
+            if (!isRotating || angle <= 10)
             {
-                attempts++;
-                if (attempts >= 10)
-                    break;
-            }
+                int attempts = 0;
+                while (Raycast())
+                {
+                    attempts++;
+                    if (attempts >= 10)
+                        break;
+                }
 
-            TargetRotation = Quaternion.LookRotation(nextDirection);
-            obstacleAvoidanceTime = 1;
+                isRotating = true;
+                TargetRotation = Quaternion.LookRotation(nextDirection);
+                obstacleAvoidanceTime = 1;
+            }
+        }
+        else
+        {
+            isRotating = false;
         }
 
         bool Raycast()
