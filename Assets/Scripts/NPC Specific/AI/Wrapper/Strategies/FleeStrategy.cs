@@ -171,9 +171,14 @@ public class FleeStrategy : StaminaMoveStrategy
             _resetThreatAction();
             return Status.Success;
         }
-        AvoidMarkedArea();
-        RotateToOppositeDirection();
+        Entity.rotation = Quaternion.Slerp(Entity.rotation, TargetRotation, RotationSpeed * 2 * Time.deltaTime);
+
         AvoidObstacles();
+        if(obstacleAvoidanceTime <= 0)
+        {
+            AvoidMarkedArea();
+            RotateToOppositeDirection();
+        }
 
         if (Graspable.IsGrasped)
         {
@@ -182,12 +187,10 @@ public class FleeStrategy : StaminaMoveStrategy
         }
 
         CheckStamina();
-
         Vector3 forwardDirection = Entity.forward * (ForwardModifier * (Speed * Time.deltaTime));
 
         Move(forwardDirection);
 
-        Entity.rotation = Quaternion.Slerp(Entity.rotation, TargetRotation, RotationSpeed * Time.deltaTime);
         return Status.Running;
     }
 
