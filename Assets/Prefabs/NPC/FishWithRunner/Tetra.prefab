@@ -155,6 +155,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 330945d332c80934999ee14c283a705e,
         type: 2}
+    - target: {fileID: 6630329994706225884, guid: 3f8486498552be144992af32f4d2779b,
+        type: 3}
+      propertyPath: fishData
+      value: 
+      objectReference: {fileID: 11400000, guid: 330945d332c80934999ee14c283a705e,
+        type: 2}
     - target: {fileID: 8821568059870424906, guid: 3f8486498552be144992af32f4d2779b,
         type: 3}
       propertyPath: healthModel
@@ -321,7 +327,7 @@ PrefabInstance:
     - target: {fileID: 4503618248469752422, guid: 09864b0130333b342835e2b09ec2e8dd,
         type: 3}
       propertyPath: m_Name
-      value: Tetra
+      value: Model
       objectReference: {fileID: 0}
     - target: {fileID: 4944109585445969989, guid: 09864b0130333b342835e2b09ec2e8dd,
         type: 3}

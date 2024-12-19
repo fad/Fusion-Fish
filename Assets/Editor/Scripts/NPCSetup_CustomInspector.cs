@@ -134,10 +134,10 @@ public class NPCSetup_CustomInspector : Editor
 
         SerializedObject spawnGibsObject = new SerializedObject(spawnGibsOnDestroy);
         SerializedProperty gibPrefab = spawnGibsObject.FindProperty("gibPrefab");
-        SerializedProperty gibsXPValue = spawnGibsObject.FindProperty("gibsExperienceValue");
+    //SerializedProperty gibsXPValue = spawnGibsObject.FindProperty("gibsExperienceValue");
 
         gibPrefab.objectReferenceValue = AssetDatabase.LoadAssetAtPath<GameObject>(PathToMeatObjectPrefab);
-        gibsXPValue.intValue = fishData.XPValue;
+    // gibsXPValue.intValue = fishData.XPValue;
 
         spawnGibsObject.ApplyModifiedProperties();
 

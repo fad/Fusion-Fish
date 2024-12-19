@@ -618,6 +618,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 7d2cb7dfd99a72c4bb748bd65e464fd4,
         type: 2}
+    - target: {fileID: 6630329994706225884, guid: 3f8486498552be144992af32f4d2779b,
+        type: 3}
+      propertyPath: fishData
+      value: 
+      objectReference: {fileID: 11400000, guid: 7d2cb7dfd99a72c4bb748bd65e464fd4,
+        type: 2}
     - target: {fileID: 8821568059870424906, guid: 3f8486498552be144992af32f4d2779b,
         type: 3}
       propertyPath: healthModel
@@ -749,6 +755,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 892618476366769819}
     m_Modifications:
+    - target: {fileID: 235297015278299334, guid: 10ae0571baab10142955ff89774b59f2,
+        type: 3}
+      propertyPath: m_Radius
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 1700375572343781464, guid: 10ae0571baab10142955ff89774b59f2,
         type: 3}
       propertyPath: m_IsActive
@@ -891,6 +902,11 @@ PrefabInstance:
       propertyPath: spawnGibs
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3560085847436736690, guid: 10ae0571baab10142955ff89774b59f2,
+        type: 3}
+      propertyPath: gibSpawnCount
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 4199829970043314401, guid: 10ae0571baab10142955ff89774b59f2,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -989,7 +1005,7 @@ PrefabInstance:
     - target: {fileID: 6810320542011287091, guid: 10ae0571baab10142955ff89774b59f2,
         type: 3}
       propertyPath: m_Name
-      value: Catfish
+      value: Model
       objectReference: {fileID: 0}
     - target: {fileID: 7292582293443456216, guid: 10ae0571baab10142955ff89774b59f2,
         type: 3}

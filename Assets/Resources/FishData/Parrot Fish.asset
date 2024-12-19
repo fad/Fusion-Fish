@@ -33,7 +33,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 1724f0690ac686340a9d49e2f66c6cd3, type: 2}
   - {fileID: 11400000, guid: 6998654e15fc34741a20046b034526a9, type: 2}
   - {fileID: 11400000, guid: a3555f5f9bb3fce4aa266dabbd811314, type: 2}
-  predatorList: []
+  predatorList:
+  - {fileID: 11400000, guid: 0c6308a7049671a42abceaddee436b9c, type: 2}
+  - {fileID: 11400000, guid: 7d2cb7dfd99a72c4bb748bd65e464fd4, type: 2}
   attackValue: 15
   attackRange: 2
   attackCooldown: 1

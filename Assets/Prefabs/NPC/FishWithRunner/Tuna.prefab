@@ -435,6 +435,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 4f425dd60c1f84442a76761bb02cae31,
         type: 2}
+    - target: {fileID: 6630329994706225884, guid: 3f8486498552be144992af32f4d2779b,
+        type: 3}
+      propertyPath: fishData
+      value: 
+      objectReference: {fileID: 11400000, guid: 4f425dd60c1f84442a76761bb02cae31,
+        type: 2}
     - target: {fileID: 8821568059870424906, guid: 3f8486498552be144992af32f4d2779b,
         type: 3}
       propertyPath: healthModel
@@ -810,7 +816,7 @@ PrefabInstance:
     - target: {fileID: 2284069224005208639, guid: 3e743a8b52b32d940a93ecf90cedba05,
         type: 3}
       propertyPath: m_Name
-      value: Tuna
+      value: Model
       objectReference: {fileID: 0}
     - target: {fileID: 2516379072932712111, guid: 3e743a8b52b32d940a93ecf90cedba05,
         type: 3}

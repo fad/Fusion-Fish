@@ -31,8 +31,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 330945d332c80934999ee14c283a705e, type: 2}
   - {fileID: 11400000, guid: aaa032bb997807948879483b73e44a6d, type: 2}
   - {fileID: 11400000, guid: 1724f0690ac686340a9d49e2f66c6cd3, type: 2}
+  - {fileID: 11400000, guid: 6998654e15fc34741a20046b034526a9, type: 2}
+  - {fileID: 11400000, guid: ca5b417791726f949aab6afff7e7eb84, type: 2}
   - {fileID: 11400000, guid: a3555f5f9bb3fce4aa266dabbd811314, type: 2}
-  predatorList: []
+  predatorList:
+  - {fileID: 11400000, guid: 0c6308a7049671a42abceaddee436b9c, type: 2}
   attackValue: 20
   attackRange: 2
   attackCooldown: 1

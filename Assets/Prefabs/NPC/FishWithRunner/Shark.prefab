@@ -50,7 +50,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gibPrefab: {fileID: -6550082182933151621, guid: b9dad96a76a34d346ae8989e61852300,
     type: 3}
-  gibSpawnCount: 15
+  gibSpawnCount: 10
   spawnGibs: 1
   fishData: {fileID: 11400000, guid: 0c6308a7049671a42abceaddee436b9c, type: 2}
 --- !u!114 &598851164403782487
@@ -146,7 +146,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 14
+  m_Radius: 10
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &8832970889146234319
 MonoBehaviour:
@@ -310,6 +310,12 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5807882279209203546, guid: 3f8486498552be144992af32f4d2779b,
+        type: 3}
+      propertyPath: fishData
+      value: 
+      objectReference: {fileID: 11400000, guid: 0c6308a7049671a42abceaddee436b9c,
+        type: 2}
+    - target: {fileID: 6630329994706225884, guid: 3f8486498552be144992af32f4d2779b,
         type: 3}
       propertyPath: fishData
       value: 

@@ -624,7 +624,7 @@ PrefabInstance:
     - target: {fileID: 7000746915098752231, guid: d29956c564d139a45ab318ff6e931255,
         type: 3}
       propertyPath: m_Name
-      value: ParrotFish
+      value: Model
       objectReference: {fileID: 0}
     - target: {fileID: 8348419828889055348, guid: d29956c564d139a45ab318ff6e931255,
         type: 3}
@@ -944,6 +944,12 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5807882279209203546, guid: 3f8486498552be144992af32f4d2779b,
+        type: 3}
+      propertyPath: fishData
+      value: 
+      objectReference: {fileID: 11400000, guid: ca5b417791726f949aab6afff7e7eb84,
+        type: 2}
+    - target: {fileID: 6630329994706225884, guid: 3f8486498552be144992af32f4d2779b,
         type: 3}
       propertyPath: fishData
       value: 

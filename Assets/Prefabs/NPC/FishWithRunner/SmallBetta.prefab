@@ -237,6 +237,11 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1253509041228715374, guid: 7b8a0ecd9c7ba2e4dad3391a0a56e42c,
+        type: 3}
+      propertyPath: m_Radius
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 1851556293424689627, guid: 7b8a0ecd9c7ba2e4dad3391a0a56e42c,
         type: 3}
       propertyPath: m_LocalRotation.w
@@ -340,7 +345,7 @@ PrefabInstance:
     - target: {fileID: 5197201702416932992, guid: 7b8a0ecd9c7ba2e4dad3391a0a56e42c,
         type: 3}
       propertyPath: m_Name
-      value: SmallBetta
+      value: Model
       objectReference: {fileID: 0}
     - target: {fileID: 5329846237721762774, guid: 7b8a0ecd9c7ba2e4dad3391a0a56e42c,
         type: 3}
@@ -372,7 +377,7 @@ PrefabInstance:
     - target: {fileID: 6051695805070191918, guid: 7b8a0ecd9c7ba2e4dad3391a0a56e42c,
         type: 3}
       propertyPath: gibSpawnCount
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6496080518685895798, guid: 7b8a0ecd9c7ba2e4dad3391a0a56e42c,
         type: 3}
@@ -701,7 +706,7 @@ PrefabInstance:
     - target: {fileID: 2522072839802053289, guid: 3f8486498552be144992af32f4d2779b,
         type: 3}
       propertyPath: NetworkedBehaviours.Array.size
-      value: 13
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 2522072839802053289, guid: 3f8486498552be144992af32f4d2779b,
         type: 3}
@@ -727,25 +732,30 @@ PrefabInstance:
         type: 3}
       propertyPath: NetworkedBehaviours.Array.data[8]
       value: 
-      objectReference: {fileID: 8136897614190955610}
+      objectReference: {fileID: 4371887378305757255}
     - target: {fileID: 2522072839802053289, guid: 3f8486498552be144992af32f4d2779b,
         type: 3}
       propertyPath: NetworkedBehaviours.Array.data[9]
       value: 
-      objectReference: {fileID: 1455673182896992344}
+      objectReference: {fileID: 8136897614190955610}
     - target: {fileID: 2522072839802053289, guid: 3f8486498552be144992af32f4d2779b,
         type: 3}
       propertyPath: NetworkedBehaviours.Array.data[10]
       value: 
-      objectReference: {fileID: 5559819988896379008}
+      objectReference: {fileID: 1455673182896992344}
     - target: {fileID: 2522072839802053289, guid: 3f8486498552be144992af32f4d2779b,
         type: 3}
       propertyPath: NetworkedBehaviours.Array.data[11]
       value: 
-      objectReference: {fileID: 7048324565586925809}
+      objectReference: {fileID: 5559819988896379008}
     - target: {fileID: 2522072839802053289, guid: 3f8486498552be144992af32f4d2779b,
         type: 3}
       propertyPath: NetworkedBehaviours.Array.data[12]
+      value: 
+      objectReference: {fileID: 7048324565586925809}
+    - target: {fileID: 2522072839802053289, guid: 3f8486498552be144992af32f4d2779b,
+        type: 3}
+      propertyPath: NetworkedBehaviours.Array.data[13]
       value: 
       objectReference: {fileID: 4485672370762897990}
     - target: {fileID: 5124316588462460406, guid: 3f8486498552be144992af32f4d2779b,
@@ -785,6 +795,18 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 6998654e15fc34741a20046b034526a9,
         type: 2}
+    - target: {fileID: 6630329994706225884, guid: 3f8486498552be144992af32f4d2779b,
+        type: 3}
+      propertyPath: model
+      value: 
+      objectReference: {fileID: 725318885590578868, guid: 240d2fe2969a54ff0b6122df02e7ad13,
+        type: 3}
+    - target: {fileID: 6630329994706225884, guid: 3f8486498552be144992af32f4d2779b,
+        type: 3}
+      propertyPath: fishData
+      value: 
+      objectReference: {fileID: 11400000, guid: 6998654e15fc34741a20046b034526a9,
+        type: 2}
     - target: {fileID: 8821568059870424906, guid: 3f8486498552be144992af32f4d2779b,
         type: 3}
       propertyPath: healthModel
@@ -815,6 +837,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 7014466964299935284}
+    - targetCorrespondingSourceObject: {fileID: 1443812496687094691, guid: 3f8486498552be144992af32f4d2779b,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4371887378305757255}
   m_SourcePrefab: {fileID: 100100000, guid: 3f8486498552be144992af32f4d2779b, type: 3}
 --- !u!114 &1627304806677042884 stripped
 MonoBehaviour:
@@ -926,3 +952,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthModel: {fileID: 3162902124500956280}
   healthSlider: {fileID: 2310782456221131389}
+--- !u!114 &4371887378305757255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8714653982888993325}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b50d21f750df344eb19913dadddbd49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthModel: {fileID: 0}
+  healthSlider: {fileID: 0}
