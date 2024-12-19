@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using UnityEditor;
+using System.Globalization;
 
 public class FishData_CSVReader
 {
@@ -118,7 +119,7 @@ public class FishData_CSVReader
 
         fishID.intValue = short.Parse(ID);
         fishPrefab.objectReferenceValue = AssetDatabase.LoadAssetAtPath<GameObject>(prefabPath);
-        //scale.floatValue = float.Parse(scaleValue);
+        scale.floatValue = float.Parse(scaleValue, CultureInfo.InvariantCulture);
 
         dataObject.ApplyModifiedProperties();
     }
@@ -141,17 +142,17 @@ public class FishData_CSVReader
         SerializedProperty FOV_Angle = dataObject.FindProperty("FOV_Angle");
         SerializedProperty FOV_Radius = dataObject.FindProperty("FOV_Radius");
 
-        maxHealth.floatValue = float.Parse(maxHealthValue);
-        recoveryHealthInSecProperty.floatValue = float.Parse(recoveryHealthInSec);
-        timeToStartRecoveringProperty.floatValue = float.Parse(timeToStartRecovering);
-        maxStamina.intValue = short.Parse(maxStaminaValue);
-        staminaDecreaseRate.intValue = short.Parse(staminaDecreaseRateValue);
-        staminaRegenRate.intValue = short.Parse(staminaRegenRateValue);
-        staminaThreshold.intValue = short.Parse(staminaThresholdValue);
-        xpValueProperty.intValue = short.Parse(xpValue);
-        gibsSpawnValueProperty.intValue = short.Parse(gibsSpawnValue);
-        FOV_Angle.floatValue = float.Parse(FOV_AngleValue);
-        FOV_Radius.floatValue = float.Parse(FOV_RadiusValue);
+        maxHealth.floatValue = float.Parse(maxHealthValue, CultureInfo.InvariantCulture);
+        recoveryHealthInSecProperty.floatValue = float.Parse(recoveryHealthInSec, CultureInfo.InvariantCulture);
+        timeToStartRecoveringProperty.floatValue = float.Parse(timeToStartRecovering, CultureInfo.InvariantCulture);
+        maxStamina.intValue = short.Parse(maxStaminaValue, CultureInfo.InvariantCulture);
+        staminaDecreaseRate.intValue = short.Parse(staminaDecreaseRateValue, CultureInfo.InvariantCulture);
+        staminaRegenRate.intValue = short.Parse(staminaRegenRateValue, CultureInfo.InvariantCulture);
+        staminaThreshold.intValue = short.Parse(staminaThresholdValue, CultureInfo.InvariantCulture);
+        xpValueProperty.intValue = short.Parse(xpValue, CultureInfo.InvariantCulture);
+        gibsSpawnValueProperty.intValue = short.Parse(gibsSpawnValue, CultureInfo.InvariantCulture);
+        FOV_Angle.floatValue = float.Parse(FOV_AngleValue, CultureInfo.InvariantCulture);
+        FOV_Radius.floatValue = float.Parse(FOV_RadiusValue, CultureInfo.InvariantCulture);
 
         dataObject.ApplyModifiedProperties();
     }
@@ -166,11 +167,11 @@ public class FishData_CSVReader
         SerializedProperty timeToLoseInterest = dataObject.FindProperty("timeToLoseInterest");
         SerializedProperty distanceToLoseInterest = dataObject.FindProperty("distanceToLoseInterest");
 
-        attackValue.floatValue = float.Parse(attackDamage);
-        attackRange.floatValue = float.Parse(attackRangeValue);
-        attackCooldown.floatValue = float.Parse(attackCooldownValue);
-        timeToLoseInterest.floatValue = float.Parse(timeToLoseInterestValue);
-        distanceToLoseInterest.floatValue = float.Parse(distanceToLoseInterestValue);
+        attackValue.floatValue = float.Parse(attackDamage, CultureInfo.InvariantCulture);
+        attackRange.floatValue = float.Parse(attackRangeValue, CultureInfo.InvariantCulture);
+        attackCooldown.floatValue = float.Parse(attackCooldownValue, CultureInfo.InvariantCulture);
+        timeToLoseInterest.floatValue = float.Parse(timeToLoseInterestValue, CultureInfo.InvariantCulture);
+        distanceToLoseInterest.floatValue = float.Parse(distanceToLoseInterestValue, CultureInfo.InvariantCulture);
 
         dataObject.ApplyModifiedProperties();
     }
@@ -237,13 +238,13 @@ public class FishData_CSVReader
         SerializedProperty wanderDistanceVertical = dataObject.FindProperty("wanderDistanceVertical");
         SerializedProperty wanderDistanceHorizontal = dataObject.FindProperty("wanderDistanceHorizontal");
 
-        wanderSpeed.floatValue = float.Parse(wanderSpeedValue);
-        fastSpeed.floatValue = float.Parse(fastSpeedValue);
-        rotationSpeed.floatValue = float.Parse(rotationSpeedValue);
-        maxPitch.floatValue = float.Parse(maxPitchValue);
-        obstacleAvoidanceDistance.floatValue = float.Parse(obstacleAvoidanceValue);
-        wanderDistanceVertical.floatValue = float.Parse(wanderDistanceVerticalValue);
-        wanderDistanceHorizontal.floatValue = float.Parse(wanderDistanceHorizontalValue);
+        wanderSpeed.floatValue = float.Parse(wanderSpeedValue, CultureInfo.InvariantCulture);
+        fastSpeed.floatValue = float.Parse(fastSpeedValue, CultureInfo.InvariantCulture);
+        rotationSpeed.floatValue = float.Parse(rotationSpeedValue, CultureInfo.InvariantCulture);
+        maxPitch.floatValue = float.Parse(maxPitchValue, CultureInfo.InvariantCulture);
+        obstacleAvoidanceDistance.floatValue = float.Parse(obstacleAvoidanceValue, CultureInfo.InvariantCulture);
+        wanderDistanceVertical.floatValue = float.Parse(wanderDistanceVerticalValue, CultureInfo.InvariantCulture);
+        wanderDistanceHorizontal.floatValue = float.Parse(wanderDistanceHorizontalValue, CultureInfo.InvariantCulture);
 
         dataObject.ApplyModifiedProperties();
     }
@@ -251,7 +252,7 @@ public class FishData_CSVReader
     private static void FillFleeValues(SerializedObject dataObject, string safeDistanceValue)
     {
         SerializedProperty safeDistance = dataObject.FindProperty("safeDistance");
-        safeDistance.floatValue = float.Parse(safeDistanceValue);
+        safeDistance.floatValue = float.Parse(safeDistanceValue, CultureInfo.InvariantCulture);
 
         dataObject.ApplyModifiedProperties();
     }
