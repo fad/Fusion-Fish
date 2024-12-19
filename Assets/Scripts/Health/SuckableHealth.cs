@@ -53,6 +53,8 @@ public class SuckableHealth : NetworkBehaviour, IHealthManager
     {
         _died = true;
         OnDeath?.Invoke();
-        Destroy(gameObject);
+
+        if (!HasStateAuthority) return;
+        Runner.Despawn(Object);
     }
 }

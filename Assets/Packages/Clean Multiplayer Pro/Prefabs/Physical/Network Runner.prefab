@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6867999484311217255}
   - component: {fileID: 5941535274536526876}
   - component: {fileID: -4483146633577362278}
+  - component: {fileID: 8015389025272927989}
   m_Layer: 0
   m_Name: Network Runner
   m_TagString: Untagged
@@ -121,6 +122,18 @@ MonoBehaviour:
   ClientPhysicsSimulation: 2
   DeltaTimeMultiplier: 1
   SetUnityFixedTimestep: 0
+--- !u!114 &8015389025272927989
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6867999484311217248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b520769a721a0134fb6ec2ac2470f03a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2442570615845802599
 PrefabInstance:
   m_ObjectHideFlags: 0
