@@ -15,27 +15,26 @@ MonoBehaviour:
   fishID: 8
   fishPrefab: {fileID: 1113120347895142575, guid: 574e4c410012d714abb2b8bacc59e218,
     type: 3}
-  scale: 0.5
-  maxHealth: 30
-  recoveryHealthInSecond: 1
-  timeToStartRecoveryHealth: 8
-  maxStamina: 50
+  scale: 1
+  maxHealth: 120
+  recoveryHealthInSecond: 2
+  timeToStartRecoveryHealth: 10
+  maxStamina: 60
   staminaDecreaseRate: 10
-  staminaRegenRate: 6
+  staminaRegenRate: 5
   staminaThreshold: 30
-  xpValue: 100
+  xpValue: 200
   gibsSpawnValue: 3
   FOV_Angle: 50
   FOV_Radius: 20
   preyList:
   - {fileID: 11400000, guid: 330945d332c80934999ee14c283a705e, type: 2}
-  - {fileID: 11400000, guid: ca5b417791726f949aab6afff7e7eb84, type: 2}
+  - {fileID: 11400000, guid: 6998654e15fc34741a20046b034526a9, type: 2}
   - {fileID: 11400000, guid: a3555f5f9bb3fce4aa266dabbd811314, type: 2}
   predatorList:
   - {fileID: 11400000, guid: 0c6308a7049671a42abceaddee436b9c, type: 2}
-  - {fileID: 11400000, guid: 6998654e15fc34741a20046b034526a9, type: 2}
-  attackValue: 4
-  attackRange: 4
+  attackValue: 12
+  attackRange: 1.5
   attackCooldown: 1
   timeToLoseInterest: 6
   distanceToLoseInterest: 17.5
