@@ -59,6 +59,9 @@ public class HealthManager : NetworkBehaviour, IHealthManager, ISuckable, IGrasp
 
         _changeDetector = GetChangeDetector(ChangeDetector.Source.SimulationState);
 
+        maxHealth = fishData.MaxHealth;
+        recoveryHealthInSecond = fishData.RecoveryHealthInSecond;
+        timeToStartRecoveryHealth = fishData.TimeToStartRecoveryHealth;
         Restart();
     }
 
