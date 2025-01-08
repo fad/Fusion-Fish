@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Fusion;
 using StarterAssets;
+using DamageNumbersPro;
 
 public class PlayerAttack : NetworkBehaviour
 {
@@ -27,6 +28,12 @@ public class PlayerAttack : NetworkBehaviour
 
     [SerializeField]
     private NetworkMecanimAnimator networkFishAnimator;
+    
+    [SerializeField]
+    private DamageNumber damageNumberPrefab; 
+    
+    [SerializeField]
+    private float radiusToSpawnDamageNumber = .5f;
 
     [Header("Attack")]
     [SerializeField]
@@ -89,6 +96,8 @@ public class PlayerAttack : NetworkBehaviour
     {
         if (!HasStateAuthority)
             return;
+        
+        damageNumberPrefab.PrewarmPool();
 
         playerManager.thirdPersonController.gameObject.layer = LayerMask.NameToLayer("StateAuthorityPlayer");
 
@@ -280,8 +289,11 @@ public class PlayerAttack : NetworkBehaviour
             HealthManager health = hitColliders[0].GetComponentInChildren<HealthManager>();
 
             // Check if the target is within the attraction angle
-            if (angleToTarget <= attractionAngle && health && !health.notAbleToGetBitten)
+            if (angleToTarget <= attractionAngle && health && !health.notAbleToGetBitten)   
             {
+                if (hitColliders[0] is null)
+                    return;
+                
                 SetFoodObject(hitColliders[0].transform.gameObject, Color.yellow, false);
 
                 if (hitColliders[0].TryGetComponent(out _currentEnemyOutline))
@@ -355,12 +367,20 @@ public class PlayerAttack : NetworkBehaviour
                 return;
 
             health.ReceiveDamageRpc(attackDamage);
+            ShowDamageNumbers(health.transform.position, attackDamage);
 
             if (_foodObject.TryGetComponent<ThirdPersonController>(out var player))
                 player.GraspedRpc(playerManager.GetComponent<NetworkTransform>());
 
             playerManager.thirdPersonController.StartAttractToEntity(_foodObject.transform);
         }
+    }
+
+    private void ShowDamageNumbers(Vector3 targetGlobalPosition, float number)
+    {   
+        Vector3 randomPositionAroundTarget = targetGlobalPosition + Random.insideUnitSphere * radiusToSpawnDamageNumber;
+        
+        damageNumberPrefab.Spawn(randomPositionAroundTarget, number);
     }
 
     private void OnDrawGizmos()

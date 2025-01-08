@@ -6575,6 +6575,8 @@ MonoBehaviour:
   biteLower: {fileID: 5466369016473450773}
   biteAnimator: {fileID: 9174893869088333902}
   networkFishAnimator: {fileID: 6741892561249266755}
+  damageNumber: {fileID: 7407005287724650605, guid: e42a86b60d2f8294c9a2a418574abe06,
+    type: 3}
   attackRange: 1.24
   maxTimeBetweenAttack: 0.75
   attractionAngle: 40
