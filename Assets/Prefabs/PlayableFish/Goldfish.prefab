@@ -5541,6 +5541,17 @@ PrefabInstance:
       propertyPath: healthIncreaseOnLevelUp
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 2297454540360690151, guid: 274fa519b44c24e43a28d85dbdddcb30,
+        type: 3}
+      propertyPath: LevelsFishData.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2297454540360690151, guid: 274fa519b44c24e43a28d85dbdddcb30,
+        type: 3}
+      propertyPath: LevelsFishData.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 1724f0690ac686340a9d49e2f66c6cd3,
+        type: 2}
     - target: {fileID: 2749181200256999984, guid: 274fa519b44c24e43a28d85dbdddcb30,
         type: 3}
       propertyPath: attackDamage

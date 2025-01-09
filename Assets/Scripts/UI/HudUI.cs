@@ -97,7 +97,7 @@ public class HudUI : MonoBehaviour
 
         currentTimeToSpawn -= Time.deltaTime;
 
-        float XpPercent = (float)playerManager.levelUp.GetExperience() / playerManager.levelUp.experienceUntilUpgrade;
+        float XpPercent = (float)playerManager.levelUp.GetExperience() / playerManager.levelUp.currentLevelFishData.ExperienceUntilUpgrade;
         if (xpUI.Value > XpPercent)
         {
             xpUI.animTime = 100;

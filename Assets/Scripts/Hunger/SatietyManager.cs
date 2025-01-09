@@ -11,7 +11,7 @@ public class SatietyManager : NetworkBehaviour, ISatietyManager
     [SerializeField]private int satietyDecreaseRate = 1;
 
     private int _currentSatiety;
-
+    
     public override void Spawned()
     {
         playerManager = GetComponent<PlayerManager>();
@@ -60,6 +60,12 @@ public class SatietyManager : NetworkBehaviour, ISatietyManager
     {
         return  maxSatiety;
     }
- 
+    public void UpdateSatietyData(int maxSatiety, int satietyDecreaseRate)
+    {
+        if(maxSatiety > 0)
+            this.maxSatiety = maxSatiety;
+        if(satietyDecreaseRate > 0)
+            this.satietyDecreaseRate = satietyDecreaseRate;
+    }
     
 }

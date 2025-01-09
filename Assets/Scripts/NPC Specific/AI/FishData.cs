@@ -15,6 +15,15 @@ public class FishData : ScriptableObject
     private float scale;
 
     [Header("General Values")]
+    [SerializeField, Tooltip("The amount of experience required to level up.")]
+    private int experienceUntilUpgrade = 300;
+
+    [SerializeField, Tooltip("The amount of experience required to level up.")]
+    private int maxSatiety = 120;  
+
+    [SerializeField, Tooltip("The amount of experience required to level up.")]
+    private int satietyDecreaseRate = 1;    
+    
     [SerializeField, Tooltip("The maximum Health of the entity.")]
     private float maxHealth = 10f;
 
@@ -106,6 +115,9 @@ public class FishData : ScriptableObject
     public float Scale => scale;
 
     public float MaxHealth => maxHealth;
+    public int ExperienceUntilUpgrade => experienceUntilUpgrade;
+    public int MaxSatiety => maxSatiety;
+    public int SatietyDecreaseRate => satietyDecreaseRate;
     public float RecoveryHealthInSecond => recoveryHealthInSecond;
     public float TimeToStartRecoveryHealth => timeToStartRecoveryHealth;
     public short MaxStamina => maxStamina;

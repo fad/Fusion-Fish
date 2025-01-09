@@ -45,22 +45,12 @@ public class PlayerHealth : NetworkBehaviour, IHealthUtility
         HudUI.Instance.OffDeathPanel();
         
         _playerManager.levelUp.Restart();
-
-        _playerManager.playerAttack.suckInDamage = _playerManager.levelUp.startingSuckPower;
-        _playerManager.playerAttack.attackDamage = _playerManager.levelUp.startingAttackDamage;
-        _playerManager.thirdPersonController.cameraDistance = _playerManager.levelUp.startingCameraDistance;
-        _playerManager.thirdPersonController.defaultSwimSpeed = _playerManager.levelUp.startingDefaultSwimSpeed;
-        _playerManager.thirdPersonController.boostSwimSpeed = _playerManager.levelUp.startingBoostSwimSpeed;
-        _playerManager.playerAttack.attackRange = _playerManager.levelUp.startingAttackRange;
-        _playerManager.healthManager.maxHealth = _playerManager.levelUp.startingHealth;
-
         _playerManager.satietyManager.Restart();
         _playerManager.healthManager.Restart();
         _playerManager.thirdPersonController.currentBoostCount = _playerManager.thirdPersonController.maxBoostCount;
         
         var playerTransform = _playerManager.thirdPersonController.transform;
         GetComponent<PlayerPositionReset>().ResetPlayerPosition();
-        playerTransform.localScale = _playerManager.levelUp.startingSize;
         _playerManager.thirdPersonController.boostState = ThirdPersonController.BoostState.BoostReload;
         SetPlayerMeshRpc(true);
     }

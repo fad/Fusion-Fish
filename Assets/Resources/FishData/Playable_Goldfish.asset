@@ -16,6 +16,9 @@ MonoBehaviour:
   fishPrefab: {fileID: 7922903181239320888, guid: 4903ee395fc06425aa96fe507fe8334b,
     type: 3}
   scale: 0.5
+  experienceUntilUpgrade: 300
+  maxSatiety: 120
+  satietyDecreaseRate: 1
   maxHealth: 120
   recoveryHealthInSecond: 1.8
   timeToStartRecoveryHealth: 10

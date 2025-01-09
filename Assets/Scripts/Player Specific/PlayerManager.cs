@@ -14,9 +14,7 @@ public class PlayerManager : NetworkBehaviour
     [HideInInspector] public SlowDownManager slowDownManager;
     [SerializeField] public PlayerAttack playerAttack;
     [HideInInspector] public NetworkRunner hostPlayerRunner;
-
-    [SerializeField] private FishData fishData;
-
+    [HideInInspector] public EntityDataContainer entityDataContainer;
 
     private void Awake()
     {
@@ -26,7 +24,7 @@ public class PlayerManager : NetworkBehaviour
         playerHealth = GetComponent<PlayerHealth>();
         satietyManager = GetComponent<SatietyManager>();
         slowDownManager = GetComponent<SlowDownManager>();
-        CheckLevelUp();
+        entityDataContainer = GetComponent<EntityDataContainer>();
     }
     
     private IEnumerator Start()
@@ -46,18 +44,5 @@ public class PlayerManager : NetworkBehaviour
             HudUI.Instance.playerManager = this;
             DebugLogManager.Instance.GetComponent<InGameDebugConsoleManager>().playerManager = this;
         }
-    }
-
-    public void CheckLevelUp()
-    {
-        thirdPersonController.transform.localScale = new Vector3(fishData.Scale, fishData.Scale, fishData.Scale);
-        thirdPersonController.boostSwimSpeed = fishData.FastSpeed;
-        thirdPersonController.defaultSwimSpeed = fishData.WanderSpeed;
-        thirdPersonController.boostReloadSpeed = fishData.StaminaRegenRate;
-        healthManager.maxHealth = fishData.MaxHealth;
-        healthManager.recoveryHealthInSecond = fishData.RecoveryHealthInSecond;
-        healthManager.timeToStartRecoveryHealth = fishData.TimeToStartRecoveryHealth;
-        playerAttack.attackDamage = fishData.AttackValue;
-        playerAttack.attackRange = fishData.AttackRange;
     }
 }

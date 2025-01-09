@@ -16,6 +16,7 @@ MonoBehaviour:
   fishPrefab: {fileID: 1113120347895142575, guid: 574e4c410012d714abb2b8bacc59e218,
     type: 3}
   scale: 1
+  experienceUntilUpgrade: 300
   maxHealth: 120
   recoveryHealthInSecond: 2
   timeToStartRecoveryHealth: 10
@@ -33,6 +34,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 330945d332c80934999ee14c283a705e, type: 2}
   - {fileID: 11400000, guid: 6998654e15fc34741a20046b034526a9, type: 2}
   - {fileID: 11400000, guid: a3555f5f9bb3fce4aa266dabbd811314, type: 2}
+  - {fileID: 11400000, guid: 6561da2b692dab14da2811ec66135abb, type: 2}
   predatorList:
   - {fileID: 11400000, guid: 0c6308a7049671a42abceaddee436b9c, type: 2}
   attackValue: 12
@@ -45,6 +47,6 @@ MonoBehaviour:
   rotationSpeed: 2
   maxPitch: 45
   obstacleAvoidanceDistance: 2
-  wanderDistanceHorizontal: 100
+  wanderDistanceHorizontal: 4
   wanderDistanceVertical: 15
   safeDistance: 20

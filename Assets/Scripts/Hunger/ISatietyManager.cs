@@ -7,5 +7,6 @@ public interface ISatietyManager
     public void RecoverySatiety(float SatietyCount);
     public float GetSatiety();
     public float GetMaxSatiety();
+    public void UpdateSatietyData(int maxSatiety, int satietyDecreaseRate);
 
 }

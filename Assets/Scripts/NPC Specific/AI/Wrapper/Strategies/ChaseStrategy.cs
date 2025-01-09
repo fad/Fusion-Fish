@@ -247,7 +247,7 @@ public class ChaseStrategy : StaminaMoveStrategy
             if(sqrMagnitude > .25f)
             {
                 Vector3 directionToPrey = _preyTransform.position - Entity.position;
-                Vector3 forwardDirection = directionToPrey.normalized * (ForwardModifier * (Speed * Time.deltaTime));
+                Vector3 forwardDirection = Entity.forward * (ForwardModifier * (Speed * Time.deltaTime));
                 Move(forwardDirection);
             }
         }

@@ -10,4 +10,10 @@ public class EntityDataContainer : MonoBehaviour, IEntity
     private FishData fishData;
 
     public FishData FishType => fishData;
+
+    public void FishDataUpdate(FishData newData)
+    {
+        if(newData!=null)
+            fishData = newData;
+    }
 }
