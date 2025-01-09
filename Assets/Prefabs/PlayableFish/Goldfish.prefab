@@ -5550,7 +5550,7 @@ PrefabInstance:
         type: 3}
       propertyPath: LevelsFishData.Array.data[0]
       value: 
-      objectReference: {fileID: 11400000, guid: 1724f0690ac686340a9d49e2f66c6cd3,
+      objectReference: {fileID: 11400000, guid: 10ded4c8cb3282148921dd1b9eba9c30,
         type: 2}
     - target: {fileID: 2749181200256999984, guid: 274fa519b44c24e43a28d85dbdddcb30,
         type: 3}
@@ -5617,7 +5617,7 @@ PrefabInstance:
         type: 3}
       propertyPath: fishData
       value: 
-      objectReference: {fileID: 11400000, guid: 1724f0690ac686340a9d49e2f66c6cd3,
+      objectReference: {fileID: 11400000, guid: 10ded4c8cb3282148921dd1b9eba9c30,
         type: 2}
     - target: {fileID: 4632872686385277288, guid: 274fa519b44c24e43a28d85dbdddcb30,
         type: 3}

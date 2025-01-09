@@ -8,7 +8,7 @@ using UnityEngine;
 public class LevelUp : NetworkBehaviour
 {
     [Networked][HideInInspector] public int currentLevel { get; private set; }
-    [HideInInspector] public FishData currentLevelFishData { get; private set; }
+    [HideInInspector] public PlayerFishData currentLevelFishData { get; private set; }
 
     private int currentExperience;
     private PlayerManager playerManager;
@@ -17,7 +17,7 @@ public class LevelUp : NetworkBehaviour
     [SerializeField] private GameObject eggModel;
     [SerializeField] private GameObject fishModel;
     [SerializeField] private ParticleSystem LevelUpParticleSystem;
-    [SerializeField] private FishData[] LevelsFishData;
+    [SerializeField] private PlayerFishData[] LevelsFishData;
 
     public Action levelUpEvent;
     public Action<int> AddExperienceEvent;
@@ -55,7 +55,7 @@ public class LevelUp : NetworkBehaviour
     [Rpc(RpcSources.All, RpcTargets.All)]
     private void CheckLevelUpRpc()
     {
-        if (currentExperience >= 0)//currentLevelFishData.ExperienceUntilUpgrade)
+        if (currentExperience >= currentLevelFishData.ExperienceUntilUpgrade)
         {
             currentLevel++;
             currentLevelFishData = LevelsFishData[currentLevel];
@@ -73,7 +73,7 @@ public class LevelUp : NetworkBehaviour
         }
     }
 
-    private void UpdateFishData(FishData fishData)
+    private void UpdateFishData(PlayerFishData fishData)
     {
         playerManager.satietyManager.UpdateSatietyData(fishData.MaxSatiety,fishData.SatietyDecreaseRate);
         playerManager.entityDataContainer.FishDataUpdate(fishData);
