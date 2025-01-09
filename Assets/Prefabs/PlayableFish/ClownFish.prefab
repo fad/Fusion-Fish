@@ -5420,6 +5420,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2749181200256999984, guid: 274fa519b44c24e43a28d85dbdddcb30,
         type: 3}
+      propertyPath: damageNumberPrefab
+      value: 
+      objectReference: {fileID: 7407005287724650605, guid: e42a86b60d2f8294c9a2a418574abe06,
+        type: 3}
+    - target: {fileID: 2749181200256999984, guid: 274fa519b44c24e43a28d85dbdddcb30,
+        type: 3}
       propertyPath: playerLayerMask.m_Bits
       value: 128
       objectReference: {fileID: 0}
@@ -5427,6 +5433,11 @@ PrefabInstance:
         type: 3}
       propertyPath: hittableLayerMask.m_Bits
       value: 192
+      objectReference: {fileID: 0}
+    - target: {fileID: 2749181200256999984, guid: 274fa519b44c24e43a28d85dbdddcb30,
+        type: 3}
+      propertyPath: radiusToSpawnDamageNumber
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 3269069715231181482, guid: 274fa519b44c24e43a28d85dbdddcb30,
         type: 3}
