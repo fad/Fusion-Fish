@@ -63,7 +63,10 @@ public class SatietyManager : NetworkBehaviour, ISatietyManager
     public void UpdateSatietyData(int maxSatiety, int satietyDecreaseRate)
     {
         if(maxSatiety > 0)
+        {
             this.maxSatiety = maxSatiety;
+            _currentSatiety = maxSatiety;
+        }
         if(satietyDecreaseRate > 0)
             this.satietyDecreaseRate = satietyDecreaseRate;
     }
