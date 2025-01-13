@@ -48,7 +48,7 @@ public class FishSpawnHandler : NetworkBehaviour
         {
             _fishDataDictionary.Add(data.FishID, data);
             _fishDataDictionaryByName.Add(data.name, data);
-        } 
+        }
     }
     
     

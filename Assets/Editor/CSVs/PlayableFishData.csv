@@ -1,0 +1,9 @@
+ID,Name,Prefab,Scale,Max Health,Max Stamina,Recovery Health In Seconds,Time To Start Recovering Health,Stamina Decrease Rate,Stamina Regeneration Rate,XP Value,Gibs Spawn Value,Attack Value,Attack Range,Wander Speed,Fast Speed,Rotation Speed,Max Pitch
+100,Clownfish,Assets/Packages/Low Poly Fishes/Prefabs/Clownfish.prefab,0.25,60,100,0.8,6,30,23,100,2,6,3,120,300,2,45
+101,Clownfish 1,Assets/Packages/Low Poly Fishes/Prefabs/Clownfish.prefab,0.25,60,100,0.8,6,30,23,100,2,6,3,120,300,2,45
+102,Clownfish 2,Assets/Packages/Low Poly Fishes/Prefabs/Clownfish.prefab,0.25,60,100,0.8,6,30,23,100,2,6,3,120,300,2,45
+103,Clownfish 3,Assets/Packages/Low Poly Fishes/Prefabs/Clownfish.prefab,0.25,60,100,0.8,6,30,23,100,2,6,3,120,300,2,45
+200,Goldfish,Assets/Packages/Low Poly Fishes/Prefabs/Goldfish.prefab,0.5,120,100,1.8,10,30,18,100,2,4,3,160,240,2,45
+201,Goldfish 1,Assets/Packages/Low Poly Fishes/Prefabs/Goldfish.prefab,0.5,120,100,1.8,10,30,18,100,2,4,3,160,240,2,45
+202,Goldfish 2,Assets/Packages/Low Poly Fishes/Prefabs/Goldfish.prefab,0.5,120,100,1.8,10,30,18,100,2,4,3,160,240,2,45
+203,Goldfish 3,Assets/Packages/Low Poly Fishes/Prefabs/Goldfish.prefab,0.5,120,100,1.8,10,30,18,100,2,4,3,160,240,2,45

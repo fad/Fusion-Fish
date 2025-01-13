@@ -10,19 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 66b2c857830665b43a00bbd7ca459835, type: 3}
-  m_Name: Playable_Clownfish 1
+  m_Name: Clownfish 3
   m_EditorClassIdentifier: 
-  fishID: 11
+  fishID: 103
   fishPrefab: {fileID: 2075058937487730628, guid: 07543d3dbdec44f7598a50d39bed61aa,
     type: 3}
-  scale: 0.5
+  scale: 0.25
   maxHealth: 60
   recoveryHealthInSecond: 0.8
   timeToStartRecoveryHealth: 6
   maxStamina: 100
   staminaDecreaseRate: 30
   staminaRegenRate: 23
-  staminaThreshold: 65
+  staminaThreshold: 5
   xpValue: 100
   gibsSpawnValue: 2
   FOV_Angle: 45
@@ -33,16 +33,16 @@ MonoBehaviour:
   chanceToCatch: 30
   attackRange: 3
   attackCooldown: 1
-  timeToLoseInterest: 7
+  timeToLoseInterest: 5
   distanceToLoseInterest: 20
   wanderSpeed: 120
   fastSpeed: 300
   rotationSpeed: 2
   maxPitch: 45
-  obstacleAvoidanceDistance: 2
-  wanderDistanceHorizontal: 2
-  wanderDistanceVertical: 5
-  safeDistance: 20
+  obstacleAvoidanceDistance: 1
+  wanderDistanceHorizontal: 50
+  wanderDistanceVertical: 10
+  safeDistance: 50
   experienceUntilUpgrade: 300
   maxSatiety: 120
   satietyDecreaseRate: 1

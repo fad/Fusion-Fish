@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c11d033a7185418c9421d8741488f96b, type: 3}
   m_Name: Tuna
   m_EditorClassIdentifier: 
-  fishID: 8
+  fishID: 6
   fishPrefab: {fileID: 1113120347895142575, guid: 574e4c410012d714abb2b8bacc59e218,
     type: 3}
   scale: 1
@@ -28,14 +28,13 @@ MonoBehaviour:
   FOV_Angle: 50
   FOV_Radius: 20
   preyList:
-  - {fileID: 11400000, guid: a3e9a62d8e02ff04c8ea885df710872f, type: 2}
-  - {fileID: 11400000, guid: 09364c29e362da84f95e82dfb2ae8afa, type: 2}
   - {fileID: 11400000, guid: 330945d332c80934999ee14c283a705e, type: 2}
   - {fileID: 11400000, guid: 6998654e15fc34741a20046b034526a9, type: 2}
   - {fileID: 11400000, guid: a3555f5f9bb3fce4aa266dabbd811314, type: 2}
   predatorList:
   - {fileID: 11400000, guid: 0c6308a7049671a42abceaddee436b9c, type: 2}
   attackValue: 12
+  chanceToCatch: 30
   attackRange: 1.5
   attackCooldown: 1
   timeToLoseInterest: 6

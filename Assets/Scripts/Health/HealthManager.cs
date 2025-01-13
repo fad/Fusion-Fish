@@ -1,18 +1,15 @@
 using System;
 using Fusion;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class HealthManager : NetworkBehaviour, IHealthManager, ISuckable, IGraspable
 {
-    [Header("Data Container")]
-    [SerializeField]
-    private FishData fishData;
-
     [Header("Health"), Space(10)]
     public float maxHealth;
-
     public float recoveryHealthInSecond = 10;
     public float timeToStartRecoveryHealth = 3;
+    public int XPValue = 100;
     private bool _regeneration = false;
 
     [Networked]
@@ -50,21 +47,19 @@ public class HealthManager : NetworkBehaviour, IHealthManager, ISuckable, IGrasp
     private ChangeDetector _changeDetector;
 
 
-    private void Start() => _bloodParticleSystem = GameObject.Find("BloodParticles").GetComponent<ParticleSystem>();
 
     public override void Spawned()
     {
         if (_healthUtility == null) TryGetComponent(out _healthUtility);
         if (!_slowDownManager) TryGetComponent(out _slowDownManager);
 
+    }
+    public void Start()
+    {
+        _bloodParticleSystem = GameObject.Find("BloodParticles").GetComponent<ParticleSystem>();
         _changeDetector = GetChangeDetector(ChangeDetector.Source.SimulationState);
-
-        maxHealth = fishData.MaxHealth;
-        recoveryHealthInSecond = fishData.RecoveryHealthInSecond;
-        timeToStartRecoveryHealth = fishData.TimeToStartRecoveryHealth;
         Restart();
     }
-
     public void Restart()
     {
         _died = false;
@@ -213,7 +208,7 @@ public class HealthManager : NetworkBehaviour, IHealthManager, ISuckable, IGrasp
     public int GetSuckedIn()
     {
         DestroySuckableRpc();
-        return fishData.XPValue;
+        return XPValue;
     }
 
     [Rpc(RpcSources.All, RpcTargets.StateAuthority)]

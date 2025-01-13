@@ -12,17 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c11d033a7185418c9421d8741488f96b, type: 3}
   m_Name: Small Betta
   m_EditorClassIdentifier: 
-  fishID: 6
+  fishID: 4
   fishPrefab: {fileID: 8714653982888993325, guid: e31abeab98e70be4cbb09a7698ec96f0,
     type: 3}
   scale: 0.5
   maxHealth: 100
   recoveryHealthInSecond: 1.7
   timeToStartRecoveryHealth: 12
-  maxStamina: 20
+  maxStamina: 50
   staminaDecreaseRate: 10
-  staminaRegenRate: 2
-  staminaThreshold: 15
+  staminaRegenRate: 5
+  staminaThreshold: 30
   xpValue: 150
   gibsSpawnValue: 3
   FOV_Angle: 35
@@ -31,20 +31,17 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 330945d332c80934999ee14c283a705e, type: 2}
   - {fileID: 11400000, guid: a3555f5f9bb3fce4aa266dabbd811314, type: 2}
   predatorList:
-  - {fileID: 11400000, guid: a3e9a62d8e02ff04c8ea885df710872f, type: 2}
-  - {fileID: 11400000, guid: 09364c29e362da84f95e82dfb2ae8afa, type: 2}
   - {fileID: 11400000, guid: 4f425dd60c1f84442a76761bb02cae31, type: 2}
   - {fileID: 11400000, guid: 7d2cb7dfd99a72c4bb748bd65e464fd4, type: 2}
   - {fileID: 11400000, guid: ca5b417791726f949aab6afff7e7eb84, type: 2}
-  - {fileID: 11400000, guid: d31e264a105b6c444b7fa1242d677279, type: 2}
   attackValue: 10
   chanceToCatch: 30
   attackRange: 1
   attackCooldown: 1
   timeToLoseInterest: 6
   distanceToLoseInterest: 17.5
-  wanderSpeed: 5
-  fastSpeed: 10
+  wanderSpeed: 2
+  fastSpeed: 4
   rotationSpeed: 2
   maxPitch: 45
   obstacleAvoidanceDistance: 2

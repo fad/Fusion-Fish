@@ -85,6 +85,7 @@ public class LevelUp : NetworkBehaviour
         playerManager.healthManager.maxHealth = fishData.MaxHealth;
         playerManager.healthManager.recoveryHealthInSecond = fishData.RecoveryHealthInSecond;
         playerManager.healthManager.timeToStartRecoveryHealth = fishData.TimeToStartRecoveryHealth;
+        playerManager.healthManager.XPValue = fishData.XPValue;
         playerManager.playerAttack.attackDamage = fishData.AttackValue;
         playerManager.playerAttack.chanceToCatch = fishData.ChanceToCatch;
         playerManager.playerAttack.attackRange = fishData.AttackRange;
