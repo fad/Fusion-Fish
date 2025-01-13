@@ -5544,13 +5544,25 @@ PrefabInstance:
     - target: {fileID: 2297454540360690151, guid: 274fa519b44c24e43a28d85dbdddcb30,
         type: 3}
       propertyPath: LevelsFishData.Array.size
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2297454540360690151, guid: 274fa519b44c24e43a28d85dbdddcb30,
         type: 3}
       propertyPath: LevelsFishData.Array.data[0]
       value: 
       objectReference: {fileID: 11400000, guid: 10ded4c8cb3282148921dd1b9eba9c30,
+        type: 2}
+    - target: {fileID: 2297454540360690151, guid: 274fa519b44c24e43a28d85dbdddcb30,
+        type: 3}
+      propertyPath: LevelsFishData.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: aa986f31109df444b909b6ef5da66d17,
+        type: 2}
+    - target: {fileID: 2297454540360690151, guid: 274fa519b44c24e43a28d85dbdddcb30,
+        type: 3}
+      propertyPath: LevelsFishData.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: 3f03ef4fecc4f2a4a9aebb221ec7ed9e,
         type: 2}
     - target: {fileID: 2749181200256999984, guid: 274fa519b44c24e43a28d85dbdddcb30,
         type: 3}
