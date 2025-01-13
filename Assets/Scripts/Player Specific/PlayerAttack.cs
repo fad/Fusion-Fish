@@ -46,6 +46,7 @@ public class PlayerAttack : NetworkBehaviour
     private float attractionAngle;
 
     public float attackDamage = 1;
+    public float chanceToCatch = 1;
     private float _currentAttackTime;
     private bool _preparedAttack;
     private bool _sucksFood;
@@ -366,7 +367,7 @@ public class PlayerAttack : NetworkBehaviour
             if (_foodObject.TryGetComponent(out HealthManager healthM) && healthM.notAbleToGetBitten)
                 return;
 
-            health.ReceiveDamageRpc(attackDamage);
+            health.ReceiveDamageRpc(attackDamage, chanceToCatch);
             ShowDamageNumbers(health.transform.position, attackDamage);
 
             if (_foodObject.TryGetComponent<ThirdPersonController>(out var player))

@@ -44,8 +44,10 @@ namespace StarterAssets
         private bool attractToEntity;
         private bool pushingAway;
         private Transform currentAttractEntity;
-        private float maxAttractTime = 1;
+        private const float maxAttractTime = 1;
+        private const float maxAttractCooldown = 2;
         private float currentAttractTime;
+        private float currentAttractCooldown;
 
         private Rigidbody rb; 
         private Transform swimArea;
@@ -377,6 +379,9 @@ namespace StarterAssets
             if(currentAttractEntity==null || currentAttractTime <= 0)
                 attractToEntity = false;
 
+            if(currentAttractCooldown > 0)
+                currentAttractCooldown -= Time.deltaTime;
+
             if(attractToEntity)
             {
                 currentAttractTime -= Time.deltaTime;
@@ -422,6 +427,9 @@ namespace StarterAssets
         }
         public void StartAttractToEntity(Transform entity)
         {
+            if(currentAttractCooldown > 0)
+                return;
+            currentAttractCooldown = maxAttractCooldown;
             currentAttractEntity = entity;
             currentAttractTime = maxAttractTime;
             attractToEntity = true;

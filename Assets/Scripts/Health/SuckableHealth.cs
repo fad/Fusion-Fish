@@ -30,7 +30,7 @@ public class SuckableHealth : NetworkBehaviour, IHealthManager
         NetworkedHealth = maxHealth;
     }
 
-    public void Damage(float amount)
+    public void Damage(float amount, float chanceToCatch = 0)
     {
         if (!Runner || !HasStateAuthority) return;
         

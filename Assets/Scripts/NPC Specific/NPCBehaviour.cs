@@ -185,16 +185,7 @@ public class NPCBehaviour : NetworkBehaviour
     
     private void MoveNPCInDirection(Vector3 targetDirection, Quaternion lookDirection)
     {
-        int slowdown  = 1;
-        if (TryGetComponent<HealthManager>(out var health))
-        {
-            // if(health.slowDown)
-            //     slowdown = 2;
-            if(health.IsGrasped)
-                slowdown = 10;
-        }
-
-        rb.AddForce(targetDirection.normalized * (-currentSpeed / slowdown * Time.deltaTime), ForceMode.Impulse);
+        rb.AddForce(targetDirection.normalized * (-currentSpeed * Time.deltaTime), ForceMode.Impulse);
         transform.rotation = Quaternion.Lerp(transform.rotation, lookDirection, Time.deltaTime * rotationSpeed);
     }
 

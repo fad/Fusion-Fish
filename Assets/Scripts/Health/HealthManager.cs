@@ -32,8 +32,8 @@ public class HealthManager : NetworkBehaviour, IHealthManager, ISuckable, IGrasp
     private SlowDownManager _slowDownManager;
 
     private bool _grasped;
-    [HideInInspector] public float maxGraspedTime = 1;
     [HideInInspector] public float graspedTime;
+    private const float graspedMaxTime = 0.6f;
 
     public event Action<float> OnHealthChanged;
     public event Action OnDeath;
@@ -128,12 +128,12 @@ public class HealthManager : NetworkBehaviour, IHealthManager, ISuckable, IGrasp
         _regeneration = true;
     }
 
-    public void Damage(float amount)
+    public void Damage(float amount, float chanceToCatch)
     {
         if (!HasSpawned) return;
 
         if (notAbleToGetBitten) return;
-        ReceiveDamageRpc(amount);
+        ReceiveDamageRpc(amount,chanceToCatch);
         CheckDeath(); // this line may not be deleted
     }
 
@@ -152,12 +152,13 @@ public class HealthManager : NetworkBehaviour, IHealthManager, ISuckable, IGrasp
     }
 
     [Rpc(RpcSources.All, RpcTargets.All)]
-    public void ReceiveDamageRpc(float damage)
+    public void ReceiveDamageRpc(float damage,float chanceToCatch = 0)
     {
-        if (damage >= NetworkedHealth * 0.2f)
+        //The chance to catch a fish will only trigger if you deal 10% damage of its current health.
+        if (damage >= NetworkedHealth * 0.1f && UnityEngine.Random.Range(0,101) < chanceToCatch)
         {
             _grasped = true;
-            graspedTime = maxGraspedTime;
+            graspedTime = graspedMaxTime;
         }
         NetworkedHealth -= damage;
 

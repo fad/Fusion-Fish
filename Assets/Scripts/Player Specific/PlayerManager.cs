@@ -15,6 +15,7 @@ public class PlayerManager : NetworkBehaviour
     [SerializeField] public PlayerAttack playerAttack;
     [HideInInspector] public NetworkRunner hostPlayerRunner;
     [HideInInspector] public EntityDataContainer entityDataContainer;
+    [HideInInspector] public SpawnGibsOnDestroy spawnGibsOnDestroy;
 
     private void Awake()
     {
@@ -25,6 +26,7 @@ public class PlayerManager : NetworkBehaviour
         satietyManager = GetComponent<SatietyManager>();
         slowDownManager = GetComponent<SlowDownManager>();
         entityDataContainer = GetComponent<EntityDataContainer>();
+        spawnGibsOnDestroy = GetComponent<SpawnGibsOnDestroy>();
     }
     
     private IEnumerator Start()

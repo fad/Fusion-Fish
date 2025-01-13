@@ -16,7 +16,6 @@ MonoBehaviour:
   fishPrefab: {fileID: 1113120347895142575, guid: 574e4c410012d714abb2b8bacc59e218,
     type: 3}
   scale: 1
-  experienceUntilUpgrade: 300
   maxHealth: 120
   recoveryHealthInSecond: 2
   timeToStartRecoveryHealth: 10
@@ -29,12 +28,11 @@ MonoBehaviour:
   FOV_Angle: 50
   FOV_Radius: 20
   preyList:
-  - {fileID: 11400000, guid: aaa032bb997807948879483b73e44a6d, type: 2}
-  - {fileID: 11400000, guid: 1724f0690ac686340a9d49e2f66c6cd3, type: 2}
+  - {fileID: 11400000, guid: a3e9a62d8e02ff04c8ea885df710872f, type: 2}
+  - {fileID: 11400000, guid: 09364c29e362da84f95e82dfb2ae8afa, type: 2}
   - {fileID: 11400000, guid: 330945d332c80934999ee14c283a705e, type: 2}
   - {fileID: 11400000, guid: 6998654e15fc34741a20046b034526a9, type: 2}
   - {fileID: 11400000, guid: a3555f5f9bb3fce4aa266dabbd811314, type: 2}
-  - {fileID: 11400000, guid: 6561da2b692dab14da2811ec66135abb, type: 2}
   predatorList:
   - {fileID: 11400000, guid: 0c6308a7049671a42abceaddee436b9c, type: 2}
   attackValue: 12

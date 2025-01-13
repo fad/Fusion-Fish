@@ -28,14 +28,15 @@ MonoBehaviour:
   FOV_Angle: 50
   FOV_Radius: 25
   preyList:
-  - {fileID: 11400000, guid: aaa032bb997807948879483b73e44a6d, type: 2}
-  - {fileID: 11400000, guid: 1724f0690ac686340a9d49e2f66c6cd3, type: 2}
+  - {fileID: 11400000, guid: a3e9a62d8e02ff04c8ea885df710872f, type: 2}
+  - {fileID: 11400000, guid: 09364c29e362da84f95e82dfb2ae8afa, type: 2}
   - {fileID: 11400000, guid: 7d2cb7dfd99a72c4bb748bd65e464fd4, type: 2}
   - {fileID: 11400000, guid: ca5b417791726f949aab6afff7e7eb84, type: 2}
   - {fileID: 11400000, guid: 4f425dd60c1f84442a76761bb02cae31, type: 2}
   - {fileID: 11400000, guid: a3555f5f9bb3fce4aa266dabbd811314, type: 2}
   predatorList: []
   attackValue: 200
+  chanceToCatch: 30
   attackRange: 6
   attackCooldown: 2
   timeToLoseInterest: 10

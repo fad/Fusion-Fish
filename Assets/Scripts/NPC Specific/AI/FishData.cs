@@ -60,6 +60,9 @@ public class FishData : ScriptableObject
     [SerializeField, Min(1f), Tooltip("The damage value to use for attacks.")]
     private float attackValue = 1f;
 
+    [SerializeField, Range(0, 100), Tooltip("The chance of catching a fish when biting.")]
+    private int chanceToCatch = 30;
+
     [SerializeField, Min(2f), Tooltip("The range at which the fish can attack.")]
     private float attackRange = 2f;
 
@@ -124,6 +127,7 @@ public class FishData : ScriptableObject
     public FishData[] PreyList => preyList;
     public FishData[] PredatorList => predatorList;
     public float AttackValue => attackValue;
+    public int ChanceToCatch => chanceToCatch;
     public float AttackRange => attackRange;
     public float AttackCooldown => attackCooldown;
     public float TimeToLoseInterest => timeToLoseInterest;

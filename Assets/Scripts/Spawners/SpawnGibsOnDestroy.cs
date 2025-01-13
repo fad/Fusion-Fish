@@ -35,7 +35,12 @@ public class SpawnGibsOnDestroy : NetworkBehaviour
             SpawnMeatObjects(currentGibSpawnCount);
         }
     }
-
+    public void FishDataUpdate(FishData newData)
+    {
+        if(newData!=null)
+            fishData = newData;
+    }
+    
     [Rpc(RpcSources.All, RpcTargets.StateAuthority)]
     public void SpawnGibsRpc()
     {

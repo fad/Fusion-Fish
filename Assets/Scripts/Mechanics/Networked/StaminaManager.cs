@@ -61,7 +61,11 @@ public class StaminaManager : NetworkBehaviour, IStaminaManager, IInitialisable
         TimePassedAfterLastDecrease = 0f; // Reset the timer after decreasing stamina
         CurrentDecreaseCooldownTimer = 0f;
     }
-
+    
+    public void Recavery()
+    {
+        CurrentStamina = fishData.MaxStamina;
+    }
     public void Regenerate()
     {
         if(CurrentStamina == fishData.MaxStamina || IsRegenerating) return;

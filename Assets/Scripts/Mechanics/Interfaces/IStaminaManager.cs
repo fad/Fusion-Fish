@@ -9,6 +9,7 @@ public interface IStaminaManager
     /// Decreases the stamina of the entity with their own Decrease Rate.
     /// </summary>
     void Decrease();
+    void Recavery();
     
     /// <summary>
     /// Starts regenerating the stamina of the entity with their own Regen Rate.

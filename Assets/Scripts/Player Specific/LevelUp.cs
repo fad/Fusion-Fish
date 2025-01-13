@@ -77,6 +77,7 @@ public class LevelUp : NetworkBehaviour
     {
         playerManager.satietyManager.UpdateSatietyData(fishData.MaxSatiety,fishData.SatietyDecreaseRate);
         playerManager.entityDataContainer.FishDataUpdate(fishData);
+        playerManager.spawnGibsOnDestroy.FishDataUpdate(fishData);
         playerManager.thirdPersonController.transform.localScale = new Vector3(fishData.Scale, fishData.Scale, fishData.Scale);
         playerManager.thirdPersonController.boostSwimSpeed = fishData.FastSpeed;
         playerManager.thirdPersonController.defaultSwimSpeed = fishData.WanderSpeed;
@@ -85,6 +86,7 @@ public class LevelUp : NetworkBehaviour
         playerManager.healthManager.recoveryHealthInSecond = fishData.RecoveryHealthInSecond;
         playerManager.healthManager.timeToStartRecoveryHealth = fishData.TimeToStartRecoveryHealth;
         playerManager.playerAttack.attackDamage = fishData.AttackValue;
+        playerManager.playerAttack.chanceToCatch = fishData.ChanceToCatch;
         playerManager.playerAttack.attackRange = fishData.AttackRange;
         playerManager.thirdPersonController.cameraDistance = fishData.Scale * 5 / 0.25f;
         playerManager.playerAttack.suckInDamage = 10;

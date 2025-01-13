@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 66b2c857830665b43a00bbd7ca459835, type: 3}
-  m_Name: Playable_Clownfish 3
+  m_Name: Playable_Clownfish 1
   m_EditorClassIdentifier: 
-  fishID: 13
+  fishID: 11
   fishPrefab: {fileID: 2075058937487730628, guid: 07543d3dbdec44f7598a50d39bed61aa,
     type: 3}
-  scale: 2
+  scale: 0.5
   maxHealth: 60
   recoveryHealthInSecond: 0.8
   timeToStartRecoveryHealth: 6
@@ -30,6 +30,7 @@ MonoBehaviour:
   preyList: []
   predatorList: []
   attackValue: 6
+  chanceToCatch: 30
   attackRange: 3
   attackCooldown: 1
   timeToLoseInterest: 7

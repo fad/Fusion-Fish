@@ -8,6 +8,6 @@ public interface IHealthManager
         bool Died { get; }
         float MaxHealth { get; }
     
-        void Damage(float amount);
+        void Damage(float amount, float chanceToCatch);
         void Heal(float amount);
 }

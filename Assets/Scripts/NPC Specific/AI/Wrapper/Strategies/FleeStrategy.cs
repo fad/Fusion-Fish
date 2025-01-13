@@ -182,10 +182,11 @@ public class FleeStrategy : StaminaMoveStrategy
 
         if (Graspable.IsGrasped)
         {
+            RecaveryStamina();
             AttractionToPredator();
             return Status.Running;
         }
-
+        
         CheckStamina();
         Vector3 forwardDirection = Entity.forward * (ForwardModifier * (Speed * Time.deltaTime));
 

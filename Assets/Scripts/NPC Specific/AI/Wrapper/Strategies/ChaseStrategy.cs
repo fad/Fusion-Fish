@@ -10,6 +10,7 @@ public class ChaseStrategy : StaminaMoveStrategy
     private readonly Func<Transform> _preyTransformGetter;
     private readonly Func<bool> _didPreyDie;
     private readonly float _attackValue;
+    private readonly float _chanceToCatch;
     private readonly float _attackRange;
     private readonly float _distanceToLoseInterest;
     private readonly float _timeToLoseInterest;
@@ -38,6 +39,7 @@ public class ChaseStrategy : StaminaMoveStrategy
         public Func<(bool, Vector3)> ForbiddenAreaCheck;
         public IAttackManager AttackManager;
         public float AttackValue;
+        public float ChanceToCatch;
         public float AttackRange;
         public float TimeToLoseInterest;
         public float DistanceToLoseInterest;
@@ -116,6 +118,11 @@ public class ChaseStrategy : StaminaMoveStrategy
             AttackManager = attackManager;
             return this;
         }
+        public Builder WithBiteStunDuration(float value)
+        {
+            ChanceToCatch = value;
+            return this;
+        }
 
         public Builder WithAttackValue(float value)
         {
@@ -189,6 +196,7 @@ public class ChaseStrategy : StaminaMoveStrategy
         _preyTransformGetter = builder.PreyTransformGetter;
         _attackManager = builder.AttackManager;
         _attackValue = builder.AttackValue;
+        _chanceToCatch = builder.ChanceToCatch;
         _attackRange = builder.AttackRange;
         _timeToLoseInterest = builder.TimeToLoseInterest;
         _resetBehavior = builder.ResetBehavior;
@@ -242,7 +250,7 @@ public class ChaseStrategy : StaminaMoveStrategy
 
         if (sqrMagnitude <= _attackRange * _attackRange)
         {
-            _attackManager.Attack(_attackValue, _preyTransform); // TODO: Do an attack strategy
+            _attackManager.Attack(_attackValue, _chanceToCatch, _preyTransform); // TODO: Do an attack strategy
             
             if(sqrMagnitude > .25f)
             {

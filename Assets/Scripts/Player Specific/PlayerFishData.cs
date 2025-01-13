@@ -10,10 +10,10 @@ public class PlayerFishData : FishData
     [SerializeField, Tooltip("The amount of experience required to level up.")]
     private int experienceUntilUpgrade = 300;
 
-    [SerializeField, Tooltip("The amount of experience required to level up.")]
+    [SerializeField, Tooltip("Maximum saturation value.")]
     private int maxSatiety = 120;  
 
-    [SerializeField, Tooltip("The amount of experience required to level up.")]
+    [SerializeField, Tooltip("Amount of satiety reduction per second.")]
     private int satietyDecreaseRate = 1;   
 
     public int ExperienceUntilUpgrade => experienceUntilUpgrade;

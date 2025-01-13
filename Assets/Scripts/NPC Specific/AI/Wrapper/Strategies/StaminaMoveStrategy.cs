@@ -55,6 +55,11 @@ public abstract class StaminaMoveStrategy : MoveStrategy
         StaminaManager?.Decrease();
     }
 
+
+    protected virtual void RecaveryStamina()
+    {
+        StaminaManager.Recavery();
+    }
     /// <summary>
     /// Checks the current stamina level and adjusts the speed accordingly.
     /// If the current stamina is above the threshold, the entity can use stamina and moves at a faster speed.
