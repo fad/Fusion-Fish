@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -10,6 +11,7 @@ public class SetUIActivationState : MonoBehaviour
     [HideInInspector] public bool pressedActivationUIMultiplayerButton;
     [SerializeField] private TMP_InputField inputField;
     [SerializeField] private CanvasGroup LoadPanel;
+    [SerializeField] private GameObject settingsPanel;
 
     private void Start()
     {
@@ -46,7 +48,7 @@ public class SetUIActivationState : MonoBehaviour
         }
         LoadPanel.gameObject.SetActive(false);
     }
-    public void SetActiveUIObjects()
+    public void SetActiveUIObjects(Action onPressed = null)
     {
         if (uiObjectsActive)
         {
@@ -64,6 +66,8 @@ public class SetUIActivationState : MonoBehaviour
                 Cursor.lockState = CursorLockMode.Locked;
             }
             
+            settingsPanel.SetActive(false);
+            
             uiObjectsActive = false;
         }
         else
@@ -79,5 +83,7 @@ public class SetUIActivationState : MonoBehaviour
             
             uiObjectsActive = true;
         }
+
+        onPressed?.Invoke();
     }
 }

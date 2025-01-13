@@ -102,6 +102,8 @@ namespace StarterAssets
 
         private SetUIActivationState setUIActivationState;
 
+        private bool _isInHUD = false;
+
         private float checkObstacleDistance = 0.5f;
         [SerializeField] private LayerMask obstacleLayer;
 
@@ -177,6 +179,7 @@ namespace StarterAssets
             Gravity();
             SpeedBoost();
             SetActiveMultiplayerUI();
+            // ToggleInput();
         }
 
         public void FixedUpdate()
@@ -203,12 +206,22 @@ namespace StarterAssets
             switch (input.setActiveStateMultiplayerUI)
             {
                 case true when setUIActivationState.pressedActivationUIMultiplayerButton == false:
-                    setUIActivationState.SetActiveUIObjects();
+                    setUIActivationState.SetActiveUIObjects(ToggleInput);
                     break;
                 case false:
                     setUIActivationState.pressedActivationUIMultiplayerButton = false;
                     break;
             }
+        }
+
+        private void ToggleInput()
+        {
+            _isInHUD = !_isInHUD;
+            
+            if(_isInHUD)
+                input.DisablePlayerInput();
+            else
+                input.EnablePlayerInput();
         }
 
         private void CameraForwardRotation()

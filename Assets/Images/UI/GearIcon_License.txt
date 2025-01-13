@@ -1,0 +1,2 @@
+This game uses icons from Google, licensed under the Apache License 2.0.
+You can find a copy of the license at: http://www.apache.org/licenses/LICENSE-2.0

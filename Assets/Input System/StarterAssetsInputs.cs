@@ -11,7 +11,7 @@ namespace StarterAssets
 	{
 		public bool isPlayerWritingChat = false;
 
-		public InputActionReference PushToTalkAction,moveAction,lookAction;
+		public InputActionReference PushToTalkAction,moveAction,lookAction, attackAction, suckInAction;
 		[Header("Character Input Values")]
 		public Vector2 move;
 		public Vector2 look;
@@ -139,11 +139,15 @@ namespace StarterAssets
 		{
 			moveAction.action.Disable();
 			lookAction.action.Disable();
+			attackAction.action.Disable();
+			suckInAction.action.Disable();
 		}
 		public void EnablePlayerInput()
 		{
 			moveAction.action.Enable();
 			lookAction.action.Enable();
+			attackAction.action.Enable();
+			suckInAction.action.Enable();
 		}
 
 		private void Awake() {
