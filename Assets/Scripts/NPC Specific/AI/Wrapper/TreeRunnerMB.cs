@@ -142,7 +142,8 @@ public class TreeRunnerMB : MonoBehaviour, ITreeRunner, IEntity
                 .WithAttackManager(_attackManager)
                 .WithAttackRange(fishData.AttackRange)
                 .WithAttackValue(fishData.AttackValue)
-                .WithBiteStunDuration(fishData.ChanceToCatch)
+                .WithBiteStunDuration(fishData.BiteStunDuration)
+                .WithStunChance(fishData.StunChance)
                 .WithDidPreyDie(() => _targetHealthManager.Died)
                 .Build()
         );

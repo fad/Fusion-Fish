@@ -45,6 +45,7 @@ public class SatietyManager : NetworkBehaviour, ISatietyManager
             if (_currentSatiety <= 0)
             {
                 playerManager.playerHealth.causeOfDeath = "You starved";
+                
                 playerManager.healthManager.ReceiveDamageRpc(playerManager.healthManager.maxHealth);
                 break;
             }

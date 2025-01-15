@@ -189,7 +189,7 @@ public class BehaviourTreeRunner : NetworkBehaviour, INPC, IInitialisable
                 .WithAttackManager(_attackManager)
                 .WithAttackRange(fishData.AttackRange)
                 .WithAttackValue(fishData.AttackValue)
-                .WithBiteStunDuration(fishData.ChanceToCatch)
+                .WithBiteStunDuration(fishData.StunChance)
                 .WithDidPreyDie(DidPreyDie)
                 .WithUseForward(true)
                 .WithSpeedChangeCallback(SetAnimatorMoveSpeed)

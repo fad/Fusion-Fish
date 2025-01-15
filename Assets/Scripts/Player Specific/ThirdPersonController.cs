@@ -48,6 +48,8 @@ namespace StarterAssets
         private const float maxAttractCooldown = 2;
         private float currentAttractTime;
         private float currentAttractCooldown;
+        private const float jumpCooldown = 0.5f;
+        private float currentJumpCooldown;
 
         private Rigidbody rb; 
         private Transform swimArea;
@@ -184,13 +186,13 @@ namespace StarterAssets
 
         public void FixedUpdate()
         {
-            if (playerManager.playerHealth.isDead || !HasStateAuthority || !foundSwimArea || outOfWater)
+            if (playerManager.playerHealth.isDead || !HasStateAuthority || !foundSwimArea)
                 return;
 
-            if (!playerManager.levelUp.isEgg)
+            if (!playerManager.levelUp.isEgg && !outOfWater)
                 Move();
             else
-                EggMove();
+                Jump();
         }
 
         private void LateUpdate()
@@ -290,17 +292,21 @@ namespace StarterAssets
             }
         }
         quaternion randomRotation;
-        private void EggMove()
+        private void Jump()
         {
-            if (hasVCam && input.jump)
+            if (hasVCam && input.jump && currentJumpCooldown <= 0)
             {
+                animator.SetTrigger("jump");
                 int impulseForce = 8;
                 rb.AddForce(GetRandomDirection() * impulseForce, ForceMode.Impulse);
                 RandomizeRotation();
-                playerManager.levelUp.AddExperience(50);
                 input.jump = false;
-            }
+                currentJumpCooldown = jumpCooldown;
+                if(playerManager.levelUp.isEgg)
+                    playerManager.levelUp.AddExperience(50);
 
+            }
+            currentJumpCooldown -= Time.deltaTime;
             rb.useGravity = true;
             rb.drag = 0.05f;
             eggVisual.transform.localRotation = Quaternion.Lerp(eggVisual.transform.localRotation, randomRotation, playerRotationSmoothTime / 3 * Time.deltaTime);
@@ -308,7 +314,7 @@ namespace StarterAssets
             Vector3 GetRandomDirection()
             {
                 float randomX = UnityEngine.Random.Range(-1f, 1f);
-                float randomY = UnityEngine.Random.Range(0, 2);
+                float randomY = UnityEngine.Random.Range(0.5f, 2f);
                 float randomZ = UnityEngine.Random.Range(-1f, 1f);
 
                 Vector3 randomDirection = new Vector3(randomX, randomY, randomZ);

@@ -25,9 +25,9 @@ public class HealthManagerMB : MonoBehaviour, IHealthManager
         _currentHealth = fishData.MaxHealth;
     }
 
-    public void Damage(float amount, float chanceToCatch = 0)
+    public void Damage(DamageInfo damageInfo)
     {
-        _currentHealth -= amount;
+        _currentHealth -= damageInfo.Damage;
         OnHealthChanged?.Invoke(_currentHealth);
 
         Die();

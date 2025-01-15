@@ -30,8 +30,6 @@ public class HealthManager : NetworkBehaviour, IHealthManager, ISuckable, IGrasp
 
     private bool _grasped;
     [HideInInspector] public float graspedTime;
-    private const float graspedMaxTime = 0.6f;
-
     public event Action<float> OnHealthChanged;
     public event Action OnDeath;
 
@@ -109,10 +107,10 @@ public class HealthManager : NetworkBehaviour, IHealthManager, ISuckable, IGrasp
             switch (propertyName)
             {
                 case nameof(NetworkedHealth):
-                    {
-                        CheckDeath();
-                        break;
-                    }
+                {
+                    CheckDeath();
+                    break;
+                }
             }
         }
     }
@@ -123,12 +121,12 @@ public class HealthManager : NetworkBehaviour, IHealthManager, ISuckable, IGrasp
         _regeneration = true;
     }
 
-    public void Damage(float amount, float chanceToCatch)
+    public void Damage(DamageInfo damageInfo)
     {
         if (!HasSpawned) return;
 
         if (notAbleToGetBitten) return;
-        ReceiveDamageRpc(amount,chanceToCatch);
+        ReceiveDamageRpc(damageInfo.Damage,damageInfo.StunChance,damageInfo.BiteStunDuration);
         CheckDeath(); // this line may not be deleted
     }
 
@@ -147,13 +145,13 @@ public class HealthManager : NetworkBehaviour, IHealthManager, ISuckable, IGrasp
     }
 
     [Rpc(RpcSources.All, RpcTargets.All)]
-    public void ReceiveDamageRpc(float damage,float chanceToCatch = 0)
+    public void ReceiveDamageRpc(float damage,float stunChance = 0,float biteStunDuration = 0)
     {
         //The chance to catch a fish will only trigger if you deal 10% damage of its current health.
-        if (damage >= NetworkedHealth * 0.1f && UnityEngine.Random.Range(0,101) < chanceToCatch)
+        if (damage >= NetworkedHealth * 0.1f && UnityEngine.Random.Range(0,101) < stunChance)
         {
             _grasped = true;
-            graspedTime = graspedMaxTime;
+            graspedTime = biteStunDuration;
         }
         NetworkedHealth -= damage;
 

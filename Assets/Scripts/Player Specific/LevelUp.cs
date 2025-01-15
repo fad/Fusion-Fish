@@ -87,7 +87,8 @@ public class LevelUp : NetworkBehaviour
         playerManager.healthManager.timeToStartRecoveryHealth = fishData.TimeToStartRecoveryHealth;
         playerManager.healthManager.XPValue = fishData.XPValue;
         playerManager.playerAttack.attackDamage = fishData.AttackValue;
-        playerManager.playerAttack.chanceToCatch = fishData.ChanceToCatch;
+        playerManager.playerAttack.biteStunDuration = fishData.BiteStunDuration;
+        playerManager.playerAttack.stunChance = fishData.StunChance;
         playerManager.playerAttack.attackRange = fishData.AttackRange;
         playerManager.thirdPersonController.cameraDistance = fishData.Scale * 5 / 0.25f;
         playerManager.playerAttack.suckInDamage = 10;

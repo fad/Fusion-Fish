@@ -65,7 +65,7 @@ public class AttackManager : NetworkBehaviour, IAttackManager
     
 
 
-    public void Attack(float damageValue,float chanceToCatch, Transform target)
+    public void Attack(DamageInfo damageInfo, Transform target)
     {
         if(CurrentAttackCooldown > 0f) return;
         if(!_currentTarget) return;
@@ -76,7 +76,7 @@ public class AttackManager : NetworkBehaviour, IAttackManager
         }
         
         CurrentAttackCooldown = fishData.AttackCooldown;
-        _currentTargetHealthManager?.Damage(damageValue, chanceToCatch);
+        _currentTargetHealthManager?.Damage(damageInfo);
 
         if (_currentTargetHealthManager is { Died: true }) return;
 

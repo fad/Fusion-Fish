@@ -34,8 +34,17 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 7d2cb7dfd99a72c4bb748bd65e464fd4, type: 2}
   - {fileID: 11400000, guid: ca5b417791726f949aab6afff7e7eb84, type: 2}
   - {fileID: 11400000, guid: 6998654e15fc34741a20046b034526a9, type: 2}
+  - {fileID: 11400000, guid: fec84207006ee8542a5cbaf7a36505ab, type: 2}
+  - {fileID: 11400000, guid: 7267b2d298f06de4eba655b5454f73f6, type: 2}
+  - {fileID: 11400000, guid: 6a6e69978aeb18044934eeceac3c81b5, type: 2}
+  - {fileID: 11400000, guid: 71e79ddf7c061064eaeeb270f43f9268, type: 2}
+  - {fileID: 11400000, guid: 5254a92fb07a4854288f3273fb8828b4, type: 2}
+  - {fileID: 11400000, guid: 57cf0ee226ecca64380a53b96d739eb1, type: 2}
+  - {fileID: 11400000, guid: 08362eb755c5fbf4085dc8158be7e104, type: 2}
+  - {fileID: 11400000, guid: 449f2937f8d86ff41b6fb7e26d6b4d98, type: 2}
   attackValue: 4
-  chanceToCatch: 30
+  stunChance: 15
+  biteStunDuration: 1
   attackRange: 0.5
   attackCooldown: 1
   timeToLoseInterest: 4

@@ -30,7 +30,8 @@ MonoBehaviour:
   preyList: []
   predatorList: []
   attackValue: 6
-  chanceToCatch: 30
+  stunChance: 28
+  biteStunDuration: 1
   attackRange: 3
   attackCooldown: 1
   timeToLoseInterest: 5

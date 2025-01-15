@@ -30,11 +30,11 @@ public class SuckableHealth : NetworkBehaviour, IHealthManager
         NetworkedHealth = maxHealth;
     }
 
-    public void Damage(float amount, float chanceToCatch = 0)
+    public void Damage(DamageInfo damageInfo)
     {
         if (!Runner || !HasStateAuthority) return;
         
-        NetworkedHealth -= amount;
+        NetworkedHealth -= damageInfo.Damage;
         OnHealthChanged?.Invoke(NetworkedHealth);
         
         if (NetworkedHealth <= 0)
