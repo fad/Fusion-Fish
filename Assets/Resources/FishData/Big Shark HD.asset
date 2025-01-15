@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c11d033a7185418c9421d8741488f96b, type: 3}
+  m_Name: Big Shark HD
+  m_EditorClassIdentifier: 
+  fishID: 1001
+  fishPrefab: {fileID: 2689198742307886242, guid: 7170042e0eee6664e8251ccaef4a108c,
+    type: 3}
+  scale: 5
+  maxHealth: 500
+  recoveryHealthInSecond: 8
+  timeToStartRecoveryHealth: 20
+  maxStamina: 250
+  staminaDecreaseRate: 40
+  staminaRegenRate: 20
+  staminaThreshold: 140
+  xpValue: 350
+  gibsSpawnValue: 10
+  FOV_Angle: 50
+  FOV_Radius: 25
+  preyList:
+  - {fileID: 11400000, guid: 7d2cb7dfd99a72c4bb748bd65e464fd4, type: 2}
+  - {fileID: 11400000, guid: ca5b417791726f949aab6afff7e7eb84, type: 2}
+  - {fileID: 11400000, guid: 4f425dd60c1f84442a76761bb02cae31, type: 2}
+  - {fileID: 11400000, guid: a3555f5f9bb3fce4aa266dabbd811314, type: 2}
+  predatorList: []
+  attackValue: 200
+  stunChance: 30
+  biteStunDuration: 1
+  attackRange: 6
+  attackCooldown: 2
+  timeToLoseInterest: 10
+  distanceToLoseInterest: 40
+  wanderSpeed: 2
+  fastSpeed: 10
+  rotationSpeed: 2
+  maxPitch: 45
+  obstacleAvoidanceDistance: 5
+  wanderDistanceHorizontal: 5
+  wanderDistanceVertical: 5
+  safeDistance: 15

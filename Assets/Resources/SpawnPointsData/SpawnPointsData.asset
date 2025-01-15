@@ -31,3 +31,8 @@ MonoBehaviour:
     rotation: {x: 0, y: 0, z: 0, w: 0}
   - location: {x: 8.47, y: 4.19, z: -11.28}
     rotation: {x: 0, y: 0, z: 0, w: 0}
+  hdOceanSpawnPoints:
+  - location: {x: -135, y: -8.6, z: -60}
+    rotation: {x: 0, y: 0, z: 0, w: 0}
+  - location: {x: 157, y: -3.7, z: 50.5}
+    rotation: {x: 0, y: 0, z: 0, w: 0}

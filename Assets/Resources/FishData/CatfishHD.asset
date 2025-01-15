@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c11d033a7185418c9421d8741488f96b, type: 3}
+  m_Name: CatfishHD
+  m_EditorClassIdentifier: 
+  fishID: 1002
+  fishPrefab: {fileID: 1510140372902657752, guid: 836107aacffd39e41bd70e387029f63e,
+    type: 3}
+  scale: 2
+  maxHealth: 200
+  recoveryHealthInSecond: 3.3
+  timeToStartRecoveryHealth: 15
+  maxStamina: 80
+  staminaDecreaseRate: 12
+  staminaRegenRate: 10
+  staminaThreshold: 35
+  xpValue: 250
+  gibsSpawnValue: 5
+  FOV_Angle: 60
+  FOV_Radius: 15
+  preyList:
+  - {fileID: 11400000, guid: 330945d332c80934999ee14c283a705e, type: 2}
+  - {fileID: 11400000, guid: 6998654e15fc34741a20046b034526a9, type: 2}
+  - {fileID: 11400000, guid: ca5b417791726f949aab6afff7e7eb84, type: 2}
+  - {fileID: 11400000, guid: a3555f5f9bb3fce4aa266dabbd811314, type: 2}
+  predatorList:
+  - {fileID: 11400000, guid: 0c6308a7049671a42abceaddee436b9c, type: 2}
+  - {fileID: 11400000, guid: fec84207006ee8542a5cbaf7a36505ab, type: 2}
+  - {fileID: 11400000, guid: 7267b2d298f06de4eba655b5454f73f6, type: 2}
+  - {fileID: 11400000, guid: 6a6e69978aeb18044934eeceac3c81b5, type: 2}
+  - {fileID: 11400000, guid: 71e79ddf7c061064eaeeb270f43f9268, type: 2}
+  - {fileID: 11400000, guid: 5254a92fb07a4854288f3273fb8828b4, type: 2}
+  - {fileID: 11400000, guid: 57cf0ee226ecca64380a53b96d739eb1, type: 2}
+  - {fileID: 11400000, guid: 08362eb755c5fbf4085dc8158be7e104, type: 2}
+  - {fileID: 11400000, guid: 449f2937f8d86ff41b6fb7e26d6b4d98, type: 2}
+  attackValue: 20
+  stunChance: 30
+  biteStunDuration: 1
+  attackRange: 2
+  attackCooldown: 1
+  timeToLoseInterest: 5
+  distanceToLoseInterest: 15
+  wanderSpeed: 2.5
+  fastSpeed: 5
+  rotationSpeed: 2
+  maxPitch: 45
+  obstacleAvoidanceDistance: 2
+  wanderDistanceHorizontal: 6
+  wanderDistanceVertical: 5
+  safeDistance: 25
