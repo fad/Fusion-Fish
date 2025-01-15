@@ -462,7 +462,8 @@ namespace AvocadoShark
 
             var sessionProperties = new Dictionary<string, SessionProperty>
             {
-                ["single"] = true // Singleplayer session; short name to avoid too much traffic
+                {"single", true }, // Singleplayer session; short name to avoid too much traffic
+                {"sceneNumber", sceneNumber}
             };
 
 
@@ -577,7 +578,12 @@ namespace AvocadoShark
                 return;
             var playerPrefab = PlayerPrefs.GetInt("ChosenCharacter") == 0 ? playerPrefabSecond : playerPrefabFirst;
 
-            sceneNumber = runner.SessionInfo.Properties["sceneNumber"];
+
+            if (runner.SessionInfo.Properties is not null)
+            {
+                sceneNumber = runner.SessionInfo.Properties["sceneNumber"];
+            }
+            
             if (!Runner.IsSceneAuthority)
             {
                 RenderSettings.skybox = sceneNumber switch
