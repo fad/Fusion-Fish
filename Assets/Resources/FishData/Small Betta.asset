@@ -35,7 +35,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 7d2cb7dfd99a72c4bb748bd65e464fd4, type: 2}
   - {fileID: 11400000, guid: ca5b417791726f949aab6afff7e7eb84, type: 2}
   attackValue: 10
-  chanceToCatch: 30
+  stunChance: 30
+  biteStunDuration: 1
   attackRange: 1
   attackCooldown: 1
   timeToLoseInterest: 6
