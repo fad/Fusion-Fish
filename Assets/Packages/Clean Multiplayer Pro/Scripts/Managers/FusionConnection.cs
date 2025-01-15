@@ -207,6 +207,14 @@ namespace AvocadoShark
             loadingScreenScript.gameObject.SetActive(true);
             Invoke(nameof(ContinueCreateRoom), loadingScreenScript.lerpSpeed);
         }
+        
+        public void CreateRoomSingleplayer()
+        {
+            PlayerPrefs.SetInt("has_pass", 0);
+            loadingScreenScript.gameObject.SetActive(true);
+            Invoke(nameof(ContinueCreateRoomSingleplayer), loadingScreenScript.lerpSpeed);
+        }
+        
         private void ContinueCreateRoom()
         {
             string sessionName = null;
@@ -254,6 +262,23 @@ namespace AvocadoShark
 
             StopCoroutine(AutoRefreshRoomList());
         }
+        
+        private void ContinueCreateRoomSingleplayer()
+        {
+            string sessionName = PlayerPrefs.GetString(NamePlayerPrefs);
+            
+            sessionName += "-" + Random.Range(1000, 9999);
+            
+            //it counts +2 for the scene index because there are the menu & game scene that need to be excluded
+            sceneNumber = environmentDropdown.value + 2;
+            
+
+            Debug.Log("Session name is Singleplayer");
+
+            JoinRoomSingleplayer(sessionName);
+
+            StopCoroutine(AutoRefreshRoomList());
+        }
 
         private bool IsRoomNameValid()
         {
@@ -296,6 +321,11 @@ namespace AvocadoShark
 
             foreach (SessionInfo session in _sessionList)
             {
+                if(session.Properties.TryGetValue("single", out SessionProperty isSingleplayer) && (bool)isSingleplayer.PropertyValue)
+                {
+                    continue;
+                }
+                
                 if (CurrentEntryBeingEdited != null)
                 {
                     if (session.Name == CurrentEntryBeingEdited.sessionInfo.Name)
@@ -310,14 +340,7 @@ namespace AvocadoShark
                 _roomEntryList.Add(entryScript);
             }
 
-            if (_sessionList.Count == 0)
-            {
-                NoRoomsText.gameObject.SetActive(true);
-            }
-            else
-            {
-                NoRoomsText.gameObject.SetActive(false);
-            }
+            NoRoomsText.gameObject.SetActive(_sessionList.Count == 0);
         }
 
         //public void AddPlayerToBannedList(string name) {
@@ -418,6 +441,47 @@ namespace AvocadoShark
             {
                 return;
             }
+            popup.ShowPopup(result.ShutdownReason.ToString());
+        }
+        
+        public async void JoinRoomSingleplayer(string sessionName)
+        {
+            int buildIndex = -1;
+
+            for (int i = 0; i < SceneManager.sceneCountInBuildSettings; i++)
+            {
+                string scenePath = SceneUtility.GetScenePathByBuildIndex(i);
+                string sceneName = System.IO.Path.GetFileNameWithoutExtension(scenePath);
+
+                if (sceneName == "Game")
+                {
+                    buildIndex = i;
+                    break;
+                }
+            }
+
+            var sessionProperties = new Dictionary<string, SessionProperty>
+            {
+                ["single"] = true // Singleplayer session; short name to avoid too much traffic
+            };
+
+
+            StopCoroutine(AutoRefreshRoomList());
+            if (Runner == null)
+            {
+                SetUpComponents();
+            }
+
+            var result = await Runner.StartGame(new StartGameArgs()
+            {
+                GameMode = GameMode.Single,
+                SessionName = sessionName,
+                Scene = SceneRef.FromIndex(buildIndex),
+                ObjectProvider = Runner.GetComponent<FusionPool>(),
+                SessionProperties = sessionProperties
+            });
+            
+            if (result.Ok) return;
             popup.ShowPopup(result.ShutdownReason.ToString());
         }
 
