@@ -1,8 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class DamageInfo
+public struct DamageInfo
 {
     public float Damage { get; set; }
     public float StunChance { get; set; }

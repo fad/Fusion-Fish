@@ -260,10 +260,10 @@ public class BehaviourTreeRunner : NetworkBehaviour, INPC, IInitialisable
             _target = targetData.targetTransform;
             _target.TryGetComponent(out _targetHealthManager);
             
-            if (_targetHealthManager is not null)
-            {
-                _targetHealthManager.OnDeath += ResetHuntBehaviour;
-            }
+            // if (_targetHealthManager is not null)
+            // {
+            //     _targetHealthManager.OnDeath += ResetHuntBehaviour;
+            // }
 
             _isHunting = true;
         }
@@ -273,10 +273,10 @@ public class BehaviourTreeRunner : NetworkBehaviour, INPC, IInitialisable
 
     private void ResetHuntBehaviour()
     {
-        if (_targetHealthManager is not null)
-        {
-            _targetHealthManager.OnDeath -= ResetHuntBehaviour;
-        }
+        // if (_targetHealthManager is not null)
+        // {
+        //     _targetHealthManager.OnDeath -= ResetHuntBehaviour;
+        // }
         
         _isHunting = false;
         _isInDanger = false;
@@ -302,7 +302,7 @@ public class BehaviourTreeRunner : NetworkBehaviour, INPC, IInitialisable
 
     private bool DidPreyDie()
     {
-        return _targetHealthManager is null || _targetHealthManager.Died;
+        return !_target.gameObject.activeInHierarchy || (_targetHealthManager is not null && _targetHealthManager.Died);
     }
 
 }

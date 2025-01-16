@@ -226,11 +226,14 @@ public class ChaseStrategy : StaminaMoveStrategy
     /// <see cref="Status.Running"/> during the chase.</returns>
     public override Status Process()
     {   
-        if (_didPreyDie())
-        {
-            ResetValues();
-            return Status.Success;
-        }
+        Debug.Log("Hunt"); // this gets called continuously near a meatobject
+        
+        // if (_didPreyDie()) // this causes the stop with a meatobject
+        // {
+        //     Debug.Log("Prey died");
+        //     ResetValues();
+        //     return Status.Success;
+        // }
         
         GetPreyTransform();
         
@@ -254,15 +257,23 @@ public class ChaseStrategy : StaminaMoveStrategy
         CheckStamina();
         RotateToPrey();
         
+        if (_preyTransform is null)
+        {
+            ResetValues();
+            return Status.Success;
+        }
+        
+            
         float sqrMagnitude = (Entity.position - _preyTransform.position).sqrMagnitude;
 
         if (sqrMagnitude <= _attackRange * _attackRange)
         {
-            _attackManager.Attack( new DamageInfo(_attackValue,_stunChance,_biteStunDuration), _preyTransform); // TODO: Do an attack strategy
+            _attackManager.Attack(new DamageInfo(_attackValue,_stunChance,_biteStunDuration), _preyTransform); // TODO: Do an attack strategy
             
             if(sqrMagnitude > .25f)
             {
                 Vector3 directionToPrey = _preyTransform.position - Entity.position;
+                Entity.rotation = Quaternion.Slerp(Entity.rotation, Quaternion.LookRotation(directionToPrey), RotationSpeed * Time.deltaTime);
                 Vector3 forwardDirection = Entity.forward * (ForwardModifier * (Speed * Time.deltaTime));
                 Move(forwardDirection);
             }
@@ -289,9 +300,11 @@ public class ChaseStrategy : StaminaMoveStrategy
     /// </summary>
     private void GetPreyTransform()
     {
-        _preyTransform ??= _preyTransformGetter();
+        if (_preyTransform) return;
+        
+        _preyTransform = _preyTransformGetter();
+        if (!_preyTransform || !_preyTransform.gameObject.activeInHierarchy) _targetTransformDoesNotExist = true;
 
-        if (!_preyTransform) _targetTransformDoesNotExist = true;
     }
 
     /// <summary>
