@@ -267,6 +267,8 @@ public class PlayerAttack : NetworkBehaviour
 
     public override void Render()
     {
+        if(!networkFishAnimator) return;
+        
         if (_attackCount > _lastAttackCount)
         {
             networkFishAnimator.SetTrigger("attack");
