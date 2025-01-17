@@ -9,10 +9,8 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Threading;
-
 using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using Unity.Mathematics;
-
 
 
 #if ENABLE_INPUT_SYSTEM
@@ -28,19 +26,33 @@ namespace StarterAssets
     public class ThirdPersonController : NetworkBehaviour
     {
         [Header("PlayerSettings")]
-        [SerializeField] private SettingsSO settingsSO;
+        [SerializeField]
+        private SettingsSO settingsSO;
 
         [Header("Movement")]
         [Tooltip("How fast the character turns to face movement direction")]
-        [SerializeField] private float playerRotationSmoothTime = 3f;
-        [Tooltip("How fast you can rotate the player depending on the mouse movement, the camera moves with the player")]
+        [SerializeField]
+        private float playerRotationSmoothTime = 3f;
+
+        [Tooltip(
+            "How fast you can rotate the player depending on the mouse movement, the camera moves with the player")]
         public float sensitivity = .85f;
+
         public GameObject playerVisual;
         public GameObject eggVisual;
-        [SerializeField] public float boostSwimSpeed = 100f;
-        [SerializeField] public float defaultSwimSpeed = 50f;
-        [HideInInspector] public PlayerManager playerManager;
-        [HideInInspector] public float speed;
+
+        [SerializeField]
+        public float boostSwimSpeed = 100f;
+
+        [SerializeField]
+        public float defaultSwimSpeed = 50f;
+
+        [HideInInspector]
+        public PlayerManager playerManager;
+
+        [HideInInspector]
+        public float speed;
+
         private bool attractToEntity;
         private bool pushingAway;
         private Transform currentAttractEntity;
@@ -51,22 +63,39 @@ namespace StarterAssets
         private const float jumpCooldown = 0.5f;
         private float currentJumpCooldown;
 
-        private Rigidbody rb; 
+        private Rigidbody rb;
         private Transform swimArea;
         private bool foundSwimArea;
-        [HideInInspector] public CapsuleCollider capsuleCollider;
-        [SerializeField] private float waterLevelY;
+
+        [HideInInspector]
+        public CapsuleCollider capsuleCollider;
+
+        [SerializeField]
+        private float waterLevelY;
+
         private bool outOfWater;
         private ParticleSystem outOfWaterParticles;
         private ParticleSystem insideWaterParticles;
 
         [Header("Boost")]
-        [HideInInspector] public float currentBoostCount;
-        [SerializeField] private float boostDelayAfterActivation = 3f;
-        [SerializeField] public float boostReloadSpeed = 18;
-        [SerializeField] private float boostConsumptionSpeed = 30;
-        [SerializeField] private VisualEffect boostParticles;
-        [HideInInspector] public bool permanentStamina;
+        [HideInInspector]
+        public float currentBoostCount;
+
+        [SerializeField]
+        private float boostDelayAfterActivation = 3f;
+
+        [SerializeField]
+        public float boostReloadSpeed = 18;
+
+        [SerializeField]
+        private float boostConsumptionSpeed = 30;
+
+        [SerializeField]
+        private VisualEffect boostParticles;
+
+        [HideInInspector]
+        public bool permanentStamina;
+
         public float maxBoostCount = 100f;
         private bool isBoosting;
         private bool canReloadBoost = true;
@@ -74,15 +103,25 @@ namespace StarterAssets
 
         [Header("CineMachine")]
         [Tooltip("How fast the fov changes when the character speed changes")]
-        [SerializeField] private float cameraFOVSmoothTime = 3f;
+        [SerializeField]
+        private float cameraFOVSmoothTime = 3f;
+
         [Tooltip("How fast the camera rotates with the player")]
-        [SerializeField] private float cameraRotationSmoothTime = 3f;
+        [SerializeField]
+        private float cameraRotationSmoothTime = 3f;
+
         [Tooltip("How far in degrees can you move the camera up")]
-        [SerializeField] private float topCameraClamp = 70.0f;
+        [SerializeField]
+        private float topCameraClamp = 70.0f;
+
         [Tooltip("How far in degrees can you move the camera down")]
-        [SerializeField] private float bottomCameraClamp = -30.0f;
+        [SerializeField]
+        private float bottomCameraClamp = -30.0f;
+
         [Tooltip("For locking the camera position on all axis")]
-        [SerializeField] private bool lockCameraPosition;
+        [SerializeField]
+        private bool lockCameraPosition;
+
         public float notMovingFOV = 17.5f;
         public float defaultSpeedFOV = 20f;
         public float boostSpeedFOV = 35;
@@ -99,6 +138,7 @@ namespace StarterAssets
 
         [Header("Animation")]
         public Animator animator;
+
         private int animIDMotionSpeed;
         private float defaultAnimSpeed = 2.5f, boostAnimSpeed = 5, notMovingAnimSpeed = 1;
 
@@ -108,12 +148,15 @@ namespace StarterAssets
         private PlayerSwimArea _playerSwimArea;
 
         private float checkObstacleDistance = 0.5f;
-        [SerializeField] private LayerMask obstacleLayer;
+
+        [SerializeField]
+        private LayerMask obstacleLayer;
 
 #if ENABLE_INPUT_SYSTEM
         private PlayerInput playerInput;
 #endif
-        [HideInInspector] public StarterAssetsInputs input;
+        [HideInInspector]
+        public StarterAssetsInputs input;
 
         private bool IsCurrentDeviceMouse
         {
@@ -127,7 +170,9 @@ namespace StarterAssets
             }
         }
 
-        [HideInInspector] public BoostState boostState;
+        [HideInInspector]
+        public BoostState boostState;
+
         public enum BoostState
         {
             BoostStarted,
@@ -173,8 +218,8 @@ namespace StarterAssets
             _playerSwimArea = swimArea.GetComponent<PlayerSwimArea>();
 
             playerManager.levelUp.levelUpEvent += CameraForwardRotation;
-            _cinemachineFramingTransposer = getPlayerCameraAndControls.vCam.GetCinemachineComponent<CinemachineFramingTransposer>();
-
+            _cinemachineFramingTransposer =
+                getPlayerCameraAndControls.vCam.GetCinemachineComponent<CinemachineFramingTransposer>();
         }
 
         private void Update()
@@ -223,8 +268,8 @@ namespace StarterAssets
         private void ToggleInput()
         {
             _isInHUD = !_isInHUD;
-            
-            if(_isInHUD)
+
+            if (_isInHUD)
                 input.DisablePlayerInput();
             else
                 input.EnablePlayerInput();
@@ -243,27 +288,19 @@ namespace StarterAssets
                 //Don't multiply mouse input by Time.deltaTime;
                 var deltaTimeMultiplier = IsCurrentDeviceMouse ? 1.0f : Time.deltaTime;
 
+                float targetYaw = settingsSO.xInputIsInverted
+                    ? -input.look.x * deltaTimeMultiplier * sensitivity
+                    : Mathf.Clamp(input.look.x, -15, 15) * deltaTimeMultiplier * sensitivity;
 
-                if (settingsSO.xInputIsInverted)
-                {
-                    cineMachineTargetYaw -= input.look.x * deltaTimeMultiplier * sensitivity;
-                }
-                else
-                {
-                    cineMachineTargetYaw += Mathf.Clamp(input.look.x, -15, 15) * deltaTimeMultiplier * sensitivity;
-                }
+                cineMachineTargetYaw += targetYaw;
 
 
                 if (!playerManager.levelUp.isEgg)
                 {
-                    if (settingsSO.yInputIsInverted)
-                    {
-                        cineMachineTargetPitch -= -input.look.y * deltaTimeMultiplier * sensitivity;
-                    }
-                    else
-                    {
-                        cineMachineTargetPitch += -input.look.y * deltaTimeMultiplier * sensitivity;
-                    }
+                    float pitchCalc = input.look.y * deltaTimeMultiplier * sensitivity;
+                    float targetPitch = settingsSO.yInputIsInverted ? pitchCalc : -pitchCalc;
+                    
+                    cineMachineTargetPitch += targetPitch;
                 }
                 else
                 {
@@ -279,11 +316,14 @@ namespace StarterAssets
             if (hasVCam)
             {
                 var localRotation = transform.localRotation;
-                localRotation = Quaternion.Lerp(localRotation, Quaternion.Euler(cineMachineTargetPitch, cineMachineTargetYaw, 0.0f), playerRotationSmoothTime * Time.deltaTime);
+                localRotation = Quaternion.Lerp(localRotation,
+                    Quaternion.Euler(cineMachineTargetPitch, cineMachineTargetYaw, 0.0f),
+                    playerRotationSmoothTime * Time.deltaTime);
                 transform.localRotation = localRotation;
 
                 Transform cameraTransform = getPlayerCameraAndControls.vCamRoot.transform;
-                float yRotationDifference = Mathf.DeltaAngle(localRotation.eulerAngles.y, cameraTransform.eulerAngles.y);
+                float yRotationDifference =
+                    Mathf.DeltaAngle(localRotation.eulerAngles.y, cameraTransform.eulerAngles.y);
 
                 float currentCameraRotationSmoothTime = cameraRotationSmoothTime;
                 if (yRotationDifference > 90 || yRotationDifference < -90)
@@ -291,10 +331,11 @@ namespace StarterAssets
                     currentCameraRotationSmoothTime *= 2;
                 }
 
-                cameraTransform.localRotation = Quaternion.Lerp(cameraTransform.localRotation, localRotation, currentCameraRotationSmoothTime * Time.deltaTime);
-
+                cameraTransform.localRotation = Quaternion.Lerp(cameraTransform.localRotation, localRotation,
+                    currentCameraRotationSmoothTime * Time.deltaTime);
             }
         }
+
         quaternion randomRotation;
         private CinemachineFramingTransposer _cinemachineFramingTransposer;
 
@@ -308,14 +349,15 @@ namespace StarterAssets
                 RandomizeRotation();
                 input.jump = false;
                 currentJumpCooldown = jumpCooldown;
-                if(playerManager.levelUp.isEgg)
+                if (playerManager.levelUp.isEgg)
                     playerManager.levelUp.AddExperience(50);
-
             }
+
             currentJumpCooldown -= Time.deltaTime;
             rb.useGravity = true;
             rb.drag = 0.05f;
-            eggVisual.transform.localRotation = Quaternion.Lerp(eggVisual.transform.localRotation, randomRotation, playerRotationSmoothTime / 3 * Time.deltaTime);
+            eggVisual.transform.localRotation = Quaternion.Lerp(eggVisual.transform.localRotation, randomRotation,
+                playerRotationSmoothTime / 3 * Time.deltaTime);
 
             Vector3 GetRandomDirection()
             {
@@ -327,6 +369,7 @@ namespace StarterAssets
 
                 return randomDirection.normalized;
             }
+
             void RandomizeRotation()
             {
                 float randomX = UnityEngine.Random.Range(200, 360);
@@ -356,15 +399,19 @@ namespace StarterAssets
 
             // set target speed based on move speed, sprint speed and if sprint is pressed
             // TODO: Switch Vector3.Distance to sqrMagnitude comparison
-            if (Vector3.Distance(transform.position, swimArea.position) >= _playerSwimArea.swimLength && !IsSwimmingTowardIsland())
+            if (Vector3.Distance(transform.position, swimArea.position) >= _playerSwimArea.swimLength &&
+                !IsSwimmingTowardIsland())
             {
                 if (isBoosting && boostSwimSpeed > 0)
                 {
-                    speed = boostSwimSpeed - (Vector3.Distance(transform.position, swimArea.position) - _playerSwimArea.swimLength) * 2.5f;
+                    speed = boostSwimSpeed -
+                            (Vector3.Distance(transform.position, swimArea.position) - _playerSwimArea.swimLength) *
+                            2.5f;
                 }
                 else if (defaultSwimSpeed > 0)
                 {
-                    speed = defaultSwimSpeed - (Vector3.Distance(transform.position, swimArea.position) - _playerSwimArea.swimLength);
+                    speed = defaultSwimSpeed - (Vector3.Distance(transform.position, swimArea.position) -
+                                                _playerSwimArea.swimLength);
                 }
             }
             else
@@ -383,38 +430,44 @@ namespace StarterAssets
             void MovePlayer(float playerRenderRotationX, float playerRenderRotationY)
             {
                 Vector3 direction;
-                
-                if(attractToEntity)
-                    direction = (transform.position - currentAttractEntity.position).normalized * (-1 * (boostSwimSpeed * Time.deltaTime));
+
+                if (attractToEntity)
+                    direction = (transform.position - currentAttractEntity.position).normalized *
+                                (-1 * (boostSwimSpeed * Time.deltaTime));
                 else
                     direction = transform.forward * (-1 * (inputDirectionNormalized.z * moveDistance));
-            
+
                 if (hasVCam)
                 {
-                    if (!playerManager.healthManager.IsGrasped && !Physics.Raycast(playerVisual.transform.position, direction, checkObstacleDistance, obstacleLayer))
+                    if (!playerManager.healthManager.IsGrasped && !Physics.Raycast(playerVisual.transform.position,
+                            direction, checkObstacleDistance, obstacleLayer))
                         rb.AddForce(direction, ForceMode.Impulse);
 
                     AnimationSpeed = isBoosting ? boostAnimSpeed : defaultAnimSpeed;
-                    getPlayerCameraAndControls.vCam.m_Lens.FieldOfView = Mathf.Lerp(getPlayerCameraAndControls.vCam.m_Lens.FieldOfView, isBoosting ? boostSpeedFOV : defaultSpeedFOV, cameraFOVSmoothTime * Time.deltaTime);
+                    getPlayerCameraAndControls.vCam.m_Lens.FieldOfView = Mathf.Lerp(
+                        getPlayerCameraAndControls.vCam.m_Lens.FieldOfView,
+                        isBoosting ? boostSpeedFOV : defaultSpeedFOV, cameraFOVSmoothTime * Time.deltaTime);
                     _cinemachineFramingTransposer.m_CameraDistance = CameraDistance();
                 }
 
-                playerVisual.transform.localRotation = Quaternion.Lerp(playerVisual.transform.localRotation, Quaternion.Euler(playerRenderRotationX, playerRenderRotationY, 0), playerRotationSmoothTime * Time.deltaTime);
+                playerVisual.transform.localRotation = Quaternion.Lerp(playerVisual.transform.localRotation,
+                    Quaternion.Euler(playerRenderRotationX, playerRenderRotationY, 0),
+                    playerRotationSmoothTime * Time.deltaTime);
             }
 
-            if(!currentAttractEntity || currentAttractTime <= 0)
+            if (!currentAttractEntity || currentAttractTime <= 0)
                 attractToEntity = false;
 
-            if(currentAttractCooldown > 0)
+            if (currentAttractCooldown > 0)
                 currentAttractCooldown -= Time.deltaTime;
 
-            if(attractToEntity)
+            if (attractToEntity)
             {
                 currentAttractTime -= Time.deltaTime;
-                if(Vector3.Distance(transform.position,currentAttractEntity.position) > 1)
+                if (Vector3.Distance(transform.position, currentAttractEntity.position) > 1)
                     MovePlayer(25, 0);
             }
-            else if (inputDirectionNormalized.z >= 0.1 )
+            else if (inputDirectionNormalized.z >= 0.1)
             {
                 MovePlayer(25, 0);
             }
@@ -425,41 +478,46 @@ namespace StarterAssets
             else
             {
                 if (hasVCam)
-                    getPlayerCameraAndControls.vCam.m_Lens.FieldOfView = Mathf.Lerp(getPlayerCameraAndControls.vCam.m_Lens.FieldOfView, notMovingFOV, cameraFOVSmoothTime * Time.deltaTime);
+                    getPlayerCameraAndControls.vCam.m_Lens.FieldOfView = Mathf.Lerp(
+                        getPlayerCameraAndControls.vCam.m_Lens.FieldOfView, notMovingFOV,
+                        cameraFOVSmoothTime * Time.deltaTime);
             }
 
             animator.SetFloat(animIDMotionSpeed, AnimationSpeed);
         }
 
         [Rpc(RpcSources.All, RpcTargets.All)]
-        public void GraspedRpc(NetworkTransform predator )
+        public void GraspedRpc(NetworkTransform predator)
         {
-            if(playerManager.healthManager.IsGrasped)
+            if (playerManager.healthManager.IsGrasped)
                 StartAttractToEntity(predator.transform);
-        } 
+        }
 
         [Rpc(RpcSources.All, RpcTargets.All)]
         public void PushAwayAnimationRpc()
         {
             boostParticles.Play();
             AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
-            if(!stateInfo.IsName("Fish_pushAway"))
+            if (!stateInfo.IsName("Fish_pushAway"))
                 animator.SetTrigger("pushAway");
-        } 
+        }
+
         public void PushAway(Vector3 Direction)
         {
             rb.AddForce(Direction * 50, ForceMode.Impulse);
             PushAwayAnimationRpc();
         }
+
         public void StartAttractToEntity(Transform entity)
         {
-            if(currentAttractCooldown > 0)
+            if (currentAttractCooldown > 0)
                 return;
             currentAttractCooldown = maxAttractCooldown;
             currentAttractEntity = entity;
             currentAttractTime = maxAttractTime;
             attractToEntity = true;
         }
+
         private float CameraDistance()
         {
             scrollValue += Input.GetAxis("Mouse ScrollWheel");
@@ -468,7 +526,8 @@ namespace StarterAssets
             float currentCameraDistance = scrollCameraDistance;
             RaycastHit hit;
 
-            if (Physics.Raycast(playerVisual.transform.position, playerVisual.transform.forward, out hit, scrollCameraDistance, obstacleLayer))
+            if (Physics.Raycast(playerVisual.transform.position, playerVisual.transform.forward, out hit,
+                    scrollCameraDistance, obstacleLayer))
                 currentCameraDistance = Vector3.Distance(transform.position, hit.point);
 
             return currentCameraDistance;
@@ -495,6 +554,7 @@ namespace StarterAssets
                         if (!permanentStamina)
                             currentBoostCount -= Time.deltaTime * boostConsumptionSpeed;
                     }
+
                     break;
                 case BoostState.BoostReload:
                     if (boostParticles.aliveParticleCount > 8)
@@ -511,6 +571,7 @@ namespace StarterAssets
                     {
                         currentBoostCount += Time.deltaTime * boostReloadSpeed;
                     }
+
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -575,12 +636,14 @@ namespace StarterAssets
                             AudioManager.Instance.UnPauseSound("OutOfWaterOcean");
                         }
                     }
+
                     outOfWaterParticles.transform.position = transform.position;
                     outOfWaterParticles.Play();
                     var velocity = rb.velocity;
                     playerVisual.transform.forward = -velocity;
                     cineMachineTargetPitch = -velocity.x;
-                    getPlayerCameraAndControls.vCam.GetCinemachineComponent<CinemachineFramingTransposer>().m_CameraDistance = CameraDistance() / 2;
+                    getPlayerCameraAndControls.vCam.GetCinemachineComponent<CinemachineFramingTransposer>()
+                        .m_CameraDistance = CameraDistance() / 2;
                 }
             }
             else
@@ -607,10 +670,13 @@ namespace StarterAssets
                             AudioManager.Instance.PauseSound("OutOfWaterOcean");
                         }
                     }
+
                     AudioManager.Instance.PlaySoundAtPosition("impactWithWater", playerVisual.transform.position);
                     outOfWater = false;
                 }
-                getPlayerCameraAndControls.vCam.GetCinemachineComponent<CinemachineFramingTransposer>().m_CameraDistance = CameraDistance();
+
+                getPlayerCameraAndControls.vCam.GetCinemachineComponent<CinemachineFramingTransposer>()
+                    .m_CameraDistance = CameraDistance();
                 rb.drag = 6;
                 rb.useGravity = false;
             }
