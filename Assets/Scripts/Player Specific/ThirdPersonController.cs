@@ -105,6 +105,7 @@ namespace StarterAssets
         private SetUIActivationState setUIActivationState;
 
         private bool _isInHUD = false;
+        private PlayerSwimArea _playerSwimArea;
 
         private float checkObstacleDistance = 0.5f;
         [SerializeField] private LayerMask obstacleLayer;
@@ -169,8 +170,11 @@ namespace StarterAssets
             AudioManager.Instance.PlaySoundAtPosition("impactWithWater", playerVisual.transform.position);
             foundSwimArea = true;
             setUIActivationState.DeactiveLoadPanel();
+            _playerSwimArea = swimArea.GetComponent<PlayerSwimArea>();
 
             playerManager.levelUp.levelUpEvent += CameraForwardRotation;
+            _cinemachineFramingTransposer = getPlayerCameraAndControls.vCam.GetCinemachineComponent<CinemachineFramingTransposer>();
+
         }
 
         private void Update()
@@ -292,6 +296,8 @@ namespace StarterAssets
             }
         }
         quaternion randomRotation;
+        private CinemachineFramingTransposer _cinemachineFramingTransposer;
+
         private void Jump()
         {
             if (hasVCam && input.jump && currentJumpCooldown <= 0)
@@ -349,15 +355,16 @@ namespace StarterAssets
             float AnimationSpeed = notMovingAnimSpeed;
 
             // set target speed based on move speed, sprint speed and if sprint is pressed
-            if (Vector3.Distance(transform.position, swimArea.position) >= swimArea.GetComponent<PlayerSwimArea>().swimLength && !IsSwimmingTowardIsland())
+            // TODO: Switch Vector3.Distance to sqrMagnitude comparison
+            if (Vector3.Distance(transform.position, swimArea.position) >= _playerSwimArea.swimLength && !IsSwimmingTowardIsland())
             {
                 if (isBoosting && boostSwimSpeed > 0)
                 {
-                    speed = boostSwimSpeed - (Vector3.Distance(transform.position, swimArea.position) - swimArea.GetComponent<PlayerSwimArea>().swimLength) * 2.5f;
+                    speed = boostSwimSpeed - (Vector3.Distance(transform.position, swimArea.position) - _playerSwimArea.swimLength) * 2.5f;
                 }
                 else if (defaultSwimSpeed > 0)
                 {
-                    speed = defaultSwimSpeed - (Vector3.Distance(transform.position, swimArea.position) - swimArea.GetComponent<PlayerSwimArea>().swimLength);
+                    speed = defaultSwimSpeed - (Vector3.Distance(transform.position, swimArea.position) - _playerSwimArea.swimLength);
                 }
             }
             else
@@ -375,27 +382,27 @@ namespace StarterAssets
 
             void MovePlayer(float playerRenderRotationX, float playerRenderRotationY)
             {
-                Vector3 Direction;
+                Vector3 direction;
                 
                 if(attractToEntity)
-                    Direction = (transform.position - currentAttractEntity.position).normalized * -1 * (boostSwimSpeed * Time.deltaTime);
+                    direction = (transform.position - currentAttractEntity.position).normalized * (-1 * (boostSwimSpeed * Time.deltaTime));
                 else
-                    Direction = (transform.forward * -1) * (inputDirectionNormalized.z * moveDistance);
+                    direction = transform.forward * (-1 * (inputDirectionNormalized.z * moveDistance));
             
                 if (hasVCam)
                 {
-                    if (!playerManager.healthManager.IsGrasped && !Physics.Raycast(playerVisual.transform.position, Direction, checkObstacleDistance, obstacleLayer))
-                        rb.AddForce(Direction, ForceMode.Impulse);
+                    if (!playerManager.healthManager.IsGrasped && !Physics.Raycast(playerVisual.transform.position, direction, checkObstacleDistance, obstacleLayer))
+                        rb.AddForce(direction, ForceMode.Impulse);
 
                     AnimationSpeed = isBoosting ? boostAnimSpeed : defaultAnimSpeed;
                     getPlayerCameraAndControls.vCam.m_Lens.FieldOfView = Mathf.Lerp(getPlayerCameraAndControls.vCam.m_Lens.FieldOfView, isBoosting ? boostSpeedFOV : defaultSpeedFOV, cameraFOVSmoothTime * Time.deltaTime);
-                    getPlayerCameraAndControls.vCam.GetCinemachineComponent<CinemachineFramingTransposer>().m_CameraDistance = CameraDistance();
+                    _cinemachineFramingTransposer.m_CameraDistance = CameraDistance();
                 }
 
                 playerVisual.transform.localRotation = Quaternion.Lerp(playerVisual.transform.localRotation, Quaternion.Euler(playerRenderRotationX, playerRenderRotationY, 0), playerRotationSmoothTime * Time.deltaTime);
             }
 
-            if(currentAttractEntity==null || currentAttractTime <= 0)
+            if(!currentAttractEntity || currentAttractTime <= 0)
                 attractToEntity = false;
 
             if(currentAttractCooldown > 0)
