@@ -100,6 +100,15 @@ namespace PlayerInputAssetNS
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Zoom"",
+                    ""type"": ""Value"",
+                    ""id"": ""4878798f-c9a1-4914-8b98-5ec696335ecc"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -311,6 +320,17 @@ namespace PlayerInputAssetNS
                     ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""169395b6-d203-43ce-b26c-4cc5ac099bd8"",
+                    ""path"": ""<Mouse>/scroll"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Zoom"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -375,6 +395,7 @@ namespace PlayerInputAssetNS
             m_Player_SetActivationStateMultiplayerUI = m_Player.FindAction("SetActivationStateMultiplayerUI", throwIfNotFound: true);
             m_Player_SuckIn = m_Player.FindAction("SuckIn", throwIfNotFound: true);
             m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
+            m_Player_Zoom = m_Player.FindAction("Zoom", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -444,6 +465,7 @@ namespace PlayerInputAssetNS
         private readonly InputAction m_Player_SetActivationStateMultiplayerUI;
         private readonly InputAction m_Player_SuckIn;
         private readonly InputAction m_Player_Jump;
+        private readonly InputAction m_Player_Zoom;
         public struct PlayerActions
         {
             private @StarterAssets m_Wrapper;
@@ -456,6 +478,7 @@ namespace PlayerInputAssetNS
             public InputAction @SetActivationStateMultiplayerUI => m_Wrapper.m_Player_SetActivationStateMultiplayerUI;
             public InputAction @SuckIn => m_Wrapper.m_Player_SuckIn;
             public InputAction @Jump => m_Wrapper.m_Player_Jump;
+            public InputAction @Zoom => m_Wrapper.m_Player_Zoom;
             public InputActionMap Get() { return m_Wrapper.m_Player; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -489,6 +512,9 @@ namespace PlayerInputAssetNS
                 @Jump.started += instance.OnJump;
                 @Jump.performed += instance.OnJump;
                 @Jump.canceled += instance.OnJump;
+                @Zoom.started += instance.OnZoom;
+                @Zoom.performed += instance.OnZoom;
+                @Zoom.canceled += instance.OnZoom;
             }
 
             private void UnregisterCallbacks(IPlayerActions instance)
@@ -517,6 +543,9 @@ namespace PlayerInputAssetNS
                 @Jump.started -= instance.OnJump;
                 @Jump.performed -= instance.OnJump;
                 @Jump.canceled -= instance.OnJump;
+                @Zoom.started -= instance.OnZoom;
+                @Zoom.performed -= instance.OnZoom;
+                @Zoom.canceled -= instance.OnZoom;
             }
 
             public void RemoveCallbacks(IPlayerActions instance)
@@ -580,6 +609,7 @@ namespace PlayerInputAssetNS
             void OnSetActivationStateMultiplayerUI(InputAction.CallbackContext context);
             void OnSuckIn(InputAction.CallbackContext context);
             void OnJump(InputAction.CallbackContext context);
+            void OnZoom(InputAction.CallbackContext context);
         }
     }
 }

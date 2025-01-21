@@ -917,8 +917,12 @@ MonoBehaviour:
     type: 3}
   lookAction: {fileID: -3787169064211337688, guid: 4419d82f33d36e848b3ed5af4c8da37e,
     type: 3}
-  attackAction: {fileID: 0}
-  suckInAction: {fileID: 0}
+  attackAction: {fileID: 636620786295374268, guid: 4419d82f33d36e848b3ed5af4c8da37e,
+    type: 3}
+  suckInAction: {fileID: 9102503548613125204, guid: 4419d82f33d36e848b3ed5af4c8da37e,
+    type: 3}
+  zoomAction: {fileID: 8692068699046092461, guid: 4419d82f33d36e848b3ed5af4c8da37e,
+    type: 3}
   move: {x: 0, y: 0}
   look: {x: 0, y: 0}
   sprint: 0

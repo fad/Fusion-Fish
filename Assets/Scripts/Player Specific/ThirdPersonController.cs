@@ -125,13 +125,22 @@ namespace StarterAssets
         public float notMovingFOV = 17.5f;
         public float defaultSpeedFOV = 20f;
         public float boostSpeedFOV = 35;
-        public float cameraDistance = 5;
         private float cineMachineTargetYaw;
         private float cineMachineTargetPitch;
-        private float scrollValue = 0;
-        private float maxScrollValue = 0.8f;
-        private float minScrollValue = -2;
-        private float zoomSpeed = 5;
+        
+        [Header("Zoom Values")]
+        [SerializeField]
+        private float zoomSpeed = .45f;
+        
+        [SerializeField]
+        private float minCamDistance = 2f;
+       
+        [SerializeField]
+        private float maxCamDistance = 8f;
+
+        [HideInInspector]
+        public float cameraDistance = 5f; // TODO: Remove; LevelUP has a reference to this why so ever
+        private float _scrollValue;
 
         private GetPlayerCameraAndControls getPlayerCameraAndControls;
         private bool hasVCam = true;
@@ -157,7 +166,7 @@ namespace StarterAssets
 #endif
         [HideInInspector]
         public StarterAssetsInputs input;
-
+        private CinemachineFramingTransposer _cinemachineFramingTransposer;
         private bool IsCurrentDeviceMouse
         {
             get
@@ -218,8 +227,14 @@ namespace StarterAssets
             _playerSwimArea = swimArea.GetComponent<PlayerSwimArea>();
 
             playerManager.levelUp.levelUpEvent += CameraForwardRotation;
-            _cinemachineFramingTransposer =
-                getPlayerCameraAndControls.vCam.GetCinemachineComponent<CinemachineFramingTransposer>();
+
+            if (HasStateAuthority)
+            {
+                _cinemachineFramingTransposer =
+                    getPlayerCameraAndControls.vCam.GetCinemachineComponent<CinemachineFramingTransposer>();
+                
+                cameraDistance = CameraDistance();
+            }
         }
 
         private void Update()
@@ -249,6 +264,12 @@ namespace StarterAssets
             if (playerManager.playerHealth.isDead || !HasStateAuthority)
                 return;
 
+
+            if (input.CurrentScrollValue.y != 0)
+            {
+                _cinemachineFramingTransposer.m_CameraDistance = CameraDistance();
+            }
+            
             CameraRotation();
         }
 
@@ -336,11 +357,10 @@ namespace StarterAssets
             }
         }
 
-        quaternion randomRotation;
-        private CinemachineFramingTransposer _cinemachineFramingTransposer;
-
         private void Jump()
         {
+            Quaternion randomRotation = Quaternion.identity;
+            
             if (hasVCam && input.jump && currentJumpCooldown <= 0)
             {
                 animator.SetTrigger("jump");
@@ -447,7 +467,6 @@ namespace StarterAssets
                     getPlayerCameraAndControls.vCam.m_Lens.FieldOfView = Mathf.Lerp(
                         getPlayerCameraAndControls.vCam.m_Lens.FieldOfView,
                         isBoosting ? boostSpeedFOV : defaultSpeedFOV, cameraFOVSmoothTime * Time.deltaTime);
-                    _cinemachineFramingTransposer.m_CameraDistance = CameraDistance();
                 }
 
                 playerVisual.transform.localRotation = Quaternion.Lerp(playerVisual.transform.localRotation,
@@ -520,9 +539,9 @@ namespace StarterAssets
 
         private float CameraDistance()
         {
-            scrollValue += Input.GetAxis("Mouse ScrollWheel");
-            scrollValue = Mathf.Clamp(scrollValue, minScrollValue, maxScrollValue);
-            float scrollCameraDistance = cameraDistance - scrollValue * zoomSpeed;
+            _scrollValue += -input.CurrentScrollValue.y * zoomSpeed;
+            _scrollValue = Mathf.Clamp(_scrollValue, minCamDistance, maxCamDistance);
+            float scrollCameraDistance = _scrollValue;
             float currentCameraDistance = scrollCameraDistance;
             RaycastHit hit;
 
@@ -530,6 +549,7 @@ namespace StarterAssets
                     scrollCameraDistance, obstacleLayer))
                 currentCameraDistance = Vector3.Distance(transform.position, hit.point);
 
+            cameraDistance = currentCameraDistance;
             return currentCameraDistance;
         }
 
@@ -642,8 +662,7 @@ namespace StarterAssets
                     var velocity = rb.velocity;
                     playerVisual.transform.forward = -velocity;
                     cineMachineTargetPitch = -velocity.x;
-                    getPlayerCameraAndControls.vCam.GetCinemachineComponent<CinemachineFramingTransposer>()
-                        .m_CameraDistance = CameraDistance() / 2;
+                    _cinemachineFramingTransposer.m_CameraDistance = CameraDistance() / 2;
                 }
             }
             else
@@ -674,9 +693,7 @@ namespace StarterAssets
                     AudioManager.Instance.PlaySoundAtPosition("impactWithWater", playerVisual.transform.position);
                     outOfWater = false;
                 }
-
-                getPlayerCameraAndControls.vCam.GetCinemachineComponent<CinemachineFramingTransposer>()
-                    .m_CameraDistance = CameraDistance();
+                
                 rb.drag = 6;
                 rb.useGravity = false;
             }

@@ -11,7 +11,7 @@ namespace StarterAssets
 	{
 		public bool isPlayerWritingChat = false;
 
-		public InputActionReference PushToTalkAction,moveAction,lookAction, attackAction, suckInAction;
+		public InputActionReference PushToTalkAction,moveAction,lookAction, attackAction, suckInAction, zoomAction;
 		[Header("Character Input Values")]
 		public Vector2 move;
 		public Vector2 look;
@@ -20,6 +20,10 @@ namespace StarterAssets
 		public bool suckIn;
 		public bool jump;
         public bool setActiveStateMultiplayerUI;
+
+        private Vector2 _scrollValue;
+
+        public Vector2 CurrentScrollValue => _scrollValue;
 
 		[Header("Movement Settings")]
 		public bool analogMovement;
@@ -67,6 +71,11 @@ namespace StarterAssets
 		public void OnAttack(InputValue value)
 		{
 			AttackInput(value.isPressed);
+		}
+
+		public void OnZoom(InputValue value)
+		{
+			ZoomInput(value.Get<Vector2>().normalized); // Normalize to get a value between -1 and 1
 		}
 
 		public void EnablePushToTalk(InputAction.CallbackContext context) {
@@ -124,6 +133,13 @@ namespace StarterAssets
                 return;
             jump = newActivationState;
         }
+
+        private void ZoomInput(Vector2 newScrollValue)
+        {
+	        if (isPlayerWritingChat) return;
+	        
+	        _scrollValue = newScrollValue;
+        }
         
         private void OnApplicationFocus(bool hasFocus)
 		{
@@ -141,6 +157,7 @@ namespace StarterAssets
 			lookAction.action.Disable();
 			attackAction.action.Disable();
 			suckInAction.action.Disable();
+			zoomAction.action.Disable();
 		}
 		public void EnablePlayerInput()
 		{
@@ -148,6 +165,7 @@ namespace StarterAssets
 			lookAction.action.Enable();
 			attackAction.action.Enable();
 			suckInAction.action.Enable();
+			zoomAction.action.Enable();
 		}
 
 		private void Awake() {
