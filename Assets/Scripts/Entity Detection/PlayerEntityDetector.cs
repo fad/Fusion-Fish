@@ -1,3 +1,4 @@
+using AvocadoShark;
 using UnityEngine;
 
 /// <summary>
@@ -10,6 +11,7 @@ public class PlayerEntityDetector : EntityDetector
         if (!TryCheck(other.gameObject)) return;
 
         DealWithFoodOutline(other.gameObject, true);
+        DealWithPlayerName(other.gameObject, true);
     }
 
     protected override void OnTriggerExit(Collider other)
@@ -17,6 +19,7 @@ public class PlayerEntityDetector : EntityDetector
         if (!TryCheck(other.gameObject)) return;
 
         DealWithFoodOutline(other.gameObject, false);
+        DealWithPlayerName(other.gameObject, false);
     }
 
     private void DealWithFoodOutline(GameObject other, bool shouldOutline)
@@ -24,6 +27,14 @@ public class PlayerEntityDetector : EntityDetector
         if (other.TryGetComponent(out OutlineManager outlineManager) && other.TryGetComponent(out SuckableService _))
         {
             outlineManager.ShouldOutline(shouldOutline);
+        }
+    }
+
+    private void DealWithPlayerName(GameObject other, bool shouldShow)
+    {
+        if (other.TryGetComponent(out PlayerStats playerStats))
+        {
+            playerStats.SetPlayerNameVisibility(shouldShow);
         }
     }
 }

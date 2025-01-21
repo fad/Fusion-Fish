@@ -110,6 +110,11 @@ namespace AvocadoShark
             }
         }
         
+        public void SetPlayerNameVisibility(bool value)
+        {
+            playerNameLabel.gameObject.SetActive(value);
+        }
+        
         // public override void FixedUpdateNetwork()
         // {
         //     if (Object.HasStateAuthority)
