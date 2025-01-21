@@ -251,30 +251,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _currentLevel: 0
-  startingExperienceUntilUpgrade: 0
-  startingExperience: 0
-  startingSize: {x: 0, y: 0, z: 0}
-  startingCameraDistance: 0
-  startingBoostSwimSpeed: 0
-  startingDefaultSwimSpeed: 0
-  startingAttackDamage: 0
-  startingSuckPower: 0
-  startingAttackRange: 0
-  startingHealth: 0
-  experienceUntilUpgrade: 300
-  experienceIncreaseOnLevelUp: 200
-  defaultSwimSpeedIncreaseOnLevelUp: 1
-  boostSwimSpeedIncreaseOnLevelUp: 1
-  attackDamageIncreaseOnLevelUp: 2
-  sizeIncreaseOnLevelUp: 0.25
-  suckPowerIncreaseOnLevelUp: 0.2
-  cameraDistanceIncreaseOnLevelUp: 1
-  attackRangeIncreaseOnLevelUp: 0.2
-  healthIncreaseOnLevelUp: 5
   isEgg: 0
   eggModel: {fileID: 0}
   fishModel: {fileID: 0}
   LevelUpParticleSystem: {fileID: 0}
+  LevelsFishData: []
 --- !u!114 &6595614106671272429
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -304,14 +285,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f8880170c48b1f44aaef687b67ca3f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fishData: {fileID: 0}
   maxHealth: 100
   recoveryHealthInSecond: 1
   timeToStartRecoveryHealth: 5
+  XPValue: 100
   _NetworkedHealth: 100
   currentHealth: 0
   notAbleToGetBitten: 0
-  maxGraspedTime: 1
   graspedTime: 0
 --- !u!114 &-2164658129637747517
 MonoBehaviour:
@@ -425,6 +405,8 @@ MonoBehaviour:
     type: 3}
   lookAction: {fileID: -3787169064211337688, guid: 4419d82f33d36e848b3ed5af4c8da37e,
     type: 3}
+  attackAction: {fileID: 0}
+  suckInAction: {fileID: 0}
   move: {x: 0, y: 0}
   look: {x: 0, y: 0}
   sprint: 0
@@ -660,7 +642,8 @@ MonoBehaviour:
   slowDownManager: {fileID: 0}
   playerAttack: {fileID: 2749181200256999984}
   hostPlayerRunner: {fileID: 0}
-  fishData: {fileID: 0}
+  entityDataContainer: {fileID: 0}
+  spawnGibsOnDestroy: {fileID: 0}
 --- !u!114 &9144912782510203114
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1089,7 +1072,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &3231227891575338801
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6575,12 +6558,14 @@ MonoBehaviour:
   biteLower: {fileID: 5466369016473450773}
   biteAnimator: {fileID: 9174893869088333902}
   networkFishAnimator: {fileID: 6741892561249266755}
-  damageNumber: {fileID: 7407005287724650605, guid: e42a86b60d2f8294c9a2a418574abe06,
-    type: 3}
+  damageNumberPrefab: {fileID: 0}
+  radiusToSpawnDamageNumber: 0.5
   attackRange: 1.24
   maxTimeBetweenAttack: 0.75
   attractionAngle: 40
   attackDamage: 10
+  stunChance: 1
+  biteStunDuration: 1
   playerManager: {fileID: 532309906241500560}
   suckInParticles: {fileID: 1547311364694370056}
   suckInForce: 100
