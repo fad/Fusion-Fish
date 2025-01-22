@@ -7,20 +7,34 @@ using UnityEngine;
 
 public class LevelUp : NetworkBehaviour
 {
-    [Networked][HideInInspector] public int currentLevel { get; private set; }
-    [HideInInspector] public PlayerFishData currentLevelFishData { get; private set; }
+    [Networked]
+    [HideInInspector]
+    public int currentLevel { get; private set; }
+
+    [HideInInspector]
+    public PlayerFishData currentLevelFishData { get; private set; }
 
     private int currentExperience;
     private PlayerManager playerManager;
 
-    [HideInInspector] public bool isEgg;
-    [SerializeField] private GameObject eggModel;
-    [SerializeField] private GameObject fishModel;
-    [SerializeField] private ParticleSystem LevelUpParticleSystem;
-    [SerializeField] private PlayerFishData[] LevelsFishData;
+    [HideInInspector]
+    public bool isEgg;
+
+    [SerializeField]
+    private GameObject eggModel;
+
+    [SerializeField]
+    private GameObject fishModel;
+
+    [SerializeField]
+    private ParticleSystem LevelUpParticleSystem;
+
+    [SerializeField]
+    private PlayerFishData[] LevelsFishData;
 
     public Action levelUpEvent;
     public Action<int> AddExperienceEvent;
+
     private void Start()
     {
         playerManager = GetComponent<PlayerManager>();
@@ -30,6 +44,7 @@ public class LevelUp : NetworkBehaviour
         else
             Restart();
     }
+
     public void Restart()
     {
         currentLevel = 0;
@@ -44,32 +59,35 @@ public class LevelUp : NetworkBehaviour
     {
         return currentExperience;
     }
+
     public void AddExperience(int experience)
     {
         if (!HasStateAuthority) return;
-        
+
         currentExperience += experience;
         AddExperienceEvent?.Invoke(experience);
         CheckLevelUpRpc();
-    }    
-    
+    }
+
 
     [Rpc(RpcSources.All, RpcTargets.All)]
     private void CheckLevelUpRpc()
     {
-        if(!currentLevelFishData) return;
-        
+        if (!currentLevelFishData) return;
+
         if (currentExperience < currentLevelFishData.ExperienceUntilUpgrade) return;
-        
+
         currentLevel++;
-        currentLevelFishData = LevelsFishData[currentLevel];
+
+        currentLevelFishData =
+            currentLevel >= LevelsFishData.Length ? LevelsFishData[^1] : LevelsFishData[currentLevel];
 
         LevelUpParticleSystem.Play();
         if (isEgg)
         {
             EvolutionIntoFishRpc();
         }
-            
+
         UpdateFishData(currentLevelFishData);
         currentExperience = 0;
         AudioManager.Instance.Play("levelUp");
@@ -78,10 +96,11 @@ public class LevelUp : NetworkBehaviour
 
     private void UpdateFishData(PlayerFishData fishData)
     {
-        playerManager.satietyManager.UpdateSatietyData(fishData.MaxSatiety,fishData.SatietyDecreaseRate);
+        playerManager.satietyManager.UpdateSatietyData(fishData.MaxSatiety, fishData.SatietyDecreaseRate);
         playerManager.entityDataContainer.FishDataUpdate(fishData);
         playerManager.spawnGibsOnDestroy.FishDataUpdate(fishData);
-        playerManager.thirdPersonController.transform.localScale = new Vector3(fishData.Scale, fishData.Scale, fishData.Scale);
+        playerManager.thirdPersonController.transform.localScale =
+            new Vector3(fishData.Scale, fishData.Scale, fishData.Scale);
         playerManager.thirdPersonController.boostSwimSpeed = fishData.FastSpeed;
         playerManager.thirdPersonController.defaultSwimSpeed = fishData.WanderSpeed;
         playerManager.thirdPersonController.boostReloadSpeed = fishData.StaminaRegenRate;
@@ -96,6 +115,7 @@ public class LevelUp : NetworkBehaviour
         playerManager.thirdPersonController.cameraDistance = fishData.Scale * 5 / 0.25f;
         playerManager.playerAttack.suckInDamage = 10;
     }
+
     public int GetLevel()
     {
         if (HasStateAuthority)
