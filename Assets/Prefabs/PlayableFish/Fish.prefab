@@ -666,8 +666,7 @@ MonoBehaviour:
   SortKey: 778621691
   ObjectInterest: 1
   Flags: 262145
-  NestedObjects:
-  - {fileID: 6147735825067914960}
+  NestedObjects: []
   NetworkedBehaviours:
   - {fileID: 9150513680388461083}
   - {fileID: 2297454540360690151}
@@ -685,6 +684,7 @@ MonoBehaviour:
   - {fileID: 4401903604139822273}
   - {fileID: 6045487449421373419}
   - {fileID: 2749181200256999984}
+  - {fileID: 6741892561249266755}
   - {fileID: 3542185466123676831}
   - {fileID: 8616088687293941838}
 --- !u!114 &4401903604139822273
@@ -1518,8 +1518,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5967580297110785664}
-  - component: {fileID: 6147735825067914960}
-  - component: {fileID: 3024809650598101344}
   m_Layer: 0
   m_Name: Player Render
   m_TagString: Untagged
@@ -1549,41 +1547,6 @@ Transform:
   - {fileID: 2487675172160686926}
   m_Father: {fileID: 61442038398986381}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6147735825067914960
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5159690815227489710}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SortKey: 724917311
-  ObjectInterest: 1
-  Flags: 262145
-  NestedObjects: []
-  NetworkedBehaviours:
-  - {fileID: 3024809650598101344}
-  - {fileID: 6741892561249266755}
---- !u!114 &3024809650598101344
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5159690815227489710}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 158639473, guid: e725a070cec140c4caffb81624c8c787, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SyncScale: 0
-  SyncParent: 0
-  _autoAOIOverride: 1
-  DisableSharedModeInterpolation: 1
 --- !u!1 &5247204222744005071
 GameObject:
   m_ObjectHideFlags: 0
@@ -6686,8 +6649,8 @@ MonoBehaviour:
   TotalWords: 2
   ApplyTiming: 2
   SyncSettings: 79
-  StateHashes: 000000002445ff7f3ed4c595221c37918758d02e8e24d5c6bd97f0f1e63d5747244f96e5
-  TriggerHashes: 000000003b2dc047
+  StateHashes: 000000002445ff7f3ed4c595221c37918758d02e8e24d5c6bd97f0f1b05f21be722de01c1cbc8421f77f0cdc
+  TriggerHashes: 000000003b2dc0476520ff741606b3a7
 --- !u!1 &6488255723578305957
 GameObject:
   m_ObjectHideFlags: 0

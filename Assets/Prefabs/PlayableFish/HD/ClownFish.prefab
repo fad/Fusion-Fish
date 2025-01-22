@@ -1307,8 +1307,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3750007572065302002}
-  - component: {fileID: 3713934242813513122}
-  - component: {fileID: 5702092542984616466}
   m_Layer: 0
   m_Name: Player Render
   m_TagString: Untagged
@@ -1339,41 +1337,6 @@ Transform:
   - {fileID: 4926464990231195708}
   m_Father: {fileID: 7350410708160254975}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3713934242813513122
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2396277671021008604}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SortKey: 2915340023
-  ObjectInterest: 1
-  Flags: 262145
-  NestedObjects: []
-  NetworkedBehaviours:
-  - {fileID: 5702092542984616466}
-  - {fileID: 2536351339780674081}
---- !u!114 &5702092542984616466
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2396277671021008604}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 158639473, guid: e725a070cec140c4caffb81624c8c787, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SyncScale: 0
-  SyncParent: 0
-  _autoAOIOverride: 1
-  DisableSharedModeInterpolation: 1
 --- !u!1 &3317603565387952829
 GameObject:
   m_ObjectHideFlags: 0
@@ -7126,6 +7089,9 @@ MonoBehaviour:
   notMovingFOV: 20
   defaultSpeedFOV: 30
   boostSpeedFOV: 40
+  zoomSpeed: 0.45
+  minCamDistance: 2
+  maxCamDistance: 8
   cameraDistance: 5
   animator: {fileID: 159821371318304178}
   obstacleLayer:
@@ -7562,8 +7528,7 @@ MonoBehaviour:
   SortKey: 1120929771
   ObjectInterest: 1
   Flags: 264449
-  NestedObjects:
-  - {fileID: 3713934242813513122}
+  NestedObjects: []
   NetworkedBehaviours:
   - {fileID: 1740229046022351209}
   - {fileID: 8735184572475249301}
@@ -7581,6 +7546,7 @@ MonoBehaviour:
   - {fileID: 6614972755330119603}
   - {fileID: 3836587921067304089}
   - {fileID: 4682797007924009282}
+  - {fileID: 2536351339780674081}
   - {fileID: 6337673288655362029}
   - {fileID: 1245757324773585724}
 --- !u!114 &6614972755330119603
