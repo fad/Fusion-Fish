@@ -7,6 +7,8 @@ public class OutlineManager : MonoBehaviour
     
     public void ShouldOutline(bool shouldOutline)
     {
+        if(!objectOutline) return;
+        
         objectOutline.enabled = shouldOutline;
     }
 }

@@ -46,6 +46,8 @@ public class LevelUp : NetworkBehaviour
     }
     public void AddExperience(int experience)
     {
+        if (!HasStateAuthority) return;
+        
         currentExperience += experience;
         AddExperienceEvent?.Invoke(experience);
         CheckLevelUpRpc();
@@ -55,22 +57,23 @@ public class LevelUp : NetworkBehaviour
     [Rpc(RpcSources.All, RpcTargets.All)]
     private void CheckLevelUpRpc()
     {
-        if (currentExperience >= currentLevelFishData.ExperienceUntilUpgrade)
-        {
-            currentLevel++;
-            currentLevelFishData = LevelsFishData[currentLevel];
+        if(!currentLevelFishData) return;
+        
+        if (currentExperience < currentLevelFishData.ExperienceUntilUpgrade) return;
+        
+        currentLevel++;
+        currentLevelFishData = LevelsFishData[currentLevel];
 
-            LevelUpParticleSystem.Play();
-            if (isEgg)
-            {
-                EvolutionIntoFishRpc();
-            }
-            
-            UpdateFishData(currentLevelFishData);
-            currentExperience = 0;
-            AudioManager.Instance.Play("levelUp");
-            levelUpEvent?.Invoke();
+        LevelUpParticleSystem.Play();
+        if (isEgg)
+        {
+            EvolutionIntoFishRpc();
         }
+            
+        UpdateFishData(currentLevelFishData);
+        currentExperience = 0;
+        AudioManager.Instance.Play("levelUp");
+        levelUpEvent?.Invoke();
     }
 
     private void UpdateFishData(PlayerFishData fishData)
