@@ -50,13 +50,14 @@ public class HealthManager : NetworkBehaviour, IHealthManager, ISuckable, IGrasp
     {
         if (_healthUtility == null) TryGetComponent(out _healthUtility);
         if (!_slowDownManager) TryGetComponent(out _slowDownManager);
+        
+        _changeDetector = GetChangeDetector(ChangeDetector.Source.SimulationState);
+        Restart();
 
     }
     public void Start()
     {
         _bloodParticleSystem = GameObject.Find("BloodParticles").GetComponent<ParticleSystem>();
-        _changeDetector = GetChangeDetector(ChangeDetector.Source.SimulationState);
-        Restart();
     }
     public void Restart()
     {
