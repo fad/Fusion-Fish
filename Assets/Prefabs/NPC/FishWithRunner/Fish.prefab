@@ -12,14 +12,11 @@ GameObject:
   - component: {fileID: 5807882279209203546}
   - component: {fileID: 2522072839802053289}
   - component: {fileID: 1865835381330798333}
-  - component: {fileID: 4587424286127669558}
-  - component: {fileID: 3520792079937246030}
   - component: {fileID: 6630329994706225884}
   - component: {fileID: 5124316588462460406}
   - component: {fileID: 1943943065113725832}
   - component: {fileID: 8821568059870424906}
   - component: {fileID: -2513658585567508546}
-  - component: {fileID: -7308711493592459286}
   m_Layer: 6
   m_Name: Fish
   m_TagString: Untagged
@@ -72,17 +69,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SortKey: 2749683392
   ObjectInterest: 1
-  Flags: 524289
+  Flags: 131073
   NestedObjects: []
   NetworkedBehaviours:
   - {fileID: 5807882279209203546}
   - {fileID: 1865835381330798333}
-  - {fileID: 4587424286127669558}
-  - {fileID: 3520792079937246030}
   - {fileID: 5124316588462460406}
   - {fileID: 1943943065113725832}
   - {fileID: 8821568059870424906}
-  - {fileID: -7308711493592459286}
 --- !u!114 &1865835381330798333
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -99,30 +93,6 @@ MonoBehaviour:
   SyncParent: 1
   _autoAOIOverride: 1
   DisableSharedModeInterpolation: 1
---- !u!114 &4587424286127669558
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1443812496687094691}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff2982a4918a3434ea873ea2c9f9d2aa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &3520792079937246030
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1443812496687094691}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a0822fda13ddf1441aa1d15688d1ed64, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &6630329994706225884
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -197,15 +167,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectOutline: {fileID: 0}
---- !u!114 &-7308711493592459286
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1443812496687094691}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9cba62ab3da96904d8863c547747a9e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

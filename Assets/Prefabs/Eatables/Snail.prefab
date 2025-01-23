@@ -12,12 +12,9 @@ GameObject:
   - component: {fileID: 5176357301769495334}
   - component: {fileID: 7042346548101621276}
   - component: {fileID: 9093912718778848599}
-  - component: {fileID: 6419011312389179594}
-  - component: {fileID: 3557233515773472043}
   - component: {fileID: -6645687050782172566}
   - component: {fileID: 7515034531768731648}
   - component: {fileID: 4239358611535118213}
-  - component: {fileID: -3858284056133453605}
   m_Layer: 6
   m_Name: Snail
   m_TagString: Untagged
@@ -92,38 +89,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SortKey: 4015226418
   ObjectInterest: 1
-  Flags: 524289
+  Flags: 131073
   NestedObjects: []
   NetworkedBehaviours:
   - {fileID: 7042346548101621276}
-  - {fileID: 6419011312389179594}
-  - {fileID: 3557233515773472043}
   - {fileID: -6645687050782172566}
-  - {fileID: -3858284056133453605}
---- !u!114 &6419011312389179594
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3074263614759568986}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff2982a4918a3434ea873ea2c9f9d2aa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &3557233515773472043
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3074263614759568986}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a0822fda13ddf1441aa1d15688d1ed64, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &-6645687050782172566
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -188,18 +158,6 @@ CapsuleCollider:
   m_Height: 1.09
   m_Direction: 2
   m_Center: {x: 0.31, y: 0.14, z: 0.06}
---- !u!114 &-3858284056133453605
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3074263614759568986}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9cba62ab3da96904d8863c547747a9e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1694738444338251489
 PrefabInstance:
   m_ObjectHideFlags: 0
