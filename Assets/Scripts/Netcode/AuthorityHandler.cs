@@ -45,7 +45,7 @@ public class AuthorityHandler : NetworkBehaviour, IStateAuthorityChanged
 	/// <summary>
 	/// Request authority for this object.
 	/// Will request authority if the object has no authority.
-	/// Otherwise will transfer authority to the local player.
+	/// Otherwise, will transfer authority to the local player.
 	/// </summary>
 	/// <param name="onAuthorized">Action to use when authority was granted</param>
 	/// <param name="onUnauthorized">Action to use when authority was not granted</param>
