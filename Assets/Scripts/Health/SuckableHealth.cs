@@ -32,7 +32,7 @@ public class SuckableHealth : NetworkBehaviour, IHealthManager
 
     public void Damage(DamageInfo damageInfo)
     {
-        if (!Runner || !HasStateAuthority) return;
+        // if (!Runner || !HasStateAuthority) return;
         
         NetworkedHealth -= damageInfo.Damage;
         OnHealthChanged?.Invoke(NetworkedHealth);

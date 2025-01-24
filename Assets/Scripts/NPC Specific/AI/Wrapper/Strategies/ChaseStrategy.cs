@@ -226,8 +226,6 @@ public class ChaseStrategy : StaminaMoveStrategy
     /// <see cref="Status.Running"/> during the chase.</returns>
     public override Status Process()
     {   
-        Debug.Log("Hunt"); // this gets called continuously near a meatobject
-        
         // if (_didPreyDie()) // this causes the stop with a meatobject
         // {
         //     Debug.Log("Prey died");
