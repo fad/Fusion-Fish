@@ -651,6 +651,7 @@ MonoBehaviour:
   hostPlayerRunner: {fileID: 0}
   entityDataContainer: {fileID: 0}
   spawnGibsOnDestroy: {fileID: 0}
+  playerRender: []
 --- !u!114 &9144912782510203114
 MonoBehaviour:
   m_ObjectHideFlags: 0

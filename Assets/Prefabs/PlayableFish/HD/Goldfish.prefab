@@ -1163,6 +1163,9 @@ MonoBehaviour:
   hostPlayerRunner: {fileID: 0}
   entityDataContainer: {fileID: 0}
   spawnGibsOnDestroy: {fileID: 0}
+  playerRender:
+  - {fileID: 5383486638424493648}
+  - {fileID: 1796954079457379972}
 --- !u!114 &6178911508137242890
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7492,12 +7495,12 @@ MonoBehaviour:
   m_Script: {fileID: 506319458, guid: e725a070cec140c4caffb81624c8c787, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Animator: {fileID: 0}
-  TotalWords: 2
+  Animator: {fileID: 7633178403502015758}
+  TotalWords: 0
   ApplyTiming: 2
   SyncSettings: 79
-  StateHashes: 000000002445ff7f3ed4c595221c37918758d02e8e24d5c6bd97f0f1b05f21be722de01c1cbc8421f77f0cdc
-  TriggerHashes: 000000003b2dc0476520ff741606b3a7
+  StateHashes: 00000000b0634c8e644f17acd7ff783961924260c8b48b70f9e0c5647752b3164606fd021a3fd39aac52e9c3
+  TriggerHashes: 00000000
 --- !u!1 &7132177231882862324
 GameObject:
   m_ObjectHideFlags: 0

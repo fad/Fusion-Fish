@@ -100,9 +100,6 @@ public class PlayerAttack : NetworkBehaviour
             return;
         
         damageNumberPrefab.PrewarmPool();
-
-        playerManager.thirdPersonController.gameObject.layer = LayerMask.NameToLayer("StateAuthorityPlayer");
-
         _usualSensitivity = playerManager.thirdPersonController.sensitivity;
         _sensitivityWhileAttacking = playerManager.thirdPersonController.sensitivity /= 2;
 
