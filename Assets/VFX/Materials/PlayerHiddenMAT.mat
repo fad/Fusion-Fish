@@ -51,8 +51,9 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _Dither_Size: 8.42
     - _QueueControl: 0
     - _QueueOffset: 0
     m_Colors:
-    - _Base_Color: {r: 0.20242596, g: 0.8207547, b: 0.11227306, a: 0}
+    - _Base_Color: {r: 0.20242593, g: 0.8207547, b: 0.11227303, a: 0.8235294}
   m_BuildTextureStacks: []
