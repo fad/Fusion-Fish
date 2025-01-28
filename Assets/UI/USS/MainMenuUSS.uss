@@ -1,0 +1,39 @@
+.mainButton {
+    font-size: 36px;
+    width: 420px;
+    height: 70px;
+    border-top-left-radius: 24px;
+    border-top-right-radius: 24px;
+    border-bottom-right-radius: 24px;
+    border-bottom-left-radius: 24px;
+    align-items: stretch;
+    justify-content: center;
+    margin-top: 20px;
+    letter-spacing: 0;
+    -unity-font-definition: url("project://database/Assets/UI%20Toolkit/UnityThemes/UnityDefaultRuntimeTheme.tss?fileID=2230732570650464555&guid=6d1638d73aefdc14f9aa0839423dc5b8&type=3#NotInter-Regular");
+}
+
+.feedbackButton {
+    font-size: 20px;
+    -unity-font-style: bold;
+    border-top-left-radius: 14px;
+    border-top-right-radius: 14px;
+    border-bottom-right-radius: 14px;
+    border-bottom-left-radius: 14px;
+    width: 335px;
+    height: 60px;
+    margin-left: 30px;
+    -unity-text-align: middle-center;
+    padding-left: 0;
+}
+
+.active {
+    visibility: visible;
+    display: flex;
+}
+
+.inactive {
+    visibility: hidden;
+    display: none;
+    overflow: hidden;
+}
