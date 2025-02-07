@@ -1,0 +1,19 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <engine:VisualElement name="Root" style="flex-grow: 1;">
+        <engine:VisualElement name="SelectionTitle" style="flex-grow: 1; align-items: center;">
+            <engine:Label text="Map Selection" name="TitleLabel" style="-unity-text-align: upper-center; font-size: 80px; top: 30px; border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; border-top-left-radius: 20px; border-top-right-radius: 20px; border-bottom-right-radius: 20px; border-bottom-left-radius: 20px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); background-color: rgb(192, 192, 192); height: 110px; width: 811px; left: 0; position: relative;" />
+        </engine:VisualElement>
+        <engine:VisualElement name="SelectionLayer" style="flex-grow: 1; flex-direction: row; justify-content: flex-start; margin-left: 60px; margin-right: 60px;">
+            <engine:ScrollView name="SelectionScroll" vertical-scroller-visibility="AlwaysVisible" horizontal-scroller-visibility="Hidden" style="width: 40%; align-items: stretch; align-self: flex-start; margin-top: 0; margin-bottom: 0; justify-content: flex-start; min-width: 40%; top: 30%;">
+                <engine:Button text="Button" />
+                <engine:Button text="Button" />
+                <engine:Button text="Button" />
+            </engine:ScrollView>
+            <engine:VisualElement name="SelectionImage" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Packages/Underwater%20life%20deluxe/Textures/Animals/trout_col20_unity.tga?fileID=2800000&amp;guid=c51cdded1b14c5e479d45ac52cef7288&amp;type=3#trout_col20_unity&quot;); height: 100%; align-self: center; margin-left: 0; justify-content: flex-start; min-height: 100%; -unity-background-scale-mode: scale-to-fit; background-color: rgba(0, 0, 0, 0);" />
+        </engine:VisualElement>
+        <engine:VisualElement name="ControlButtons" style="flex-grow: 1; flex-direction: row; margin-top: 0; margin-bottom: 0; left: 0; top: 0; bottom: 0; width: 1907px; padding-top: 0; align-self: center; align-items: flex-end; padding-bottom: 38px;">
+            <engine:Button text="Back" name="BackButton" style="margin-left: 0; margin-top: 0; margin-right: 0; margin-bottom: 0; min-height: 50px; left: 61px; min-width: 50px; padding-top: 10px; height: 50px; width: 129px; top: 0; font-size: 30px;" />
+            <engine:Button text="Next" name="NextButton" style="left: 1400px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-left: 10px; min-width: 350px; min-height: 100px; max-height: 100px; font-size: 36px; top: 0;" />
+        </engine:VisualElement>
+    </engine:VisualElement>
+</engine:UXML>

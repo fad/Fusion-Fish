@@ -1,0 +1,14 @@
+.fishSelectionButton {
+    align-self: center;
+    align-items: auto;
+    justify-content: center;
+    width: 70%;
+    height: 129px;
+    border-top-left-radius: 39px;
+    border-top-right-radius: 39px;
+    border-bottom-right-radius: 39px;
+    border-bottom-left-radius: 39px;
+    font-size: 42px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}

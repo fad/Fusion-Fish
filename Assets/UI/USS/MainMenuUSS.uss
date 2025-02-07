@@ -27,13 +27,13 @@
     padding-left: 0;
 }
 
-.active {
-    visibility: visible;
-    display: flex;
-}
-
 .inactive {
     visibility: hidden;
     display: none;
     overflow: hidden;
+}
+
+.active {
+    visibility: visible;
+    display: flex;
 }
