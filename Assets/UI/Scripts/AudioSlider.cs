@@ -6,36 +6,76 @@ public partial class AudioSlider : VisualElement
 {
     private readonly Slider _slider;
     private readonly Label _valueLabel;
-    
+
+    private const string SliderName = "Slider";
+    private const string ValueLabelName = "ValueLabel";
+
     [UxmlAttribute]
-    public string SliderText { get; set; }
-    
+    public string SliderText
+    {
+        get => _sliderText;
+        set
+        {
+            _sliderText = value;
+            _slider.label = value;
+        }
+    }
+
     [UxmlAttribute]
-    public float LowValue { get; set; }
-    
+    public float LowValue
+    {
+        get => _lowValue;
+        set
+        {
+            _lowValue = value;
+            _slider.lowValue = value;
+        }
+    }
+
     [UxmlAttribute]
-    public float HighValue { get; set; }
-    
+    public float HighValue
+    {
+        get => _highValue;
+        set
+        {
+            _highValue = value;
+            _slider.highValue = value;
+        }
+    }
+
     [UxmlAttribute]
-    public float Value { get; set; }
+    public float Value
+    {
+        get => _value;
+        set
+        {
+            _value = value;
+            _slider.value = value;
+            _valueLabel.text = value.ToString("F0");
+        }
+    }
+    
+    private string _sliderText;
+    private float _lowValue;
+    private float _highValue;
+    private float _value;
 
     public AudioSlider()
     {
         _slider = new Slider();
-        Add(_slider); // adds a slider to the visual element
+        _slider.name = SliderName;
         
         _valueLabel = new Label();
-        Add(_valueLabel); // adds a label to the visual element
+        _valueLabel.name = ValueLabelName;
 
-        RegisterCallback<ChangeEvent<float>>(OnSliderValueChanged);
-        RegisterCallback<ChangeEvent<float>>(OnHighValueChanged);
-        RegisterCallback<ChangeEvent<float>>(OnLowValueChanged);
-        RegisterCallback<ChangeEvent<string>>(OnSliderTextValueChanged);
+        _slider.RegisterValueChangedCallback(evt => UpdateLabel(evt.newValue));
         
-        Update();
+        Add(_slider); // adds a slider to the visual element
+        Add(_valueLabel); // adds a label to the visual element
+        InitValues();
     }
 
-    private void Update()
+    private void InitValues()
     {
         _slider.label = SliderText;
         
@@ -46,28 +86,10 @@ public partial class AudioSlider : VisualElement
         
         _valueLabel.text = Value.ToString();
     }
-    
-    private void OnSliderValueChanged(ChangeEvent<float> evt)
+
+    private void UpdateLabel(float newValue)
     {
-        Value = evt.newValue;
-        _valueLabel.text = Value.ToString();
-    }
-    
-    public void OnSliderTextValueChanged(ChangeEvent<string> evt)
-    {
-        SliderText = evt.newValue;
-        _slider.label = SliderText;
-    }
-    
-    public void OnLowValueChanged(ChangeEvent<float> evt)
-    {
-        LowValue = evt.newValue;
-        _slider.lowValue = LowValue;
-    }
-    
-    public void OnHighValueChanged(ChangeEvent<float> evt)
-    {
-        HighValue = evt.newValue;
-        _slider.highValue = HighValue;
+        Value = newValue;
+        _valueLabel.text = newValue.ToString("F0");
     }
 }
