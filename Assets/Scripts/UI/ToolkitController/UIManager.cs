@@ -3,16 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class MainMenuController : MonoBehaviour
+public class UIManager : MonoBehaviour
 {
     [Header("UI related"), SerializeField]
     private UIDocument ui;
-    
-    [Header("URL Data"), Space(10), SerializeField]
-    private URLData discordURL;
-    
-    [SerializeField]
-    private URLData feedbackURL;
     
     private VisualElement _root;
     
@@ -65,7 +59,7 @@ public class MainMenuController : MonoBehaviour
 
     private void SetupViews()
     {
-        _mainMenuView = new MainMenuView(_root.Q(MainMenuVisualElementName), discordURL, feedbackURL);
+        _mainMenuView = new MainMenuView(_root.Q(MainMenuVisualElementName));
         
         // Track UI views in a list for disposal
         _views.Add(_mainMenuView);

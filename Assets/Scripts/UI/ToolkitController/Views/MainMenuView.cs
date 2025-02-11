@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -13,9 +11,6 @@ public class MainMenuView : UIView
     Button _feedbackButton;
     Button _discordButton;
     
-    URLData _discordURL;
-    URLData _feedbackFormURL;
-    
     #region Main Button Names
     private const string SingleplayerButtonName = "SingleplayerButton";
     private const string MultiplayerButtonName = "MultiplayerButton";
@@ -28,10 +23,9 @@ public class MainMenuView : UIView
     private const string DiscordButtonName = "DiscordButton";
     #endregion
     
-    public MainMenuView(VisualElement topElement, URLData discordURL, URLData feedbackFormURL) : base(topElement)
+    public MainMenuView(VisualElement topElement) : base(topElement)
     {
-        _discordURL = discordURL;
-        _feedbackFormURL = feedbackFormURL;
+
     }
 
     protected override void SetVisualElements()
@@ -51,7 +45,11 @@ public class MainMenuView : UIView
         _feedbackButton.RegisterCallback<ClickEvent>(OnFeedbackButtonClicked);
         _discordButton.RegisterCallback<ClickEvent>(OnDiscordButtonClicked);
         
+        _singleplayerButton.RegisterCallback<ClickEvent>(OnSingleplayerButtonClicked);
+        _multiplayerButton.RegisterCallback<ClickEvent>(OnMultiplayerButtonClicked);
+        _settingsButton.RegisterCallback<ClickEvent>(OnSettingsButtonClicked);
         _quitButton.RegisterCallback<ClickEvent>(OnQuitButtonClicked);
+        
     }
 
     public override void Dispose()
@@ -63,6 +61,22 @@ public class MainMenuView : UIView
         
         _quitButton.UnregisterCallback<ClickEvent>(OnQuitButtonClicked);
     }
+    
+    
+    private void OnSettingsButtonClicked(ClickEvent evt)
+    {
+        Hide();
+    }
+
+    private void OnMultiplayerButtonClicked(ClickEvent evt)
+    {
+        Hide();
+    }
+
+    private void OnSingleplayerButtonClicked(ClickEvent evt)
+    {
+        Hide();
+    }
 
     private void OnQuitButtonClicked(ClickEvent evt)
     {
@@ -71,28 +85,12 @@ public class MainMenuView : UIView
 
     private void OnDiscordButtonClicked(ClickEvent evt)
     {
-        OpenURL(_discordURL?.url);
+        MainMenuEvents.OnDiscordButtonClicked?.Invoke();
     }
 
     private void OnFeedbackButtonClicked(ClickEvent evt)
     {
-        OpenURL(_feedbackFormURL?.url);
-    }
-
-    /// <summary>
-    /// Checks whether the URL is set and opens it.
-    /// </summary>
-    /// <param name="url">The URL to open.</param>
-    private void OpenURL(string url)
-    {
-        if (!string.IsNullOrEmpty(url))
-        {
-            Application.OpenURL(url);
-        }
-        else
-        {
-            Debug.LogWarning("URL not set!");
-        }
+        MainMenuEvents.OnFeedbackButtonClicked?.Invoke();
     }
 
 }
