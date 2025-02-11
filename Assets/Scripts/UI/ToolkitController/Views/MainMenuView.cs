@@ -80,7 +80,7 @@ public class MainMenuView : UIView
 
     private void OnQuitButtonClicked(ClickEvent evt)
     {
-        Application.Quit();
+        MainMenuEvents.OnQuitButtonClicked?.Invoke();
     }
 
     private void OnDiscordButtonClicked(ClickEvent evt)

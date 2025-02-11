@@ -18,6 +18,9 @@ public class UIManager : MonoBehaviour
     // VisualTree string IDs for UIViews; each one represents a branch in the VisualTree
     private const string MainMenuVisualElementName = "MainMenu";
     
+    private UIView _currentView;
+    private UIView _previousView;
+    
     
     private void Awake()
     {
@@ -65,6 +68,30 @@ public class UIManager : MonoBehaviour
         _views.Add(_mainMenuView);
         
         
+    }
+
+    private void SubscribeToEvents()
+    {
+        
+    }
+    
+    private void UnsubscribeFromEvents()
+    {
+        
+    }
+
+    /// <summary>
+    /// Toggle the visibility of the given view.
+    /// </summary>
+    /// <param name="newView">The new view to show</param>
+    private void ShowView(UIView newView)
+    {
+        _currentView?.Hide();
+
+        _previousView = _currentView;
+        _currentView = newView;
+
+        _currentView?.Show();
     }
     
 
