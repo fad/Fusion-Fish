@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -14,9 +13,15 @@ public class UIManager : MonoBehaviour
     
     // Full screen views
     private UIView _mainMenuView;
+    private UIView _modeSelectionView;
+    private UIView _mapSelectionView;
+    private UIView _fishSelectionView;
     
     // VisualTree string IDs for UIViews; each one represents a branch in the VisualTree
     private const string MainMenuVisualElementName = "MainMenu";
+    private const string ModeSelectionVisualElementName = "ModeSelection";
+    private const string MapSelectionVisualElementName = "MapSelection";
+    private const string FishSelectionVisualElementName = "FishSelection";
     
     private UIView _currentView;
     private UIView _previousView;
@@ -35,8 +40,9 @@ public class UIManager : MonoBehaviour
         
         AddSoundsToButtons();
         SetupViews();
+        SubscribeToEvents();
         
-        _mainMenuView.Show();
+        ShowView(_mainMenuView);
     }
 
     private void OnDisable()
@@ -45,6 +51,8 @@ public class UIManager : MonoBehaviour
         {
             view.Dispose();
         }
+        
+        UnsubscribeFromEvents();
     }
 
     /// <summary>
@@ -63,21 +71,69 @@ public class UIManager : MonoBehaviour
     private void SetupViews()
     {
         _mainMenuView = new MainMenuView(_root.Q(MainMenuVisualElementName));
+        _modeSelectionView = new ModeSelectionView(_root.Q(ModeSelectionVisualElementName));
+        _mapSelectionView = new MapSelectionView(_root.Q(MapSelectionVisualElementName));
+        _fishSelectionView = new FishSelectionView(_root.Q(FishSelectionVisualElementName));
+        
         
         // Track UI views in a list for disposal
         _views.Add(_mainMenuView);
+        _views.Add(_modeSelectionView);
+        _views.Add(_mapSelectionView);
+        _views.Add(_fishSelectionView);
         
         
     }
 
     private void SubscribeToEvents()
     {
-        
+        MainMenuEvents.OnSingleplayerButtonClicked += SingleplayerButtonClicked;
+        ModeSelectionEvents.OnBackButtonClicked += ModeBackButtonClicked;
+        ModeSelectionEvents.OnNextButtonClicked += ModeNextButtonClicked;
+        MapSelectionEvents.OnBackButtonClicked += MapBackButtonClicked;
+        MapSelectionEvents.OnNextButtonClicked += MapNextButtonClicked;
+        FishSelectionEvents.OnBackButtonClicked += FishBackButtonClicked;
     }
-    
+
     private void UnsubscribeFromEvents()
     {
-        
+        MainMenuEvents.OnSingleplayerButtonClicked += SingleplayerButtonClicked;
+        ModeSelectionEvents.OnBackButtonClicked -= ModeBackButtonClicked;
+        ModeSelectionEvents.OnNextButtonClicked += ModeNextButtonClicked;
+        MapSelectionEvents.OnBackButtonClicked -= MapBackButtonClicked;
+        MapSelectionEvents.OnNextButtonClicked -= MapNextButtonClicked;
+        FishSelectionEvents.OnBackButtonClicked -= FishBackButtonClicked;
+
+    }
+
+    private void SingleplayerButtonClicked()
+    {
+        ShowView(_modeSelectionView);
+    }
+
+    private void ModeBackButtonClicked()
+    {
+        ShowView(_mainMenuView);
+    }
+    
+    private void ModeNextButtonClicked()
+    {
+        ShowView(_mapSelectionView);
+    }
+    
+    private void MapBackButtonClicked()
+    {
+        ShowView(_modeSelectionView);
+    }
+    
+    private void MapNextButtonClicked()
+    {
+        ShowView(_fishSelectionView);
+    }
+    
+    private void FishBackButtonClicked()
+    {
+        ShowView(_mapSelectionView);
     }
 
     /// <summary>

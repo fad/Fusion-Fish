@@ -65,17 +65,17 @@ public class MainMenuView : UIView
     
     private void OnSettingsButtonClicked(ClickEvent evt)
     {
-        Hide();
+        MainMenuEvents.OnSettingsButtonClicked?.Invoke();
     }
 
     private void OnMultiplayerButtonClicked(ClickEvent evt)
     {
-        Hide();
+        MainMenuEvents.OnMultiplayerButtonClicked?.Invoke();
     }
 
     private void OnSingleplayerButtonClicked(ClickEvent evt)
     {
-        Hide();
+        MainMenuEvents.OnSingleplayerButtonClicked?.Invoke();
     }
 
     private void OnQuitButtonClicked(ClickEvent evt)
