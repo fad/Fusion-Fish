@@ -1,0 +1,11 @@
+.mapButton {
+    font-size: 40px;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+    border-bottom-left-radius: 30px;
+    margin-bottom: 25px;
+    min-width: 75%;
+    width: 95%;
+    margin-top: 8px;
+}

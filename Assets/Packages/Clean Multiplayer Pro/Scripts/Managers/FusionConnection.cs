@@ -30,6 +30,9 @@ namespace AvocadoShark
         public Action OnDestroyRoomEntries;
 
         public static FusionConnection Instance;
+        
+        [Header("All player prefabs")]
+        [SerializeField] private AllPlayerPrefabsSO allPlayerPrefabs;
 
         [SerializeField] private SpawnPointsData spawnPointsData;
         [SerializeField] private NetworkRunner runnerPrefab;
@@ -83,6 +86,8 @@ namespace AvocadoShark
         [SerializeField] private TMP_Dropdown environmentDropdown;
         [SerializeField] private Material oceanSky;
         [SerializeField] private Material riverSky;
+
+        private GameObject _selectedPlayerPrefab;
         
         private void Awake()
         {
@@ -221,7 +226,7 @@ namespace AvocadoShark
             string sessionPassword = null;
 
             //it counts +2 for the scene index because there are the menu & game scene that need to be excluded
-            sceneNumber = environmentDropdown.value + 2;
+            // sceneNumber = environmentDropdown.value + 2;
 
             int maxPlayers = 10;
             if (IsRoomNameValid())
@@ -270,7 +275,7 @@ namespace AvocadoShark
             sessionName += "-" + Random.Range(1000, 9999);
             
             //it counts +2 for the scene index because there are the menu & game scene that need to be excluded
-            sceneNumber = environmentDropdown.value + 2;
+            // sceneNumber = environmentDropdown.value + 2;
             
 
             Debug.Log("Session name is Singleplayer");
@@ -576,8 +581,9 @@ namespace AvocadoShark
 
             if (runner.GetPlayerObject(runner.LocalPlayer) != null)
                 return;
-            var playerPrefab = PlayerPrefs.GetInt("ChosenCharacter") == 0 ? playerPrefabSecond : playerPrefabFirst;
-
+            
+            // var playerPrefab = PlayerPrefs.GetInt("ChosenCharacter") == 0 ? playerPrefabSecond : playerPrefabFirst;
+            var playerPrefab = _selectedPlayerPrefab;
 
             if (runner.SessionInfo.Properties is not null)
             {
@@ -659,6 +665,16 @@ namespace AvocadoShark
                 OnDestroyRoomEntries += CurrentEntryBeingEdited.DestroyEntry;
                 CurrentEntryBeingEdited = null;
             }
+        }
+
+        public void SetSceneNumber(int newSceneNumber)
+        {
+            sceneNumber = newSceneNumber;
+        }
+
+        public void SetPlayerPrefab(string prefabName)
+        {
+            _selectedPlayerPrefab = allPlayerPrefabs[prefabName].PlayableFish.FishPrefab;
         }
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -9,7 +10,7 @@ public class UIManager : MonoBehaviour
     
     private VisualElement _root;
     
-    private List<UIView> _views = new();
+    private readonly List<UIView> _views = new();
     
     // Full screen views
     private UIView _mainMenuView;
@@ -33,17 +34,19 @@ public class UIManager : MonoBehaviour
         
         _root = ui.rootVisualElement;
     }
-    
+
     private void OnEnable()
     {
-        if(!ui) return;
+        if (!ui) return;
         
-        AddSoundsToButtons();
         SetupViews();
         SubscribeToEvents();
         
+        AddSoundsToButtons();
         ShowView(_mainMenuView);
+        
     }
+
 
     private void OnDisable()
     {
@@ -88,8 +91,8 @@ public class UIManager : MonoBehaviour
     private void SubscribeToEvents()
     {
         MainMenuEvents.OnSingleplayerButtonClicked += SingleplayerButtonClicked;
-        ModeSelectionEvents.OnBackButtonClicked += ModeBackButtonClicked;
-        ModeSelectionEvents.OnNextButtonClicked += ModeNextButtonClicked;
+        // ModeSelectionEvents.OnBackButtonClicked += ModeBackButtonClicked;
+        // ModeSelectionEvents.OnNextButtonClicked += ModeNextButtonClicked;
         MapSelectionEvents.OnBackButtonClicked += MapBackButtonClicked;
         MapSelectionEvents.OnNextButtonClicked += MapNextButtonClicked;
         FishSelectionEvents.OnBackButtonClicked += FishBackButtonClicked;
@@ -97,9 +100,9 @@ public class UIManager : MonoBehaviour
 
     private void UnsubscribeFromEvents()
     {
-        MainMenuEvents.OnSingleplayerButtonClicked += SingleplayerButtonClicked;
-        ModeSelectionEvents.OnBackButtonClicked -= ModeBackButtonClicked;
-        ModeSelectionEvents.OnNextButtonClicked += ModeNextButtonClicked;
+        MainMenuEvents.OnSingleplayerButtonClicked -= SingleplayerButtonClicked;
+        // ModeSelectionEvents.OnBackButtonClicked -= ModeBackButtonClicked;
+        // ModeSelectionEvents.OnNextButtonClicked -= ModeNextButtonClicked;
         MapSelectionEvents.OnBackButtonClicked -= MapBackButtonClicked;
         MapSelectionEvents.OnNextButtonClicked -= MapNextButtonClicked;
         FishSelectionEvents.OnBackButtonClicked -= FishBackButtonClicked;
@@ -108,7 +111,8 @@ public class UIManager : MonoBehaviour
 
     private void SingleplayerButtonClicked()
     {
-        ShowView(_modeSelectionView);
+        // ShowView(_modeSelectionView);
+        ShowView(_mapSelectionView);
     }
 
     private void ModeBackButtonClicked()
@@ -123,8 +127,10 @@ public class UIManager : MonoBehaviour
     
     private void MapBackButtonClicked()
     {
-        ShowView(_modeSelectionView);
+        // ShowView(_modeSelectionView);
+        ShowView(_mainMenuView);
     }
+    
     
     private void MapNextButtonClicked()
     {

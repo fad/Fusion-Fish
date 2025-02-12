@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Goldfish
   m_EditorClassIdentifier: 
   fishID: 200
-  fishPrefab: {fileID: 7922903181239320888, guid: 4903ee395fc06425aa96fe507fe8334b,
+  fishPrefab: {fileID: 3193804982151995303, guid: 3d82bef95e88f4c498c7cc518819fc9e,
     type: 3}
   scale: 0.5
   maxHealth: 120

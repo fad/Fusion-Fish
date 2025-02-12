@@ -1,4 +1,3 @@
-using UnityEngine;
 using UnityEngine.UIElements;
 
 public class MainMenuView : UIView
@@ -60,6 +59,9 @@ public class MainMenuView : UIView
         _discordButton.UnregisterCallback<ClickEvent>(OnDiscordButtonClicked);
         
         _quitButton.UnregisterCallback<ClickEvent>(OnQuitButtonClicked);
+        _settingsButton.UnregisterCallback<ClickEvent>(OnSettingsButtonClicked);
+        _multiplayerButton.UnregisterCallback<ClickEvent>(OnMultiplayerButtonClicked);
+        _singleplayerButton.UnregisterCallback<ClickEvent>(OnSingleplayerButtonClicked);
     }
     
     
