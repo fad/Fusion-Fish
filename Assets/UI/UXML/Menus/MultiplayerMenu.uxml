@@ -1,0 +1,22 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/USS/MultiplayerMenuUSS.uss?fileID=7433441132597879392&amp;guid=3b8cb896953c5794fb0c7b764a8053a0&amp;type=3#MultiplayerMenuUSS" />
+    <engine:VisualElement name="MultiplayerRoot" style="flex-grow: 1;">
+        <engine:VisualElement name="TitleSection" style="flex-grow: 0; margin-top: 42px;">
+            <engine:Label text="Multiplayer" name="Title" style="background-color: rgb(192, 192, 192); border-left-color: rgba(0, 0, 0, 0); border-right-color: rgba(0, 0, 0, 0); border-top-color: rgba(0, 0, 0, 0); border-bottom-color: rgba(0, 0, 0, 0); align-items: stretch; text-overflow: clip; align-self: center; font-size: 82px; top: 0; border-top-left-radius: 30px; border-top-right-radius: 30px; border-bottom-right-radius: 30px; border-bottom-left-radius: 30px; padding-left: 40px; padding-right: 40px; padding-top: 8px; padding-bottom: 8px;" />
+        </engine:VisualElement>
+        <engine:VisualElement name="MainButtonsSection" style="flex-grow: 0; height: 685px; align-items: center; justify-content: center; align-self: center; width: 100%;">
+            <engine:VisualElement name="PlayerNameFieldSection" style="flex-grow: 0; flex-direction: row; justify-content: center; font-size: 32px; align-self: center; align-items: center; top: 56px;">
+                <engine:TextField label="Player name" placeholder-text="Your player handle" readonly="false" name="PlayerNameTextField" class="textFieldLabel textFieldElement" style="align-items: center; align-self: center; justify-content: flex-start;" />
+            </engine:VisualElement>
+            <engine:VisualElement name="ControlsSection" style="flex-grow: 1; flex-direction: row; justify-content: center; flex-shrink: 1; align-items: center; align-self: auto; flex-wrap: nowrap; flex-basis: auto; height: auto; width: 100%;">
+                <engine:Button text="Host" name="HostButton" class="controlButton" />
+                <engine:Button text="Join by ID" name="JoinButton" class="controlButton" />
+                <engine:Button text="Find a game" name="FindButton" class="controlButton" />
+            </engine:VisualElement>
+        </engine:VisualElement>
+        <engine:VisualElement name="LowerSection" style="flex-grow: 1; flex-direction: row; align-self: center; width: 100%; justify-content: center;">
+            <engine:Button text="Back" name="BackButton" style="border-top-left-radius: 32px; border-top-right-radius: 32px; border-bottom-right-radius: 32px; border-bottom-left-radius: 32px; font-size: 45px; padding-left: 75px; padding-right: 75px; padding-top: 15px; padding-bottom: 15px; margin-bottom: 0; margin-top: 0; -unity-text-align: middle-center; left: -35%; align-self: center; align-items: center; justify-content: flex-start;" />
+            <engine:DropdownField label="Region" choices="EU" index="0" name="RegionDropdown" class="dropDownLabel dropDownElement" style="flex-direction: column; font-size: 41px; -unity-text-align: upper-center; height: 62%; left: -5%; align-self: center; justify-content: flex-start; align-items: stretch; top: -31%;" />
+        </engine:VisualElement>
+    </engine:VisualElement>
+</engine:UXML>

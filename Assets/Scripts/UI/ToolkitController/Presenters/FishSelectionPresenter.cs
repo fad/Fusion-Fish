@@ -1,3 +1,4 @@
+using System;
 using AvocadoShark;
 using UnityEngine;
 
@@ -13,7 +14,10 @@ public class FishSelectionPresenter : MonoBehaviour
     {
         FishSelectionEvents.OnFishButtonClicked += OnFishButtonClicked;
         FishSelectionEvents.OnStartButtonClicked += OnStartButtonClicked;
-        
+    }
+
+    private void Start()
+    {
         fusionConnection.SetPlayerPrefab(standardFish.FishNameToDisplay);
     }
 

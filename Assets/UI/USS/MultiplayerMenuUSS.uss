@@ -1,0 +1,54 @@
+.controlButton {
+    width: 20%;
+    height: 60%;
+    font-size: 45px;
+    border-top-left-radius: 49px;
+    border-top-right-radius: 49px;
+    border-bottom-right-radius: 49px;
+    border-bottom-left-radius: 49px;
+}
+
+.textFieldLabel > .unity-base-field__label {
+    margin-right: 87px;
+    font-size: 42px;
+    border-left-color: rgba(255, 255, 255, 0);
+    border-right-color: rgba(255, 255, 255, 0);
+    border-top-color: rgba(255, 255, 255, 0);
+    border-bottom-color: rgba(255, 255, 255, 0);
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.textFieldElement > .unity-base-text-field__input {
+    padding-left: 50px;
+    align-self: auto;
+    padding-right: 50px;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+    border-bottom-right-radius: 16px;
+    border-bottom-left-radius: 16px;
+}
+
+.dropDownLabel > .unity-base-field__label {
+    font-size: 32px;
+    -unity-font-style: normal;
+    -unity-text-align: middle-center;
+}
+
+.dropDownElement > .unity-base-popup-field__input {
+    border-top-left-radius: 36px;
+    border-top-right-radius: 36px;
+    border-bottom-right-radius: 36px;
+    border-bottom-left-radius: 36px;
+    align-items: stretch;
+    justify-content: flex-start;
+    align-self: auto;
+    -unity-text-align: middle-center;
+    padding-left: 48px;
+}
