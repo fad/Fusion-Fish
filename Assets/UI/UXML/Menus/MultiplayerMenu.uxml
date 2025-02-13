@@ -16,7 +16,7 @@
         </engine:VisualElement>
         <engine:VisualElement name="LowerSection" style="flex-grow: 1; flex-direction: row; align-self: center; width: 100%; justify-content: center;">
             <engine:Button text="Back" name="BackButton" style="border-top-left-radius: 32px; border-top-right-radius: 32px; border-bottom-right-radius: 32px; border-bottom-left-radius: 32px; font-size: 45px; padding-left: 75px; padding-right: 75px; padding-top: 15px; padding-bottom: 15px; margin-bottom: 0; margin-top: 0; -unity-text-align: middle-center; left: -35%; align-self: center; align-items: center; justify-content: flex-start;" />
-            <engine:DropdownField label="Region" choices="EU" index="0" name="RegionDropdown" class="dropDownLabel dropDownElement" style="flex-direction: column; font-size: 41px; -unity-text-align: upper-center; height: 62%; left: -5%; align-self: center; justify-content: flex-start; align-items: stretch; top: -31%;" />
+            <engine:DropdownField label="Region" choices="EU,Asia,KR,JP,US" index="0" name="RegionDropdown" class="dropDownLabel dropDownElement" style="flex-direction: column; font-size: 41px; -unity-text-align: upper-center; height: 62%; left: -5%; align-self: center; justify-content: flex-start; align-items: stretch; top: -31%;" />
         </engine:VisualElement>
     </engine:VisualElement>
 </engine:UXML>
