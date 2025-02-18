@@ -1,0 +1,21 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/USS/MultiplayerMenuUSS.uss?fileID=7433441132597879392&amp;guid=3b8cb896953c5794fb0c7b764a8053a0&amp;type=3#MultiplayerMenuUSS" />
+    <Style src="project://database/Assets/UI/USS/HostServerUSS.uss?fileID=7433441132597879392&amp;guid=a5032b96aadcff94fb11579424e27c36&amp;type=3#HostServerUSS" />
+    <engine:VisualElement name="HostRoot" style="flex-grow: 1;">
+        <engine:VisualElement name="TitleSection" style="flex-grow: 0;">
+            <engine:Label text="Host Game" name="Title" style="font-size: 60px; background-color: rgb(255, 255, 255); align-self: center; align-items: center; border-top-left-radius: 24px; border-top-right-radius: 24px; border-bottom-right-radius: 24px; border-bottom-left-radius: 24px; padding-left: 36px; padding-right: 36px; padding-top: 8px; padding-bottom: 8px; top: 0; margin-top: 33px;" />
+        </engine:VisualElement>
+        <engine:VisualElement name="ControlsSection" style="flex-grow: 1; flex-direction: row; margin-top: 3%; align-self: auto; align-items: flex-start; margin-bottom: 3%;">
+            <engine:VisualElement name="LeftSide" style="flex-grow: 1; margin-left: 0; margin-right: 0; align-self: auto; align-items: flex-start; justify-content: space-between;">
+                <engine:DropdownField label="Map" name="MapField" class="controlFields indicatorLabel" style="font-size: 46px; flex-grow: 0; width: 75%; justify-content: flex-start;" />
+            </engine:VisualElement>
+            <engine:VisualElement name="RightSide" style="flex-grow: 1; margin-left: 0; align-items: auto;">
+                <engine:TextField label="Password" name="PasswordField" class="controlFields indicatorLabel" style="width: 75%;" />
+            </engine:VisualElement>
+        </engine:VisualElement>
+        <engine:VisualElement name="UtilitySection" style="flex-grow: 0; flex-direction: row; justify-content: center;">
+            <engine:Button text="Back" name="BackButton" style="margin-left: 0; margin-top: 0; margin-right: 0; margin-bottom: 0; min-height: 50px; left: -37%; min-width: 50px; padding-top: 10px; height: 50px; width: 129px; top: 0; font-size: 30px;" />
+            <engine:Button text="Start" name="StartButton" style="font-size: 48px; padding-left: 35px; padding-right: 35px; margin-bottom: 30px; left: 36%;" />
+        </engine:VisualElement>
+    </engine:VisualElement>
+</engine:UXML>

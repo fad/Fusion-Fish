@@ -1,0 +1,24 @@
+.controlFields {
+    font-size: 46px;
+    margin-left: 200px;
+    margin-right: 200px;
+}
+
+.controlFields {
+    font-size: 46px;
+    width: 75%;
+}
+
+.indicatorLabel > .unity-label {
+    margin-right: 19px;
+    background-color: rgb(149, 146, 146);
+    padding-left: 15px;
+    padding-right: 15px;
+    align-items: center;
+    align-self: center;
+    border-top-left-radius: 14px;
+    border-top-right-radius: 14px;
+    border-bottom-right-radius: 14px;
+    border-bottom-left-radius: 14px;
+    justify-content: flex-start;
+}

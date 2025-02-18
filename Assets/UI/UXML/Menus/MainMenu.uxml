@@ -2,6 +2,8 @@
     <engine:Template name="ModeSelectionMenu" src="project://database/Assets/UI/UXML/Menus/ModeSelectionMenu.uxml?fileID=9197481963319205126&amp;guid=89e27cc979ff1fc4fb4eaa200998e575&amp;type=3#ModeSelectionMenu" />
     <engine:Template name="MapSelectionMenu" src="project://database/Assets/UI/UXML/Menus/MapSelectionMenu.uxml?fileID=9197481963319205126&amp;guid=2cf01a9128f00fd45b01dd1948af2fbc&amp;type=3#MapSelectionMenu" />
     <engine:Template name="FishSelectionMenu" src="project://database/Assets/UI/UXML/Menus/FishSelectionMenu.uxml?fileID=9197481963319205126&amp;guid=4034c51453e6fbd49848a9475cb2546c&amp;type=3#FishSelectionMenu" />
+    <engine:Template name="MultiplayerMenu" src="project://database/Assets/UI/UXML/Menus/MultiplayerMenu.uxml?fileID=9197481963319205126&amp;guid=57efef50f52b86343a96ee36befd4110&amp;type=3#MultiplayerMenu" />
+    <engine:Template name="HostServer" src="project://database/Assets/UI/UXML/Menus/HostServer.uxml?fileID=9197481963319205126&amp;guid=1208fd938ba6dca44a647a3a6ea4b413&amp;type=3#HostServer" />
     <Style src="project://database/Assets/UI/USS/MainMenuUSS.uss?fileID=7433441132597879392&amp;guid=6c0ee7f5755e1e54d9f762772dfc6367&amp;type=3#MainMenuUSS" />
     <engine:VisualElement name="MainGroup" style="flex-grow: 1;">
         <engine:VisualElement name="MainMenu" style="flex-grow: 1; display: flex; visibility: visible; overflow: visible;">
@@ -20,5 +22,7 @@
         <engine:Instance template="ModeSelectionMenu" name="ModeSelection" style="display: none; visibility: visible; overflow: visible; height: 100%;" />
         <engine:Instance template="MapSelectionMenu" name="MapSelection" style="display: none; visibility: visible; overflow: visible; height: 100%;" />
         <engine:Instance template="FishSelectionMenu" name="FishSelection" style="display: none; visibility: visible; overflow: visible; height: 100%;" />
+        <engine:Instance template="MultiplayerMenu" name="MultiplayerMenu" style="display: none; flex-grow: 1;" />
+        <engine:Instance template="HostServer" name="HostGameView" style="display: none; flex-grow: 1;" />
     </engine:VisualElement>
 </engine:UXML>
