@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -17,12 +16,16 @@ public class UIManager : MonoBehaviour
     private UIView _modeSelectionView;
     private UIView _mapSelectionView;
     private UIView _fishSelectionView;
+    private UIView _multiplayerMenuView;
+    private UIView _hostGameView;
     
     // VisualTree string IDs for UIViews; each one represents a branch in the VisualTree
     private const string MainMenuVisualElementName = "MainMenu";
     private const string ModeSelectionVisualElementName = "ModeSelection";
     private const string MapSelectionVisualElementName = "MapSelection";
     private const string FishSelectionVisualElementName = "FishSelection";
+    private const string MultiplayerMenuVisualElementName = "MultiplayerMenu";
+    private const string HostGameVisualElementName = "HostGameView";
     
     private UIView _currentView;
     private UIView _previousView;
@@ -77,6 +80,8 @@ public class UIManager : MonoBehaviour
         _modeSelectionView = new ModeSelectionView(_root.Q(ModeSelectionVisualElementName));
         _mapSelectionView = new MapSelectionView(_root.Q(MapSelectionVisualElementName));
         _fishSelectionView = new FishSelectionView(_root.Q(FishSelectionVisualElementName));
+        _multiplayerMenuView = new MultiplayerMenuView(_root.Q(MultiplayerMenuVisualElementName));
+        _hostGameView = new HostGameView(_root.Q(HostGameVisualElementName));
         
         
         // Track UI views in a list for disposal
@@ -84,6 +89,8 @@ public class UIManager : MonoBehaviour
         _views.Add(_modeSelectionView);
         _views.Add(_mapSelectionView);
         _views.Add(_fishSelectionView);
+        _views.Add(_multiplayerMenuView);
+        _views.Add(_hostGameView);
         
         
     }
@@ -91,22 +98,49 @@ public class UIManager : MonoBehaviour
     private void SubscribeToEvents()
     {
         MainMenuEvents.OnSingleplayerButtonClicked += SingleplayerButtonClicked;
+        MainMenuEvents.OnMultiplayerButtonClicked += MultiplayerButtonClicked;
         // ModeSelectionEvents.OnBackButtonClicked += ModeBackButtonClicked;
         // ModeSelectionEvents.OnNextButtonClicked += ModeNextButtonClicked;
         MapSelectionEvents.OnBackButtonClicked += MapBackButtonClicked;
         MapSelectionEvents.OnNextButtonClicked += MapNextButtonClicked;
         FishSelectionEvents.OnBackButtonClicked += FishBackButtonClicked;
+        MultiplayerMenuEvents.OnBackButtonClicked += MultiplayerBackButtonClicked;
+        MultiplayerMenuEvents.OnHostGameButtonClicked += HostGameButtonClicked;
+        MultiplayerMenuEvents.OnHostViewBackButtonClicked += HostViewBackButtonClicked;
+        
+
     }
+
+
 
     private void UnsubscribeFromEvents()
     {
         MainMenuEvents.OnSingleplayerButtonClicked -= SingleplayerButtonClicked;
+        MainMenuEvents.OnMultiplayerButtonClicked -= MultiplayerButtonClicked;
         // ModeSelectionEvents.OnBackButtonClicked -= ModeBackButtonClicked;
         // ModeSelectionEvents.OnNextButtonClicked -= ModeNextButtonClicked;
         MapSelectionEvents.OnBackButtonClicked -= MapBackButtonClicked;
         MapSelectionEvents.OnNextButtonClicked -= MapNextButtonClicked;
         FishSelectionEvents.OnBackButtonClicked -= FishBackButtonClicked;
+        MultiplayerMenuEvents.OnBackButtonClicked -= MultiplayerBackButtonClicked;
+        MultiplayerMenuEvents.OnHostGameButtonClicked -= HostGameButtonClicked;
+        MultiplayerMenuEvents.OnHostViewBackButtonClicked -= HostViewBackButtonClicked;
 
+    }
+
+    private void HostViewBackButtonClicked()
+    {
+        ShowView(_multiplayerMenuView);
+    }
+
+    private void HostGameButtonClicked()
+    {
+        ShowView(_hostGameView);
+    }
+
+    private void MultiplayerBackButtonClicked()
+    {
+        ShowView(_mainMenuView);
     }
 
     private void SingleplayerButtonClicked()
@@ -115,6 +149,11 @@ public class UIManager : MonoBehaviour
         ShowView(_mapSelectionView);
     }
 
+    private void MultiplayerButtonClicked()
+    {
+        ShowView(_multiplayerMenuView);
+    }
+    
     private void ModeBackButtonClicked()
     {
         ShowView(_mainMenuView);
