@@ -5,10 +5,10 @@
             <engine:Label text="Multiplayer" name="Title" style="background-color: rgb(192, 192, 192); border-left-color: rgba(0, 0, 0, 0); border-right-color: rgba(0, 0, 0, 0); border-top-color: rgba(0, 0, 0, 0); border-bottom-color: rgba(0, 0, 0, 0); align-items: stretch; text-overflow: clip; align-self: center; font-size: 82px; top: 0; border-top-left-radius: 30px; border-top-right-radius: 30px; border-bottom-right-radius: 30px; border-bottom-left-radius: 30px; padding-left: 40px; padding-right: 40px; padding-top: 8px; padding-bottom: 8px;" />
         </engine:VisualElement>
         <engine:VisualElement name="MainButtonsSection" style="flex-grow: 0; height: 685px; align-items: center; justify-content: center; align-self: center; width: 100%;">
-            <engine:VisualElement name="PlayerNameFieldSection" style="flex-grow: 0; flex-direction: row; justify-content: center; font-size: 32px; align-self: center; align-items: center; top: 56px;">
+            <engine:VisualElement name="PlayerNameFieldSection" style="flex-grow: 0; flex-direction: row; justify-content: center; font-size: 32px; align-self: center; align-items: center; top: auto; margin-top: 36px;">
                 <engine:TextField label="Player name" placeholder-text="Your player handle" readonly="false" name="PlayerNameTextField" class="textFieldLabel textFieldElement" style="align-items: center; align-self: center; justify-content: flex-start;" />
             </engine:VisualElement>
-            <engine:VisualElement name="ControlsSection" style="flex-grow: 1; flex-direction: row; justify-content: center; flex-shrink: 1; align-items: center; align-self: auto; flex-wrap: nowrap; flex-basis: auto; height: auto; width: 100%;">
+            <engine:VisualElement name="ControlsSection" style="flex-grow: 1; flex-direction: row; justify-content: center; flex-shrink: 1; align-items: center; align-self: auto; flex-wrap: nowrap; flex-basis: auto; height: auto; width: 100%; overflow: visible;">
                 <engine:Button text="Host" name="HostButton" class="controlButton" />
                 <engine:Button text="Join by ID" name="JoinButton" class="controlButton" style="display: none;" />
                 <engine:Button text="Find a game" name="FindButton" class="controlButton" />

@@ -49,6 +49,8 @@ namespace AvocadoShark
         public GameObject characterselectionobject;
         private const string NamePlayerPrefs = "Name";
         private const string RoomNamePlayerPrefs = "RoomName";
+        
+        private const string DesiredRoomNamePrefs = "DesiredRoomName";
 
         [Header("Room List")] public RoomEntry roomEntryPrefab;
         public GameObject roomListObject;
@@ -233,11 +235,14 @@ namespace AvocadoShark
             {
                 do
                 {
-                    sessionName = menuCanvas.GetRoomName() + "-" + Random.Range(1000, 9999);
+                    // sessionName = menuCanvas.GetRoomName() + "-" + Random.Range(1000, 9999);
+                    sessionName = PlayerPrefs.GetString(DesiredRoomNamePrefs, "Room") + "-" + Random.Range(1000, 9999);
                 }
                 while(_sessionList.FirstOrDefault(session => session.Name == sessionName));
 
-                PlayerPrefs.SetString(RoomNamePlayerPrefs, menuCanvas.nameInputField.text);
+                // PlayerPrefs.SetString(RoomNamePlayerPrefs, menuCanvas.nameInputField.text);
+                PlayerPrefs.SetString(RoomNamePlayerPrefs, PlayerPrefs.GetString(DesiredRoomNamePrefs, "Room"));
+                
                 //sessionPassword = menuCanvas.GetPassword();
                 //maxPlayers = menuCanvas.GetMaxPlayers();
             }
@@ -359,8 +364,10 @@ namespace AvocadoShark
         }
         private void ContinueConnectToRunner()
         {
-            PlayerPrefs.SetString(NamePlayerPrefs, nameField.text);
-            _playerName = nameField.text;
+            // PlayerPrefs.SetString(NamePlayerPrefs, nameField.text);
+            // _playerName = nameField.text;
+            
+            _playerName = PlayerPrefs.GetString(NamePlayerPrefs);
             mainObject.SetActive(false);
             characterselectionobject.SetActive(false);
             SetUpComponents();
