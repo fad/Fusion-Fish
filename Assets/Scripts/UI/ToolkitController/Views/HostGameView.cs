@@ -53,8 +53,8 @@ public class HostGameView : UIView
         _backButton.RegisterCallback<ClickEvent>(OnBackButtonClicked);
         _startButton.RegisterCallback<ClickEvent>(OnStartButtonClicked);
         
-        _sessionNameField.RegisterCallback<KeyDownEvent>(OnHostNameFieldChanged);
-        _passwordField.RegisterCallback<KeyDownEvent>(OnPasswordFieldChanged);
+        _sessionNameField.RegisterValueChangedCallback(OnHostNameFieldChanged);
+        _passwordField.RegisterValueChangedCallback(OnPasswordFieldChanged);
         
         _mapDropdown.RegisterValueChangedCallback(OnMapChanged);
         _fishDropdown.RegisterValueChangedCallback(OnFishChanged);
@@ -128,12 +128,12 @@ public class HostGameView : UIView
         }
     }
     
-    private void OnHostNameFieldChanged(KeyDownEvent evt)
+    private void OnHostNameFieldChanged(ChangeEvent<string> changeEvent)
     {
         MultiplayerMenuEvents.OnSessionNameChanged?.Invoke(_sessionNameField.value);
     }
 
-    private void OnPasswordFieldChanged(KeyDownEvent evt)
+    private void OnPasswordFieldChanged(ChangeEvent<string> changeEvent)
     {
         
     }

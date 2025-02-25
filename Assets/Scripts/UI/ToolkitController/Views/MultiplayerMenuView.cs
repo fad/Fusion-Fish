@@ -38,7 +38,8 @@ public class MultiplayerMenuView : UIView
         _backButton.RegisterCallback<ClickEvent>(OnBackButtonClicked);
         _hostGameButton.RegisterCallback<ClickEvent>(OnHostGameButtonClicked);
         _findGameButton.RegisterCallback<ClickEvent>(OnFindGameButtonClicked);
-        _playerHandleField.RegisterCallback<KeyDownEvent>(OnPlayerHandleChanged);
+        
+        _playerHandleField.RegisterValueChangedCallback(OnPlayerHandleChanged);
         
         _regionDropdown.RegisterValueChangedCallback(OnRegionChanged);
     }
@@ -96,7 +97,7 @@ public class MultiplayerMenuView : UIView
         _playerHandleField.value = playerName;
     }
 
-    private void OnPlayerHandleChanged(KeyDownEvent evt)
+    private void OnPlayerHandleChanged(ChangeEvent<string> changeEvent)
     {
         MultiplayerMenuEvents.OnPlayerHandleChanged?.Invoke(_playerHandleField.value);
     }
