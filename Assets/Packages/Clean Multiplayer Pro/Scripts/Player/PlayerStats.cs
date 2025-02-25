@@ -22,6 +22,7 @@ namespace AvocadoShark
 
         public int maxVoteTime = 15;
 
+        private const string PlayerNamePrefsKey = "Name";
 
         public bool isVoteInitiator = false;
         public Action<int> OnPositiveVotesChanged, OnNegativeVotesChanged, OnVoteTimeUpdated;
@@ -40,7 +41,8 @@ namespace AvocadoShark
             GetComponent<PlayerWorldUIManager>().OnSpeaking += Speaking;
             if (HasStateAuthority)
             {
-                PlayerName = FusionConnection.Instance._playerName;
+                // PlayerName = FusionConnection.Instance._playerName;
+                PlayerName = PlayerPrefs.GetString(PlayerNamePrefsKey, "Local Player");
                 OnPlayerStatsReady?.Invoke(PlayerName.ToString());
                 playerNameLabel.text = !HasStateAuthority ? PlayerName.ToString() : "";
                 
@@ -59,7 +61,6 @@ namespace AvocadoShark
                 SessionPlayers.instance.AddPlayer(this);
                 playerNameLabel.text = !HasStateAuthority ? PlayerName.ToString() : "";
             }
-
         }
 
         public override void Render()
