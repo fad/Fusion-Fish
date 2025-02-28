@@ -1,0 +1,17 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <engine:VisualElement name="Root" style="flex-grow: 1;">
+        <engine:VisualElement name="TitleSection" style="flex-grow: 0;">
+            <engine:Label text="Room List" name="Title" style="font-size: 60px; background-color: rgb(255, 255, 255); align-self: center; align-items: center; border-top-left-radius: 24px; border-top-right-radius: 24px; border-bottom-right-radius: 24px; border-bottom-left-radius: 24px; padding-left: 36px; padding-right: 36px; padding-top: 8px; padding-bottom: 8px; top: 0; margin-top: 33px;" />
+        </engine:VisualElement>
+        <engine:VisualElement name="RoomListSection" style="flex-grow: 1; margin-top: 30px;">
+            <engine:TextField placeholder-text="Search rooms..." name="SearchField" style="justify-content: space-between; align-self: flex-end; min-width: 37%; margin-right: 388px;" />
+            <engine:VisualElement name="RoomList" style="flex-grow: 1; background-color: rgb(221, 216, 216); border-top-left-radius: 20px; border-top-right-radius: 20px; border-bottom-right-radius: 20px; border-bottom-left-radius: 20px; align-self: center; min-width: 60%;">
+                <engine:ScrollView name="RoomScroll" />
+            </engine:VisualElement>
+        </engine:VisualElement>
+        <engine:VisualElement name="UtilitySection" style="flex-grow: 0; flex-direction: row; margin-bottom: 80px; margin-top: 72px;">
+            <engine:Button text="Back" name="BackButton" style="margin-left: 0; margin-top: 0; margin-right: 0; margin-bottom: 0; min-height: 50%; left: 5%; min-width: 11%; padding-top: 10px; height: 50px; width: 129px; top: 0; font-size: 36px;" />
+            <engine:DropdownField label="Region" choices="EU,Asia,KR,JP,US" index="0" name="RegionDropdown" class="dropDownLabel dropDownElement" style="flex-direction: column; font-size: 41px; -unity-text-align: upper-center; height: 91%; left: 34%; align-self: center; justify-content: flex-start; align-items: stretch; top: auto;" />
+        </engine:VisualElement>
+    </engine:VisualElement>
+</engine:UXML>
